@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "*.entxml": "xsl",
+    "imagemagick.h": "c",
+    "magickcore.h": "c",
+    "version.h": "c",
+    "option.h": "c",
+    "cache-view.h": "c"
+  }
+}

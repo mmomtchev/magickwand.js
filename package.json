@@ -1,0 +1,24 @@
+{
+  "name": "magickwand",
+  "version": "1.0.0",
+  "description": "Node.js bindings for imagemagick",
+  "main": "index.js",
+  "scripts": {
+    "swig": "mkdir -p build && swig -javascript -I/usr/include/x86_64-linux-gnu/ImageMagick-6 -I/usr/include/ImageMagick-6 -node -c++ -o build/Magick++.cxx src/Magick++.i",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmomtchev/node-magickwand.git"
+  },
+  "keywords": [
+    "imagemagick",
+    "node.js"
+  ],
+  "author": "Momtchil Momtchev <momtchil@momtchev.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmomtchev/node-magickwand/issues"
+  },
+  "homepage": "https://github.com/mmomtchev/node-magickwand#readme"
+}

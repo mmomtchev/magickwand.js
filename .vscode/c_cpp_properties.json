@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${default}",
+                "/usr/include/ImageMagick-6",
+                "/usr/include/x86_64-linux-gnu/ImageMagick-6"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang-12",
+            "cStandard": "c17",
+            "cppStandard": "c++14"
+        }
+    ],
+    "version": 4
+}
