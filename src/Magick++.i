@@ -12,11 +12,20 @@ using namespace Magick;
 %include "std_string.i"
 %include "std_vector.i"
 %include "typemaps.i"
+%include "exception.i"
 
 %typemap(in) size_t = unsigned long;   
 %typemap(out) size_t = unsigned long;
 %typemap(in) ssize_t = long;
 %typemap(out) ssize_t = long;
+
+%exception {
+  try {
+    $action
+  } catch (const Magick::ErrorBlob &e) {
+    SWIG_exception(SWIG_IndexError, const_cast<char *>(e.what()));
+  }
+}
 
 #define MAGICKCORE_QUANTUM_DEPTH 16
 #define MAGICKCORE_HDRI_ENABLE 0
