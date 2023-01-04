@@ -5,5 +5,5 @@
 ## This project serves three purposes:
 
 * Experiment with SWIG for Node.js
-* Provide an alternative, native, bindings for ImageMagick in Node.js
+* Provide alternative, native, bindings for ImageMagick in Node.js
 * Indulge in hyper-reality
