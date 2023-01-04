@@ -7,10 +7,15 @@
 using namespace Magick;
 %}
 
+%include "cpointer.i"
+%include "std_string.i"
+%include "std_vector.i"
+%include "typemaps.i"
+
 #define MAGICKCORE_QUANTUM_DEPTH 16
 #define MAGICKCORE_HDRI_ENABLE 0
 #define _magickcore_restrict
-//#define magick_restrict
+#define magick_restrict
 
 %include "Magick++/Include.h"
 %include "Magick++/Functions.h"
