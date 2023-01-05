@@ -23,7 +23,7 @@ using namespace Magick;
   try {
     $action
   } catch (const Magick::ErrorBlob &e) {
-    SWIG_exception(SWIG_IndexError, const_cast<char *>(e.what()));
+    SWIG_exception(SWIG_ValueError, const_cast<char *>(e.what()));
   }
 }
 
