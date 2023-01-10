@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/mmomtchev/node-magickwand/issues"
   },
-  "homepage": "https://github.com/mmomtchev/node-magickwand#readme"
+  "homepage": "https://github.com/mmomtchev/node-magickwand#readme",
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
 }

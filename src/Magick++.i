@@ -14,8 +14,6 @@ using namespace Magick;
 %include "typemaps.i"
 %include "exception.i"
 
-%typemap(in) size_t = unsigned long;   
-%typemap(out) size_t = unsigned long;
 %typemap(in) ssize_t = long;
 %typemap(out) ssize_t = long;
 
