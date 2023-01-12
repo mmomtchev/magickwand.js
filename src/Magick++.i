@@ -2,9 +2,8 @@
 %{
 /* Includes the header in the wrapper code */
 #include <Magick++.h> 
-#include <iostream> 
+#include <iostream>
 
-using namespace std;
 using namespace Magick;
 %}
 
@@ -21,7 +20,8 @@ using namespace Magick;
   try {
     $action
   } catch (const Magick::ErrorBlob &e) {
-    SWIG_exception(SWIG_ValueError, const_cast<char *>(e.what()));
+    SWIG_V8_Raise(e.what());
+    SWIG_fail;
   }
 }
 
@@ -29,6 +29,19 @@ using namespace Magick;
 #define MAGICKCORE_HDRI_ENABLE 0
 #define _magickcore_restrict
 #define magick_restrict
+
+namespace MagickCore {
+  %import "magickwand.i"
+}
+
+%rename(call) operator();
+%rename(clone) operator=;
+%rename(equal) operator==;
+%rename(notEqual) operator!=;
+%rename(gt) operator>;
+%rename(lt) operator<;
+%rename(gte) operator>=;
+%rename(lte) operator<=;
 
 %include "Magick++/Include.h"
 %include "Magick++/TypeMetric.h"

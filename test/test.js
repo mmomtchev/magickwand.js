@@ -25,5 +25,12 @@ describe('Image', () => {
     im.read('temp.png');
     assert.equal(im.size().width(), 100);    
     fs.rmSync('temp.png');
-  })
+  });
+
+  it('throw an exception', () => {
+    const im = new Image;
+    assert.throws(() => {
+      im.read('something.png');
+    }, /unable to open image/);
+  });
 });

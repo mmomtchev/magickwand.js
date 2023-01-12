@@ -5,35 +5,42 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "(gdb) Launch REPL",
+      "name": "(gdb) Launch mocha",
       "type": "cppdbg",
       "request": "launch",
       "program": "/usr/bin/node",
-      "args": [],
+      "args": [
+        "--expose-gc",
+        "${workspaceFolder}/node_modules/mocha/lib/cli/cli.js",
+        "-R",
+        "tap",
+        "--timeout",
+        "0",
+      ],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
       "setupCommands": [
-          {
-              "description": "Enable pretty-printing for gdb",
-              "text": "-enable-pretty-printing",
-              "ignoreFailures": true
-          },
-          {
-              "description": "Set Disassembly Flavor to Intel",
-              "text": "-gdb-set disassembly-flavor intel",
-              "ignoreFailures": true
-          }
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        }
       ]
     },
     {
-      "name": "(gdb) Launch test gizmo",
+      "name": "(gdb) Launch REPL",
       "type": "cppdbg",
       "request": "launch",
       "program": "/usr/bin/node",
-      "args": [ "${workspaceFolder}/test.js" ],
+      "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
@@ -52,5 +59,5 @@
         }
       ]
     }
-  ]
+ ]
 }
