@@ -10,16 +10,17 @@
     {
       'target_name': 'node-magickwand',
       'include_dirs': [
-        '/usr/include/ImageMagick-6',
-        '/usr/include/x86_64-linux-gnu/ImageMagick-6'
+        "<!@(node -p \"require('node-addon-api').include\")",
+        'deps/ImageMagick/Magick++/lib',
+        'deps/ImageMagick'
       ],
       'defines': [
         'BUILDING_NODE_EXTENSION=1',
         'MAGICKCORE_QUANTUM_DEPTH=16',
-        'MAGICKCORE_HDRI_ENABLE=0'
+        'MAGICKCORE_HDRI_ENABLE=1'
       ],
       'libraries': [
-        '-lMagick++-6.Q16'
+        '-Ldeps/ImageMagick/Magick++/lib/.libs/ -lMagick++-7.Q16HDRI'
       ],
       'cflags': [
         '-Wno-deprecated-declarations',
@@ -34,6 +35,7 @@
         'GCC_ENABLE_CPP_RTTI': 'YES',
         'GCC_ENABLE_CPP_EXCEPTIONS' : 'YES'
       },
+      'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],
       'sources': [
         'build/Magick++.cxx'
       ]

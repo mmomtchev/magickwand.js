@@ -4,7 +4,9 @@
   "description": "Node.js bindings for imagemagick",
   "main": "index.js",
   "scripts": {
-    "swig": "mkdir -p build && swig -javascript -I/usr/include/x86_64-linux-gnu/ImageMagick-6 -I/usr/include/ImageMagick-6 -node -c++ -o build/Magick++.cxx src/Magick++.i",
+    "deps:magickcore": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickCore build/magickcore.i import",
+    "deps:magickpp": "node src/deps.js src/deps-stub.cc deps/ImageMagick/Magick\\\\+\\\\+ build/magickpp.i",
+    "swig": "swig -javascript -Ideps/ImageMagick/Magick++/lib -Ideps/ImageMagick -node -c++ -o build/Magick++.cxx src/Magick++.i",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +25,7 @@
   "homepage": "https://github.com/mmomtchev/node-magickwand#readme",
   "devDependencies": {
     "chai": "^4.3.7",
-    "mocha": "^10.2.0"
+    "mocha": "^10.2.0",
+    "node-addon-api": "^5.1.0"
   }
 }

@@ -1,11 +1,12 @@
 #define MAGICKCORE_QUANTUM_DEPTH 16
-#define MAGICKCORE_HDRI_ENABLE 0
-#include <Magick++.h>
+#define MAGICKCORE_HDRI_ENABLE 1
 
-using Magick::PixelPacket;
+#include <Magick++.h>
+#include <iostream>
+
+using namespace std;
+using namespace Magick;
 
 int main() {
-	PixelPacket test;
-	return 0;
+    return 0;
 }
-

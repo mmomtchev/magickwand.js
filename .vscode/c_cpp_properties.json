@@ -1,14 +1,14 @@
 {
-    "configurations": [
+    "configurations": [ 
         {
             "name": "Linux",
             "includePath": [
                 "${default}",
-                "/usr/include/ImageMagick-6",
-                "/usr/include/x86_64-linux-gnu/ImageMagick-6"
+                "${workspaceFolder}/deps/ImageMagick/Magick++/lib",
+                "${workspaceFolder}/deps/ImageMagick"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/clang-12",
+            "compilerPath": "/usr/bin/g++",
             "cStandard": "c17",
             "cppStandard": "c++14"
         }

@@ -29,10 +29,7 @@ using namespace Magick;
 #define MAGICKCORE_HDRI_ENABLE 0
 #define _magickcore_restrict
 #define magick_restrict
-
-namespace MagickCore {
-  %import "magickwand.i"
-}
+#define __attribute__(x)
 
 %rename(call) operator();
 %rename(clone) operator=;
@@ -43,18 +40,8 @@ namespace MagickCore {
 %rename(gte) operator>=;
 %rename(lte) operator<=;
 
-%include "Magick++/Include.h"
-%include "Magick++/TypeMetric.h"
-%include "Magick++/Geometry.h"
-%include "Magick++/Functions.h"
-%include "Magick++/Pixels.h"
-%include "Magick++/ResourceLimits.h"
-%include "Magick++/STL.h"
-%include "Magick++/Blob.h"
-%include "Magick++/ChannelMoments.h"
-%include "Magick++/CoderInfo.h"
-%include "Magick++/Color.h"
-%include "Magick++/Drawable.h"
-%include "Magick++/Exception.h"
-%include "Magick++/Montage.h"
-%include "Magick++/Image.h"
+namespace MagickCore {
+  %include "../build/magickcore.i"
+}
+
+%include "../build/magickpp.i"
