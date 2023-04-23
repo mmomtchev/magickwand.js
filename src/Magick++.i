@@ -20,7 +20,7 @@ using namespace Magick;
   try {
     $action
   } catch (const Magick::ErrorBlob &e) {
-    SWIG_V8_Raise(e.what());
+    SWIG_Raise(e.what());
     SWIG_fail;
   }
 }

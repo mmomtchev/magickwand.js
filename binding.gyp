@@ -27,7 +27,9 @@
         '-Wno-unused-function'
       ],
       'cflags_cc': [
-        '-std=c++11'
+        '-std=c++11',
+        '-Wno-type-limits',
+        '-Wno-deprecated-copy'
       ],
       'cflags!': [ '-fno-exceptions' ],
       'cflags_cc!': [ '-fno-exceptions', '-fno-rtti' ],
