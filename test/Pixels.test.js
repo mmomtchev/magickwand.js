@@ -11,6 +11,7 @@ describe('Pixels', () => {
     it('from Image', () => {
       const im = new Image(path.join(__dirname, 'data', 'wizard.png'));
       const pixels = new Pixels(im);
+      // Alas this is a raw unconstrained pointer...
       const pp = pixels.get(10, 10, 10, 10);
     });
   });

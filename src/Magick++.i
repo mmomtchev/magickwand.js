@@ -36,7 +36,7 @@ typedef MagickCore::ImageInfo _ImageInfo;
 
 %include "magick_config.h"
 
-// Short-cut __attribute__(x) which is not supported by SWIG
+// Shunt __attribute__(x) which is not supported by SWIG
 #define _magickcore_restrict
 #define magick_restrict
 #define __attribute__(x)
