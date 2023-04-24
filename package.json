@@ -7,8 +7,9 @@
     "deps:magickcore": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickCore build/magickcore.i import",
     "deps:magick++": "node src/deps.js src/deps-stub.cc deps/ImageMagick/Magick\\\\+\\\\+ build/magick++.i",
     "deps:magickwand": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickWand build/magickwand.i",
+    "deps": "npm run deps:magickcore && npm run deps:magick++ && npm run deps:magickwand",
     "swig": "swig -javascript -Ideps/ImageMagick/Magick++/lib -Ideps/ImageMagick -napi -c++ -o build/Magick++.cxx src/Magick++.i",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
