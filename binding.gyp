@@ -15,9 +15,6 @@
         'deps/ImageMagick'
       ],
       'defines': [
-        'BUILDING_NODE_EXTENSION=1',
-        'MAGICKCORE_QUANTUM_DEPTH=16',
-        'MAGICKCORE_HDRI_ENABLE=1'
       ],
       'libraries': [
         '-Ldeps/ImageMagick/Magick++/lib/.libs/ -lMagick++-7.Q16HDRI'

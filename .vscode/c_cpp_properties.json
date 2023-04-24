@@ -5,6 +5,7 @@
             "includePath": [
                 "${default}",
                 "${workspaceFolder}/deps/ImageMagick/Magick++/lib",
+                "${workspaceFolder}/deps/ImageMagick/MagickWand",
                 "${workspaceFolder}/deps/ImageMagick"
             ],
             "defines": [],

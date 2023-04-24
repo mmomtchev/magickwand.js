@@ -2,6 +2,7 @@
 #define MAGICKCORE_HDRI_ENABLE 1
 
 #include <Magick++.h>
+#include <MagickWand/MagickWand.h>
 #include <iostream>
 
 using namespace std;
