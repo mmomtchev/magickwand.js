@@ -2,8 +2,7 @@
 
 %{
 // ImageMagick mandatory compilation options
-#define MAGICKCORE_QUANTUM_DEPTH 16
-#define MAGICKCORE_HDRI_ENABLE 1
+#include "../src/magick_config.h"
 
 // Includes the header in the wrapper code
 #include <Magick++.h>
@@ -11,6 +10,10 @@
 #include <iostream>
 
 using namespace Magick;
+
+// This can probably be fixed in SWIG
+typedef MagickCore::SemaphoreInfo SemaphoreInfo;
+typedef MagickCore::ImageInfo _ImageInfo;
 %}
 
 %include "cpointer.i"
@@ -31,9 +34,7 @@ using namespace Magick;
   }
 }
 
-// ImageMagick mandatory compilation options
-#define MAGICKCORE_QUANTUM_DEPTH 16
-#define MAGICKCORE_HDRI_ENABLE 1
+%include "magick_config.h"
 
 // Short-cut __attribute__(x) which is not supported by SWIG
 #define _magickcore_restrict
@@ -64,10 +65,26 @@ using namespace Magick;
 // function defaults
 #pragma SWIG nowarn=451
 
+// As many of the plain C structs in MagickCore:: have identically
+// named C++ class counterparts in Magick::, we have to use namespaces
+%nspace;
+
+// These use va_list and require special handling
+%ignore LogMagickEventList;
+%ignore ThrowMagickExceptionList;
+
 namespace MagickCore {
+  // Global functions are (still) not bound to a namespace
+  // and there is both a Magick::CloneString and MagickCore::CloneString
+  %rename(Core_CloneString) CloneString;
+
+  // These are all the MagickCore:: header files ordered by dependency
+  // (as produced by the dependency generator)
   %include "../build/magickcore.i"
   %include "../build/magickwand.i"
 }
+
+// These are all the Magick:: header files ordered by dependency
 %include "../build/magick++.i"
 
 %insert(init) %{

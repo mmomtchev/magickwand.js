@@ -2,7 +2,9 @@ const path = require('path');
 const fs = require('fs');
 const { assert } = require('chai');
 
-const { Image, Pixels } = require('../build/Release/node-magickwand.node');
+const im = require('../build/Release/node-magickwand.node');
+const { Image, Pixels } = im.Magick;
+const { PixelPacket } = im.MagickCore;
 
 describe('Pixels', () => {
   describe('constructor', () => {
