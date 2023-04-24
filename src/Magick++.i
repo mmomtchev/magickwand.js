@@ -11,13 +11,6 @@
 #include <iostream>
 
 using namespace Magick;
-
-// Work around https://github.com/swig/swig/issues/2553
-typedef MagickCore::_MagickWand _MagickWand;
-typedef MagickCore::_WandView _WandView;
-typedef MagickCore::_PixelIterator _PixelIterator;
-typedef MagickCore::_PixelWand _PixelWand;
-typedef MagickCore::_DrawingWand _DrawingWand;
 %}
 
 %include "cpointer.i"
