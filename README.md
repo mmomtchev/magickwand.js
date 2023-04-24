@@ -13,6 +13,7 @@ Only Linux is being worked on at the moment - you are on your own for other OSes
 
 * If you want NAPI, get SWIG with NAPI support from https://github.com/mmomtchev/swig#mmom
   * Otherwise, building with the old Node/V8 interface might be possible
+  * Alternatively, you can checkout the `generated` branch where all files have been pre-generated
 
 * Recursively clone the repo
 ```shell
