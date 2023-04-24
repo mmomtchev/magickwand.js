@@ -1,6 +1,4 @@
-#define MAGICKCORE_QUANTUM_DEPTH 16
-#define MAGICKCORE_HDRI_ENABLE 1
-
+#include "magick_config.h"
 #include <Magick++.h>
 #include <MagickWand/MagickWand.h>
 #include <iostream>

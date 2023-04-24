@@ -2,8 +2,7 @@
 
 %{
 // ImageMagick mandatory compilation options
-#define MAGICKCORE_QUANTUM_DEPTH 16
-#define MAGICKCORE_HDRI_ENABLE 1
+#include "../src/magick_config.h"
 
 // Includes the header in the wrapper code
 #include <Magick++.h>
@@ -12,12 +11,9 @@
 
 using namespace Magick;
 
-// Work around https://github.com/swig/swig/issues/2553
-typedef MagickCore::_MagickWand _MagickWand;
-typedef MagickCore::_WandView _WandView;
-typedef MagickCore::_PixelIterator _PixelIterator;
-typedef MagickCore::_PixelWand _PixelWand;
-typedef MagickCore::_DrawingWand _DrawingWand;
+// This can probably be fixed in SWIG
+typedef MagickCore::SemaphoreInfo SemaphoreInfo;
+typedef MagickCore::ImageInfo _ImageInfo;
 %}
 
 %include "cpointer.i"
@@ -38,9 +34,7 @@ typedef MagickCore::_DrawingWand _DrawingWand;
   }
 }
 
-// ImageMagick mandatory compilation options
-#define MAGICKCORE_QUANTUM_DEPTH 16
-#define MAGICKCORE_HDRI_ENABLE 1
+%include "magick_config.h"
 
 // Short-cut __attribute__(x) which is not supported by SWIG
 #define _magickcore_restrict
@@ -71,10 +65,26 @@ typedef MagickCore::_DrawingWand _DrawingWand;
 // function defaults
 #pragma SWIG nowarn=451
 
+// As many of the plain C structs in MagickCore:: have identically
+// named C++ class counterparts in Magick::, we have to use namespaces
+%nspace;
+
+// These use va_list and require special handling
+%ignore LogMagickEventList;
+%ignore ThrowMagickExceptionList;
+
 namespace MagickCore {
+  // Global functions are (still) not bound to a namespace
+  // and there is both a Magick::CloneString and MagickCore::CloneString
+  %rename(Core_CloneString) CloneString;
+
+  // These are all the MagickCore:: header files ordered by dependency
+  // (as produced by the dependency generator)
   %include "../build/magickcore.i"
   %include "../build/magickwand.i"
 }
+
+// These are all the Magick:: header files ordered by dependency
 %include "../build/magick++.i"
 
 %insert(init) %{
