@@ -42,7 +42,7 @@ describe('Blob', () => {
       const blob = new Blob;
       im.magick('RGBA');
       im.write(blob);
-      const buffer = blob.buffer();
+      const buffer = blob.data();
       assert.instanceOf(buffer, Buffer);
       assert.lengthOf(buffer, rawLength);
     });

@@ -107,9 +107,9 @@ namespace MagickCore {
 // * We ignore the original function
 // * We create a new one that uses special out arguments
 // * The arguments are named so that we can enable the argout typemap in nodejs_buffer.i
-%ignore Magick::Blob::data;
+%ignore Magick::Blob::data() const;
 %extend Magick::Blob {
-  void buffer(void **buffer_data, size_t *buffer_len) {
+  void data(void **buffer_data, size_t *buffer_len) const {
     *buffer_data = const_cast<void *>(self->data());
     *buffer_len = self->length();
   }
