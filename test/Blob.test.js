@@ -37,6 +37,17 @@ describe('Blob', () => {
     });
   });
 
+  describe('buffer', () => {
+    it('retrieve data in Buffer', () => {
+      const blob = new Blob;
+      im.magick('RGBA');
+      im.write(blob);
+      const buffer = blob.buffer();
+      assert.instanceOf(buffer, Buffer);
+      assert.lengthOf(buffer, rawLength);
+    });
+  });
+
   describe('base64', () => {
     it('export to base64', () => {
       const blob = new Blob;

@@ -12,6 +12,7 @@
 using namespace Magick;
 
 // This can probably be fixed in SWIG
+// (it is the continuation of SWIG#2553)
 typedef MagickCore::SemaphoreInfo SemaphoreInfo;
 typedef MagickCore::ImageInfo _ImageInfo;
 %}
@@ -99,6 +100,19 @@ namespace MagickCore {
 #endif
 
   %include "../build/magickwand.i"
+}
+
+// Magick::Blob::data is a very special case - it returns a const void *
+// and we want to make a Buffer out of it:
+// * We ignore the original function
+// * We create a new one that uses special out arguments
+// * The arguments are named so that we can enable the argout typemap in nodejs_buffer.i
+%ignore Magick::Blob::data;
+%extend Magick::Blob {
+  void buffer(void **buffer_data, size_t *buffer_len) {
+    *buffer_data = const_cast<void *>(self->data());
+    *buffer_len = self->length();
+  }
 }
 
 // These are all the Magick:: header files ordered by dependency
