@@ -49,6 +49,18 @@ describe('Image', () => {
     fs.rmSync('temp.png');
   });
 
+  it('read an image, write it in different format and read it back', () => {
+    let im = new Image;
+    im.read(path.join(__dirname, 'data', 'wizard.png'));
+    im.magick('JPEG');
+    im.write('temp.jpg');
+
+    im = new Image();
+    im.read('temp.jpg');
+    assert.equal(im.size().width(), 80);
+    fs.rmSync('temp.jpg');
+  });
+
   it('throw an exception', () => {
     const im = new Image;
     assert.throws(() => {
