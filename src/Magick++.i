@@ -28,7 +28,7 @@ typedef MagickCore::ImageInfo _ImageInfo;
 %exception {
   try {
     $action
-  } catch (const Magick::ErrorBlob &e) {
+  } catch (const Magick::Error &e) {
     SWIG_Raise(e.what());
     SWIG_fail;
   }
