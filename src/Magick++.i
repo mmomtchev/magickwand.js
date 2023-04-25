@@ -12,6 +12,7 @@
 using namespace Magick;
 
 // This can probably be fixed in SWIG
+// (it is the continuation of SWIG#2553)
 typedef MagickCore::SemaphoreInfo SemaphoreInfo;
 typedef MagickCore::ImageInfo _ImageInfo;
 %}
@@ -21,14 +22,18 @@ typedef MagickCore::ImageInfo _ImageInfo;
 %include "std_vector.i"
 %include "typemaps.i"
 %include "exception.i"
+%include "nodejs_buffer.i"
 
-%typemap(in) ssize_t = long;
-%typemap(out) ssize_t = long;
+%typemap(in)        (const void* data_,const size_t length_) = (const void* buffer_data, const size_t buffer_len);
+%typemap(typecheck) (const void* data_,const size_t length_) = (const void* buffer_data, const size_t buffer_len);
+
+%apply unsigned { size_t };
+%apply int { ssize_t };
 
 %exception {
   try {
     $action
-  } catch (const Magick::ErrorBlob &e) {
+  } catch (const Magick::Error &e) {
     SWIG_Raise(e.what());
     SWIG_fail;
   }
@@ -36,7 +41,7 @@ typedef MagickCore::ImageInfo _ImageInfo;
 
 %include "magick_config.h"
 
-// Short-cut __attribute__(x) which is not supported by SWIG
+// Shunt __attribute__(x) which is not supported by SWIG
 #define _magickcore_restrict
 #define magick_restrict
 #define __attribute__(x)
@@ -73,18 +78,45 @@ typedef MagickCore::ImageInfo _ImageInfo;
 %ignore LogMagickEventList;
 %ignore ThrowMagickExceptionList;
 
+// These cannot be used safely from JavaScript
+%rename("$ignore", regextarget=1) "NoCopy$";
+%rename("$ignore", regextarget=1) "Allocator";
+
 namespace MagickCore {
   // Global functions are (still) not bound to a namespace
   // and there is both a Magick::CloneString and MagickCore::CloneString
   %rename(Core_CloneString) CloneString;
 
-  // These are all the MagickCore:: header files ordered by dependency
-  // (as produced by the dependency generator)
+  // Exposing MagickCore (the old plain C API) to JS is optional
+  // It doubles the size of the addon and most of its primitives
+  // are very unsafe or completely unusable from a high-level language
+#ifdef MAGICKCORE_JS
+  // Generate wrappers
   %include "../build/magickcore.i"
+#else
+  // Simply import the types
+  %rename("$ignore", regextarget=1, fullname=1) "^MagickCore::.+";
+  %include "../build/magickcore-import.i"
+#endif
+
   %include "../build/magickwand.i"
 }
 
+// Magick::Blob::data is a very special case - it returns a const void *
+// and we want to make a Buffer out of it:
+// * We ignore the original function
+// * We create a new one that uses special out arguments
+// * The arguments are named so that we can enable the argout typemap in nodejs_buffer.i
+%ignore Magick::Blob::data;
+%extend Magick::Blob {
+  void buffer(void **buffer_data, size_t *buffer_len) {
+    *buffer_data = const_cast<void *>(self->data());
+    *buffer_len = self->length();
+  }
+}
+
 // These are all the Magick:: header files ordered by dependency
+// (as produced by the dependency generator)
 %include "../build/magick++.i"
 
 %insert(init) %{
