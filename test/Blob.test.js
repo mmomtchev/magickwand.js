@@ -36,13 +36,25 @@ describe('Blob', () => {
       assert.closeTo(b64.length, rawLength * 1.33, 500);
     });
 
-    it('import from base64', () => {
+    it('import RGBA from base64', () => {
       const blobIn = new Blob;
+      im.magick('RGBA');
       im.write(blobIn);
 
       const blobOut = new Blob;
       blobOut.base64(blobIn.base64());
       const imOut = new Image(blobOut, im.size(), 4, 'RGBA');
+      assert.strictEqual(imOut.size().width(), im.size().width());
+    });
+
+    it('import PNG from base64', () => {
+      const blobIn = new Blob;
+      im.magick('PNG');
+      im.write(blobIn);
+
+      const blobOut = new Blob;
+      blobOut.base64(blobIn.base64());
+      const imOut = new Image(blobOut);
       assert.strictEqual(imOut.size().width(), im.size().width());
     });
   })
