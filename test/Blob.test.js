@@ -1,7 +1,7 @@
 const path = require('path');
 const { assert } = require('chai');
 
-const im = require('../build/Release/node-magickwand.node');
+const im = require('../build/Debug/node-magickwand.node');
 const { Image, Blob } = im.Magick;
 
 describe('Blob', () => {
@@ -34,6 +34,16 @@ describe('Blob', () => {
 
       const b64 = blob.base64();
       assert.closeTo(b64.length, rawLength * 1.33, 500);
+    });
+
+    it('import from base64', () => {
+      const blobIn = new Blob;
+      im.write(blobIn);
+
+      const blobOut = new Blob;
+      blobOut.base64(blobIn.base64());
+      const imOut = new Image(blobOut, im.size(), 4, 'RGBA');
+      assert.strictEqual(imOut.size().width(), im.size().width());
     });
   })
 });

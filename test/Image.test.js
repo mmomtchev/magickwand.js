@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const { assert } = require('chai');
 
-const { Image, Geometry, Color } = require('../build/Release/node-magickwand.node').Magick;
+const { Image, Geometry, Color } = require('../build/Debug/node-magickwand.node').Magick;
 
 describe('Geometry', () => {
   describe('constructor', () => {
