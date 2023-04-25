@@ -7,15 +7,23 @@ const { Image, Geometry, Color } = require('../build/Debug/node-magickwand.node'
 describe('Geometry', () => {
   describe('constructor', () => {
     it('from numbers', () => {
-      let gm = new Geometry(100, 80);
+      const gm = new Geometry(100, 80);
       assert.equal(gm.width(), 100);
       assert.equal(gm.height(), 80);
     });
 
     it('from string', () => {
-      let gm = new Geometry("120x100");
+      const gm = new Geometry("120x100");
       assert.equal(gm.width(), 120);
       assert.equal(gm.height(), 100);
+    });
+
+    it('copy constructor', () => {
+      const gm1 = new Geometry("120x100");
+      const gm2 = new Geometry(gm1);
+      gm1.width(100);
+      assert.strictEqual(gm1.width(), 100);
+      assert.strictEqual(gm2.width(), 120);
     });
   });
 });
@@ -32,6 +40,14 @@ describe('Image', () => {
       const im = new Image(new Geometry(100, 80), new Color);
       assert.equal(im.size().width(), 100);
       assert.equal(im.size().height(), 80);
+    });
+
+    it('copy constructor', () => {
+      const im1 = new Image(path.join(__dirname, 'data', 'wizard.png'));
+      const im2 = new Image(im1);
+      im1.crop(new Geometry(10, 8, 1, 8));
+      assert.strictEqual(im1.size().width(), 10);
+      assert.strictEqual(im2.size().width(), 80);
     });
   });
 

@@ -35,6 +35,22 @@ describe('Blob', () => {
       image.read(blob);
       assert.strictEqual(image.size().width(), im.size().width());
     });
+
+    it('copy constructor', () => {
+      const blob1 = new Blob;
+      im.magick('JPG');
+      im.write(blob1);
+
+      const blob2 = new Blob(blob1);
+      im.magick('PNG');
+      im.write(blob2);
+
+      const test = new Image;
+      test.read(blob1);
+      assert.strictEqual(test.magick(), 'JPEG');
+      test.read(blob2);
+      assert.strictEqual(test.magick(), 'PNG');
+    });
   });
 
   describe('buffer', () => {
