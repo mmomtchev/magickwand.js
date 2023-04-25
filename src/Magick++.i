@@ -24,9 +24,6 @@ typedef MagickCore::ImageInfo _ImageInfo;
 %include "exception.i"
 %include "nodejs_buffer.i"
 
-%typemap(in)        (const void* data_,const size_t length_) = (const void* buffer_data, const size_t buffer_len);
-%typemap(typecheck) (const void* data_,const size_t length_) = (const void* buffer_data, const size_t buffer_len);
-
 %apply unsigned { size_t };
 %apply int { ssize_t };
 
@@ -39,6 +36,7 @@ typedef MagickCore::ImageInfo _ImageInfo;
   }
 }
 
+// This one is for SWIG itself (the previous one goes into the generated file)
 %include "magick_config.h"
 
 // Shunt __attribute__(x) which is not supported by SWIG
@@ -101,6 +99,11 @@ namespace MagickCore {
 
   %include "../build/magickwand.i"
 }
+
+// These are for the Magick::Blob constructors, they allow to transform an incoming Buffer to (void *, size_t)
+// The base typemap comes from 'nodejs_buffer.i'
+%typemap(in)        (const void* data_,const size_t length_) = (const void* buffer_data, const size_t buffer_len);
+%typemap(typecheck) (const void* data_,const size_t length_) = (const void* buffer_data, const size_t buffer_len);
 
 // Magick::Blob::data is a very special case - it returns a const void *
 // and we want to make a Buffer out of it:
