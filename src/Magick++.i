@@ -21,9 +21,13 @@ typedef MagickCore::ImageInfo _ImageInfo;
 %include "std_vector.i"
 %include "typemaps.i"
 %include "exception.i"
+%include "nodejs_buffer.i"
 
-%typemap(in) ssize_t = long;
-%typemap(out) ssize_t = long;
+%typemap(in)        (const void* data_,const size_t length_) = (const void* buffer_data, const size_t buffer_len);
+%typemap(typecheck) (const void* data_,const size_t length_) = (const void* buffer_data, const size_t buffer_len);
+
+%apply unsigned { size_t };
+%apply int { ssize_t };
 
 %exception {
   try {
@@ -73,18 +77,32 @@ typedef MagickCore::ImageInfo _ImageInfo;
 %ignore LogMagickEventList;
 %ignore ThrowMagickExceptionList;
 
+// These cannot be used safely from JavaScript
+%rename("$ignore", regextarget=1) "NoCopy$";
+%rename("$ignore", regextarget=1) "Allocator";
+
 namespace MagickCore {
   // Global functions are (still) not bound to a namespace
   // and there is both a Magick::CloneString and MagickCore::CloneString
   %rename(Core_CloneString) CloneString;
 
-  // These are all the MagickCore:: header files ordered by dependency
-  // (as produced by the dependency generator)
+  // Exposing MagickCore (the old plain C API) to JS is optional
+  // It doubles the size of the addon and most of its primitives
+  // are very unsafe or completely unusable from a high-level language
+#ifdef MAGICKCORE_JS
+  // Generate wrappers
   %include "../build/magickcore.i"
+#else
+  // Simply import the types
+  %rename("$ignore", regextarget=1, fullname=1) "^MagickCore::.+";
+  %include "../build/magickcore-import.i"
+#endif
+
   %include "../build/magickwand.i"
 }
 
 // These are all the Magick:: header files ordered by dependency
+// (as produced by the dependency generator)
 %include "../build/magick++.i"
 
 %insert(init) %{

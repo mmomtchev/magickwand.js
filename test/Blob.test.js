@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const { assert } = require('chai');
 
 const im = require('../build/Debug/node-magickwand.node');
@@ -17,6 +18,7 @@ describe('Blob', () => {
       const blob = new Blob;
 
       // PNG image
+      im.magick('PNG');
       im.write(blob);
       assert.strictEqual(blob.length(), 10039);
 
@@ -25,11 +27,20 @@ describe('Blob', () => {
       im.write(blob);
       assert.strictEqual(blob.length(), rawLength);
     });
+
+    it('from Buffer', () => {
+      const data = fs.readFileSync(path.join(__dirname, 'data', 'wizard.png'));
+      const blob = new Blob(data);
+      const image = new Image;
+      image.read(blob);
+      assert.strictEqual(image.size().width(), im.size().width());
+    });
   });
 
   describe('base64', () => {
     it('export to base64', () => {
       const blob = new Blob;
+      im.magick('RGBA');
       im.write(blob);
 
       const b64 = blob.base64();
