@@ -25,5 +25,20 @@ describe('CoderInfo', () => {
     for (let i = 0; i < list.size(); i++) {
       assert.isString(list.get(i).name());
     }
+
+    const writables = coderInfoList(CoderInfo.AnyMatch, CoderInfo.TrueMatch, CoderInfo.AnyMatch);
+    assert.isBelow(writables.size(), list.size());
+  });
+
+  it('iterator', () => {
+    const list = coderInfoList();
+
+    assert.isAtLeast(list.size(), 50);
+    let i = 0;
+    for (const l of list) {
+      i++;
+      assert.isString(l.name());
+    }
+    assert.strictEqual(i, list.size());
   });
 });
