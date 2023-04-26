@@ -118,9 +118,23 @@ namespace MagickCore {
   }
 }
 
+// A specialized typemap for coderInfoList which takes an std::vector* argument
+// which serves as a result holder -> we transform it to a function that
+// returns that std::vector for which we have a SWIG wrapper in 'std_vector.i'
+%typemap(in, numinputs=0) std::vector<Magick::CoderInfo> *container_ (std::vector<Magick::CoderInfo> temp) {
+  $1 = new std::vector<Magick::CoderInfo>;
+}
+%typemap(argout) std::vector<Magick::CoderInfo> *container_ {
+  $result = SWIG_Napi_NewPointerObj(env, $1, SWIGTYPE_p_std__vectorT_Magick__CoderInfo_t, SWIG_POINTER_OWN);
+}
+
 // These are all the Magick:: header files ordered by dependency
 // (as produced by the dependency generator)
 %include "../build/magick++.i"
+
+// Templates need to be instantiated - you can't instantiate new ones on runtime
+%template(coderInfoArray)   std::vector<Magick::CoderInfo>;
+%template(coderInfoList)    Magick::coderInfoList<std::vector<Magick::CoderInfo>>;
 
 %insert(init) %{
 // TODO: Find the path on Windows
