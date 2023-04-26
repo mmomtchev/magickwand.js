@@ -132,7 +132,7 @@ namespace MagickCore {
 // (as produced by the dependency generator)
 %include "../build/magick++.i"
 
-// Templates need to be instantiated - you can't instantiate new ones on runtime
+// Templates need to be instantiated - you can't instantiate new ones at runtime
 %template(coderInfoArray)   std::vector<Magick::CoderInfo>;
 %template(coderInfoList)    Magick::coderInfoList<std::vector<Magick::CoderInfo>>;
 
