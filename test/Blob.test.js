@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const { assert } = require('chai');
 
-const im = require('../build/Debug/node-magickwand.node');
+const im = require('..');
 const { Image, Blob } = im.Magick;
 
 describe('Blob', () => {
@@ -35,6 +35,22 @@ describe('Blob', () => {
       image.read(blob);
       assert.strictEqual(image.size().width(), im.size().width());
     });
+
+    it('copy constructor', () => {
+      const blob1 = new Blob;
+      im.magick('JPG');
+      im.write(blob1);
+
+      const blob2 = new Blob(blob1);
+      im.magick('PNG');
+      im.write(blob2);
+
+      const test = new Image;
+      test.read(blob1);
+      assert.strictEqual(test.magick(), 'JPEG');
+      test.read(blob2);
+      assert.strictEqual(test.magick(), 'PNG');
+    });
   });
 
   describe('buffer', () => {
@@ -42,7 +58,7 @@ describe('Blob', () => {
       const blob = new Blob;
       im.magick('RGBA');
       im.write(blob);
-      const buffer = blob.buffer();
+      const buffer = blob.data();
       assert.instanceOf(buffer, Buffer);
       assert.lengthOf(buffer, rawLength);
     });

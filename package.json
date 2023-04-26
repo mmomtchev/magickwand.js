@@ -2,7 +2,7 @@
   "name": "magickwand",
   "version": "0.0.1",
   "description": "Node.js bindings for imagemagick",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "scripts": {
     "deps:magickcore:import": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickCore build/magickcore-import.i import",
     "deps:magickcore:include": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickCore build/magickcore.i",
