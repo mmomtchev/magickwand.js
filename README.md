@@ -28,7 +28,7 @@ cd deps/ImageMagick
 make -j4
 ```
 
-Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 without HDRI - which is the default setting on Linux. You can adjust the build mode in `src/magick_config.h` to build with a different ImageMagick.
+Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the interface between the user code and ImageMagick - images still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 without HDRI - which is the default setting on Linux. You can adjust the build mode in `src/magick_config.h` to build with a different ImageMagick.
 
 * Install the npm dependencies, this will also generate the dependencies and run SWIG - which you must have installed
 ```shell
