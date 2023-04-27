@@ -128,7 +128,7 @@ describe('Image', () => {
           assert.strictEqual(pixels[1], 2n ** (8n * BigInt(typed.BYTES_PER_ELEMENT)) - 1n);
 
         assert.throws(() => {
-          im.read(20, 20, 'RGBA', pixels);
+          im.write(0, 0, 5, 5, 'RGB', pixels);
         }, /does not match the number of pixels/);
       });
     });

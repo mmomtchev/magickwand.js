@@ -22,3 +22,11 @@
     SWIG_exception_fail(SWIG_IndexError, "The number of elements in the TypedArray does not match the number of pixels in the image");
   }
 }
+
+%typemap(check)     (const ::ssize_t x_, const ::ssize_t y_, const size_t columns_,
+      const size_t rows_, const std::string &map_, const Magick::StorageType type_,
+      void *pixels_) {
+  if ($3 * $4 * $5->size() != info[5].As<Napi::TypedArray>().ElementLength()) {
+    SWIG_exception_fail(SWIG_IndexError, "The number of elements in the TypedArray does not match the number of pixels in the image");
+  }
+}
