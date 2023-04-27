@@ -15,13 +15,13 @@ describe('Geometry', () => {
     });
 
     it('from string', () => {
-      const gm = new Geometry("120x100");
+      const gm = new Geometry('120x100');
       assert.equal(gm.width(), 120);
       assert.equal(gm.height(), 100);
     });
 
     it('copy constructor', () => {
-      const gm1 = new Geometry("120x100");
+      const gm1 = new Geometry('120x100');
       const gm2 = new Geometry(gm1);
       gm1.width(100);
       assert.strictEqual(gm1.width(), 100);
@@ -98,7 +98,7 @@ describe('Image', () => {
         else
           pixels.fill(2n ** (8n * BigInt(typed.BYTES_PER_ELEMENT)) - 1n);
 
-        im.read(15, 20, "RGBA", pixels);
+        im.read(15, 20, 'RGBA', pixels);
         
         const px = im.pixelColor(5, 5);
         assert.strictEqual(px.pixelType(), Color.RGBAPixel);
@@ -110,7 +110,7 @@ describe('Image', () => {
         assert.strictEqual(px.quantumGreen(), 65535);
 
         assert.throws(() => {
-          im.read(20, 20, "RGBA", pixels);
+          im.read(20, 20, 'RGBA', pixels);
         }, /does not match the number of pixels/);
       });
     });

@@ -12,6 +12,10 @@
     "semi": [
       2,
       "always"
+    ],
+    "quotes": [
+      "error",
+      "single"
     ]
   },
   "plugins": [
