@@ -38,6 +38,19 @@
       'sources': [
         'build/Magick++.cxx'
       ]
+    },
+    {
+      "target_name": "action_after_build",
+      "type": "none",
+      "dependencies": [ "<(module_name)" ],
+      "copies": [
+        {
+          "files": [
+            "<(PRODUCT_DIR)/node-magickwand.node"
+          ],
+          "destination": "<(module_path)"
+        }
+      ]
     }
   ]
 }

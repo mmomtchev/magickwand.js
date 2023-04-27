@@ -28,24 +28,14 @@ cd deps/ImageMagick
 make -j4
 ```
 
-* Install the npm dependencies
+* Install the npm dependencies, this will also generate the dependencies and run SWIG - which you must have installed
 ```shell
 npm install
 ```
 
-* Generate the C++ dependency graph
-```shell
-npm run deps
-```
-
-* Generate the C++ bindings code
-```shell
-npm run swig
-```
-
 * Build the Node.js addon
 ```shell
-node-gyp configure && node-gyp build
+node-pre-gyp configure && node-pre-gyp build
 ```
 
 * `npm test` should work at this point
