@@ -2,7 +2,9 @@ const path = require('path');
 const fs = require('fs');
 const { assert } = require('chai');
 
-const { Image, Geometry, Color } = require('..').Magick;
+const ImageMagick = require('..');
+const { Image, Geometry, Color } = ImageMagick.Magick;
+const { MultiplyCompositeOp } = ImageMagick.MagickCore;
 
 describe('Geometry', () => {
   describe('constructor', () => {
@@ -70,7 +72,7 @@ describe('Image', () => {
       const im = new Image(new Geometry('20x20'), new Color('black'));
 
       im.pixelColor(10, 10, new Color('red'));
-      
+
       const px = im.pixelColor(10, 10);
       assert.instanceOf(px, Color);
       assert.strictEqual(px.pixelType(), Color.RGBPixel);
@@ -83,6 +85,20 @@ describe('Image', () => {
     });
   });
 
+  describe('compositing', () => {
+    const im1 = new Image(path.join(__dirname, 'data', 'wizard.png'));
+    const im2 = new Image(im1.size(), new Color(0, 65535, 0, 32768));
+
+    im1.composite(im2, new Geometry(0, 0), MultiplyCompositeOp);
+    const px = im1.pixelColor(10, 10);
+    assert.strictEqual(px.pixelType(), Color.RGBAPixel);
+    assert.isTrue(px.isValid());
+    assert.strictEqual(px.quantumAlpha(), 65535);
+    assert.strictEqual(px.quantumBlack(), 0);
+    assert.strictEqual(px.quantumRed(), 32767);
+    assert.strictEqual(px.quantumBlue(), 32767);
+    assert.strictEqual(px.quantumGreen(), 65535);
+  });
 
   it('read an image, crop it, write it and read it back', () => {
     let im = new Image;

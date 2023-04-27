@@ -80,23 +80,25 @@ typedef MagickCore::ImageInfo _ImageInfo;
 %rename("$ignore", regextarget=1) "NoCopy$";
 %rename("$ignore", regextarget=1) "Allocator";
 
+// Exposing MagickCore (the old plain C API) to JS is optional
+// It doubles the size of the addon and most of its primitives
+// are very unsafe or completely unusable from a high-level language
+#ifndef MAGICKCORE_JS
+// Ignore everything but a few types - *Operator and *Type enums
+%rename("$ignore", regextarget=1, fullname=1) "^MagickCore::.+";
+%rename("%s") MagickCore;
+%rename("%s", regextarget=1) ".+Operator$";
+%rename("%s", regextarget=1) ".+Op$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Options$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Type$";
+#endif
+
 namespace MagickCore {
   // Global functions are (still) not bound to a namespace
   // and there is both a Magick::CloneString and MagickCore::CloneString
   %rename(Core_CloneString) CloneString;
 
-  // Exposing MagickCore (the old plain C API) to JS is optional
-  // It doubles the size of the addon and most of its primitives
-  // are very unsafe or completely unusable from a high-level language
-#ifdef MAGICKCORE_JS
-  // Generate wrappers
   %include "../build/magickcore.i"
-#else
-  // Simply import the types
-  %rename("$ignore", regextarget=1, fullname=1) "^MagickCore::.+";
-  %include "../build/magickcore-import.i"
-#endif
-
   %include "../build/magickwand.i"
 }
 

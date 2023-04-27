@@ -4,9 +4,7 @@
   "description": "Node.js bindings for imagemagick",
   "main": "./lib/index.js",
   "scripts": {
-    "deps:magickcore:import": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickCore build/magickcore-import.i import",
-    "deps:magickcore:include": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickCore build/magickcore.i",
-    "deps:magickcore": "npm run deps:magickcore:import && npm run deps:magickcore:include",
+    "deps:magickcore": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickCore build/magickcore.i",
     "deps:magick++": "node src/deps.js src/deps-stub.cc deps/ImageMagick/Magick\\\\+\\\\+ build/magick++.i",
     "deps:magickwand": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickWand build/magickwand.i",
     "deps": "npm run deps:magickcore && npm run deps:magick++ && npm run deps:magickwand",
