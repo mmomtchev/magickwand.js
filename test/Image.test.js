@@ -85,26 +85,36 @@ describe('Image', () => {
     });
   });
 
-  describe('TypedArray', () => {
-    it('read', () => {
-      const im = new Image();
-      const pixels = new Uint8Array(15 * 20 * 4);
-      pixels.fill(255);
-      im.read(15, 20, "RGBA", pixels);
-      const px = im.pixelColor(5, 5);
-      assert.strictEqual(px.pixelType(), Color.RGBAPixel);
-      assert.isTrue(px.isValid());
-      assert.strictEqual(px.quantumAlpha(), 65535);
-      assert.strictEqual(px.quantumBlack(), 0);
-      assert.strictEqual(px.quantumRed(), 65535);
-      assert.strictEqual(px.quantumBlue(), 65535);
-      assert.strictEqual(px.quantumGreen(), 65535);
+  for (const typed of [Uint8Array, Uint16Array, Uint32Array, BigUint64Array, Float32Array, Float64Array]) {
+    describe('TypedArray ' + typed.name, () => {
+      it('read', () => {
+        const im = new Image();
+        const pixels = new typed(15 * 20 * 4);
 
-      assert.throws(() => {
-        im.read(20, 20, "RGBA", pixels);
-      }, /does not match the number of pixels/);
+        if (typed.name.startsWith('Float'))
+          pixels.fill(1);
+        else if (typed.BYTES_PER_ELEMENT < 8)
+          pixels.fill(2 ** (8 * typed.BYTES_PER_ELEMENT) - 1);
+        else
+          pixels.fill(2n ** (8n * BigInt(typed.BYTES_PER_ELEMENT)) - 1n);
+
+        im.read(15, 20, "RGBA", pixels);
+        
+        const px = im.pixelColor(5, 5);
+        assert.strictEqual(px.pixelType(), Color.RGBAPixel);
+        assert.isTrue(px.isValid());
+        assert.strictEqual(px.quantumAlpha(), 65535);
+        assert.strictEqual(px.quantumBlack(), 0);
+        assert.strictEqual(px.quantumRed(), 65535);
+        assert.strictEqual(px.quantumBlue(), 65535);
+        assert.strictEqual(px.quantumGreen(), 65535);
+
+        assert.throws(() => {
+          im.read(20, 20, "RGBA", pixels);
+        }, /does not match the number of pixels/);
+      });
     });
-  });
+  }
 
   describe('compositing', () => {
     const im1 = new Image(path.join(__dirname, 'data', 'wizard.png'));
