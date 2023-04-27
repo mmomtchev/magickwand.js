@@ -95,5 +95,5 @@ describe('Blob', () => {
       const imOut = new Image(blobOut);
       assert.strictEqual(imOut.size().width(), im.size().width());
     });
-  })
+  });
 });
