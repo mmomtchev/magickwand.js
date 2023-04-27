@@ -4,23 +4,38 @@
   "description": "Node.js bindings for imagemagick",
   "main": "./lib/index.js",
   "scripts": {
-    "deps:magickcore:import": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickCore build/magickcore-import.i import",
-    "deps:magickcore:include": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickCore build/magickcore.i",
-    "deps:magickcore": "npm run deps:magickcore:import && npm run deps:magickcore:include",
+    "deps:magickcore": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickCore build/magickcore.i",
     "deps:magick++": "node src/deps.js src/deps-stub.cc deps/ImageMagick/Magick\\\\+\\\\+ build/magick++.i",
     "deps:magickwand": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickWand build/magickwand.i",
     "deps": "npm run deps:magickcore && npm run deps:magick++ && npm run deps:magickwand",
     "swig": "swig -javascript -Ideps/ImageMagick/Magick++/lib -Ideps/ImageMagick -napi -c++ -o build/Magick++.cxx src/Magick++.i",
+    "prepare": "npm run deps && npm run swig",
+    "lint": "eslint lib/*.js test/*.js",
     "test": "mocha"
+  },
+  "keywords": [
+    "imagemagick",
+    "magick",
+    "image",
+    "resize",
+    "convert",
+    "filters"
+  ],
+  "binary": {
+    "module_name": "node-magickwand",
+    "module_path": "./lib/binding/{node_abi}-{platform}-{arch}",
+    "remote_path": "v{version}",
+    "host": "https://github.com/mmomtchev/node-magickwand/releases/download/",
+    "package_name": "{node_abi}-{platform}-{arch}.tar.gz",
+    "hosting": {
+      "provider": "github",
+      "repo": "mmomtchev/node-magickwand"
+    }
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mmomtchev/node-magickwand.git"
   },
-  "keywords": [
-    "imagemagick",
-    "node.js"
-  ],
   "author": "Momtchil Momtchev <momtchil@momtchev.com>",
   "license": "ISC",
   "bugs": {
@@ -29,7 +44,12 @@
   "homepage": "https://github.com/mmomtchev/node-magickwand#readme",
   "devDependencies": {
     "chai": "^4.3.7",
+    "eslint": "^8.39.0",
+    "eslint-plugin-mocha": "^10.1.0",
     "mocha": "^10.2.0",
     "node-addon-api": "^5.1.0"
+  },
+  "dependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.10"
   }
 }

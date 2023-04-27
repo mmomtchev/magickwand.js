@@ -17,7 +17,10 @@
       'defines': [
       ],
       'libraries': [
-        '-Ldeps/ImageMagick/Magick++/lib/.libs/ -lMagick++-7.Q16HDRI'
+        '-L../deps/ImageMagick/Magick++/lib/.libs/ -lMagick++-7.Q16 -L../deps/ImageMagick/MagickCore/.libs -lMagickCore-7.Q16'
+      ],
+      'ldflags': [
+        '-Wl,-rpath \'$$ORIGIN/../../../deps/ImageMagick/Magick++/lib/.libs/\' -Wl,-rpath \'$$ORIGIN/../../../deps/ImageMagick/MagickCore/.libs\''
       ],
       'cflags': [
         '-Wno-deprecated-declarations',
@@ -37,6 +40,19 @@
       'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],
       'sources': [
         'build/Magick++.cxx'
+      ]
+    },
+    {
+      "target_name": "action_after_build",
+      "type": "none",
+      "dependencies": [ "<(module_name)" ],
+      "copies": [
+        {
+          "files": [
+            "<(PRODUCT_DIR)/node-magickwand.node"
+          ],
+          "destination": "<(module_path)"
+        }
       ]
     }
   ]

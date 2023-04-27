@@ -1,0 +1,23 @@
+{
+  "env": {
+    "mocha": true,
+    "node": true,
+    "es6": true,
+    "es2020": true
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "rules": {
+    "semi": [
+      2,
+      "always"
+    ]
+  },
+  "plugins": [
+    "mocha"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020
+  }
+}

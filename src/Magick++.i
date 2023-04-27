@@ -17,6 +17,7 @@ typedef MagickCore::SemaphoreInfo SemaphoreInfo;
 typedef MagickCore::ImageInfo _ImageInfo;
 %}
 
+%include ""
 %include "cpointer.i"
 %include "std_string.i"
 %include "std_vector.i"
@@ -80,53 +81,32 @@ typedef MagickCore::ImageInfo _ImageInfo;
 %rename("$ignore", regextarget=1) "NoCopy$";
 %rename("$ignore", regextarget=1) "Allocator";
 
+// Exposing MagickCore (the old plain C API) to JS is optional
+// It doubles the size of the addon and most of its primitives
+// are very unsafe or completely unusable from a high-level language
+#ifndef MAGICKCORE_JS
+// Ignore everything but a few types - *Operator and *Type enums
+%rename("$ignore", regextarget=1, fullname=1) "^MagickCore::.+";
+%rename("%s") MagickCore;
+%rename("%s", regextarget=1) ".+Operator$";
+%rename("%s", regextarget=1) ".+Op$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Options$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Type$";
+#endif
+
 namespace MagickCore {
   // Global functions are (still) not bound to a namespace
   // and there is both a Magick::CloneString and MagickCore::CloneString
   %rename(Core_CloneString) CloneString;
 
-  // Exposing MagickCore (the old plain C API) to JS is optional
-  // It doubles the size of the addon and most of its primitives
-  // are very unsafe or completely unusable from a high-level language
-#ifdef MAGICKCORE_JS
-  // Generate wrappers
   %include "../build/magickcore.i"
-#else
-  // Simply import the types
-  %rename("$ignore", regextarget=1, fullname=1) "^MagickCore::.+";
-  %include "../build/magickcore-import.i"
-#endif
-
   %include "../build/magickwand.i"
 }
 
-// These are for the Magick::Blob constructors, they allow to transform an incoming Buffer to (void *, size_t)
-// The base typemap comes from 'nodejs_buffer.i'
-%typemap(in)        (const void* data_,const size_t length_) = (const void* buffer_data, const size_t buffer_len);
-%typemap(typecheck) (const void* data_,const size_t length_) = (const void* buffer_data, const size_t buffer_len);
-
-// Magick::Blob::data is a very special case - it returns a const void *
-// and we want to make a Buffer out of it:
-// * We ignore the original function
-// * We create a new one that uses special out arguments
-// * The arguments are named so that we can enable the argout typemap in nodejs_buffer.i
-%ignore Magick::Blob::data() const;
-%extend Magick::Blob {
-  void data(void **buffer_data, size_t *buffer_len) const {
-    *buffer_data = const_cast<void *>(self->data());
-    *buffer_len = self->length();
-  }
-}
-
-// A specialized typemap for coderInfoList which takes an std::vector* argument
-// which serves as a result holder -> we transform it to a function that
-// returns that std::vector for which we have a SWIG wrapper in 'std_vector.i'
-%typemap(in, numinputs=0) std::vector<Magick::CoderInfo> *container_ (std::vector<Magick::CoderInfo> temp) {
-  $1 = new std::vector<Magick::CoderInfo>;
-}
-%typemap(argout) std::vector<Magick::CoderInfo> *container_ {
-  $result = SWIG_Napi_NewPointerObj(env, $1, SWIGTYPE_p_std__vectorT_Magick__CoderInfo_t, SWIG_POINTER_OWN);
-}
+// Various special cases - Buffers, TypedArrays, std::vectors...
+%include "Image.i"
+%include "Blob.i"
+%include "CoderInfo.i"
 
 // These are all the Magick:: header files ordered by dependency
 // (as produced by the dependency generator)

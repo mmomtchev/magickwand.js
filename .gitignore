@@ -2,3 +2,4 @@ node_modules
 build/*
 !build/*.cxx
 !build/*.i
+lib/binding

@@ -1,5 +1,3 @@
-const path = require('path');
-const fs = require('fs');
 const { assert } = require('chai');
 
 const { CoderInfo, coderInfoList } = require('..').Magick;

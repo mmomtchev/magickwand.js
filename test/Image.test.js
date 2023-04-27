@@ -2,7 +2,9 @@ const path = require('path');
 const fs = require('fs');
 const { assert } = require('chai');
 
-const { Image, Geometry, Color } = require('..').Magick;
+const ImageMagick = require('..');
+const { Image, Geometry, Color } = ImageMagick.Magick;
+const { MultiplyCompositeOp } = ImageMagick.MagickCore;
 
 describe('Geometry', () => {
   describe('constructor', () => {
@@ -49,6 +51,84 @@ describe('Image', () => {
       assert.strictEqual(im1.size().width(), 10);
       assert.strictEqual(im2.size().width(), 80);
     });
+  });
+
+  describe('pixelColor', () => {
+    it('get', () => {
+      const im = new Image(path.join(__dirname, 'data', 'wizard.png'));
+
+      const px = im.pixelColor(10, 10);
+      assert.instanceOf(px, Color);
+      assert.strictEqual(px.pixelType(), Color.RGBAPixel);
+      assert.isTrue(px.isValid());
+      assert.strictEqual(px.quantumAlpha(), 65535);
+      assert.strictEqual(px.quantumBlack(), 0);
+      assert.strictEqual(px.quantumRed(), 65535);
+      assert.strictEqual(px.quantumBlue(), 65535);
+      assert.strictEqual(px.quantumGreen(), 65535);
+    });
+
+    it('set', () => {
+      const im = new Image(new Geometry('20x20'), new Color('black'));
+
+      im.pixelColor(10, 10, new Color('red'));
+
+      const px = im.pixelColor(10, 10);
+      assert.instanceOf(px, Color);
+      assert.strictEqual(px.pixelType(), Color.RGBPixel);
+      assert.isTrue(px.isValid());
+      assert.strictEqual(px.quantumAlpha(), 65535);
+      assert.strictEqual(px.quantumBlack(), 0);
+      assert.strictEqual(px.quantumRed(), 65535);
+      assert.strictEqual(px.quantumBlue(), 0);
+      assert.strictEqual(px.quantumGreen(), 0);
+    });
+  });
+
+  for (const typed of [Uint8Array, Uint16Array, Uint32Array, BigUint64Array, Float32Array, Float64Array]) {
+    describe('TypedArray ' + typed.name, () => {
+      it('read', () => {
+        const im = new Image();
+        const pixels = new typed(15 * 20 * 4);
+
+        if (typed.name.startsWith('Float'))
+          pixels.fill(1);
+        else if (typed.BYTES_PER_ELEMENT < 8)
+          pixels.fill(2 ** (8 * typed.BYTES_PER_ELEMENT) - 1);
+        else
+          pixels.fill(2n ** (8n * BigInt(typed.BYTES_PER_ELEMENT)) - 1n);
+
+        im.read(15, 20, "RGBA", pixels);
+        
+        const px = im.pixelColor(5, 5);
+        assert.strictEqual(px.pixelType(), Color.RGBAPixel);
+        assert.isTrue(px.isValid());
+        assert.strictEqual(px.quantumAlpha(), 65535);
+        assert.strictEqual(px.quantumBlack(), 0);
+        assert.strictEqual(px.quantumRed(), 65535);
+        assert.strictEqual(px.quantumBlue(), 65535);
+        assert.strictEqual(px.quantumGreen(), 65535);
+
+        assert.throws(() => {
+          im.read(20, 20, "RGBA", pixels);
+        }, /does not match the number of pixels/);
+      });
+    });
+  }
+
+  describe('compositing', () => {
+    const im1 = new Image(path.join(__dirname, 'data', 'wizard.png'));
+    const im2 = new Image(im1.size(), new Color(0, 65535, 0, 32768));
+
+    im1.composite(im2, new Geometry(0, 0), MultiplyCompositeOp);
+    const px = im1.pixelColor(10, 10);
+    assert.strictEqual(px.pixelType(), Color.RGBAPixel);
+    assert.isTrue(px.isValid());
+    assert.strictEqual(px.quantumAlpha(), 65535);
+    assert.strictEqual(px.quantumBlack(), 0);
+    assert.strictEqual(px.quantumRed(), 32767);
+    assert.strictEqual(px.quantumBlue(), 32767);
+    assert.strictEqual(px.quantumGreen(), 65535);
   });
 
   it('read an image, crop it, write it and read it back', () => {
