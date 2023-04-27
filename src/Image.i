@@ -15,3 +15,10 @@
 %typemap(typecheck) (const Magick::StorageType type_, const void *pixels_) {
   return $input.IsTypedArray();
 }
+
+%typemap(check)     (const size_t width_, const size_t height_, const std::string &map_,
+      const Magick::StorageType type_, const void *pixels_) {
+  if ($1 * $2 * $3->size() != info[3].As<Napi::TypedArray>().ElementLength()) {
+    SWIG_exception_fail(SWIG_IndexError, "The number of elements in the TypedArray does not match the number of pixels in the image");
+  }
+}

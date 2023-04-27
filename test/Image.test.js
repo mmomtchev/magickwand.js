@@ -99,6 +99,10 @@ describe('Image', () => {
       assert.strictEqual(px.quantumRed(), 65535);
       assert.strictEqual(px.quantumBlue(), 65535);
       assert.strictEqual(px.quantumGreen(), 65535);
+
+      assert.throws(() => {
+        im.read(20, 20, "RGBA", pixels);
+      }, /does not match the number of pixels/);
     });
   });
 
