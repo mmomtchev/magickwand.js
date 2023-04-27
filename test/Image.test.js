@@ -85,6 +85,23 @@ describe('Image', () => {
     });
   });
 
+  describe('TypedArray', () => {
+    it('read', () => {
+      const im = new Image();
+      const pixels = new Uint8Array(15 * 20 * 4);
+      pixels.fill(255);
+      im.read(15, 20, "RGBA", pixels);
+      const px = im.pixelColor(5, 5);
+      assert.strictEqual(px.pixelType(), Color.RGBAPixel);
+      assert.isTrue(px.isValid());
+      assert.strictEqual(px.quantumAlpha(), 65535);
+      assert.strictEqual(px.quantumBlack(), 0);
+      assert.strictEqual(px.quantumRed(), 65535);
+      assert.strictEqual(px.quantumBlue(), 65535);
+      assert.strictEqual(px.quantumGreen(), 65535);
+    });
+  });
+
   describe('compositing', () => {
     const im1 = new Image(path.join(__dirname, 'data', 'wizard.png'));
     const im2 = new Image(im1.size(), new Color(0, 65535, 0, 32768));
