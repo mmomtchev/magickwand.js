@@ -51,6 +51,39 @@ describe('Image', () => {
     });
   });
 
+  describe('pixelColor', () => {
+    it('get', () => {
+      const im = new Image(path.join(__dirname, 'data', 'wizard.png'));
+
+      const px = im.pixelColor(10, 10);
+      assert.instanceOf(px, Color);
+      assert.strictEqual(px.pixelType(), Color.RGBAPixel);
+      assert.isTrue(px.isValid());
+      assert.strictEqual(px.quantumAlpha(), 65535);
+      assert.strictEqual(px.quantumBlack(), 0);
+      assert.strictEqual(px.quantumRed(), 65535);
+      assert.strictEqual(px.quantumBlue(), 65535);
+      assert.strictEqual(px.quantumGreen(), 65535);
+    });
+
+    it('set', () => {
+      const im = new Image(new Geometry('20x20'), new Color('black'));
+
+      im.pixelColor(10, 10, new Color('red'));
+      
+      const px = im.pixelColor(10, 10);
+      assert.instanceOf(px, Color);
+      assert.strictEqual(px.pixelType(), Color.RGBPixel);
+      assert.isTrue(px.isValid());
+      assert.strictEqual(px.quantumAlpha(), 65535);
+      assert.strictEqual(px.quantumBlack(), 0);
+      assert.strictEqual(px.quantumRed(), 65535);
+      assert.strictEqual(px.quantumBlue(), 0);
+      assert.strictEqual(px.quantumGreen(), 0);
+    });
+  });
+
+
   it('read an image, crop it, write it and read it back', () => {
     let im = new Image;
     im.read(path.join(__dirname, 'data', 'wizard.png'));
