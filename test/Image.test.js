@@ -113,6 +113,24 @@ describe('Image', () => {
           im.read(20, 20, 'RGBA', pixels);
         }, /does not match the number of pixels/);
       });
+
+      it('write', () => {
+        const im = new Image(new Geometry('15x20'), new Color(0, 65535, 0, 0));
+        const pixels = new typed(15 * 20 * 4);
+
+        im.write(0, 0, 15, 20, 'RGBA', pixels);
+
+        if (typed.name.startsWith('Float'))
+          assert.strictEqual(pixels[1], 1);
+        else if (typed.BYTES_PER_ELEMENT < 8)
+          assert.strictEqual(pixels[1], 2 ** (8 * typed.BYTES_PER_ELEMENT) - 1);
+        else
+          assert.strictEqual(pixels[1], 2n ** (8n * BigInt(typed.BYTES_PER_ELEMENT)) - 1n);
+
+        assert.throws(() => {
+          im.read(20, 20, 'RGBA', pixels);
+        }, /does not match the number of pixels/);
+      });
     });
   }
 

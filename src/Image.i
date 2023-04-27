@@ -2,7 +2,7 @@
 // We want to make it work with a TypedArray
 %include "StorageType.i";
 
-%typemap(in)        (const Magick::StorageType type_, const void *pixels_) {
+%typemap(in)        (const Magick::StorageType type_, void *pixels_) {
   if ($input.IsTypedArray()) {
     Napi::TypedArray array = $input.As<Napi::TypedArray>();
     $1 = GetMagickStorageType(env, array);
