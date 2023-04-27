@@ -11,6 +11,7 @@
     "deps:magickwand": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickWand build/magickwand.i",
     "deps": "npm run deps:magickcore && npm run deps:magick++ && npm run deps:magickwand",
     "swig": "swig -javascript -Ideps/ImageMagick/Magick++/lib -Ideps/ImageMagick -napi -c++ -o build/Magick++.cxx src/Magick++.i",
+    "lint": "eslint lib/*.js test/*.js",
     "test": "mocha"
   },
   "repository": {
@@ -29,7 +30,12 @@
   "homepage": "https://github.com/mmomtchev/node-magickwand#readme",
   "devDependencies": {
     "chai": "^4.3.7",
+    "eslint": "^8.39.0",
+    "eslint-plugin-mocha": "^10.1.0",
     "mocha": "^10.2.0",
     "node-addon-api": "^5.1.0"
+  },
+  "dependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.10"
   }
 }
