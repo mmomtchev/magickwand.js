@@ -114,12 +114,19 @@ namespace MagickCore {
 %include "../build/magick++.i"
 
 // Templates need to be instantiated - you can't instantiate new ones at runtime
-%template(coderInfoArray)   std::vector<Magick::CoderInfo>;
-%template(coderInfoList)    Magick::coderInfoList<std::vector<Magick::CoderInfo>>;
-%template(appendImages)     Magick::appendImages<std::list<ImagePtr>::iterator>;
-%template(averageImages)    Magick::averageImages<std::list<ImagePtr>::iterator>;
-%template(flattenImages)    Magick::flattenImages<std::list<ImagePtr>::iterator>;
-%template(mosaicImages)     Magick::mosaicImages<std::list<ImagePtr>::iterator>;
+%template(coderInfoArray)               std::vector<Magick::CoderInfo>;
+%template(coderInfoList)                Magick::coderInfoList<std::vector<Magick::CoderInfo>>;
+%template(appendImages)                 Magick::appendImages<ImageListIterator>;
+%template(averageImages)                Magick::averageImages<ImageListIterator>;
+%template(flattenImages)                Magick::flattenImages<ImageListIterator>;
+%template(mosaicImages)                 Magick::mosaicImages<ImageListIterator>;
+%template(coalesceImages)               Magick::coalesceImages<ImageListIterator, ImageListContainer>;
+%template(deconstructImages)            Magick::deconstructImages<ImageListIterator, ImageListContainer>;
+%template(forwardFourierTransformImage) Magick::forwardFourierTransformImage<ImageListContainer>;
+%template(montageImages)                Magick::montageImages<ImageListContainer, ImageListIterator>;
+%template(morphImages)                  Magick::morphImages<ImageListIterator, ImageListContainer>;
+%template(readImages)                   Magick::readImages<ImageListContainer>;
+%template(writeImages)                  Magick::writeImages<ImageListIterator>;
 
 %insert(init) %{
 // TODO: Find the path on Windows
