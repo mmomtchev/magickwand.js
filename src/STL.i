@@ -43,3 +43,26 @@ typedef std::vector<Magick::Image>::iterator   ImageListIterator;
     $result = env.Null();
   }
 }
+
+// These functions expect a Magick::Image pointer and use it to return the image
+// In this case, we eliminate this argument and return the value instead
+%typemap(in, numinputs=0)
+  Magick::Image *appendedImage_,
+  Magick::Image *averagedImage_,
+  Magick::Image *flattendImage_,
+  Magick::Image *mosaicImage_
+{
+  $1 = new Magick::Image();
+}
+%typemap(argout)
+  Magick::Image *appendedImage_,
+  Magick::Image *averagedImage_,
+  Magick::Image *flattendImage_,
+  Magick::Image *mosaicImage_
+{
+  if ($1 != nullptr) {
+    $result = SWIG_Napi_NewPointerObj(env, $1, $1_descriptor, SWIG_POINTER_OWN);
+  } else {
+    $result = env.Null();
+  }
+}
