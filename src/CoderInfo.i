@@ -6,5 +6,5 @@
 }
 
 %typemap(argout)          std::vector<Magick::CoderInfo> *container_ {
-  $result = SWIG_Napi_NewPointerObj(env, $1, SWIGTYPE_p_std__vectorT_Magick__CoderInfo_t, SWIG_POINTER_OWN);
+  $result = SWIG_Napi_NewPointerObj(env, $1, $1_descriptor, SWIG_POINTER_OWN);
 }

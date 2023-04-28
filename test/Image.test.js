@@ -15,13 +15,13 @@ describe('Geometry', () => {
     });
 
     it('from string', () => {
-      const gm = new Geometry("120x100");
+      const gm = new Geometry('120x100');
       assert.equal(gm.width(), 120);
       assert.equal(gm.height(), 100);
     });
 
     it('copy constructor', () => {
-      const gm1 = new Geometry("120x100");
+      const gm1 = new Geometry('120x100');
       const gm2 = new Geometry(gm1);
       gm1.width(100);
       assert.strictEqual(gm1.width(), 100);
@@ -42,6 +42,15 @@ describe('Image', () => {
       const im = new Image(new Geometry(100, 80), new Color);
       assert.equal(im.size().width(), 100);
       assert.equal(im.size().height(), 80);
+    });
+
+    it('from TypedArray', () => {
+      const array = new Float32Array(100 * 120 * 3);
+      array.fill(1);
+      const im = new Image(100, 120, 'RGB', array);
+      assert.equal(im.size().width(), 100);
+      assert.equal(im.size().height(), 120);
+      assert.equal(im.pixelColor(10, 10).quantumBlue(), 65535);
     });
 
     it('copy constructor', () => {
@@ -98,7 +107,7 @@ describe('Image', () => {
         else
           pixels.fill(2n ** (8n * BigInt(typed.BYTES_PER_ELEMENT)) - 1n);
 
-        im.read(15, 20, "RGBA", pixels);
+        im.read(15, 20, 'RGBA', pixels);
         
         const px = im.pixelColor(5, 5);
         assert.strictEqual(px.pixelType(), Color.RGBAPixel);
@@ -110,7 +119,25 @@ describe('Image', () => {
         assert.strictEqual(px.quantumGreen(), 65535);
 
         assert.throws(() => {
-          im.read(20, 20, "RGBA", pixels);
+          im.read(20, 20, 'RGBA', pixels);
+        }, /does not match the number of pixels/);
+      });
+
+      it('write', () => {
+        const im = new Image(new Geometry('15x20'), new Color(0, 65535, 0, 0));
+        const pixels = new typed(15 * 20 * 4);
+
+        im.write(0, 0, 15, 20, 'RGBA', pixels);
+
+        if (typed.name.startsWith('Float'))
+          assert.strictEqual(pixels[1], 1);
+        else if (typed.BYTES_PER_ELEMENT < 8)
+          assert.strictEqual(pixels[1], 2 ** (8 * typed.BYTES_PER_ELEMENT) - 1);
+        else
+          assert.strictEqual(pixels[1], 2n ** (8n * BigInt(typed.BYTES_PER_ELEMENT)) - 1n);
+
+        assert.throws(() => {
+          im.write(0, 0, 5, 5, 'RGB', pixels);
         }, /does not match the number of pixels/);
       });
     });
