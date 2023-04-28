@@ -44,6 +44,15 @@ describe('Image', () => {
       assert.equal(im.size().height(), 80);
     });
 
+    it('from TypedArray', () => {
+      const array = new Float32Array(100 * 120 * 3);
+      array.fill(1);
+      const im = new Image(100, 120, 'RGB', array);
+      assert.equal(im.size().width(), 100);
+      assert.equal(im.size().height(), 120);
+      assert.equal(im.pixelColor(10, 10).quantumBlue(), 65535);
+    });
+
     it('copy constructor', () => {
       const im1 = new Image(path.join(__dirname, 'data', 'wizard.png'));
       const im2 = new Image(im1);
