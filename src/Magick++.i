@@ -107,6 +107,7 @@ namespace MagickCore {
 %include "Image.i"
 %include "Blob.i"
 %include "CoderInfo.i"
+%include "STL.i"
 
 // These are all the Magick:: header files ordered by dependency
 // (as produced by the dependency generator)
@@ -115,6 +116,10 @@ namespace MagickCore {
 // Templates need to be instantiated - you can't instantiate new ones at runtime
 %template(coderInfoArray)   std::vector<Magick::CoderInfo>;
 %template(coderInfoList)    Magick::coderInfoList<std::vector<Magick::CoderInfo>>;
+%template(appendImages)     Magick::appendImages<std::list<ImagePtr>::iterator>;
+%template(averageImages)    Magick::averageImages<std::list<ImagePtr>::iterator>;
+%template(flattenImages)    Magick::flattenImages<std::list<ImagePtr>::iterator>;
+%template(mosaicImages)     Magick::mosaicImages<std::list<ImagePtr>::iterator>;
 
 %insert(init) %{
 // TODO: Find the path on Windows
