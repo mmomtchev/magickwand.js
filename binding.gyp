@@ -24,12 +24,14 @@
       ],
       'cflags': [
         '-Wno-deprecated-declarations',
-        '-Wno-unused-function'
+        '-Wno-unused-function',
+        #'-fsanitize=address'
       ],
       'cflags_cc': [
         '-std=c++11',
         '-Wno-type-limits',
-        '-Wno-deprecated-copy'
+        '-Wno-deprecated-copy',
+        #'-fsanitize=address'
       ],
       'cflags!': [ '-fno-exceptions' ],
       'cflags_cc!': [ '-fno-exceptions', '-fno-rtti' ],

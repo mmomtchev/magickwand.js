@@ -81,6 +81,10 @@ typedef MagickCore::ImageInfo _ImageInfo;
 %rename("$ignore", regextarget=1) "NoCopy$";
 %rename("$ignore", regextarget=1) "Allocator";
 
+// These need special handling and the functionality they provide
+// is already covered
+%rename("$ignore", regextarget=1, fullname=1) "^Magick::Pixels";
+
 // Exposing MagickCore (the old plain C API) to JS is optional
 // It doubles the size of the addon and most of its primitives
 // are very unsafe or completely unusable from a high-level language
@@ -128,6 +132,7 @@ namespace MagickCore {
 %include "Blob.i"
 %include "CoderInfo.i"
 %include "STL.i"
+%include "Drawable.i"
 
 // These are all the Magick:: header files ordered by dependency
 // (as produced by the dependency generator)
