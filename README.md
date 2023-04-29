@@ -11,7 +11,7 @@ The project is far from ready, but it could be usable
 
 Only Linux is being worked on at the moment - you are on your own for other OSes
 
-* If you want NAPI, get SWIG with NAPI support from https://github.com/mmomtchev/swig#mmom
+* In order to generate the C++ wrapping code, you will need SWIG 4.2.0-git with NAPI support from https://github.com/mmomtchev/swig#mmom
   * Building with the old Node/V8 interface is not possible - the typemaps are not compatible
   * Alternatively, you can checkout the `generated` branch where all files have been pre-generated
 
