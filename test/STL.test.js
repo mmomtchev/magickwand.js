@@ -1,7 +1,7 @@
 const path = require('path');
 const { assert } = require('chai');
 
-const Magick = require('..').Magick;
+const { Magick, MagickCore } = require('..');
 const { Image, Color } = Magick;
 
 describe('STL', () => {
@@ -21,8 +21,15 @@ describe('STL', () => {
   it('montageImages', () => {
     const src = new Image(path.join(__dirname, 'data', 'wizard.png'));
 
-    const array = Magick.montageImages([src, src, src], new Magick.Montage);
+    const opts = new Magick.Montage;
+    opts.gravity(MagickCore.CenterGravity);
+    opts.geometry(new Magick.Geometry('200x200'));
+    opts.tile(new Magick.Geometry('3x1'));
+
+    const array = Magick.montageImages([src, src, src], opts);
+    
     assert.lengthOf(array, 1);
     assert.instanceOf(array[0], Image);
+    assert.strictEqual(array[0].size().width(), 200 * 3);
   });
 });

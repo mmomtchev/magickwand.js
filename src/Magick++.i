@@ -81,6 +81,10 @@ typedef MagickCore::ImageInfo _ImageInfo;
 %rename("$ignore", regextarget=1) "NoCopy$";
 %rename("$ignore", regextarget=1) "Allocator";
 
+// These need special handling and the functionality they provide
+// is already covered
+%rename("$ignore", regextarget=1, fullname=1) "^Magick::Pixels";
+
 // Exposing MagickCore (the old plain C API) to JS is optional
 // It doubles the size of the addon and most of its primitives
 // are very unsafe or completely unusable from a high-level language
@@ -91,7 +95,27 @@ typedef MagickCore::ImageInfo _ImageInfo;
 %rename("%s", regextarget=1) ".+Operator$";
 %rename("%s", regextarget=1) ".+Op$";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Options$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Colorspace$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Compression";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Type$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Channel$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Class$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Gravity$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Interlace$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Layer$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Cap$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Join$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Orientation$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Method$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Quantum$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Intent$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Stretch$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Style$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Method$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Deciratuib$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Endian$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Rule$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Filter$";
 #endif
 
 namespace MagickCore {
@@ -108,6 +132,7 @@ namespace MagickCore {
 %include "Blob.i"
 %include "CoderInfo.i"
 %include "STL.i"
+%include "Drawable.i"
 
 // These are all the Magick:: header files ordered by dependency
 // (as produced by the dependency generator)
