@@ -28,7 +28,7 @@
     Napi::Array array = $input.As<Napi::Array>();
     for (size_t i = 0; i < array.Length(); i++) {
       Magick::DrawableBase *p = nullptr;
-      if (!SWIG_IsOK(SWIG_Napi_ConvertPtr(array.Get(i), reinterpret_cast<void **>(&p), $descriptor(Magick::DrawableBase *), 0)) || p == nullptr) {
+      if (!SWIG_IsOK(SWIG_NAPI_ConvertPtr(array.Get(i), reinterpret_cast<void **>(&p), $descriptor(Magick::DrawableBase *), 0)) || p == nullptr) {
         SWIG_exception_fail(SWIG_TypeError, "in method '$symname', array element is not a Magick::Drawable");
       }
       // Emplace the newly constructed wrappers in the std::container

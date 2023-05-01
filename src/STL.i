@@ -13,7 +13,7 @@ typedef std::vector<Magick::Image>::iterator   ImageListIterator;
     Napi::Array array = $input.As<Napi::Array>();
     for (size_t i = 0; i < array.Length(); i++) {
       Magick::Image *im = nullptr;
-      if (!SWIG_IsOK(SWIG_Napi_ConvertPtr(array.Get(i), reinterpret_cast<void **>(&im), $descriptor(Magick::Image *), 0)) || im == nullptr) {
+      if (!SWIG_IsOK(SWIG_NAPI_ConvertPtr(array.Get(i), reinterpret_cast<void **>(&im), $descriptor(Magick::Image *), 0)) || im == nullptr) {
         SWIG_exception_fail(SWIG_TypeError, "in method '$symname', array element is not an Image");
       }
       // Emplace the newly constructed copies in the std::container
@@ -41,7 +41,7 @@ typedef std::vector<Magick::Image>::iterator   ImageListIterator;
     size_t i = 0;
     // Iterate over the std::Container using standard C++ semantics
     for (auto it = $1->begin(); it != $1->end(); it++, i++) {
-      Napi::Value element = SWIG_Napi_NewPointerObj(env, new Magick::Image(*it), $descriptor(Magick::Image *), SWIG_POINTER_OWN);
+      Napi::Value element = SWIG_NAPI_NewPointerObj(env, new Magick::Image(*it), $descriptor(Magick::Image *), SWIG_POINTER_OWN);
       array.Set(i, element);
     }
     $result = array;
@@ -67,7 +67,7 @@ typedef std::vector<Magick::Image>::iterator   ImageListIterator;
   Magick::Image *mosaicImage_
 {
   if ($1 != nullptr) {
-    $result = SWIG_Napi_NewPointerObj(env, $1, $1_descriptor, SWIG_POINTER_OWN);
+    $result = SWIG_NAPI_NewPointerObj(env, $1, $1_descriptor, SWIG_POINTER_OWN);
   } else {
     $result = env.Null();
   }
