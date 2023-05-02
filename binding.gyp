@@ -41,7 +41,7 @@
       },
       'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],
       'sources': [
-        'build/Magick++.cxx'
+        'build/swig/Magick++.cxx'
       ]
     },
     {
