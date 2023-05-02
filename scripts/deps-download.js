@@ -6,12 +6,12 @@ const path = require('path');
 let hash = '';
 for (let i = 0; !hash.length; i++) {
   const hashMain = cp.execSync(`git rev-parse HEAD~${i}`).toString().trimEnd();
-  console.log(i, hashMain);
   hash = cp.execSync(`git log origin/generated  --grep "${hashMain}" --pretty=format:"%H"`).toString().trimEnd();
 }
 
 async function download(url, targetFile) {
   console.log('downloading', url, 'to', targetFile);
+  await fs.promises.mkdir(path.basename(targetFile), {recursive: true});
   return await new Promise((resolve, reject) => {
     https.get(url, response => {
       const code = response.statusCode ?? 0;
@@ -26,6 +26,8 @@ async function download(url, targetFile) {
           download(response.headers.location, targetFile)
         );
       }
+
+      fs.promises.rm(targetFile, {force: true});
 
       // save the file to disk
       const fileWriter = fs
