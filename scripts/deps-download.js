@@ -11,7 +11,7 @@ for (let i = 0; !hash.length; i++) {
 
 async function download(url, targetFile) {
   console.log('downloading', url, 'to', targetFile);
-  await fs.promises.mkdir(path.basename(targetFile), {recursive: true});
+  await fs.promises.mkdir(path.dirname(targetFile), {recursive: true});
   return await new Promise((resolve, reject) => {
     https.get(url, response => {
       const code = response.statusCode ?? 0;
