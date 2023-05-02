@@ -4,10 +4,12 @@ const fs = require('fs');
 const path = require('path');
 
 cp.execSync('git fetch origin generated');
-const hashMain = cp.execSync('git rev-parse HEAD').toString().trimEnd();
-const hashGen = cp.execSync(`git log generated  --grep "${hashMain}" --pretty=format:"%H"`).toString().trimEnd();
-if (!hashGen.length)
-  throw new Error('No pregenerated files for your version');
+let hash = '';
+for (let i = 0; !hash.length; i++) {
+  const hashMain = cp.execSync(`git rev-parse HEAD~${i}`).toString().trimEnd();
+  console.log(i, hashMain);
+  hash = cp.execSync(`git log generated  --grep "${hashMain}" --pretty=format:"%H"`).toString().trimEnd();
+}
 
 async function download(url, targetFile) {
   console.log('downloading', url, 'to', targetFile);
@@ -42,7 +44,7 @@ async function download(url, targetFile) {
 
 for (const file of ['magickcore.i', 'Magick++.cxx', 'magick++.i', 'magickwand.i']) {
   download(
-    `https://github.com/mmomtchev/node-magickwand/blob/${hashGen}/${file}`,
+    `https://github.com/mmomtchev/node-magickwand/blob/${hash}/${file}`,
     path.resolve(__dirname, '..', 'build', 'swig', file)
   );
 }
