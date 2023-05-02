@@ -12,7 +12,8 @@ for (let i = 0; !hash.length; i++) {
 async function download(url, targetFile) {
   console.log('downloading', url, 'to', targetFile);
   await fs.promises.mkdir(path.dirname(targetFile), {recursive: true});
-  return await new Promise((resolve, reject) => {
+  await fs.promises.rm(targetFile, { force: true });
+  return new Promise((resolve, reject) => {
     https.get(url, response => {
       const code = response.statusCode ?? 0;
 
@@ -27,12 +28,11 @@ async function download(url, targetFile) {
         );
       }
 
-      fs.promises.rm(targetFile, {force: true});
-
       // save the file to disk
       const fileWriter = fs
         .createWriteStream(targetFile)
         .on('finish', () => {
+          fileWriter.close();
           resolve({});
         });
 
@@ -43,9 +43,11 @@ async function download(url, targetFile) {
   });
 }
 
+const q = [];
 for (const file of ['magickcore.i', 'Magick++.cxx', 'magick++.i', 'magickwand.i']) {
-  download(
-    `https://github.com/mmomtchev/node-magickwand/blob/${hash}/${file}`,
+  q.push(download(
+    `https://raw.githubusercontent.com/mmomtchev/node-magickwand/${hash}/${file}`,
     path.resolve(__dirname, '..', 'build', 'swig', file)
-  );
+  ));
 }
+Promise.all(q).then(() => console.log('done'));
