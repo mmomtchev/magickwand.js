@@ -123,8 +123,8 @@ namespace MagickCore {
   // and there is both a Magick::CloneString and MagickCore::CloneString
   %rename(Core_CloneString) CloneString;
 
-  %include "../build/magickcore.i"
-  %include "../build/magickwand.i"
+  %include "../build/swig/magickcore.i"
+  %include "../build/swig/magickwand.i"
 }
 
 // Various special cases - Buffers, TypedArrays, std::vectors...
@@ -136,7 +136,7 @@ namespace MagickCore {
 
 // These are all the Magick:: header files ordered by dependency
 // (as produced by the dependency generator)
-%include "../build/magick++.i"
+%include "../build/swig/magick++.i"
 
 // Templates need to be instantiated - you can't instantiate new ones at runtime
 %template(coderInfoArray)               std::vector<Magick::CoderInfo>;
@@ -148,7 +148,7 @@ namespace MagickCore {
 %template(coalesceImages)               Magick::coalesceImages<ImageListIterator, ImageListContainer>;
 %template(deconstructImages)            Magick::deconstructImages<ImageListIterator, ImageListContainer>;
 %template(forwardFourierTransformImage) Magick::forwardFourierTransformImage<ImageListContainer>;
-%template(montageImages)                Magick::montageImages<ImageListContainer, ImageListIterator>;
+%template(montageImages)                Magick::montageImages<std::vector<Magick::Image>, ImageListIterator>;
 %template(morphImages)                  Magick::morphImages<ImageListIterator, ImageListContainer>;
 %template(readImages)                   Magick::readImages<ImageListContainer>;
 %template(writeImages)                  Magick::writeImages<ImageListIterator>;

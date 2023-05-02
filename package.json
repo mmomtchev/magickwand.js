@@ -4,12 +4,13 @@
   "description": "Node.js bindings for imagemagick",
   "main": "./lib/index.js",
   "scripts": {
-    "deps:magickcore": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickCore build/magickcore.i",
-    "deps:magick++": "node src/deps.js src/deps-stub.cc deps/ImageMagick/Magick\\\\+\\\\+ build/magick++.i",
-    "deps:magickwand": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickWand build/magickwand.i",
-    "deps": "npm run deps:magickcore && npm run deps:magick++ && npm run deps:magickwand",
-    "swig": "swig -javascript -Ideps/ImageMagick/Magick++/lib -Ideps/ImageMagick -napi -c++ -o build/Magick++.cxx src/Magick++.i",
-    "prepare": "npm run deps && npm run swig",
+    "deps:magickcore": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickCore build/swig/magickcore.i",
+    "deps:magick++": "node src/deps.js src/deps-stub.cc deps/ImageMagick/Magick\\\\+\\\\+ build/swig/magick++.i",
+    "deps:magickwand": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickWand build/swig/magickwand.i",
+    "deps": "mkdir -p build/swig && npm run deps:magickcore && npm run deps:magick++ && npm run deps:magickwand",
+    "deps:download": "node scripts/deps-download.js",
+    "swig": "swig -javascript -Ideps/ImageMagick/Magick++/lib -Ideps/ImageMagick -napi -c++ -o build/swig/Magick++.cxx src/Magick++.i",
+    "publish:generated": "node scripts/publish-generated.js",
     "lint": "eslint lib/*.js test/*.js",
     "test": "mocha"
   },
@@ -46,6 +47,7 @@
     "chai": "^4.3.7",
     "eslint": "^8.39.0",
     "eslint-plugin-mocha": "^10.1.0",
+    "gh-pages": "^5.0.0",
     "mocha": "^10.2.0",
     "node-addon-api": "^5.1.0"
   },
