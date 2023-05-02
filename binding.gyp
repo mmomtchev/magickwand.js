@@ -1,7 +1,8 @@
 {
   'variables': {
     'shared_imagemagick%': 'false',
-    'enable_asan%': 'false'
+    'enable_asan%': 'false',
+    'enable_hdri%': 'false'
   },
   'configurations': {
     'Debug': {
@@ -14,9 +15,7 @@
     {
       'target_name': 'node-magickwand',
       'include_dirs': [
-        "<!@(node -p \"require('node-addon-api').include\")",
-        'deps/ImageMagick/Magick++/lib',
-        'deps/ImageMagick'
+        "<!@(node -p \"require('node-addon-api').include\")"
       ],
       'defines': [
       ],
@@ -45,12 +44,17 @@
           ]
         }],
         ['shared_imagemagick == "false"', {
+          'dependencies': [ 'builtin_imagemagick' ],
           'libraries': [
             '-L../deps/ImageMagick/Magick++/lib/.libs/ -lMagick++-7.Q16 -L../deps/ImageMagick/MagickCore/.libs -lMagickCore-7.Q16'
           ],
           'ldflags': [
             '-Wl,-rpath \'$$ORIGIN/../../../deps/ImageMagick/Magick++/lib/.libs/\' -Wl,-rpath \'$$ORIGIN/../../../deps/ImageMagick/MagickCore/.libs\''
-          ]
+          ],
+          'include_dirs': [
+            'deps/ImageMagick/Magick++/lib',
+            'deps/ImageMagick'
+          ],
         }]
       ],
       'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],
@@ -59,17 +63,49 @@
       ],
     },
     {
-      "target_name": "action_after_build",
-      "type": "none",
-      "dependencies": [ "<(module_name)" ],
-      "copies": [
+      'target_name': 'download_swig',
+      'type': 'none',
+      'actions': [{
+        'action_name': 'download_swig',
+        'inputs': [ '<(module_root_dir)/scripts/deps-download.js' ],
+        'outputs': [ '<(module_root_dir)/build/swig/Magick++.cxx' ],
+        'action': [ 'node', 'scripts/deps-download.js' ]
+      }]
+    },
+    {
+      'target_name': 'action_after_build',
+      'type': 'none',
+      'dependencies': [ '<(module_name)' ],
+      'copies': [
         {
-          "files": [
-            "<(PRODUCT_DIR)/node-magickwand.node"
+          'files': [
+            '<(PRODUCT_DIR)/node-magickwand.node'
           ],
-          "destination": "<(module_path)"
+          'destination': '<(module_path)'
         }
       ]
     }
+  ],
+  'conditions': [
+    ['shared_imagemagick == "false"', {
+      'targets': [{
+        'target_name': 'builtin_imagemagick',
+        'type': 'none',
+        'actions': [
+          {
+            'action_name': 'configure',
+            'inputs': [ '<(module_root_dir)/deps/ImageMagick/configure' ],
+            'outputs': [ '<(module_root_dir)/deps/ImageMagick/config.status' ],
+            'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && sh ./configure --disable-hdri' ]
+          },
+          {
+            'action_name': 'make',
+            'inputs': [ '<(module_root_dir)/deps/ImageMagick/config.status' ],
+            'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16.so.5.0.0' ],
+            'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && make -j4' ]
+          }
+        ]
+      }]
+    }]
   ]
 }
