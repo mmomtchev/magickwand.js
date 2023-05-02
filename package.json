@@ -11,6 +11,7 @@
     "deps:download": "node scripts/deps-download.js",
     "swig": "swig -javascript -Ideps/ImageMagick/Magick++/lib -Ideps/ImageMagick -napi -c++ -o build/swig/Magick++.cxx src/Magick++.i",
     "publish:generated": "node scripts/publish-generated.js",
+    "install": "node-pre-gyp install --fallback-to-build",
     "lint": "eslint lib/*.js test/*.js",
     "test": "mocha"
   },
