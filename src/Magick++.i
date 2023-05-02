@@ -17,7 +17,6 @@ typedef MagickCore::SemaphoreInfo SemaphoreInfo;
 typedef MagickCore::ImageInfo _ImageInfo;
 %}
 
-%include ""
 %include "cpointer.i"
 %include "std_string.i"
 %include "std_vector.i"
@@ -148,7 +147,7 @@ namespace MagickCore {
 %template(coalesceImages)               Magick::coalesceImages<ImageListIterator, ImageListContainer>;
 %template(deconstructImages)            Magick::deconstructImages<ImageListIterator, ImageListContainer>;
 %template(forwardFourierTransformImage) Magick::forwardFourierTransformImage<ImageListContainer>;
-%template(montageImages)                Magick::montageImages<std::vector<Magick::Image>, ImageListIterator>;
+%template(montageImages)                Magick::montageImages<ImageListContainer, ImageListIterator>;
 %template(morphImages)                  Magick::morphImages<ImageListIterator, ImageListContainer>;
 %template(readImages)                   Magick::readImages<ImageListContainer>;
 %template(writeImages)                  Magick::writeImages<ImageListIterator>;
