@@ -2,7 +2,7 @@
 
 %{
 // ImageMagick mandatory compilation options
-#include "../src/magick_config.h"
+#include "../../src/magick_config.h"
 
 // Includes the header in the wrapper code
 #include <Magick++.h>
