@@ -3,12 +3,11 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-cp.execSync('git fetch origin generated');
 let hash = '';
 for (let i = 0; !hash.length; i++) {
   const hashMain = cp.execSync(`git rev-parse HEAD~${i}`).toString().trimEnd();
   console.log(i, hashMain);
-  hash = cp.execSync(`git log generated  --grep "${hashMain}" --pretty=format:"%H"`).toString().trimEnd();
+  hash = cp.execSync(`git log origin/generated  --grep "${hashMain}" --pretty=format:"%H"`).toString().trimEnd();
 }
 
 async function download(url, targetFile) {
