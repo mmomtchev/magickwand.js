@@ -45,9 +45,6 @@
         ['enable_asan == "true"', {
           'cflags_cc': [ '-fsanitize=address' ]
         }],
-        ['OS == "mac"', {
-          'include_dirs': [ '/usr/local/include' ]
-        }],
         # Link against a system-installed ImageMagick
         ['shared_imagemagick == "true"', {
         }],
@@ -149,7 +146,7 @@
                 'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16HDRI.a' ],
               }]
             ],
-            'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && make -j4' ]
+            'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && make -j4 && make install' ]
           }
         ],
         'direct_dependent_settings': {
@@ -170,7 +167,7 @@
           # This an ugly hack that enable running of shell commands during node-gyp configure
           # node-gyp configure needs to evaluate this expression to generate the platform-specific files
           # (originally by TooTallNate for libffi) 
-          'libraries': [ '<!@(sh configure_magick.sh <(hdri))' ]
+          'libraries': [ '<!@(sh configure_magick.sh <(module_path) <(hdri))' ]
         }
       }]
     }]
