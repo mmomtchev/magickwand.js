@@ -30,6 +30,9 @@ typedef MagickCore::ImageInfo _ImageInfo;
   } catch (const Magick::Error &e) {
     SWIG_Raise(e.what());
     SWIG_fail;
+  } catch (const Magick::Warning &e) {
+    SWIG_Raise(e.what());
+    SWIG_fail;
   }
 }
 
