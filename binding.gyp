@@ -146,7 +146,7 @@
                 'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16HDRI.a' ],
               }]
             ],
-            'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && env -i make -j4 && env -i make install' ]
+            'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && SDKROOT= make -j4 && SDKROOT= make install' ]
           }
         ],
         'direct_dependent_settings': {
