@@ -17,13 +17,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
+          fetch-depth: 0
           submodules: true
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
       - run: npm install --ignore-scripts
-      - run: git remote -v
       - run: npx @mapbox/node-pre-gyp configure
       - run: npx @mapbox/node-pre-gyp build -j max
       - run: npm test
