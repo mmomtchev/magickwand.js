@@ -72,8 +72,8 @@
         ['enable_hdri==default_hdri and regen_swig=="false"', {
           'actions': [{
             'action_name': 'swig_wrappers',
-            'inputs': [ '<(module_root_dir)/scripts/deps-download.js' ],
-            'outputs': [ '<(module_root_dir)/build/swig/Magick++.cxx' ],
+            'inputs': [ 'scripts/deps-download.js' ],
+            'outputs': [ 'build/swig/Magick++.cxx' ],
             'action': [ 'node', 'scripts/deps-download.js' ]
           }]
         }],
@@ -93,8 +93,8 @@
               }]
             ],
             'action_name': 'swig_wrappers',
-            'inputs': [ '<(module_root_dir)/src/Magick++.i' ],
-            'outputs': [ '<(module_root_dir)/build/swig/Magick++.cxx' ],
+            'inputs': [ 'src/Magick++.i' ],
+            'outputs': [ 'build/swig/Magick++.cxx' ],
             'action': [
               'swig', '-javascript', '-napi', '-c++',
               '-Ideps/ImageMagick/Magick++/lib', '-Ideps/ImageMagick',
