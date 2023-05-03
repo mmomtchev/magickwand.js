@@ -156,13 +156,13 @@
           'conditions': [
             ['enable_hdri == "false"', {
               'defines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-              'libraries': [
+              'libraries+': [
                 '-lMagick++-7.Q16 -lMagickCore-7.Q16 -lMagickWand-7.Q16'
               ]
             }],
             ['enable_hdri == "true"', {
               'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-              'libraries': [
+              'libraries+': [
                 '-lMagick++-7.Q16HDRI -lMagickCore-7.Q16HDRI -lMagickWand-7.Q16HDRI'
               ]
             }]
