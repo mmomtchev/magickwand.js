@@ -28,7 +28,7 @@
         '-Wno-type-limits',
         '-Wno-deprecated-copy'
       ],
-      'cflags!': [ '-fno-exceptions' ],
+      'cflags!': [ '-fno-exceptions', '-fno-rtti' ],
       'cflags_cc!': [ '-fno-exceptions', '-fno-rtti' ],
       'xcode_settings': {
         'GCC_ENABLE_CPP_RTTI': 'YES',
@@ -48,25 +48,25 @@
           'libraries': [
             '-L../deps/ImageMagick/Magick++/lib/.libs/ -lMagick++-7.Q16 -L../deps/ImageMagick/MagickCore/.libs -lMagickCore-7.Q16'
           ],
-          'ldflags': [
-            '-Wl,-rpath \'$$ORIGIN/../../../deps/ImageMagick/Magick++/lib/.libs/\' -Wl,-rpath \'$$ORIGIN/../../../deps/ImageMagick/MagickCore/.libs\''
-          ],
           'include_dirs': [
             'deps/ImageMagick/Magick++/lib',
             'deps/ImageMagick'
-          ],
+          ]
         }]
       ],
-      'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],
+      'dependencies': [
+        'swig_wrappers',
+        "<!(node -p \"require('node-addon-api').gyp\")"
+      ],
       'sources': [
         'build/swig/Magick++.cxx'
       ],
     },
     {
-      'target_name': 'download_swig',
+      'target_name': 'swig_wrappers',
       'type': 'none',
       'actions': [{
-        'action_name': 'download_swig',
+        'action_name': 'download_swig_wrappers',
         'inputs': [ '<(module_root_dir)/scripts/deps-download.js' ],
         'outputs': [ '<(module_root_dir)/build/swig/Magick++.cxx' ],
         'action': [ 'node', 'scripts/deps-download.js' ]
@@ -96,12 +96,16 @@
             'action_name': 'configure',
             'inputs': [ '<(module_root_dir)/deps/ImageMagick/configure' ],
             'outputs': [ '<(module_root_dir)/deps/ImageMagick/config.status' ],
-            'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && sh ./configure --disable-hdri' ]
+            'action': [
+              'sh',
+              '-c',
+              'cd <(module_root_dir)/deps/ImageMagick && sh ./configure --disable-hdri --disable-shared --enable-static CFLAGS="-fPIC" CXXFLAGS="-fPIC"'
+            ]
           },
           {
             'action_name': 'make',
             'inputs': [ '<(module_root_dir)/deps/ImageMagick/config.status' ],
-            'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16.so.5.0.0' ],
+            'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16.a' ],
             'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && make -j4' ]
           }
         ]
