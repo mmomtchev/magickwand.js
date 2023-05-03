@@ -67,10 +67,44 @@
         }],
         ['enable_hdri == "true"', {
           'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+        }],
+        # Download the pregenerated SWIG wrappers if there is no need to regenerate them
+        ['enable_hdri==default_hdri and regen_swig=="false"', {
+          'actions': [{
+            'action_name': 'swig_wrappers',
+            'inputs': [ '<(module_root_dir)/scripts/deps-download.js' ],
+            'outputs': [ '<(module_root_dir)/build/swig/Magick++.cxx' ],
+            'action': [ 'node', 'scripts/deps-download.js' ]
+          }]
+        }],
+        # Regenerate the SWIG wrappers
+        ['enable_hdri!=default_hdri or regen_swig=="true"', {
+          'actions': [{
+            'conditions': [
+              ['enable_hdri == "false"', {
+                'variables': {
+                  'hdri': '-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16',
+                }
+              }],
+              ['enable_hdri == "true"', {
+                'variables': {
+                  'hdri': '-DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16',
+                }
+              }]
+            ],
+            'action_name': 'swig_wrappers',
+            'inputs': [ '<(module_root_dir)/src/Magick++.i' ],
+            'outputs': [ '<(module_root_dir)/build/swig/Magick++.cxx' ],
+            'action': [
+              'swig', '-javascript', '-napi', '-c++',
+              '-Ideps/ImageMagick/Magick++/lib', '-Ideps/ImageMagick',
+              '-DMAGICKCORE_HDRI_ENABLE=1', '-DMAGICKCORE_QUANTUM_DEPTH=16',
+              '-o', 'build/swig/Magick++.cxx', 'src/Magick++.i'
+            ]
+          }]
         }]
       ],
       'dependencies': [
-        'swig_wrappers',
         "<!(node -p \"require('node-addon-api').gyp\")"
       ],
       'sources': [
@@ -92,49 +126,6 @@
     }
   ],
   'conditions': [
-    # Download the pregenerated SWIG wrappers if there is no need to regenerate them
-    ['enable_hdri==default_hdri and regen_swig=="false"', {
-      'targets': [{
-        'target_name': 'swig_wrappers',
-        'type': 'none',
-        'actions': [{
-          'action_name': 'swig_wrappers',
-          'inputs': [ '<(module_root_dir)/scripts/deps-download.js' ],
-          'outputs': [ '<(module_root_dir)/build/swig/Magick++.cxx' ],
-          'action': [ 'node', 'scripts/deps-download.js' ]
-        }]
-      }]
-    }],
-    # Regenerate the SWIG wrappers
-    ['enable_hdri!=default_hdri or regen_swig=="true"', {
-      'targets': [{
-        'conditions': [
-          ['enable_hdri == "false"', {
-            'variables': {
-              'hdri': '-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16',
-            }
-          }],
-          ['enable_hdri == "true"', {
-            'variables': {
-              'hdri': '-DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16',
-            }
-          }]
-        ],
-        'target_name': 'swig_wrappers',
-        'type': 'none',
-        'actions': [{
-          'action_name': 'swig_wrappers',
-          'inputs': [ '<(module_root_dir)/src/Magick++.i' ],
-          'outputs': [ '<(module_root_dir)/build/swig/Magick++.cxx' ],
-          'action': [
-            'swig', '-javascript', '-napi', '-c++',
-            '-Ideps/ImageMagick/Magick++/lib', '-Ideps/ImageMagick',
-            '-DMAGICKCORE_HDRI_ENABLE=1', '-DMAGICKCORE_QUANTUM_DEPTH=16',
-            '-o', 'build/swig/Magick++.cxx', 'src/Magick++.i'
-          ]
-        }]
-      }]
-    }],
     # Build the included ImageMagick library
     ['shared_imagemagick == "false"', {
       'targets': [{
