@@ -11,8 +11,12 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ${{ matrix.platform }}
 
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ubuntu-20.04, macos-11]
 
     steps:
       - uses: actions/checkout@v3
