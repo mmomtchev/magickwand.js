@@ -2,7 +2,9 @@
   'variables': {
     'shared_imagemagick%': 'false',
     'enable_asan%': 'false',
-    'enable_hdri%': 'false'
+    'default_hdri': 'true',
+    'enable_hdri%': '<(default_hdri)',
+    'regen_swig%': 'false'
   },
   'configurations': {
     'Debug': {
@@ -11,14 +13,19 @@
       ]
     }
   },
+  'conditions': [
+    ['enable_hdri == "false"', {
+    }],
+    ['enable_hdri == "true"', {
+      'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+    }]
+  ],
   'targets': [
     {
       'target_name': 'node-magickwand',
       'include_dirs': [
         "<!@(node -p \"require('node-addon-api').include\")"
-      ],
-      'defines': [
-      ],
+      ],      
       'cflags': [
         '-Wno-deprecated-declarations',
         '-Wno-unused-function'
@@ -28,7 +35,7 @@
         '-Wno-type-limits',
         '-Wno-deprecated-copy'
       ],
-      'cflags!': [ '-fno-exceptions' ],
+      'cflags!': [ '-fno-exceptions', '-fno-rtti' ],
       'cflags_cc!': [ '-fno-exceptions', '-fno-rtti' ],
       'xcode_settings': {
         'GCC_ENABLE_CPP_RTTI': 'YES',
@@ -38,39 +45,62 @@
         ['enable_asan == "true"', {
           'cflags_cc': [ '-fsanitize=address' ]
         }],
+        # Link against a system-installed ImageMagick
         ['shared_imagemagick == "true"', {
-          'libraries': [
-            '-lMagickCore-7.Q16'
-          ]
         }],
+        # Link against the included ImageMagick
         ['shared_imagemagick == "false"', {
-          'dependencies': [ 'builtin_imagemagick' ],
+          'dependencies': [ 'imagemagick' ],
           'libraries': [
-            '-L../deps/ImageMagick/Magick++/lib/.libs/ -lMagick++-7.Q16 -L../deps/ImageMagick/MagickCore/.libs -lMagickCore-7.Q16'
-          ],
-          'ldflags': [
-            '-Wl,-rpath \'$$ORIGIN/../../../deps/ImageMagick/Magick++/lib/.libs/\' -Wl,-rpath \'$$ORIGIN/../../../deps/ImageMagick/MagickCore/.libs\''
+            '-L../deps/ImageMagick/Magick++/lib/.libs/ '
+            '-L../deps/ImageMagick/MagickWand/.libs/ '
+            '-L../deps/ImageMagick/MagickCore/.libs  ',
           ],
           'include_dirs': [
             'deps/ImageMagick/Magick++/lib',
             'deps/ImageMagick'
-          ],
+          ]
+        }],
+        # These defines must be present when building
+        ['enable_hdri == "false"', {
+          'defines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+        }],
+        ['enable_hdri == "true"', {
+          'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+        }],
+        # Regenerate the SWIG wrappers when needed
+        ['enable_hdri!=default_hdri or regen_swig=="true"', {
+          'actions': [{
+            'conditions': [
+              ['enable_hdri == "false"', {
+                'variables': {
+                  'hdri': '-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16',
+                }
+              }],
+              ['enable_hdri == "true"', {
+                'variables': {
+                  'hdri': '-DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16',
+                }
+              }]
+            ],
+            'action_name': 'swig_wrappers',
+            'inputs': [ 'src/Magick++.i' ],
+            'outputs': [ 'build/swig/Magick++.cxx' ],
+            'action': [
+              'swig', '-javascript', '-napi', '-c++',
+              '-Ideps/ImageMagick/Magick++/lib', '-Ideps/ImageMagick',
+              '-DMAGICKCORE_HDRI_ENABLE=1', '-DMAGICKCORE_QUANTUM_DEPTH=16',
+              '-o', 'build/swig/Magick++.cxx', 'src/Magick++.i'
+            ]
+          }]
         }]
       ],
-      'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],
+      'dependencies': [
+        "<!(node -p \"require('node-addon-api').gyp\")"
+      ],
       'sources': [
         'build/swig/Magick++.cxx'
       ],
-    },
-    {
-      'target_name': 'download_swig',
-      'type': 'none',
-      'actions': [{
-        'action_name': 'download_swig',
-        'inputs': [ '<(module_root_dir)/scripts/deps-download.js' ],
-        'outputs': [ '<(module_root_dir)/build/swig/Magick++.cxx' ],
-        'action': [ 'node', 'scripts/deps-download.js' ]
-      }]
     },
     {
       'target_name': 'action_after_build',
@@ -87,24 +117,58 @@
     }
   ],
   'conditions': [
+    # Build the included ImageMagick library
     ['shared_imagemagick == "false"', {
       'targets': [{
-        'target_name': 'builtin_imagemagick',
+        'conditions': [
+          ['enable_hdri == "false"', {
+            'variables': {
+              'hdri': '--disable-hdri',
+            }
+          }],
+          ['enable_hdri == "true"', {
+            'variables': {
+              'hdri': '--enable-hdri',
+            }
+          }]
+        ],
+        'target_name': 'imagemagick',
         'type': 'none',
         'actions': [
           {
-            'action_name': 'configure',
-            'inputs': [ '<(module_root_dir)/deps/ImageMagick/configure' ],
-            'outputs': [ '<(module_root_dir)/deps/ImageMagick/config.status' ],
-            'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && sh ./configure --disable-hdri' ]
-          },
-          {
             'action_name': 'make',
-            'inputs': [ '<(module_root_dir)/deps/ImageMagick/config.status' ],
-            'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16.so.5.0.0' ],
-            'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && make -j4' ]
+            'inputs': [ '<(module_root_dir)/deps/ImageMagick/configure' ],
+            'conditions': [
+              ['enable_hdri == "false"', {
+                'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16.a' ],
+              }],
+              ['enable_hdri == "true"', {
+                'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16HDRI.a' ],
+              }]
+            ],
+            'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && SDKROOT= make -j4 && SDKROOT= make install' ]
           }
-        ]
+        ],
+        'direct_dependent_settings': {
+          'conditions': [
+            ['enable_hdri == "false"', {
+              'defines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+              'libraries+': [
+                '-lMagick++-7.Q16 -lMagickCore-7.Q16 -lMagickWand-7.Q16'
+              ]
+            }],
+            ['enable_hdri == "true"', {
+              'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+              'libraries+': [
+                '-lMagick++-7.Q16HDRI -lMagickCore-7.Q16HDRI -lMagickWand-7.Q16HDRI'
+              ]
+            }]
+          ],
+          # This an ugly hack that enable running of shell commands during node-gyp configure
+          # node-gyp configure needs to evaluate this expression to generate the platform-specific files
+          # (originally by TooTallNate for libffi) 
+          'libraries': [ '<!@(sh configure_magick.sh <(module_path) <(hdri))' ]
+        }
       }]
     }]
   ]

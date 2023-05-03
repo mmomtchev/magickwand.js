@@ -3,6 +3,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
+cp.execSync('git fetch origin');
 let hash = '';
 for (let i = 0; !hash.length; i++) {
   const hashMain = cp.execSync(`git rev-parse HEAD~${i}`).toString().trimEnd();

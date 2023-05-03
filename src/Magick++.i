@@ -1,8 +1,7 @@
 %module magickwand
 
 %{
-// ImageMagick mandatory compilation options
-#include "../../src/magick_config.h"
+#define MAGICKCORE_INSTALLED_SUPPORT 0
 
 // Includes the header in the wrapper code
 #include <Magick++.h>
@@ -30,14 +29,11 @@ typedef MagickCore::ImageInfo _ImageInfo;
 %exception {
   try {
     $action
-  } catch (const Magick::Error &e) {
+  } catch (const Magick::Exception &e) {
     SWIG_Raise(e.what());
     SWIG_fail;
   }
 }
-
-// This one is for SWIG itself (the previous one goes into the generated file)
-%include "magick_config.h"
 
 // Shunt __attribute__(x) which is not supported by SWIG
 #define _magickcore_restrict

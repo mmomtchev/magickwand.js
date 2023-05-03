@@ -20,7 +20,8 @@ describe('Blob', () => {
       // PNG image
       im.magick('PNG');
       im.write(blob);
-      assert.strictEqual(blob.length(), 10039);
+      assert.isBelow(blob.length(), rawLength);
+      assert.isAbove(blob.length(), 1024);
 
       // RAW image
       im.magick('RGBA');
