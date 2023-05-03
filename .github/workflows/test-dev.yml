@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: 16.x
       - run: npm install --ignore-scripts
+      - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure
-      - run: cat build/node-magickwand.target.mk
       - run: npx @mapbox/node-pre-gyp build -j max
       - run: npm test
