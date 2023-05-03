@@ -23,9 +23,6 @@
   'targets': [
     {
       'target_name': 'node-magickwand',
-      'variables': {
-        'magick_libs': '<!(grep MAGICK_LIBS deps/ImageMagick/Makefile | cut -f 2 -d "=")'
-      },
       'include_dirs': [
         "<!@(node -p \"require('node-addon-api').include\")"
       ],      
@@ -47,18 +44,6 @@
       'conditions': [
         ['enable_asan == "true"', {
           'cflags_cc': [ '-fsanitize=address' ]
-        }],
-        ['enable_hdri == "false"', {
-          'defines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-          'libraries': [
-            '-lMagick++-7.Q16 -lMagickCore-7.Q16 -lMagickWand-7.Q16', '<(magick_libs)'
-          ]
-        }],
-        ['enable_hdri == "true"', {
-          'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-          'libraries': [
-            '-lMagick++-7.Q16HDRI -lMagickCore-7.Q16HDRI -lMagickWand-7.Q16HDRI', '<(magick_libs)'
-          ]
         }],
         # Link against a system-installed ImageMagick
         ['shared_imagemagick == "true"', {
@@ -169,19 +154,8 @@
         'type': 'none',
         'actions': [
           {
-            'action_name': 'configure',
-            'inputs': [ '<(module_root_dir)/deps/ImageMagick/configure' ],
-            'outputs': [ '<(module_root_dir)/deps/ImageMagick/config.status' ],
-            'action': [
-              'sh',
-              '-c',
-              'cd <(module_root_dir)/deps/ImageMagick'
-              ' && sh ./configure <(hdri) --enable-static CFLAGS="-fPIC" CXXFLAGS="-fPIC"'
-            ]
-          },
-          {
             'action_name': 'make',
-            'inputs': [ '<(module_root_dir)/deps/ImageMagick/config.status' ],
+            'inputs': [ '<!@(sh configure_magick.sh <(hdri))' ],
             'conditions': [
               ['enable_hdri == "false"', {
                 'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16.a' ],
@@ -192,7 +166,24 @@
             ],
             'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && make -j4' ]
           }
-        ]
+        ],
+        'direct_dependent_settings': {
+          'conditions': [
+            ['enable_hdri == "false"', {
+              'defines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+              'libraries': [
+                '-lMagick++-7.Q16 -lMagickCore-7.Q16 -lMagickWand-7.Q16'
+              ]
+            }],
+            ['enable_hdri == "true"', {
+              'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+              'libraries': [
+                '-lMagick++-7.Q16HDRI -lMagickCore-7.Q16HDRI -lMagickWand-7.Q16HDRI'
+              ]
+            }]
+          ],
+          'libraries': '<!(grep MAGICK_LIBS deps/ImageMagick/Makefile | cut -f 2 -d "=")'          
+        }
       }]
     }]
   ]
