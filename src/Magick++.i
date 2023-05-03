@@ -1,6 +1,8 @@
 %module magickwand
 
 %{
+#define MAGICKCORE_INSTALLED_SUPPORT 0
+
 // Includes the header in the wrapper code
 #include <Magick++.h>
 #include <MagickWand/MagickWand.h>
@@ -27,10 +29,7 @@ typedef MagickCore::ImageInfo _ImageInfo;
 %exception {
   try {
     $action
-  } catch (const Magick::Error &e) {
-    SWIG_Raise(e.what());
-    SWIG_fail;
-  } catch (const Magick::Warning &e) {
+  } catch (const Magick::Exception &e) {
     SWIG_Raise(e.what());
     SWIG_fail;
   }
