@@ -73,6 +73,9 @@
         'swig_wrappers',
         "<!(node -p \"require('node-addon-api').gyp\")"
       ],
+      'inputs': [
+        'build/swig/Magick++.cxx'
+      ],
       'sources': [
         'build/swig/Magick++.cxx'
       ],
