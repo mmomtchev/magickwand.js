@@ -1,9 +1,6 @@
 %module magickwand
 
 %{
-// ImageMagick mandatory compilation options
-#include "../../src/magick_config.h"
-
 // Includes the header in the wrapper code
 #include <Magick++.h>
 #include <MagickWand/MagickWand.h>
@@ -35,9 +32,6 @@ typedef MagickCore::ImageInfo _ImageInfo;
     SWIG_fail;
   }
 }
-
-// This one is for SWIG itself (the previous one goes into the generated file)
-%include "magick_config.h"
 
 // Shunt __attribute__(x) which is not supported by SWIG
 #define _magickcore_restrict

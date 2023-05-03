@@ -1,8 +1,11 @@
 {
   'variables': {
-    'shared_imagemagick%': 'false',
+    'builtin_imagemagick%': 'false',
     'enable_asan%': 'false',
-    'enable_hdri%': 'false'
+    'default_hdri': 'true',
+    'enable_hdri%': '<(default_hdri)',
+    'magick_libs': '<!(grep MAGICK_LIBS deps/ImageMagick/Makefile | cut -f 2 -d "=")',
+    'regen_swig%': 'false'
   },
   'configurations': {
     'Debug': {
@@ -11,6 +14,13 @@
       ]
     }
   },
+  'conditions': [
+    ['enable_hdri == "false"', {
+    }],
+    ['enable_hdri == "true"', {
+      'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+    }]
+  ],
   'targets': [
     {
       'target_name': 'node-magickwand',
@@ -38,20 +48,40 @@
         ['enable_asan == "true"', {
           'cflags_cc': [ '-fsanitize=address' ]
         }],
-        ['shared_imagemagick == "true"', {
+        ['enable_hdri == "false"', {
+          'defines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
           'libraries': [
-            '-lMagickCore-7.Q16'
+            '-lMagick++-7.Q16 -lMagickCore-7.Q16 -lMagickWand-7.Q16', '<(magick_libs)'
           ]
         }],
+        ['enable_hdri == "true"', {
+          'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+          'libraries': [
+            '-lMagick++-7.Q16HDRI -lMagickCore-7.Q16HDRI -lMagickWand-7.Q16HDRI', '<(magick_libs)'
+          ]
+        }],
+        # Link against a system-installed ImageMagick
+        ['shared_imagemagick == "true"', {
+        }],
+        # Link against the included ImageMagick
         ['shared_imagemagick == "false"', {
           'dependencies': [ 'builtin_imagemagick' ],
           'libraries': [
-            '-L../deps/ImageMagick/Magick++/lib/.libs/ -lMagick++-7.Q16 -L../deps/ImageMagick/MagickCore/.libs -lMagickCore-7.Q16'
+            '-L../deps/ImageMagick/Magick++/lib/.libs/ '
+            '-L../deps/ImageMagick/MagickWand/.libs/ '
+            '-L../deps/ImageMagick/MagickCore/.libs  ',
           ],
           'include_dirs': [
             'deps/ImageMagick/Magick++/lib',
             'deps/ImageMagick'
           ]
+        }],
+        # These defines must be present when building
+        ['enable_hdri == "false"', {
+          'defines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+        }],
+        ['enable_hdri == "true"', {
+          'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
         }]
       ],
       'dependencies': [
@@ -61,16 +91,6 @@
       'sources': [
         'build/swig/Magick++.cxx'
       ],
-    },
-    {
-      'target_name': 'swig_wrappers',
-      'type': 'none',
-      'actions': [{
-        'action_name': 'download_swig_wrappers',
-        'inputs': [ '<(module_root_dir)/scripts/deps-download.js' ],
-        'outputs': [ '<(module_root_dir)/build/swig/Magick++.cxx' ],
-        'action': [ 'node', 'scripts/deps-download.js' ]
-      }]
     },
     {
       'target_name': 'action_after_build',
@@ -87,8 +107,64 @@
     }
   ],
   'conditions': [
+    # Download the pregenerated SWIG wrappers if there is no need to regenerate them
+    ['enable_hdri==default_hdri and regen_swig=="false"', {
+      'targets': [{
+        'target_name': 'swig_wrappers',
+        'type': 'none',
+        'actions': [{
+          'action_name': 'download_swig_wrappers',
+          'inputs': [ '<(module_root_dir)/scripts/deps-download.js' ],
+          'outputs': [ '<(module_root_dir)/build/swig/Magick++.cxx' ],
+          'action': [ 'node', 'scripts/deps-download.js' ]
+        }]
+      }]
+    }],
+    # Regenerate the SWIG wrappers
+    ['enable_hdri!=default_hdri or regen_swig=="true"', {
+      'targets': [{
+        'conditions': [
+          ['enable_hdri == "false"', {
+            'variables': {
+              'hdri': '-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16',
+            }
+          }],
+          ['enable_hdri == "true"', {
+            'variables': {
+              'hdri': '-DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16',
+            }
+          }]
+        ],
+        'target_name': 'swig_wrappers',
+        'type': 'none',
+        'actions': [{
+          'action_name': 'regen_swig_wrappers',
+          'inputs': [ '<(module_root_dir)/src/Magick++.i' ],
+          'outputs': [ '<(module_root_dir)/build/swig/Magick++.cxx' ],
+          'action': [
+            'swig', '-javascript', '-napi', '-c++',
+            '-Ideps/ImageMagick/Magick++/lib', '-Ideps/ImageMagick',
+            '-DMAGICKCORE_HDRI_ENABLE=1', '-DMAGICKCORE_QUANTUM_DEPTH=16',
+            '-o', 'build/swig/Magick++.cxx', 'src/Magick++.i'
+          ]
+        }]
+      }]
+    }],
+    # Build the included ImageMagick library
     ['shared_imagemagick == "false"', {
       'targets': [{
+        'conditions': [
+          ['enable_hdri == "false"', {
+            'variables': {
+              'hdri': '--disable-hdri',
+            }
+          }],
+          ['enable_hdri == "true"', {
+            'variables': {
+              'hdri': '--enable-hdri',
+            }
+          }]
+        ],
         'target_name': 'builtin_imagemagick',
         'type': 'none',
         'actions': [
@@ -100,13 +176,20 @@
               'sh',
               '-c',
               'cd <(module_root_dir)/deps/ImageMagick'
-              ' && sh ./configure --disable-hdri --disable-shared --enable-static CFLAGS="-fPIC" CXXFLAGS="-fPIC"'
+              ' && sh ./configure <(hdri) --enable-static CFLAGS="-fPIC" CXXFLAGS="-fPIC"'
             ]
           },
           {
             'action_name': 'make',
             'inputs': [ '<(module_root_dir)/deps/ImageMagick/config.status' ],
-            'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16.a' ],
+            'conditions': [
+              ['enable_hdri == "false"', {
+                'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16.a' ],
+              }],
+              ['enable_hdri == "true"', {
+                'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16HDRI.a' ],
+              }]
+            ],
             'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && make -j4' ]
           }
         ]
