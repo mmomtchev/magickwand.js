@@ -99,7 +99,8 @@
             'action': [
               'sh',
               '-c',
-              'cd <(module_root_dir)/deps/ImageMagick && sh ./configure --disable-hdri --disable-shared --enable-static CFLAGS="-fPIC" CXXFLAGS="-fPIC"'
+              'cd <(module_root_dir)/deps/ImageMagick'
+              ' && sh ./configure --disable-hdri --disable-shared --enable-static CFLAGS="-fPIC" CXXFLAGS="-fPIC"'
             ]
           },
           {
