@@ -45,6 +45,9 @@
         ['enable_asan == "true"', {
           'cflags_cc': [ '-fsanitize=address' ]
         }],
+        ['OS == "mac"', {
+          'include_dirs': [ '/usr/local/include' ]
+        }],
         # Link against a system-installed ImageMagick
         ['shared_imagemagick == "true"', {
         }],
