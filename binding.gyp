@@ -1,10 +1,9 @@
 {
   'variables': {
-    'builtin_imagemagick%': 'false',
+    'shared_imagemagick%': 'false',
     'enable_asan%': 'false',
     'default_hdri': 'true',
     'enable_hdri%': '<(default_hdri)',
-    'magick_libs': '<!(grep MAGICK_LIBS deps/ImageMagick/Makefile | cut -f 2 -d "=")',
     'regen_swig%': 'false'
   },
   'configurations': {
@@ -24,11 +23,12 @@
   'targets': [
     {
       'target_name': 'node-magickwand',
+      'variables': {
+        'magick_libs': '<!(grep MAGICK_LIBS deps/ImageMagick/Makefile | cut -f 2 -d "=")'
+      },
       'include_dirs': [
         "<!@(node -p \"require('node-addon-api').include\")"
-      ],
-      'defines': [
-      ],
+      ],      
       'cflags': [
         '-Wno-deprecated-declarations',
         '-Wno-unused-function'
@@ -65,7 +65,7 @@
         }],
         # Link against the included ImageMagick
         ['shared_imagemagick == "false"', {
-          'dependencies': [ 'builtin_imagemagick' ],
+          'dependencies': [ 'imagemagick' ],
           'libraries': [
             '-L../deps/ImageMagick/Magick++/lib/.libs/ '
             '-L../deps/ImageMagick/MagickWand/.libs/ '
@@ -165,7 +165,7 @@
             }
           }]
         ],
-        'target_name': 'builtin_imagemagick',
+        'target_name': 'imagemagick',
         'type': 'none',
         'actions': [
           {
