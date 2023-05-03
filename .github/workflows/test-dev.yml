@@ -23,6 +23,7 @@ jobs:
         with:
           node-version: 16.x
       - run: npm install --ignore-scripts
+      - run: git remote -v
       - run: npx @mapbox/node-pre-gyp configure
       - run: npx @mapbox/node-pre-gyp build -j max
       - run: npm test
