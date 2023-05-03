@@ -1,8 +1,6 @@
 %module magickwand
 
 %{
-#define MAGICKCORE_INSTALLED_SUPPORT 0
-
 // Includes the header in the wrapper code
 #include <Magick++.h>
 #include <MagickWand/MagickWand.h>
