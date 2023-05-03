@@ -73,9 +73,6 @@
         'swig_wrappers',
         "<!(node -p \"require('node-addon-api').gyp\")"
       ],
-      'inputs': [
-        'build/swig/Magick++.cxx'
-      ],
       'sources': [
         'build/swig/Magick++.cxx'
       ],
@@ -101,7 +98,7 @@
         'target_name': 'swig_wrappers',
         'type': 'none',
         'actions': [{
-          'action_name': 'download_swig_wrappers',
+          'action_name': 'swig_wrappers',
           'inputs': [ '<(module_root_dir)/scripts/deps-download.js' ],
           'outputs': [ '<(module_root_dir)/build/swig/Magick++.cxx' ],
           'action': [ 'node', 'scripts/deps-download.js' ]
@@ -126,7 +123,7 @@
         'target_name': 'swig_wrappers',
         'type': 'none',
         'actions': [{
-          'action_name': 'regen_swig_wrappers',
+          'action_name': 'swig_wrappers',
           'inputs': [ '<(module_root_dir)/src/Magick++.i' ],
           'outputs': [ '<(module_root_dir)/build/swig/Magick++.cxx' ],
           'action': [
