@@ -68,16 +68,7 @@
         ['enable_hdri == "true"', {
           'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
         }],
-        # Download the pregenerated SWIG wrappers if there is no need to regenerate them
-        ['enable_hdri==default_hdri and regen_swig=="false"', {
-          'actions': [{
-            'action_name': 'swig_wrappers',
-            'inputs': [ 'scripts/deps-download.js' ],
-            'outputs': [ 'build/swig/Magick++.cxx' ],
-            'action': [ 'node', 'scripts/deps-download.js' ]
-          }]
-        }],
-        # Regenerate the SWIG wrappers
+        # Regenerate the SWIG wrappers when needed
         ['enable_hdri!=default_hdri or regen_swig=="true"', {
           'actions': [{
             'conditions': [
