@@ -155,7 +155,7 @@
         'actions': [
           {
             'action_name': 'make',
-            'inputs': [ '<!@(sh configure_magick.sh <(hdri))' ],
+            'inputs': [ '<(module_root_dir)/deps/ImageMagick/configure' ],
             'conditions': [
               ['enable_hdri == "false"', {
                 'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16.a' ],
@@ -182,7 +182,10 @@
               ]
             }]
           ],
-          'libraries': '<!(grep MAGICK_LIBS deps/ImageMagick/Makefile | cut -f 2 -d "=")'          
+          # This an ugly hack that enable running of shell commands during node-gyp configure
+          # node-gyp configure needs to evaluate this expression to generate the platform-specific files
+          # (originally by TooTallNate for libffi) 
+          'libraries': [ '<!@(sh configure_magick.sh <(hdri))' ]
         }
       }]
     }]
