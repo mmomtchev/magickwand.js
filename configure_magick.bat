@@ -1,10 +1,10 @@
 SET SCRIPT_DIR=%~dp0
 
 cd %SCRIPT_DIR%\deps\ImageMagick-Windows
-if not exist "ImageMagick" (
-  mklink /J ImageMagick ..\ImageMagick
-)
+rd /q /s ImageMagick
 call CloneRepositories.cmd
+rd /q /s ImageMagick
+mklink /J ImageMagick ..\ImageMagick
 cd %SCRIPT_DIR%
 
 mkdir build\bin
