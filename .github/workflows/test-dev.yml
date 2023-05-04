@@ -33,6 +33,7 @@ jobs:
         shell: bash
       - run: npm install --ignore-scripts
       - run: npm run deps:download
-      - run: npx node-pre-gyp configure
-      - run: npx node-pre-gyp build -j max
+      - run: npx @mapbox/node-pre-gyp configure
+        shell: cmd
+      - run: npx @mapbox/node-pre-gyp build -j max
       - run: npm test
