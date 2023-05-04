@@ -16,3 +16,5 @@ FOR /F "tokens=*" %%g IN ('"%ProgramFiles(x86)%\Microsoft Visual Studio\Installe
 
 "%MSBUILD%" configure.2022.sln /m /t:Rebuild /p:Configuration=Release,Platform=x64
 configure.exe /noWizard /VS2022 /HDRI /Q16 /x64 /smt
+
+exit /b 0
