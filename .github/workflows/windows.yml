@@ -16,18 +16,6 @@ jobs:
         platform: [ x64 ]
         quantum: [ Q16 ]
         hdri: [ HDRI ]
-        exclude:
-          - quantum: Q8
-            hdri: HDRI
-        include:
-          - platform: x64
-            bit: 64
-          - platform: arm64
-            bit: 64
-          - platform: x86
-            bit: 32
-          - hdri: HDRI
-            hdri_flag: '-HDRI'
 
     steps:
     - uses: actions/checkout@v3
