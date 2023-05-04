@@ -33,6 +33,12 @@ jobs:
         shell: bash
       - run: npm install --ignore-scripts
       - run: npm run deps:download
+      - name: ls 1
+        run: ls -al deps/ImageMagick-Windows
+        shell: bash
       - run: npx @mapbox/node-pre-gyp configure
+      - name: ls 2
+        run: ls -al deps/ImageMagick-Windows
+        shell: bash
       - run: npx @mapbox/node-pre-gyp build -j max
       - run: npm test
