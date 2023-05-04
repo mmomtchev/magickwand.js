@@ -16,6 +16,9 @@ jobs:
         platform: [ x64 ]
         quantum: [ Q16 ]
         hdri: [ HDRI ]
+      include:
+        - platform: x64
+          bit: 64
 
     steps:
     - uses: actions/checkout@v3
@@ -34,6 +37,7 @@ jobs:
       shell: cmd
       run: |
         powershell Invoke-WebRequest -Uri https://github.com/ImageMagick/ImageMagick-Windows/releases/download/20200615/ffmpeg-4.2.3-win${{matrix.bit}}.exe -OutFile ffmpeg.exe
+                                          https://github.com/ImageMagick/ImageMagick-Windows/releases/download/20200615/ffmpeg-4.2.3-win64.exe
         copy /Y ffmpeg.exe ImageMagick-Windows\VisualMagick\bin
 
     - name: Build configure
