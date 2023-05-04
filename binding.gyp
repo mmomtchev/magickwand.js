@@ -74,12 +74,12 @@
             'conditions': [
               ['enable_hdri == "false"', {
                 'variables': {
-                  'hdri': '-DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16',
+                  'hdri': [ '-DMAGICKCORE_HDRI_ENABLE=0', '-DMAGICKCORE_QUANTUM_DEPTH=16' ],
                 }
               }],
               ['enable_hdri == "true"', {
                 'variables': {
-                  'hdri': '-DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16',
+                  'hdri': [ '-DMAGICKCORE_HDRI_ENABLE=1', '-DMAGICKCORE_QUANTUM_DEPTH=16' ],
                 }
               }]
             ],
@@ -89,7 +89,7 @@
             'action': [
               'swig', '-javascript', '-napi', '-c++',
               '-Ideps/ImageMagick/Magick++/lib', '-Ideps/ImageMagick',
-              '-DMAGICKCORE_HDRI_ENABLE=1', '-DMAGICKCORE_QUANTUM_DEPTH=16',
+              '<@(hdri)',
               '-o', 'build/swig/Magick++.cxx', 'src/Magick++.i'
             ]
           }]
