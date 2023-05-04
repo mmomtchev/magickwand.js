@@ -33,3 +33,4 @@ jobs:
         shell: bash
       - run: npm install --ignore-scripts
       - run: configure_magick.bat
+        shell: cmd
