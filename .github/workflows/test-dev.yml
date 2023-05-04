@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ubuntu-20.04, macos-11, windows-2022]
+        platform: [windows-2022]
 
     steps:
       - uses: actions/checkout@v3
@@ -36,9 +36,10 @@ jobs:
       - name: ls 1
         run: ls -al deps/ImageMagick-Windows
         shell: bash
-      - run: npx @mapbox/node-pre-gyp configure
-      - name: ls 2
-        run: ls -al deps/ImageMagick-Windows
-        shell: bash
-      - run: npx @mapbox/node-pre-gyp build -j max
-      - run: npm test
+      - run: |
+          cd deps\ImageMagick-Windows
+          dir
+          rd /q /s ImageMagick
+          dir
+          call CloneRepositories.cmd
+          dir
