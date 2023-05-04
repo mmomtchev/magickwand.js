@@ -21,21 +21,20 @@ git clone --recursive https://github.com/mmomtchev/node-magickwand
 cd node-magickwand
 ```
 
-* Install the npm dependencies
-```shell
-npm install
-npm run deps:download
-```
+* `npm install` should automatically install the dependencies and compile the module
 
-* Build the Node.js addon
+* or, to do everything manually:
 ```shell
-node-pre-gyp configure && node-pre-gyp build
+npm install --ignore-scripts
+npm run deps:download
+npx @mapbox/node-pre-gyp configure
+npx @mapbox/node-pre-gyp build
 ```
 
 Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the interface between the user code and ImageMagick - images still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. Unless you can regenerate the SWIG wrappers, you will have to use the very latest ImageMagick version. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
 ```shell
-node-pre-gyp configure --shared_imagemagick
-LDFLAGS=-L/usr/local/lib CFLAGS=-I/usr/local/include/ImageMagick-7 CXXFLAGS=-I/usr/local/include/ImageMagick-7 node-pre-gyp build
+npx @mapbox/node-pre-gyp configure --shared_imagemagick
+LDFLAGS=-L/usr/local/lib CFLAGS=-I/usr/local/include/ImageMagick-7 CXXFLAGS=-I/usr/local/include/ImageMagick-7 npx @mapbox/node-pre-gyp build
 ```
 
 * `npm test` should work at this point

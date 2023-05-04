@@ -11,6 +11,7 @@
     "deps:download": "node scripts/deps-download.js",
     "swig": "swig -javascript -napi -c++ -Ideps/ImageMagick/Magick++/lib -Ideps/ImageMagick -DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16 -o build/swig/Magick++.cxx src/Magick++.i",
     "publish:generated": "node scripts/publish-generated.js",
+    "preinstall": "npm run deps:download",
     "install": "node-pre-gyp install --fallback-to-build",
     "lint": "eslint lib/*.js test/*.js",
     "test": "mocha"
