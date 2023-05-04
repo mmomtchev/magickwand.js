@@ -1,5 +1,6 @@
 %module magickwand
 
+#define MAGICKCORE_EXCLUDE_DEPRECATED
 %{
 // Includes the header in the wrapper code
 #include <Magick++.h>
