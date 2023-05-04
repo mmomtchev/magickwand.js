@@ -43,3 +43,4 @@ jobs:
           dir
           call CloneRepositories.cmd
           dir
+        shell: cmd
