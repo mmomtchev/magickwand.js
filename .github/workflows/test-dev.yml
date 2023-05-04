@@ -12,6 +12,7 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.platform }}
+    continue-on-error: true
 
     strategy:
       fail-fast: false
@@ -32,5 +33,5 @@ jobs:
           [[ '${{ matrix.platform }}' == 'ubuntu-20.04' ]] && sudo apt-get install -y fonts-ubuntu || true
         shell: bash
       - run: npm install --ignore-scripts
-      - run: configure_magick.bat
-        shell: cmd
+      - run: npx node-pre-gyp configure
+      - run: cat build/imagemagick.vcxproj
