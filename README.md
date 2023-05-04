@@ -11,9 +11,9 @@ The project is far from ready, but it could be usable
 
 Only Linux is being worked on at the moment - you are on your own for other OSes
 
-* In order to generate the C++ wrapping code, you will need SWIG 4.2.0-git with NAPI support from https://github.com/mmomtchev/swig#mmom
+* In order to regenerate the C++ wrapping code, you will need SWIG 4.2.0-git with NAPI support from https://github.com/mmomtchev/swig#mmom
   * Building with the old Node/V8 interface is not possible - the typemaps are not compatible
-  * Alternatively, you can checkout the `generated` branch where all files have been pre-generated
+  * Alternatively, you can checkout the `generated` branch where all files have been pre-generated - `npm run deps:download` does this
 
 * Recursively clone the repo
 ```shell
@@ -21,23 +21,21 @@ git clone --recursive https://github.com/mmomtchev/node-magickwand
 cd node-magickwand
 ```
 
-* Build ImageMagick
-```shell
-cd deps/ImageMagick
-./configure --disable-hdri
-make -j4
-```
-
-Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the interface between the user code and ImageMagick - images still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 without HDRI - which is the default setting on Linux. You can adjust the build mode in `src/magick_config.h` to build with a different ImageMagick.
-
-* Install the npm dependencies, this will also generate the dependencies and run SWIG - which you must have installed
+* Install the npm dependencies
 ```shell
 npm install
+npm run deps:download
 ```
 
 * Build the Node.js addon
 ```shell
 node-pre-gyp configure && node-pre-gyp build
+```
+
+Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the interface between the user code and ImageMagick - images still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. Unless you can regenerate the SWIG wrappers, you will have to use the very latest ImageMagick version. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
+```shell
+node-pre-gyp configure --shared_imagemagick
+LDFLAGS=-L/usr/local/lib CFLAGS=-I/usr/local/include/ImageMagick-7 CXXFLAGS=-I/usr/local/include/ImageMagick-7 node-pre-gyp build
 ```
 
 * `npm test` should work at this point
