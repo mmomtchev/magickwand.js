@@ -71,6 +71,13 @@ typedef MagickCore::ImageInfo _ImageInfo;
 %ignore LogMagickEventList;
 %ignore ThrowMagickExceptionList;
 
+// These seem to lack an implementation?
+%ignore penTextureImage;
+%ignore penColorImage;
+%ignore mergeLayersImage;
+%ignore sigmoidalContrastImage;
+%ignore Magick::Montage::compose;
+
 // These cannot be used safely from JavaScript
 %rename("$ignore", regextarget=1) "NoCopy$";
 %rename("$ignore", regextarget=1) "Allocator";
