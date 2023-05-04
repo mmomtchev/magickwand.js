@@ -3,7 +3,7 @@ SET SCRIPT_DIR=%~dp0
 FOR /F "tokens=*" %%g IN ('"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -prerelease -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe') do (SET MSBUILD=%%g)
 
 cd %SCRIPT_DIR%\deps\ImageMagick-Windows\VisualMagick
-REM "%MSBUILD%" VisualStaticMT.sln /m /t:Rebuild /p:Configuration=Release,Platform=x64
+"%MSBUILD%" VisualStaticMT.sln /m /t:Rebuild /p:Configuration=Release,Platform=x64
 cd %SCRIPT_DIR%
 
 SET DEST=%1\ImageMagick

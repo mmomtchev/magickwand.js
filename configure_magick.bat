@@ -4,7 +4,6 @@ cd %SCRIPT_DIR%\deps\ImageMagick-Windows
 if not exist "ImageMagick" (
   mklink /J ImageMagick ..\ImageMagick
 )
-exit /b 0
 call CloneRepositories.cmd
 cd %SCRIPT_DIR%
 
