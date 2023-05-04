@@ -7,9 +7,7 @@
 
 ## Trying for yourself
 
-The project is far from ready, but it could be usable
-
-Only Linux and macOS have working builds at the moment, I am still looking for a solution on Windows.
+The project is still unpublished, but it is already usable for many tasks.
 
 * In order to regenerate the C++ wrapping code, you will need SWIG 4.2.0-git with NAPI support from https://github.com/mmomtchev/swig#mmom
   * Building with the old Node/V8 interface is not possible - the typemaps are not compatible
