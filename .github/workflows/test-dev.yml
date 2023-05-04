@@ -34,4 +34,3 @@ jobs:
         shell: bash
       - run: npm install --ignore-scripts
       - run: npx node-pre-gyp configure
-      - run: cat build/imagemagick.vcxproj

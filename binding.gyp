@@ -264,7 +264,7 @@
           ],
           # This is the Windows version of the same hack as above
           # Here we invoke the official ImageMagick-Windows downloader
-          'inputs': [ '<!@(configure_magick.bat)' ]
+          'inputs': [ '<(module_root_dir)/configure_magick.bat', '<!@(configure_magick.bat > nul)' ]
         }
       }]
     }]
