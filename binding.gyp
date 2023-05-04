@@ -41,6 +41,17 @@
         'GCC_ENABLE_CPP_RTTI': 'YES',
         'GCC_ENABLE_CPP_EXCEPTIONS' : 'YES'
       },
+      'msvs_settings': {
+        'VCCLCompilerTool': {
+          'AdditionalOptions': [
+            '/MP', # compile across multiple CPUs
+            '/GR', # force RTTI on (see https://github.com/nodejs/node-gyp/issues/2412)
+            '/EHsc' # same for ExceptionHandling
+          ],
+          'ExceptionHandling': 1,
+          'RuntimeTypeInfo': 'true'
+        }
+      },
       'conditions': [
         ['enable_asan == "true"', {
           'cflags_cc': [ '-fsanitize=address' ]
@@ -117,8 +128,8 @@
     }
   ],
   'conditions': [
-    # Build the included ImageMagick library
-    ['shared_imagemagick == "false"', {
+    # Build the included ImageMagick library on POSIX
+    ['OS != "win" and shared_imagemagick == "false"', {
       'targets': [{
         'conditions': [
           ['enable_hdri == "false"', {
@@ -168,6 +179,59 @@
           # node-gyp configure needs to evaluate this expression to generate the platform-specific files
           # (originally by TooTallNate for libffi) 
           'libraries': [ '<!@(sh configure_magick.sh <(module_path) <(hdri))' ]
+        }
+      }]
+    }],
+    # Build the included ImageMagick library on Windows
+    ['OS == "win" and shared_imagemagick == "false"', {
+      'targets': [{
+        'conditions': [
+          ['enable_hdri == "false"', {
+            'variables': {
+              'hdri': '--disable-hdri',
+            }
+          }],
+          ['enable_hdri == "true"', {
+            'variables': {
+              'hdri': '--enable-hdri',
+            }
+          }]
+        ],
+        'target_name': 'imagemagick',
+        'type': 'none',
+        'actions': [
+          {
+            'action_name': 'make',
+            'inputs': [ '<(module_root_dir)/deps/ImageMagick/configure' ],
+            'conditions': [
+              ['enable_hdri == "false"', {
+                'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16.a' ],
+              }],
+              ['enable_hdri == "true"', {
+                'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16HDRI.a' ],
+              }]
+            ],
+            'action': [ '<(module_root_dir)/build_magick.bat' ]
+          }
+        ],
+        'direct_dependent_settings': {
+          'conditions': [
+            ['enable_hdri == "false"', {
+              'defines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+              'libraries+': [
+                '-lMagick++-7.Q16 -lMagickCore-7.Q16 -lMagickWand-7.Q16'
+              ]
+            }],
+            ['enable_hdri == "true"', {
+              'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+              'libraries+': [
+                '-lMagick++-7.Q16HDRI -lMagickCore-7.Q16HDRI -lMagickWand-7.Q16HDRI'
+              ]
+            }]
+          ],
+          # This is the Windows version of the same hack as above
+          # Here we invoke the official ImageMagick-Windows downloader
+          'inputs': [ '<!@(configure_magick.bat > nul)' ]
         }
       }]
     }]
