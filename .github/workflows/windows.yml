@@ -1,0 +1,111 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - windows
+    paths:
+    - 'configure'
+    - 'm4/version.m4'
+
+name: release
+jobs:
+  release_windows_portable:
+    name: 'Windows portable ${{matrix.quantum}}${{matrix.hdri_flag}}-${{matrix.platform}}'
+    runs-on: windows-2022
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ x64 ]
+        quantum: [ Q16 ]
+        hdri: [ HDRI ]
+        exclude:
+          - quantum: Q8
+            hdri: HDRI
+        include:
+          - platform: x64
+            bit: 64
+          - platform: arm64
+            bit: 64
+          - platform: x86
+            bit: 32
+          - hdri: HDRI
+            hdri_flag: '-HDRI'
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        repository: ImageMagick/ImageMagick-Windows
+        path: ImageMagick-Windows
+        ref: refs/heads/main
+
+    - name: Clone repositories
+      shell: cmd
+      run: |
+        cd ImageMagick-Windows
+        CloneRepositories.cmd https://github.com/ImageMagick shallow
+
+    - name: Download FFmpeg
+      shell: cmd
+      run: |
+        powershell Invoke-WebRequest -Uri https://github.com/ImageMagick/ImageMagick-Windows/releases/download/20200615/ffmpeg-4.2.3-win${{matrix.bit}}.exe -OutFile ffmpeg.exe
+        copy /Y ffmpeg.exe ImageMagick-Windows\VisualMagick\bin
+
+    - name: Build configure
+      shell: cmd
+      run: |
+        call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"
+        cd ImageMagick-Windows\VisualMagick\configure
+        msbuild configure.2022.sln /m /t:Rebuild /p:Configuration=Release,Platform=x64
+
+    - name: Configure ImageMagick
+      shell: cmd
+      run: |
+        cd ImageMagick-Windows\VisualMagick\configure
+        configure.exe /noWizard /VS2022 /${{matrix.hdri}} /${{matrix.quantum}} /${{matrix.platform}} /smt
+
+    - name: Build ImageMagick
+      shell: cmd
+      run: |
+        call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"
+        cd ImageMagick-Windows\VisualMagick
+        set /p solution=<solution
+        msbuild %solution% /m /t:Rebuild /p:Configuration=Release,Platform=${{matrix.platform}}
+
+    - name: Copy Files
+      id: package
+      shell: powershell
+      run: |
+        [void](New-Item -Name "portable" -ItemType directory)
+        Copy-Item "ImageMagick-Windows\VisualMagick\bin\*.exe" "portable"
+        Copy-Item "ImageMagick-Windows\ImageMagick\config\colors.xml" "portable"
+        Copy-Item "ImageMagick-Windows\ImageMagick\config\english.xml" "portable"
+        Copy-Item "ImageMagick-Windows\ImageMagick\config\locale.xml" "portable"
+        Copy-Item "ImageMagick-Windows\ImageMagick\config\log.xml" "portable"
+        Copy-Item "ImageMagick-Windows\ImageMagick\config\mime.xml" "portable"
+        Copy-Item "ImageMagick-Windows\ImageMagick\config\quantization-table.xml" "portable"
+        Copy-Item "ImageMagick-Windows\VisualMagick\bin\configure.xml" "portable"
+        Copy-Item "ImageMagick-Windows\VisualMagick\bin\ImageMagick.rdf" "portable"
+        Copy-Item "ImageMagick-Windows\VisualMagick\bin\delegates.xml" "portable"
+        Copy-Item "ImageMagick-Windows\VisualMagick\bin\policy.xml" "portable"
+        Copy-Item "ImageMagick-Windows\VisualMagick\bin\sRGB.icc" "portable"
+        Copy-Item "ImageMagick-Windows\VisualMagick\bin\thresholds.xml" "portable"
+        Copy-Item "ImageMagick-Windows\VisualMagick\bin\type-ghostscript.xml" "portable"
+        Copy-Item "ImageMagick-Windows\VisualMagick\bin\type.xml" "portable"
+
+        Copy-Item "ImageMagick-Windows\ImageMagick\LICENSE" "portable\LICENSE.txt"
+        Copy-Item "ImageMagick-Windows\VisualMagick\NOTICE.txt" "portable"
+        Copy-Item "ImageMagick-Windows\ImageMagick\README.txt" "portable"
+
+        Copy-Item -Recurse "ImageMagick-Windows\VisualMagick\lib" "portable"
+
+        $version = (cat "ImageMagick-Windows\VisualMagick\installer\inc\version.isx" | Select-String "MagickPackageFullVersionText") | Out-String
+        $version = ($version | Select-String '".*"' -AllMatches |  Select -Expand Matches | Select -Expand Value | Out-String)
+        $version = $version -Replace "`n|`r|""",""
+        $version = $version -Replace " ","-"
+        Write-Host "::set-output name=version::$version"
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: 'ImageMagick-${{steps.package.outputs.version}}-portable-${{matrix.quantum}}${{matrix.hdri_flag}}-${{matrix.platform}}'
+        path: portable
