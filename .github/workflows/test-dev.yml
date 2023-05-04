@@ -34,3 +34,6 @@ jobs:
         shell: bash
       - run: npm install --ignore-scripts
       - run: npx node-pre-gyp configure
+        continue-on-error: true
+      - run: cat log
+
