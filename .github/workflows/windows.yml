@@ -3,9 +3,6 @@ on:
   push:
     branches:
     - windows-build
-    paths:
-    - 'configure'
-    - 'm4/version.m4'
 
 name: release
 jobs:
