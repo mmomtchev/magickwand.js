@@ -2,7 +2,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-    - windows
+    - windows-build
     paths:
     - 'configure'
     - 'm4/version.m4'
