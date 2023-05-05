@@ -15,14 +15,15 @@ npm install node-magickwand
 ```
 
 ```js
+const assert = require('assert');
 const { Magick, MagickCore } = require('node-magickwand');
-const { Image } = Magick;
+const { Image, Geometry } = Magick;
 
 const im = new Image;
 im.read(path.join(__dirname, 'data', 'wizard.png'));
-assert.equal(im.size().width(), 80);
+assert(im.size().width() === 80);
 im.crop(new Geometry(10, 8, 1, 8));
-assert.equal(im.size().width(), 10);
+assert(im.size().width() === 10);
 im.magick('JPEG');
 im.write('cutout.jpg');
 ```
@@ -32,6 +33,8 @@ Your best source of further information is the Magick++ documentation itself:
 * The full API: https://www.imagemagick.org/Magick++/
 
 When in doubt about the JS semantics of a particular method, you can also check the unit tests: https://github.com/mmomtchev/node-magickwand/tree/main/test
+
+There are no TypeScript bindings at the moment - the sheer size and complexity of the ImageMagick library renders any port prohibitive unless it is fully automated. TypeScript support for SWIG is planned at some later moment.
 
 # Rebuilding from source
 
