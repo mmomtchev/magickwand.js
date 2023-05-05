@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const { assert } = require('chai');
 
-const im = require('..');
+const im = require('node-magickwand');
 const { Image, Blob } = im.Magick;
 
 describe('Blob', () => {

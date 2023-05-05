@@ -1,0 +1,5 @@
+{
+  "spec": "test/*.test.js",
+  "v8-expose-gc": true,
+  "require": "test/alias.js"
+}

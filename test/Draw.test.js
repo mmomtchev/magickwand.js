@@ -1,6 +1,6 @@
 const { assert } = require('chai');
 
-const { Magick, MagickCore } = require('..');
+const { Magick, MagickCore } = require('node-magickwand');
 const { Image, Geometry, Color } = Magick;
 
 describe('Drawable', () => {

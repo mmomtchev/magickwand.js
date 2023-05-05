@@ -30,7 +30,17 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Create package.json
         run: npm init --yes
-      - name: Install node-magickwand from npm
+      - name: Set up the unit tests
+        run: |
+          curl https://codeload.github.com/mmomtchev/node-magickwand/zip/refs/tags/v${{ github.event.inputs.version }} --output repo.zip
+          unzip repo.zip
+          mv node-magickwand-${{ github.event.inputs.version }}/test .
+      - name: Install dependencies
+        run: |
+          npm i chai chai-spies mocha
+      - name: Install pymport from npm
         run: npm install --force node-magickwand@${{ github.event.inputs.version }}
-      - name: Try requiring
-        run: node -e "const i = new (require('.').Magick.Image)();"
+      - name: Run the unit tests
+        run: |
+          cd test
+          npx mocha --reporter=tap --v8-expose-gc *.test.*s

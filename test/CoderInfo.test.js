@@ -1,6 +1,6 @@
 const { assert } = require('chai');
 
-const { CoderInfo, coderInfoList } = require('..').Magick;
+const { CoderInfo, coderInfoList } = require('node-magickwand').Magick;
 
 describe('CoderInfo', () => {
   it('get', () => {

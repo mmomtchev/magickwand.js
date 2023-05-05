@@ -1,7 +1,7 @@
 const path = require('path');
 const { assert } = require('chai');
 
-const { Magick, MagickCore } = require('..');
+const { Magick, MagickCore } = require('node-magickwand');
 const { Image, Color } = Magick;
 
 describe('STL', () => {

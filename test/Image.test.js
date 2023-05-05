@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const { assert } = require('chai');
 
-const ImageMagick = require('..');
+const ImageMagick = require('node-magickwand');
 const { Image, Geometry, Color } = ImageMagick.Magick;
 const { MultiplyCompositeOp } = ImageMagick.MagickCore;
 
