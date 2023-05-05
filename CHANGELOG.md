@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.3] 2023-05-05
+
+- Render the package compatible with Node.js 14.x / 16.x
+
 ## [0.0.2] 2023-05-05
 
 - Fix the install script
