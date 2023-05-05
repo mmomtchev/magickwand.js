@@ -53,11 +53,11 @@
     "eslint": "^8.39.0",
     "eslint-plugin-mocha": "^10.1.0",
     "gh-pages": "^5.0.0",
-    "mocha": "^10.2.0",
-    "node-addon-api": "^5.1.0"
+    "mocha": "^10.2.0"
   },
   "dependencies": {
-    "@mapbox/node-pre-gyp": "^1.0.10"
+    "@mapbox/node-pre-gyp": "^1.0.10",
+    "node-addon-api": "^5.1.0"
   },
   "engines": {
     "node": ">=14"
