@@ -7,7 +7,7 @@ cp.execSync('git fetch origin');
 let hash = '';
 for (let i = 0; !hash.length; i++) {
   const hashMain = cp.execSync(`git rev-parse HEAD~${i}`).toString().trimEnd();
-  hash = cp.execSync(`git log origin/generated  --grep "${hashMain}" --pretty=format:"%H"`).toString().trimEnd();
+  hash = cp.execSync(`git log origin/generated  --grep "${hashMain}" --pretty=format:"%H"`).toString().split('\n')[0].trimEnd();
 }
 
 async function download(url, targetFile) {
