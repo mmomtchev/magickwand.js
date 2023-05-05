@@ -1,0 +1,36 @@
+name: Test npm package
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Package version to test"
+        required: true
+
+jobs:
+  test_npm_binaries:
+    runs-on: ${{ matrix.platform }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - ubuntu-20.04
+          - ubuntu-22.04
+          - windows-2019
+          - windows-2022
+          - macos-11
+          - macos-12
+        node-version: [14.x, 16.x, 18.x, 20.x]
+
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Create package.json
+        run: npm init --yes
+      - name: Install node-magickwand from npm
+        run: npm install --force node-magickwand@${{ github.event.inputs.version }}
+      - name: Try requiring
+        run: node -e "const i = new (require('.').Magick.Image)();"

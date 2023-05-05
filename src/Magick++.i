@@ -34,6 +34,10 @@ typedef MagickCore::ImageInfo _ImageInfo;
   }
 }
 
+%insert(begin) %{
+#define NAPI_VERSION 6
+%}
+
 // Shunt __attribute__(x) which is not supported by SWIG
 #define _magickcore_restrict
 #define magick_restrict
@@ -155,6 +159,6 @@ namespace MagickCore {
 %template(writeImages)                  Magick::writeImages<ImageListIterator>;
 
 %insert(init) %{
-// TODO: Find the path on Windows
+// We link in everything statically
 InitializeMagick(".");
 %}

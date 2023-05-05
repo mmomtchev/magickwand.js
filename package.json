@@ -14,7 +14,10 @@
     "preinstall": "npm run deps:download",
     "install": "node-pre-gyp install --fallback-to-build",
     "lint": "eslint lib/*.js test/*.js",
-    "test": "mocha"
+    "test": "mocha",
+    "preversion": "npm run lint && npm run test",
+    "postversion": "git push && git push --tags && node ./scripts/publish-packages.js",
+    "postpublish": "gh workflow run test-package.yml -F version=$npm_package_version"
   },
   "keywords": [
     "imagemagick",
@@ -55,5 +58,8 @@
   },
   "dependencies": {
     "@mapbox/node-pre-gyp": "^1.0.10"
+  },
+  "engines": {
+    "node": ">=14"
   }
 }

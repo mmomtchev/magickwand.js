@@ -7,7 +7,7 @@
 
 ## Trying for yourself
 
-The project is still unpublished, but it is already usable for many tasks.
+The project should be considered of `alpha` quality.
 
 * In order to regenerate the C++ wrapping code, you will need SWIG 4.2.0-git with NAPI support from https://github.com/mmomtchev/swig#mmom
   * Building with the old Node/V8 interface is not possible - the typemaps are not compatible
@@ -56,3 +56,7 @@ The unit tests are a very good source of examples.
 ## Using this project as a tutorial for creating C++ bindings for Node.js with SWIG
 
 I have tried to be as verbose as possible throughout the `Magick++.i` file - you should start there. ImageMagick is a very complex C++ project with 30 years history and it probably uses every single feature of SWIG that might be needed in a Node.js addon. Look at the various JS wrappers that expect special arguments (`Buffer`, `TypedArray`, lists), remember to check the ImageMagick header file for the original C++ function and then you can use its SWIG interface as a starting point in your project.
+
+# Asynchronous mode
+
+I intend to fully merge the current NAPI support in SWIG before starting the asynchronous mode support.

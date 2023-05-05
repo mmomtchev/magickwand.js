@@ -1,0 +1,34 @@
+name: Test release
+
+on:
+  release:
+    types: [published]
+
+  workflow_dispatch:
+
+jobs:
+  test_published:
+    runs-on: ${{ matrix.platform }}
+
+    strategy:
+      matrix:
+        platform:
+          - ubuntu-20.04
+          - ubuntu-22.04
+          - windows-2019
+          - windows-2022
+          - macos-11
+          - macos-12
+        node-version: [14.x, 16.x, 18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install --ignore-scripts
+      - name: Install precompiled binary
+        run: npx @mapbox/node-pre-gyp install
+      - name: Run unit tests
+        run: npm test
