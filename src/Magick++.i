@@ -3,6 +3,7 @@
 #define MAGICKCORE_EXCLUDE_DEPRECATED
 %{
 // Includes the header in the wrapper code
+#define MAGICKCORE_EXCLUDE_DEPRECATED
 #include <Magick++.h>
 #include <MagickWand/MagickWand.h>
 #include <iostream>
