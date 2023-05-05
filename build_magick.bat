@@ -29,6 +29,3 @@ copy "%SCRIPT_DIR%\deps\ImageMagick-Windows\VisualMagick\bin\type.xml" %DEST%
 copy "%SCRIPT_DIR%\deps\ImageMagick-Windows\ImageMagick\LICENSE" %DEST%\LICENSE.txt
 copy "%SCRIPT_DIR%\deps\ImageMagick-Windows\VisualMagick\NOTICE.txt" %DEST%
 copy "%SCRIPT_DIR%\deps\ImageMagick-Windows\ImageMagick\README.txt" %DEST%
-
-mkdir %DEST%\lib
-copy "%SCRIPT_DIR%\deps\ImageMagick-Windows\VisualMagick\lib\*.*" %DEST%\lib

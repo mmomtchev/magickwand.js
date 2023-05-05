@@ -52,7 +52,7 @@
           'RuntimeTypeInfo': 'true'
         },
         'VCLinkerTool': {
-          'AdditionalLibraryDirectories': '<(module_path)/ImageMagick/lib'
+          'AdditionalLibraryDirectories': '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/lib'
         }
       },
       'conditions': [
@@ -155,7 +155,7 @@
                 'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16HDRI.a' ],
               }]
             ],
-            'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && SDKROOT= make -j4 && SDKROOT= make install' ]
+            'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && SDKROOT= make -j4 && SDKROOT= make install && rm -rf <(module_path)/ImageMagick/lib/*.*a' ]
           }
         ],
         'direct_dependent_settings': {
