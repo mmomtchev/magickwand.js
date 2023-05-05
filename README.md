@@ -1,13 +1,39 @@
 # node-magickwand
-## This project serves three purposes:
 
-* Testing grounds for the NAPI support in SWIG
-* Provide alternative native bindings for ImageMagick in Node.js
-* Indulge in hyper-reality
+This package is a port of the ImageMagick-7 C++ library to Node.js using SWIG NAPI.
 
-## Trying for yourself
+It is meant both as
+* a general-purpose image processing library for Node.js
+* and testing grounds for the NAPI support in SWIG
 
 The project should be considered of `alpha` quality.
+
+## Usage
+
+```
+npm install node-magickwand
+```
+
+```js
+const { Magick, MagickCore } = require('node-magickwand');
+const { Image } = Magick;
+
+const im = new Image;
+im.read(path.join(__dirname, 'data', 'wizard.png'));
+assert.equal(im.size().width(), 80);
+im.crop(new Geometry(10, 8, 1, 8));
+assert.equal(im.size().width(), 10);
+im.magick('JPEG');
+im.write('cutout.jpg');
+```
+
+Your best source of further information is the Magick++ documentation itself:
+* The tutorial: https://imagemagick.org/Magick++/tutorial/Magick++_tutorial.pdf
+* The full API: https://www.imagemagick.org/Magick++/
+
+When in doubt about the JS semantics of a particular method, you can also check the unit tests: https://github.com/mmomtchev/node-magickwand/tree/main/test
+
+# Rebuilding from source
 
 * In order to regenerate the C++ wrapping code, you will need SWIG 4.2.0-git with NAPI support from https://github.com/mmomtchev/swig#mmom
   * Building with the old Node/V8 interface is not possible - the typemaps are not compatible
@@ -37,25 +63,11 @@ LDFLAGS=-L/usr/local/lib CFLAGS=-I/usr/local/include/ImageMagick-7 CXXFLAGS=-I/u
 
 * `npm test` should work at this point
 
-## Using this project to process images in Node.js
-
-Your starting point should be the Magick++ (the C++ API) documentation:
-* The tutorial: https://imagemagick.org/Magick++/tutorial/Magick++_tutorial.pdf
-* The full API: https://www.imagemagick.org/Magick++/
-
-All C++ methods (except a few unusable ones that expect custom allocators) have a JS wrapper in `Magick`. If you compiled the optional MagickCore support, you will also get (the mostly unusable from JS) plain C API in `MagickCore`. Otherwise, only the `enum`s required for `Magick` will be available:
-
-```js
-const { Magick, MagickCore } = require('node-magickwand');
-```
-
-There are no TypeScript bindings at the moment - but there might be if/when I add TypeScript support to SWIG (another planned project).
-
-The unit tests are a very good source of examples.
-
-## Using this project as a tutorial for creating C++ bindings for Node.js with SWIG
+# Using this project as a tutorial for creating C++ bindings for Node.js with SWIG
 
 I have tried to be as verbose as possible throughout the `Magick++.i` file - you should start there. ImageMagick is a very complex C++ project with 30 years history and it probably uses every single feature of SWIG that might be needed in a Node.js addon. Look at the various JS wrappers that expect special arguments (`Buffer`, `TypedArray`, lists), remember to check the ImageMagick header file for the original C++ function and then you can use its SWIG interface as a starting point in your project.
+
+At some point, I will publish a full step-by-step tutorial for porting C++ libraries to Node.js using the SWIG NAPI support and this package will be its example.
 
 # Asynchronous mode
 
