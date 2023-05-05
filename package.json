@@ -29,10 +29,10 @@
   ],
   "binary": {
     "module_name": "node-magickwand",
-    "module_path": "./lib/binding/{node_abi}-{platform}-{arch}",
+    "module_path": "./lib/binding/{platform}-{arch}",
     "remote_path": "v{version}",
     "host": "https://github.com/mmomtchev/node-magickwand/releases/download/",
-    "package_name": "{node_abi}-{platform}-{arch}.tar.gz",
+    "package_name": "{platform}-{arch}.tar.gz",
     "hosting": {
       "provider": "github",
       "repo": "mmomtchev/node-magickwand"
