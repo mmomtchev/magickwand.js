@@ -3,6 +3,11 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
+if (!fs.statSync(path.resolve(__dirname, '..', '.git'), {throwIfNoEntry: false})) {
+  console.log('not a git checkout, skipping download');
+  process.exit(0);
+}
+
 cp.execSync('git fetch origin');
 let hash = '';
 for (let i = 0; !hash.length; i++) {
