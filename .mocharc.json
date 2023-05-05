@@ -1,5 +1,6 @@
 {
   "spec": "test/*.test.js",
   "v8-expose-gc": true,
+  "timeout": "5000",
   "require": "test/alias.js"
 }
