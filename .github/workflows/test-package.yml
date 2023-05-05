@@ -42,7 +42,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm i chai chai-spies mocha
-      - name: Install pymport from npm
+      - name: Install node-magickwand from npm
         run: npm install --force node-magickwand@${{ github.event.inputs.version }}
       - name: Run the unit tests
         run: |
