@@ -2,7 +2,8 @@
 .github
 .vscode
 node_modules
-build
+build/*
+!build/swig
 lib/binding
 *.a
 *.o
