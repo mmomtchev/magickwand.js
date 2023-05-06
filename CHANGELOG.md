@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.0.4]
+## [0.0.4] 2023-05-06
 
 - Fix and test automatic rebuilding when installing from npm
 
