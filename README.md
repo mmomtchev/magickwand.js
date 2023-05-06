@@ -14,7 +14,7 @@ The project should be considered of `alpha` quality.
 npm install node-magickwand
 ```
 
-This will install prebuilt binaries on Windows x64, Linux x64 and macOS x64. For other platforms, see the section below.
+This will install prebuilt binaries on Windows x64, Linux x64 and macOS x64. macOS supposes that you have all the required libraries from Homebrew. For everything else, see the next section below.
 
 ```js
 const assert = require('assert');
