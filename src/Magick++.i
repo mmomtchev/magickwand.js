@@ -129,8 +129,8 @@ namespace MagickCore {
   // and there is both a Magick::CloneString and MagickCore::CloneString
   %rename(Core_CloneString) CloneString;
 
-  %include "../build/swig/magickcore.i"
-  %include "../build/swig/magickwand.i"
+  %include "../swig/magickcore.i"
+  %include "../swig/magickwand.i"
 }
 
 // Various special cases - Buffers, TypedArrays, std::vectors...
@@ -142,7 +142,7 @@ namespace MagickCore {
 
 // These are all the Magick:: header files ordered by dependency
 // (as produced by the dependency generator)
-%include "../build/swig/magick++.i"
+%include "../swig/magick++.i"
 
 // Templates need to be instantiated - you can't instantiate new ones at runtime
 %template(coderInfoArray)               std::vector<Magick::CoderInfo>;

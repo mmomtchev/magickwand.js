@@ -5,7 +5,7 @@ const cp = require('child_process');
 const hash = cp.execSync('git rev-parse HEAD').toString().trimEnd();
 
 process.stdout.write('Publishing to "generated" branch... ');
-ghpages.publish(path.resolve(__dirname, '../build/swig'), {
+ghpages.publish(path.resolve(__dirname, '../swig'), {
   message: hash,
   branch: 'generated'
 }, (err) => {
