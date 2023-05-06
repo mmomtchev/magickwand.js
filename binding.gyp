@@ -94,12 +94,12 @@
             ],
             'action_name': 'swig_wrappers',
             'inputs': [ 'src/Magick++.i' ],
-            'outputs': [ 'build/swig/Magick++.cxx' ],
+            'outputs': [ 'swig/Magick++.cxx' ],
             'action': [
               'swig', '-javascript', '-napi', '-c++',
               '-Ideps/ImageMagick/Magick++/lib', '-Ideps/ImageMagick',
               '<@(hdri)',
-              '-o', 'build/swig/Magick++.cxx', 'src/Magick++.i'
+              '-o', 'fgswig/Magick++.cxx', 'src/Magick++.i'
             ]
           }]
         }]
@@ -108,7 +108,7 @@
         "<!(node -p \"require('node-addon-api').gyp\")"
       ],
       'sources': [
-        'build/swig/Magick++.cxx'
+        'swig/Magick++.cxx'
       ],
     },
     {
