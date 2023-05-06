@@ -14,6 +14,8 @@ The project should be considered of `alpha` quality.
 npm install node-magickwand
 ```
 
+This will install prebuilt binaries on Windows x64, Linux x64 and macOS x64. For other platforms, see the section below.
+
 ```js
 const assert = require('assert');
 const { Magick, MagickCore } = require('node-magickwand');
@@ -36,7 +38,17 @@ When in doubt about the JS semantics of a particular method, you can also check 
 
 There are no TypeScript bindings at the moment - the sheer size and complexity of the ImageMagick library renders any port prohibitive unless it is fully automated. TypeScript support for SWIG is planned at some later moment.
 
-# Rebuilding from source
+### Rebuilding from npm with the built-in ImageMagick library
+
+```
+npm install node-magickwand --build-from-source
+```
+
+You will need a working C++ environment. On Windows nothing but VS 2022 works at the moment. This will also rebuild the included Magick++ library. On Linux and macOS, it will invoke its `configure` script which will auto-detect whatever usable libraries you have installed on your system.
+
+**This is the currently recommended method of installation on Linux until a proper fully-contained build is implemented.**
+
+### Rebuilding from git or using an externally provided ImageMagick library
 
 * In order to regenerate the C++ wrapping code, you will need SWIG 4.2.0-git with NAPI support from https://github.com/mmomtchev/swig#mmom
   * Building with the old Node/V8 interface is not possible - the typemaps are not compatible
@@ -66,12 +78,12 @@ LDFLAGS=-L/usr/local/lib CFLAGS=-I/usr/local/include/ImageMagick-7 CXXFLAGS=-I/u
 
 * `npm test` should work at this point
 
-# Using this project as a tutorial for creating C++ bindings for Node.js with SWIG
+## Using this project as a tutorial for creating C++ bindings for Node.js with SWIG
 
 I have tried to be as verbose as possible throughout the `Magick++.i` file - you should start there. ImageMagick is a very complex C++ project with 30 years history and it probably uses every single feature of SWIG that might be needed in a Node.js addon. Look at the various JS wrappers that expect special arguments (`Buffer`, `TypedArray`, lists), remember to check the ImageMagick header file for the original C++ function and then you can use its SWIG interface as a starting point in your project.
 
 At some point, I will publish a full step-by-step tutorial for porting C++ libraries to Node.js using the SWIG NAPI support and this package will be its example.
 
-# Asynchronous mode
+## Asynchronous mode
 
 I intend to fully merge the current NAPI support in SWIG before starting the asynchronous mode support.
