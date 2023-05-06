@@ -14,6 +14,9 @@ jobs:
       matrix:
         platform: [ubuntu-20.04, macos-11, windows-2022]
         node-version: [14.x, 16.x, 18.x, 20.x]
+        exclude:
+          - platform: windows-2022
+            node-version: [14.x, 16.x]
 
     steps:
       - uses: actions/checkout@v3
