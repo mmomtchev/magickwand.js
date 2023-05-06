@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.4]
+
+- Fix and test automatic rebuilding when installing from npm
+
 ## [0.0.3] 2023-05-05
 
 - Render the package compatible with Node.js 14.x / 16.x
