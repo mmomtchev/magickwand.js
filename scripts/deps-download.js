@@ -53,7 +53,7 @@ const q = [];
 for (const file of ['magickcore.i', 'Magick++.cxx', 'magick++.i', 'magickwand.i']) {
   q.push(download(
     `https://raw.githubusercontent.com/mmomtchev/node-magickwand/${hash}/${file}`,
-    path.resolve(__dirname, '..', 'build', 'swig', file)
+    path.resolve(__dirname, '..', 'swig', file)
   ));
 }
 Promise.all(q).then(() => console.log('done'));
