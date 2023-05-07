@@ -9,11 +9,6 @@
 #include <iostream>
 
 using namespace Magick;
-
-// This can probably be fixed in SWIG
-// (it is the continuation of SWIG#2553)
-typedef MagickCore::SemaphoreInfo SemaphoreInfo;
-typedef MagickCore::ImageInfo _ImageInfo;
 %}
 
 %include "cpointer.i"
@@ -35,6 +30,7 @@ typedef MagickCore::ImageInfo _ImageInfo;
   }
 }
 
+// We fix the NAPI level to 6 (Node.js >= 14.0, and latest 10.x/12.x)
 %insert(begin) %{
 #define NAPI_VERSION 6
 %}
@@ -122,6 +118,7 @@ typedef MagickCore::ImageInfo _ImageInfo;
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Endian$";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Rule$";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Filter$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+Info$";
 #endif
 
 namespace MagickCore {
