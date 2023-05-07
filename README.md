@@ -38,6 +38,8 @@ Your best source of further information is the Magick++ documentation itself:
 
 When in doubt about the JS semantics of a particular method, you can also check the unit tests: https://github.com/mmomtchev/node-magickwand/tree/main/test
 
+The `Image.display()` function works and it is an excellent debugging tool.
+
 There are no TypeScript bindings at the moment - the sheer size and complexity of the ImageMagick library renders any port prohibitive unless it is fully automated. TypeScript support for SWIG is planned at some later moment.
 
 ### Rebuilding from npm with the built-in ImageMagick library
@@ -85,6 +87,15 @@ LDFLAGS=-L/usr/local/lib CFLAGS=-I/usr/local/include/ImageMagick-7 CXXFLAGS=-I/u
 I have tried to be as verbose as possible throughout the `Magick++.i` file - you should start there. ImageMagick is a very complex C++ project with 30 years history and it probably uses every single feature of SWIG that might be needed in a Node.js addon. Look at the various JS wrappers that expect special arguments (`Buffer`, `TypedArray`, lists), remember to check the ImageMagick header file for the original C++ function and then you can use its SWIG interface as a starting point in your project.
 
 There is also a [medium article about using the new NAPI support in SWIG](https://mmomtchev.medium.com/effortlessly-porting-a-major-c-library-to-node-js-with-swig-napi-3c1a5c4a233f).
+
+The tutorial, just like everything else, is still a work-in-progress, but like everything else, you may find it usable.
+
+## Known to be broken at the moment
+
+* Parts of the vector drawing API
+* Rebuilding when installing on Windows works only with VS 2022 + Node.js >= 18.0
+* Functors and iterators
+
 ## Asynchronous mode
 
 I intend to fully merge the current NAPI support in SWIG before starting the asynchronous mode support.
