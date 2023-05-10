@@ -32,4 +32,13 @@ describe('STL', () => {
     assert.instanceOf(array[0], Image);
     assert.strictEqual(array[0].size().width(), 200 * 3);
   });
+
+  it('blurImage', () => {
+    const im = new Image(path.join(__dirname, 'data', 'wizard.png'));
+
+    const blur = new Magick.blurImage(20, 10.5);
+    blur.call(im);
+    const px1 = im.pixelColor(10, 10);
+    assert.closeTo(px1.quantumBlue(), 63635, 1);
+  });
 });
