@@ -16,7 +16,7 @@ There is also a [medium article about using the new NAPI support in SWIG](https:
 npm install node-magickwand
 ```
 
-This will install prebuilt binaries on Windows x64, Linux x64 and macOS x64. macOS supposes that you have all the required libraries from Homebrew. For everything else, see the next section below.
+This will install prebuilt binaries on Windows x64, Linux x64 and macOS x64. It will try to compile the module on other platforms.
 
 ```js
 const assert = require('assert');
@@ -48,9 +48,7 @@ There are no TypeScript bindings at the moment - the sheer size and complexity o
 npm install node-magickwand --build-from-source
 ```
 
-You will need a working C++ environment. On Windows nothing but VS 2022 works at the moment. This will also rebuild the included Magick++ library. On Linux and macOS, it will invoke its `configure` script which will auto-detect whatever usable libraries you have installed on your system.
-
-**This is the currently recommended method of installation on Linux until a proper fully-contained build is implemented.**
+You will need a working C++ environment. On Windows nothing but VS 2022 works at the moment. This will also rebuild the included Magick++ library.
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
