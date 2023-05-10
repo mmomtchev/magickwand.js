@@ -180,9 +180,17 @@
             '<!@((pip3 install "conan<2.0.0" && cd build && conan install .. -pr:b=default -of build --build=missing) > /dev/null)',
             '-L../deps/ImageMagick/Magick++/lib/.libs/',
             '-L../deps/ImageMagick/MagickWand/.libs/',
-            '-L../deps/ImageMagick/MagickCore/.libs',
-            '<!(cat <(module_root_dir)/build/conanbuildinfo.args)'
-          ]
+            '-L../deps/ImageMagick/MagickCore/.libs'
+          ],
+          # Workaround for https://github.com/nodejs/node-gyp/issues/2844
+          'ldflags': [
+            '<!@(cat <(module_root_dir)/build/conanbuildinfo.args)'
+          ],
+          'xcode_settings': {
+            'OTHER_LDFLAGS': [
+              '<!@(cat <(module_root_dir)/build/conanbuildinfo.args)'
+            ]
+          }
         }
       }]
     }],
