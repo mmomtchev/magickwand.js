@@ -177,7 +177,7 @@
           # node-gyp configure needs to evaluate this expression to generate the platform-specific files
           # (originally by TooTallNate for libffi) 
           'libraries': [
-            '<!@((pip install "conan<1.59.0" && cd build && conan install .. -of build --build=missing) > /dev/null)',
+            '<!@((pip install "conan<2.0.0" && cd build && conan install .. -of build --build=missing) > /dev/null)',
             '-L../deps/ImageMagick/Magick++/lib/.libs/',
             '-L../deps/ImageMagick/MagickWand/.libs/',
             '-L../deps/ImageMagick/MagickCore/.libs',
