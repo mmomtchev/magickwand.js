@@ -181,7 +181,7 @@
             '-L../deps/ImageMagick/Magick++/lib/.libs/',
             '-L../deps/ImageMagick/MagickWand/.libs/',
             '-L../deps/ImageMagick/MagickCore/.libs',
-            '<!@(cat <(module_root_dir)/build/conanbuildinfo.args)'
+            '<!(cat <(module_root_dir)/build/conanbuildinfo.args)'
           ]
         }
       }]
