@@ -38,6 +38,8 @@ cairo:with_xcb=False
 jasper:with_libjpeg=libjpeg-turbo
 libtiff:jpeg=libjpeg-turbo
 libraw:with_jpeg=libjpeg-turbo
+glib:shared=False
+glib:fPIC=True
 
 [generators]
 compiler_args
