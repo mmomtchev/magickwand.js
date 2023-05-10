@@ -92,7 +92,6 @@ The tutorial, just like everything else, is still a work-in-progress, but like e
 
 ## Known to be broken at the moment
 
-* Parts of the vector drawing API
 * Rebuilding when installing on Windows works only with VS 2022 + Node.js >= 18.0
 
 ## Asynchronous mode

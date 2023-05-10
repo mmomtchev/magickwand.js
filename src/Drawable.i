@@ -41,3 +41,26 @@
 %typemap(freearg)   std::vector<Magick::Drawable> const & {
   delete $1;
 }
+
+// Functions that expect a VPathList will also take a JS array
+// Very similar to the previous one, all classes inherit from Magick::VPathBase while
+// the methods expect the in-place constructed surrogate Magick::VPath
+%typemap(in)        Magick::VPathList const & {
+  if ($input.IsArray()) {
+    $1 = new Magick::VPathList;
+    Napi::Array array = $input.As<Napi::Array>();
+    for (size_t i = 0; i < array.Length(); i++) {
+      Magick::VPathBase *p = nullptr;
+      if (!SWIG_IsOK(SWIG_NAPI_ConvertPtr(array.Get(i), reinterpret_cast<void **>(&p), $descriptor(Magick::VPathBase *), 0)) || p == nullptr) {
+        SWIG_exception_fail(SWIG_TypeError, "in method '$symname', array element is not a Magick::VPath");
+      }
+      // Emplace the newly constructed surrogates in the std::container
+      $1->emplace_back(Magick::VPath(*p));
+    }
+  } else {
+    SWIG_exception_fail(SWIG_TypeError, "in method '$symname', argument $argnum is not an array");
+  }
+}
+%typemap(freearg)   Magick::VPathList const & {
+  delete $1;
+}

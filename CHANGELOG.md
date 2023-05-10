@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.5] WIP
+
+- Fix and test the `DrawablePath` API
+
 ## [0.0.4] 2023-05-06
 
 - Fix and test automatic rebuilding when installing from npm
