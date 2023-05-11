@@ -164,33 +164,17 @@
         ],
         'direct_dependent_settings': {
           'defines': [ '<@(magickdefines)' ],
-          'conditions': [
-            ['OS == "linux"', {
-              'libraries': [
-                # This an ugly hack that enable running of shell commands during node-gyp configure
-                # node-gyp configure needs to evaluate this expression to generate the platform-specific files
-                # (originally by TooTallNate for libffi) 
-                '<!@((pip3 install "conan<2.0.0" && cd build && conan install .. -pr:b=default -of build --build=missing) > /dev/null)',
-                '-L../deps/ImageMagick/Magick++/lib/.libs/',
-                '-L../deps/ImageMagick/MagickWand/.libs/',
-                '-L../deps/ImageMagick/MagickCore/.libs',
-                '<@(magicklibs)',
-                '<!@(cat <(module_root_dir)/build/conanbuildinfo.args)'
-              ],
-            }],
-            ['OS == "mac"', {
-              # Workaround for https://github.com/nodejs/node-gyp/issues/2844
-              'link_settings': {
-                'libraries': [
-                  '<!@((pip3 install "conan<2.0.0" && cd build && conan install .. -pr:b=default -of build --build=missing) > /dev/null)',
-                  '-L../deps/ImageMagick/Magick++/lib/.libs/',
-                  '-L../deps/ImageMagick/MagickWand/.libs/',
-                  '-L../deps/ImageMagick/MagickCore/.libs',
-                  '<@(magicklibs)',
-                  '<!@(cat <(module_root_dir)/build/conanbuildinfo.args | sed "s/-framework.*//g")'
-                ]
-              }
-            }]
+          'libraries': [
+            # This an ugly hack that enable running of shell commands during node-gyp configure
+            # node-gyp configure needs to evaluate this expression to generate the platform-specific files
+            # (originally by TooTallNate for libffi) 
+            '<!@((pip3 install "conan<2.0.0" && cd build && conan install .. -pr:b=default -of build --build=missing) > /dev/null)',
+            '-L../deps/ImageMagick/Magick++/lib/.libs/',
+            '-L../deps/ImageMagick/MagickWand/.libs/',
+            '-L../deps/ImageMagick/MagickCore/.libs',
+            '<@(magicklibs)',
+            # Workaround for https://github.com/nodejs/node-gyp/issues/2844
+            '<!@(cat <(module_root_dir)/build/conanbuildinfo.args | sed "s/-framework.*//g")'
           ]
         }
       }]
