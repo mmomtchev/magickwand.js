@@ -14,7 +14,7 @@ cd deps/ImageMagick
 sh ./configure $2 --prefix=$1/ImageMagick --disable-openmp --disable-shared --enable-static --disable-installed --without-utilities > /dev/null
 cd ../..
 
-cat build/conanbuildinfo.args
+cat build/conanbuildinfo.args | sed "s/-framework.*//"
 
 case `uname` in
   Linux) echo -n " -lXext -lXt -lSM -lICE -lX11" ;;
