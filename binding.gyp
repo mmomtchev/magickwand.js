@@ -173,7 +173,7 @@
             # node-gyp configure needs to evaluate this expression to generate the platform-specific files
             # (originally by TooTallNate for libffi) 
             '<!@((pip3 install "conan<2.0.0" && cd build && conan install .. -pr:b=default -of build --build=missing) > /dev/null)',
-            '<!@(bash configure_magick.sh <(module_path) <(hdri))'
+            '<!@(sh configure_magick.sh <(module_path) <(hdri))'
           ]
         }
       }]
