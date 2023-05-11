@@ -2,6 +2,7 @@
 
 ## [0.0.5] WIP
 
+- Fully self-contained build with conan that can produce an universal binary on POSIX
 - Fix and test the `DrawablePath` API
 
 ## [0.0.4] 2023-05-06

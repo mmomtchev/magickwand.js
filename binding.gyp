@@ -133,11 +133,15 @@
           ['enable_hdri == "false"', {
             'variables': {
               'hdri': '--disable-hdri',
+              'magickdefines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+              'magicklibs': [ '-lMagick++-7.Q16', '-lMagickCore-7.Q16', '-lMagickWand-7.Q16' ]
             }
           }],
           ['enable_hdri == "true"', {
             'variables': {
               'hdri': '--enable-hdri',
+              'magickdefines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+              'magicklibs': [ '-lMagick++-7.Q16HDRI', '-lMagickCore-7.Q16HDRI', '-lMagickWand-7.Q16HDRI' ]
             }
           }]
         ],
@@ -155,32 +159,21 @@
                 'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16HDRI.a' ],
               }]
             ],
-            'action': [ 'sh', '-c', 'cd <(module_root_dir)/deps/ImageMagick && SDKROOT= make -j4 && SDKROOT= make install && rm -rf <(module_path)/ImageMagick/lib/*.*a' ]
+            'action': [ 'sh', 'build_magick.sh', '<(module_path)', '<(hdri)' ]
           }
         ],
         'direct_dependent_settings': {
-          'conditions': [
-            ['enable_hdri == "false"', {
-              'defines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-              'libraries+': [
-                '-lMagick++-7.Q16 -lMagickCore-7.Q16 -lMagickWand-7.Q16'
-              ]
-            }],
-            ['enable_hdri == "true"', {
-              'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-              'libraries+': [
-                '-lMagick++-7.Q16HDRI -lMagickCore-7.Q16HDRI -lMagickWand-7.Q16HDRI'
-              ]
-            }]
-          ],
-          # This an ugly hack that enable running of shell commands during node-gyp configure
-          # node-gyp configure needs to evaluate this expression to generate the platform-specific files
-          # (originally by TooTallNate for libffi) 
+          'defines': [ '<@(magickdefines)' ],
           'libraries': [
             '-L../deps/ImageMagick/Magick++/lib/.libs/',
             '-L../deps/ImageMagick/MagickWand/.libs/',
-            '-L../deps/ImageMagick/MagickCore/.libs ',
-            '<!@(sh configure_magick.sh <(module_path) <(hdri))'
+            '-L../deps/ImageMagick/MagickCore/.libs',
+            '<@(magicklibs)',
+            # This an ugly hack that enable running of shell commands during node-gyp configure
+            # node-gyp configure needs to evaluate this expression to generate the platform-specific files
+            # (originally by TooTallNate for libffi) 
+            '<!@((pip3 install "conan<2.0.0" && cd build && conan install .. -pr:b=default -of build --build=missing) > /dev/null)',
+            '<!@(bash configure_magick.sh <(module_path) <(hdri))'
           ]
         }
       }]
@@ -190,14 +183,9 @@
       'targets': [{
         'conditions': [
           ['enable_hdri == "false"', {
-            'variables': {
-              'hdri': '--disable-hdri',
-            }
+            # TODO: Implement no-HDRI build on Windows
           }],
           ['enable_hdri == "true"', {
-            'variables': {
-              'hdri': '--enable-hdri',
-            }
           }]
         ],
         'target_name': 'imagemagick',
@@ -214,13 +202,9 @@
           'conditions': [
             ['enable_hdri == "false"', {
               'defines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-              'libraries+': [
-              ]
             }],
             ['enable_hdri == "true"', {
               'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-              'libraries+': [
-              ]
             }]
           ],
           'libraries': [
@@ -264,7 +248,7 @@
           ],
           # This is the Windows version of the same hack as above
           # Here we invoke the official ImageMagick-Windows downloader
-          'inputs': [ '<!@(configure_magick.bat > log)' ]
+          'inputs': [ '<!@(configure_magick.bat > configure.log)' ]
         }
       }]
     }]
