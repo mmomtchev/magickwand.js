@@ -133,11 +133,15 @@
           ['enable_hdri == "false"', {
             'variables': {
               'hdri': '--disable-hdri',
+              'magickdefines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+              'magicklibs': [ '-lMagick++-7.Q16', '-lMagickCore-7.Q16', '-lMagickWand-7.Q16' ]
             }
           }],
           ['enable_hdri == "true"', {
             'variables': {
               'hdri': '--enable-hdri',
+              'magickdefines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+              'magicklibs': [ '-lMagick++-7.Q16HDRI', '-lMagickCore-7.Q16HDRI', '-lMagickWand-7.Q16HDRI' ]
             }
           }]
         ],
@@ -159,38 +163,35 @@
           }
         ],
         'direct_dependent_settings': {
+          'defines': [ '<@(magickdefines)' ],
           'conditions': [
-            ['enable_hdri == "false"', {
-              'defines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-              'libraries+': [
-                '-lMagick++-7.Q16 -lMagickCore-7.Q16 -lMagickWand-7.Q16'
-              ]
+            ['OS == "linux"', {
+              'libraries': [
+                # This an ugly hack that enable running of shell commands during node-gyp configure
+                # node-gyp configure needs to evaluate this expression to generate the platform-specific files
+                # (originally by TooTallNate for libffi) 
+                '<!@((pip3 install "conan<2.0.0" && cd build && conan install .. -pr:b=default -of build --build=missing) > /dev/null)',
+                '-L../deps/ImageMagick/Magick++/lib/.libs/',
+                '-L../deps/ImageMagick/MagickWand/.libs/',
+                '-L../deps/ImageMagick/MagickCore/.libs',
+                '<@(magicklibs)',
+                '<!@(cat <(module_root_dir)/build/conanbuildinfo.args)'
+              ],
             }],
-            ['enable_hdri == "true"', {
-              'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-              'libraries+': [
-                '-lMagick++-7.Q16HDRI -lMagickCore-7.Q16HDRI -lMagickWand-7.Q16HDRI'
-              ]
+            ['OS == "mac"', {
+              # Workaround for https://github.com/nodejs/node-gyp/issues/2844
+              'link_settings': {
+                'libraries': [
+                  '<!@((pip3 install "conan<2.0.0" && cd build && conan install .. -pr:b=default -of build --build=missing) > /dev/null)',
+                  '-L../deps/ImageMagick/Magick++/lib/.libs/',
+                  '-L../deps/ImageMagick/MagickWand/.libs/',
+                  '-L../deps/ImageMagick/MagickCore/.libs',
+                  '<@(magicklibs)',
+                  '<!@(cat <(module_root_dir)/build/conanbuildinfo.args | sed "s/-framework.*//g")'
+                ]
+              }
             }]
-          ],
-          # This an ugly hack that enable running of shell commands during node-gyp configure
-          # node-gyp configure needs to evaluate this expression to generate the platform-specific files
-          # (originally by TooTallNate for libffi) 
-          'libraries': [
-            '<!@((pip3 install "conan<2.0.0" && cd build && conan install .. -pr:b=default -of build --build=missing) > /dev/null)',
-            '-L../deps/ImageMagick/Magick++/lib/.libs/',
-            '-L../deps/ImageMagick/MagickWand/.libs/',
-            '-L../deps/ImageMagick/MagickCore/.libs'
-          ],
-          # Workaround for https://github.com/nodejs/node-gyp/issues/2844
-          'ldflags': [
-            '<!@(cat <(module_root_dir)/build/conanbuildinfo.args)'
-          ],
-          'xcode_settings': {
-            'OTHER_LDFLAGS': [
-              '<!@(cat <(module_root_dir)/build/conanbuildinfo.args)'
-            ]
-          }
+          ]
         }
       }]
     }],
