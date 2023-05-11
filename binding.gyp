@@ -174,7 +174,8 @@
             '-L../deps/ImageMagick/MagickCore/.libs',
             '<@(magicklibs)',
             # Workaround for https://github.com/nodejs/node-gyp/issues/2844
-            '<!@(cat <(module_root_dir)/build/conanbuildinfo.args | sed "s/-framework.*//g")'
+            '<!@(cat <(module_root_dir)/build/conanbuildinfo.args | sed "s/-framework.*//g")',
+            '-lSM', '-lICE', '-lXext', '-lX11'
           ]
         }
       }]

@@ -38,7 +38,7 @@ Your best source of further information is the Magick++ documentation itself:
 
 When in doubt about the JS semantics of a particular method, you can also check the unit tests: https://github.com/mmomtchev/node-magickwand/tree/main/test
 
-The `Image.display()` function works and it is an excellent debugging tool.
+The `Image.display()` function works and it is an excellent debugging tool. On macOS, it requires X11.
 
 There are no TypeScript bindings at the moment - the sheer size and complexity of the ImageMagick library renders any port prohibitive unless it is fully automated. TypeScript support for SWIG is planned at some later moment.
 
