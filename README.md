@@ -90,7 +90,8 @@ The tutorial, just like everything else, is still a work-in-progress, but like e
 
 ## Known to be broken at the moment
 
-* Rebuilding when installing on Windows works only with VS 2022 + Node.js >= 18.0
+* Rebuilding when installing requires Node.js >= 18.0 on all platforms
+* Additionally, rebuilding when installing on Windows works only with VS 2022
 
 ## Asynchronous mode
 
