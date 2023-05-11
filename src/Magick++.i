@@ -119,6 +119,7 @@ using namespace Magick;
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Rule$";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Filter$";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Info$";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+[Vv]ersion.+";
 #endif
 
 namespace MagickCore {

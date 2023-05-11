@@ -6,6 +6,11 @@ const ImageMagick = require('node-magickwand');
 const { Image, Geometry, Color } = ImageMagick.Magick;
 const { MultiplyCompositeOp } = ImageMagick.MagickCore;
 
+it('ImageMagick version information', () => {
+  assert.isString(ImageMagick.MagickLibVersionText);
+  console.log('Built with ImageMagick', ImageMagick.MagickLibVersionText);
+});
+
 describe('Geometry', () => {
   describe('constructor', () => {
     it('from numbers', () => {
