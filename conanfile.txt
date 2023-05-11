@@ -7,6 +7,7 @@ libde265/1.0.11
 openexr/3.1.5
 libffi/3.4.4
 fftw/3.3.10
+fontconfig/2.14.2
 freetype/2.13.0
 fribidi/1.0.12
 glib/2.76.2
