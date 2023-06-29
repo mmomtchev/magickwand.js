@@ -52,7 +52,7 @@ You will need a working C++ environment. On Windows nothing but VS 2022 works at
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
-* In order to regenerate the C++ wrapping code, you will need SWIG 4.2.0-git with NAPI support from https://github.com/mmomtchev/swig#mmom
+* In order to regenerate the C++ wrapping code, you will need the still unreleased SWIG 4.2.0 with NAPI support available only as a git checkout at the moment
   * Building with the old Node/V8 interface is not possible - the typemaps are not compatible
   * Alternatively, you can checkout the `generated` branch where all files have been pre-generated - `npm run deps:download` does this
 
