@@ -99,6 +99,9 @@ The tutorial, just like everything else, is still a work-in-progress, but like e
 * Rebuilding when installing requires Node.js >= 18.0 on all platforms
 * Additionally, rebuilding when installing on Windows works only with VS 2022
 
-## Asynchronous mode
+# Future plans
 
-I intend to fully merge the current NAPI support in SWIG before starting the asynchronous mode support.
+This is the current roadmap both for this project and for SWIG-NAPI in general:
+
+* Async support
+* Typescript support
