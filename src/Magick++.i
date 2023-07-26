@@ -101,29 +101,29 @@ using namespace Magick;
 %rename("%s", regextarget=1) ".+Operator$";
 %rename("%s", regextarget=1) ".+Op$";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Options$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Colorspace$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Compression";
+%rename("%s", regextarget=1, %$isenumitem) ".+Colorspace$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Compression";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Type$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Channel$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Class$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Gravity$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Interlace$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Layer$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Cap$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Join$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Orientation$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Method$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Quantum$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Intent$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Stretch$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Style$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Method$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Deciratuib$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Endian$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Rule$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Filter$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Info$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+[Vv]ersion.+";
+%rename("%s", regextarget=1, %$isenumitem) ".+Channel$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Class$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Gravity$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Interlace$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Layer$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Cap$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Join$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Orientation$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Method$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Quantum$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Intent$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Stretch$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Style$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Method$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Delegate$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Endian$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Rule$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Filter$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Info$";
+%rename("%s", regextarget=1, %$isenumitem) ".+[Vv]ersion.+";
 #endif
 
 namespace MagickCore {
@@ -134,6 +134,25 @@ namespace MagickCore {
   %include "../swig/magickcore.i"
   %include "../swig/magickwand.i"
 }
+
+
+// Ignore some features for now (to reduce the code size)
+// The STL functors
+%rename("$ignore", regextarget=1, fullname=1) "^Magick::[a-z][A-Za-z]+Image";
+// Some extra features
+%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::.+Statistics";
+%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Channel.+";
+%rename("$ignore", fullname=1, %$isclass) "Magick::ResourceLimits";
+%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Montage.*";
+// Extended errors and warnings
+%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Warning.+";
+%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Error.+";
+// Renamed operators
+%feature("async", "0") *::copy;
+%feature("async", "0") *::operator();
+// Drawable / Path (this is coming back)
+%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Drawable.*";
+%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Path.*";
 
 // Various special cases - Buffers, TypedArrays, std::vectors...
 %include "Image.i"
