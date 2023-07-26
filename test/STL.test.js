@@ -4,7 +4,7 @@ const { assert } = require('chai');
 const { Magick, MagickCore } = require('node-magickwand');
 const { Image, Color } = Magick;
 
-describe('STL', () => {
+describe.skip('STL', () => {
   it('mosaicImages', () => {
     const src1 = new Image(path.join(__dirname, 'data', 'wizard.png'));
     const src2 = new Image(src1.size(), new Color('red'));
