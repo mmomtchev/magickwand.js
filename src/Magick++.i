@@ -30,6 +30,10 @@ using namespace Magick;
   }
 }
 
+// Enable generation of asynchronous wrappers (using suffix Async)
+%feature("async", "Async");
+%feature("async:locking", "1");
+
 // We fix the NAPI level to 6 (Node.js >= 14.0, and latest 10.x/12.x)
 %insert(begin) %{
 #define NAPI_VERSION 6

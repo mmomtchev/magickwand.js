@@ -113,7 +113,7 @@ describe('Image', () => {
           pixels.fill(2n ** (8n * BigInt(typed.BYTES_PER_ELEMENT)) - 1n);
 
         im.read(15, 20, 'RGBA', pixels);
-        
+
         const px = im.pixelColor(5, 5);
         assert.strictEqual(px.pixelType(), Color.RGBAPixel);
         assert.isTrue(px.isValid());
@@ -189,10 +189,36 @@ describe('Image', () => {
     fs.rmSync('temp.jpg');
   });
 
+  it('(async) read an image, write it in different format and read it back', (done) => {
+    let im = new Image;
+    im.readAsync(path.join(__dirname, 'data', 'wizard.png'))
+      .then(() => im.magickAsync('JPEG'))
+      .then(() => im.writeAsync('temp.jpg'))
+      .then(() => {
+        im = new Image();
+        return im.readAsync('temp.jpg');
+      })
+      .then(() => {
+        assert.equal(im.size().width(), 80);
+        return fs.promises.rm('temp.jpg');
+      })
+      .then(() => done());
+  });
+
   it('throw an exception', () => {
     const im = new Image;
     assert.throws(() => {
       im.read('something.png');
     }, /unable to open image/);
+  });
+
+  it('(async) throw an exception', (done) => {
+    const im = new Image;
+    im.readAsync('something.png')
+      .then(() => done('did not throw'))
+      .catch((e) => {
+        assert.match(e, /unable to open image/);
+        done();
+      },);
   });
 });

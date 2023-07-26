@@ -103,5 +103,4 @@ The tutorial, just like everything else, is still a work-in-progress, but like e
 
 This is the current roadmap both for this project and for SWIG-NAPI in general:
 
-* Async support
 * Typescript support
