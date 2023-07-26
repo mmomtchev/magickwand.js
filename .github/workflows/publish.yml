@@ -21,7 +21,7 @@ jobs:
           node-version: 18.x
       - name: Install fonts on Ubuntu
         run: |
-          [[ '${{ matrix.platform }}' == 'ubuntu-20.04' ]] && sudo apt-get install -y fonts-ubuntu || true
+          [[ '${{ matrix.platform }}' =~ 'ubuntu' ]] && sudo apt-get install -y fonts-ubuntu || true
         shell: bash
       - run: npm install --ignore-scripts
       - run: npm run deps:download
