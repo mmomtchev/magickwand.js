@@ -123,7 +123,7 @@ using namespace Magick;
 %rename("%s", regextarget=1, %$isenumitem) ".+Rule$";
 %rename("%s", regextarget=1, %$isenumitem) ".+Filter$";
 %rename("%s", regextarget=1, %$isenumitem) ".+Info$";
-%rename("%s", regextarget=1, %$isenumitem) ".+[Vv]ersion.+";
+%rename("%s", regextarget=1, %$not %$isfunction) ".+[Vv]ersion.+";
 #endif
 
 namespace MagickCore {
