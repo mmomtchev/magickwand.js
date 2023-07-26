@@ -1,6 +1,10 @@
 const path = require('path');
 const fs = require('fs');
-const { assert } = require('chai');
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+
+chai.use(chaiAsPromised);
+const assert = chai.assert;
 
 const ImageMagick = require('node-magickwand');
 const { Image, Geometry, Color } = ImageMagick.Magick;
@@ -164,45 +168,80 @@ describe('Image', () => {
   });
 
   it('read an image, crop it, write it and read it back', () => {
+    const tmpfile = `temp-${Math.round(Math.random() * 1e6)}.png`;
     let im = new Image;
+
     im.read(path.join(__dirname, 'data', 'wizard.png'));
     assert.equal(im.size().width(), 80);
     im.crop(new Geometry(10, 8, 1, 8));
     assert.equal(im.size().width(), 10);
-    im.write('temp.png');
+    im.write(tmpfile);
 
     im = new Image();
-    im.read('temp.png');
+    im.read(tmpfile);
     assert.equal(im.size().width(), 10);
-    fs.rmSync('temp.png');
+    fs.rmSync(tmpfile);
   });
+
+  it('(async) read an image, crop it, write it and read it back', () => {
+    const tmpfile = `temp-${Math.round(Math.random() * 1e6)}.png`;
+    let im = new Image;
+
+    return assert.isFulfilled(im.readAsync(path.join(__dirname, 'data', 'wizard.png'))
+    .then(() => im.sizeAsync())
+    .then((size) => size.widthAsync())
+    .then((width) => {
+      assert.equal(width, 80);
+      return im.cropAsync(new Geometry(10, 8, 1, 8));
+    })
+    .then(() => im.sizeAsync())
+    .then((size) => size.widthAsync())
+    .then((width) => {
+      assert.equal(width, 10);
+      return im.writeAsync(tmpfile);
+    })
+    .then(() => {
+      im = new Image();
+      return im.readAsync(tmpfile);
+    })
+    .then(() => im.sizeAsync())
+    .then((size) => size.widthAsync())
+    .then((width) => {
+      assert.equal(width, 10);
+      return fs.promises.rm(tmpfile);
+    }));
+  });
+
 
   it('read an image, write it in different format and read it back', () => {
+    const tmpfile = `temp-${Math.round(Math.random() * 1e6)}.jpg`;
     let im = new Image;
+
     im.read(path.join(__dirname, 'data', 'wizard.png'));
     im.magick('JPEG');
-    im.write('temp.jpg');
+    im.write(tmpfile);
 
     im = new Image();
-    im.read('temp.jpg');
+    im.read(tmpfile);
     assert.equal(im.size().width(), 80);
-    fs.rmSync('temp.jpg');
+    fs.rmSync(tmpfile);
   });
 
-  it('(async) read an image, write it in different format and read it back', (done) => {
+  it('(async) read an image, write it in different format and read it back', () => {
+    const tmpfile = `temp-${Math.round(Math.random() * 1e6)}.jpg`;
     let im = new Image;
-    im.readAsync(path.join(__dirname, 'data', 'wizard.png'))
+
+    return assert.isFulfilled(im.readAsync(path.join(__dirname, 'data', 'wizard.png'))
       .then(() => im.magickAsync('JPEG'))
-      .then(() => im.writeAsync('temp.jpg'))
+      .then(() => im.writeAsync(tmpfile))
       .then(() => {
         im = new Image();
-        return im.readAsync('temp.jpg');
+        return im.readAsync(tmpfile);
       })
       .then(() => {
         assert.equal(im.size().width(), 80);
-        return fs.promises.rm('temp.jpg');
-      })
-      .then(() => done());
+        return fs.promises.rm(tmpfile);
+      }));
   });
 
   it('throw an exception', () => {
@@ -212,13 +251,8 @@ describe('Image', () => {
     }, /unable to open image/);
   });
 
-  it('(async) throw an exception', (done) => {
+  it('(async) throw an exception', () => {
     const im = new Image;
-    im.readAsync('something.png')
-      .then(() => done('did not throw'))
-      .catch((e) => {
-        assert.match(e, /unable to open image/);
-        done();
-      },);
+    return assert.isRejected(im.readAsync('something.png'), /unable to open image/);
   });
 });
