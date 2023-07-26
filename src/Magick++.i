@@ -143,6 +143,10 @@ namespace MagickCore {
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::.+Statistics";
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Channel.+";
 %rename("$ignore", fullname=1, %$isclass) "Magick::ResourceLimits";
+%rename("$ignore", fullname=1, %$isclass) "Magick::TypeMetric";
+%rename("$ignore", fullname=1, %$isclass) "Magick::ImageMoments";
+%rename("$ignore", fullname=1, %$isclass) "Magick::ImagePerceptualHash";
+%rename("$ignore", fullname=1, %$isclass) "Magick::Offset";
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Montage.*";
 // Extended errors and warnings
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Warning.+";
@@ -153,6 +157,9 @@ namespace MagickCore {
 // Drawable / Path (this is coming back)
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Drawable.*";
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Path.*";
+%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::VPath.*";
+%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Coordinate.*";
+%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Point.*";
 
 // Various special cases - Buffers, TypedArrays, std::vectors...
 %include "Image.i"
