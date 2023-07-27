@@ -132,6 +132,37 @@ describe('Image', () => {
         }, /does not match the number of pixels/);
       });
 
+      it('readAsync', () => {
+        const im = new Image();
+        const pixels = new typed(15 * 20 * 4);
+
+        if (typed.name.startsWith('Float'))
+          pixels.fill(1);
+        else if (typed.BYTES_PER_ELEMENT < 8)
+          pixels.fill(2 ** (8 * typed.BYTES_PER_ELEMENT) - 1);
+        else
+          pixels.fill(2n ** (8n * BigInt(typed.BYTES_PER_ELEMENT)) - 1n);
+
+        return assert.isFulfilled(
+          im.readAsync(15, 20, 'RGBA', pixels)
+            .then(() => {
+              const px = im.pixelColor(5, 5);
+              assert.strictEqual(px.pixelType(), Color.RGBAPixel);
+              assert.isTrue(px.isValid());
+              assert.strictEqual(px.quantumAlpha(), 65535);
+              assert.strictEqual(px.quantumBlack(), 0);
+              assert.strictEqual(px.quantumRed(), 65535);
+              assert.strictEqual(px.quantumBlue(), 65535);
+              assert.strictEqual(px.quantumGreen(), 65535);
+
+              // TODO: check tmaps should return a rejected promise
+              // instead of throwing synchronously
+              assert.throws(() => {
+                im.readAsync(20, 20, 'RGBA', pixels);
+              }, /does not match the number of pixels/);
+            }));
+      });
+
       it('write', () => {
         const im = new Image(new Geometry('15x20'), new Color(0, 65535, 0, 0));
         const pixels = new typed(15 * 20 * 4);
@@ -149,10 +180,33 @@ describe('Image', () => {
           im.write(0, 0, 5, 5, 'RGB', pixels);
         }, /does not match the number of pixels/);
       });
+
+      it('writeAsync', () => {
+        const im = new Image(new Geometry('15x20'), new Color(0, 65535, 0, 0));
+        const pixels = new typed(15 * 20 * 4);
+
+        return assert.isFulfilled(
+          im.writeAsync(0, 0, 15, 20, 'RGBA', pixels)
+            .then(() => {
+              if (typed.name.startsWith('Float'))
+                assert.strictEqual(pixels[1], 1);
+              else if (typed.BYTES_PER_ELEMENT < 8)
+                assert.strictEqual(pixels[1], 2 ** (8 * typed.BYTES_PER_ELEMENT) - 1);
+              else
+                assert.strictEqual(pixels[1], 2n ** (8n * BigInt(typed.BYTES_PER_ELEMENT)) - 1n);
+
+              // TODO: check tmaps should return a rejected promise
+              // instead of throwing synchronously
+              assert.throws(() => {
+                im.writeAsync(0, 0, 5, 5, 'RGB', pixels);
+              }, /does not match the number of pixels/);
+            })
+        );
+      });
     });
   }
 
-  describe('compositing', () => {
+  describe('composite', () => {
     const im1 = new Image(path.join(__dirname, 'data', 'wizard.png'));
     const im2 = new Image(im1.size(), new Color(0, 65535, 0, 32768));
 
@@ -165,6 +219,24 @@ describe('Image', () => {
     assert.strictEqual(px.quantumRed(), 32767);
     assert.strictEqual(px.quantumBlue(), 32767);
     assert.strictEqual(px.quantumGreen(), 65535);
+  });
+
+  describe('compositeAsync', () => {
+    const im1 = new Image(path.join(__dirname, 'data', 'wizard.png'));
+    const im2 = new Image(im1.size(), new Color(0, 65535, 0, 32768));
+
+    return assert.isFulfilled(
+      im1.compositeAsync(im2, new Geometry(0, 0), MultiplyCompositeOp)
+        .then(() => {
+          const px = im1.pixelColor(10, 10);
+          assert.strictEqual(px.pixelType(), Color.RGBAPixel);
+          assert.isTrue(px.isValid());
+          assert.strictEqual(px.quantumAlpha(), 65535);
+          assert.strictEqual(px.quantumBlack(), 0);
+          assert.strictEqual(px.quantumRed(), 32767);
+          assert.strictEqual(px.quantumBlue(), 32767);
+          assert.strictEqual(px.quantumGreen(), 65535);
+        }));
   });
 
   it('read an image, crop it, write it and read it back', () => {

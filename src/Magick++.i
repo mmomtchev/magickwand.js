@@ -41,20 +41,20 @@ using namespace Magick;
 #define __attribute__(x)
 
 // Generic renaming
-%rename(call) operator();
-%rename(clone) operator=;
-%rename(equal) operator==;
+%rename(call)     operator();
+%rename(clone)    operator=;
+%rename(equal)    operator==;
 %rename(notEqual) operator!=;
-%rename(gt) operator>;
-%rename(lt) operator<;
-%rename(gte) operator>=;
-%rename(lte) operator<=;
+%rename(gt)       operator>;
+%rename(lt)       operator<;
+%rename(gte)      operator>=;
+%rename(lte)      operator<=;
 
 // Rename some specific ImageMagick operators
-%rename(toPixelInfo) operator PixelInfo;
-%rename(toString) operator std::string;
-%rename(toRectangleInfo) operator MagickCore::RectangleInfo;
-%rename(toOffsetInfo) operator MagickCore::OffsetInfo;
+%rename(toPixelInfo)      operator PixelInfo;
+%rename(toString)         operator std::string;
+%rename(toRectangleInfo)  operator MagickCore::RectangleInfo;
+%rename(toOffsetInfo)     operator MagickCore::OffsetInfo;
 
 // ImageMagick contains some defines that cannot be transformed 
 // to a constant
@@ -161,7 +161,6 @@ LOCKED_ASYNC(Magick::writeImages);
 // These do not need async (on any class)
 %feature("async", "0") *::copy;
 %feature("async", "0") *::operator=;
-//%feature("async", "0") *::operator();
 %feature("async", "0") *::operator<;
 %feature("async", "0") *::operator>;
 %feature("async", "0") *::operator<=;
