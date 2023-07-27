@@ -1,5 +1,9 @@
 const path = require('path');
-const { assert } = require('chai');
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+
+chai.use(chaiAsPromised);
+const assert = chai.assert;
 
 const { Magick, MagickCore } = require('node-magickwand');
 const { Image, Color } = Magick;
@@ -27,7 +31,7 @@ describe('STL', () => {
     opts.tile(new Magick.Geometry('3x1'));
 
     const array = Magick.montageImages([src, src, src], opts);
-    
+
     assert.lengthOf(array, 1);
     assert.instanceOf(array[0], Image);
     assert.strictEqual(array[0].size().width(), 200 * 3);
@@ -40,5 +44,15 @@ describe('STL', () => {
     blur.call(im);
     const px1 = im.pixelColor(10, 10);
     assert.closeTo(px1.quantumBlue(), 63635, 1);
+  });
+
+  it('(async) blurImage', () => {
+    const im = new Image(path.join(__dirname, 'data', 'wizard.png'));
+
+    const blur = new Magick.blurImage(20, 10.5);
+    return assert.isFulfilled(blur.callAsync(im).then(() => {
+      const px1 = im.pixelColor(10, 10);
+      assert.closeTo(px1.quantumBlue(), 63635, 1);
+    }));
   });
 });
