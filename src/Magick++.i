@@ -30,10 +30,6 @@ using namespace Magick;
   }
 }
 
-// Enable generation of asynchronous wrappers (using suffix Async)
-%feature("async", "Async");
-%feature("async:locking", "1");
-
 // We fix the NAPI level to 6 (Node.js >= 14.0, and latest 10.x/12.x)
 %insert(begin) %{
 #define NAPI_VERSION 6
@@ -147,27 +143,25 @@ namespace MagickCore {
 // Extended errors and warnings
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Warning.+";
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Error.+";
-// Include some classes as sync-only as they don't do any heavy processing
-%include "SyncClasses.i"
-%feature("async", "0") Magick::Warning;
-%feature("async", "0") Magick::Error;
-%feature("async", "0") Magick::Geometry;
-%feature("async", "0") Magick::Blob;
-%feature("async", "0") Magick::Color;
-%feature("async", "0") Magick::ColorMono;
-%feature("async", "0") Magick::ColorGray;
-%feature("async", "0") Magick::ColorRGB;
-%feature("async", "0") Magick::ColorCMYK;
-%feature("async", "0") Magick::ColorHSL;
-%feature("async", "0") Magick::ColorYUV;
-%feature("async", "0") Magick::ReadOptions;
-%feature("async", "0") Magick::Point;
-%feature("async", "0") Magick::CoderInfo;
-%feature("async", "0") Magick::coderInfoList;
-// Renamed operators
+
+// Enable async on select classes
+// Async is very expensive (compilation-wise) and free Github Actions runners
+// are limited to 7GB. Sponsorship of this project will go a long way
+// towards more features.
+%define LOCKED_ASYNC(DECL)
+%feature("async", "Async") DECL;
+%feature("async:locking", "1") DECL;
+%enddef
+%include "AsyncClasses.i"
+// And some global functions
+LOCKED_ASYNC(Magick::appendImages);
+LOCKED_ASYNC(Magick::forwardFourierTransformImage);
+LOCKED_ASYNC(Magick::readImages);
+LOCKED_ASYNC(Magick::writeImages);
+// These do not need async (on any class)
 %feature("async", "0") *::copy;
 %feature("async", "0") *::operator=;
-%feature("async", "0") *::operator();
+//%feature("async", "0") *::operator();
 %feature("async", "0") *::operator<;
 %feature("async", "0") *::operator>;
 %feature("async", "0") *::operator<=;
