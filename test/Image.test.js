@@ -188,28 +188,22 @@ describe('Image', () => {
     let im = new Image;
 
     return assert.isFulfilled(im.readAsync(path.join(__dirname, 'data', 'wizard.png'))
-    .then(() => im.sizeAsync())
-    .then((size) => size.widthAsync())
-    .then((width) => {
-      assert.equal(width, 80);
-      return im.cropAsync(new Geometry(10, 8, 1, 8));
-    })
-    .then(() => im.sizeAsync())
-    .then((size) => size.widthAsync())
-    .then((width) => {
-      assert.equal(width, 10);
-      return im.writeAsync(tmpfile);
-    })
-    .then(() => {
-      im = new Image();
-      return im.readAsync(tmpfile);
-    })
-    .then(() => im.sizeAsync())
-    .then((size) => size.widthAsync())
-    .then((width) => {
-      assert.equal(width, 10);
-      return fs.promises.rm(tmpfile);
-    }));
+      .then(() => {
+        assert.equal(im.size().width(), 80);
+        return im.cropAsync(new Geometry(10, 8, 1, 8));
+      })
+      .then(() => {
+        assert.equal(im.size().width(), 10);
+        return im.writeAsync(tmpfile);
+      })
+      .then(() => {
+        im = new Image();
+        return im.readAsync(tmpfile);
+      })
+      .then(() => {
+        assert.equal(im.size().width(), 10);
+        return fs.promises.rm(tmpfile);
+      }));
   });
 
 
