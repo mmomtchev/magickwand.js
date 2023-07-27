@@ -76,6 +76,18 @@ describe('Blob', () => {
       assert.closeTo(b64.length, rawLength * 1.33, 500);
     });
 
+    it('(async) export to base64', () => {
+      const blob = new Blob;
+      return assert.isFulfilled(
+        im.magickAsync('RGBA')
+          .then(() => im.writeAsync(blob))
+          .then(() => blob.base64Async())
+          .then((b64) => {
+            assert.typeOf(b64, 'string');
+            assert.closeTo(b64.length, rawLength * 1.33, 500);
+          }));
+    });
+
     it('import RGBA from base64', () => {
       const blobIn = new Blob;
       im.magick('RGBA');
@@ -87,6 +99,22 @@ describe('Blob', () => {
       blobOut.base64(b64);
       const imOut = new Image(blobOut, im.size(), 4, 'RGBA');
       assert.strictEqual(imOut.size().width(), im.size().width());
+    });
+
+    it('(async) import RGBA from base64', () => {
+      const blobIn = new Blob;
+      return assert.isFulfilled(
+        im.magickAsync('RGBA')
+          .then(() => im.writeAsync(blobIn))
+          .then(() => blobIn.base64Async())
+          .then((b64) => {
+            const blobOut = new Blob;
+            return blobOut.base64Async(b64)
+              .then(() => {
+                const imOut = new Image(blobOut, im.size(), 4, 'RGBA');
+                assert.strictEqual(imOut.size().width(), im.size().width());
+              });
+          }));
     });
 
     it('import PNG from base64', () => {

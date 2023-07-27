@@ -9,7 +9,7 @@ LOCKED_ASYNC(Magick::animationDelayImage);
 LOCKED_ASYNC(Magick::animationIterationsImage);
 LOCKED_ASYNC(Magick::annotateImage);
 LOCKED_ASYNC(Magick::backgroundTextureImage);
-//LOCKED_ASYNC(Magick::Blob);
+LOCKED_ASYNC(Magick::Blob);
 LOCKED_ASYNC(Magick::blurImage);
 LOCKED_ASYNC(Magick::borderImage);
 LOCKED_ASYNC(Magick::cdlImage);
