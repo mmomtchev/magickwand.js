@@ -137,9 +137,6 @@ namespace MagickCore {
 
 
 // Ignore some features for now (to reduce the code size)
-// The STL functors
-%rename("$ignore", regextarget=1, fullname=1) "^Magick::[a-z][A-Za-z]+Image";
-// Some extra features
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::.+Statistics";
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Channel.+";
 %rename("$ignore", fullname=1, %$isclass) "Magick::ResourceLimits";
@@ -151,15 +148,33 @@ namespace MagickCore {
 // Extended errors and warnings
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Warning.+";
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Error.+";
+// Include some classes as sync-only as they don't do any heavy processing
+%include "SyncClasses.i"
+%feature("async", "0") Magick::Warning;
+%feature("async", "0") Magick::Error;
+%feature("async", "0") Magick::Geometry;
+%feature("async", "0") Magick::Blob;
+%feature("async", "0") Magick::Color;
+%feature("async", "0") Magick::ColorMono;
+%feature("async", "0") Magick::ColorGray;
+%feature("async", "0") Magick::ColorRGB;
+%feature("async", "0") Magick::ColorCMYK;
+%feature("async", "0") Magick::ColorHSL;
+%feature("async", "0") Magick::ColorYUV;
+%feature("async", "0") Magick::ReadOptions;
+%feature("async", "0") Magick::Point;
+%feature("async", "0") Magick::CoderInfo;
+%feature("async", "0") Magick::coderInfoList;
 // Renamed operators
 %feature("async", "0") *::copy;
+%feature("async", "0") *::operator=;
 %feature("async", "0") *::operator();
-// Drawable / Path (this is coming back)
-%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Drawable.*";
-%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Path.*";
-%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::VPath.*";
-%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Coordinate.*";
-%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Point.*";
+%feature("async", "0") *::operator<;
+%feature("async", "0") *::operator>;
+%feature("async", "0") *::operator<=;
+%feature("async", "0") *::operator>=;
+%feature("async", "0") *::operator==;
+%feature("async", "0") *::operator!=;
 
 // Various special cases - Buffers, TypedArrays, std::vectors...
 %include "Image.i"
