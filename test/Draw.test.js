@@ -3,7 +3,7 @@ const { assert } = require('chai');
 const { Magick, MagickCore } = require('node-magickwand');
 const { Image, Geometry, Color, Coordinate } = Magick;
 
-describe.skip('Drawable', () => {
+describe('Drawable', () => {
   it('simple drawing', () => {
     const im = new Image(new Geometry(100, 100), new Color('white'));
 
