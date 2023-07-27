@@ -144,7 +144,6 @@ namespace MagickCore {
 %rename("$ignore", fullname=1, %$isclass) "Magick::ImageMoments";
 %rename("$ignore", fullname=1, %$isclass) "Magick::ImagePerceptualHash";
 %rename("$ignore", fullname=1, %$isclass) "Magick::Offset";
-%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Montage.*";
 // Extended errors and warnings
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Warning.+";
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Error.+";
