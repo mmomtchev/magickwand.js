@@ -155,11 +155,8 @@ describe('Image', () => {
               assert.strictEqual(px.quantumBlue(), 65535);
               assert.strictEqual(px.quantumGreen(), 65535);
 
-              // TODO: check tmaps should return a rejected promise
-              // instead of throwing synchronously
-              assert.throws(() => {
-                im.readAsync(20, 20, 'RGBA', pixels);
-              }, /does not match the number of pixels/);
+              return assert.isRejected(im.readAsync(20, 20, 'RGBA', pixels),
+                /does not match the number of pixels/);
             }));
       });
 
@@ -195,11 +192,8 @@ describe('Image', () => {
               else
                 assert.strictEqual(pixels[1], 2n ** (8n * BigInt(typed.BYTES_PER_ELEMENT)) - 1n);
 
-              // TODO: check tmaps should return a rejected promise
-              // instead of throwing synchronously
-              assert.throws(() => {
-                im.writeAsync(0, 0, 5, 5, 'RGB', pixels);
-              }, /does not match the number of pixels/);
+              return assert.isRejected(im.writeAsync(0, 0, 5, 5, 'RGB', pixels),
+                /does not match the number of pixels/);
             })
         );
       });

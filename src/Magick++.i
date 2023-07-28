@@ -1,5 +1,9 @@
 %module magickwand
 
+#if SWIG_VERSION < 0x040200
+#error node-magickwand requires SWIG 4.2.0
+#endif
+
 #define MAGICKCORE_EXCLUDE_DEPRECATED
 %{
 // Includes the header in the wrapper code
