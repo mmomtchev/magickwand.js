@@ -74,7 +74,16 @@ console.log(`${wizard} 5 : 5 = ${px}`
   + ` red=${px.quantumRed()} alpha=${px.quantumAlpha()}`);
 
 // Apply blur
-im.blurAsync(0.5);
+const im2 = new Magick.Image(im);
+im2.blurAsync(0.5);
+
+// Compositing (overlaying)
+const im3 = new Magick.Image(im.size(), new Magick.Color(0, 65535, 0, 32768));
+await im2.compositeAsync(im3, new Magick.Geometry(0, 0), IM.MagickCore.MultiplyCompositeOp);
+
+// Crop
+im.crop(new Magick.Geometry("10x8+5+5"));
+console.log(`${wizard}: ${im.size()}`);
 ```
 
 Your best source of further information is the Magick++ documentation itself:
