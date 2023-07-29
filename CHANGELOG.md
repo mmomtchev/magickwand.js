@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.1.0] 2023-07-30
+- `*Async` versions of most CPU-heavy classes, including `Image` and the filters
+
 ## [0.0.5] 2023-05-11
 
 - Fully self-contained build with conan that can produce an universal binary on POSIX
