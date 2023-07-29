@@ -135,18 +135,6 @@ namespace MagickCore {
   %include "../swig/magickwand.i"
 }
 
-// Ignore some features for now (to reduce the code size)
-%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::.+Statistics";
-%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Channel.+";
-%rename("$ignore", fullname=1, %$isclass) "Magick::ResourceLimits";
-%rename("$ignore", fullname=1, %$isclass) "Magick::TypeMetric";
-%rename("$ignore", fullname=1, %$isclass) "Magick::ImageMoments";
-%rename("$ignore", fullname=1, %$isclass) "Magick::ImagePerceptualHash";
-%rename("$ignore", fullname=1, %$isclass) "Magick::Offset";
-// Extended errors and warnings
-%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Warning.+";
-%rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Error.+";
-
 // Enable async on select classes
 // Async is very expensive (compilation-wise) and free Github Actions runners
 // are limited to 7GB. Sponsorship of this project will go a long way
