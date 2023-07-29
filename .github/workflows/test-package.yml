@@ -41,7 +41,7 @@ jobs:
           mv node-magickwand-${{ github.event.inputs.version }}/test .
       - name: Install dependencies
         run: |
-          npm i chai chai-spies mocha
+          npm i chai chai-spies chai-as-promised mocha
       - name: Install node-magickwand from npm
         run: npm install --force node-magickwand@${{ github.event.inputs.version }}
       - name: Run the unit tests
@@ -82,7 +82,7 @@ jobs:
           mv node-magickwand-${{ github.event.inputs.version }}/test .
       - name: Install dependencies
         run: |
-          npm i chai chai-spies mocha
+          npm i chai chai-spies chai-as-promised mocha
       - name: Install node-magickwand from npm
         run: npm install --force node-magickwand@${{ github.event.inputs.version }} --build-from-source
       - name: Run the unit tests
