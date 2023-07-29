@@ -51,6 +51,7 @@
   "devDependencies": {
     "@octokit/core": "^4.2.0",
     "chai": "^4.3.7",
+    "chai-as-promised": "^7.1.1",
     "eslint": "^8.39.0",
     "eslint-plugin-mocha": "^10.1.0",
     "gh-pages": "^5.0.0",

@@ -1,12 +1,16 @@
 # node-magickwand
 
-This package is a port of the ImageMagick-7 C++ library to Node.js using SWIG NAPI.
+This package is a full native port of the ImageMagick-7 C++ library to Node.js using SWIG NAPI.
 
-It is meant both as
-* a general-purpose image processing library for Node.js
-* and testing grounds for the NAPI support in SWIG
+Unlike all other ImageMagick `npm` packages, it does not use the CLI to interact with the utilities, but directly uses the C++ API. It supports both synchronous and multithreaded asynchronous operations and it is fully integrated with `TypedArray`s.
 
-The project should be considered of `alpha` quality.
+It is less mature than the alternatives, but offers a substantial performance boost and usability benefits.
+
+The pre-built binaries are fully self-contained and do not need an existing ImageMagick installation.
+
+It is currently to be considered of beta quality, but it is actively developed because of it its special status as SWIG Node-API showcase project.
+
+It is meant both as a high-performance general-purpose library for image processing in Node.js and as a demonstration of the capabilities of SWIG Node-API.
 
 There is also a [medium article about using the new NAPI support in SWIG](https://mmomtchev.medium.com/effortlessly-porting-a-major-c-library-to-node-js-with-swig-napi-3c1a5c4a233f).
 
@@ -16,25 +20,77 @@ There is also a [medium article about using the new NAPI support in SWIG](https:
 npm install node-magickwand
 ```
 
-This will install prebuilt binaries on Windows x64, Linux x64 and macOS x64. It will try to compile the module on other platforms.
+This will install pre-built binaries on Windows x64, Linux x64 and macOS x64. It will try to compile the module on all other platforms.
 
 ```js
-const assert = require('assert');
-const { Magick, MagickCore } = require('node-magickwand');
-const { Image, Geometry } = Magick;
+import IM from 'node-magickwand';
+import { fileURLToPath } from 'url';
+import * as path from 'path';
 
-const im = new Image;
-im.read(path.join(__dirname, 'data', 'wizard.png'));
-assert(im.size().width() === 80);
-im.crop(new Geometry(10, 8, 1, 8));
-assert(im.size().width() === 10);
-im.magick('JPEG');
-im.write('cutout.jpg');
+const Magick = IM.Magick;
+
+// The famous ImageMagick wizard
+const wizard = path.join(path.dirname(fileURLToPath(import.meta.url)),
+  'node_modules', 'node-magickwand', 'test', 'data', 'wizard.png');
+
+// Read a new image (synchronously)
+let im = new Magick.Image(wizard);
+console.log(`${wizard}: ${im.size()}`);
+
+// Read a new image (asynchronously)
+im = new Magick.Image;
+await im.readAsync(wizard);
+console.log(`${wizard}: ${await im.sizeAsync()}`);
+
+// Check if PNG support is built-in (it should be)
+const infoPNG = new Magick.CoderInfo('PNG');
+console.log(`PNG support: ${infoPNG && infoPNG.isReadable()}`);
+
+// Convert it to PNG
+await im.magickAsync('PNG');
+
+// Write it to a binary blob and export it to Base64
+const blob = new Magick.Blob;
+await im.writeAsync(blob);
+const b64 = await blob.base64Async();
+console.log(`${wizard} : ${b64.substring(0, 40)}...`);
+
+// Import from Base64
+await blob.base64Async(b64);
+await im.readAsync(blob);
+console.log(`${blob}`);
+
+// Convert to RGBA (raw) and write it to a TypedArray
+await im.magickAsync('RGBA');
+// Conversion to Uint16 is automatic
+const pixels = new Uint16Array(im.size().width() * im.size().height() * 4);
+im.write(0, 0, im.size().width(), im.size().height(), 'RGBA', pixels);
+console.log(`${wizard} 0 : 0 = ${pixels[0]}`);
+
+// Access pixels directly
+const px = im.pixelColor(5, 5);
+console.log(`${wizard} 5 : 5 = ${px}`
+  + ` (RGBA=${px.pixelType() == Magick.Color.RGBAPixel})`
+  + ` red=${px.quantumRed()} alpha=${px.quantumAlpha()}`);
+
+// Apply blur
+const im2 = new Magick.Image(im);
+im2.blurAsync(0.5);
+
+// Compositing (overlaying)
+const im3 = new Magick.Image(im.size(), new Magick.Color(0, 65535, 0, 32768));
+await im2.compositeAsync(im3, new Magick.Geometry(0, 0), IM.MagickCore.MultiplyCompositeOp);
+
+// Crop
+im.crop(new Magick.Geometry("10x8+5+5"));
+console.log(`${wizard}: ${im.size()}`);
 ```
 
 Your best source of further information is the Magick++ documentation itself:
 * The tutorial: https://imagemagick.org/Magick++/tutorial/Magick++_tutorial.pdf
 * The full API: https://www.imagemagick.org/Magick++/
+
+`node-magickwand` implements the full Magick++ C++ API.
 
 When in doubt about the JS semantics of a particular method, you can also check the unit tests: https://github.com/mmomtchev/node-magickwand/tree/main/test
 
@@ -52,9 +108,9 @@ You will need a working C++ environment. On Windows nothing but VS 2022 works at
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
-* In order to regenerate the C++ wrapping code, you will need the still unreleased SWIG 4.2.0 with NAPI support available only as a git checkout at the moment
-  * Building with the old Node/V8 interface is not possible - the typemaps are not compatible
-  * Alternatively, you can checkout the `generated` branch where all files have been pre-generated - `npm run deps:download` does this
+* In order to regenerate the C++ wrapping code, you will need the still unreleased SWIG 4.2.0 with async Node-API support - available exclusively from https://github.com/mmomtchev/swig/tree/async - Node-API has been merged but the async support is still being worked on
+  * Building with the old SWIG Node/V8 interface is not possible - the typemaps are not compatible
+  * Alternatively, if you don't want to build a development version of SWIG yourself, you can clone the `generated` branch where all files have been pre-generated - `npm run deps:download` does this
 
 * Recursively clone the repo
 ```shell
@@ -92,7 +148,7 @@ I have tried to be as verbose as possible throughout the `Magick++.i` file - you
 
 There is also a [medium article about using the new NAPI support in SWIG](https://mmomtchev.medium.com/effortlessly-porting-a-major-c-library-to-node-js-with-swig-napi-3c1a5c4a233f).
 
-The tutorial, just like everything else, is still a work-in-progress, but like everything else, you may find it usable.
+The tutorial, just like the module itself, is still a work-in-progress.
 
 ## Known to be broken at the moment
 
@@ -103,5 +159,4 @@ The tutorial, just like everything else, is still a work-in-progress, but like e
 
 This is the current roadmap both for this project and for SWIG-NAPI in general:
 
-* Async support
 * Typescript support

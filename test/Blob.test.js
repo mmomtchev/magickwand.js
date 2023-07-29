@@ -72,27 +72,60 @@ describe('Blob', () => {
       im.write(blob);
 
       const b64 = blob.base64();
+      assert.typeOf(b64, 'string');
       assert.closeTo(b64.length, rawLength * 1.33, 500);
+    });
+
+    it('(async) export to base64', () => {
+      const blob = new Blob;
+      return assert.isFulfilled(
+        im.magickAsync('RGBA')
+          .then(() => im.writeAsync(blob))
+          .then(() => blob.base64Async())
+          .then((b64) => {
+            assert.typeOf(b64, 'string');
+            assert.closeTo(b64.length, rawLength * 1.33, 500);
+          }));
     });
 
     it('import RGBA from base64', () => {
       const blobIn = new Blob;
       im.magick('RGBA');
       im.write(blobIn);
+      const b64 = blobIn.base64();
+      assert.typeOf(b64, 'string');
 
       const blobOut = new Blob;
-      blobOut.base64(blobIn.base64());
+      blobOut.base64(b64);
       const imOut = new Image(blobOut, im.size(), 4, 'RGBA');
       assert.strictEqual(imOut.size().width(), im.size().width());
+    });
+
+    it('(async) import RGBA from base64', () => {
+      const blobIn = new Blob;
+      return assert.isFulfilled(
+        im.magickAsync('RGBA')
+          .then(() => im.writeAsync(blobIn))
+          .then(() => blobIn.base64Async())
+          .then((b64) => {
+            const blobOut = new Blob;
+            return blobOut.base64Async(b64)
+              .then(() => {
+                const imOut = new Image(blobOut, im.size(), 4, 'RGBA');
+                assert.strictEqual(imOut.size().width(), im.size().width());
+              });
+          }));
     });
 
     it('import PNG from base64', () => {
       const blobIn = new Blob;
       im.magick('PNG');
       im.write(blobIn);
+      const b64 = blobIn.base64();
+      assert.typeOf(b64, 'string');
 
       const blobOut = new Blob;
-      blobOut.base64(blobIn.base64());
+      blobOut.base64(b64);
       const imOut = new Image(blobOut);
       assert.strictEqual(imOut.size().width(), im.size().width());
     });

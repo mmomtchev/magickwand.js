@@ -1,5 +1,9 @@
 %module magickwand
 
+#if SWIG_VERSION < 0x040200
+#error node-magickwand requires SWIG 4.2.0
+#endif
+
 #define MAGICKCORE_EXCLUDE_DEPRECATED
 %{
 // Includes the header in the wrapper code
@@ -41,20 +45,20 @@ using namespace Magick;
 #define __attribute__(x)
 
 // Generic renaming
-%rename(call) operator();
-%rename(clone) operator=;
-%rename(equal) operator==;
+%rename(call)     operator();
+%rename(clone)    operator=;
+%rename(equal)    operator==;
 %rename(notEqual) operator!=;
-%rename(gt) operator>;
-%rename(lt) operator<;
-%rename(gte) operator>=;
-%rename(lte) operator<=;
+%rename(gt)       operator>;
+%rename(lt)       operator<;
+%rename(gte)      operator>=;
+%rename(lte)      operator<=;
 
 // Rename some specific ImageMagick operators
-%rename(toPixelInfo) operator PixelInfo;
-%rename(toString) operator std::string;
-%rename(toRectangleInfo) operator MagickCore::RectangleInfo;
-%rename(toOffsetInfo) operator MagickCore::OffsetInfo;
+%rename(toPixelInfo)      operator PixelInfo;
+%rename(toString)         operator std::string;
+%rename(toRectangleInfo)  operator MagickCore::RectangleInfo;
+%rename(toOffsetInfo)     operator MagickCore::OffsetInfo;
 
 // ImageMagick contains some defines that cannot be transformed 
 // to a constant
@@ -97,28 +101,28 @@ using namespace Magick;
 %rename("%s", regextarget=1) ".+Operator$";
 %rename("%s", regextarget=1) ".+Op$";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Options$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Colorspace$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Compression";
+%rename("%s", regextarget=1, %$isenumitem) ".+Colorspace$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Compression";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Type$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Channel$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Class$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Gravity$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Interlace$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Layer$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Cap$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Join$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Orientation$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Method$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Quantum$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Intent$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Stretch$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Style$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Method$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Deciratuib$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Endian$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Rule$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Filter$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+Info$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Channel$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Class$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Gravity$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Interlace$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Layer$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Cap$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Join$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Orientation$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Method$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Quantum$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Intent$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Stretch$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Style$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Method$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Delegate$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Endian$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Rule$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Filter$";
+%rename("%s", regextarget=1, %$isenumitem) ".+Info$";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+[Vv]ersion.+";
 #endif
 
@@ -130,6 +134,33 @@ namespace MagickCore {
   %include "../swig/magickcore.i"
   %include "../swig/magickwand.i"
 }
+
+// Enable async on select classes
+// Async is very expensive (compilation-wise) and free Github Actions runners
+// are limited to 7GB. Sponsorship of this project will go a long way
+// towards more features.
+%feature("async:locking", "1");
+%define LOCKED_ASYNC(TYPE)
+%apply SWIGTYPE  LOCK {TYPE};
+%apply SWIGTYPE *LOCK {TYPE *};
+%apply SWIGTYPE &LOCK {TYPE &};
+%feature("async", "Async");
+%enddef
+%include "AsyncClasses.i"
+// And some global functions
+%feature("async", "Async") Magick::appendImages;
+%feature("async", "Async") Magick::forwardFourierTransformImage;
+%feature("async", "Async") Magick::readImages;
+%feature("async", "Async") Magick::writeImages;
+// These do not need async (on any class)
+%feature("async", "0") *::copy;
+%feature("async", "0") *::operator=;
+%feature("async", "0") *::operator<;
+%feature("async", "0") *::operator>;
+%feature("async", "0") *::operator<=;
+%feature("async", "0") *::operator>=;
+%feature("async", "0") *::operator==;
+%feature("async", "0") *::operator!=;
 
 // Various special cases - Buffers, TypedArrays, std::vectors...
 %include "Image.i"
