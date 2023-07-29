@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 
@@ -54,5 +55,55 @@ describe('STL', () => {
       const px1 = im.pixelColor(10, 10);
       assert.closeTo(px1.quantumBlue(), 63635, 1);
     }));
+  });
+
+  describe('readImages', () => {
+    it('readImages()', () => {
+      const images = Magick.readImages(path.join(__dirname, 'data', 'wizard.png'));
+
+      assert.instanceOf(images, Array);
+      assert.instanceOf(images[0], Magick.Image);
+      assert.equal(images[0].size().width(), 80);
+      assert.equal(images[0].size().height(), 106);
+    });
+
+    it('readImagesAsync()', () => {
+      return assert.isFulfilled(Magick.readImagesAsync(path.join(__dirname, 'data', 'wizard.png')))
+        .then((images) => {
+          assert.instanceOf(images, Array);
+          assert.instanceOf(images[0], Magick.Image);
+          assert.equal(images[0].size().width(), 80);
+          assert.equal(images[0].size().height(), 106);
+        });
+    });
+
+    it('readImages() w/ReadOptions', () => {
+      const opt = new Magick.ReadOptions();
+      opt.size(new Magick.Geometry('80x106'));
+      assert.strictEqual(opt.size().width(), 80);
+      const images = Magick.readImages(path.join(__dirname, 'data', 'wizard.png'), opt);
+
+      assert.instanceOf(images, Array);
+      assert.instanceOf(images[0], Magick.Image);
+      assert.equal(images[0].size().width(), 80);
+      assert.equal(images[0].size().height(), 106);
+    });
+  });
+
+  describe('writeImages', () => {
+    const tmp = path.join(__dirname, 'data', 'temp.png');
+
+    it('writeImages()', () => {
+      const im = new Magick.Image(new Magick.Geometry(100, 80), new Magick.Color);
+      im.magick('PNG');
+      Magick.writeImages([im], tmp);
+      fs.rmSync(tmp);
+    });
+
+    it('writeImagesAsync()', () => {
+      const im = new Magick.Image(new Magick.Geometry(100, 80), new Magick.Color);
+      return assert.isFulfilled(Magick.writeImagesAsync([im], tmp))
+        .then(() => fs.promises.rm(tmp));
+    });
   });
 });
