@@ -135,7 +135,6 @@ namespace MagickCore {
   %include "../swig/magickwand.i"
 }
 
-
 // Ignore some features for now (to reduce the code size)
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::.+Statistics";
 %rename("$ignore", regextarget=1, fullname=1, %$isclass) "^Magick::Channel.+";
@@ -152,16 +151,19 @@ namespace MagickCore {
 // Async is very expensive (compilation-wise) and free Github Actions runners
 // are limited to 7GB. Sponsorship of this project will go a long way
 // towards more features.
-%define LOCKED_ASYNC(DECL)
-%feature("async", "Async") DECL;
-%feature("async:locking", "1") DECL;
+%feature("async:locking", "1");
+%define LOCKED_ASYNC(TYPE)
+%apply SWIGTYPE  LOCK {TYPE};
+%apply SWIGTYPE *LOCK {TYPE *};
+%apply SWIGTYPE &LOCK {TYPE &};
+%feature("async", "Async");
 %enddef
 %include "AsyncClasses.i"
 // And some global functions
-LOCKED_ASYNC(Magick::appendImages);
-LOCKED_ASYNC(Magick::forwardFourierTransformImage);
-LOCKED_ASYNC(Magick::readImages);
-LOCKED_ASYNC(Magick::writeImages);
+%feature("async", "Async") Magick::appendImages;
+%feature("async", "Async") Magick::forwardFourierTransformImage;
+%feature("async", "Async") Magick::readImages;
+%feature("async", "Async") Magick::writeImages;
 // These do not need async (on any class)
 %feature("async", "0") *::copy;
 %feature("async", "0") *::operator=;
