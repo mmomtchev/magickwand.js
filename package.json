@@ -1,6 +1,6 @@
 {
   "name": "node-magickwand",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Node.js bindings for imagemagick",
   "main": "./lib/index.js",
   "scripts": {
