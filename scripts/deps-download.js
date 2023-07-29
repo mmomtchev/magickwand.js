@@ -8,11 +8,20 @@ if (!fs.statSync(path.resolve(__dirname, '..', '.git'), {throwIfNoEntry: false})
   process.exit(0);
 }
 
+const branch = cp.execSync('git branch --show-current').toString().trimEnd();
+if (branch !== 'main') {
+  console.log(`on branch ${branch}`);
+}
 cp.execSync('git fetch origin');
 let hash = '';
 for (let i = 0; !hash.length; i++) {
   const hashMain = cp.execSync(`git rev-parse HEAD~${i}`).toString().trimEnd();
-  hash = cp.execSync(`git log origin/generated  --grep "${hashMain}" --pretty=format:"%H"`).toString().split('\n')[0].trimEnd();
+  try {
+    hash = cp.execSync(`git log origin/generated-${branch} --grep "${hashMain}" --pretty=format:"%H"`).toString().split('\n')[0].trimEnd();
+  } catch {
+    console.error('unknown branch?');
+    process.exit(0);
+  }
 }
 
 async function download(url, targetFile) {
