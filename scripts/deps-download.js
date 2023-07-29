@@ -17,7 +17,7 @@ let hash = '';
 for (let i = 0; !hash.length; i++) {
   const hashMain = cp.execSync(`git rev-parse HEAD~${i}`).toString().trimEnd();
   try {
-    hash = cp.execSync(`git log origin/generated${branch !== 'main' ? `-${branch}` : ''} --grep "${hashMain}" --pretty=format:"%H"`)
+    hash = cp.execSync(`git log origin/generated${branch && branch !== 'main' ? `-${branch}` : ''} --grep "${hashMain}" --pretty=format:"%H"`)
       .toString().split('\n')[0].trimEnd();
   } catch {
     console.error('unknown branch?');
