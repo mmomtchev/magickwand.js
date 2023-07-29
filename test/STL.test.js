@@ -102,6 +102,7 @@ describe('STL', () => {
 
     it('writeImagesAsync()', () => {
       const im = new Magick.Image(new Magick.Geometry(100, 80), new Magick.Color);
+      im.magick('PNG');
       return assert.isFulfilled(Magick.writeImagesAsync([im], tmp))
         .then(() => fs.promises.rm(tmp));
     });
