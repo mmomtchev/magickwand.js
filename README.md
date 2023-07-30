@@ -49,6 +49,17 @@ console.log(`PNG support: ${infoPNG && infoPNG.isReadable()}`);
 // Convert it to PNG
 await im.magickAsync('PNG');
 
+// Rescale and rotate it
+await im.scaleAsync(new Magick.Geometry('160x212'));
+await im.rotateAsync(60);
+
+// Display it and continue execution (requires X11)
+im.displayAsync();
+
+// displayAsync locks the previous image object
+// until it completes executions
+im = new Magick.Image(wizard);
+
 // Write it to a binary blob and export it to Base64
 const blob = new Magick.Blob;
 await im.writeAsync(blob);
@@ -75,7 +86,7 @@ console.log(`${wizard} 5 : 5 = ${px}`
 
 // Apply blur
 const im2 = new Magick.Image(im);
-im2.blurAsync(0.5);
+await im2.blurAsync(0.5);
 
 // Compositing (overlaying)
 const im3 = new Magick.Image(im.size(), new Magick.Color(0, 65535, 0, 32768));
@@ -96,7 +107,7 @@ When in doubt about the JS semantics of a particular method, you can also check 
 
 The `Image.display()` function works and it is an excellent debugging tool. On macOS, it requires X11.
 
-There are no TypeScript bindings at the moment - the sheer size and complexity of the ImageMagick library renders any port prohibitive unless it is fully automated. TypeScript support for SWIG is planned at some later moment.
+There are no TypeScript bindings at the moment - the sheer size and complexity of the ImageMagick library renders any port prohibitive unless it is fully automated. TypeScript support for SWIG is already been worked on.
 
 ### Rebuilding from npm with the built-in ImageMagick library
 
@@ -104,7 +115,7 @@ There are no TypeScript bindings at the moment - the sheer size and complexity o
 npm install node-magickwand --build-from-source
 ```
 
-You will need a working C++ environment. On Windows nothing but VS 2022 works at the moment. This will also rebuild the included Magick++ library.
+You will need a working C++11 environment. On Windows nothing but VS 2022 works at the moment. This will also rebuild the included Magick++ library.
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
@@ -118,7 +129,7 @@ git clone --recursive https://github.com/mmomtchev/node-magickwand
 cd node-magickwand
 ```
 
-* `npm install` should automatically install the dependencies and compile the module
+* `npm install` should automatically install the dependencies and compile the module unless a pre-built binary can be downloaded
 
 * or, to do everything manually:
 ```shell
@@ -142,7 +153,7 @@ ImageMagick is the perfect candidate for an automatically generated with SWIG No
 
 ![](https://gist.githubusercontent.com/mmomtchev/3ca8f7c96a0a09ef1dd530c8f73dd959/raw/5a54c384c99c336bb2bc71b75cf0109c6b2c69e7/SWIG-positioning.png)
 
-ImageMagick has an absolutely huge number of API methods and objects - the SWIG-generated module totals more than 400k lines of C++ code - and this is only covering the `Magick++` API and the enums from the `MagickWand` API. However there are relatively few method signatures - and the whole SWIG project which brings you this full API to Node.js, measures a grand total of only **462** lines!!
+ImageMagick has an absolutely huge number of API methods and objects - the SWIG-generated module totals more than 400k lines of C++ code - and this is only covering the `Magick++` API and the enums from the `MagickWand` API. However there are relatively few method signatures - while the whole SWIG project which brings you this full API to Node.js, measures a grand total of only **493** lines - half of which are comments!!
 
 I have tried to be as verbose as possible throughout the `Magick++.i` file - you should start there. ImageMagick is a very complex C++ project with 30 years history and it probably uses every single feature of SWIG that might be needed in a Node.js addon. Look at the various JS wrappers that expect special arguments (`Buffer`, `TypedArray`, lists), remember to check the ImageMagick header file for the original C++ function and then you can use its SWIG interface as a starting point in your project.
 

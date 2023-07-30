@@ -23,6 +23,17 @@ console.log(`PNG support: ${infoPNG && infoPNG.isReadable()}`);
 // Convert it to PNG
 await im.magickAsync('PNG');
 
+// Rescale and rotate it
+await im.scaleAsync(new Magick.Geometry('160x212'));
+await im.rotateAsync(60);
+
+// Display it and continue execution (requires X11)
+im.displayAsync();
+
+// displayAsync locks the previous image object
+// until it completes executions
+im = new Magick.Image(wizard);
+
 // Write it to a binary blob and export it to Base64
 const blob = new Magick.Blob;
 await im.writeAsync(blob);
@@ -49,7 +60,7 @@ console.log(`${wizard} 5 : 5 = ${px}`
 
 // Apply blur
 const im2 = new Magick.Image(im);
-im2.blurAsync(0.5);
+await im2.blurAsync(0.5);
 
 // Compositing (overlaying)
 const im3 = new Magick.Image(im.size(), new Magick.Color(0, 65535, 0, 32768));
