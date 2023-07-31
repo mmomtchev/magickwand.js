@@ -1,5 +1,10 @@
 # node-magickwand
 
+[![ISC](https://img.shields.io/github/license/mmomtchev/node-magickwand)](https://github.com/mmomtchev/node-magickwand/blob/main/LICENSE)
+[![Test npm package](https://github.com/mmomtchev/node-magickwand/actions/workflows/test-package.yml/badge.svg)](https://github.com/mmomtchev/node-magickwand/actions/workflows/test-package.yml)
+[![Node.js CI](https://github.com/mmomtchev/node-magickwand/actions/workflows/test-dev.yml/badge.svg)](https://github.com/mmomtchev/node-magickwand/actions/workflows/test-dev.yml)
+[![npm](https://img.shields.io/npm/v/node-magickwand)](https://www.npmjs.com/package/node-magickwand)
+
 This package is a full native port of the ImageMagick-7 C++ library to Node.js using SWIG NAPI.
 
 Unlike all other ImageMagick `npm` packages, it does not use the CLI to interact with the utilities, but directly uses the C++ API. It supports both synchronous and multithreaded asynchronous operations and it is fully integrated with `TypedArray`s.
