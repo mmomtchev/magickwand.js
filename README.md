@@ -124,7 +124,7 @@ You will need a working C++11 environment. On Windows nothing but VS 2022 works 
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
-* In order to regenerate the C++ wrapping code, you will need the still unreleased SWIG 4.2.0 with async Node-API support - available exclusively from https://github.com/mmomtchev/swig/tree/async - Node-API has been merged but the async support is still being worked on
+* In order to regenerate the C++ wrapping code, you will need the still unreleased SWIG 4.2.0 with async Node-API support - available exclusively from https://github.com/mmomtchev/swig/tree/mmom - Node-API has been merged but the async support is still being worked on
   * Building with the old SWIG Node/V8 interface is not possible - the typemaps are not compatible
   * Alternatively, if you don't want to build a development version of SWIG yourself, you can clone the `generated` branch where all files have been pre-generated - `npm run deps:download` does this
 
