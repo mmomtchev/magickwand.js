@@ -200,7 +200,7 @@ describe('Image', () => {
     });
   }
 
-  describe('composite', () => {
+  it('composite', () => {
     const im1 = new Image(path.join(__dirname, 'data', 'wizard.png'));
     const im2 = new Image(im1.size(), new Color(0, 65535, 0, 32768));
 
@@ -215,7 +215,7 @@ describe('Image', () => {
     assert.strictEqual(px.quantumGreen(), 65535);
   });
 
-  describe('compositeAsync', () => {
+  it('compositeAsync', () => {
     const im1 = new Image(path.join(__dirname, 'data', 'wizard.png'));
     const im2 = new Image(im1.size(), new Color(0, 65535, 0, 32768));
 
