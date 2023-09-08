@@ -29,7 +29,10 @@ using namespace Magick;
   try {
     $action
   } catch (const Magick::Exception &e) {
-    SWIG_Raise(e.what());
+    // Using a local std::string copy helps avoid a suspected
+    // MSVC compiler/runtime problem
+    std::string error = e.what();
+    SWIG_Raise(error.c_str());
     SWIG_fail;
   }
 }
