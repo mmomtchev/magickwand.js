@@ -144,7 +144,7 @@ namespace MagickCore {
 %apply SWIGTYPE  LOCK {TYPE};
 %apply SWIGTYPE *LOCK {TYPE *};
 %apply SWIGTYPE &LOCK {TYPE &};
-%feature("async", "Async");
+%feature("async", "Async") TYPE;
 %enddef
 %include "AsyncClasses.i"
 // And some global functions
