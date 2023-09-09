@@ -28,3 +28,5 @@
       "The number of elements in the TypedArray does not match the number of pixels in the image");
   }
 }
+
+%typemap(ts) (const Magick::StorageType type_, void *pixels_) PixelTypedArray;
