@@ -1,12 +1,12 @@
-const path = require('path');
-const fs = require('fs');
-const chai = require('chai');
-const chaiAsPromised = require('chai-as-promised');
+import * as path from 'path';
+import * as fs from 'fs';
+import * as chai from 'chai';
+import * as chaiAsPromised from 'chai-as-promised';
 
 chai.use(chaiAsPromised);
 const assert = chai.assert;
 
-const { Magick, MagickCore } = require('node-magickwand');
+import { Magick, MagickCore } from 'node-magickwand';
 const { Image, Color } = Magick;
 
 describe('STL', () => {
@@ -68,13 +68,13 @@ describe('STL', () => {
     });
 
     it('readImagesAsync()', () => {
-      return assert.isFulfilled(Magick.readImagesAsync(path.join(__dirname, 'data', 'wizard.png')))
+      return assert.isFulfilled(Magick.readImagesAsync(path.join(__dirname, 'data', 'wizard.png'))
         .then((images) => {
           assert.instanceOf(images, Array);
           assert.instanceOf(images[0], Magick.Image);
           assert.equal(images[0].size().width(), 80);
           assert.equal(images[0].size().height(), 106);
-        });
+        }));
     });
 
     it('readImages() w/ReadOptions', () => {

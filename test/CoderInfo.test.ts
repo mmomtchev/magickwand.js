@@ -1,6 +1,7 @@
-const { assert } = require('chai');
+import { assert } from 'chai';
 
-const { CoderInfo, coderInfoList } = require('node-magickwand').Magick;
+import { Magick } from 'node-magickwand';
+const { CoderInfo, coderInfoList } = Magick;
 
 describe('CoderInfo', () => {
   it('get', () => {

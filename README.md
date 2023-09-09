@@ -32,7 +32,7 @@ import IM from 'node-magickwand';
 import { fileURLToPath } from 'url';
 import * as path from 'path';
 
-const Magick = IM.Magick;
+const { Magick } = IM;
 
 // The famous ImageMagick wizard
 const wizard = path.join(path.dirname(fileURLToPath(import.meta.url)),
@@ -106,13 +106,13 @@ Your best source of further information is the Magick++ documentation itself:
 * The tutorial: https://imagemagick.org/Magick++/tutorial/Magick++_tutorial.pdf
 * The full API: https://www.imagemagick.org/Magick++/
 
+Also, if you have a code editor capable of reading the TypeScript bindings, such as Visual Studio Code, it will provide online help for each method.
+
 `node-magickwand` implements the full Magick++ C++ API.
 
 When in doubt about the JS semantics of a particular method, you can also check the unit tests: https://github.com/mmomtchev/node-magickwand/tree/main/test
 
 The `Image.display()` function works and it is an excellent debugging tool. On macOS, it requires X11.
-
-There are no TypeScript bindings at the moment - the sheer size and complexity of the ImageMagick library renders any port prohibitive unless it is fully automated. TypeScript support for SWIG is already been worked on.
 
 ### Rebuilding from npm with the built-in ImageMagick library
 
@@ -174,9 +174,7 @@ The tutorial, just like the module itself, is still a work-in-progress.
 
 # Future plans
 
-This is the current roadmap both for this project and for SWIG-NAPI in general:
-
-* Typescript support
+This project serves as showcase and testing grounds for SWIG/Node-API.
 
 # License
 
@@ -185,3 +183,7 @@ Copyright 2023 Momtchil Momtchev <momtchil@momtchev.com>
 Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+# Disclaimer
+
+`node-magickwand` is not affiliated in any way with ImageMagick LLC.
