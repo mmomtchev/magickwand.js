@@ -3,7 +3,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-if (!fs.statSync(path.resolve(__dirname, '..', '.git'), {throwIfNoEntry: false})) {
+if (!fs.statSync(path.resolve(__dirname, '..', '.git'), { throwIfNoEntry: false })) {
   console.log('not a git checkout, skipping download');
   process.exit(0);
 }
@@ -27,7 +27,7 @@ for (let i = 0; !hash.length; i++) {
 
 async function download(url, targetFile) {
   console.log('downloading', url, 'to', targetFile);
-  await fs.promises.mkdir(path.dirname(targetFile), {recursive: true});
+  await fs.promises.mkdir(path.dirname(targetFile), { recursive: true });
   await fs.promises.rm(targetFile, { force: true });
   return new Promise((resolve, reject) => {
     https.get(url, response => {
@@ -60,7 +60,13 @@ async function download(url, targetFile) {
 }
 
 const q = [];
-for (const file of ['magickcore.i', 'Magick++.cxx', 'magick++.i', 'magickwand.i']) {
+for (const file of [
+  'magickcore.i',
+  'Magick++.cxx',
+  'magick++.i',
+  'magickwand.i',
+  'Magick++.d.ts'
+]) {
   q.push(download(
     `https://raw.githubusercontent.com/mmomtchev/node-magickwand/${hash}/${file}`,
     path.resolve(__dirname, '..', 'swig', file)
