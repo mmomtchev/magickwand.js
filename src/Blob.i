@@ -2,6 +2,7 @@
 // The base typemap comes from 'nodejs_buffer.i'
 %typemap(in)        (const void *data_,const size_t length_) = (const void *buffer_data, const size_t buffer_len);
 %typemap(typecheck) (const void *data_,const size_t length_) = (const void *buffer_data, const size_t buffer_len);
+%typemap(ts)        (const void *data_,const size_t length_) = (const void *buffer_data, const size_t buffer_len);
 
 // Magick::Blob::data is a very special case - it returns a const void *
 // and we want to make a Buffer out of it:
