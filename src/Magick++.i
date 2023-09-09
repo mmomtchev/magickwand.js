@@ -35,8 +35,9 @@ using namespace Magick;
 }
 
 // We fix the NAPI level to 6 (Node.js >= 14.0, and latest 10.x/12.x)
+#define NAPI_VERSION 6  // For the SWIG interface file
 %insert(begin) %{
-#define NAPI_VERSION 6
+#define NAPI_VERSION 6  // For the generated C++ code
 %}
 
 // Shunt __attribute__(x) which is not supported by SWIG

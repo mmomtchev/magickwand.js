@@ -1,5 +1,9 @@
 %define PixelTypedArray
-"Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Float32Array | Float64Array | BigUint64Array"
+"Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | "
+"Float32Array | Float64Array"
+#if (NAPI_VERSION > 5)
+" | BigUint64Array"
+#endif
 %enddef
 
 %{
