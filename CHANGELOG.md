@@ -1,6 +1,11 @@
 # Changelog
 
+## [0.9.0]
+
+- TypeScript support
+
 ## [0.1.0] 2023-07-30
+
 - `*Async` versions of most CPU-heavy classes, including `Image` and the filters
 
 ## [0.0.5] 2023-05-11
