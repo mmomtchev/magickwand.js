@@ -1,4 +1,9 @@
 {
+  'target_defaults': {
+    'includes': [
+      'node_modules/node-addon-api/except.gypi'
+    ]
+  },
   'variables': {
     'shared_imagemagick%': 'false',
     'enable_asan%': 'false',
@@ -6,7 +11,7 @@
     'enable_hdri%': '<(default_hdri)',
     'regen_swig%': 'false',
     'winbuildtype%': '/p:Configuration=Release,Platform=x64',
-    'winlibid%': 'DB',
+    'winlibid%': 'RL',
   },
   'configurations': {
     'Debug': {
@@ -37,22 +42,11 @@
         '-Wno-type-limits',
         '-Wno-deprecated-copy'
       ],
-      'cflags!': [ '-fno-exceptions', '-fno-rtti' ],
-      'cflags_cc!': [ '-fno-exceptions', '-fno-rtti' ],
-      'xcode_settings': {
-        'GCC_ENABLE_CPP_RTTI': 'YES',
-        'GCC_ENABLE_CPP_EXCEPTIONS' : 'YES'
-      },
       'msvs_settings': {
         'VCCLCompilerTool': {
           'AdditionalOptions': [
             '/MP', # compile across multiple CPUs
-            '/GR', # force RTTI on (see https://github.com/nodejs/node-gyp/issues/2412)
-            '/EHsc' # same for ExceptionHandling,
-            #'/fsanitize=address'
           ],
-          'ExceptionHandling': 1,
-          'RuntimeTypeInfo': 'true'
         },
         'VCLinkerTool': {
           'AdditionalLibraryDirectories': '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/lib'
