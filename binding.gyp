@@ -92,10 +92,12 @@
             'inputs': [ 'src/Magick++.i' ],
             'outputs': [ 'swig/Magick++.cxx' ],
             'action': [
-              'swig', '-javascript', '-napi', '-c++',
+              'swig', '-javascript', '-typescript', '-napi', '-c++',
               '-Ideps/ImageMagick/Magick++/lib', '-Ideps/ImageMagick',
               '<@(hdri)',
-              '-o', 'fgswig/Magick++.cxx', 'src/Magick++.i'
+              '-o', 'swig/Magick++.cxx',
+              '-outdir', 'swig',
+              'src/Magick++.i'
             ]
           }]
         }]
@@ -117,6 +119,12 @@
             '<(PRODUCT_DIR)/node-magickwand.node'
           ],
           'destination': '<(module_path)'
+        },
+        {
+          'files': [
+            '<(module_root_dir)/swig/Magick++.d.ts'
+          ],
+          'destination': '<(module_root_dir)/lib'
         }
       ]
     }

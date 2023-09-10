@@ -1,6 +1,9 @@
 {
-  "spec": "test/*.test.js",
+  "spec": "test/*.test.*s",
   "v8-expose-gc": true,
   "timeout": "5000",
-  "require": "test/alias.js"
+  "require": [
+    "ts-node/register",
+    "tsconfig-paths/register"
+  ]
 }

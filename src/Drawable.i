@@ -18,6 +18,7 @@
 %typemap(freearg)   Magick::Drawable & {
   delete $1;
 }
+%typemap(ts)        Magick::Drawable & "Magick.DrawableBase";
 
 
 // Some draw functions accept an std::vector of Magick::Drawable
@@ -41,6 +42,7 @@
 %typemap(freearg)   std::vector<Magick::Drawable> const & {
   delete $1;
 }
+%typemap(ts)        std::vector<Magick::Drawable> const & "Magick.DrawableBase[]";
 
 // Functions that expect a VPathList will also take a JS array
 // Very similar to the previous one, all classes inherit from Magick::VPathBase while
@@ -64,3 +66,4 @@
 %typemap(freearg)   Magick::VPathList const & {
   delete $1;
 }
+%typemap(ts)        Magick::VPathList const & "Magick.VPathBase[]";

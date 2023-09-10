@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "strict": true,
+    "strictNullChecks": true,
+    "target": "ES2020",
+    "paths": {
+      "node-magickwand": [
+        "."
+      ]
+    }
+  }
+}

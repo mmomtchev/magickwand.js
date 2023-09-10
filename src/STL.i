@@ -49,6 +49,7 @@ typedef std::vector<Magick::Image>::iterator   ImageListIterator;
     $result = env.Null();
   }
 }
+%typemap(tsout)            ImageListContainer * "Magick.Image[]";
 
 // These functions expect a Magick::Image pointer and use it to return the image
 // In this case, we eliminate this argument and return the value instead
@@ -72,3 +73,9 @@ typedef std::vector<Magick::Image>::iterator   ImageListIterator;
     $result = env.Null();
   }
 }
+%typemap(tsout)
+  Magick::Image *appendedImage_,
+  Magick::Image *averagedImage_,
+  Magick::Image *flattendImage_,
+  Magick::Image *mosaicImage_
+"Magick.Image";

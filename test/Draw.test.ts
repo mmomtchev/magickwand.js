@@ -1,6 +1,6 @@
-const { assert } = require('chai');
+import { assert } from 'chai';
 
-const { Magick, MagickCore } = require('node-magickwand');
+import { Magick, MagickCore } from 'node-magickwand';
 const { Image, Geometry, Color, Coordinate } = Magick;
 
 describe('Drawable', () => {
