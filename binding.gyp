@@ -4,7 +4,9 @@
     'enable_asan%': 'false',
     'default_hdri': 'true',
     'enable_hdri%': '<(default_hdri)',
-    'regen_swig%': 'false'
+    'regen_swig%': 'false',
+    'winbuildtype%': '/p:Configuration=Release,Platform=x64',
+    'winlibid%': 'DB',
   },
   'configurations': {
     'Debug': {
@@ -46,7 +48,8 @@
           'AdditionalOptions': [
             '/MP', # compile across multiple CPUs
             '/GR', # force RTTI on (see https://github.com/nodejs/node-gyp/issues/2412)
-            '/EHsc' # same for ExceptionHandling
+            '/EHsc' # same for ExceptionHandling,
+            #'/fsanitize=address'
           ],
           'ExceptionHandling': 1,
           'RuntimeTypeInfo': 'true'
@@ -194,8 +197,8 @@
           {
             'action_name': 'make',
             'inputs': [ '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/VisualStaticMT.sln' ],
-            'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/CORE_RL_Magick++_.lib' ],
-            'action': [ '<(module_root_dir)/build_magick.bat', '<(module_path)' ]
+            'outputs': [ '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/lib/CORE_<(winlibid)_Magick++_.lib' ],
+            'action': [ '<(module_root_dir)/build_magick.bat', '<(module_path)', '<(winbuildtype)' ]
           }
         ],
         'direct_dependent_settings': {
@@ -208,43 +211,43 @@
             }]
           ],
           'libraries': [
-            'CORE_RL_aom_.lib',
-            'CORE_RL_brotli_.lib',
-            'CORE_RL_bzlib_.lib',
-            'CORE_RL_cairo_.lib',
-            'CORE_RL_coders_.lib',
-            'CORE_RL_croco_.lib',
-            'CORE_RL_de265_.lib',
-            'CORE_RL_exr_.lib',
-            'CORE_RL_ffi_.lib',
-            'CORE_RL_filters_.lib',
-            'CORE_RL_freetype_.lib',
-            'CORE_RL_fribidi_.lib',
-            'CORE_RL_glib_.lib',
-            'CORE_RL_harfbuzz_.lib',
-            'CORE_RL_heif_.lib',
-            'CORE_RL_highway_.lib',
-            'CORE_RL_jasper_.lib',
-            'CORE_RL_jpeg-turbo_.lib',
-            'CORE_RL_jpeg-xl_.lib',
-            'CORE_RL_lcms_.lib',
-            'CORE_RL_lqr_.lib',
-            'CORE_RL_lzma_.lib',
-            'CORE_RL_Magick++_.lib',
-            'CORE_RL_MagickCore_.lib',
-            'CORE_RL_MagickWand_.lib',
-            'CORE_RL_openjpeg_.lib',
-            'CORE_RL_pango_.lib',
-            'CORE_RL_pixman_.lib',
-            'CORE_RL_png_.lib',
-            'CORE_RL_raqm_.lib',
-            'CORE_RL_raw_.lib',
-            'CORE_RL_rsvg_.lib',
-            'CORE_RL_tiff_.lib',
-            'CORE_RL_webp_.lib',
-            'CORE_RL_xml_.lib',
-            'CORE_RL_zip_.lib',
-            'CORE_RL_zlib_.lib'
+            'CORE_<(winlibid)_aom_.lib',
+            'CORE_<(winlibid)_brotli_.lib',
+            'CORE_<(winlibid)_bzlib_.lib',
+            'CORE_<(winlibid)_cairo_.lib',
+            'CORE_<(winlibid)_coders_.lib',
+            'CORE_<(winlibid)_croco_.lib',
+            'CORE_<(winlibid)_de265_.lib',
+            'CORE_<(winlibid)_exr_.lib',
+            'CORE_<(winlibid)_ffi_.lib',
+            'CORE_<(winlibid)_filters_.lib',
+            'CORE_<(winlibid)_freetype_.lib',
+            'CORE_<(winlibid)_fribidi_.lib',
+            'CORE_<(winlibid)_glib_.lib',
+            'CORE_<(winlibid)_harfbuzz_.lib',
+            'CORE_<(winlibid)_heif_.lib',
+            'CORE_<(winlibid)_highway_.lib',
+            'CORE_<(winlibid)_jasper_.lib',
+            'CORE_<(winlibid)_jpeg-turbo_.lib',
+            'CORE_<(winlibid)_jpeg-xl_.lib',
+            'CORE_<(winlibid)_lcms_.lib',
+            'CORE_<(winlibid)_lqr_.lib',
+            'CORE_<(winlibid)_lzma_.lib',
+            'CORE_<(winlibid)_Magick++_.lib',
+            'CORE_<(winlibid)_MagickCore_.lib',
+            'CORE_<(winlibid)_MagickWand_.lib',
+            'CORE_<(winlibid)_openjpeg_.lib',
+            'CORE_<(winlibid)_pango_.lib',
+            'CORE_<(winlibid)_pixman_.lib',
+            'CORE_<(winlibid)_png_.lib',
+            'CORE_<(winlibid)_raqm_.lib',
+            'CORE_<(winlibid)_raw_.lib',
+            'CORE_<(winlibid)_rsvg_.lib',
+            'CORE_<(winlibid)_tiff_.lib',
+            'CORE_<(winlibid)_webp_.lib',
+            'CORE_<(winlibid)_xml_.lib',
+            'CORE_<(winlibid)_zip_.lib',
+            'CORE_<(winlibid)_zlib_.lib'
           ],
           # This is the Windows version of the same hack as above
           # Here we invoke the official ImageMagick-Windows downloader
