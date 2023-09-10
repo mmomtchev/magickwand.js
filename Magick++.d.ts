@@ -377,6 +377,8 @@ export const BC7Compression: number;
 
 export const BC5Compression: number;
 
+export const LERCCompression: number;
+
 export function Core_CloneString(arg0: any, arg1: string): string;
 
 export const UndefinedEndian: number;
@@ -722,6 +724,8 @@ export const InverseLogEvaluateOperator: number;
 
 }
 
+export const NAPI_VERSION: number;
+
 export const MagickLibVersionText: string;
 
 export const MagickppLibVersionText: string;
@@ -735,13 +739,13 @@ export function CloneString(destination_: any, source_: string): void;
 
 export function DisableOpenCL(arg0?: void): void;
 
-export function EnableOpenCL(arg0?: void): any;
+export function EnableOpenCL(arg0?: void): boolean;
 
 export function InitializeMagick(path_: string): void;
 
 export function SetRandomSeed(seed: number): void;
 
-export function SetSecurityPolicy(policy_: string): any;
+export function SetSecurityPolicy(policy_: string): boolean;
 
 export function TerminateMagick(): void;
 
@@ -749,7 +753,7 @@ export  class Blob {
 
   constructor();
 
-  constructor(data_: any);
+  constructor(data_: Buffer);
 
   constructor(blob_: Magick.Blob);
 
@@ -767,13 +771,13 @@ export  class Blob {
 
   lengthAsync(): Promise<number>;
 
-  update(data_: any): void;
+  update(data_: Buffer): void;
 
-  updateAsync(data_: any): Promise<void>;
+  updateAsync(data_: Buffer): Promise<void>;
 
-  data(): void;
+  data(): Buffer;
 
-  dataAsync(): Promise<void>;
+  dataAsync(): Promise<Buffer>;
 }
 
 export function equal(left_: any, right_: any): number;
@@ -810,27 +814,21 @@ export  class Color {
 
   constructor(color_: Magick.Color);
 
-  constructor(color_: any);
-
   constructor(color_: string);
 
   clone(color_: Magick.Color): Magick.Color;
 
   clone(color: string): Magick.Color;
 
-  clone(color_: any): Magick.Color;
-
   clone(color: string): Magick.Color;
-
-  toPixelInfo(): any;
 
   toString(): string;
 
-  isFuzzyEquivalent(color_: Magick.Color, fuzz_: number): any;
+  isFuzzyEquivalent(color_: Magick.Color, fuzz_: number): boolean;
 
-  isValid(valid_: any): void;
+  isValid(valid_: boolean): void;
 
-  isValid(): any;
+  isValid(): boolean;
 
   pixelType(): any;
 
@@ -930,15 +928,15 @@ export  class ColorMono extends Magick.Color {
 
   constructor();
 
-  constructor(mono_: any);
+  constructor(mono_: boolean);
 
   constructor(color_: Magick.Color);
 
   clone(color_: Magick.Color): Magick.ColorMono;
 
-  mono(mono_: any): void;
+  mono(mono_: boolean): void;
 
-  mono(): any;
+  mono(): boolean;
 }
 
 export  class ColorRGB extends Magick.Color {
@@ -1029,37 +1027,37 @@ export  class Geometry {
 
   toString(): string;
 
-  aspect(aspect_: any): void;
+  aspect(aspect_: boolean): void;
 
-  aspect(): any;
+  aspect(): boolean;
 
-  fillArea(fillArea_: any): void;
+  fillArea(fillArea_: boolean): void;
 
-  fillArea(): any;
+  fillArea(): boolean;
 
-  greater(greater_: any): void;
+  greater(greater_: boolean): void;
 
-  greater(): any;
+  greater(): boolean;
 
   height(height_: number): void;
 
   height(): number;
 
-  isValid(isValid_: any): void;
+  isValid(isValid_: boolean): void;
 
-  isValid(): any;
+  isValid(): boolean;
 
-  less(less_: any): void;
+  less(less_: boolean): void;
 
-  less(): any;
+  less(): boolean;
 
-  limitPixels(limitPixels_: any): void;
+  limitPixels(limitPixels_: boolean): void;
 
-  limitPixels(): any;
+  limitPixels(): boolean;
 
-  percent(percent_: any): void;
+  percent(percent_: boolean): void;
 
-  percent(): any;
+  percent(): boolean;
 
   width(width_: number): void;
 
@@ -1073,11 +1071,7 @@ export  class Geometry {
 
   yOff(): number;
 
-  constructor(rectangle_: any);
-
   clone(rectangle_: any): Magick.Geometry;
-
-  toRectangleInfo(): any;
 }
 
 export function equal(left_: any, right_: any): number;
@@ -1105,8 +1099,6 @@ export  class Offset {
   x(): number;
 
   y(): number;
-
-  toOffsetInfo(): any;
 }
 
 export function equal(left_: any, right_: any): number;
@@ -1137,7 +1129,7 @@ export  class Point {
 
   toString(): string;
 
-  isValid(): any;
+  isValid(): boolean;
 
   x(): number;
 
@@ -1186,9 +1178,9 @@ export  class Drawable {
 
   constructor(original_: Magick.DrawableBase);
 
-  constructor(original_: Magick.Drawable);
+  constructor(original_: Magick.DrawableBase);
 
-  clone(original_: Magick.Drawable): Magick.Drawable;
+  clone(original_: Magick.DrawableBase): Magick.DrawableBase;
 
   call(arg0: any): void;
 }
@@ -1647,7 +1639,7 @@ export  class DrawableLine extends Magick.DrawableBase {
 
 export  class DrawablePath extends Magick.DrawableBase {
 
-  constructor(path_: any);
+  constructor(path_: Magick.VPathBase[]);
 
   constructor(original_: Magick.DrawablePath);
 
@@ -1946,15 +1938,15 @@ export  class DrawableStrokePatternUrl extends Magick.DrawableBase {
 
 export  class DrawableStrokeAntialias extends Magick.DrawableBase {
 
-  constructor(flag_: any);
+  constructor(flag_: boolean);
 
   call(context_: any): void;
 
   copy(): Magick.DrawableBase;
 
-  flag(flag_: any): void;
+  flag(flag_: boolean): void;
 
-  flag(): any;
+  flag(): boolean;
 }
 
 export  class DrawableStrokeColor extends Magick.DrawableBase {
@@ -2042,7 +2034,7 @@ export  class DrawableTextAlignment extends Magick.DrawableBase {
 
 export  class DrawableTextAntialias extends Magick.DrawableBase {
 
-  constructor(flag_: any);
+  constructor(flag_: boolean);
 
   constructor(original_: Magick.DrawableTextAntialias);
 
@@ -2050,9 +2042,9 @@ export  class DrawableTextAntialias extends Magick.DrawableBase {
 
   copy(): Magick.DrawableBase;
 
-  flag(flag_: any): void;
+  flag(flag_: boolean): void;
 
-  flag(): any;
+  flag(): boolean;
 }
 
 export  class DrawableTextDecoration extends Magick.DrawableBase {
@@ -2183,7 +2175,7 @@ export  class PathArcArgs {
 
   constructor();
 
-  constructor(radiusX_: number, radiusY_: number, xAxisRotation_: number, largeArcFlag_: any, sweepFlag_: any, x_: number, y_: number);
+  constructor(radiusX_: number, radiusY_: number, xAxisRotation_: number, largeArcFlag_: boolean, sweepFlag_: boolean, x_: number, y_: number);
 
   constructor(original_: Magick.PathArcArgs);
 
@@ -2199,13 +2191,13 @@ export  class PathArcArgs {
 
   xAxisRotation(): number;
 
-  largeArcFlag(largeArcFlag_: any): void;
+  largeArcFlag(largeArcFlag_: boolean): void;
 
-  largeArcFlag(): any;
+  largeArcFlag(): boolean;
 
-  sweepFlag(sweepFlag_: any): void;
+  sweepFlag(sweepFlag_: boolean): void;
 
-  sweepFlag(): any;
+  sweepFlag(): boolean;
 
   x(x_: number): void;
 
@@ -2872,7 +2864,7 @@ export function throwExceptionExplicit(severity_: any, reason_: string, descript
 
 export function throwExceptionExplicit(severity_: any, reason_: string): void;
 
-export function throwException(exception_: any, quiet_: any): void;
+export function throwException(exception_: any, quiet_: boolean): void;
 
 export function throwException(exception_: any): void;
 
@@ -2900,7 +2892,7 @@ export  class ChannelMoments {
 
   huInvariants(index_: number): number;
 
-  isValid(): any;
+  isValid(): boolean;
 
   constructor(channel_: any, channelMoments_: any);
 }
@@ -2917,7 +2909,7 @@ export  class ChannelPerceptualHash {
 
   channel(): any;
 
-  isValid(): any;
+  isValid(): boolean;
 
   sumSquaredDifferences(channelPerceptualHash_: Magick.ChannelPerceptualHash): number;
 
@@ -2942,7 +2934,7 @@ export  class ChannelStatistics {
 
   entropy(): number;
 
-  isValid(): any;
+  isValid(): boolean;
 
   kurtosis(): number;
 
@@ -2992,7 +2984,7 @@ export  class ImagePerceptualHash {
 
   channel(channel_: any): Magick.ChannelPerceptualHash;
 
-  isValid(): any;
+  isValid(): boolean;
 
   sumSquaredDifferences(channelPerceptualHash_: Magick.ImagePerceptualHash): number;
 
@@ -3073,27 +3065,27 @@ export  class Image {
 
   constructor(image_: Magick.Image, geometry_: Magick.Geometry);
 
-  constructor(width_: number, height_: number, map_: string, type_: any);
+  constructor(width_: number, height_: number, map_: string, type_: Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Float32Array | Float64Array | BigUint64Array);
 
   constructor(imageSpec_: string);
 
   clone(image_: Magick.Image): Magick.Image;
 
-  adjoin(flag_: any): void;
+  adjoin(flag_: boolean): void;
 
-  adjoinAsync(flag_: any): Promise<void>;
+  adjoinAsync(flag_: boolean): Promise<void>;
 
-  adjoin(): any;
+  adjoin(): boolean;
 
-  adjoinAsync(): Promise<any>;
+  adjoinAsync(): Promise<boolean>;
 
-  alpha(alphaFlag_: any): void;
+  alpha(alphaFlag_: boolean): void;
 
-  alphaAsync(alphaFlag_: any): Promise<void>;
+  alphaAsync(alphaFlag_: boolean): Promise<void>;
 
-  alpha(): any;
+  alpha(): boolean;
 
-  alphaAsync(): Promise<any>;
+  alphaAsync(): Promise<boolean>;
 
   matteColor(matteColor_: Magick.Color): void;
 
@@ -3147,13 +3139,13 @@ export  class Image {
 
   baseRowsAsync(): Promise<number>;
 
-  blackPointCompensation(flag_: any): void;
+  blackPointCompensation(flag_: boolean): void;
 
-  blackPointCompensationAsync(flag_: any): Promise<void>;
+  blackPointCompensationAsync(flag_: boolean): Promise<void>;
 
-  blackPointCompensation(): any;
+  blackPointCompensation(): boolean;
 
-  blackPointCompensationAsync(): Promise<any>;
+  blackPointCompensationAsync(): Promise<boolean>;
 
   borderColor(color_: Magick.Color): void;
 
@@ -3255,13 +3247,13 @@ export  class Image {
 
   compressTypeAsync(): Promise<any>;
 
-  debug(flag_: any): void;
+  debug(flag_: boolean): void;
 
-  debugAsync(flag_: any): Promise<void>;
+  debugAsync(flag_: boolean): Promise<void>;
 
-  debug(): any;
+  debug(): boolean;
 
-  debugAsync(): Promise<any>;
+  debugAsync(): Promise<boolean>;
 
   density(density_: Magick.Point): void;
 
@@ -3407,9 +3399,9 @@ export  class Image {
 
   gifDisposeMethodAsync(): Promise<any>;
 
-  hasChannel(channel: any): any;
+  hasChannel(channel: any): boolean;
 
-  hasChannelAsync(channel: any): Promise<any>;
+  hasChannelAsync(channel: any): Promise<boolean>;
 
   highlightColor(color_: Magick.Color): void;
 
@@ -3447,17 +3439,17 @@ export  class Image {
 
   iptcProfileAsync(): Promise<Magick.Blob>;
 
-  isOpaque(): any;
+  isOpaque(): boolean;
 
-  isOpaqueAsync(): Promise<any>;
+  isOpaqueAsync(): Promise<boolean>;
 
-  isValid(isValid_: any): void;
+  isValid(isValid_: boolean): void;
 
-  isValidAsync(isValid_: any): Promise<void>;
+  isValidAsync(isValid_: boolean): Promise<void>;
 
-  isValid(): any;
+  isValid(): boolean;
 
-  isValidAsync(): Promise<any>;
+  isValidAsync(): Promise<boolean>;
 
   label(label_: string): void;
 
@@ -3495,13 +3487,13 @@ export  class Image {
 
   modulusDepthAsync(): Promise<number>;
 
-  monochrome(monochromeFlag_: any): void;
+  monochrome(monochromeFlag_: boolean): void;
 
-  monochromeAsync(monochromeFlag_: any): Promise<void>;
+  monochromeAsync(monochromeFlag_: boolean): Promise<void>;
 
-  monochrome(): any;
+  monochrome(): boolean;
 
-  monochromeAsync(): Promise<any>;
+  monochromeAsync(): Promise<boolean>;
 
   montageGeometry(): Magick.Geometry;
 
@@ -3555,13 +3547,13 @@ export  class Image {
 
   quantizeColorSpaceAsync(): Promise<any>;
 
-  quantizeDither(ditherFlag_: any): void;
+  quantizeDither(ditherFlag_: boolean): void;
 
-  quantizeDitherAsync(ditherFlag_: any): Promise<void>;
+  quantizeDitherAsync(ditherFlag_: boolean): Promise<void>;
 
-  quantizeDither(): any;
+  quantizeDither(): boolean;
 
-  quantizeDitherAsync(): Promise<any>;
+  quantizeDitherAsync(): Promise<boolean>;
 
   quantizeDitherMethod(ditherMethod_: any): void;
 
@@ -3579,13 +3571,13 @@ export  class Image {
 
   quantizeTreeDepthAsync(): Promise<number>;
 
-  quiet(quiet_: any): void;
+  quiet(quiet_: boolean): void;
 
-  quietAsync(quiet_: any): Promise<void>;
+  quietAsync(quiet_: boolean): Promise<void>;
 
-  quiet(): any;
+  quiet(): boolean;
 
-  quietAsync(): Promise<any>;
+  quietAsync(): Promise<boolean>;
 
   renderingIntent(renderingIntent_: any): void;
 
@@ -3631,13 +3623,13 @@ export  class Image {
 
   sizeAsync(): Promise<Magick.Geometry>;
 
-  strokeAntiAlias(flag_: any): void;
+  strokeAntiAlias(flag_: boolean): void;
 
-  strokeAntiAliasAsync(flag_: any): Promise<void>;
+  strokeAntiAliasAsync(flag_: boolean): Promise<void>;
 
-  strokeAntiAlias(): any;
+  strokeAntiAlias(): boolean;
 
-  strokeAntiAliasAsync(): Promise<any>;
+  strokeAntiAliasAsync(): Promise<boolean>;
 
   strokeColor(strokeColor_: Magick.Color): void;
 
@@ -3719,13 +3711,13 @@ export  class Image {
 
   subRangeAsync(): Promise<number>;
 
-  textAntiAlias(flag_: any): void;
+  textAntiAlias(flag_: boolean): void;
 
-  textAntiAliasAsync(flag_: any): Promise<void>;
+  textAntiAliasAsync(flag_: boolean): Promise<void>;
 
-  textAntiAlias(): any;
+  textAntiAlias(): boolean;
 
-  textAntiAliasAsync(): Promise<any>;
+  textAntiAliasAsync(): Promise<boolean>;
 
   textDirection(direction_: any): void;
 
@@ -3807,13 +3799,13 @@ export  class Image {
 
   typeAsync(): Promise<any>;
 
-  verbose(verboseFlag_: any): void;
+  verbose(verboseFlag_: boolean): void;
 
-  verboseAsync(verboseFlag_: any): Promise<void>;
+  verboseAsync(verboseFlag_: boolean): Promise<void>;
 
-  verbose(): any;
+  verbose(): boolean;
 
-  verboseAsync(): Promise<any>;
+  verboseAsync(): Promise<boolean>;
 
   virtualPixelMethod(virtualPixelMethod_: any): void;
 
@@ -4147,9 +4139,9 @@ export  class Image {
 
   clipAsync(): Promise<void>;
 
-  clipPath(pathname_: string, inside_: any): void;
+  clipPath(pathname_: string, inside_: boolean): void;
 
-  clipPathAsync(pathname_: string, inside_: any): Promise<void>;
+  clipPathAsync(pathname_: string, inside_: boolean): Promise<void>;
 
   clut(clutImage_: Magick.Image, method: any): void;
 
@@ -4179,9 +4171,9 @@ export  class Image {
 
   colorMatrixAsync(order_: number, color_matrix_: any): Promise<void>;
 
-  compare(reference_: Magick.Image): any;
+  compare(reference_: Magick.Image): boolean;
 
-  compareAsync(reference_: Magick.Image): Promise<any>;
+  compareAsync(reference_: Magick.Image): Promise<boolean>;
 
   compare(reference_: Magick.Image, metric_: any): number;
 
@@ -4227,9 +4219,9 @@ export  class Image {
 
   connectedComponentsAsync(connectivity_: number): Promise<void>;
 
-  contrast(sharpen_: any): void;
+  contrast(sharpen_: boolean): void;
 
-  contrastAsync(sharpen_: any): Promise<void>;
+  contrastAsync(sharpen_: boolean): Promise<void>;
 
   contrastStretch(blackPoint_: number, whitePoint_: number): void;
 
@@ -4259,13 +4251,13 @@ export  class Image {
 
   decipherAsync(passphrase_: string): Promise<void>;
 
-  defineSet(magick_: string, key_: string, flag_: any): void;
+  defineSet(magick_: string, key_: string, flag_: boolean): void;
 
-  defineSetAsync(magick_: string, key_: string, flag_: any): Promise<void>;
+  defineSetAsync(magick_: string, key_: string, flag_: boolean): Promise<void>;
 
-  defineSet(magick_: string, key_: string): any;
+  defineSet(magick_: string, key_: string): boolean;
 
-  defineSetAsync(magick_: string, key_: string): Promise<any>;
+  defineSetAsync(magick_: string, key_: string): Promise<boolean>;
 
   defineValue(magick_: string, key_: string, value_: string): void;
 
@@ -4287,21 +4279,21 @@ export  class Image {
 
   displayAsync(): Promise<void>;
 
-  distort(method_: any, numberArguments_: number, arguments_: any, bestfit_: any): void;
+  distort(method_: any, numberArguments_: number, arguments_: any, bestfit_: boolean): void;
 
-  distortAsync(method_: any, numberArguments_: number, arguments_: any, bestfit_: any): Promise<void>;
+  distortAsync(method_: any, numberArguments_: number, arguments_: any, bestfit_: boolean): Promise<void>;
 
   distort(method_: any, numberArguments_: number, arguments_: any): void;
 
   distortAsync(method_: any, numberArguments_: number, arguments_: any): Promise<void>;
 
-  draw(drawable_: Magick.Drawable): void;
+  draw(drawable_: Magick.DrawableBase): void;
 
-  drawAsync(drawable_: Magick.Drawable): Promise<void>;
+  drawAsync(drawable_: Magick.DrawableBase): Promise<void>;
 
-  draw(drawable_: any): void;
+  draw(drawable_: Magick.DrawableBase[]): void;
 
-  drawAsync(drawable_: any): Promise<void>;
+  drawAsync(drawable_: Magick.DrawableBase[]): Promise<void>;
 
   edge(radius_: number): void;
 
@@ -4371,81 +4363,81 @@ export  class Image {
 
   flipAsync(): Promise<void>;
 
-  floodFillAlpha(x_: number, y_: number, alpha_: number, invert_: any): void;
+  floodFillAlpha(x_: number, y_: number, alpha_: number, invert_: boolean): void;
 
-  floodFillAlphaAsync(x_: number, y_: number, alpha_: number, invert_: any): Promise<void>;
+  floodFillAlphaAsync(x_: number, y_: number, alpha_: number, invert_: boolean): Promise<void>;
 
   floodFillAlpha(x_: number, y_: number, alpha_: number): void;
 
   floodFillAlphaAsync(x_: number, y_: number, alpha_: number): Promise<void>;
 
-  floodFillAlpha(x_: number, y_: number, alpha_: number, target_: Magick.Color, invert_: any): void;
+  floodFillAlpha(x_: number, y_: number, alpha_: number, target_: Magick.Color, invert_: boolean): void;
 
-  floodFillAlphaAsync(x_: number, y_: number, alpha_: number, target_: Magick.Color, invert_: any): Promise<void>;
+  floodFillAlphaAsync(x_: number, y_: number, alpha_: number, target_: Magick.Color, invert_: boolean): Promise<void>;
 
   floodFillAlpha(x_: number, y_: number, alpha_: number, target_: Magick.Color): void;
 
   floodFillAlphaAsync(x_: number, y_: number, alpha_: number, target_: Magick.Color): Promise<void>;
 
-  floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color, invert_: any): void;
+  floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color, invert_: boolean): void;
 
-  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color, invert_: any): Promise<void>;
+  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color, invert_: boolean): Promise<void>;
 
   floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color): void;
 
   floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color): Promise<void>;
 
-  floodFillColor(x_: number, y_: number, fillColor_: Magick.Color, invert_: any): void;
+  floodFillColor(x_: number, y_: number, fillColor_: Magick.Color, invert_: boolean): void;
 
-  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color, invert_: any): Promise<void>;
+  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color, invert_: boolean): Promise<void>;
 
   floodFillColor(x_: number, y_: number, fillColor_: Magick.Color): void;
 
   floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color): Promise<void>;
 
-  floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: any): void;
+  floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: boolean): void;
 
-  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: any): Promise<void>;
+  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: boolean): Promise<void>;
 
   floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color, borderColor_: Magick.Color): void;
 
   floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color, borderColor_: Magick.Color): Promise<void>;
 
-  floodFillColor(x_: number, y_: number, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: any): void;
+  floodFillColor(x_: number, y_: number, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: boolean): void;
 
-  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: any): Promise<void>;
+  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: boolean): Promise<void>;
 
   floodFillColor(x_: number, y_: number, fillColor_: Magick.Color, borderColor_: Magick.Color): void;
 
   floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color, borderColor_: Magick.Color): Promise<void>;
 
-  floodFillTexture(point_: Magick.Geometry, texture_: Magick.Image, invert_: any): void;
+  floodFillTexture(point_: Magick.Geometry, texture_: Magick.Image, invert_: boolean): void;
 
-  floodFillTextureAsync(point_: Magick.Geometry, texture_: Magick.Image, invert_: any): Promise<void>;
+  floodFillTextureAsync(point_: Magick.Geometry, texture_: Magick.Image, invert_: boolean): Promise<void>;
 
   floodFillTexture(point_: Magick.Geometry, texture_: Magick.Image): void;
 
   floodFillTextureAsync(point_: Magick.Geometry, texture_: Magick.Image): Promise<void>;
 
-  floodFillTexture(x_: number, y_: number, texture_: Magick.Image, invert_: any): void;
+  floodFillTexture(x_: number, y_: number, texture_: Magick.Image, invert_: boolean): void;
 
-  floodFillTextureAsync(x_: number, y_: number, texture_: Magick.Image, invert_: any): Promise<void>;
+  floodFillTextureAsync(x_: number, y_: number, texture_: Magick.Image, invert_: boolean): Promise<void>;
 
   floodFillTexture(x_: number, y_: number, texture_: Magick.Image): void;
 
   floodFillTextureAsync(x_: number, y_: number, texture_: Magick.Image): Promise<void>;
 
-  floodFillTexture(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color, invert_: any): void;
+  floodFillTexture(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color, invert_: boolean): void;
 
-  floodFillTextureAsync(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color, invert_: any): Promise<void>;
+  floodFillTextureAsync(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color, invert_: boolean): Promise<void>;
 
   floodFillTexture(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color): void;
 
   floodFillTextureAsync(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color): Promise<void>;
 
-  floodFillTexture(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color, invert_: any): void;
+  floodFillTexture(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color, invert_: boolean): void;
 
-  floodFillTextureAsync(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color, invert_: any): Promise<void>;
+  floodFillTextureAsync(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color, invert_: boolean): Promise<void>;
 
   floodFillTexture(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color): void;
 
@@ -4551,9 +4543,9 @@ export  class Image {
 
   inverseFourierTransformAsync(phase_: Magick.Image): Promise<void>;
 
-  inverseFourierTransform(phase_: Magick.Image, magnitude_: any): void;
+  inverseFourierTransform(phase_: Magick.Image, magnitude_: boolean): void;
 
-  inverseFourierTransformAsync(phase_: Magick.Image, magnitude_: any): Promise<void>;
+  inverseFourierTransformAsync(phase_: Magick.Image, magnitude_: boolean): Promise<void>;
 
   kuwahara(radius_: number, sigma_: number): void;
 
@@ -4595,17 +4587,17 @@ export  class Image {
 
   levelChannelAsync(channel_: any, blackPoint_: number, whitePoint_: number): Promise<void>;
 
-  levelColors(blackColor_: Magick.Color, whiteColor_: Magick.Color, invert_: any): void;
+  levelColors(blackColor_: Magick.Color, whiteColor_: Magick.Color, invert_: boolean): void;
 
-  levelColorsAsync(blackColor_: Magick.Color, whiteColor_: Magick.Color, invert_: any): Promise<void>;
+  levelColorsAsync(blackColor_: Magick.Color, whiteColor_: Magick.Color, invert_: boolean): Promise<void>;
 
   levelColors(blackColor_: Magick.Color, whiteColor_: Magick.Color): void;
 
   levelColorsAsync(blackColor_: Magick.Color, whiteColor_: Magick.Color): Promise<void>;
 
-  levelColorsChannel(channel_: any, blackColor_: Magick.Color, whiteColor_: Magick.Color, invert_: any): void;
+  levelColorsChannel(channel_: any, blackColor_: Magick.Color, whiteColor_: Magick.Color, invert_: boolean): void;
 
-  levelColorsChannelAsync(channel_: any, blackColor_: Magick.Color, whiteColor_: Magick.Color, invert_: any): Promise<void>;
+  levelColorsChannelAsync(channel_: any, blackColor_: Magick.Color, whiteColor_: Magick.Color, invert_: boolean): Promise<void>;
 
   levelColorsChannel(channel_: any, blackColor_: Magick.Color, whiteColor_: Magick.Color): void;
 
@@ -4647,9 +4639,9 @@ export  class Image {
 
   magnifyAsync(): Promise<void>;
 
-  map(mapImage_: Magick.Image, dither_: any): void;
+  map(mapImage_: Magick.Image, dither_: boolean): void;
 
-  mapAsync(mapImage_: Magick.Image, dither_: any): Promise<void>;
+  mapAsync(mapImage_: Magick.Image, dither_: boolean): Promise<void>;
 
   map(mapImage_: Magick.Image): void;
 
@@ -4715,17 +4707,17 @@ export  class Image {
 
   motionBlurAsync(radius_: number, sigma_: number, angle_: number): Promise<void>;
 
-  negate(grayscale_: any): void;
+  negate(grayscale_: boolean): void;
 
-  negateAsync(grayscale_: any): Promise<void>;
+  negateAsync(grayscale_: boolean): Promise<void>;
 
   negate(): void;
 
   negateAsync(): Promise<void>;
 
-  negateChannel(channel_: any, grayscale_: any): void;
+  negateChannel(channel_: any, grayscale_: boolean): void;
 
-  negateChannelAsync(channel_: any, grayscale_: any): Promise<void>;
+  negateChannelAsync(channel_: any, grayscale_: boolean): Promise<void>;
 
   negateChannel(channel_: any): void;
 
@@ -4747,9 +4739,9 @@ export  class Image {
 
   oilPaintAsync(): Promise<void>;
 
-  opaque(opaqueColor_: Magick.Color, penColor_: Magick.Color, invert_: any): void;
+  opaque(opaqueColor_: Magick.Color, penColor_: Magick.Color, invert_: boolean): void;
 
-  opaqueAsync(opaqueColor_: Magick.Color, penColor_: Magick.Color, invert_: any): Promise<void>;
+  opaqueAsync(opaqueColor_: Magick.Color, penColor_: Magick.Color, invert_: boolean): Promise<void>;
 
   opaque(opaqueColor_: Magick.Color, penColor_: Magick.Color): void;
 
@@ -4815,17 +4807,17 @@ export  class Image {
 
   profileAsync(name_: string): Promise<Magick.Blob>;
 
-  quantize(measureError_: any): void;
+  quantize(measureError_: boolean): void;
 
-  quantizeAsync(measureError_: any): Promise<void>;
+  quantizeAsync(measureError_: boolean): Promise<void>;
 
   quantize(): void;
 
   quantizeAsync(): Promise<void>;
 
-  raise(geometry_: Magick.Geometry, raisedFlag_: any): void;
+  raise(geometry_: Magick.Geometry, raisedFlag_: boolean): void;
 
-  raiseAsync(geometry_: Magick.Geometry, raisedFlag_: any): Promise<void>;
+  raiseAsync(geometry_: Magick.Geometry, raisedFlag_: boolean): Promise<void>;
 
   raise(geometry_: Magick.Geometry): void;
 
@@ -4867,9 +4859,9 @@ export  class Image {
 
   readAsync(size_: Magick.Geometry, imageSpec_: string): Promise<void>;
 
-  read(width_: number, height_: number, map_: string, type_: any): void;
+  read(width_: number, height_: number, map_: string, type_: Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Float32Array | Float64Array | BigUint64Array): void;
 
-  readAsync(width_: number, height_: number, map_: string, type_: any): Promise<void>;
+  readAsync(width_: number, height_: number, map_: string, type_: Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Float32Array | Float64Array | BigUint64Array): Promise<void>;
 
   read(imageSpec_: string): void;
 
@@ -4963,17 +4955,17 @@ export  class Image {
 
   sepiaToneAsync(threshold_: number): Promise<void>;
 
-  setColorMetric(reference_: Magick.Image): any;
+  setColorMetric(reference_: Magick.Image): boolean;
 
-  setColorMetricAsync(reference_: Magick.Image): Promise<any>;
+  setColorMetricAsync(reference_: Magick.Image): Promise<boolean>;
 
   setPixels(x_: number, y_: number, columns_: number, rows_: number): any;
 
   setPixelsAsync(x_: number, y_: number, columns_: number, rows_: number): Promise<any>;
 
-  shade(azimuth_: number, elevation_: number, colorShading_: any): void;
+  shade(azimuth_: number, elevation_: number, colorShading_: boolean): void;
 
-  shadeAsync(azimuth_: number, elevation_: number, colorShading_: any): Promise<void>;
+  shadeAsync(azimuth_: number, elevation_: number, colorShading_: boolean): Promise<void>;
 
   shade(azimuth_: number, elevation_: number): void;
 
@@ -5039,17 +5031,17 @@ export  class Image {
 
   shearAsync(xShearAngle_: number, yShearAngle_: number): Promise<void>;
 
-  sigmoidalContrast(sharpen_: any, contrast: number, midpoint: number): void;
+  sigmoidalContrast(sharpen_: boolean, contrast: number, midpoint: number): void;
 
-  sigmoidalContrastAsync(sharpen_: any, contrast: number, midpoint: number): Promise<void>;
+  sigmoidalContrastAsync(sharpen_: boolean, contrast: number, midpoint: number): Promise<void>;
 
-  sigmoidalContrast(sharpen_: any, contrast: number): void;
+  sigmoidalContrast(sharpen_: boolean, contrast: number): void;
 
-  sigmoidalContrastAsync(sharpen_: any, contrast: number): Promise<void>;
+  sigmoidalContrastAsync(sharpen_: boolean, contrast: number): Promise<void>;
 
-  signature(force_: any): string;
+  signature(force_: boolean): string;
 
-  signatureAsync(force_: any): Promise<string>;
+  signatureAsync(force_: boolean): Promise<string>;
 
   signature(): string;
 
@@ -5163,9 +5155,9 @@ export  class Image {
 
   transformScaleAsync(sx_: number, sy_: number): Promise<void>;
 
-  transparent(color_: Magick.Color, inverse_: any): void;
+  transparent(color_: Magick.Color, inverse_: boolean): void;
 
-  transparentAsync(color_: Magick.Color, inverse_: any): Promise<void>;
+  transparentAsync(color_: Magick.Color, inverse_: boolean): Promise<void>;
 
   transparent(color_: Magick.Color): void;
 
@@ -5255,9 +5247,9 @@ export  class Image {
 
   writeAsync(blob_: Magick.Blob, magick_: string, depth_: number): Promise<void>;
 
-  write(x_: number, y_: number, columns_: number, rows_: number, map_: string, type_: any): void;
+  write(x_: number, y_: number, columns_: number, rows_: number, map_: string, type_: Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Float32Array | Float64Array | BigUint64Array): void;
 
-  writeAsync(x_: number, y_: number, columns_: number, rows_: number, map_: string, type_: any): Promise<void>;
+  writeAsync(x_: number, y_: number, columns_: number, rows_: number, map_: string, type_: Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Float32Array | Float64Array | BigUint64Array): Promise<void>;
 
   write(imageSpec_: string): void;
 
@@ -5394,17 +5386,17 @@ export  class CoderInfo {
 
   clone(coder_: Magick.CoderInfo): Magick.CoderInfo;
 
-  canReadMultithreaded(): any;
+  canReadMultithreaded(): boolean;
 
-  canWriteMultithreaded(): any;
+  canWriteMultithreaded(): boolean;
 
   description(): string;
 
-  isMultiFrame(): any;
+  isMultiFrame(): boolean;
 
-  isReadable(): any;
+  isReadable(): boolean;
 
-  isWritable(): any;
+  isWritable(): boolean;
 
   mimeType(): string;
 
@@ -5412,7 +5404,7 @@ export  class CoderInfo {
 
   name(): string;
 
-  unregister(): any;
+  unregister(): boolean;
 }
 
 export  class Montage {
@@ -5483,13 +5475,13 @@ export  class Montage {
 
   pointSizeAsync(): Promise<number>;
 
-  shadow(shadow_: any): void;
+  shadow(shadow_: boolean): void;
 
-  shadowAsync(shadow_: any): Promise<void>;
+  shadowAsync(shadow_: boolean): Promise<void>;
 
-  shadow(): any;
+  shadow(): boolean;
 
-  shadowAsync(): Promise<any>;
+  shadowAsync(): Promise<boolean>;
 
   strokeColor(stroke_: Magick.Color): void;
 
@@ -5789,7 +5781,7 @@ export  class despeckleImage {
 
 export  class distortImage {
 
-  constructor(method_: any, number_arguments_: number, arguments_: any, bestfit_: any);
+  constructor(method_: any, number_arguments_: number, arguments_: any, bestfit_: boolean);
 
   constructor(method_: any, number_arguments_: number, arguments_: any);
 
@@ -5800,9 +5792,9 @@ export  class distortImage {
 
 export  class drawImage {
 
-  constructor(drawable_: Magick.Drawable);
+  constructor(drawable_: Magick.DrawableBase);
 
-  constructor(drawable_: any);
+  constructor(drawable_: Magick.DrawableBase[]);
 
   call(image_: Magick.Image): void;
 
@@ -5867,7 +5859,7 @@ export  class flipImage {
 
 export  class floodFillAlphaImage {
 
-  constructor(x_: number, y_: number, alpha_: number, target_: Magick.Color, invert_: any);
+  constructor(x_: number, y_: number, alpha_: number, target_: Magick.Color, invert_: boolean);
 
   constructor(x_: number, y_: number, alpha_: number, target_: Magick.Color);
 
@@ -5878,19 +5870,19 @@ export  class floodFillAlphaImage {
 
 export  class floodFillColorImage {
 
-  constructor(point_: Magick.Geometry, fillColor_: Magick.Color, invert_: any);
+  constructor(point_: Magick.Geometry, fillColor_: Magick.Color, invert_: boolean);
 
   constructor(point_: Magick.Geometry, fillColor_: Magick.Color);
 
-  constructor(x_: number, y_: number, fillColor_: Magick.Color, invert_: any);
+  constructor(x_: number, y_: number, fillColor_: Magick.Color, invert_: boolean);
 
   constructor(x_: number, y_: number, fillColor_: Magick.Color);
 
-  constructor(point_: Magick.Geometry, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: any);
+  constructor(point_: Magick.Geometry, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: boolean);
 
   constructor(point_: Magick.Geometry, fillColor_: Magick.Color, borderColor_: Magick.Color);
 
-  constructor(x_: number, y_: number, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: any);
+  constructor(x_: number, y_: number, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: boolean);
 
   constructor(x_: number, y_: number, fillColor_: Magick.Color, borderColor_: Magick.Color);
 
@@ -5899,19 +5891,19 @@ export  class floodFillColorImage {
 
 export  class floodFillTextureImage {
 
-  constructor(x_: number, y_: number, texture_: Magick.Image, invert_: any);
+  constructor(x_: number, y_: number, texture_: Magick.Image, invert_: boolean);
 
   constructor(x_: number, y_: number, texture_: Magick.Image);
 
-  constructor(point_: Magick.Geometry, texture_: Magick.Image, invert_: any);
+  constructor(point_: Magick.Geometry, texture_: Magick.Image, invert_: boolean);
 
   constructor(point_: Magick.Geometry, texture_: Magick.Image);
 
-  constructor(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color, invert_: any);
+  constructor(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color, invert_: boolean);
 
   constructor(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color);
 
-  constructor(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color, invert_: any);
+  constructor(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color, invert_: boolean);
 
   constructor(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color);
 
@@ -5997,7 +5989,7 @@ export  class inverseFourierTransformImage {
 
 export  class isValidImage {
 
-  constructor(isValid_: any);
+  constructor(isValid_: boolean);
 
   call(image_: Magick.Image): void;
 
@@ -6035,7 +6027,7 @@ export  class magnifyImage {
 
 export  class mapImage {
 
-  constructor(mapImage_: Magick.Image, dither_: any);
+  constructor(mapImage_: Magick.Image, dither_: boolean);
 
   constructor(mapImage_: Magick.Image);
 
@@ -6075,7 +6067,7 @@ export  class modulateImage {
 
 export  class negateImage {
 
-  constructor(grayscale_: any);
+  constructor(grayscale_: boolean);
 
   constructor();
 
@@ -6124,7 +6116,7 @@ export  class opaqueImage {
 
 export  class quantizeImage {
 
-  constructor(measureError_: any);
+  constructor(measureError_: boolean);
 
   constructor();
 
@@ -6135,7 +6127,7 @@ export  class quantizeImage {
 
 export  class raiseImage {
 
-  constructor(geometry_: Magick.Geometry, raisedFlag_: any);
+  constructor(geometry_: Magick.Geometry, raisedFlag_: boolean);
 
   constructor(geometry_: Magick.Geometry);
 
@@ -6160,13 +6152,13 @@ export  class ReadOptions {
 
   depth(): number;
 
-  ping(flag_: any): void;
+  ping(flag_: boolean): void;
 
-  ping(): any;
+  ping(): boolean;
 
-  quiet(quiet_: any): void;
+  quiet(quiet_: boolean): void;
 
-  quiet(): any;
+  quiet(): boolean;
 
   size(geometry_: Magick.Geometry): void;
 
@@ -6248,7 +6240,7 @@ export  class segmentImage {
 
 export  class shadeImage {
 
-  constructor(azimuth_: number, elevation_: number, colorShading_: any);
+  constructor(azimuth_: number, elevation_: number, colorShading_: boolean);
 
   constructor(azimuth_: number, elevation_: number);
 
@@ -6432,7 +6424,7 @@ export  class zoomImage {
 
 export  class adjoinImage {
 
-  constructor(flag_: any);
+  constructor(flag_: boolean);
 
   call(image_: Magick.Image): void;
 
@@ -6651,7 +6643,7 @@ export  class magickImage {
 
 export  class alphaFlagImage {
 
-  constructor(alphaFlag_: any);
+  constructor(alphaFlag_: boolean);
 
   call(image_: Magick.Image): void;
 
@@ -6667,7 +6659,7 @@ export  class matteColorImage {
 
 export  class monochromeImage {
 
-  constructor(monochromeFlag_: any);
+  constructor(monochromeFlag_: boolean);
 
   call(image_: Magick.Image): void;
 
@@ -6715,7 +6707,7 @@ export  class quantizeColorSpaceImage {
 
 export  class quantizeDitherImage {
 
-  constructor(ditherFlag_: any);
+  constructor(ditherFlag_: boolean);
 
   call(image_: Magick.Image): void;
 
@@ -6796,7 +6788,7 @@ export  class subRangeImage {
 
 export  class textAntiAliasImage {
 
-  constructor(flag_: any);
+  constructor(flag_: boolean);
 
   call(image_: Magick.Image): void;
 
@@ -6814,7 +6806,7 @@ export  class typeImage {
 
 export  class verboseImage {
 
-  constructor(verbose_: any);
+  constructor(verbose_: boolean);
 
   call(image_: Magick.Image): void;
 
@@ -6830,71 +6822,71 @@ export  class x11DisplayImage {
   callAsync(image_: Magick.Image): Promise<void>;
 }
 
-export function coderInfoList(isReadable_: any, isWritable_: any, isMultiFrame_: any): void;
+export function coderInfoList(isReadable_: any, isWritable_: any, isMultiFrame_: any): std.coderInfoArray;
 
-export function coderInfoList(isReadable_: any, isWritable_: any): void;
+export function coderInfoList(isReadable_: any, isWritable_: any): std.coderInfoArray;
 
-export function coderInfoList(isReadable_: any): void;
+export function coderInfoList(isReadable_: any): std.coderInfoArray;
 
-export function coderInfoList(): void;
+export function coderInfoList(): std.coderInfoArray;
 
-export function appendImages(first_: any, stack_: any): void;
+export function appendImages(first_: any, stack_: boolean): Magick.Image;
 
-export function appendImagesAsync(first_: any, stack_: any): Promise<void>;
+export function appendImagesAsync(first_: any, stack_: boolean): Promise<Magick.Image>;
 
-export function appendImages(first_: any): void;
+export function appendImages(first_: any): Magick.Image;
 
-export function appendImagesAsync(first_: any): Promise<void>;
+export function appendImagesAsync(first_: any): Promise<Magick.Image>;
 
-export function averageImages(first_: any): void;
+export function averageImages(first_: any): Magick.Image;
 
 export function flattenImages(flattenedImage_: Magick.Image, first_: any): void;
 
-export function mosaicImages(first_: any): void;
+export function mosaicImages(first_: any): Magick.Image;
 
-export function coalesceImages(first_: any): void;
+export function coalesceImages(first_: any): Magick.Image[];
 
-export function deconstructImages(first_: any): void;
+export function deconstructImages(first_: any): Magick.Image[];
 
-export function forwardFourierTransformImage(image_: Magick.Image): void;
+export function forwardFourierTransformImage(image_: Magick.Image): Magick.Image[];
 
-export function forwardFourierTransformImageAsync(image_: Magick.Image): Promise<void>;
+export function forwardFourierTransformImageAsync(image_: Magick.Image): Promise<Magick.Image[]>;
 
-export function forwardFourierTransformImage(image_: Magick.Image, magnitude_: any): void;
+export function forwardFourierTransformImage(image_: Magick.Image, magnitude_: boolean): Magick.Image[];
 
-export function forwardFourierTransformImageAsync(image_: Magick.Image, magnitude_: any): Promise<void>;
+export function forwardFourierTransformImageAsync(image_: Magick.Image, magnitude_: boolean): Promise<Magick.Image[]>;
 
-export function montageImages(first_: any, options_: Magick.Montage): void;
+export function montageImages(first_: any, options_: Magick.Montage): Magick.Image[];
 
-export function morphImages(first_: any, frames_: number): void;
+export function morphImages(first_: any, frames_: number): Magick.Image[];
 
-export function readImages(imageSpec_: string, options: Magick.ReadOptions): void;
+export function readImages(imageSpec_: string, options: Magick.ReadOptions): Magick.Image[];
 
-export function readImagesAsync(imageSpec_: string, options: Magick.ReadOptions): Promise<void>;
+export function readImagesAsync(imageSpec_: string, options: Magick.ReadOptions): Promise<Magick.Image[]>;
 
-export function readImages(imageSpec_: string): void;
+export function readImages(imageSpec_: string): Magick.Image[];
 
-export function readImagesAsync(imageSpec_: string): Promise<void>;
+export function readImagesAsync(imageSpec_: string): Promise<Magick.Image[]>;
 
-export function readImages(blob_: Magick.Blob, options: Magick.ReadOptions): void;
+export function readImages(blob_: Magick.Blob, options: Magick.ReadOptions): Magick.Image[];
 
-export function readImagesAsync(blob_: Magick.Blob, options: Magick.ReadOptions): Promise<void>;
+export function readImagesAsync(blob_: Magick.Blob, options: Magick.ReadOptions): Promise<Magick.Image[]>;
 
-export function readImages(blob_: Magick.Blob): void;
+export function readImages(blob_: Magick.Blob): Magick.Image[];
 
-export function readImagesAsync(blob_: Magick.Blob): Promise<void>;
+export function readImagesAsync(blob_: Magick.Blob): Promise<Magick.Image[]>;
 
-export function writeImages(first_: any, imageSpec_: string, adjoin_: any): void;
+export function writeImages(first_: any, imageSpec_: string, adjoin_: boolean): void;
 
-export function writeImagesAsync(first_: any, imageSpec_: string, adjoin_: any): Promise<void>;
+export function writeImagesAsync(first_: any, imageSpec_: string, adjoin_: boolean): Promise<void>;
 
 export function writeImages(first_: any, imageSpec_: string): void;
 
 export function writeImagesAsync(first_: any, imageSpec_: string): Promise<void>;
 
-export function writeImages(first_: any, blob_: Magick.Blob, adjoin_: any): void;
+export function writeImages(first_: any, blob_: Magick.Blob, adjoin_: boolean): void;
 
-export function writeImagesAsync(first_: any, blob_: Magick.Blob, adjoin_: any): Promise<void>;
+export function writeImagesAsync(first_: any, blob_: Magick.Blob, adjoin_: boolean): Promise<void>;
 
 export function writeImages(first_: any, blob_: Magick.Blob): void;
 
@@ -6919,7 +6911,7 @@ export  class coderInfoArray {
 
   reserve(n: number): void;
 
-  isEmpty(): any;
+  isEmpty(): boolean;
 
   clear(): void;
 
