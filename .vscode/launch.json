@@ -36,6 +36,24 @@
       ]
     },
     {
+      "name": "(Windows) Launch mocha",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "--expose-gc",
+        "${workspaceFolder}/node_modules/mocha/lib/cli/cli.js",
+        "-R",
+        "tap",
+        "--timeout",
+        "0",
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceRoot}",
+      "environment": [],
+      "console": "externalTerminal"
+    },
+    {
       "name": "(gdb) Launch REPL",
       "type": "cppdbg",
       "request": "launch",
