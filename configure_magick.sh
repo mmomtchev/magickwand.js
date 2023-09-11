@@ -18,5 +18,9 @@ XEXT_LIBS=`egrep -o '^\s*XEXT_LIBS\s*=.*' Makefile | cut -f 2 -d "="`
 
 cd ../..
 
-cat build/conanbuildinfo.args | sed "s/-framework.*//"
+cat build/conanbuildinfo.args | sed 's/-framework.*//g;
+    s/[[:space:]]\+-m64[[:space:]]\+/ /g;
+    s/[[:space:]]\+-O3[[:space:]]\+/ /g;
+    s/[[:space:]]\+-s[[:space:]]\+/ /g;
+    s/[[:space:]]\+-DNDEBUG[[:space:]]\+/ /g;'
 echo -n " ${X11_LIBS} ${XEXT_LIBS}"

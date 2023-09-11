@@ -15,30 +15,6 @@ it('ImageMagick version information', () => {
   console.log('Built with ImageMagick', MagickLibVersionText);
 });
 
-describe('Geometry', () => {
-  describe('constructor', () => {
-    it('from numbers', () => {
-      const gm = new Geometry(100, 80);
-      assert.equal(gm.width(), 100);
-      assert.equal(gm.height(), 80);
-    });
-
-    it('from string', () => {
-      const gm = new Geometry('120x100');
-      assert.equal(gm.width(), 120);
-      assert.equal(gm.height(), 100);
-    });
-
-    it('copy constructor', () => {
-      const gm1 = new Geometry('120x100');
-      const gm2 = new Geometry(gm1);
-      gm1.width(100);
-      assert.strictEqual(gm1.width(), 100);
-      assert.strictEqual(gm2.width(), 120);
-    });
-  });
-});
-
 describe('Image', () => {
   describe('constructor', () => {
     it('from path', () => {
@@ -48,7 +24,7 @@ describe('Image', () => {
     });
 
     it('from geometry and color', () => {
-      const im = new Image(new Geometry(100, 80), new Color);
+      const im = new Image('100x80', 'red');
       assert.equal(im.size().width(), 100);
       assert.equal(im.size().height(), 80);
     });
@@ -65,7 +41,7 @@ describe('Image', () => {
     it('copy constructor', () => {
       const im1 = new Image(path.join(__dirname, 'data', 'wizard.png'));
       const im2 = new Image(im1);
-      im1.crop(new Geometry(10, 8, 1, 8));
+      im1.crop('10x8+1+8');
       assert.strictEqual(im1.size().width(), 10);
       assert.strictEqual(im2.size().width(), 80);
     });
@@ -87,9 +63,9 @@ describe('Image', () => {
     });
 
     it('set', () => {
-      const im = new Image(new Geometry('20x20'), new Color('black'));
+      const im = new Image('20x20', 'black');
 
-      im.pixelColor(10, 10, new Color('red'));
+      im.pixelColor(10, 10, 'red');
 
       const px = im.pixelColor(10, 10);
       assert.instanceOf(px, Color);
@@ -161,7 +137,7 @@ describe('Image', () => {
       });
 
       it('write', () => {
-        const im = new Image(new Geometry('15x20'), new Color(0, 65535, 0, 0));
+        const im = new Image('15x20', new Color(0, 65535, 0, 0));
         const pixels = new typed(15 * 20 * 4);
 
         im.write(0, 0, 15, 20, 'RGBA', pixels);
@@ -179,7 +155,7 @@ describe('Image', () => {
       });
 
       it('writeAsync', () => {
-        const im = new Image(new Geometry('15x20'), new Color(0, 65535, 0, 0));
+        const im = new Image('15x20', new Color(0, 65535, 0, 0));
         const pixels = new typed(15 * 20 * 4);
 
         return assert.isFulfilled(
@@ -239,7 +215,7 @@ describe('Image', () => {
 
     im.read(path.join(__dirname, 'data', 'wizard.png'));
     assert.equal(im.size().width(), 80);
-    im.crop(new Geometry(10, 8, 1, 8));
+    im.crop('10x8+1+8');
     assert.equal(im.size().width(), 10);
     im.write(tmpfile);
 
@@ -257,7 +233,7 @@ describe('Image', () => {
       .then(() => im.sizeAsync())
       .then((size) => {
         assert.equal(size.width(), 80);
-        return im.cropAsync(new Geometry(10, 8, 1, 8));
+        return im.cropAsync('10x8+1+8');
       })
       .then(() => im.sizeAsync())
       .then((size) => {

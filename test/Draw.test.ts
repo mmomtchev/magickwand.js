@@ -1,14 +1,14 @@
 import { assert } from 'chai';
 
 import { Magick, MagickCore } from 'node-magickwand';
-const { Image, Geometry, Color, Coordinate } = Magick;
+const { Image, Coordinate } = Magick;
 
 describe('Drawable', () => {
   it('simple drawing', () => {
-    const im = new Image(new Geometry(100, 100), new Color('white'));
+    const im = new Image('100x100', 'white');
 
-    im.strokeColor(new Color('red'));
-    im.fillColor(new Color('blue'));
+    im.strokeColor('red');
+    im.fillColor('blue');
     im.strokeWidth(5);
 
     im.draw(new Magick.DrawableCircle(50, 50, 40, 40));
@@ -17,10 +17,10 @@ describe('Drawable', () => {
   });
 
   it('mutiple drawables per call', () => {
-    const im = new Image(new Geometry(100, 100), new Color('white'));
+    const im = new Image('100x100', 'white');
 
-    im.strokeColor(new Color('red'));
-    im.fillColor(new Color('blue'));
+    im.strokeColor('red');
+    im.fillColor('blue');
     im.strokeWidth(2);
 
     im.draw([new Magick.DrawableCircle(20, 50, 10, 50), new Magick.DrawableCircle(80, 50, 90, 50)]);
@@ -29,9 +29,9 @@ describe('Drawable', () => {
   });
 
   it('text', () => {
-    const im = new Image(new Geometry(100, 100), new Color('white'));
+    const im = new Image('100x100', 'white');
 
-    im.strokeColor(new Color('red'));
+    im.strokeColor('red');
     im.strokeWidth(2);
 
     im.draw(new Magick.DrawableFont('sans-serif', MagickCore.ItalicStyle, 400, MagickCore.ExpandedStretch));
@@ -41,10 +41,10 @@ describe('Drawable', () => {
   });
 
   it('SVG-like vector path drawing', () => {
-    const im = new Image(new Geometry(100, 100), new Color('white'));
+    const im = new Image('100x100', 'white');
 
-    im.strokeColor(new Color('red'));
-    im.fillColor(new Color('blue'));
+    im.strokeColor('red');
+    im.fillColor('blue');
     im.strokeWidth(2);
 
     im.draw(new Magick.DrawablePath([

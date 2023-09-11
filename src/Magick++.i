@@ -136,6 +136,9 @@ using namespace Magick;
 %include "STL.i"
 %include "Drawable.i"
 
+// Convenience implicit casting
+%include "ImplicitCasting.i"
+
 // These are all the Magick:: header files ordered by dependency
 // (as produced by the dependency generator)
 %include "../swig/magick++.i"
