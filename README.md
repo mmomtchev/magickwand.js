@@ -89,6 +89,15 @@ console.log(`${wizard} 5 : 5 = ${px}`
   + ` (RGBA=${px.pixelType() == Magick.Color.RGBAPixel})`
   + ` red=${px.quantumRed()} alpha=${px.quantumAlpha()}`);
 
+// Produce HTML hex color
+const rgb = new Magick.ColorRGB(px);
+console.log('#' + [rgb.red(), rgb.green(), rgb.blue(), rgb.alpha()]
+  .map((v) => Math.floor(v * 255).toString(16).padStart(2, '0')).join(''));
+
+// Parse HTML hex color
+const cl = new Magick.Color('#7f7f7f');
+console.log(cl.toString());
+
 // Apply blur
 const im2 = new Magick.Image(im);
 await im2.blurAsync(0.5);
