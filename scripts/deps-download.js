@@ -9,11 +9,12 @@ if (!fs.statSync(path.resolve(__dirname, '..', '.git'), { throwIfNoEntry: false 
   process.exit(0);
 }
 
-const generated_path = path.resolve(__dirname, '../swig');
+const generated_path = path.resolve(__dirname, '..', 'swig');
+const source_path = path.resolve(__dirname, '..', 'src');
 
 const hash = crypto.createHash('md5');
-for (const file of fs.readdirSync(generated_path, 'utf8').sort()) {
-  hash.update(fs.readFileSync(path.resolve(generated_path, file), 'utf8'));
+for (const file of fs.readdirSync(source_path, 'utf8').sort()) {
+  hash.update(fs.readFileSync(path.resolve(source_path, file), 'utf8'));
 }
 const message = hash.digest('hex');
 
@@ -23,9 +24,10 @@ let commit;
 try {
   commit = cp.execSync(`git log origin/generated --grep "${message}" --pretty=format:"%H"`)
     .toString().split('\n')[0].trimEnd();
+  if (!commit) throw new Error;
   console.log(`Commit hash is ${commit}`);
 } catch {
-  console.error('unknown branch?');
+  console.error(`Generated files not published for ${message}`);
   process.exit(0);
 }
 
@@ -73,7 +75,7 @@ for (const file of [
 ]) {
   q.push(download(
     `https://raw.githubusercontent.com/mmomtchev/node-magickwand/${commit}/${file}`,
-    path.resolve(__dirname, '..', 'swig', file)
+    path.resolve(generated_path, file)
   ));
 }
 Promise.all(q).then(() => console.log('done'));
