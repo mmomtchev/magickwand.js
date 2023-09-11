@@ -55,7 +55,7 @@ console.log(`PNG support: ${infoPNG && infoPNG.isReadable()}`);
 await im.magickAsync('PNG');
 
 // Rescale and rotate it
-await im.scaleAsync(new Magick.Geometry('160x212'));
+await im.scaleAsync('160x212');
 await im.rotateAsync(60);
 
 // Display it and continue execution (requires X11)
@@ -95,10 +95,10 @@ await im2.blurAsync(0.5);
 
 // Compositing (overlaying)
 const im3 = new Magick.Image(im.size(), new Magick.Color(0, 65535, 0, 32768));
-await im2.compositeAsync(im3, new Magick.Geometry(0, 0), IM.MagickCore.MultiplyCompositeOp);
+await im2.compositeAsync(im3, '0x0+0+0', IM.MagickCore.MultiplyCompositeOp);
 
 // Crop
-im.crop(new Magick.Geometry("10x8+5+5"));
+im.crop('10x8+5+5');
 console.log(`${wizard}: ${im.size()}`);
 ```
 
