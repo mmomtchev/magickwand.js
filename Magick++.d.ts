@@ -4191,13 +4191,13 @@ export  class Image {
 
   compareChannelAsync(channel_: any, reference_: Magick.Image, metric_: any, distortion: any): Promise<Magick.Image>;
 
-  composite(compositeImage_: Magick.Image, offset_: Magick.Geometry, compose_: any): void;
+  composite(compositeImage_: Magick.Image, offset_: Magick.Geometry | string, compose_: any): void;
 
-  compositeAsync(compositeImage_: Magick.Image, offset_: Magick.Geometry, compose_: any): Promise<void>;
+  compositeAsync(compositeImage_: Magick.Image, offset_: Magick.Geometry | string, compose_: any): Promise<void>;
 
-  composite(compositeImage_: Magick.Image, offset_: Magick.Geometry): void;
+  composite(compositeImage_: Magick.Image, offset_: Magick.Geometry | string): void;
 
-  compositeAsync(compositeImage_: Magick.Image, offset_: Magick.Geometry): Promise<void>;
+  compositeAsync(compositeImage_: Magick.Image, offset_: Magick.Geometry | string): Promise<void>;
 
   composite(compositeImage_: Magick.Image, gravity_: any, compose_: any): void;
 
@@ -5736,9 +5736,9 @@ export  class compositeImage {
 
   constructor(compositeImage_: Magick.Image, xOffset_: number, yOffset_: number);
 
-  constructor(compositeImage_: Magick.Image, offset_: Magick.Geometry, compose_: any);
+  constructor(compositeImage_: Magick.Image, offset_: Magick.Geometry | string, compose_: any);
 
-  constructor(compositeImage_: Magick.Image, offset_: Magick.Geometry);
+  constructor(compositeImage_: Magick.Image, offset_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
 
