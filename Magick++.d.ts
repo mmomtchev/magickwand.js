@@ -812,11 +812,11 @@ export  class Color {
 
   constructor(color_: string);
 
-  constructor(color_: Magick.Color);
+  constructor(color_: Magick.Color | string);
 
   constructor(color_: string);
 
-  clone(color_: Magick.Color): Magick.Color;
+  clone(color_: Magick.Color | string): Magick.Color;
 
   clone(color: string): Magick.Color;
 
@@ -824,7 +824,7 @@ export  class Color {
 
   toString(): string;
 
-  isFuzzyEquivalent(color_: Magick.Color, fuzz_: number): boolean;
+  isFuzzyEquivalent(color_: Magick.Color | string, fuzz_: number): boolean;
 
   isValid(valid_: boolean): void;
 
@@ -857,13 +857,13 @@ export  class ColorCMYK extends Magick.Color {
 
   constructor();
 
-  constructor(color_: Magick.Color);
+  constructor(color_: Magick.Color | string | Magick.ColorCMYK);
 
   constructor(cyan_: number, magenta_: number, yellow_: number, black_: number);
 
   constructor(cyan_: number, magenta_: number, yellow_: number, black_: number, alpha_: number);
 
-  clone(color_: Magick.Color): Magick.ColorCMYK;
+  clone(color_: Magick.Color | string | Magick.ColorCMYK): Magick.ColorCMYK;
 
   alpha(alpha_: number): void;
 
@@ -890,7 +890,7 @@ export  class ColorGray extends Magick.Color {
 
   constructor();
 
-  constructor(color_: Magick.Color);
+  constructor(color_: Magick.Color | string | Magick.ColorGray | Magick.ColorCMYK);
 
   constructor(shade_: number);
 
@@ -898,18 +898,18 @@ export  class ColorGray extends Magick.Color {
 
   shade(): number;
 
-  clone(color_: Magick.Color): Magick.ColorGray;
+  clone(color_: Magick.Color | string | Magick.ColorGray | Magick.ColorCMYK): Magick.ColorGray;
 }
 
 export  class ColorHSL extends Magick.Color {
 
   constructor();
 
-  constructor(color_: Magick.Color);
+  constructor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorCMYK);
 
   constructor(hue_: number, saturation_: number, lightness_: number);
 
-  clone(color_: Magick.Color): Magick.ColorHSL;
+  clone(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorCMYK): Magick.ColorHSL;
 
   hue(hue_: number): void;
 
@@ -930,9 +930,9 @@ export  class ColorMono extends Magick.Color {
 
   constructor(mono_: boolean);
 
-  constructor(color_: Magick.Color);
+  constructor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorCMYK | Magick.ColorMono);
 
-  clone(color_: Magick.Color): Magick.ColorMono;
+  clone(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorCMYK | Magick.ColorMono): Magick.ColorMono;
 
   mono(mono_: boolean): void;
 
@@ -943,13 +943,13 @@ export  class ColorRGB extends Magick.Color {
 
   constructor();
 
-  constructor(color_: Magick.Color);
+  constructor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   constructor(red_: number, green_: number, blue_: number);
 
   constructor(red_: number, green_: number, blue_: number, alpha_: number);
 
-  clone(color_: Magick.Color): Magick.ColorRGB;
+  clone(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Magick.ColorRGB;
 
   alpha(alpha_: number): void;
 
@@ -972,11 +972,11 @@ export  class ColorYUV extends Magick.Color {
 
   constructor();
 
-  constructor(color_: Magick.Color);
+  constructor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   constructor(y_: number, u_: number, v_: number);
 
-  clone(color_: Magick.Color): Magick.ColorYUV;
+  clone(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Magick.ColorYUV;
 
   u(u_: number): void;
 
@@ -1009,7 +1009,7 @@ export  class Geometry {
 
   constructor(geometry_: string);
 
-  constructor(geometry_: Magick.Geometry);
+  constructor(geometry_: Magick.Geometry | string);
 
   constructor(geometry_: string);
 
@@ -1307,13 +1307,13 @@ export  class DrawableBezier extends Magick.DrawableBase {
 
 export  class DrawableBorderColor extends Magick.DrawableBase {
 
-  constructor(color_: Magick.Color);
+  constructor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   constructor(original_: Magick.DrawableBorderColor);
 
   call(context_: any): void;
 
-  color(color_: Magick.Color): void;
+  color(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
   color(): Magick.Color;
 
@@ -1528,7 +1528,7 @@ export  class DrawableEllipse extends Magick.DrawableBase {
 
 export  class DrawableFillColor extends Magick.DrawableBase {
 
-  constructor(color_: Magick.Color);
+  constructor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   constructor(original_: Magick.DrawableFillColor);
 
@@ -1536,7 +1536,7 @@ export  class DrawableFillColor extends Magick.DrawableBase {
 
   copy(): Magick.DrawableBase;
 
-  color(color_: Magick.Color): void;
+  color(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
   color(): Magick.Color;
 }
@@ -1951,7 +1951,7 @@ export  class DrawableStrokeAntialias extends Magick.DrawableBase {
 
 export  class DrawableStrokeColor extends Magick.DrawableBase {
 
-  constructor(color_: Magick.Color);
+  constructor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   constructor(original_: Magick.DrawableStrokeColor);
 
@@ -1959,7 +1959,7 @@ export  class DrawableStrokeColor extends Magick.DrawableBase {
 
   copy(): Magick.DrawableBase;
 
-  color(color_: Magick.Color): void;
+  color(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
   color(): Magick.Color;
 }
@@ -2116,7 +2116,7 @@ export  class DrawableTextKerning extends Magick.DrawableBase {
 
 export  class DrawableTextUnderColor extends Magick.DrawableBase {
 
-  constructor(color_: Magick.Color);
+  constructor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   constructor(original_: Magick.DrawableTextUnderColor);
 
@@ -2124,7 +2124,7 @@ export  class DrawableTextUnderColor extends Magick.DrawableBase {
 
   copy(): Magick.DrawableBase;
 
-  color(color_: Magick.Color): void;
+  color(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
   color(): Magick.Color;
 }
@@ -2566,294 +2566,294 @@ export  class Error extends Magick.Exception {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.Error);
 }
 
 export  class ErrorBlob extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.Error | Magick.ErrorBlob);
 }
 
 export  class ErrorCache extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorCache | Magick.Error | Magick.ErrorBlob);
 }
 
 export  class ErrorCoder extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorCoder | Magick.ErrorCache | Magick.Error | Magick.ErrorBlob);
 }
 
 export  class ErrorConfigure extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorCoder | Magick.ErrorCache | Magick.Error | Magick.ErrorConfigure | Magick.ErrorBlob);
 }
 
 export  class ErrorCorruptImage extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorCoder | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorBlob);
 }
 
 export  class ErrorDelegate extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorCoder | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorBlob | Magick.ErrorDelegate);
 }
 
 export  class ErrorDraw extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorDraw | Magick.ErrorCoder | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorBlob | Magick.ErrorDelegate);
 }
 
 export  class ErrorFileOpen extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorDraw | Magick.ErrorCoder | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
 }
 
 export  class ErrorImage extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorDraw | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
 }
 
 export  class ErrorMissingDelegate extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorDraw | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
 }
 
 export  class ErrorModule extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorDraw | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
 }
 
 export  class ErrorMonitor extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorDraw | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
 }
 
 export  class ErrorOption extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
 }
 
 export  class ErrorPolicy extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
 }
 
 export  class ErrorRegistry extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
 }
 
 export  class ErrorResourceLimit extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
 }
 
 export  class ErrorStream extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorStream | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
 }
 
 export  class ErrorType extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
 }
 
 export  class ErrorUndefined extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
 }
 
 export  class ErrorXServer extends Magick.Error {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
 }
 
 export  class Warning extends Magick.Exception {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.ErrorFileOpen);
 }
 
 export  class WarningBlob extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.ErrorFileOpen);
 }
 
 export  class WarningCache extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.ErrorFileOpen);
 }
 
 export  class WarningCoder extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningConfigure extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningCorruptImage extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningDelegate extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningDraw extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.WarningDraw | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningFileOpen extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningImage extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningMissingDelegate extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningModule extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningMonitor extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningMonitor | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningOption extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningPolicy extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningRegistry extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.WarningRegistry | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningResourceLimit extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.WarningRegistry | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningResourceLimit | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningStream extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.WarningRegistry | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningResourceLimit | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.WarningStream | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningType extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.WarningRegistry | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningResourceLimit | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningType | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.WarningStream | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningUndefined extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.WarningRegistry | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.WarningUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningResourceLimit | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningType | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.WarningStream | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
 }
 
 export  class WarningXServer extends Magick.Warning {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
+  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.WarningRegistry | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.WarningUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningResourceLimit | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningType | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.WarningStream | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen | Magick.WarningXServer);
 }
 
 export function formatExceptionMessage(exception_: any): string;
@@ -3051,19 +3051,19 @@ export  class Image {
 
   constructor(blob_: Magick.Blob);
 
-  constructor(blob_: Magick.Blob, size_: Magick.Geometry);
+  constructor(blob_: Magick.Blob, size_: Magick.Geometry | string);
 
-  constructor(blob_: Magick.Blob, size_: Magick.Geometry, depth_: number);
+  constructor(blob_: Magick.Blob, size_: Magick.Geometry | string, depth_: number);
 
-  constructor(blob_: Magick.Blob, size_: Magick.Geometry, depth_: number, magick_: string);
+  constructor(blob_: Magick.Blob, size_: Magick.Geometry | string, depth_: number, magick_: string);
 
-  constructor(blob_: Magick.Blob, size_: Magick.Geometry, magick_: string);
+  constructor(blob_: Magick.Blob, size_: Magick.Geometry | string, magick_: string);
 
-  constructor(size_: Magick.Geometry, color_: Magick.Color);
+  constructor(size_: Magick.Geometry | string, color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   constructor(image_: Magick.Image);
 
-  constructor(image_: Magick.Image, geometry_: Magick.Geometry);
+  constructor(image_: Magick.Image, geometry_: Magick.Geometry | string);
 
   constructor(width_: number, height_: number, map_: string, type_: Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Float32Array | Float64Array | BigUint64Array);
 
@@ -3087,9 +3087,9 @@ export  class Image {
 
   alphaAsync(): Promise<boolean>;
 
-  matteColor(matteColor_: Magick.Color): void;
+  matteColor(matteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  matteColorAsync(matteColor_: Magick.Color): Promise<void>;
+  matteColorAsync(matteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   matteColor(): Magick.Color;
 
@@ -3111,9 +3111,9 @@ export  class Image {
 
   animationIterationsAsync(): Promise<number>;
 
-  backgroundColor(color_: Magick.Color): void;
+  backgroundColor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  backgroundColorAsync(color_: Magick.Color): Promise<void>;
+  backgroundColorAsync(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   backgroundColor(): Magick.Color;
 
@@ -3147,9 +3147,9 @@ export  class Image {
 
   blackPointCompensationAsync(): Promise<boolean>;
 
-  borderColor(color_: Magick.Color): void;
+  borderColor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  borderColorAsync(color_: Magick.Color): Promise<void>;
+  borderColorAsync(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   borderColor(): Magick.Color;
 
@@ -3159,9 +3159,9 @@ export  class Image {
 
   boundingBoxAsync(): Promise<Magick.Geometry>;
 
-  boxColor(boxColor_: Magick.Color): void;
+  boxColor(boxColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  boxColorAsync(boxColor_: Magick.Color): Promise<void>;
+  boxColorAsync(boxColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   boxColor(): Magick.Color;
 
@@ -3303,9 +3303,9 @@ export  class Image {
 
   fileSizeAsync(): Promise<number>;
 
-  fillColor(fillColor_: Magick.Color): void;
+  fillColor(fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  fillColorAsync(fillColor_: Magick.Color): Promise<void>;
+  fillColorAsync(fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   fillColor(): Magick.Color;
 
@@ -3403,9 +3403,9 @@ export  class Image {
 
   hasChannelAsync(channel: any): Promise<boolean>;
 
-  highlightColor(color_: Magick.Color): void;
+  highlightColor(color_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  highlightColorAsync(color_: Magick.Color): Promise<void>;
+  highlightColorAsync(color_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   iccColorProfile(colorProfile_: Magick.Blob): void;
 
@@ -3459,9 +3459,9 @@ export  class Image {
 
   labelAsync(): Promise<string>;
 
-  lowlightColor(color_: Magick.Color): void;
+  lowlightColor(color_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  lowlightColorAsync(color_: Magick.Color): Promise<void>;
+  lowlightColorAsync(color_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   magick(magick_: string): void;
 
@@ -3471,9 +3471,9 @@ export  class Image {
 
   magickAsync(): Promise<string>;
 
-  masklightColor(color_: Magick.Color): void;
+  masklightColor(color_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  masklightColorAsync(color_: Magick.Color): Promise<void>;
+  masklightColorAsync(color_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   meanErrorPerPixel(): number;
 
@@ -3615,9 +3615,9 @@ export  class Image {
 
   sceneAsync(): Promise<number>;
 
-  size(geometry_: Magick.Geometry): void;
+  size(geometry_: Magick.Geometry | string): void;
 
-  sizeAsync(geometry_: Magick.Geometry): Promise<void>;
+  sizeAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   size(): Magick.Geometry;
 
@@ -3631,9 +3631,9 @@ export  class Image {
 
   strokeAntiAliasAsync(): Promise<boolean>;
 
-  strokeColor(strokeColor_: Magick.Color): void;
+  strokeColor(strokeColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  strokeColorAsync(strokeColor_: Magick.Color): Promise<void>;
+  strokeColorAsync(strokeColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   strokeColor(): Magick.Color;
 
@@ -3767,9 +3767,9 @@ export  class Image {
 
   textKerningAsync(): Promise<number>;
 
-  textUnderColor(underColor_: Magick.Color): void;
+  textUnderColor(underColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  textUnderColorAsync(underColor_: Magick.Color): Promise<void>;
+  textUnderColorAsync(underColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   textUnderColor(): Magick.Color;
 
@@ -3843,9 +3843,9 @@ export  class Image {
 
   adaptiveBlurAsync(): Promise<void>;
 
-  adaptiveResize(geometry_: Magick.Geometry): void;
+  adaptiveResize(geometry_: Magick.Geometry | string): void;
 
-  adaptiveResizeAsync(geometry_: Magick.Geometry): Promise<void>;
+  adaptiveResizeAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   adaptiveSharpen(radius_: number, sigma_: number): void;
 
@@ -4007,9 +4007,9 @@ export  class Image {
 
   blurChannelAsync(channel_: any): Promise<void>;
 
-  border(geometry_: Magick.Geometry): void;
+  border(geometry_: Magick.Geometry | string): void;
 
-  borderAsync(geometry_: Magick.Geometry): Promise<void>;
+  borderAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   border(): void;
 
@@ -4091,9 +4091,9 @@ export  class Image {
 
   charcoalChannelAsync(channel_: any): Promise<void>;
 
-  chop(geometry_: Magick.Geometry): void;
+  chop(geometry_: Magick.Geometry | string): void;
 
-  chopAsync(geometry_: Magick.Geometry): Promise<void>;
+  chopAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   chromaBluePrimary(x_: number, y_: number, z_: number): void;
 
@@ -4151,17 +4151,17 @@ export  class Image {
 
   clutChannelAsync(channel_: any, clutImage_: Magick.Image, method: any): Promise<void>;
 
-  colorize(alpha_: number, penColor_: Magick.Color): void;
+  colorize(alpha_: number, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  colorizeAsync(alpha_: number, penColor_: Magick.Color): Promise<void>;
+  colorizeAsync(alpha_: number, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
-  colorize(alphaRed_: number, alphaGreen_: number, alphaBlue_: number, penColor_: Magick.Color): void;
+  colorize(alphaRed_: number, alphaGreen_: number, alphaBlue_: number, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  colorizeAsync(alphaRed_: number, alphaGreen_: number, alphaBlue_: number, penColor_: Magick.Color): Promise<void>;
+  colorizeAsync(alphaRed_: number, alphaGreen_: number, alphaBlue_: number, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
-  colorMap(index_: number, color_: Magick.Color): void;
+  colorMap(index_: number, color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  colorMapAsync(index_: number, color_: Magick.Color): Promise<void>;
+  colorMapAsync(index_: number, color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   colorMap(index_: number): Magick.Color;
 
@@ -4235,13 +4235,13 @@ export  class Image {
 
   convolveAsync(order_: number, kernel_: any): Promise<void>;
 
-  copyPixels(source_: Magick.Image, geometry_: Magick.Geometry, offset_: Magick.Offset): void;
+  copyPixels(source_: Magick.Image, geometry_: Magick.Geometry | string, offset_: Magick.Offset): void;
 
-  copyPixelsAsync(source_: Magick.Image, geometry_: Magick.Geometry, offset_: Magick.Offset): Promise<void>;
+  copyPixelsAsync(source_: Magick.Image, geometry_: Magick.Geometry | string, offset_: Magick.Offset): Promise<void>;
 
-  crop(geometry_: Magick.Geometry): void;
+  crop(geometry_: Magick.Geometry | string): void;
 
-  cropAsync(geometry_: Magick.Geometry): Promise<void>;
+  cropAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   cycleColormap(amount_: number): void;
 
@@ -4343,21 +4343,21 @@ export  class Image {
 
   evaluateAsync(channel_: any, x_: number, y_: number, columns_: number, rows_: number, operator_: any, rvalue_: number): Promise<void>;
 
-  extent(geometry_: Magick.Geometry): void;
+  extent(geometry_: Magick.Geometry | string): void;
 
-  extentAsync(geometry_: Magick.Geometry): Promise<void>;
+  extentAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
-  extent(geometry_: Magick.Geometry, backgroundColor: Magick.Color): void;
+  extent(geometry_: Magick.Geometry | string, backgroundColor: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  extentAsync(geometry_: Magick.Geometry, backgroundColor: Magick.Color): Promise<void>;
+  extentAsync(geometry_: Magick.Geometry | string, backgroundColor: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
-  extent(geometry_: Magick.Geometry, backgroundColor: Magick.Color, gravity_: any): void;
+  extent(geometry_: Magick.Geometry | string, backgroundColor: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: any): void;
 
-  extentAsync(geometry_: Magick.Geometry, backgroundColor: Magick.Color, gravity_: any): Promise<void>;
+  extentAsync(geometry_: Magick.Geometry | string, backgroundColor: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: any): Promise<void>;
 
-  extent(geometry_: Magick.Geometry, gravity_: any): void;
+  extent(geometry_: Magick.Geometry | string, gravity_: any): void;
 
-  extentAsync(geometry_: Magick.Geometry, gravity_: any): Promise<void>;
+  extentAsync(geometry_: Magick.Geometry | string, gravity_: any): Promise<void>;
 
   flip(): void;
 
@@ -4371,45 +4371,45 @@ export  class Image {
 
   floodFillAlphaAsync(x_: number, y_: number, alpha_: number): Promise<void>;
 
-  floodFillAlpha(x_: number, y_: number, alpha_: number, target_: Magick.Color, invert_: boolean): void;
+  floodFillAlpha(x_: number, y_: number, alpha_: number, target_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  floodFillAlphaAsync(x_: number, y_: number, alpha_: number, target_: Magick.Color, invert_: boolean): Promise<void>;
+  floodFillAlphaAsync(x_: number, y_: number, alpha_: number, target_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
 
-  floodFillAlpha(x_: number, y_: number, alpha_: number, target_: Magick.Color): void;
+  floodFillAlpha(x_: number, y_: number, alpha_: number, target_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  floodFillAlphaAsync(x_: number, y_: number, alpha_: number, target_: Magick.Color): Promise<void>;
+  floodFillAlphaAsync(x_: number, y_: number, alpha_: number, target_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
-  floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color, invert_: boolean): void;
+  floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color, invert_: boolean): Promise<void>;
+  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
 
-  floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color): void;
+  floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color): Promise<void>;
+  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
-  floodFillColor(x_: number, y_: number, fillColor_: Magick.Color, invert_: boolean): void;
+  floodFillColor(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color, invert_: boolean): Promise<void>;
+  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
 
-  floodFillColor(x_: number, y_: number, fillColor_: Magick.Color): void;
+  floodFillColor(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color): Promise<void>;
+  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
-  floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: boolean): void;
+  floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: boolean): Promise<void>;
+  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
 
-  floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color, borderColor_: Magick.Color): void;
+  floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color, borderColor_: Magick.Color): Promise<void>;
+  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
-  floodFillColor(x_: number, y_: number, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: boolean): void;
+  floodFillColor(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: boolean): Promise<void>;
+  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
 
-  floodFillColor(x_: number, y_: number, fillColor_: Magick.Color, borderColor_: Magick.Color): void;
+  floodFillColor(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color, borderColor_: Magick.Color): Promise<void>;
+  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   floodFillTexture(point_: Magick.Geometry, texture_: Magick.Image, invert_: boolean): void;
 
@@ -4427,21 +4427,21 @@ export  class Image {
 
   floodFillTextureAsync(x_: number, y_: number, texture_: Magick.Image): Promise<void>;
 
-  floodFillTexture(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color, invert_: boolean): void;
+  floodFillTexture(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  floodFillTextureAsync(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color, invert_: boolean): Promise<void>;
+  floodFillTextureAsync(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
 
-  floodFillTexture(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color): void;
+  floodFillTexture(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  floodFillTextureAsync(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color): Promise<void>;
+  floodFillTextureAsync(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
-  floodFillTexture(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color, invert_: boolean): void;
+  floodFillTexture(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  floodFillTextureAsync(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color, invert_: boolean): Promise<void>;
+  floodFillTextureAsync(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
 
-  floodFillTexture(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color): void;
+  floodFillTexture(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  floodFillTextureAsync(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color): Promise<void>;
+  floodFillTextureAsync(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   flop(): void;
 
@@ -4455,9 +4455,9 @@ export  class Image {
 
   fontTypeMetricsMultilineAsync(text_: string, metrics: Magick.TypeMetric): Promise<void>;
 
-  frame(geometry_: Magick.Geometry): void;
+  frame(geometry_: Magick.Geometry | string): void;
 
-  frameAsync(geometry_: Magick.Geometry): Promise<void>;
+  frameAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   frame(): void;
 
@@ -4587,21 +4587,21 @@ export  class Image {
 
   levelChannelAsync(channel_: any, blackPoint_: number, whitePoint_: number): Promise<void>;
 
-  levelColors(blackColor_: Magick.Color, whiteColor_: Magick.Color, invert_: boolean): void;
+  levelColors(blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  levelColorsAsync(blackColor_: Magick.Color, whiteColor_: Magick.Color, invert_: boolean): Promise<void>;
+  levelColorsAsync(blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
 
-  levelColors(blackColor_: Magick.Color, whiteColor_: Magick.Color): void;
+  levelColors(blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  levelColorsAsync(blackColor_: Magick.Color, whiteColor_: Magick.Color): Promise<void>;
+  levelColorsAsync(blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
-  levelColorsChannel(channel_: any, blackColor_: Magick.Color, whiteColor_: Magick.Color, invert_: boolean): void;
+  levelColorsChannel(channel_: any, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  levelColorsChannelAsync(channel_: any, blackColor_: Magick.Color, whiteColor_: Magick.Color, invert_: boolean): Promise<void>;
+  levelColorsChannelAsync(channel_: any, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
 
-  levelColorsChannel(channel_: any, blackColor_: Magick.Color, whiteColor_: Magick.Color): void;
+  levelColorsChannel(channel_: any, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  levelColorsChannelAsync(channel_: any, blackColor_: Magick.Color, whiteColor_: Magick.Color): Promise<void>;
+  levelColorsChannelAsync(channel_: any, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   levelize(blackPoint_: number, whitePoint_: number, gamma_: number): void;
 
@@ -4623,9 +4623,9 @@ export  class Image {
 
   linearStretchAsync(blackPoint_: number, whitePoint_: number): Promise<void>;
 
-  liquidRescale(geometry_: Magick.Geometry): void;
+  liquidRescale(geometry_: Magick.Geometry | string): void;
 
-  liquidRescaleAsync(geometry_: Magick.Geometry): Promise<void>;
+  liquidRescaleAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   localContrast(radius_: number, strength_: number): void;
 
@@ -4739,13 +4739,13 @@ export  class Image {
 
   oilPaintAsync(): Promise<void>;
 
-  opaque(opaqueColor_: Magick.Color, penColor_: Magick.Color, invert_: boolean): void;
+  opaque(opaqueColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  opaqueAsync(opaqueColor_: Magick.Color, penColor_: Magick.Color, invert_: boolean): Promise<void>;
+  opaqueAsync(opaqueColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
 
-  opaque(opaqueColor_: Magick.Color, penColor_: Magick.Color): void;
+  opaque(opaqueColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  opaqueAsync(opaqueColor_: Magick.Color, penColor_: Magick.Color): Promise<void>;
+  opaqueAsync(opaqueColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   orderedDither(thresholdMap_: string): void;
 
@@ -4775,9 +4775,9 @@ export  class Image {
 
   pingAsync(blob_: Magick.Blob): Promise<void>;
 
-  pixelColor(x_: number, y_: number, color_: Magick.Color): void;
+  pixelColor(x_: number, y_: number, color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  pixelColorAsync(x_: number, y_: number, color_: Magick.Color): Promise<void>;
+  pixelColorAsync(x_: number, y_: number, color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   pixelColor(x_: number, y_: number): Magick.Color;
 
@@ -4815,13 +4815,13 @@ export  class Image {
 
   quantizeAsync(): Promise<void>;
 
-  raise(geometry_: Magick.Geometry, raisedFlag_: boolean): void;
+  raise(geometry_: Magick.Geometry | string, raisedFlag_: boolean): void;
 
-  raiseAsync(geometry_: Magick.Geometry, raisedFlag_: boolean): Promise<void>;
+  raiseAsync(geometry_: Magick.Geometry | string, raisedFlag_: boolean): Promise<void>;
 
-  raise(geometry_: Magick.Geometry): void;
+  raise(geometry_: Magick.Geometry | string): void;
 
-  raiseAsync(geometry_: Magick.Geometry): Promise<void>;
+  raiseAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   raise(): void;
 
@@ -4839,25 +4839,25 @@ export  class Image {
 
   readAsync(blob_: Magick.Blob): Promise<void>;
 
-  read(blob_: Magick.Blob, size_: Magick.Geometry): void;
+  read(blob_: Magick.Blob, size_: Magick.Geometry | string): void;
 
-  readAsync(blob_: Magick.Blob, size_: Magick.Geometry): Promise<void>;
+  readAsync(blob_: Magick.Blob, size_: Magick.Geometry | string): Promise<void>;
 
-  read(blob_: Magick.Blob, size_: Magick.Geometry, depth_: number): void;
+  read(blob_: Magick.Blob, size_: Magick.Geometry | string, depth_: number): void;
 
-  readAsync(blob_: Magick.Blob, size_: Magick.Geometry, depth_: number): Promise<void>;
+  readAsync(blob_: Magick.Blob, size_: Magick.Geometry | string, depth_: number): Promise<void>;
 
-  read(blob_: Magick.Blob, size_: Magick.Geometry, depth_: number, magick_: string): void;
+  read(blob_: Magick.Blob, size_: Magick.Geometry | string, depth_: number, magick_: string): void;
 
-  readAsync(blob_: Magick.Blob, size_: Magick.Geometry, depth_: number, magick_: string): Promise<void>;
+  readAsync(blob_: Magick.Blob, size_: Magick.Geometry | string, depth_: number, magick_: string): Promise<void>;
 
-  read(blob_: Magick.Blob, size_: Magick.Geometry, magick_: string): void;
+  read(blob_: Magick.Blob, size_: Magick.Geometry | string, magick_: string): void;
 
-  readAsync(blob_: Magick.Blob, size_: Magick.Geometry, magick_: string): Promise<void>;
+  readAsync(blob_: Magick.Blob, size_: Magick.Geometry | string, magick_: string): Promise<void>;
 
-  read(size_: Magick.Geometry, imageSpec_: string): void;
+  read(size_: Magick.Geometry | string, imageSpec_: string): void;
 
-  readAsync(size_: Magick.Geometry, imageSpec_: string): Promise<void>;
+  readAsync(size_: Magick.Geometry | string, imageSpec_: string): Promise<void>;
 
   read(width_: number, height_: number, map_: string, type_: Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Float32Array | Float64Array | BigUint64Array): void;
 
@@ -4895,9 +4895,9 @@ export  class Image {
 
   resampleAsync(density_: Magick.Point): Promise<void>;
 
-  resize(geometry_: Magick.Geometry): void;
+  resize(geometry_: Magick.Geometry | string): void;
 
-  resizeAsync(geometry_: Magick.Geometry): Promise<void>;
+  resizeAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   roll(roll_: Magick.Geometry): void;
 
@@ -4919,13 +4919,13 @@ export  class Image {
 
   rotationalBlurChannelAsync(channel_: any, angle_: number): Promise<void>;
 
-  sample(geometry_: Magick.Geometry): void;
+  sample(geometry_: Magick.Geometry | string): void;
 
-  sampleAsync(geometry_: Magick.Geometry): Promise<void>;
+  sampleAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
-  scale(geometry_: Magick.Geometry): void;
+  scale(geometry_: Magick.Geometry | string): void;
 
-  scaleAsync(geometry_: Magick.Geometry): Promise<void>;
+  scaleAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   segment(clusterThreshold_: number, smoothingThreshold_: number): void;
 
@@ -5023,9 +5023,9 @@ export  class Image {
 
   sharpenChannelAsync(channel_: any): Promise<void>;
 
-  shave(geometry_: Magick.Geometry): void;
+  shave(geometry_: Magick.Geometry | string): void;
 
-  shaveAsync(geometry_: Magick.Geometry): Promise<void>;
+  shaveAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   shear(xShearAngle_: number, yShearAngle_: number): void;
 
@@ -5075,17 +5075,17 @@ export  class Image {
 
   sparseColorAsync(channel_: any, method_: any, numberArguments_: number, arguments_: any): Promise<void>;
 
-  splice(geometry_: Magick.Geometry): void;
+  splice(geometry_: Magick.Geometry | string): void;
 
-  spliceAsync(geometry_: Magick.Geometry): Promise<void>;
+  spliceAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
-  splice(geometry_: Magick.Geometry, backgroundColor_: Magick.Color): void;
+  splice(geometry_: Magick.Geometry | string, backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  spliceAsync(geometry_: Magick.Geometry, backgroundColor_: Magick.Color): Promise<void>;
+  spliceAsync(geometry_: Magick.Geometry | string, backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
-  splice(geometry_: Magick.Geometry, backgroundColor_: Magick.Color, gravity_: any): void;
+  splice(geometry_: Magick.Geometry | string, backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: any): void;
 
-  spliceAsync(geometry_: Magick.Geometry, backgroundColor_: Magick.Color, gravity_: any): Promise<void>;
+  spliceAsync(geometry_: Magick.Geometry | string, backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: any): Promise<void>;
 
   spread(amount_: number): void;
 
@@ -5135,9 +5135,9 @@ export  class Image {
 
   thresholdAsync(threshold_: number): Promise<void>;
 
-  thumbnail(geometry_: Magick.Geometry): void;
+  thumbnail(geometry_: Magick.Geometry | string): void;
 
-  thumbnailAsync(geometry_: Magick.Geometry): Promise<void>;
+  thumbnailAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   tint(opacity_: string): void;
 
@@ -5155,17 +5155,17 @@ export  class Image {
 
   transformScaleAsync(sx_: number, sy_: number): Promise<void>;
 
-  transparent(color_: Magick.Color, inverse_: boolean): void;
+  transparent(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, inverse_: boolean): void;
 
-  transparentAsync(color_: Magick.Color, inverse_: boolean): Promise<void>;
+  transparentAsync(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, inverse_: boolean): Promise<void>;
 
-  transparent(color_: Magick.Color): void;
+  transparent(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  transparentAsync(color_: Magick.Color): Promise<void>;
+  transparentAsync(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
-  transparentChroma(colorLow_: Magick.Color, colorHigh_: Magick.Color): void;
+  transparentChroma(colorLow_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, colorHigh_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  transparentChromaAsync(colorLow_: Magick.Color, colorHigh_: Magick.Color): Promise<void>;
+  transparentChromaAsync(colorLow_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, colorHigh_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   transpose(): void;
 
@@ -5267,9 +5267,9 @@ export  class Image {
 
   writePixelsAsync(quantum_: any, destination_: any): Promise<void>;
 
-  zoom(geometry_: Magick.Geometry): void;
+  zoom(geometry_: Magick.Geometry | string): void;
 
-  zoomAsync(geometry_: Magick.Geometry): Promise<void>;
+  zoomAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   constructor(image_: any);
 
@@ -5411,9 +5411,9 @@ export  class Montage {
 
   constructor();
 
-  backgroundColor(backgroundColor_: Magick.Color): void;
+  backgroundColor(backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  backgroundColorAsync(backgroundColor_: Magick.Color): Promise<void>;
+  backgroundColorAsync(backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   backgroundColor(): Magick.Color;
 
@@ -5427,9 +5427,9 @@ export  class Montage {
 
   fileNameAsync(): Promise<string>;
 
-  fillColor(fill_: Magick.Color): void;
+  fillColor(fill_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  fillColorAsync(fill_: Magick.Color): Promise<void>;
+  fillColorAsync(fill_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   fillColor(): Magick.Color;
 
@@ -5443,9 +5443,9 @@ export  class Montage {
 
   fontAsync(): Promise<string>;
 
-  geometry(geometry_: Magick.Geometry): void;
+  geometry(geometry_: Magick.Geometry | string): void;
 
-  geometryAsync(geometry_: Magick.Geometry): Promise<void>;
+  geometryAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   geometry(): Magick.Geometry;
 
@@ -5483,9 +5483,9 @@ export  class Montage {
 
   shadowAsync(): Promise<boolean>;
 
-  strokeColor(stroke_: Magick.Color): void;
+  strokeColor(stroke_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  strokeColorAsync(stroke_: Magick.Color): Promise<void>;
+  strokeColorAsync(stroke_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   strokeColor(): Magick.Color;
 
@@ -5515,9 +5515,9 @@ export  class Montage {
 
   titleAsync(): Promise<string>;
 
-  transparentColor(transparentColor_: Magick.Color): void;
+  transparentColor(transparentColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  transparentColorAsync(transparentColor_: Magick.Color): Promise<void>;
+  transparentColorAsync(transparentColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   transparentColor(): Magick.Color;
 
@@ -5532,17 +5532,17 @@ export  class MontageFramed extends Magick.Montage {
 
   constructor();
 
-  matteColor(matteColor_: Magick.Color): void;
+  matteColor(matteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  matteColorAsync(matteColor_: Magick.Color): Promise<void>;
+  matteColorAsync(matteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   matteColor(): Magick.Color;
 
   matteColorAsync(): Promise<Magick.Color>;
 
-  borderColor(borderColor_: Magick.Color): void;
+  borderColor(borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  borderColorAsync(borderColor_: Magick.Color): Promise<void>;
+  borderColorAsync(borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   borderColor(): Magick.Color;
 
@@ -5615,11 +5615,11 @@ export  class affineTransformImage {
 
 export  class annotateImage {
 
-  constructor(text_: string, geometry_: Magick.Geometry);
+  constructor(text_: string, geometry_: Magick.Geometry | string);
 
-  constructor(text_: string, geometry_: Magick.Geometry, gravity_: any);
+  constructor(text_: string, geometry_: Magick.Geometry | string, gravity_: any);
 
-  constructor(text_: string, geometry_: Magick.Geometry, gravity_: any, degrees_: number);
+  constructor(text_: string, geometry_: Magick.Geometry | string, gravity_: any, degrees_: number);
 
   constructor(text_: string, gravity_: any);
 
@@ -5643,7 +5643,7 @@ export  class blurImage {
 
 export  class borderImage {
 
-  constructor(geometry_: Magick.Geometry);
+  constructor(geometry_: Magick.Geometry | string);
 
   constructor();
 
@@ -5676,7 +5676,7 @@ export  class charcoalImage {
 
 export  class chopImage {
 
-  constructor(geometry_: Magick.Geometry);
+  constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
 
@@ -5694,9 +5694,9 @@ export  class cdlImage {
 
 export  class colorizeImage {
 
-  constructor(alphaRed_: number, alphaGreen_: number, alphaBlue_: number, penColor_: Magick.Color);
+  constructor(alphaRed_: number, alphaGreen_: number, alphaBlue_: number, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
-  constructor(alpha_: number, penColor_: Magick.Color);
+  constructor(alpha_: number, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
 
@@ -5756,7 +5756,7 @@ export  class contrastImage {
 
 export  class cropImage {
 
-  constructor(geometry_: Magick.Geometry);
+  constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
 
@@ -5843,7 +5843,7 @@ export  class equalizeImage {
 
 export  class fillColorImage {
 
-  constructor(fillColor_: Magick.Color);
+  constructor(fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
 }
@@ -5859,9 +5859,9 @@ export  class flipImage {
 
 export  class floodFillAlphaImage {
 
-  constructor(x_: number, y_: number, alpha_: number, target_: Magick.Color, invert_: boolean);
+  constructor(x_: number, y_: number, alpha_: number, target_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean);
 
-  constructor(x_: number, y_: number, alpha_: number, target_: Magick.Color);
+  constructor(x_: number, y_: number, alpha_: number, target_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
 
@@ -5870,21 +5870,21 @@ export  class floodFillAlphaImage {
 
 export  class floodFillColorImage {
 
-  constructor(point_: Magick.Geometry, fillColor_: Magick.Color, invert_: boolean);
+  constructor(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean);
 
-  constructor(point_: Magick.Geometry, fillColor_: Magick.Color);
+  constructor(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
-  constructor(x_: number, y_: number, fillColor_: Magick.Color, invert_: boolean);
+  constructor(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean);
 
-  constructor(x_: number, y_: number, fillColor_: Magick.Color);
+  constructor(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
-  constructor(point_: Magick.Geometry, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: boolean);
+  constructor(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean);
 
-  constructor(point_: Magick.Geometry, fillColor_: Magick.Color, borderColor_: Magick.Color);
+  constructor(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
-  constructor(x_: number, y_: number, fillColor_: Magick.Color, borderColor_: Magick.Color, invert_: boolean);
+  constructor(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean);
 
-  constructor(x_: number, y_: number, fillColor_: Magick.Color, borderColor_: Magick.Color);
+  constructor(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
 }
@@ -5899,13 +5899,13 @@ export  class floodFillTextureImage {
 
   constructor(point_: Magick.Geometry, texture_: Magick.Image);
 
-  constructor(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color, invert_: boolean);
+  constructor(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean);
 
-  constructor(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color);
+  constructor(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
-  constructor(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color, invert_: boolean);
+  constructor(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean);
 
-  constructor(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color);
+  constructor(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
 
@@ -5923,7 +5923,7 @@ export  class flopImage {
 
 export  class frameImage {
 
-  constructor(geometry_: Magick.Geometry);
+  constructor(geometry_: Magick.Geometry | string);
 
   constructor();
 
@@ -6107,7 +6107,7 @@ export  class alphaImage {
 
 export  class opaqueImage {
 
-  constructor(opaqueColor_: Magick.Color, penColor_: Magick.Color);
+  constructor(opaqueColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
 
@@ -6127,9 +6127,9 @@ export  class quantizeImage {
 
 export  class raiseImage {
 
-  constructor(geometry_: Magick.Geometry, raisedFlag_: boolean);
+  constructor(geometry_: Magick.Geometry | string, raisedFlag_: boolean);
 
-  constructor(geometry_: Magick.Geometry);
+  constructor(geometry_: Magick.Geometry | string);
 
   constructor();
 
@@ -6144,7 +6144,7 @@ export  class ReadOptions {
 
   constructor(options_: Magick.ReadOptions);
 
-  density(geometry_: Magick.Geometry): void;
+  density(geometry_: Magick.Geometry | string): void;
 
   density(): Magick.Geometry;
 
@@ -6160,7 +6160,7 @@ export  class ReadOptions {
 
   quiet(): boolean;
 
-  size(geometry_: Magick.Geometry): void;
+  size(geometry_: Magick.Geometry | string): void;
 
   size(): Magick.Geometry;
 
@@ -6180,7 +6180,7 @@ export  class reduceNoiseImage {
 
 export  class resizeImage {
 
-  constructor(geometry_: Magick.Geometry);
+  constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
 
@@ -6209,7 +6209,7 @@ export  class rotateImage {
 
 export  class sampleImage {
 
-  constructor(geometry_: Magick.Geometry);
+  constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
 
@@ -6218,7 +6218,7 @@ export  class sampleImage {
 
 export  class scaleImage {
 
-  constructor(geometry_: Magick.Geometry);
+  constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
 
@@ -6285,7 +6285,7 @@ export  class sharpenImage {
 
 export  class shaveImage {
 
-  constructor(geometry_: Magick.Geometry);
+  constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
 
@@ -6312,7 +6312,7 @@ export  class solarizeImage {
 
 export  class spliceImage {
 
-  constructor(geometry_: Magick.Geometry);
+  constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
 
@@ -6350,7 +6350,7 @@ export  class stereoImage {
 
 export  class strokeColorImage {
 
-  constructor(strokeColor_: Magick.Color);
+  constructor(strokeColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
 }
@@ -6384,7 +6384,7 @@ export  class thresholdImage {
 
 export  class transparentImage {
 
-  constructor(color_: Magick.Color);
+  constructor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
 
@@ -6415,7 +6415,7 @@ export  class waveImage {
 
 export  class zoomImage {
 
-  constructor(geometry_: Magick.Geometry);
+  constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
 
@@ -6451,7 +6451,7 @@ export  class animationIterationsImage {
 
 export  class backgroundColorImage {
 
-  constructor(color_: Magick.Color);
+  constructor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
 }
@@ -6467,14 +6467,14 @@ export  class backgroundTextureImage {
 
 export  class borderColorImage {
 
-  constructor(color_: Magick.Color);
+  constructor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
 }
 
 export  class boxColorImage {
 
-  constructor(boxColor_: Magick.Color);
+  constructor(boxColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
 }
@@ -6526,7 +6526,7 @@ export  class colorFuzzImage {
 
 export  class colorMapImage {
 
-  constructor(index_: number, color_: Magick.Color);
+  constructor(index_: number, color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
 
@@ -6652,7 +6652,7 @@ export  class alphaFlagImage {
 
 export  class matteColorImage {
 
-  constructor(matteColor_: Magick.Color);
+  constructor(matteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
 }
@@ -6668,7 +6668,7 @@ export  class monochromeImage {
 
 export  class pixelColorImage {
 
-  constructor(x_: number, y_: number, color_: Magick.Color);
+  constructor(x_: number, y_: number, color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
 }
@@ -6752,7 +6752,7 @@ export  class sceneImage {
 
 export  class sizeImage {
 
-  constructor(geometry_: Magick.Geometry);
+  constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
 
@@ -6856,7 +6856,7 @@ export function forwardFourierTransformImage(image_: Magick.Image, magnitude_: b
 
 export function forwardFourierTransformImageAsync(image_: Magick.Image, magnitude_: boolean): Promise<Magick.Image[]>;
 
-export function montageImages(first_: any, options_: Magick.Montage): Magick.Image[];
+export function montageImages(first_: any, options_: Magick.Montage | Magick.MontageFramed): Magick.Image[];
 
 export function morphImages(first_: any, frames_: number): Magick.Image[];
 
