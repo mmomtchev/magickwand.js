@@ -7,11 +7,11 @@
 
 This package is a full native port of the ImageMagick-7 C++ library to Node.js using SWIG NAPI.
 
-Unlike all other ImageMagick `npm` packages, it does not use the CLI to interact with the utilities, but directly uses the C++ API. It supports both synchronous and multithreaded asynchronous operations and it is fully integrated with `TypedArray`s.
+Unlike all other ImageMagick `npm` packages, it does not use the CLI to interact with the utilities, but offers direct access to the full C++ API. It supports both synchronous and multithreaded asynchronous operations and it is fully integrated with `TypedArray`s.
 
-It is less mature than the alternatives, but offers a substantial performance boost and usability benefits.
+It adds many new features and offers a substantial performance boost and usability benefits.
 
-The pre-built binaries are fully self-contained and do not need an existing ImageMagick installation.
+The pre-built binaries are fully self-contained and do not need an existing ImageMagick installation, but it is also possible to rebuild the package against a shared ImageMagick-7.
 
 It is currently to be considered of beta quality, but it is actively developed because of it its special status as SWIG Node-API showcase project.
 

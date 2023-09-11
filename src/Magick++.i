@@ -25,6 +25,9 @@ using namespace Magick;
 %apply unsigned { size_t };
 %apply int { ssize_t };
 
+// ImageMagick throws instances of Magick::Exception
+// Always catch them and rethrow them with SWIG_Raise
+// SWIG_Raise handles both sync and async throwing
 %exception {
   try {
     $action
@@ -39,6 +42,12 @@ using namespace Magick;
 %insert(begin) %{
 #define NAPI_VERSION 6  // For the generated C++ code
 %}
+
+// This allows to insert a comment from the SWIG CLI to
+// uniquely identify the generated files for version control
+#ifdef GIT_BRANCH
+%insert(begin) GIT_BRANCH
+#endif
 
 // Shunt __attribute__(x) which is not supported by SWIG
 #define _magickcore_restrict
