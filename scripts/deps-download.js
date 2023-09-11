@@ -29,7 +29,7 @@ try {
   console.log(`Commit hash is ${commit}`);
 } catch {
   console.error(`Generated files not published for ${message}`);
-  process.exit(0);
+  process.exit(1);
 }
 
 async function download(url, targetFile) {
