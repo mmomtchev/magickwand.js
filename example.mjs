@@ -2,7 +2,7 @@ import IM from './lib/index.js';
 import { fileURLToPath } from 'url';
 import * as path from 'path';
 
-const Magick = IM.Magick;
+const { Magick } = IM;
 
 // The famous ImageMagick wizard
 const wizard = path.join(path.dirname(fileURLToPath(import.meta.url)), 'test', 'data', 'wizard.png');
@@ -34,11 +34,21 @@ im.displayAsync();
 // until it completes executions
 im = new Magick.Image(wizard);
 
+// Make a copy and convert it to 256-color GIF
+const im256 = new Magick.Image(im);
+await im256.quantizeColorsAsync(256);
+await im256.quantizeAsync();
+await im256.magickAsync('GIF');
+console.log(`Image colors before/after conversion: ${im.totalColors()}/${im256.totalColors()}`);
+
+// Set compression/quality (JPEG/PNG)
+im.quality(98);
+
 // Write it to a binary blob and export it to Base64
 const blob = new Magick.Blob;
 await im.writeAsync(blob);
 const b64 = await blob.base64Async();
-console.log(`${wizard} : ${b64.substring(0, 40)}...`);
+console.log(`Base64 ${wizard} : ${b64.substring(0, 40)}...`);
 
 // Import from Base64
 await blob.base64Async(b64);
@@ -50,7 +60,7 @@ await im.magickAsync('RGBA');
 // Conversion to Uint16 is automatic
 const pixels = new Uint16Array(im.size().width() * im.size().height() * 4);
 im.write(0, 0, im.size().width(), im.size().height(), 'RGBA', pixels);
-console.log(`${wizard} 0 : 0 = ${pixels[0]}`);
+console.log(`Get pixel from ${wizard} 0 : 0 = ${pixels[0]}`);
 
 // Access pixels directly
 const px = im.pixelColor(5, 5);
@@ -60,12 +70,12 @@ console.log(`${wizard} 5 : 5 = ${px}`
 
 // Produce HTML hex color
 const rgb = new Magick.ColorRGB(px);
-console.log('#' + [rgb.red(), rgb.green(), rgb.blue(), rgb.alpha()]
+console.log('HTML color: ', '#' + [rgb.red(), rgb.green(), rgb.blue(), rgb.alpha()]
   .map((v) => Math.floor(v * 255).toString(16).padStart(2, '0')).join(''));
 
 // Parse HTML hex color
 const cl = new Magick.Color('#7f7f7f');
-console.log(cl.toString());
+console.log('Parse from HTML color to IM internal representation: ', cl.toString());
 
 // Apply blur
 const im2 = new Magick.Image(im);
@@ -77,4 +87,4 @@ await im2.compositeAsync(im3, '0x0+0+0', IM.MagickCore.MultiplyCompositeOp);
 
 // Crop
 im.crop('10x8+5+5');
-console.log(`${wizard}: ${im.size()}`);
+console.log(`After cropping: ${wizard}: ${im.size()}`);
