@@ -6,720 +6,813 @@
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
 
+declare const _SWIG_enum_tag: unique symbol;
 
 export namespace MagickCore {
 
-export const UndefinedClass: number;
+export const UndefinedClass: ClassType;
 
-export const DirectClass: number;
+export const DirectClass: ClassType;
 
-export const PseudoClass: number;
+export const PseudoClass: ClassType;
 
-export const UndefinedGravity: number;
+export type ClassType = number & { readonly [_SWIG_enum_tag]: 'ClassType'; };
 
-export const ForgetGravity: number;
+export type MagickBooleanType = number & { readonly [_SWIG_enum_tag]: 'MagickBooleanType'; };
 
-export const NorthWestGravity: number;
+export const UndefinedGravity: GravityType;
 
-export const NorthGravity: number;
+export const ForgetGravity: GravityType;
 
-export const NorthEastGravity: number;
+export const NorthWestGravity: GravityType;
 
-export const WestGravity: number;
+export const NorthGravity: GravityType;
 
-export const CenterGravity: number;
+export const NorthEastGravity: GravityType;
 
-export const EastGravity: number;
+export const WestGravity: GravityType;
 
-export const SouthWestGravity: number;
+export const CenterGravity: GravityType;
 
-export const SouthGravity: number;
+export const EastGravity: GravityType;
 
-export const SouthEastGravity: number;
+export const SouthWestGravity: GravityType;
 
-export const UndefinedColorspace: number;
+export const SouthGravity: GravityType;
 
-export const CMYColorspace: number;
+export const SouthEastGravity: GravityType;
 
-export const CMYKColorspace: number;
+export type GravityType = number & { readonly [_SWIG_enum_tag]: 'GravityType'; };
 
-export const GRAYColorspace: number;
+export const UndefinedColorspace: ColorspaceType;
 
-export const HCLColorspace: number;
+export const CMYColorspace: ColorspaceType;
 
-export const HCLpColorspace: number;
+export const CMYKColorspace: ColorspaceType;
 
-export const HSBColorspace: number;
+export const GRAYColorspace: ColorspaceType;
 
-export const HSIColorspace: number;
+export const HCLColorspace: ColorspaceType;
 
-export const HSLColorspace: number;
+export const HCLpColorspace: ColorspaceType;
 
-export const HSVColorspace: number;
+export const HSBColorspace: ColorspaceType;
 
-export const HWBColorspace: number;
+export const HSIColorspace: ColorspaceType;
 
-export const LabColorspace: number;
+export const HSLColorspace: ColorspaceType;
 
-export const LCHColorspace: number;
+export const HSVColorspace: ColorspaceType;
 
-export const LCHabColorspace: number;
+export const HWBColorspace: ColorspaceType;
 
-export const LCHuvColorspace: number;
+export const LabColorspace: ColorspaceType;
 
-export const LogColorspace: number;
+export const LCHColorspace: ColorspaceType;
 
-export const LMSColorspace: number;
+export const LCHabColorspace: ColorspaceType;
 
-export const LuvColorspace: number;
+export const LCHuvColorspace: ColorspaceType;
 
-export const OHTAColorspace: number;
+export const LogColorspace: ColorspaceType;
 
-export const Rec601YCbCrColorspace: number;
+export const LMSColorspace: ColorspaceType;
 
-export const Rec709YCbCrColorspace: number;
+export const LuvColorspace: ColorspaceType;
 
-export const RGBColorspace: number;
+export const OHTAColorspace: ColorspaceType;
 
-export const scRGBColorspace: number;
+export const Rec601YCbCrColorspace: ColorspaceType;
 
-export const sRGBColorspace: number;
+export const Rec709YCbCrColorspace: ColorspaceType;
 
-export const TransparentColorspace: number;
+export const RGBColorspace: ColorspaceType;
 
-export const xyYColorspace: number;
+export const scRGBColorspace: ColorspaceType;
 
-export const XYZColorspace: number;
+export const sRGBColorspace: ColorspaceType;
 
-export const YCbCrColorspace: number;
+export const TransparentColorspace: ColorspaceType;
 
-export const YCCColorspace: number;
+export const xyYColorspace: ColorspaceType;
 
-export const YDbDrColorspace: number;
+export const XYZColorspace: ColorspaceType;
 
-export const YIQColorspace: number;
+export const YCbCrColorspace: ColorspaceType;
 
-export const YPbPrColorspace: number;
+export const YCCColorspace: ColorspaceType;
 
-export const YUVColorspace: number;
+export const YDbDrColorspace: ColorspaceType;
 
-export const LinearGRAYColorspace: number;
+export const YIQColorspace: ColorspaceType;
 
-export const JzazbzColorspace: number;
+export const YPbPrColorspace: ColorspaceType;
 
-export const DisplayP3Colorspace: number;
+export const YUVColorspace: ColorspaceType;
 
-export const Adobe98Colorspace: number;
+export const LinearGRAYColorspace: ColorspaceType;
 
-export const ProPhotoColorspace: number;
+export const JzazbzColorspace: ColorspaceType;
 
-export const OklabColorspace: number;
+export const DisplayP3Colorspace: ColorspaceType;
 
-export const OklchColorspace: number;
+export const Adobe98Colorspace: ColorspaceType;
 
-export const UndefinedChannel: number;
+export const ProPhotoColorspace: ColorspaceType;
 
-export const RedChannel: number;
+export const OklabColorspace: ColorspaceType;
 
-export const GrayChannel: number;
+export const OklchColorspace: ColorspaceType;
 
-export const CyanChannel: number;
+export type ColorspaceType = number & { readonly [_SWIG_enum_tag]: 'ColorspaceType'; };
 
-export const LChannel: number;
+export const UndefinedChannel: ChannelType;
 
-export const GreenChannel: number;
+export const RedChannel: ChannelType;
 
-export const MagentaChannel: number;
+export const GrayChannel: ChannelType;
 
-export const aChannel: number;
+export const CyanChannel: ChannelType;
 
-export const BlueChannel: number;
+export const LChannel: ChannelType;
 
-export const bChannel: number;
+export const GreenChannel: ChannelType;
 
-export const YellowChannel: number;
+export const MagentaChannel: ChannelType;
 
-export const BlackChannel: number;
+export const aChannel: ChannelType;
 
-export const AlphaChannel: number;
+export const BlueChannel: ChannelType;
 
-export const OpacityChannel: number;
+export const bChannel: ChannelType;
 
-export const IndexChannel: number;
+export const YellowChannel: ChannelType;
 
-export const ReadMaskChannel: number;
+export const BlackChannel: ChannelType;
 
-export const WriteMaskChannel: number;
+export const AlphaChannel: ChannelType;
 
-export const MetaChannel: number;
+export const OpacityChannel: ChannelType;
 
-export const CompositeMaskChannel: number;
+export const IndexChannel: ChannelType;
 
-export const TrueAlphaChannel: number;
+export const ReadMaskChannel: ChannelType;
 
-export const UndefinedCompositeOp: number;
+export const WriteMaskChannel: ChannelType;
 
-export const AlphaCompositeOp: number;
+export const MetaChannel: ChannelType;
 
-export const AtopCompositeOp: number;
+export const CompositeMaskChannel: ChannelType;
 
-export const BlendCompositeOp: number;
+export const TrueAlphaChannel: ChannelType;
 
-export const BlurCompositeOp: number;
+export type ChannelType = number & { readonly [_SWIG_enum_tag]: 'ChannelType'; };
 
-export const BumpmapCompositeOp: number;
+export type StorageType = number & { readonly [_SWIG_enum_tag]: 'StorageType'; };
 
-export const ChangeMaskCompositeOp: number;
+export type ExceptionType = number & { readonly [_SWIG_enum_tag]: 'ExceptionType'; };
 
-export const ClearCompositeOp: number;
+export type ComplianceType = number & { readonly [_SWIG_enum_tag]: 'ComplianceType'; };
 
-export const ColorBurnCompositeOp: number;
+export type IlluminantType = number & { readonly [_SWIG_enum_tag]: 'IlluminantType'; };
 
-export const ColorDodgeCompositeOp: number;
+export const UndefinedCompositeOp: CompositeOperator;
 
-export const ColorizeCompositeOp: number;
+export const AlphaCompositeOp: CompositeOperator;
 
-export const CopyBlackCompositeOp: number;
+export const AtopCompositeOp: CompositeOperator;
 
-export const CopyBlueCompositeOp: number;
+export const BlendCompositeOp: CompositeOperator;
 
-export const CopyCompositeOp: number;
+export const BlurCompositeOp: CompositeOperator;
 
-export const CopyCyanCompositeOp: number;
+export const BumpmapCompositeOp: CompositeOperator;
 
-export const CopyGreenCompositeOp: number;
+export const ChangeMaskCompositeOp: CompositeOperator;
 
-export const CopyMagentaCompositeOp: number;
+export const ClearCompositeOp: CompositeOperator;
 
-export const CopyAlphaCompositeOp: number;
+export const ColorBurnCompositeOp: CompositeOperator;
 
-export const CopyRedCompositeOp: number;
+export const ColorDodgeCompositeOp: CompositeOperator;
 
-export const CopyYellowCompositeOp: number;
+export const ColorizeCompositeOp: CompositeOperator;
 
-export const DarkenCompositeOp: number;
+export const CopyBlackCompositeOp: CompositeOperator;
 
-export const DarkenIntensityCompositeOp: number;
+export const CopyBlueCompositeOp: CompositeOperator;
 
-export const DifferenceCompositeOp: number;
+export const CopyCompositeOp: CompositeOperator;
 
-export const DisplaceCompositeOp: number;
+export const CopyCyanCompositeOp: CompositeOperator;
 
-export const DissolveCompositeOp: number;
+export const CopyGreenCompositeOp: CompositeOperator;
 
-export const DistortCompositeOp: number;
+export const CopyMagentaCompositeOp: CompositeOperator;
 
-export const DivideDstCompositeOp: number;
+export const CopyAlphaCompositeOp: CompositeOperator;
 
-export const DivideSrcCompositeOp: number;
+export const CopyRedCompositeOp: CompositeOperator;
 
-export const DstAtopCompositeOp: number;
+export const CopyYellowCompositeOp: CompositeOperator;
 
-export const DstCompositeOp: number;
+export const DarkenCompositeOp: CompositeOperator;
 
-export const DstInCompositeOp: number;
+export const DarkenIntensityCompositeOp: CompositeOperator;
 
-export const DstOutCompositeOp: number;
+export const DifferenceCompositeOp: CompositeOperator;
 
-export const DstOverCompositeOp: number;
+export const DisplaceCompositeOp: CompositeOperator;
 
-export const ExclusionCompositeOp: number;
+export const DissolveCompositeOp: CompositeOperator;
 
-export const HardLightCompositeOp: number;
+export const DistortCompositeOp: CompositeOperator;
 
-export const HardMixCompositeOp: number;
+export const DivideDstCompositeOp: CompositeOperator;
 
-export const HueCompositeOp: number;
+export const DivideSrcCompositeOp: CompositeOperator;
 
-export const InCompositeOp: number;
+export const DstAtopCompositeOp: CompositeOperator;
 
-export const IntensityCompositeOp: number;
+export const DstCompositeOp: CompositeOperator;
 
-export const LightenCompositeOp: number;
+export const DstInCompositeOp: CompositeOperator;
 
-export const LightenIntensityCompositeOp: number;
+export const DstOutCompositeOp: CompositeOperator;
 
-export const LinearBurnCompositeOp: number;
+export const DstOverCompositeOp: CompositeOperator;
 
-export const LinearDodgeCompositeOp: number;
+export const ExclusionCompositeOp: CompositeOperator;
 
-export const LinearLightCompositeOp: number;
+export const HardLightCompositeOp: CompositeOperator;
 
-export const LuminizeCompositeOp: number;
+export const HardMixCompositeOp: CompositeOperator;
 
-export const MathematicsCompositeOp: number;
+export const HueCompositeOp: CompositeOperator;
 
-export const MinusDstCompositeOp: number;
+export const InCompositeOp: CompositeOperator;
 
-export const MinusSrcCompositeOp: number;
+export const IntensityCompositeOp: CompositeOperator;
 
-export const ModulateCompositeOp: number;
+export const LightenCompositeOp: CompositeOperator;
 
-export const ModulusAddCompositeOp: number;
+export const LightenIntensityCompositeOp: CompositeOperator;
 
-export const ModulusSubtractCompositeOp: number;
+export const LinearBurnCompositeOp: CompositeOperator;
 
-export const MultiplyCompositeOp: number;
+export const LinearDodgeCompositeOp: CompositeOperator;
 
-export const NoCompositeOp: number;
+export const LinearLightCompositeOp: CompositeOperator;
 
-export const OutCompositeOp: number;
+export const LuminizeCompositeOp: CompositeOperator;
 
-export const OverCompositeOp: number;
+export const MathematicsCompositeOp: CompositeOperator;
 
-export const OverlayCompositeOp: number;
+export const MinusDstCompositeOp: CompositeOperator;
 
-export const PegtopLightCompositeOp: number;
+export const MinusSrcCompositeOp: CompositeOperator;
 
-export const PinLightCompositeOp: number;
+export const ModulateCompositeOp: CompositeOperator;
 
-export const PlusCompositeOp: number;
+export const ModulusAddCompositeOp: CompositeOperator;
 
-export const ReplaceCompositeOp: number;
+export const ModulusSubtractCompositeOp: CompositeOperator;
 
-export const SaturateCompositeOp: number;
+export const MultiplyCompositeOp: CompositeOperator;
 
-export const ScreenCompositeOp: number;
+export const NoCompositeOp: CompositeOperator;
 
-export const SoftLightCompositeOp: number;
+export const OutCompositeOp: CompositeOperator;
 
-export const SrcAtopCompositeOp: number;
+export const OverCompositeOp: CompositeOperator;
 
-export const SrcCompositeOp: number;
+export const OverlayCompositeOp: CompositeOperator;
 
-export const SrcInCompositeOp: number;
+export const PegtopLightCompositeOp: CompositeOperator;
 
-export const SrcOutCompositeOp: number;
+export const PinLightCompositeOp: CompositeOperator;
 
-export const SrcOverCompositeOp: number;
+export const PlusCompositeOp: CompositeOperator;
 
-export const ThresholdCompositeOp: number;
+export const ReplaceCompositeOp: CompositeOperator;
 
-export const VividLightCompositeOp: number;
+export const SaturateCompositeOp: CompositeOperator;
 
-export const XorCompositeOp: number;
+export const ScreenCompositeOp: CompositeOperator;
 
-export const StereoCompositeOp: number;
+export const SoftLightCompositeOp: CompositeOperator;
 
-export const FreezeCompositeOp: number;
+export const SrcAtopCompositeOp: CompositeOperator;
 
-export const InterpolateCompositeOp: number;
+export const SrcCompositeOp: CompositeOperator;
 
-export const NegateCompositeOp: number;
+export const SrcInCompositeOp: CompositeOperator;
 
-export const ReflectCompositeOp: number;
+export const SrcOutCompositeOp: CompositeOperator;
 
-export const SoftBurnCompositeOp: number;
+export const SrcOverCompositeOp: CompositeOperator;
 
-export const SoftDodgeCompositeOp: number;
+export const ThresholdCompositeOp: CompositeOperator;
 
-export const StampCompositeOp: number;
+export const VividLightCompositeOp: CompositeOperator;
 
-export const RMSECompositeOp: number;
+export const XorCompositeOp: CompositeOperator;
 
-export const SaliencyBlendCompositeOp: number;
+export const StereoCompositeOp: CompositeOperator;
 
-export const SeamlessBlendCompositeOp: number;
+export const FreezeCompositeOp: CompositeOperator;
 
-export const UndefinedCompression: number;
+export const InterpolateCompositeOp: CompositeOperator;
 
-export const B44ACompression: number;
+export const NegateCompositeOp: CompositeOperator;
 
-export const B44Compression: number;
+export const ReflectCompositeOp: CompositeOperator;
 
-export const BZipCompression: number;
+export const SoftBurnCompositeOp: CompositeOperator;
 
-export const DXT1Compression: number;
+export const SoftDodgeCompositeOp: CompositeOperator;
 
-export const DXT3Compression: number;
+export const StampCompositeOp: CompositeOperator;
 
-export const DXT5Compression: number;
+export const RMSECompositeOp: CompositeOperator;
 
-export const FaxCompression: number;
+export const SaliencyBlendCompositeOp: CompositeOperator;
 
-export const Group4Compression: number;
+export const SeamlessBlendCompositeOp: CompositeOperator;
 
-export const JBIG1Compression: number;
+export type CompositeOperator = number & { readonly [_SWIG_enum_tag]: 'CompositeOperator'; };
 
-export const JBIG2Compression: number;
+export const UndefinedCompression: CompressionType;
 
-export const JPEG2000Compression: number;
+export const B44ACompression: CompressionType;
 
-export const JPEGCompression: number;
+export const B44Compression: CompressionType;
 
-export const LosslessJPEGCompression: number;
+export const BZipCompression: CompressionType;
 
-export const LZMACompression: number;
+export const DXT1Compression: CompressionType;
 
-export const LZWCompression: number;
+export const DXT3Compression: CompressionType;
 
-export const NoCompression: number;
+export const DXT5Compression: CompressionType;
 
-export const PizCompression: number;
+export const FaxCompression: CompressionType;
 
-export const Pxr24Compression: number;
+export const Group4Compression: CompressionType;
 
-export const RLECompression: number;
+export const JBIG1Compression: CompressionType;
 
-export const ZipCompression: number;
+export const JBIG2Compression: CompressionType;
 
-export const ZipSCompression: number;
+export const JPEG2000Compression: CompressionType;
 
-export const ZstdCompression: number;
+export const JPEGCompression: CompressionType;
 
-export const WebPCompression: number;
+export const LosslessJPEGCompression: CompressionType;
 
-export const DWAACompression: number;
+export const LZMACompression: CompressionType;
 
-export const DWABCompression: number;
+export const LZWCompression: CompressionType;
 
-export const BC7Compression: number;
+export const NoCompression: CompressionType;
 
-export const BC5Compression: number;
+export const PizCompression: CompressionType;
 
-export const LERCCompression: number;
+export const Pxr24Compression: CompressionType;
+
+export const RLECompression: CompressionType;
+
+export const ZipCompression: CompressionType;
+
+export const ZipSCompression: CompressionType;
+
+export const ZstdCompression: CompressionType;
+
+export const WebPCompression: CompressionType;
+
+export const DWAACompression: CompressionType;
+
+export const DWABCompression: CompressionType;
+
+export const BC7Compression: CompressionType;
+
+export const BC5Compression: CompressionType;
+
+export const LERCCompression: CompressionType;
+
+export type CompressionType = number & { readonly [_SWIG_enum_tag]: 'CompressionType'; };
+
+export type KernelInfoType = number & { readonly [_SWIG_enum_tag]: 'KernelInfoType'; };
+
+export type PreviewType = number & { readonly [_SWIG_enum_tag]: 'PreviewType'; };
+
+export type DisposeType = number & { readonly [_SWIG_enum_tag]: 'DisposeType'; };
 
 export function Core_CloneString(arg0: any, arg1: string): string;
 
-export const UndefinedEndian: number;
+export const UndefinedEndian: EndianType;
 
-export const LSBEndian: number;
+export const LSBEndian: EndianType;
 
-export const MSBEndian: number;
+export const MSBEndian: EndianType;
 
-export const UndefinedQuantum: number;
+export type EndianType = number & { readonly [_SWIG_enum_tag]: 'EndianType'; };
 
-export const AlphaQuantum: number;
+export type QuantumAlphaType = number & { readonly [_SWIG_enum_tag]: 'QuantumAlphaType'; };
 
-export const BGRAQuantum: number;
+export type QuantumFormatType = number & { readonly [_SWIG_enum_tag]: 'QuantumFormatType'; };
 
-export const BGROQuantum: number;
+export const UndefinedQuantum: QuantumType;
 
-export const BGRQuantum: number;
+export const AlphaQuantum: QuantumType;
 
-export const BlackQuantum: number;
+export const BGRAQuantum: QuantumType;
 
-export const BlueQuantum: number;
+export const BGROQuantum: QuantumType;
 
-export const CbYCrAQuantum: number;
+export const BGRQuantum: QuantumType;
 
-export const CbYCrQuantum: number;
+export const BlackQuantum: QuantumType;
 
-export const CbYCrYQuantum: number;
+export const BlueQuantum: QuantumType;
 
-export const CMYKAQuantum: number;
+export const CbYCrAQuantum: QuantumType;
 
-export const CMYKOQuantum: number;
+export const CbYCrQuantum: QuantumType;
 
-export const CMYKQuantum: number;
+export const CbYCrYQuantum: QuantumType;
 
-export const CyanQuantum: number;
+export const CMYKAQuantum: QuantumType;
 
-export const GrayAlphaQuantum: number;
+export const CMYKOQuantum: QuantumType;
 
-export const GrayQuantum: number;
+export const CMYKQuantum: QuantumType;
 
-export const GreenQuantum: number;
+export const CyanQuantum: QuantumType;
 
-export const IndexAlphaQuantum: number;
+export const GrayAlphaQuantum: QuantumType;
 
-export const IndexQuantum: number;
+export const GrayQuantum: QuantumType;
 
-export const MagentaQuantum: number;
+export const GreenQuantum: QuantumType;
 
-export const OpacityQuantum: number;
+export const IndexAlphaQuantum: QuantumType;
 
-export const RedQuantum: number;
+export const IndexQuantum: QuantumType;
 
-export const RGBAQuantum: number;
+export const MagentaQuantum: QuantumType;
 
-export const RGBOQuantum: number;
+export const OpacityQuantum: QuantumType;
 
-export const RGBPadQuantum: number;
+export const RedQuantum: QuantumType;
 
-export const RGBQuantum: number;
+export const RGBAQuantum: QuantumType;
 
-export const YellowQuantum: number;
+export const RGBOQuantum: QuantumType;
 
-export const MultispectralQuantum: number;
+export const RGBPadQuantum: QuantumType;
 
-export const UndefinedFilter: number;
+export const RGBQuantum: QuantumType;
 
-export const PointFilter: number;
+export const YellowQuantum: QuantumType;
 
-export const BoxFilter: number;
+export const MultispectralQuantum: QuantumType;
 
-export const TriangleFilter: number;
+export type QuantumType = number & { readonly [_SWIG_enum_tag]: 'QuantumType'; };
 
-export const HermiteFilter: number;
+export const UndefinedFilter: FilterType;
 
-export const HannFilter: number;
+export const PointFilter: FilterType;
 
-export const HammingFilter: number;
+export const BoxFilter: FilterType;
 
-export const BlackmanFilter: number;
+export const TriangleFilter: FilterType;
 
-export const GaussianFilter: number;
+export const HermiteFilter: FilterType;
 
-export const QuadraticFilter: number;
+export const HannFilter: FilterType;
 
-export const CubicFilter: number;
+export const HammingFilter: FilterType;
 
-export const CatromFilter: number;
+export const BlackmanFilter: FilterType;
 
-export const MitchellFilter: number;
+export const GaussianFilter: FilterType;
 
-export const JincFilter: number;
+export const QuadraticFilter: FilterType;
 
-export const SincFilter: number;
+export const CubicFilter: FilterType;
 
-export const SincFastFilter: number;
+export const CatromFilter: FilterType;
 
-export const KaiserFilter: number;
+export const MitchellFilter: FilterType;
 
-export const WelchFilter: number;
+export const JincFilter: FilterType;
 
-export const ParzenFilter: number;
+export const SincFilter: FilterType;
 
-export const BohmanFilter: number;
+export const SincFastFilter: FilterType;
 
-export const BartlettFilter: number;
+export const KaiserFilter: FilterType;
 
-export const LagrangeFilter: number;
+export const WelchFilter: FilterType;
 
-export const LanczosFilter: number;
+export const ParzenFilter: FilterType;
 
-export const LanczosSharpFilter: number;
+export const BohmanFilter: FilterType;
 
-export const Lanczos2Filter: number;
+export const BartlettFilter: FilterType;
 
-export const Lanczos2SharpFilter: number;
+export const LagrangeFilter: FilterType;
 
-export const RobidouxFilter: number;
+export const LanczosFilter: FilterType;
 
-export const RobidouxSharpFilter: number;
+export const LanczosSharpFilter: FilterType;
 
-export const CosineFilter: number;
+export const Lanczos2Filter: FilterType;
 
-export const SplineFilter: number;
+export const Lanczos2SharpFilter: FilterType;
 
-export const LanczosRadiusFilter: number;
+export const RobidouxFilter: FilterType;
 
-export const CubicSplineFilter: number;
+export const RobidouxSharpFilter: FilterType;
 
-export const SentinelFilter: number;
+export const CosineFilter: FilterType;
 
-export const UndefinedType: number;
+export const SplineFilter: FilterType;
 
-export const BilevelType: number;
+export const LanczosRadiusFilter: FilterType;
 
-export const GrayscaleType: number;
+export const CubicSplineFilter: FilterType;
 
-export const GrayscaleAlphaType: number;
+export const SentinelFilter: FilterType;
 
-export const PaletteType: number;
+export type FilterType = number & { readonly [_SWIG_enum_tag]: 'FilterType'; };
 
-export const PaletteAlphaType: number;
+export const UndefinedType: ImageType;
 
-export const TrueColorType: number;
+export const BilevelType: ImageType;
 
-export const TrueColorAlphaType: number;
+export const GrayscaleType: ImageType;
 
-export const ColorSeparationType: number;
+export const GrayscaleAlphaType: ImageType;
 
-export const ColorSeparationAlphaType: number;
+export const PaletteType: ImageType;
 
-export const OptimizeType: number;
+export const PaletteAlphaType: ImageType;
 
-export const PaletteBilevelAlphaType: number;
+export const TrueColorType: ImageType;
 
-export const UndefinedInterlace: number;
+export const TrueColorAlphaType: ImageType;
 
-export const NoInterlace: number;
+export const ColorSeparationType: ImageType;
 
-export const LineInterlace: number;
+export const ColorSeparationAlphaType: ImageType;
 
-export const PlaneInterlace: number;
+export const OptimizeType: ImageType;
 
-export const PartitionInterlace: number;
+export const PaletteBilevelAlphaType: ImageType;
 
-export const GIFInterlace: number;
+export type ImageType = number & { readonly [_SWIG_enum_tag]: 'ImageType'; };
 
-export const JPEGInterlace: number;
+export const UndefinedInterlace: InterlaceType;
 
-export const PNGInterlace: number;
+export const NoInterlace: InterlaceType;
 
-export const UndefinedOrientation: number;
+export const LineInterlace: InterlaceType;
 
-export const TopLeftOrientation: number;
+export const PlaneInterlace: InterlaceType;
 
-export const TopRightOrientation: number;
+export const PartitionInterlace: InterlaceType;
 
-export const BottomRightOrientation: number;
+export const GIFInterlace: InterlaceType;
 
-export const BottomLeftOrientation: number;
+export const JPEGInterlace: InterlaceType;
 
-export const LeftTopOrientation: number;
+export const PNGInterlace: InterlaceType;
 
-export const RightTopOrientation: number;
+export type InterlaceType = number & { readonly [_SWIG_enum_tag]: 'InterlaceType'; };
 
-export const RightBottomOrientation: number;
+export const UndefinedOrientation: OrientationType;
 
-export const LeftBottomOrientation: number;
+export const TopLeftOrientation: OrientationType;
 
-export const UndefinedTransmitType: number;
+export const TopRightOrientation: OrientationType;
 
-export const FileTransmitType: number;
+export const BottomRightOrientation: OrientationType;
 
-export const BlobTransmitType: number;
+export const BottomLeftOrientation: OrientationType;
 
-export const StreamTransmitType: number;
+export const LeftTopOrientation: OrientationType;
 
-export const ImageTransmitType: number;
+export const RightTopOrientation: OrientationType;
 
-export const UndefinedStretch: number;
+export const RightBottomOrientation: OrientationType;
 
-export const NormalStretch: number;
+export const LeftBottomOrientation: OrientationType;
 
-export const UltraCondensedStretch: number;
+export type OrientationType = number & { readonly [_SWIG_enum_tag]: 'OrientationType'; };
 
-export const ExtraCondensedStretch: number;
+export type ResolutionType = number & { readonly [_SWIG_enum_tag]: 'ResolutionType'; };
 
-export const CondensedStretch: number;
+export const UndefinedTransmitType: TransmitType;
 
-export const SemiCondensedStretch: number;
+export const FileTransmitType: TransmitType;
 
-export const SemiExpandedStretch: number;
+export const BlobTransmitType: TransmitType;
 
-export const ExpandedStretch: number;
+export const StreamTransmitType: TransmitType;
 
-export const ExtraExpandedStretch: number;
+export const ImageTransmitType: TransmitType;
 
-export const UltraExpandedStretch: number;
+export type TransmitType = number & { readonly [_SWIG_enum_tag]: 'TransmitType'; };
 
-export const AnyStretch: number;
+export const UndefinedStretch: StretchType;
 
-export const UndefinedStyle: number;
+export const NormalStretch: StretchType;
 
-export const NormalStyle: number;
+export const UltraCondensedStretch: StretchType;
 
-export const ItalicStyle: number;
+export const ExtraCondensedStretch: StretchType;
 
-export const ObliqueStyle: number;
+export const CondensedStretch: StretchType;
 
-export const AnyStyle: number;
+export const SemiCondensedStretch: StretchType;
 
-export const BoldStyle: number;
+export const SemiExpandedStretch: StretchType;
 
-export const UndefinedWordBreakType: number;
+export const ExpandedStretch: StretchType;
 
-export const NormalWordBreakType: number;
+export const ExtraExpandedStretch: StretchType;
 
-export const BreakWordBreakType: number;
+export const UltraExpandedStretch: StretchType;
 
-export const UndefinedFormatType: number;
+export const AnyStretch: StretchType;
 
-export const ImplicitFormatType: number;
+export type StretchType = number & { readonly [_SWIG_enum_tag]: 'StretchType'; };
 
-export const ExplicitFormatType: number;
+export const UndefinedStyle: StyleType;
 
-export const UndefinedComplexOperator: number;
+export const NormalStyle: StyleType;
 
-export const AddComplexOperator: number;
+export const ItalicStyle: StyleType;
 
-export const ConjugateComplexOperator: number;
+export const ObliqueStyle: StyleType;
 
-export const DivideComplexOperator: number;
+export const AnyStyle: StyleType;
 
-export const MagnitudePhaseComplexOperator: number;
+export const BoldStyle: StyleType;
 
-export const MultiplyComplexOperator: number;
+export type StyleType = number & { readonly [_SWIG_enum_tag]: 'StyleType'; };
 
-export const RealImaginaryComplexOperator: number;
+export type AlignType = number & { readonly [_SWIG_enum_tag]: 'AlignType'; };
 
-export const SubtractComplexOperator: number;
+export type DecorationType = number & { readonly [_SWIG_enum_tag]: 'DecorationType'; };
 
-export const UndefinedCLDeviceType: number;
+export type DirectionType = number & { readonly [_SWIG_enum_tag]: 'DirectionType'; };
 
-export const CpuCLDeviceType: number;
+export type GradientType = number & { readonly [_SWIG_enum_tag]: 'GradientType'; };
 
-export const GpuCLDeviceType: number;
+export type PrimitiveType = number & { readonly [_SWIG_enum_tag]: 'PrimitiveType'; };
 
-export const UndefinedRegistryType: number;
+export type ReferenceType = number & { readonly [_SWIG_enum_tag]: 'ReferenceType'; };
 
-export const ImageRegistryType: number;
+export const UndefinedWordBreakType: WordBreakType;
 
-export const ImageInfoRegistryType: number;
+export const NormalWordBreakType: WordBreakType;
 
-export const StringRegistryType: number;
+export const BreakWordBreakType: WordBreakType;
 
-export const UndefinedEvaluateOperator: number;
+export type WordBreakType = number & { readonly [_SWIG_enum_tag]: 'WordBreakType'; };
 
-export const AbsEvaluateOperator: number;
+export type CacheType = number & { readonly [_SWIG_enum_tag]: 'CacheType'; };
 
-export const AddEvaluateOperator: number;
+export type MetricType = number & { readonly [_SWIG_enum_tag]: 'MetricType'; };
 
-export const AddModulusEvaluateOperator: number;
+export const UndefinedFormatType: MagickFormatType;
 
-export const AndEvaluateOperator: number;
+export const ImplicitFormatType: MagickFormatType;
 
-export const CosineEvaluateOperator: number;
+export const ExplicitFormatType: MagickFormatType;
 
-export const DivideEvaluateOperator: number;
+export type MagickFormatType = number & { readonly [_SWIG_enum_tag]: 'MagickFormatType'; };
 
-export const ExponentialEvaluateOperator: number;
+export const UndefinedComplexOperator: ComplexOperator;
 
-export const GaussianNoiseEvaluateOperator: number;
+export const AddComplexOperator: ComplexOperator;
 
-export const ImpulseNoiseEvaluateOperator: number;
+export const ConjugateComplexOperator: ComplexOperator;
 
-export const LaplacianNoiseEvaluateOperator: number;
+export const DivideComplexOperator: ComplexOperator;
 
-export const LeftShiftEvaluateOperator: number;
+export const MagnitudePhaseComplexOperator: ComplexOperator;
 
-export const LogEvaluateOperator: number;
+export const MultiplyComplexOperator: ComplexOperator;
 
-export const MaxEvaluateOperator: number;
+export const RealImaginaryComplexOperator: ComplexOperator;
 
-export const MeanEvaluateOperator: number;
+export const SubtractComplexOperator: ComplexOperator;
 
-export const MedianEvaluateOperator: number;
+export type ComplexOperator = number & { readonly [_SWIG_enum_tag]: 'ComplexOperator'; };
 
-export const MinEvaluateOperator: number;
+export type LogEventType = number & { readonly [_SWIG_enum_tag]: 'LogEventType'; };
 
-export const MultiplicativeNoiseEvaluateOperator: number;
+export const UndefinedCLDeviceType: MagickCLDeviceType;
 
-export const MultiplyEvaluateOperator: number;
+export const CpuCLDeviceType: MagickCLDeviceType;
 
-export const OrEvaluateOperator: number;
+export const GpuCLDeviceType: MagickCLDeviceType;
 
-export const PoissonNoiseEvaluateOperator: number;
+export type MagickCLDeviceType = number & { readonly [_SWIG_enum_tag]: 'MagickCLDeviceType'; };
 
-export const PowEvaluateOperator: number;
+export type ValidateType = number & { readonly [_SWIG_enum_tag]: 'ValidateType'; };
 
-export const RightShiftEvaluateOperator: number;
+export const UndefinedRegistryType: RegistryType;
 
-export const RootMeanSquareEvaluateOperator: number;
+export const ImageRegistryType: RegistryType;
 
-export const SetEvaluateOperator: number;
+export const ImageInfoRegistryType: RegistryType;
 
-export const SineEvaluateOperator: number;
+export const StringRegistryType: RegistryType;
 
-export const SubtractEvaluateOperator: number;
+export type RegistryType = number & { readonly [_SWIG_enum_tag]: 'RegistryType'; };
 
-export const SumEvaluateOperator: number;
+export type ResourceType = number & { readonly [_SWIG_enum_tag]: 'ResourceType'; };
 
-export const ThresholdBlackEvaluateOperator: number;
+export const UndefinedEvaluateOperator: MagickEvaluateOperator;
 
-export const ThresholdEvaluateOperator: number;
+export const AbsEvaluateOperator: MagickEvaluateOperator;
 
-export const ThresholdWhiteEvaluateOperator: number;
+export const AddEvaluateOperator: MagickEvaluateOperator;
 
-export const UniformNoiseEvaluateOperator: number;
+export const AddModulusEvaluateOperator: MagickEvaluateOperator;
 
-export const XorEvaluateOperator: number;
+export const AndEvaluateOperator: MagickEvaluateOperator;
 
-export const InverseLogEvaluateOperator: number;
+export const CosineEvaluateOperator: MagickEvaluateOperator;
+
+export const DivideEvaluateOperator: MagickEvaluateOperator;
+
+export const ExponentialEvaluateOperator: MagickEvaluateOperator;
+
+export const GaussianNoiseEvaluateOperator: MagickEvaluateOperator;
+
+export const ImpulseNoiseEvaluateOperator: MagickEvaluateOperator;
+
+export const LaplacianNoiseEvaluateOperator: MagickEvaluateOperator;
+
+export const LeftShiftEvaluateOperator: MagickEvaluateOperator;
+
+export const LogEvaluateOperator: MagickEvaluateOperator;
+
+export const MaxEvaluateOperator: MagickEvaluateOperator;
+
+export const MeanEvaluateOperator: MagickEvaluateOperator;
+
+export const MedianEvaluateOperator: MagickEvaluateOperator;
+
+export const MinEvaluateOperator: MagickEvaluateOperator;
+
+export const MultiplicativeNoiseEvaluateOperator: MagickEvaluateOperator;
+
+export const MultiplyEvaluateOperator: MagickEvaluateOperator;
+
+export const OrEvaluateOperator: MagickEvaluateOperator;
+
+export const PoissonNoiseEvaluateOperator: MagickEvaluateOperator;
+
+export const PowEvaluateOperator: MagickEvaluateOperator;
+
+export const RightShiftEvaluateOperator: MagickEvaluateOperator;
+
+export const RootMeanSquareEvaluateOperator: MagickEvaluateOperator;
+
+export const SetEvaluateOperator: MagickEvaluateOperator;
+
+export const SineEvaluateOperator: MagickEvaluateOperator;
+
+export const SubtractEvaluateOperator: MagickEvaluateOperator;
+
+export const SumEvaluateOperator: MagickEvaluateOperator;
+
+export const ThresholdBlackEvaluateOperator: MagickEvaluateOperator;
+
+export const ThresholdEvaluateOperator: MagickEvaluateOperator;
+
+export const ThresholdWhiteEvaluateOperator: MagickEvaluateOperator;
+
+export const UniformNoiseEvaluateOperator: MagickEvaluateOperator;
+
+export const XorEvaluateOperator: MagickEvaluateOperator;
+
+export const InverseLogEvaluateOperator: MagickEvaluateOperator;
+
+export type MagickEvaluateOperator = number & { readonly [_SWIG_enum_tag]: 'MagickEvaluateOperator'; };
+
+export type StatisticType = number & { readonly [_SWIG_enum_tag]: 'StatisticType'; };
+
+export type PathType = number & { readonly [_SWIG_enum_tag]: 'PathType'; };
+
+export type NoiseType = number & { readonly [_SWIG_enum_tag]: 'NoiseType'; };
 
 
 }
@@ -729,6 +822,8 @@ export const NAPI_VERSION: number;
 export const MagickLibVersionText: string;
 
 export const MagickppLibVersionText: string;
+
+export type MagickModuleType = number & { readonly [_SWIG_enum_tag]: 'MagickModuleType'; };
 
 export const Magick_CoderInfo_header: number;
 
@@ -792,15 +887,17 @@ export function gte(left_: any, right_: any): number;
 
 export function lte(left_: any, right_: any): number;
 
+export type Color_PixelType = number & { readonly [_SWIG_enum_tag]: 'Color_PixelType'; };
+
 export  class Color {
 
- static readonly CMYKPixel: number;
+ static readonly CMYKPixel: Color_PixelType;
 
- static readonly CMYKAPixel: number;
+ static readonly CMYKAPixel: Color_PixelType;
 
- static readonly RGBPixel: number;
+ static readonly RGBPixel: Color_PixelType;
 
- static readonly RGBAPixel: number;
+ static readonly RGBAPixel: Color_PixelType;
 
   constructor();
 
@@ -830,7 +927,7 @@ export  class Color {
 
   isValid(): boolean;
 
-  pixelType(): any;
+  pixelType(): Magick.Color_PixelType;
 
   quantumAlpha(alpha_: number): void;
 
@@ -1437,9 +1534,9 @@ export  class DrawableCompositeImage extends Magick.DrawableBase {
 
   constructor(x_: number, y_: number, width_: number, height_: number, image_: any);
 
-  constructor(x_: number, y_: number, width_: number, height_: number, filename_: string, composition_: any);
+  constructor(x_: number, y_: number, width_: number, height_: number, filename_: string, composition_: MagickCore.CompositeOperator);
 
-  constructor(x_: number, y_: number, width_: number, height_: number, image_: any, composition_: any);
+  constructor(x_: number, y_: number, width_: number, height_: number, image_: any, composition_: MagickCore.CompositeOperator);
 
   constructor(original_: Magick.DrawableCompositeImage);
 
@@ -1449,9 +1546,9 @@ export  class DrawableCompositeImage extends Magick.DrawableBase {
 
   copy(): Magick.DrawableBase;
 
-  composition(composition_: any): void;
+  composition(composition_: MagickCore.CompositeOperator): void;
 
-  composition(): any;
+  composition(): MagickCore.CompositeOperator;
 
   filename(image_: string): void;
 
@@ -1586,7 +1683,7 @@ export  class DrawableFont extends Magick.DrawableBase {
 
   constructor(font_: string);
 
-  constructor(family_: string, style_: any, weight_: number, stretch_: any);
+  constructor(family_: string, style_: MagickCore.StyleType, weight_: number, stretch_: MagickCore.StretchType);
 
   constructor(original_: Magick.DrawableFont);
 
@@ -1601,15 +1698,15 @@ export  class DrawableFont extends Magick.DrawableBase {
 
 export  class DrawableGravity extends Magick.DrawableBase {
 
-  constructor(gravity_: any);
+  constructor(gravity_: MagickCore.GravityType);
 
   call(context_: any): void;
 
   copy(): Magick.DrawableBase;
 
-  gravity(gravity_: any): void;
+  gravity(gravity_: MagickCore.GravityType): void;
 
-  gravity(): any;
+  gravity(): MagickCore.GravityType;
 }
 
 export  class DrawableLine extends Magick.DrawableBase {
@@ -2019,15 +2116,15 @@ export  class DrawableText extends Magick.DrawableBase {
 
 export  class DrawableTextAlignment extends Magick.DrawableBase {
 
-  constructor(alignment_: any);
+  constructor(alignment_: MagickCore.AlignType);
 
   constructor(original_: Magick.DrawableTextAlignment);
 
   call(context_: any): void;
 
-  alignment(alignment_: any): void;
+  alignment(alignment_: MagickCore.AlignType): void;
 
-  alignment(): any;
+  alignment(): MagickCore.AlignType;
 
   copy(): Magick.DrawableBase;
 }
@@ -2049,7 +2146,7 @@ export  class DrawableTextAntialias extends Magick.DrawableBase {
 
 export  class DrawableTextDecoration extends Magick.DrawableBase {
 
-  constructor(decoration_: any);
+  constructor(decoration_: MagickCore.DecorationType);
 
   constructor(original_: Magick.DrawableTextDecoration);
 
@@ -2057,20 +2154,20 @@ export  class DrawableTextDecoration extends Magick.DrawableBase {
 
   copy(): Magick.DrawableBase;
 
-  decoration(decoration_: any): void;
+  decoration(decoration_: MagickCore.DecorationType): void;
 
-  decoration(): any;
+  decoration(): MagickCore.DecorationType;
 }
 
 export  class DrawableTextDirection extends Magick.DrawableBase {
 
-  constructor(direction_: any);
+  constructor(direction_: MagickCore.DirectionType);
 
   call(context_: any): void;
 
-  direction(direction_: any): void;
+  direction(direction_: MagickCore.DirectionType): void;
 
-  direction(): any;
+  direction(): MagickCore.DirectionType;
 
   copy(): Magick.DrawableBase;
 }
@@ -2860,9 +2957,9 @@ export function formatExceptionMessage(exception_: any): string;
 
 export function createException(exception_: any): Magick.Exception;
 
-export function throwExceptionExplicit(severity_: any, reason_: string, description_: string): void;
+export function throwExceptionExplicit(severity_: MagickCore.ExceptionType, reason_: string, description_: string): void;
 
-export function throwExceptionExplicit(severity_: any, reason_: string): void;
+export function throwExceptionExplicit(severity_: MagickCore.ExceptionType, reason_: string): void;
 
 export function throwException(exception_: any, quiet_: boolean): void;
 
@@ -3167,25 +3264,25 @@ export  class Image {
 
   boxColorAsync(): Promise<Magick.Color>;
 
-  channelDepth(channel_: any, depth_: number): void;
+  channelDepth(channel_: MagickCore.ChannelType, depth_: number): void;
 
-  channelDepthAsync(channel_: any, depth_: number): Promise<void>;
+  channelDepthAsync(channel_: MagickCore.ChannelType, depth_: number): Promise<void>;
 
-  channelDepth(channel_: any): number;
+  channelDepth(channel_: MagickCore.ChannelType): number;
 
-  channelDepthAsync(channel_: any): Promise<number>;
+  channelDepthAsync(channel_: MagickCore.ChannelType): Promise<number>;
 
   channels(): number;
 
   channelsAsync(): Promise<number>;
 
-  classType(class_: any): void;
+  classType(class_: MagickCore.ClassType): void;
 
-  classTypeAsync(class_: any): Promise<void>;
+  classTypeAsync(class_: MagickCore.ClassType): Promise<void>;
 
-  classType(): any;
+  classType(): MagickCore.ClassType;
 
-  classTypeAsync(): Promise<any>;
+  classTypeAsync(): Promise<MagickCore.ClassType>;
 
   colorFuzz(fuzz_: number): void;
 
@@ -3203,21 +3300,21 @@ export  class Image {
 
   colorMapSizeAsync(): Promise<number>;
 
-  colorSpace(colorSpace_: any): void;
+  colorSpace(colorSpace_: MagickCore.ColorspaceType): void;
 
-  colorSpaceAsync(colorSpace_: any): Promise<void>;
+  colorSpaceAsync(colorSpace_: MagickCore.ColorspaceType): Promise<void>;
 
-  colorSpace(): any;
+  colorSpace(): MagickCore.ColorspaceType;
 
-  colorSpaceAsync(): Promise<any>;
+  colorSpaceAsync(): Promise<MagickCore.ColorspaceType>;
 
-  colorSpaceType(colorSpace_: any): void;
+  colorSpaceType(colorSpace_: MagickCore.ColorspaceType): void;
 
-  colorSpaceTypeAsync(colorSpace_: any): Promise<void>;
+  colorSpaceTypeAsync(colorSpace_: MagickCore.ColorspaceType): Promise<void>;
 
-  colorSpaceType(): any;
+  colorSpaceType(): MagickCore.ColorspaceType;
 
-  colorSpaceTypeAsync(): Promise<any>;
+  colorSpaceTypeAsync(): Promise<MagickCore.ColorspaceType>;
 
   columns(): number;
 
@@ -3231,21 +3328,21 @@ export  class Image {
 
   commentAsync(): Promise<string>;
 
-  compose(compose_: any): void;
+  compose(compose_: MagickCore.CompositeOperator): void;
 
-  composeAsync(compose_: any): Promise<void>;
+  composeAsync(compose_: MagickCore.CompositeOperator): Promise<void>;
 
-  compose(): any;
+  compose(): MagickCore.CompositeOperator;
 
-  composeAsync(): Promise<any>;
+  composeAsync(): Promise<MagickCore.CompositeOperator>;
 
-  compressType(compressType_: any): void;
+  compressType(compressType_: MagickCore.CompressionType): void;
 
-  compressTypeAsync(compressType_: any): Promise<void>;
+  compressTypeAsync(compressType_: MagickCore.CompressionType): Promise<void>;
 
-  compressType(): any;
+  compressType(): MagickCore.CompressionType;
 
-  compressTypeAsync(): Promise<any>;
+  compressTypeAsync(): Promise<MagickCore.CompressionType>;
 
   debug(flag_: boolean): void;
 
@@ -3275,13 +3372,13 @@ export  class Image {
 
   directoryAsync(): Promise<string>;
 
-  endian(endian_: any): void;
+  endian(endian_: MagickCore.EndianType): void;
 
-  endianAsync(endian_: any): Promise<void>;
+  endianAsync(endian_: MagickCore.EndianType): Promise<void>;
 
-  endian(): any;
+  endian(): MagickCore.EndianType;
 
-  endianAsync(): Promise<any>;
+  endianAsync(): Promise<MagickCore.EndianType>;
 
   exifProfile(exifProfile_: Magick.Blob): void;
 
@@ -3327,13 +3424,13 @@ export  class Image {
 
   fillPatternAsync(): Promise<Magick.Image>;
 
-  filterType(filterType_: any): void;
+  filterType(filterType_: MagickCore.FilterType): void;
 
-  filterTypeAsync(filterType_: any): Promise<void>;
+  filterTypeAsync(filterType_: MagickCore.FilterType): Promise<void>;
 
-  filterType(): any;
+  filterType(): MagickCore.FilterType;
 
-  filterTypeAsync(): Promise<any>;
+  filterTypeAsync(): Promise<MagickCore.FilterType>;
 
   font(font_: string): void;
 
@@ -3359,13 +3456,13 @@ export  class Image {
 
   fontPointsizeAsync(): Promise<number>;
 
-  fontStyle(style_: any): void;
+  fontStyle(style_: MagickCore.StyleType): void;
 
-  fontStyleAsync(style_: any): Promise<void>;
+  fontStyleAsync(style_: MagickCore.StyleType): Promise<void>;
 
-  fontStyle(): any;
+  fontStyle(): MagickCore.StyleType;
 
-  fontStyleAsync(): Promise<any>;
+  fontStyleAsync(): Promise<MagickCore.StyleType>;
 
   fontWeight(weight_: number): void;
 
@@ -3391,13 +3488,13 @@ export  class Image {
 
   geometryAsync(): Promise<Magick.Geometry>;
 
-  gifDisposeMethod(disposeMethod_: any): void;
+  gifDisposeMethod(disposeMethod_: MagickCore.DisposeType): void;
 
-  gifDisposeMethodAsync(disposeMethod_: any): Promise<void>;
+  gifDisposeMethodAsync(disposeMethod_: MagickCore.DisposeType): Promise<void>;
 
-  gifDisposeMethod(): any;
+  gifDisposeMethod(): MagickCore.DisposeType;
 
-  gifDisposeMethodAsync(): Promise<any>;
+  gifDisposeMethodAsync(): Promise<MagickCore.DisposeType>;
 
   hasChannel(channel: any): boolean;
 
@@ -3415,13 +3512,13 @@ export  class Image {
 
   iccColorProfileAsync(): Promise<Magick.Blob>;
 
-  interlaceType(interlace_: any): void;
+  interlaceType(interlace_: MagickCore.InterlaceType): void;
 
-  interlaceTypeAsync(interlace_: any): Promise<void>;
+  interlaceTypeAsync(interlace_: MagickCore.InterlaceType): Promise<void>;
 
-  interlaceType(): any;
+  interlaceType(): MagickCore.InterlaceType;
 
-  interlaceTypeAsync(): Promise<any>;
+  interlaceTypeAsync(): Promise<MagickCore.InterlaceType>;
 
   interpolate(interpolate_: any): void;
 
@@ -3507,13 +3604,13 @@ export  class Image {
 
   normalizedMeanErrorAsync(): Promise<number>;
 
-  orientation(orientation_: any): void;
+  orientation(orientation_: MagickCore.OrientationType): void;
 
-  orientationAsync(orientation_: any): Promise<void>;
+  orientationAsync(orientation_: MagickCore.OrientationType): Promise<void>;
 
-  orientation(): any;
+  orientation(): MagickCore.OrientationType;
 
-  orientationAsync(): Promise<any>;
+  orientationAsync(): Promise<MagickCore.OrientationType>;
 
   page(pageSize_: Magick.Geometry): void;
 
@@ -3539,13 +3636,13 @@ export  class Image {
 
   quantizeColorsAsync(): Promise<number>;
 
-  quantizeColorSpace(colorSpace_: any): void;
+  quantizeColorSpace(colorSpace_: MagickCore.ColorspaceType): void;
 
-  quantizeColorSpaceAsync(colorSpace_: any): Promise<void>;
+  quantizeColorSpaceAsync(colorSpace_: MagickCore.ColorspaceType): Promise<void>;
 
-  quantizeColorSpace(): any;
+  quantizeColorSpace(): MagickCore.ColorspaceType;
 
-  quantizeColorSpaceAsync(): Promise<any>;
+  quantizeColorSpaceAsync(): Promise<MagickCore.ColorspaceType>;
 
   quantizeDither(ditherFlag_: boolean): void;
 
@@ -3587,13 +3684,13 @@ export  class Image {
 
   renderingIntentAsync(): Promise<any>;
 
-  resolutionUnits(resolutionUnits_: any): void;
+  resolutionUnits(resolutionUnits_: MagickCore.ResolutionType): void;
 
-  resolutionUnitsAsync(resolutionUnits_: any): Promise<void>;
+  resolutionUnitsAsync(resolutionUnits_: MagickCore.ResolutionType): Promise<void>;
 
-  resolutionUnits(): any;
+  resolutionUnits(): MagickCore.ResolutionType;
 
-  resolutionUnitsAsync(): Promise<any>;
+  resolutionUnitsAsync(): Promise<MagickCore.ResolutionType>;
 
   rows(): number;
 
@@ -3719,13 +3816,13 @@ export  class Image {
 
   textAntiAliasAsync(): Promise<boolean>;
 
-  textDirection(direction_: any): void;
+  textDirection(direction_: MagickCore.DirectionType): void;
 
-  textDirectionAsync(direction_: any): Promise<void>;
+  textDirectionAsync(direction_: MagickCore.DirectionType): Promise<void>;
 
-  textDirection(): any;
+  textDirection(): MagickCore.DirectionType;
 
-  textDirectionAsync(): Promise<any>;
+  textDirectionAsync(): Promise<MagickCore.DirectionType>;
 
   textEncoding(encoding_: string): void;
 
@@ -3735,13 +3832,13 @@ export  class Image {
 
   textEncodingAsync(): Promise<string>;
 
-  textGravity(gravity_: any): void;
+  textGravity(gravity_: MagickCore.GravityType): void;
 
-  textGravityAsync(gravity_: any): Promise<void>;
+  textGravityAsync(gravity_: MagickCore.GravityType): Promise<void>;
 
-  textGravity(): any;
+  textGravity(): MagickCore.GravityType;
 
-  textGravityAsync(): Promise<any>;
+  textGravityAsync(): Promise<MagickCore.GravityType>;
 
   textInterlineSpacing(spacing_: number): void;
 
@@ -3791,13 +3888,13 @@ export  class Image {
 
   transformSkewYAsync(skewy_: number): Promise<void>;
 
-  type(type_: any): void;
+  type(type_: MagickCore.ImageType): void;
 
-  typeAsync(type_: any): Promise<void>;
+  typeAsync(type_: MagickCore.ImageType): Promise<void>;
 
-  type(): any;
+  type(): MagickCore.ImageType;
 
-  typeAsync(): Promise<any>;
+  typeAsync(): Promise<MagickCore.ImageType>;
 
   verbose(verboseFlag_: boolean): void;
 
@@ -3859,17 +3956,17 @@ export  class Image {
 
   adaptiveSharpenAsync(): Promise<void>;
 
-  adaptiveSharpenChannel(channel_: any, radius_: number, sigma_: number): void;
+  adaptiveSharpenChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): void;
 
-  adaptiveSharpenChannelAsync(channel_: any, radius_: number, sigma_: number): Promise<void>;
+  adaptiveSharpenChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): Promise<void>;
 
-  adaptiveSharpenChannel(channel_: any, radius_: number): void;
+  adaptiveSharpenChannel(channel_: MagickCore.ChannelType, radius_: number): void;
 
-  adaptiveSharpenChannelAsync(channel_: any, radius_: number): Promise<void>;
+  adaptiveSharpenChannelAsync(channel_: MagickCore.ChannelType, radius_: number): Promise<void>;
 
-  adaptiveSharpenChannel(channel_: any): void;
+  adaptiveSharpenChannel(channel_: MagickCore.ChannelType): void;
 
-  adaptiveSharpenChannelAsync(channel_: any): Promise<void>;
+  adaptiveSharpenChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   adaptiveThreshold(width_: number, height_: number, bias_: number): void;
 
@@ -3879,21 +3976,21 @@ export  class Image {
 
   adaptiveThresholdAsync(width_: number, height_: number): Promise<void>;
 
-  addNoise(noiseType_: any, attenuate_: number): void;
+  addNoise(noiseType_: MagickCore.NoiseType, attenuate_: number): void;
 
-  addNoiseAsync(noiseType_: any, attenuate_: number): Promise<void>;
+  addNoiseAsync(noiseType_: MagickCore.NoiseType, attenuate_: number): Promise<void>;
 
-  addNoise(noiseType_: any): void;
+  addNoise(noiseType_: MagickCore.NoiseType): void;
 
-  addNoiseAsync(noiseType_: any): Promise<void>;
+  addNoiseAsync(noiseType_: MagickCore.NoiseType): Promise<void>;
 
-  addNoiseChannel(channel_: any, noiseType_: any, attenuate_: number): void;
+  addNoiseChannel(channel_: MagickCore.ChannelType, noiseType_: MagickCore.NoiseType, attenuate_: number): void;
 
-  addNoiseChannelAsync(channel_: any, noiseType_: any, attenuate_: number): Promise<void>;
+  addNoiseChannelAsync(channel_: MagickCore.ChannelType, noiseType_: MagickCore.NoiseType, attenuate_: number): Promise<void>;
 
-  addNoiseChannel(channel_: any, noiseType_: any): void;
+  addNoiseChannel(channel_: MagickCore.ChannelType, noiseType_: MagickCore.NoiseType): void;
 
-  addNoiseChannelAsync(channel_: any, noiseType_: any): Promise<void>;
+  addNoiseChannelAsync(channel_: MagickCore.ChannelType, noiseType_: MagickCore.NoiseType): Promise<void>;
 
   affineTransform(affine: Magick.DrawableAffine): void;
 
@@ -3911,17 +4008,17 @@ export  class Image {
 
   annotateAsync(text_: string, location_: Magick.Geometry): Promise<void>;
 
-  annotate(text_: string, boundingArea_: Magick.Geometry, gravity_: any): void;
+  annotate(text_: string, boundingArea_: Magick.Geometry, gravity_: MagickCore.GravityType): void;
 
-  annotateAsync(text_: string, boundingArea_: Magick.Geometry, gravity_: any): Promise<void>;
+  annotateAsync(text_: string, boundingArea_: Magick.Geometry, gravity_: MagickCore.GravityType): Promise<void>;
 
-  annotate(text_: string, boundingArea_: Magick.Geometry, gravity_: any, degrees_: number): void;
+  annotate(text_: string, boundingArea_: Magick.Geometry, gravity_: MagickCore.GravityType, degrees_: number): void;
 
-  annotateAsync(text_: string, boundingArea_: Magick.Geometry, gravity_: any, degrees_: number): Promise<void>;
+  annotateAsync(text_: string, boundingArea_: Magick.Geometry, gravity_: MagickCore.GravityType, degrees_: number): Promise<void>;
 
-  annotate(text_: string, gravity_: any): void;
+  annotate(text_: string, gravity_: MagickCore.GravityType): void;
 
-  annotateAsync(text_: string, gravity_: any): Promise<void>;
+  annotateAsync(text_: string, gravity_: MagickCore.GravityType): Promise<void>;
 
   artifact(name_: string, value_: string): void;
 
@@ -3947,17 +4044,17 @@ export  class Image {
 
   autoGammaAsync(): Promise<void>;
 
-  autoGammaChannel(channel_: any): void;
+  autoGammaChannel(channel_: MagickCore.ChannelType): void;
 
-  autoGammaChannelAsync(channel_: any): Promise<void>;
+  autoGammaChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   autoLevel(): void;
 
   autoLevelAsync(): Promise<void>;
 
-  autoLevelChannel(channel_: any): void;
+  autoLevelChannel(channel_: MagickCore.ChannelType): void;
 
-  autoLevelChannelAsync(channel_: any): Promise<void>;
+  autoLevelChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   autoOrient(): void;
 
@@ -3971,9 +4068,9 @@ export  class Image {
 
   blackThresholdAsync(threshold_: string): Promise<void>;
 
-  blackThresholdChannel(channel_: any, threshold_: string): void;
+  blackThresholdChannel(channel_: MagickCore.ChannelType, threshold_: string): void;
 
-  blackThresholdChannelAsync(channel_: any, threshold_: string): Promise<void>;
+  blackThresholdChannelAsync(channel_: MagickCore.ChannelType, threshold_: string): Promise<void>;
 
   blueShift(factor_: number): void;
 
@@ -3995,17 +4092,17 @@ export  class Image {
 
   blurAsync(): Promise<void>;
 
-  blurChannel(channel_: any, radius_: number, sigma_: number): void;
+  blurChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): void;
 
-  blurChannelAsync(channel_: any, radius_: number, sigma_: number): Promise<void>;
+  blurChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): Promise<void>;
 
-  blurChannel(channel_: any, radius_: number): void;
+  blurChannel(channel_: MagickCore.ChannelType, radius_: number): void;
 
-  blurChannelAsync(channel_: any, radius_: number): Promise<void>;
+  blurChannelAsync(channel_: MagickCore.ChannelType, radius_: number): Promise<void>;
 
-  blurChannel(channel_: any): void;
+  blurChannel(channel_: MagickCore.ChannelType): void;
 
-  blurChannelAsync(channel_: any): Promise<void>;
+  blurChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   border(geometry_: Magick.Geometry | string): void;
 
@@ -4027,17 +4124,17 @@ export  class Image {
 
   brightnessContrastAsync(): Promise<void>;
 
-  brightnessContrastChannel(channel_: any, brightness_: number, contrast_: number): void;
+  brightnessContrastChannel(channel_: MagickCore.ChannelType, brightness_: number, contrast_: number): void;
 
-  brightnessContrastChannelAsync(channel_: any, brightness_: number, contrast_: number): Promise<void>;
+  brightnessContrastChannelAsync(channel_: MagickCore.ChannelType, brightness_: number, contrast_: number): Promise<void>;
 
-  brightnessContrastChannel(channel_: any, brightness_: number): void;
+  brightnessContrastChannel(channel_: MagickCore.ChannelType, brightness_: number): void;
 
-  brightnessContrastChannelAsync(channel_: any, brightness_: number): Promise<void>;
+  brightnessContrastChannelAsync(channel_: MagickCore.ChannelType, brightness_: number): Promise<void>;
 
-  brightnessContrastChannel(channel_: any): void;
+  brightnessContrastChannel(channel_: MagickCore.ChannelType): void;
 
-  brightnessContrastChannelAsync(channel_: any): Promise<void>;
+  brightnessContrastChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   cannyEdge(radius_: number, sigma_: number, lowerPercent_: number, upperPercent_: number): void;
 
@@ -4063,9 +4160,9 @@ export  class Image {
 
   cdlAsync(cdl_: string): Promise<void>;
 
-  channel(channel_: any): void;
+  channel(channel_: MagickCore.ChannelType): void;
 
-  channelAsync(channel_: any): Promise<void>;
+  channelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   charcoal(radius_: number, sigma_: number): void;
 
@@ -4079,17 +4176,17 @@ export  class Image {
 
   charcoalAsync(): Promise<void>;
 
-  charcoalChannel(channel_: any, radius_: number, sigma_: number): void;
+  charcoalChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): void;
 
-  charcoalChannelAsync(channel_: any, radius_: number, sigma_: number): Promise<void>;
+  charcoalChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): Promise<void>;
 
-  charcoalChannel(channel_: any, radius_: number): void;
+  charcoalChannel(channel_: MagickCore.ChannelType, radius_: number): void;
 
-  charcoalChannelAsync(channel_: any, radius_: number): Promise<void>;
+  charcoalChannelAsync(channel_: MagickCore.ChannelType, radius_: number): Promise<void>;
 
-  charcoalChannel(channel_: any): void;
+  charcoalChannel(channel_: MagickCore.ChannelType): void;
 
-  charcoalChannelAsync(channel_: any): Promise<void>;
+  charcoalChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   chop(geometry_: Magick.Geometry | string): void;
 
@@ -4131,9 +4228,9 @@ export  class Image {
 
   clampAsync(): Promise<void>;
 
-  clampChannel(channel_: any): void;
+  clampChannel(channel_: MagickCore.ChannelType): void;
 
-  clampChannelAsync(channel_: any): Promise<void>;
+  clampChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   clip(): void;
 
@@ -4147,9 +4244,9 @@ export  class Image {
 
   clutAsync(clutImage_: Magick.Image, method: any): Promise<void>;
 
-  clutChannel(channel_: any, clutImage_: Magick.Image, method: any): void;
+  clutChannel(channel_: MagickCore.ChannelType, clutImage_: Magick.Image, method: any): void;
 
-  clutChannelAsync(channel_: any, clutImage_: Magick.Image, method: any): Promise<void>;
+  clutChannelAsync(channel_: MagickCore.ChannelType, clutImage_: Magick.Image, method: any): Promise<void>;
 
   colorize(alpha_: number, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
@@ -4175,41 +4272,41 @@ export  class Image {
 
   compareAsync(reference_: Magick.Image): Promise<boolean>;
 
-  compare(reference_: Magick.Image, metric_: any): number;
+  compare(reference_: Magick.Image, metric_: MagickCore.MetricType): number;
 
-  compareAsync(reference_: Magick.Image, metric_: any): Promise<number>;
+  compareAsync(reference_: Magick.Image, metric_: MagickCore.MetricType): Promise<number>;
 
-  compareChannel(channel_: any, reference_: Magick.Image, metric_: any): number;
+  compareChannel(channel_: MagickCore.ChannelType, reference_: Magick.Image, metric_: MagickCore.MetricType): number;
 
-  compareChannelAsync(channel_: any, reference_: Magick.Image, metric_: any): Promise<number>;
+  compareChannelAsync(channel_: MagickCore.ChannelType, reference_: Magick.Image, metric_: MagickCore.MetricType): Promise<number>;
 
-  compare(reference_: Magick.Image, metric_: any, distortion: any): Magick.Image;
+  compare(reference_: Magick.Image, metric_: MagickCore.MetricType, distortion: any): Magick.Image;
 
-  compareAsync(reference_: Magick.Image, metric_: any, distortion: any): Promise<Magick.Image>;
+  compareAsync(reference_: Magick.Image, metric_: MagickCore.MetricType, distortion: any): Promise<Magick.Image>;
 
-  compareChannel(channel_: any, reference_: Magick.Image, metric_: any, distortion: any): Magick.Image;
+  compareChannel(channel_: MagickCore.ChannelType, reference_: Magick.Image, metric_: MagickCore.MetricType, distortion: any): Magick.Image;
 
-  compareChannelAsync(channel_: any, reference_: Magick.Image, metric_: any, distortion: any): Promise<Magick.Image>;
+  compareChannelAsync(channel_: MagickCore.ChannelType, reference_: Magick.Image, metric_: MagickCore.MetricType, distortion: any): Promise<Magick.Image>;
 
-  composite(compositeImage_: Magick.Image, offset_: Magick.Geometry | string, compose_: any): void;
+  composite(compositeImage_: Magick.Image, offset_: Magick.Geometry | string, compose_: MagickCore.CompositeOperator): void;
 
-  compositeAsync(compositeImage_: Magick.Image, offset_: Magick.Geometry | string, compose_: any): Promise<void>;
+  compositeAsync(compositeImage_: Magick.Image, offset_: Magick.Geometry | string, compose_: MagickCore.CompositeOperator): Promise<void>;
 
   composite(compositeImage_: Magick.Image, offset_: Magick.Geometry | string): void;
 
   compositeAsync(compositeImage_: Magick.Image, offset_: Magick.Geometry | string): Promise<void>;
 
-  composite(compositeImage_: Magick.Image, gravity_: any, compose_: any): void;
+  composite(compositeImage_: Magick.Image, gravity_: MagickCore.GravityType, compose_: MagickCore.CompositeOperator): void;
 
-  compositeAsync(compositeImage_: Magick.Image, gravity_: any, compose_: any): Promise<void>;
+  compositeAsync(compositeImage_: Magick.Image, gravity_: MagickCore.GravityType, compose_: MagickCore.CompositeOperator): Promise<void>;
 
-  composite(compositeImage_: Magick.Image, gravity_: any): void;
+  composite(compositeImage_: Magick.Image, gravity_: MagickCore.GravityType): void;
 
-  compositeAsync(compositeImage_: Magick.Image, gravity_: any): Promise<void>;
+  compositeAsync(compositeImage_: Magick.Image, gravity_: MagickCore.GravityType): Promise<void>;
 
-  composite(compositeImage_: Magick.Image, xOffset_: number, yOffset_: number, compose_: any): void;
+  composite(compositeImage_: Magick.Image, xOffset_: number, yOffset_: number, compose_: MagickCore.CompositeOperator): void;
 
-  compositeAsync(compositeImage_: Magick.Image, xOffset_: number, yOffset_: number, compose_: any): Promise<void>;
+  compositeAsync(compositeImage_: Magick.Image, xOffset_: number, yOffset_: number, compose_: MagickCore.CompositeOperator): Promise<void>;
 
   composite(compositeImage_: Magick.Image, xOffset_: number, yOffset_: number): void;
 
@@ -4227,9 +4324,9 @@ export  class Image {
 
   contrastStretchAsync(blackPoint_: number, whitePoint_: number): Promise<void>;
 
-  contrastStretchChannel(channel_: any, blackPoint_: number, whitePoint_: number): void;
+  contrastStretchChannel(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number): void;
 
-  contrastStretchChannelAsync(channel_: any, blackPoint_: number, whitePoint_: number): Promise<void>;
+  contrastStretchChannelAsync(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number): Promise<void>;
 
   convolve(order_: number, kernel_: any): void;
 
@@ -4331,17 +4428,17 @@ export  class Image {
 
   eraseAsync(): Promise<void>;
 
-  evaluate(channel_: any, operator_: any, rvalue_: number): void;
+  evaluate(channel_: MagickCore.ChannelType, operator_: MagickCore.MagickEvaluateOperator, rvalue_: number): void;
 
-  evaluateAsync(channel_: any, operator_: any, rvalue_: number): Promise<void>;
+  evaluateAsync(channel_: MagickCore.ChannelType, operator_: MagickCore.MagickEvaluateOperator, rvalue_: number): Promise<void>;
 
-  evaluate(channel_: any, function_: any, number_parameters_: number, parameters_: any): void;
+  evaluate(channel_: MagickCore.ChannelType, function_: any, number_parameters_: number, parameters_: any): void;
 
-  evaluateAsync(channel_: any, function_: any, number_parameters_: number, parameters_: any): Promise<void>;
+  evaluateAsync(channel_: MagickCore.ChannelType, function_: any, number_parameters_: number, parameters_: any): Promise<void>;
 
-  evaluate(channel_: any, x_: number, y_: number, columns_: number, rows_: number, operator_: any, rvalue_: number): void;
+  evaluate(channel_: MagickCore.ChannelType, x_: number, y_: number, columns_: number, rows_: number, operator_: MagickCore.MagickEvaluateOperator, rvalue_: number): void;
 
-  evaluateAsync(channel_: any, x_: number, y_: number, columns_: number, rows_: number, operator_: any, rvalue_: number): Promise<void>;
+  evaluateAsync(channel_: MagickCore.ChannelType, x_: number, y_: number, columns_: number, rows_: number, operator_: MagickCore.MagickEvaluateOperator, rvalue_: number): Promise<void>;
 
   extent(geometry_: Magick.Geometry | string): void;
 
@@ -4351,13 +4448,13 @@ export  class Image {
 
   extentAsync(geometry_: Magick.Geometry | string, backgroundColor: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
-  extent(geometry_: Magick.Geometry | string, backgroundColor: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: any): void;
+  extent(geometry_: Magick.Geometry | string, backgroundColor: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: MagickCore.GravityType): void;
 
-  extentAsync(geometry_: Magick.Geometry | string, backgroundColor: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: any): Promise<void>;
+  extentAsync(geometry_: Magick.Geometry | string, backgroundColor: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: MagickCore.GravityType): Promise<void>;
 
-  extent(geometry_: Magick.Geometry | string, gravity_: any): void;
+  extent(geometry_: Magick.Geometry | string, gravity_: MagickCore.GravityType): void;
 
-  extentAsync(geometry_: Magick.Geometry | string, gravity_: any): Promise<void>;
+  extentAsync(geometry_: Magick.Geometry | string, gravity_: MagickCore.GravityType): Promise<void>;
 
   flip(): void;
 
@@ -4479,9 +4576,9 @@ export  class Image {
 
   fxAsync(expression_: string): Promise<void>;
 
-  fx(expression_: string, channel_: any): void;
+  fx(expression_: string, channel_: MagickCore.ChannelType): void;
 
-  fxAsync(expression_: string, channel_: any): Promise<void>;
+  fxAsync(expression_: string, channel_: MagickCore.ChannelType): Promise<void>;
 
   gamma(gamma_: number): void;
 
@@ -4495,9 +4592,9 @@ export  class Image {
 
   gaussianBlurAsync(radius_: number, sigma_: number): Promise<void>;
 
-  gaussianBlurChannel(channel_: any, radius_: number, sigma_: number): void;
+  gaussianBlurChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): void;
 
-  gaussianBlurChannelAsync(channel_: any, radius_: number, sigma_: number): Promise<void>;
+  gaussianBlurChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): Promise<void>;
 
   getConstPixels(x_: number, y_: number, columns_: number, rows_: number): any;
 
@@ -4531,9 +4628,9 @@ export  class Image {
 
   houghLineAsync(width_: number, height_: number): Promise<void>;
 
-  identifyType(): any;
+  identifyType(): MagickCore.ImageType;
 
-  identifyTypeAsync(): Promise<any>;
+  identifyTypeAsync(): Promise<MagickCore.ImageType>;
 
   implode(factor_: number): void;
 
@@ -4559,17 +4656,17 @@ export  class Image {
 
   kuwaharaAsync(): Promise<void>;
 
-  kuwaharaChannel(channel_: any, radius_: number, sigma_: number): void;
+  kuwaharaChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): void;
 
-  kuwaharaChannelAsync(channel_: any, radius_: number, sigma_: number): Promise<void>;
+  kuwaharaChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): Promise<void>;
 
-  kuwaharaChannel(channel_: any, radius_: number): void;
+  kuwaharaChannel(channel_: MagickCore.ChannelType, radius_: number): void;
 
-  kuwaharaChannelAsync(channel_: any, radius_: number): Promise<void>;
+  kuwaharaChannelAsync(channel_: MagickCore.ChannelType, radius_: number): Promise<void>;
 
-  kuwaharaChannel(channel_: any): void;
+  kuwaharaChannel(channel_: MagickCore.ChannelType): void;
 
-  kuwaharaChannelAsync(channel_: any): Promise<void>;
+  kuwaharaChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   level(blackPoint_: number, whitePoint_: number, gamma_: number): void;
 
@@ -4579,13 +4676,13 @@ export  class Image {
 
   levelAsync(blackPoint_: number, whitePoint_: number): Promise<void>;
 
-  levelChannel(channel_: any, blackPoint_: number, whitePoint_: number, gamma_: number): void;
+  levelChannel(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number, gamma_: number): void;
 
-  levelChannelAsync(channel_: any, blackPoint_: number, whitePoint_: number, gamma_: number): Promise<void>;
+  levelChannelAsync(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number, gamma_: number): Promise<void>;
 
-  levelChannel(channel_: any, blackPoint_: number, whitePoint_: number): void;
+  levelChannel(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number): void;
 
-  levelChannelAsync(channel_: any, blackPoint_: number, whitePoint_: number): Promise<void>;
+  levelChannelAsync(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number): Promise<void>;
 
   levelColors(blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
@@ -4595,13 +4692,13 @@ export  class Image {
 
   levelColorsAsync(blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
-  levelColorsChannel(channel_: any, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
+  levelColorsChannel(channel_: MagickCore.ChannelType, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  levelColorsChannelAsync(channel_: any, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
+  levelColorsChannelAsync(channel_: MagickCore.ChannelType, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
 
-  levelColorsChannel(channel_: any, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
+  levelColorsChannel(channel_: MagickCore.ChannelType, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  levelColorsChannelAsync(channel_: any, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
+  levelColorsChannelAsync(channel_: MagickCore.ChannelType, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   levelize(blackPoint_: number, whitePoint_: number, gamma_: number): void;
 
@@ -4611,13 +4708,13 @@ export  class Image {
 
   levelizeAsync(blackPoint_: number, whitePoint_: number): Promise<void>;
 
-  levelizeChannel(channel_: any, blackPoint_: number, whitePoint_: number, gamma_: number): void;
+  levelizeChannel(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number, gamma_: number): void;
 
-  levelizeChannelAsync(channel_: any, blackPoint_: number, whitePoint_: number, gamma_: number): Promise<void>;
+  levelizeChannelAsync(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number, gamma_: number): Promise<void>;
 
-  levelizeChannel(channel_: any, blackPoint_: number, whitePoint_: number): void;
+  levelizeChannel(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number): void;
 
-  levelizeChannelAsync(channel_: any, blackPoint_: number, whitePoint_: number): Promise<void>;
+  levelizeChannelAsync(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number): Promise<void>;
 
   linearStretch(blackPoint_: number, whitePoint_: number): void;
 
@@ -4631,9 +4728,9 @@ export  class Image {
 
   localContrastAsync(radius_: number, strength_: number): Promise<void>;
 
-  localContrastChannel(channel_: any, radius_: number, strength_: number): void;
+  localContrastChannel(channel_: MagickCore.ChannelType, radius_: number, strength_: number): void;
 
-  localContrastChannelAsync(channel_: any, radius_: number, strength_: number): Promise<void>;
+  localContrastChannelAsync(channel_: MagickCore.ChannelType, radius_: number, strength_: number): Promise<void>;
 
   magnify(): void;
 
@@ -4679,29 +4776,29 @@ export  class Image {
 
   morphologyAsync(method_: any, kernel_: string): Promise<void>;
 
-  morphology(method_: any, kernel_: any, arguments_: string, iterations_: number): void;
+  morphology(method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string, iterations_: number): void;
 
-  morphologyAsync(method_: any, kernel_: any, arguments_: string, iterations_: number): Promise<void>;
+  morphologyAsync(method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string, iterations_: number): Promise<void>;
 
-  morphology(method_: any, kernel_: any, arguments_: string): void;
+  morphology(method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string): void;
 
-  morphologyAsync(method_: any, kernel_: any, arguments_: string): Promise<void>;
+  morphologyAsync(method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string): Promise<void>;
 
-  morphologyChannel(channel_: any, method_: any, kernel_: string, iterations_: number): void;
+  morphologyChannel(channel_: MagickCore.ChannelType, method_: any, kernel_: string, iterations_: number): void;
 
-  morphologyChannelAsync(channel_: any, method_: any, kernel_: string, iterations_: number): Promise<void>;
+  morphologyChannelAsync(channel_: MagickCore.ChannelType, method_: any, kernel_: string, iterations_: number): Promise<void>;
 
-  morphologyChannel(channel_: any, method_: any, kernel_: string): void;
+  morphologyChannel(channel_: MagickCore.ChannelType, method_: any, kernel_: string): void;
 
-  morphologyChannelAsync(channel_: any, method_: any, kernel_: string): Promise<void>;
+  morphologyChannelAsync(channel_: MagickCore.ChannelType, method_: any, kernel_: string): Promise<void>;
 
-  morphologyChannel(channel_: any, method_: any, kernel_: any, arguments_: string, iterations_: number): void;
+  morphologyChannel(channel_: MagickCore.ChannelType, method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string, iterations_: number): void;
 
-  morphologyChannelAsync(channel_: any, method_: any, kernel_: any, arguments_: string, iterations_: number): Promise<void>;
+  morphologyChannelAsync(channel_: MagickCore.ChannelType, method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string, iterations_: number): Promise<void>;
 
-  morphologyChannel(channel_: any, method_: any, kernel_: any, arguments_: string): void;
+  morphologyChannel(channel_: MagickCore.ChannelType, method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string): void;
 
-  morphologyChannelAsync(channel_: any, method_: any, kernel_: any, arguments_: string): Promise<void>;
+  morphologyChannelAsync(channel_: MagickCore.ChannelType, method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string): Promise<void>;
 
   motionBlur(radius_: number, sigma_: number, angle_: number): void;
 
@@ -4715,13 +4812,13 @@ export  class Image {
 
   negateAsync(): Promise<void>;
 
-  negateChannel(channel_: any, grayscale_: boolean): void;
+  negateChannel(channel_: MagickCore.ChannelType, grayscale_: boolean): void;
 
-  negateChannelAsync(channel_: any, grayscale_: boolean): Promise<void>;
+  negateChannelAsync(channel_: MagickCore.ChannelType, grayscale_: boolean): Promise<void>;
 
-  negateChannel(channel_: any): void;
+  negateChannel(channel_: MagickCore.ChannelType): void;
 
-  negateChannelAsync(channel_: any): Promise<void>;
+  negateChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   normalize(): void;
 
@@ -4751,17 +4848,17 @@ export  class Image {
 
   orderedDitherAsync(thresholdMap_: string): Promise<void>;
 
-  orderedDitherChannel(channel_: any, thresholdMap_: string): void;
+  orderedDitherChannel(channel_: MagickCore.ChannelType, thresholdMap_: string): void;
 
-  orderedDitherChannelAsync(channel_: any, thresholdMap_: string): Promise<void>;
+  orderedDitherChannelAsync(channel_: MagickCore.ChannelType, thresholdMap_: string): Promise<void>;
 
   perceptible(epsilon_: number): void;
 
   perceptibleAsync(epsilon_: number): Promise<void>;
 
-  perceptibleChannel(channel_: any, epsilon_: number): void;
+  perceptibleChannel(channel_: MagickCore.ChannelType, epsilon_: number): void;
 
-  perceptibleChannelAsync(channel_: any, epsilon_: number): Promise<void>;
+  perceptibleChannelAsync(channel_: MagickCore.ChannelType, epsilon_: number): Promise<void>;
 
   perceptualHash(): Magick.ImagePerceptualHash;
 
@@ -4791,9 +4888,9 @@ export  class Image {
 
   posterizeAsync(levels_: number, method_: any): Promise<void>;
 
-  posterizeChannel(channel_: any, levels_: number, method_: any): void;
+  posterizeChannel(channel_: MagickCore.ChannelType, levels_: number, method_: any): void;
 
-  posterizeChannelAsync(channel_: any, levels_: number, method_: any): Promise<void>;
+  posterizeChannelAsync(channel_: MagickCore.ChannelType, levels_: number, method_: any): Promise<void>;
 
   process(name_: string, argc_: number, argv_: any): void;
 
@@ -4831,9 +4928,9 @@ export  class Image {
 
   randomThresholdAsync(low_: number, high_: number): Promise<void>;
 
-  randomThresholdChannel(channel_: any, low_: number, high_: number): void;
+  randomThresholdChannel(channel_: MagickCore.ChannelType, low_: number, high_: number): void;
 
-  randomThresholdChannelAsync(channel_: any, low_: number, high_: number): Promise<void>;
+  randomThresholdChannelAsync(channel_: MagickCore.ChannelType, low_: number, high_: number): Promise<void>;
 
   read(blob_: Magick.Blob): void;
 
@@ -4875,9 +4972,9 @@ export  class Image {
 
   readMaskAsync(): Promise<Magick.Image>;
 
-  readPixels(quantum_: any, source_: any): void;
+  readPixels(quantum_: MagickCore.QuantumType, source_: any): void;
 
-  readPixelsAsync(quantum_: any, source_: any): Promise<void>;
+  readPixelsAsync(quantum_: MagickCore.QuantumType, source_: any): Promise<void>;
 
   reduceNoise(): void;
 
@@ -4915,9 +5012,9 @@ export  class Image {
 
   rotationalBlurAsync(angle_: number): Promise<void>;
 
-  rotationalBlurChannel(channel_: any, angle_: number): void;
+  rotationalBlurChannel(channel_: MagickCore.ChannelType, angle_: number): void;
 
-  rotationalBlurChannelAsync(channel_: any, angle_: number): Promise<void>;
+  rotationalBlurChannelAsync(channel_: MagickCore.ChannelType, angle_: number): Promise<void>;
 
   sample(geometry_: Magick.Geometry | string): void;
 
@@ -4943,13 +5040,13 @@ export  class Image {
 
   selectiveBlurAsync(radius_: number, sigma_: number, threshold_: number): Promise<void>;
 
-  selectiveBlurChannel(channel_: any, radius_: number, sigma_: number, threshold_: number): void;
+  selectiveBlurChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number, threshold_: number): void;
 
-  selectiveBlurChannelAsync(channel_: any, radius_: number, sigma_: number, threshold_: number): Promise<void>;
+  selectiveBlurChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number, threshold_: number): Promise<void>;
 
-  separate(channel_: any): Magick.Image;
+  separate(channel_: MagickCore.ChannelType): Magick.Image;
 
-  separateAsync(channel_: any): Promise<Magick.Image>;
+  separateAsync(channel_: MagickCore.ChannelType): Promise<Magick.Image>;
 
   sepiaTone(threshold_: number): void;
 
@@ -5011,17 +5108,17 @@ export  class Image {
 
   sharpenAsync(): Promise<void>;
 
-  sharpenChannel(channel_: any, radius_: number, sigma_: number): void;
+  sharpenChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): void;
 
-  sharpenChannelAsync(channel_: any, radius_: number, sigma_: number): Promise<void>;
+  sharpenChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): Promise<void>;
 
-  sharpenChannel(channel_: any, radius_: number): void;
+  sharpenChannel(channel_: MagickCore.ChannelType, radius_: number): void;
 
-  sharpenChannelAsync(channel_: any, radius_: number): Promise<void>;
+  sharpenChannelAsync(channel_: MagickCore.ChannelType, radius_: number): Promise<void>;
 
-  sharpenChannel(channel_: any): void;
+  sharpenChannel(channel_: MagickCore.ChannelType): void;
 
-  sharpenChannelAsync(channel_: any): Promise<void>;
+  sharpenChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   shave(geometry_: Magick.Geometry | string): void;
 
@@ -5071,9 +5168,9 @@ export  class Image {
 
   solarizeAsync(): Promise<void>;
 
-  sparseColor(channel_: any, method_: any, numberArguments_: number, arguments_: any): void;
+  sparseColor(channel_: MagickCore.ChannelType, method_: any, numberArguments_: number, arguments_: any): void;
 
-  sparseColorAsync(channel_: any, method_: any, numberArguments_: number, arguments_: any): Promise<void>;
+  sparseColorAsync(channel_: MagickCore.ChannelType, method_: any, numberArguments_: number, arguments_: any): Promise<void>;
 
   splice(geometry_: Magick.Geometry | string): void;
 
@@ -5083,9 +5180,9 @@ export  class Image {
 
   spliceAsync(geometry_: Magick.Geometry | string, backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
-  splice(geometry_: Magick.Geometry | string, backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: any): void;
+  splice(geometry_: Magick.Geometry | string, backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: MagickCore.GravityType): void;
 
-  spliceAsync(geometry_: Magick.Geometry | string, backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: any): Promise<void>;
+  spliceAsync(geometry_: Magick.Geometry | string, backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: MagickCore.GravityType): Promise<void>;
 
   spread(amount_: number): void;
 
@@ -5111,13 +5208,13 @@ export  class Image {
 
   stripAsync(): Promise<void>;
 
-  subImageSearch(reference_: Magick.Image, metric_: any, offset_: Magick.Geometry, similarityMetric_: any, similarityThreshold: number): Magick.Image;
+  subImageSearch(reference_: Magick.Image, metric_: MagickCore.MetricType, offset_: Magick.Geometry, similarityMetric_: any, similarityThreshold: number): Magick.Image;
 
-  subImageSearchAsync(reference_: Magick.Image, metric_: any, offset_: Magick.Geometry, similarityMetric_: any, similarityThreshold: number): Promise<Magick.Image>;
+  subImageSearchAsync(reference_: Magick.Image, metric_: MagickCore.MetricType, offset_: Magick.Geometry, similarityMetric_: any, similarityThreshold: number): Promise<Magick.Image>;
 
-  subImageSearch(reference_: Magick.Image, metric_: any, offset_: Magick.Geometry, similarityMetric_: any): Magick.Image;
+  subImageSearch(reference_: Magick.Image, metric_: MagickCore.MetricType, offset_: Magick.Geometry, similarityMetric_: any): Magick.Image;
 
-  subImageSearchAsync(reference_: Magick.Image, metric_: any, offset_: Magick.Geometry, similarityMetric_: any): Promise<Magick.Image>;
+  subImageSearchAsync(reference_: Magick.Image, metric_: MagickCore.MetricType, offset_: Magick.Geometry, similarityMetric_: any): Promise<Magick.Image>;
 
   swirl(degrees_: number): void;
 
@@ -5187,9 +5284,9 @@ export  class Image {
 
   unsharpmaskAsync(radius_: number, sigma_: number, amount_: number, threshold_: number): Promise<void>;
 
-  unsharpmaskChannel(channel_: any, radius_: number, sigma_: number, amount_: number, threshold_: number): void;
+  unsharpmaskChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number, amount_: number, threshold_: number): void;
 
-  unsharpmaskChannelAsync(channel_: any, radius_: number, sigma_: number, amount_: number, threshold_: number): Promise<void>;
+  unsharpmaskChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number, amount_: number, threshold_: number): Promise<void>;
 
   vignette(radius_: number, sigma_: number, x_: number, y_: number): void;
 
@@ -5231,9 +5328,9 @@ export  class Image {
 
   whiteThresholdAsync(threshold_: string): Promise<void>;
 
-  whiteThresholdChannel(channel_: any, threshold_: string): void;
+  whiteThresholdChannel(channel_: MagickCore.ChannelType, threshold_: string): void;
 
-  whiteThresholdChannelAsync(channel_: any, threshold_: string): Promise<void>;
+  whiteThresholdChannelAsync(channel_: MagickCore.ChannelType, threshold_: string): Promise<void>;
 
   write(blob_: Magick.Blob): void;
 
@@ -5263,9 +5360,9 @@ export  class Image {
 
   writeMaskAsync(): Promise<Magick.Image>;
 
-  writePixels(quantum_: any, destination_: any): void;
+  writePixels(quantum_: MagickCore.QuantumType, destination_: any): void;
 
-  writePixelsAsync(quantum_: any, destination_: any): Promise<void>;
+  writePixelsAsync(quantum_: MagickCore.QuantumType, destination_: any): Promise<void>;
 
   zoom(geometry_: Magick.Geometry | string): void;
 
@@ -5316,9 +5413,9 @@ export  class Image {
 
 export  class PixelData {
 
-  constructor(image_: Magick.Image, map_: string, type_: any);
+  constructor(image_: Magick.Image, map_: string, type_: MagickCore.StorageType);
 
-  constructor(image_: Magick.Image, x_: number, y_: number, width_: number, height_: number, map_: string, type_: any);
+  constructor(image_: Magick.Image, x_: number, y_: number, width_: number, height_: number, map_: string, type_: MagickCore.StorageType);
 
   data(): any;
 
@@ -5370,13 +5467,15 @@ export  class ResourceLimits {
  static width(): number;
 }
 
+export type CoderInfo_MatchType = number & { readonly [_SWIG_enum_tag]: 'CoderInfo_MatchType'; };
+
 export  class CoderInfo {
 
- static readonly AnyMatch: number;
+ static readonly AnyMatch: CoderInfo_MatchType;
 
- static readonly TrueMatch: number;
+ static readonly TrueMatch: CoderInfo_MatchType;
 
- static readonly FalseMatch: number;
+ static readonly FalseMatch: CoderInfo_MatchType;
 
   constructor();
 
@@ -5451,13 +5550,13 @@ export  class Montage {
 
   geometryAsync(): Promise<Magick.Geometry>;
 
-  gravity(gravity_: any): void;
+  gravity(gravity_: MagickCore.GravityType): void;
 
-  gravityAsync(gravity_: any): Promise<void>;
+  gravityAsync(gravity_: MagickCore.GravityType): Promise<void>;
 
-  gravity(): any;
+  gravity(): MagickCore.GravityType;
 
-  gravityAsync(): Promise<any>;
+  gravityAsync(): Promise<MagickCore.GravityType>;
 
   label(label_: string): void;
 
@@ -5595,9 +5694,9 @@ export  class adaptiveThresholdImage {
 
 export  class addNoiseImage {
 
-  constructor(noiseType_: any, attenuate_: number);
+  constructor(noiseType_: MagickCore.NoiseType, attenuate_: number);
 
-  constructor(noiseType_: any);
+  constructor(noiseType_: MagickCore.NoiseType);
 
   call(image_: Magick.Image): void;
 
@@ -5617,11 +5716,11 @@ export  class annotateImage {
 
   constructor(text_: string, geometry_: Magick.Geometry | string);
 
-  constructor(text_: string, geometry_: Magick.Geometry | string, gravity_: any);
+  constructor(text_: string, geometry_: Magick.Geometry | string, gravity_: MagickCore.GravityType);
 
-  constructor(text_: string, geometry_: Magick.Geometry | string, gravity_: any, degrees_: number);
+  constructor(text_: string, geometry_: Magick.Geometry | string, gravity_: MagickCore.GravityType, degrees_: number);
 
-  constructor(text_: string, gravity_: any);
+  constructor(text_: string, gravity_: MagickCore.GravityType);
 
   call(image_: Magick.Image): void;
 
@@ -5654,7 +5753,7 @@ export  class borderImage {
 
 export  class channelImage {
 
-  constructor(channel_: any);
+  constructor(channel_: MagickCore.ChannelType);
 
   call(image_: Magick.Image): void;
 
@@ -5714,7 +5813,7 @@ export  class colorMatrixImage {
 
 export  class colorSpaceImage {
 
-  constructor(colorSpace_: any);
+  constructor(colorSpace_: MagickCore.ColorspaceType);
 
   call(image_: Magick.Image): void;
 
@@ -5732,11 +5831,11 @@ export  class commentImage {
 
 export  class compositeImage {
 
-  constructor(compositeImage_: Magick.Image, xOffset_: number, yOffset_: number, compose_: any);
+  constructor(compositeImage_: Magick.Image, xOffset_: number, yOffset_: number, compose_: MagickCore.CompositeOperator);
 
   constructor(compositeImage_: Magick.Image, xOffset_: number, yOffset_: number);
 
-  constructor(compositeImage_: Magick.Image, offset_: Magick.Geometry | string, compose_: any);
+  constructor(compositeImage_: Magick.Image, offset_: Magick.Geometry | string, compose_: MagickCore.CompositeOperator);
 
   constructor(compositeImage_: Magick.Image, offset_: Magick.Geometry | string);
 
@@ -6535,7 +6634,7 @@ export  class colorMapImage {
 
 export  class composeImage {
 
-  constructor(compose_: any);
+  constructor(compose_: MagickCore.CompositeOperator);
 
   call(image_: Magick.Image): void;
 
@@ -6544,7 +6643,7 @@ export  class composeImage {
 
 export  class compressTypeImage {
 
-  constructor(compressType_: any);
+  constructor(compressType_: MagickCore.CompressionType);
 
   call(image_: Magick.Image): void;
 
@@ -6571,7 +6670,7 @@ export  class depthImage {
 
 export  class endianImage {
 
-  constructor(endian_: any);
+  constructor(endian_: MagickCore.EndianType);
 
   call(image_: Magick.Image): void;
 
@@ -6589,7 +6688,7 @@ export  class fileNameImage {
 
 export  class filterTypeImage {
 
-  constructor(filterType_: any);
+  constructor(filterType_: MagickCore.FilterType);
 
   call(image_: Magick.Image): void;
 
@@ -6616,7 +6715,7 @@ export  class fontPointsizeImage {
 
 export  class gifDisposeMethodImage {
 
-  constructor(disposeMethod_: any);
+  constructor(disposeMethod_: MagickCore.DisposeType);
 
   call(image_: Magick.Image): void;
 
@@ -6625,7 +6724,7 @@ export  class gifDisposeMethodImage {
 
 export  class interlaceTypeImage {
 
-  constructor(interlace_: any);
+  constructor(interlace_: MagickCore.InterlaceType);
 
   call(image_: Magick.Image): void;
 
@@ -6700,7 +6799,7 @@ export  class quantizeColorsImage {
 
 export  class quantizeColorSpaceImage {
 
-  constructor(colorSpace_: any);
+  constructor(colorSpace_: MagickCore.ColorspaceType);
 
   call(image_: Magick.Image): void;
 }
@@ -6734,7 +6833,7 @@ export  class renderingIntentImage {
 
 export  class resolutionUnitsImage {
 
-  constructor(resolutionUnits_: any);
+  constructor(resolutionUnits_: MagickCore.ResolutionType);
 
   call(image_: Magick.Image): void;
 
@@ -6797,7 +6896,7 @@ export  class textAntiAliasImage {
 
 export  class typeImage {
 
-  constructor(type_: any);
+  constructor(type_: MagickCore.ImageType);
 
   call(image_: Magick.Image): void;
 
@@ -6822,11 +6921,11 @@ export  class x11DisplayImage {
   callAsync(image_: Magick.Image): Promise<void>;
 }
 
-export function coderInfoList(isReadable_: any, isWritable_: any, isMultiFrame_: any): std.coderInfoArray;
+export function coderInfoList(isReadable_: Magick.CoderInfo_MatchType, isWritable_: Magick.CoderInfo_MatchType, isMultiFrame_: Magick.CoderInfo_MatchType): std.coderInfoArray;
 
-export function coderInfoList(isReadable_: any, isWritable_: any): std.coderInfoArray;
+export function coderInfoList(isReadable_: Magick.CoderInfo_MatchType, isWritable_: Magick.CoderInfo_MatchType): std.coderInfoArray;
 
-export function coderInfoList(isReadable_: any): std.coderInfoArray;
+export function coderInfoList(isReadable_: Magick.CoderInfo_MatchType): std.coderInfoArray;
 
 export function coderInfoList(): std.coderInfoArray;
 
@@ -6915,11 +7014,11 @@ export  class coderInfoArray {
 
   clear(): void;
 
-  add(x: any): void;
+  add(x: Magick.CoderInfo): void;
 
   get(i: number): any;
 
-  set(i: number, val: any): void;
+  set(i: number, val: Magick.CoderInfo): void;
 }
 
 
