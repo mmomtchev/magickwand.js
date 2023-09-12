@@ -192,6 +192,7 @@ The tutorial, just like the module itself, is still a work-in-progress.
 * Rebuilding when installing requires Node.js >= 18.0 on all platforms
 * Additionally, rebuilding when installing on Windows works only with VS 2022
 * The debug build on Windows requires manually setting `winbuildtype` and `winbuildid` due to restrictions in `gyp`
+* The module supports `worker_threads` but it cannot be unloaded cleanly and it should be loaded in the main thread to prevent Node.js from unloading it
 
 # Future plans
 
