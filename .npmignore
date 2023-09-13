@@ -12,3 +12,6 @@ deps/ImageMagick/PerlMagick
 *.a
 *.o
 *.la
+*.so
+*.lib
+*.dll
