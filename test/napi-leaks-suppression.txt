@@ -1,0 +1,4 @@
+leak:Init
+leak:napi_module_register
+leak:napi_register_module_v1
+leak:GetMembers
