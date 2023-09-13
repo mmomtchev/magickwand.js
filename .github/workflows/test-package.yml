@@ -41,13 +41,15 @@ jobs:
           mv node-magickwand-${{ github.event.inputs.version }}/test .
       - name: Install dependencies
         run: |
-          npm i chai chai-spies chai-as-promised mocha
+          npm i chai chai-spies chai-as-promised mocha typescript ts-node @types/chai @types/chai-as-promised @types/mocha @types/node
       - name: Install node-magickwand from npm
         run: npm install --force node-magickwand@${{ github.event.inputs.version }}
       - name: Run the unit tests
         run: |
           cd test
-          npx mocha --reporter=tap --v8-expose-gc *.test.*s
+          npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc *.test.ts *.standalone.*js
+        env:
+          TS_NODE_PROJECT: tsconfig.standalone.json 
 
 
   test_npm_rebuild:
@@ -82,10 +84,12 @@ jobs:
           mv node-magickwand-${{ github.event.inputs.version }}/test .
       - name: Install dependencies
         run: |
-          npm i chai chai-spies chai-as-promised mocha
+          npm i chai chai-spies chai-as-promised mocha typescript ts-node @types/chai @types/chai-as-promised @types/mocha @types/node
       - name: Install node-magickwand from npm
         run: npm install --force node-magickwand@${{ github.event.inputs.version }} --build-from-source
       - name: Run the unit tests
         run: |
           cd test
-          npx mocha --reporter=tap --v8-expose-gc *.test.*s
+          npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc *.test.ts *.standalone.*js
+        env:
+          TS_NODE_PROJECT: tsconfig.standalone.json 

@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "downlevelIteration": true,
+    "noEmit": true,
+    "target": "es2020",
+    "module": "commonjs",
+    "types": [ "node", "mocha", "chai", "chai-as-promised" ]
+  }
+}
