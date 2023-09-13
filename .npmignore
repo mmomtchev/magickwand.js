@@ -1,9 +1,14 @@
 .git
 .github
 .vscode
+
 node_modules
 build
 lib/binding
+
+deps/ImageMagick/www
+deps/ImageMagick/PerlMagick
+
 *.a
 *.o
 *.la
