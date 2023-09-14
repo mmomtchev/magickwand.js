@@ -1,9 +1,4 @@
 {
-  'target_defaults': {
-    'includes': [
-      'except.gypi'
-    ]
-  },
   'variables': {
     'shared_imagemagick%': 'false',
     'enable_asan%': 'false',
@@ -13,20 +8,29 @@
     'winbuildtype%': '/p:Configuration=Release,Platform=x64',
     'winlibid%': 'RL',
   },
-  'configurations': {
-    'Debug': {
-      'defines': [
-        'SWIGRUNTIME_DEBUG'
-      ]
+  'target_defaults': {
+    'includes': [
+      'node_modules/node-addon-api/except.gypi'
+    ],
+    'configurations': {
+      'Debug': {
+        'defines': [
+          'SWIGRUNTIME_DEBUG'
+        ],
+        'ldflags': [ '-Wl,-z,now' ],
+        'xcode_settings': {
+          'OTHER_LDFLAGS': [ '-Wl,-bind_at_load' ]
+        },
+        'conditions': [
+          ['enable_asan == "true"', {
+            'cflags_cc': [ '-fsanitize=address' ]
+          }]
+        ]
+      },
+      'Release': {
+      }
     }
   },
-  'conditions': [
-    ['enable_hdri == "false"', {
-    }],
-    ['enable_hdri == "true"', {
-      'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-    }]
-  ],
   'targets': [
     {
       'target_name': 'node-magickwand',
@@ -48,9 +52,6 @@
         }
       },
       'conditions': [
-        ['enable_asan == "true"', {
-          'cflags_cc': [ '-fsanitize=address' ]
-        }],
         # Link against a system-installed ImageMagick
         ['shared_imagemagick == "true"', {
         }],
