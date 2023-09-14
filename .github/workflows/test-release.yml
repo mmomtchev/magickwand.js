@@ -29,6 +29,8 @@ jobs:
           [[ '${{ matrix.platform }}' =~ 'ubuntu' ]] && sudo apt-get install -y fonts-ubuntu || true
         shell: bash
       - run: npm install --ignore-scripts
+      - name: Manually copy the TS typings
+        run: npx copyfiles -sf swig/*.d.ts lib
       - name: Install precompiled binary
         run: npx @mapbox/node-pre-gyp install
       - name: Run unit tests
