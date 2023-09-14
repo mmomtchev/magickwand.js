@@ -10,10 +10,7 @@
 //
 // const im = new Image(new Geometry('640x480'), new Color('black'))
 
-%insert(begin) %{
-%}
-
-%typemap(in) SWIGTYPE &FROM_STRING (std::unique_ptr<$*ltype> from_string_temp) %{
+%typemap(in) SWIGTYPE &FROM_STRING($*ltype from_string_temp) %{
   // This is a generic typemap that applies
   // to all arguments called FROM_STRING
   if ($input.IsString()) {
@@ -23,14 +20,13 @@
       // its argument in a local temporary $1
       std::string *$1;
       $typemap(in, const std::string &);
-      // Construct the object from this string and transfer
-      // the ownership to a smart pointer
-      from_string_temp.reset(new $*ltype(*$1));
+      // Construct the object from this string
+      from_string_temp = $*ltype(*$1);
       // The string is not needed anymore
       delete $1;
     }
     // We then assign the local temporary $1 to the real $1
-    $1 = from_string_temp.get();
+    $1 = &from_string_temp;
   } else {
     // If the JS argument is not a string, then
     // default typemap applies
