@@ -61,7 +61,7 @@ describe('Blob', () => {
       im.write(blob);
       const buffer = blob.data();
       assert.instanceOf(buffer, Buffer);
-      //assert.lengthOf(buffer, rawLength);
+      assert.lengthOf(buffer, rawLength);
     });
   });
 
