@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.9.1]
+
+ - Fix [#17](https://github.com/mmomtchev/node-magickwand/issues/17), crashes with `undefined symbol ...` on Linux when invoking methods in MagickWand such as `AnimateImages`
+
 ## [0.9.0] 2023-09-14
 
 - TypeScript support
