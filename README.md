@@ -5,19 +5,19 @@
 [![Node.js CI](https://github.com/mmomtchev/node-magickwand/actions/workflows/test-dev.yml/badge.svg)](https://github.com/mmomtchev/node-magickwand/actions/workflows/test-dev.yml)
 [![npm](https://img.shields.io/npm/v/node-magickwand)](https://www.npmjs.com/package/node-magickwand)
 
-This package is a full native port of the ImageMagick-7 C++ library to Node.js using SWIG NAPI.
+This package is a full native port of the ImageMagick-7 C++ library to Node.js using SWIG Node-API.
 
-Unlike all other ImageMagick `npm` packages, it does not use the CLI to interact with the utilities, but offers direct access to the full C++ API. It supports both synchronous and multithreaded asynchronous operations and it is fully integrated with `TypedArray`s.
+Unlike all other ImageMagick `npm` packages, it does not use the CLI to interact with the utilities, but offers direct access to the full C++ API. It supports both synchronous and multithreaded asynchronous operations, it is fully integrated with `TypedArray`s and it has full TypeScript support.
 
 It adds many new features and offers a substantial performance boost and usability benefits.
 
-The pre-built binaries are fully self-contained and do not need an existing ImageMagick installation, but it is also possible to rebuild the package against a shared ImageMagick-7.
+The pre-built binaries are fully self-contained and do not need an existing ImageMagick installation. It is also possible to rebuild the package against a shared ImageMagick-7.
 
-It is currently to be considered of beta quality, but it is actively developed because of it its special status as SWIG Node-API showcase project.
+The project is currently to be considered of beta quality, but it is actively developed because of it its special status as SWIG Node-API showcase project.
 
-It is meant both as a high-performance general-purpose library for image processing in Node.js and as a demonstration of the capabilities of SWIG Node-API.
+It is feature-complete and it should be reasonably stable. It is designed to be well-suited for server-side use with an Express.js-like framework. It has been debugged for memory leaks and, and when only asynchronous methods are used, should never block the event loop.
 
-There is also a [medium article about using the new NAPI support in SWIG](https://mmomtchev.medium.com/effortlessly-porting-a-major-c-library-to-node-js-with-swig-napi-3c1a5c4a233f).
+There is also a [medium article about using the new Node-API support in SWIG](https://mmomtchev.medium.com/effortlessly-porting-a-major-c-library-to-node-js-with-swig-napi-3c1a5c4a233f) in case you are interested in porting another C++ library to Node.js.
 
 ## Usage
 
@@ -131,7 +131,7 @@ Also, if you have a code editor capable of reading the TypeScript bindings, such
 
 `node-magickwand` implements the full Magick++ C++ API.
 
-When in doubt about the JS semantics of a particular method, you can also check the unit tests: https://github.com/mmomtchev/node-magickwand/tree/main/test
+When in doubt about the JS semantics of a particular method, you can also check the unit tests: https://github.com/mmomtchev/node-magickwand/tree/main/test.
 
 The `Image.display()` function works and it is an excellent debugging tool. On macOS, it requires X11.
 
@@ -145,9 +145,9 @@ You will need a working C++11 environment. On Windows nothing but VS 2022 works 
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
-* In order to regenerate the C++ wrapping code, you will need the still unreleased SWIG 4.2.0 with async Node-API support - available exclusively from https://github.com/mmomtchev/swig/tree/mmom - Node-API has been merged but the async support is still being worked on
+* In order to regenerate the C++ wrapping code, you will need the still unreleased SWIG 4.2.0 with async Node-API and TypeScript support - available exclusively from https://github.com/mmomtchev/swig/tree/mmom - as of 2023-09-14, the basic Node-API has been merged to the main SWIG trunk but the async support is still being worked on
   * Building with the old SWIG Node/V8 interface is not possible - the typemaps are not compatible
-  * Alternatively, if you don't want to build a development version of SWIG yourself, you can clone the `generated` branch where all files have been pre-generated - `npm run deps:download` does this
+  * Alternatively, if you don't want to build a development version of SWIG yourself, you can clone the `generated` branch where all files have been pre-generated - `npm run deps:download` does this automatically after `npm install`
 
 * Recursively clone the repo
 ```shell
@@ -171,6 +171,11 @@ npx @mapbox/node-pre-gyp configure --shared_imagemagick
 LDFLAGS=-L/usr/local/lib CFLAGS=-I/usr/local/include/ImageMagick-7 CXXFLAGS=-I/usr/local/include/ImageMagick-7 npx @mapbox/node-pre-gyp build
 ```
 
+To regenerate the SWIG wrappers, you will have to have to build yourself SWIG 4.2.0-mmom from https://github.com/mmomtchev/swig/tree/mmom and then run
+```
+npm run swig
+```
+
 * `npm test` should work at this point
 
 ## Using this project as a tutorial for creating C++ bindings for Node.js with SWIG
@@ -179,20 +184,19 @@ ImageMagick is the perfect candidate for an automatically generated with SWIG No
 
 ![](https://gist.githubusercontent.com/mmomtchev/3ca8f7c96a0a09ef1dd530c8f73dd959/raw/5a54c384c99c336bb2bc71b75cf0109c6b2c69e7/SWIG-positioning.png)
 
-ImageMagick has an absolutely huge number of API methods and objects - the SWIG-generated module totals more than 400k lines of C++ code - and this is only covering the `Magick++` API and the enums from the `MagickWand` API. However there are relatively few method signatures - while the whole SWIG project which brings you this full API to Node.js, measures a grand total of only **493** lines - half of which are comments!!
+ImageMagick has an absolutely huge number of API methods and objects - the SWIG-generated module totals more than 400k lines of C++ code - and this is only covering the `Magick++` API and the enums from the `MagickWand` API. However there are relatively few distinct method signatures. The whole SWIG project which brings you this full API to Node.js, measures a grand total of only **656** lines - half of which are comments!!
 
-I have tried to be as verbose as possible throughout the `Magick++.i` file - you should start there. ImageMagick is a very complex C++ project with 30 years history and it probably uses every single feature of SWIG that might be needed in a Node.js addon. Look at the various JS wrappers that expect special arguments (`Buffer`, `TypedArray`, lists), remember to check the ImageMagick header file for the original C++ function and then you can use its SWIG interface as a starting point in your project.
+I have tried to be as verbose as possible throughout the `Magick++.i` file - you should start there. ImageMagick is a very complex C++ project with over 30 years history and it uses (almost) every single SWIG feature. Study the various JS wrappers that expect special arguments (`Buffer`, `TypedArray`, arrays), remember to check the ImageMagick header file for the original C++ function and you should be able to use its SWIG typemaps as a starting point in your project.
 
 There is also a [medium article about using the new NAPI support in SWIG](https://mmomtchev.medium.com/effortlessly-porting-a-major-c-library-to-node-js-with-swig-napi-3c1a5c4a233f).
-
-The tutorial, just like the module itself, is still a work-in-progress.
 
 ## Known to be broken at the moment
 
 * Rebuilding when installing requires Node.js >= 18.0 on all platforms
 * Additionally, rebuilding when installing on Windows works only with VS 2022
 * The debug build on Windows requires manually setting `winbuildtype` and `winbuildid` due to restrictions in `gyp`
-* The module supports `worker_threads` but it cannot be unloaded cleanly and it should be loaded in the main thread to prevent Node.js from unloading it
+* The module supports `worker_threads` but it cannot be unloaded cleanly and it should be loaded in the main thread, before using it in worker threads, to prevent Node.js from unloading it
+* Building on Windows without HDRI enabled or with a different quantum size than 16 bits is not supported
 
 # Future plans
 

@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.9.0] 2023-09-13
+## [0.9.0] 2023-09-14
 
 - TypeScript support
 - Implicit convenience casting from strings to `Magick.Geometry` and `Magick.Color`, allows to write `new Magick.Image('640x480', 'black')` instead of `new Magick.Image(new Magick.Geometry('640x480'), new Magick.Color('black'))`
