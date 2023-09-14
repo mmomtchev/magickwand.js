@@ -47,10 +47,6 @@
         '-Wno-deprecated-copy'
       ],
       'msvs_settings': {
-        'VCCLCompilerTool': {
-          # PREfast requires too much memory for Github Actions
-          'EnablePREfast': 'false'
-        },
         'VCLinkerTool': {
           'AdditionalLibraryDirectories': '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/lib'
         }
