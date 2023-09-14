@@ -1,7 +1,7 @@
 {
   'target_defaults': {
     'includes': [
-      'node_modules/node-addon-api/except.gypi'
+      'except.gypi'
     ]
   },
   'variables': {
@@ -43,10 +43,6 @@
         '-Wno-deprecated-copy'
       ],
       'msvs_settings': {
-        'VCCLCompilerTool': {
-          # PREfast requires too much memory for Github Actions
-          'EnablePREfast': 'false'
-        },
         'VCLinkerTool': {
           'AdditionalLibraryDirectories': '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/lib'
         }
