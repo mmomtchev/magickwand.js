@@ -10,7 +10,7 @@
   },
   'target_defaults': {
     'includes': [
-      'node_modules/node-addon-api/except.gypi'
+      'except.gypi'
     ],
     'configurations': {
       'Debug': {
