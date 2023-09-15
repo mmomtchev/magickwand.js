@@ -398,6 +398,8 @@ export const BC7Compression: CompressionType;
 
 export const BC5Compression: CompressionType;
 
+export const LERCCompression: CompressionType;
+
 export type CompressionType = number & { readonly [_SWIG_enum_tag]: 'CompressionType'; };
 
 export type KernelInfoType = number & { readonly [_SWIG_enum_tag]: 'KernelInfoType'; };
