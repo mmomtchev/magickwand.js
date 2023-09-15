@@ -47,6 +47,15 @@
         '-Wno-deprecated-copy'
       ],
       'msvs_settings': {
+        'VCCLCompilerTool': {
+          # PREfast requires too much memory for Github Actions
+          'EnablePREfast': 'false',
+          'AdditionalOptions': [
+            # SWIG Node-API uses deliberate shadowing inside inner scopes
+            '/wo6246',
+            '/wo28182'
+          ]
+        },
         'VCLinkerTool': {
           'AdditionalLibraryDirectories': '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/lib'
         }
