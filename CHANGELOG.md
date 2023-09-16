@@ -1,12 +1,12 @@
 # Changelog
 
-## [0.9.2]
+## [0.9.2] 2023-09-16
 
  - Fix [#14](https://github.com/mmomtchev/node-magickwand/issues/14), rebuilding when installing from `npm` fails
+ - Fix [#19](https://github.com/mmomtchev/node-magickwand/issues/19), possible memory corruption issue when throwing asynchronously on macOS
 
 ## [0.9.1] 2023-09-15
 
- - Fix [#14](https://github.com/mmomtchev/node-magickwand/issues/14), rebuilding when installing from `npm` fails
  - Fix [#17](https://github.com/mmomtchev/node-magickwand/issues/17), crashes with `undefined symbol ...` on Linux when invoking methods in MagickWand such as `AnimateImages`
 
 ## [0.9.0] 2023-09-14
