@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.9.2]
+
+ - Fix [#14](https://github.com/mmomtchev/node-magickwand/issues/14), rebuilding when installing from `npm` fails
+
 ## [0.9.1] 2023-09-15
 
  - Fix [#14](https://github.com/mmomtchev/node-magickwand/issues/14), rebuilding when installing from `npm` fails
