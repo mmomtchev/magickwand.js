@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.9.3] 2023-09-17
+
+ - Fix [#20](https://github.com/mmomtchev/node-magickwand/issues/20), rebuilding when installing from `npm` fails on macOS/Linux with `fatal error: MagickCore/magick-baseconfig.h: No such file or directory`
+ - Fix [#21](https://github.com/mmomtchev/node-magickwand/issues/21), rebuilding when installing from `npm` fails on Windows `npm ERR! fatal: not a git repository (or any of the parent directories): .git`
+
 ## [0.9.2] 2023-09-16
 
  - Fix [#14](https://github.com/mmomtchev/node-magickwand/issues/14), rebuilding when installing from `npm` fails
