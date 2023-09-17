@@ -836,13 +836,9 @@ export function DisableOpenCL(arg0?: void): void;
 
 export function EnableOpenCL(arg0?: void): boolean;
 
-export function InitializeMagick(path_: string): void;
-
 export function SetRandomSeed(seed: number): void;
 
 export function SetSecurityPolicy(policy_: string): boolean;
-
-export function TerminateMagick(): void;
 
 export  class Blob {
 
