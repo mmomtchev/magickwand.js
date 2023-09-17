@@ -197,6 +197,7 @@ There is also a [medium article about using the new NAPI support in SWIG](https:
 * The debug build on Windows requires manually setting `winbuildtype` and `winbuildid` due to restrictions in `gyp`
 * The module supports `worker_threads` but it cannot be unloaded cleanly and it should be loaded in the main thread, before using it in worker threads, to prevent Node.js from unloading it
 * Building on Windows without HDRI enabled or with a different quantum size than 16 bits is not supported
+* If rebuilding when installing from `npm` fails on Windows with the error: `npm ERR! fatal: not a git repository (or any of the parent directories): .git`, see [#21](https://github.com/mmomtchev/node-magickwand/issues/21)
 
 # Future plans
 
