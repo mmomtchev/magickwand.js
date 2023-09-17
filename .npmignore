@@ -6,7 +6,8 @@ node_modules
 build
 lib/binding
 
-deps/ImageMagick/www
+deps/ImageMagick/www/**
+!deps/ImageMagick/www/Magick++/*.html
 deps/ImageMagick/PerlMagick/**
 !deps/ImageMagick/PerlMagick/**/*.in
 
