@@ -15,7 +15,7 @@ The pre-built binaries are fully self-contained and do not need an existing Imag
 
 The project is currently to be considered of beta quality, but it is actively developed because of it its special status as SWIG Node-API showcase project.
 
-It is feature-complete and it should be reasonably stable. It is designed to be well-suited for server-side use with an Express.js-like framework. It has been debugged for memory leaks and, and when only asynchronous methods are used, should never block the event loop.
+It is feature-complete and it should be reasonably stable. It is designed to be well-suited for server-side use with an Express.js-like framework. It has been debugged for memory leaks and, and when only asynchronous methods are used, should never block the event loop. See also [Security](#security).
 
 There is also a [medium article about using the new Node-API support in SWIG](https://mmomtchev.medium.com/effortlessly-porting-a-major-c-library-to-node-js-with-swig-napi-3c1a5c4a233f) in case you are interested in porting another C++ library to Node.js.
 
@@ -202,6 +202,20 @@ There is also a [medium article about using the new NAPI support in SWIG](https:
 # Future plans
 
 This project serves as showcase and testing grounds for SWIG/Node-API.
+
+# Security
+
+ImageMagick is a very widely used software. Security vulnerabilities tend to be very well known and are usually fixed very fast.
+
+The current ImageMagick version can be checked in the `MagickLibVersionText` global exported constant.
+
+**Special care must be exercised when ImageMagick is used to process images coming from untrusted sources**. Although possible, outright arbitrary code execution by embedded malicious code in an image is extremely rare and there has been only one such case during the last 10 years - the infamous [`ImageTragick`](https://www.cve.org/CVERecord?id=CVE-2016-3714) exploit in 2016.
+
+However DoS attacks are much more common as it is relatively easy to construct an image that will be of relatively small size when compressed, but it will expand to fill all available memory once uncompressed.
+
+**If using ImageMagick in such environment**, it is highly recommended to review the default security policy in `node_modules/node-magickwand/lib/binding/{platform}/ImageMagick/etc/ImageMagick-7/policy.xml` and to eventually replace it with a more restrictive security policy from the examples in `node_modules/node-magickwand/deps/ImageMagick/config/`. Be also sure to check https://imagemagick.org/script/security-policy.php for more information and to follow an appropriate security announcements mailing list. Also, consider re-building ImageMagick yourself in order to support a more limited amount of image file formats, as complexity is always the main risk factor with any software.
+
+**In all other cases** security should not be of any concern.
 
 # License
 
