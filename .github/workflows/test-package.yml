@@ -86,7 +86,10 @@ jobs:
         run: |
           npm i chai chai-spies chai-as-promised mocha typescript ts-node @types/chai @types/chai-as-promised @types/mocha @types/node
       - name: Install node-magickwand from npm
-        run: npm install --force node-magickwand@${{ github.event.inputs.version }} --build-from-source
+        run: |
+          [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
+          npm install --force node-magickwand@${{ github.event.inputs.version }} --build-from-source
+        shell: bash
       - name: Run the unit tests
         run: |
           cd test
