@@ -83,6 +83,10 @@ using namespace Magick;
 %ignore LogMagickEventList;
 %ignore ThrowMagickExceptionList;
 
+// Initialization is managed by the module
+%ignore InitializeMagick;
+%ignore TerminateMagick;
+
 // These seem to lack an implementation?
 %ignore penTextureImage;
 %ignore penColorImage;
