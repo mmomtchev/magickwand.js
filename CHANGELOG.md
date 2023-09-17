@@ -1,5 +1,10 @@
 # Changelog
 
+##
+
+ - All SWIG-exported symbols are now configurable and writable with getters/setters also being enumerable
+ - Eliminate all getters returning constant values and replace them with constants set at module initialization
+
 ## [0.9.3] 2023-09-17
 
  - Fix [#20](https://github.com/mmomtchev/node-magickwand/issues/20), rebuilding when installing from `npm` fails on macOS/Linux with `fatal error: MagickCore/magick-baseconfig.h: No such file or directory`
