@@ -3,7 +3,7 @@ import * as chai from 'chai';
 
 const assert = chai.assert;
 
-import {MagickLibVersionText } from 'node-magickwand';
+import { MagickLibVersionText } from 'node-magickwand';
 
 it('ImageMagick version information', () => {
   assert.isString(MagickLibVersionText);
@@ -11,5 +11,7 @@ it('ImageMagick version information', () => {
 });
 
 it('Security Policy', () => {
-  execFileSync('npx', ['mocha', '--config', '.mocharc.security.json'], {cwd: __dirname});
+  execFileSync('npx',
+    ['mocha', '--config', '.mocharc.security.json'],
+    { cwd: __dirname, shell: true });
 });
