@@ -18,6 +18,10 @@ export const PseudoClass: ClassType;
 
 export type ClassType = number & { readonly [_SWIG_enum_tag]: 'ClassType'; };
 
+export const MagickFalse: MagickBooleanType;
+
+export const MagickTrue: MagickBooleanType;
+
 export type MagickBooleanType = number & { readonly [_SWIG_enum_tag]: 'MagickBooleanType'; };
 
 export const UndefinedGravity: GravityType;
@@ -164,15 +168,223 @@ export const MetaChannel: ChannelType;
 
 export const CompositeMaskChannel: ChannelType;
 
+export const CompositeChannels: ChannelType;
+
+export const AllChannels: ChannelType;
+
 export const TrueAlphaChannel: ChannelType;
+
+export const RGBChannels: ChannelType;
+
+export const GrayChannels: ChannelType;
+
+export const SyncChannels: ChannelType;
+
+export const DefaultChannels: ChannelType;
 
 export type ChannelType = number & { readonly [_SWIG_enum_tag]: 'ChannelType'; };
 
+export const UndefinedPixel: StorageType;
+
+export const CharPixel: StorageType;
+
+export const DoublePixel: StorageType;
+
+export const FloatPixel: StorageType;
+
+export const LongPixel: StorageType;
+
+export const LongLongPixel: StorageType;
+
+export const QuantumPixel: StorageType;
+
+export const ShortPixel: StorageType;
+
 export type StorageType = number & { readonly [_SWIG_enum_tag]: 'StorageType'; };
+
+export const UndefinedException: ExceptionType;
+
+export const WarningException: ExceptionType;
+
+export const ResourceLimitWarning: ExceptionType;
+
+export const TypeWarning: ExceptionType;
+
+export const OptionWarning: ExceptionType;
+
+export const DelegateWarning: ExceptionType;
+
+export const MissingDelegateWarning: ExceptionType;
+
+export const CorruptImageWarning: ExceptionType;
+
+export const FileOpenWarning: ExceptionType;
+
+export const BlobWarning: ExceptionType;
+
+export const StreamWarning: ExceptionType;
+
+export const CacheWarning: ExceptionType;
+
+export const CoderWarning: ExceptionType;
+
+export const FilterWarning: ExceptionType;
+
+export const ModuleWarning: ExceptionType;
+
+export const DrawWarning: ExceptionType;
+
+export const ImageWarning: ExceptionType;
+
+export const WandWarning: ExceptionType;
+
+export const RandomWarning: ExceptionType;
+
+export const XServerWarning: ExceptionType;
+
+export const MonitorWarning: ExceptionType;
+
+export const RegistryWarning: ExceptionType;
+
+export const ConfigureWarning: ExceptionType;
+
+export const PolicyWarning: ExceptionType;
+
+export const ErrorException: ExceptionType;
+
+export const ResourceLimitError: ExceptionType;
+
+export const TypeError: ExceptionType;
+
+export const OptionError: ExceptionType;
+
+export const DelegateError: ExceptionType;
+
+export const MissingDelegateError: ExceptionType;
+
+export const CorruptImageError: ExceptionType;
+
+export const FileOpenError: ExceptionType;
+
+export const BlobError: ExceptionType;
+
+export const StreamError: ExceptionType;
+
+export const CacheError: ExceptionType;
+
+export const CoderError: ExceptionType;
+
+export const FilterError: ExceptionType;
+
+export const ModuleError: ExceptionType;
+
+export const DrawError: ExceptionType;
+
+export const ImageError: ExceptionType;
+
+export const WandError: ExceptionType;
+
+export const RandomError: ExceptionType;
+
+export const XServerError: ExceptionType;
+
+export const MonitorError: ExceptionType;
+
+export const RegistryError: ExceptionType;
+
+export const ConfigureError: ExceptionType;
+
+export const PolicyError: ExceptionType;
+
+export const FatalErrorException: ExceptionType;
+
+export const ResourceLimitFatalError: ExceptionType;
+
+export const TypeFatalError: ExceptionType;
+
+export const OptionFatalError: ExceptionType;
+
+export const DelegateFatalError: ExceptionType;
+
+export const MissingDelegateFatalError: ExceptionType;
+
+export const CorruptImageFatalError: ExceptionType;
+
+export const FileOpenFatalError: ExceptionType;
+
+export const BlobFatalError: ExceptionType;
+
+export const StreamFatalError: ExceptionType;
+
+export const CacheFatalError: ExceptionType;
+
+export const CoderFatalError: ExceptionType;
+
+export const FilterFatalError: ExceptionType;
+
+export const ModuleFatalError: ExceptionType;
+
+export const DrawFatalError: ExceptionType;
+
+export const ImageFatalError: ExceptionType;
+
+export const WandFatalError: ExceptionType;
+
+export const RandomFatalError: ExceptionType;
+
+export const XServerFatalError: ExceptionType;
+
+export const MonitorFatalError: ExceptionType;
+
+export const RegistryFatalError: ExceptionType;
+
+export const ConfigureFatalError: ExceptionType;
+
+export const PolicyFatalError: ExceptionType;
 
 export type ExceptionType = number & { readonly [_SWIG_enum_tag]: 'ExceptionType'; };
 
+export const UndefinedCompliance: ComplianceType;
+
+export const NoCompliance: ComplianceType;
+
+export const CSSCompliance: ComplianceType;
+
+export const SVGCompliance: ComplianceType;
+
+export const X11Compliance: ComplianceType;
+
+export const XPMCompliance: ComplianceType;
+
+export const MVGCompliance: ComplianceType;
+
+export const AllCompliance: ComplianceType;
+
 export type ComplianceType = number & { readonly [_SWIG_enum_tag]: 'ComplianceType'; };
+
+export const UndefinedIlluminant: IlluminantType;
+
+export const AIlluminant: IlluminantType;
+
+export const BIlluminant: IlluminantType;
+
+export const CIlluminant: IlluminantType;
+
+export const D50Illuminant: IlluminantType;
+
+export const D55Illuminant: IlluminantType;
+
+export const D65Illuminant: IlluminantType;
+
+export const D75Illuminant: IlluminantType;
+
+export const EIlluminant: IlluminantType;
+
+export const F2Illuminant: IlluminantType;
+
+export const F7Illuminant: IlluminantType;
+
+export const F11Illuminant: IlluminantType;
 
 export type IlluminantType = number & { readonly [_SWIG_enum_tag]: 'IlluminantType'; };
 
@@ -402,9 +614,155 @@ export const LERCCompression: CompressionType;
 
 export type CompressionType = number & { readonly [_SWIG_enum_tag]: 'CompressionType'; };
 
+export const UndefinedKernel: KernelInfoType;
+
+export const UnityKernel: KernelInfoType;
+
+export const GaussianKernel: KernelInfoType;
+
+export const DoGKernel: KernelInfoType;
+
+export const LoGKernel: KernelInfoType;
+
+export const BlurKernel: KernelInfoType;
+
+export const CometKernel: KernelInfoType;
+
+export const BinomialKernel: KernelInfoType;
+
+export const LaplacianKernel: KernelInfoType;
+
+export const SobelKernel: KernelInfoType;
+
+export const FreiChenKernel: KernelInfoType;
+
+export const RobertsKernel: KernelInfoType;
+
+export const PrewittKernel: KernelInfoType;
+
+export const CompassKernel: KernelInfoType;
+
+export const KirschKernel: KernelInfoType;
+
+export const DiamondKernel: KernelInfoType;
+
+export const SquareKernel: KernelInfoType;
+
+export const RectangleKernel: KernelInfoType;
+
+export const OctagonKernel: KernelInfoType;
+
+export const DiskKernel: KernelInfoType;
+
+export const PlusKernel: KernelInfoType;
+
+export const CrossKernel: KernelInfoType;
+
+export const RingKernel: KernelInfoType;
+
+export const PeaksKernel: KernelInfoType;
+
+export const EdgesKernel: KernelInfoType;
+
+export const CornersKernel: KernelInfoType;
+
+export const DiagonalsKernel: KernelInfoType;
+
+export const LineEndsKernel: KernelInfoType;
+
+export const LineJunctionsKernel: KernelInfoType;
+
+export const RidgesKernel: KernelInfoType;
+
+export const ConvexHullKernel: KernelInfoType;
+
+export const ThinSEKernel: KernelInfoType;
+
+export const SkeletonKernel: KernelInfoType;
+
+export const ChebyshevKernel: KernelInfoType;
+
+export const ManhattanKernel: KernelInfoType;
+
+export const OctagonalKernel: KernelInfoType;
+
+export const EuclideanKernel: KernelInfoType;
+
+export const UserDefinedKernel: KernelInfoType;
+
 export type KernelInfoType = number & { readonly [_SWIG_enum_tag]: 'KernelInfoType'; };
 
+export const UndefinedPreview: PreviewType;
+
+export const RotatePreview: PreviewType;
+
+export const ShearPreview: PreviewType;
+
+export const RollPreview: PreviewType;
+
+export const HuePreview: PreviewType;
+
+export const SaturationPreview: PreviewType;
+
+export const BrightnessPreview: PreviewType;
+
+export const GammaPreview: PreviewType;
+
+export const SpiffPreview: PreviewType;
+
+export const DullPreview: PreviewType;
+
+export const GrayscalePreview: PreviewType;
+
+export const QuantizePreview: PreviewType;
+
+export const DespecklePreview: PreviewType;
+
+export const ReduceNoisePreview: PreviewType;
+
+export const AddNoisePreview: PreviewType;
+
+export const SharpenPreview: PreviewType;
+
+export const BlurPreview: PreviewType;
+
+export const ThresholdPreview: PreviewType;
+
+export const EdgeDetectPreview: PreviewType;
+
+export const SpreadPreview: PreviewType;
+
+export const SolarizePreview: PreviewType;
+
+export const ShadePreview: PreviewType;
+
+export const RaisePreview: PreviewType;
+
+export const SegmentPreview: PreviewType;
+
+export const SwirlPreview: PreviewType;
+
+export const ImplodePreview: PreviewType;
+
+export const WavePreview: PreviewType;
+
+export const OilPaintPreview: PreviewType;
+
+export const CharcoalDrawingPreview: PreviewType;
+
+export const JPEGPreview: PreviewType;
+
 export type PreviewType = number & { readonly [_SWIG_enum_tag]: 'PreviewType'; };
+
+export const UnrecognizedDispose: DisposeType;
+
+export const UndefinedDispose: DisposeType;
+
+export const NoneDispose: DisposeType;
+
+export const BackgroundDispose: DisposeType;
+
+export const PreviousDispose: DisposeType;
 
 export type DisposeType = number & { readonly [_SWIG_enum_tag]: 'DisposeType'; };
 
@@ -416,7 +774,21 @@ export const MSBEndian: EndianType;
 
 export type EndianType = number & { readonly [_SWIG_enum_tag]: 'EndianType'; };
 
+export const UndefinedQuantumAlpha: QuantumAlphaType;
+
+export const AssociatedQuantumAlpha: QuantumAlphaType;
+
+export const DisassociatedQuantumAlpha: QuantumAlphaType;
+
 export type QuantumAlphaType = number & { readonly [_SWIG_enum_tag]: 'QuantumAlphaType'; };
+
+export const UndefinedQuantumFormat: QuantumFormatType;
+
+export const FloatingPointQuantumFormat: QuantumFormatType;
+
+export const SignedQuantumFormat: QuantumFormatType;
+
+export const UnsignedQuantumFormat: QuantumFormatType;
 
 export type QuantumFormatType = number & { readonly [_SWIG_enum_tag]: 'QuantumFormatType'; };
 
@@ -610,6 +982,12 @@ export const LeftBottomOrientation: OrientationType;
 
 export type OrientationType = number & { readonly [_SWIG_enum_tag]: 'OrientationType'; };
 
+export const UndefinedResolution: ResolutionType;
+
+export const PixelsPerInchResolution: ResolutionType;
+
+export const PixelsPerCentimeterResolution: ResolutionType;
+
 export type ResolutionType = number & { readonly [_SWIG_enum_tag]: 'ResolutionType'; };
 
 export const UndefinedTransmitType: TransmitType;
@@ -662,15 +1040,83 @@ export const BoldStyle: StyleType;
 
 export type StyleType = number & { readonly [_SWIG_enum_tag]: 'StyleType'; };
 
+export const UndefinedAlign: AlignType;
+
+export const LeftAlign: AlignType;
+
+export const CenterAlign: AlignType;
+
+export const RightAlign: AlignType;
+
 export type AlignType = number & { readonly [_SWIG_enum_tag]: 'AlignType'; };
+
+export const UndefinedDecoration: DecorationType;
+
+export const NoDecoration: DecorationType;
+
+export const UnderlineDecoration: DecorationType;
+
+export const OverlineDecoration: DecorationType;
+
+export const LineThroughDecoration: DecorationType;
 
 export type DecorationType = number & { readonly [_SWIG_enum_tag]: 'DecorationType'; };
 
+export const UndefinedDirection: DirectionType;
+
+export const RightToLeftDirection: DirectionType;
+
+export const LeftToRightDirection: DirectionType;
+
+export const TopToBottomDirection: DirectionType;
+
 export type DirectionType = number & { readonly [_SWIG_enum_tag]: 'DirectionType'; };
+
+export const UndefinedGradient: GradientType;
+
+export const LinearGradient: GradientType;
+
+export const RadialGradient: GradientType;
 
 export type GradientType = number & { readonly [_SWIG_enum_tag]: 'GradientType'; };
 
+export const UndefinedPrimitive: PrimitiveType;
+
+export const AlphaPrimitive: PrimitiveType;
+
+export const ArcPrimitive: PrimitiveType;
+
+export const BezierPrimitive: PrimitiveType;
+
+export const CirclePrimitive: PrimitiveType;
+
+export const ColorPrimitive: PrimitiveType;
+
+export const EllipsePrimitive: PrimitiveType;
+
+export const ImagePrimitive: PrimitiveType;
+
+export const LinePrimitive: PrimitiveType;
+
+export const PathPrimitive: PrimitiveType;
+
+export const PointPrimitive: PrimitiveType;
+
+export const PolygonPrimitive: PrimitiveType;
+
+export const PolylinePrimitive: PrimitiveType;
+
+export const RectanglePrimitive: PrimitiveType;
+
+export const RoundRectanglePrimitive: PrimitiveType;
+
+export const TextPrimitive: PrimitiveType;
+
 export type PrimitiveType = number & { readonly [_SWIG_enum_tag]: 'PrimitiveType'; };
+
+export const UndefinedReference: ReferenceType;
+
+export const GradientReference: ReferenceType;
 
 export type ReferenceType = number & { readonly [_SWIG_enum_tag]: 'ReferenceType'; };
 
@@ -682,7 +1128,45 @@ export const BreakWordBreakType: WordBreakType;
 
 export type WordBreakType = number & { readonly [_SWIG_enum_tag]: 'WordBreakType'; };
 
+export const UndefinedCache: CacheType;
+
+export const DiskCache: CacheType;
+
+export const DistributedCache: CacheType;
+
+export const MapCache: CacheType;
+
+export const MemoryCache: CacheType;
+
+export const PingCache: CacheType;
+
 export type CacheType = number & { readonly [_SWIG_enum_tag]: 'CacheType'; };
+
+export const UndefinedErrorMetric: MetricType;
+
+export const AbsoluteErrorMetric: MetricType;
+
+export const FuzzErrorMetric: MetricType;
+
+export const MeanAbsoluteErrorMetric: MetricType;
+
+export const MeanErrorPerPixelErrorMetric: MetricType;
+
+export const MeanSquaredErrorMetric: MetricType;
+
+export const NormalizedCrossCorrelationErrorMetric: MetricType;
+
+export const PeakAbsoluteErrorMetric: MetricType;
+
+export const PeakSignalToNoiseRatioErrorMetric: MetricType;
+
+export const PerceptualHashErrorMetric: MetricType;
+
+export const RootMeanSquaredErrorMetric: MetricType;
+
+export const StructuralSimilarityErrorMetric: MetricType;
+
+export const StructuralDissimilarityErrorMetric: MetricType;
 
 export type MetricType = number & { readonly [_SWIG_enum_tag]: 'MetricType'; };
 
@@ -712,7 +1196,61 @@ export const SubtractComplexOperator: ComplexOperator;
 
 export type ComplexOperator = number & { readonly [_SWIG_enum_tag]: 'ComplexOperator'; };
 
+export const UndefinedEvents: LogEventType;
+
+export const NoEvents: LogEventType;
+
+export const AccelerateEvent: LogEventType;
+
+export const AnnotateEvent: LogEventType;
+
+export const BlobEvent: LogEventType;
+
+export const CacheEvent: LogEventType;
+
+export const CoderEvent: LogEventType;
+
+export const ConfigureEvent: LogEventType;
+
+export const DeprecateEvent: LogEventType;
+
+export const DrawEvent: LogEventType;
+
+export const ExceptionEvent: LogEventType;
+
+export const ImageEvent: LogEventType;
+
+export const LocaleEvent: LogEventType;
+
+export const ModuleEvent: LogEventType;
+
+export const PixelEvent: LogEventType;
+
+export const PolicyEvent: LogEventType;
+
+export const ResourceEvent: LogEventType;
+
+export const TraceEvent: LogEventType;
+
+export const TransformEvent: LogEventType;
+
+export const UserEvent: LogEventType;
+
+export const WandEvent: LogEventType;
+
+export const X11Event: LogEventType;
+
+export const CommandEvent: LogEventType;
+
+export const AllEvents: LogEventType;
+
 export type LogEventType = number & { readonly [_SWIG_enum_tag]: 'LogEventType'; };
+
+export const MagickImageCoderModule: MagickModuleType;
+
+export const MagickImageFilterModule: MagickModuleType;
+
+export type MagickModuleType = number & { readonly [_SWIG_enum_tag]: 'MagickModuleType'; };
 
 export const UndefinedCLDeviceType: MagickCLDeviceType;
 
@@ -722,7 +1260,83 @@ export const GpuCLDeviceType: MagickCLDeviceType;
 
 export type MagickCLDeviceType = number & { readonly [_SWIG_enum_tag]: 'MagickCLDeviceType'; };
 
+export const UndefinedValidate: ValidateType;
+
+export const NoValidate: ValidateType;
+
+export const ColorspaceValidate: ValidateType;
+
+export const CompareValidate: ValidateType;
+
+export const CompositeValidate: ValidateType;
+
+export const ConvertValidate: ValidateType;
+
+export const FormatsDiskValidate: ValidateType;
+
+export const FormatsMapValidate: ValidateType;
+
+export const FormatsMemoryValidate: ValidateType;
+
+export const IdentifyValidate: ValidateType;
+
+export const ImportExportValidate: ValidateType;
+
+export const MontageValidate: ValidateType;
+
+export const StreamValidate: ValidateType;
+
+export const MagickValidate: ValidateType;
+
+export const AllValidate: ValidateType;
+
 export type ValidateType = number & { readonly [_SWIG_enum_tag]: 'ValidateType'; };
+
+export const UndefinedPolicyDomain: PolicyDomain;
+
+export const CoderPolicyDomain: PolicyDomain;
+
+export const DelegatePolicyDomain: PolicyDomain;
+
+export const FilterPolicyDomain: PolicyDomain;
+
+export const PathPolicyDomain: PolicyDomain;
+
+export const ResourcePolicyDomain: PolicyDomain;
+
+export const SystemPolicyDomain: PolicyDomain;
+
+export const CachePolicyDomain: PolicyDomain;
+
+export const ModulePolicyDomain: PolicyDomain;
+
+export type PolicyDomain = number & { readonly [_SWIG_enum_tag]: 'PolicyDomain'; };
+
+export const UndefinedPolicyRights: PolicyRights;
+
+export const NoPolicyRights: PolicyRights;
+
+export const ReadPolicyRights: PolicyRights;
+
+export const WritePolicyRights: PolicyRights;
+
+export const ExecutePolicyRights: PolicyRights;
+
+export const AllPolicyRights: PolicyRights;
+
+export type PolicyRights = number & { readonly [_SWIG_enum_tag]: 'PolicyRights'; };
+
+export function GetPolicyValue(arg0: string): string;
+
+export function GetPolicyList(arg0: string): any;
+
+export function GetPolicyInfoList(arg0: string): any;
+
+export function ListPolicyInfo(): MagickCore.MagickBooleanType;
+
+export function SetMagickSecurityPolicy(arg0: string): MagickCore.MagickBooleanType;
+
+export function SetMagickSecurityPolicyValue(arg0: MagickCore.PolicyDomain, arg1: string, arg2: string): MagickCore.MagickBooleanType;
 
 export const UndefinedRegistryType: RegistryType;
 
@@ -733,6 +1347,30 @@ export const ImageInfoRegistryType: RegistryType;
 export const StringRegistryType: RegistryType;
 
 export type RegistryType = number & { readonly [_SWIG_enum_tag]: 'RegistryType'; };
+
+export const UndefinedResource: ResourceType;
+
+export const AreaResource: ResourceType;
+
+export const DiskResource: ResourceType;
+
+export const FileResource: ResourceType;
+
+export const HeightResource: ResourceType;
+
+export const MapResource: ResourceType;
+
+export const MemoryResource: ResourceType;
+
+export const ThreadResource: ResourceType;
+
+export const ThrottleResource: ResourceType;
+
+export const TimeResource: ResourceType;
+
+export const WidthResource: ResourceType;
+
+export const ListLengthResource: ResourceType;
 
 export type ResourceType = number & { readonly [_SWIG_enum_tag]: 'ResourceType'; };
 
@@ -806,11 +1444,73 @@ export const InverseLogEvaluateOperator: MagickEvaluateOperator;
 
 export type MagickEvaluateOperator = number & { readonly [_SWIG_enum_tag]: 'MagickEvaluateOperator'; };
 
+export const UndefinedStatistic: StatisticType;
+
+export const GradientStatistic: StatisticType;
+
+export const MaximumStatistic: StatisticType;
+
+export const MeanStatistic: StatisticType;
+
+export const MedianStatistic: StatisticType;
+
+export const MinimumStatistic: StatisticType;
+
+export const ModeStatistic: StatisticType;
+
+export const NonpeakStatistic: StatisticType;
+
+export const RootMeanSquareStatistic: StatisticType;
+
+export const StandardDeviationStatistic: StatisticType;
+
+export const ContrastStatistic: StatisticType;
+
 export type StatisticType = number & { readonly [_SWIG_enum_tag]: 'StatisticType'; };
+
+export const UndefinedPath: PathType;
+
+export const MagickPath: PathType;
+
+export const RootPath: PathType;
+
+export const HeadPath: PathType;
+
+export const TailPath: PathType;
+
+export const BasePath: PathType;
+
+export const ExtensionPath: PathType;
+
+export const SubimagePath: PathType;
+
+export const CanonicalPath: PathType;
+
+export const SubcanonicalPath: PathType;
+
+export const BasePathSansCompressExtension: PathType;
 
 export type PathType = number & { readonly [_SWIG_enum_tag]: 'PathType'; };
 
+export const UndefinedNoise: NoiseType;
+
+export const UniformNoise: NoiseType;
+
+export const GaussianNoise: NoiseType;
+
+export const MultiplicativeGaussianNoise: NoiseType;
+
+export const ImpulseNoise: NoiseType;
+
+export const LaplacianNoise: NoiseType;
+
+export const PoissonNoise: NoiseType;
+
+export const RandomNoise: NoiseType;
+
 export type NoiseType = number & { readonly [_SWIG_enum_tag]: 'NoiseType'; };
+
+export function MagickSetSecurityPolicy(arg0: any, arg1: string): MagickCore.MagickBooleanType;
 
 
 }
@@ -820,8 +1520,6 @@ export const NAPI_VERSION: number;
 export const MagickLibVersionText: string;
 
 export const MagickppLibVersionText: string;
-
-export type MagickModuleType = number & { readonly [_SWIG_enum_tag]: 'MagickModuleType'; };
 
 export const Magick_CoderInfo_header: number;
 
@@ -2945,17 +3643,17 @@ export  class WarningXServer extends Magick.Warning {
   constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.WarningRegistry | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.WarningUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningResourceLimit | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningType | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.WarningStream | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen | Magick.WarningXServer);
 }
 
-export function formatExceptionMessage(exception_: any): string;
+export function formatExceptionMessage(): string;
 
-export function createException(exception_: any): Magick.Exception;
+export function createException(): Magick.Exception;
 
 export function throwExceptionExplicit(severity_: MagickCore.ExceptionType, reason_: string, description_: string): void;
 
 export function throwExceptionExplicit(severity_: MagickCore.ExceptionType, reason_: string): void;
 
-export function throwException(exception_: any, quiet_: boolean): void;
+export function throwException(quiet_: boolean): void;
 
-export function throwException(exception_: any): void;
+export function throwException(): void;
 
 export  class ChannelMoments {
 
