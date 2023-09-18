@@ -12,7 +12,7 @@ export PKG_CONFIG_LIBDIR=$(pwd)/build
 cd deps/ImageMagick
 # Do not include the utilities which increase the size of the npm package
 sh ./configure $2 --prefix=$1/ImageMagick                   \
-    --no-enable-zero-configuration --disable-installed      \
+    --disable-installed                                     \
     --disable-shared --enable-static                        \
     --without-utilities --without-perl --disable-openmp     \
     --disable-docs                                          \
