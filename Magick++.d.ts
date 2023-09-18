@@ -408,8 +408,6 @@ export type PreviewType = number & { readonly [_SWIG_enum_tag]: 'PreviewType'; }
 
 export type DisposeType = number & { readonly [_SWIG_enum_tag]: 'DisposeType'; };
 
-export function Core_CloneString(arg0: any, arg1: string): string;
-
 export const UndefinedEndian: EndianType;
 
 export const LSBEndian: EndianType;
@@ -829,8 +827,6 @@ export const Magick_CoderInfo_header: number;
 
 
 export namespace Magick {
-
-export function CloneString(destination_: any, source_: string): void;
 
 export function DisableOpenCL(arg0?: void): void;
 
