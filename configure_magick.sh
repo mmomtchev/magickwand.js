@@ -12,9 +12,10 @@ export PKG_CONFIG_LIBDIR=$(pwd)/build
 cd deps/ImageMagick
 # Do not include the utilities which increase the size of the npm package
 sh ./configure $2 --prefix=$1/ImageMagick                   \
-    --disable-openmp --disable-shared --enable-static       \
-    --disable-installed --without-utilities --without-perl  \
-    --disable-docs \
+    --no-enable-zero-configuration --disable-installed      \
+    --disable-shared --enable-static                        \
+    --without-utilities --without-perl --disable-openmp     \
+    --disable-docs                                          \
     > /dev/null
 
 X11_LIBS=`egrep -o '^\s*X11_LIBS\s*=.*' Makefile | cut -f 2 -d "="`

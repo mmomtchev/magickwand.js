@@ -25,6 +25,7 @@ describe('CoderInfo', () => {
     for (let i = 0; i < list.size(); i++) {
       assert.isString(list.get(i).name());
       coders.push(list.get(i).name());
+      console.log(list.get(i).name());
     }
     assert.includeMembers(coders, ['GIF', 'JPEG', 'PNG']);
 
