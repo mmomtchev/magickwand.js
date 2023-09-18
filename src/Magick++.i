@@ -97,6 +97,7 @@ using namespace Magick;
 // These cannot be used safely from JavaScript
 %rename("$ignore", regextarget=1) "NoCopy$";
 %rename("$ignore", regextarget=1) "Allocator";
+%ignore Magick::CloneString;
 
 // These need special handling and the functionality they provide
 // is already covered

@@ -50,11 +50,10 @@
 %rename(toOffsetInfo)     operator MagickCore::OffsetInfo;
 #endif
 
-namespace MagickCore {
-  // Global functions are (still) not bound to a namespace
-  // and there is both a Magick::CloneString and MagickCore::CloneString
-  %rename(Core_CloneString) CloneString;
+// There is are no reasons to use this function from JS
+%ignore MagickCore::CloneString;
 
+namespace MagickCore {
   %include "../swig/magickcore.i"
   %include "../swig/magickwand.i"
 }
