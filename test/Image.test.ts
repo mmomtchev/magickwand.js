@@ -6,14 +6,9 @@ import * as chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 const assert = chai.assert;
 
-import { Magick, MagickCore, MagickLibVersionText } from 'node-magickwand';
+import { Magick, MagickCore } from 'node-magickwand';
 const { Image, Geometry, Color } = Magick;
 const { MultiplyCompositeOp } = MagickCore;
-
-it('ImageMagick version information', () => {
-  assert.isString(MagickLibVersionText);
-  console.log('Built with ImageMagick', MagickLibVersionText);
-});
 
 describe('Image', () => {
   describe('constructor', () => {

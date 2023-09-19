@@ -1,0 +1,9 @@
+{
+  "spec": "Security.ts",
+  "v8-expose-gc": true,
+  "timeout": "5000",
+  "require": [
+    "ts-node/register",
+    "tsconfig-paths/register"
+  ]
+}

@@ -209,11 +209,23 @@ ImageMagick is a very widely used software. Security vulnerabilities tend to be 
 
 The current ImageMagick version can be checked in the `MagickLibVersionText` global exported constant.
 
-**Special care must be exercised when ImageMagick is used to process images coming from untrusted sources**. Although possible, outright arbitrary code execution by embedded malicious code in an image is extremely rare and there has been only one such case during the last 10 years - the infamous [`ImageTragick`](https://www.cve.org/CVERecord?id=CVE-2016-3714) exploit in 2016. It did not affect users who had restrictive security policies.
+**Special care must be exercised when ImageMagick is used to process images coming from untrusted sources**. Although possible, outright arbitrary code execution by embedded malicious code in an image is extremely rare and there has been only one such case during the last 30 years - the infamous [`ImageTragick`](https://www.cve.org/CVERecord?id=CVE-2016-3714) exploit in 2016. **It did not affect users who had restrictive security policies.**
 
 However DoS attacks are much more common as it is relatively easy to construct an image that will be of relatively small size when compressed, but it will expand to fill all available memory once uncompressed.
 
 **If using ImageMagick in such environment**, it is highly recommended to review the default security policy in `node_modules/node-magickwand/lib/binding/{platform}/ImageMagick/etc/ImageMagick-7/policy.xml` and to eventually replace it with a more restrictive security policy from the examples in `node_modules/node-magickwand/deps/ImageMagick/config/`. Be also sure to check https://imagemagick.org/script/security-policy.php for more information and to follow an appropriate security announcements mailing list. Also, consider re-building ImageMagick yourself in order to support a more limited amount of image file formats, as complexity is always the main risk factor with any software.
+
+Example for loading `websafe` (the most restrictive security policy):
+```js
+const pathNodeMagick = require.resolve('node-magickwand');
+const websafe = fs.readFileSync(path.resolve(pathNodeMagick, 'deps', 'ImageMagick', 'config', 'policy-websafe.xml'), 'utf8');
+Magick.SetSecurityPolicy(websafe);
+assert(MagickCore.IsRightsAuthorized(MagickCore.SystemPolicyDomain, MagickCore.WritePolicyRights, 'file') === false);
+```
+
+The current security policy can be dumped to stdout by calling `MagickCore.ListPolicyInfo()`. There is also an online tool for analyzing security policies at https://imagemagick-secevaluator.doyensec.com/.
+
+
 
 **In all other cases** security should not be of any concern.
 
