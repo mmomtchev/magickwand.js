@@ -1,7 +1,8 @@
 # Changelog
 
-##
+## [0.9.4] 2023-09-19
 
+ - Update ImageMagick to 7.1.1-16
  - Fully implement the security policy API
  - All SWIG-exported symbols are now configurable and writable with getters/setters also being enumerable
  - Eliminate all getters returning constant values and replace them with constants set at module initialization
