@@ -98,6 +98,10 @@ using namespace Magick;
 %rename("$ignore", regextarget=1) "NoCopy$";
 %rename("$ignore", regextarget=1) "Allocator";
 %ignore Magick::CloneString;
+%ignore Magick::throwException;
+%ignore Magick::throwExceptionExplicit;
+%ignore Magick::formatExceptionMessage;
+%ignore Magick::createException;
 
 // These need special handling and the functionality they provide
 // is already covered

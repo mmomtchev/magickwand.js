@@ -52,36 +52,32 @@
   $1 = const_cast<char*>("");
   $2 = &_global_number_policies;
   $3 = &_global_error;
+  _global_error.severity = MagickCore::ExceptionType::UndefinedException;
 }
 %typemap(tsout) (const char *, size_t *, MagickCore::ExceptionInfo *) "string[]";
 %typemap(out) char **GetPolicyList {
-  if ($1 == SWIG_NULLPTR) {
-    SWIG_Raise(_global_error.reason);
-  }
   Napi::Array array = Napi::Array::New(env, _global_number_policies);
-  char **policies = reinterpret_cast<char**>($1);
-  for (size_t i = 0; i < _global_number_policies; i++) {
-    Napi::String s = Napi::String::New(env, policies[i]);
-    array.Set(i, s);
+  if ($1) {
+    char **policies = reinterpret_cast<char**>($1);
+    for (size_t i = 0; i < _global_number_policies; i++) {
+      Napi::String s = Napi::String::New(env, policies[i]);
+      array.Set(i, s);
+    }
   }
   $result = array;
 }
 // * returning an exception in an argument
 %typemap(in, numinputs=0, noblock=1) (MagickCore::ExceptionInfo *) (MagickCore::ExceptionInfo _global_error) {
   $1 = &_global_error;
+  _global_error.severity = MagickCore::ExceptionType::UndefinedException;
 }
 %typemap(argout, noblock=1) (MagickCore::ExceptionInfo *) {
-  if ($1 == SWIG_NULLPTR) {
-    SWIG_Raise(_global_error.reason);
+  if (_global_error.severity != MagickCore::ExceptionType::UndefinedException) {
+    SWIG_Raise(MagickCore::GetExceptionMessage(_global_error.error_number));
   }
 }
 // * returning data in a FILE* (only nullptr at the moment)
 %typemap(in, numinputs=0, noblock=1) (FILE *) "$1 = SWIG_NULLPTR;"
-%typemap(argout, noblock=1) (MagickCore::ExceptionInfo *) {
-  if ($1 == SWIG_NULLPTR) {
-    SWIG_Raise(_global_error.reason);
-  }
-}
 
 
 namespace MagickCore {
