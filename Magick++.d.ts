@@ -1330,13 +1330,13 @@ export function GetPolicyValue(arg0: string): string;
 
 export function GetPolicyList(): string[];
 
-export function IsRightsAuthorized(arg0: MagickCore.PolicyDomain, arg1: MagickCore.PolicyRights, arg2: string): bool;
+export function IsRightsAuthorized(arg0: MagickCore.PolicyDomain, arg1: MagickCore.PolicyRights, arg2: string): boolean;
 
-export function ListPolicyInfo(): bool;
+export function ListPolicyInfo(): boolean;
 
-export function SetMagickSecurityPolicy(arg0: string): bool;
+export function SetMagickSecurityPolicy(arg0: string): boolean;
 
-export function SetMagickSecurityPolicyValue(arg0: MagickCore.PolicyDomain, arg1: string, arg2: string): bool;
+export function SetMagickSecurityPolicyValue(arg0: MagickCore.PolicyDomain, arg1: string, arg2: string): boolean;
 
 export const UndefinedRegistryType: RegistryType;
 
@@ -1510,7 +1510,7 @@ export const RandomNoise: NoiseType;
 
 export type NoiseType = number & { readonly [_SWIG_enum_tag]: 'NoiseType'; };
 
-export function MagickSetSecurityPolicy(arg0: any, arg1: string): bool;
+export function MagickSetSecurityPolicy(arg0: any, arg1: string): boolean;
 
 
 }
