@@ -2,6 +2,7 @@
 
 ##
 
+ - Fully implement the security policy API
  - All SWIG-exported symbols are now configurable and writable with getters/setters also being enumerable
  - Eliminate all getters returning constant values and replace them with constants set at module initialization
 
