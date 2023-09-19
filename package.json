@@ -18,7 +18,6 @@
     "test": "mocha --reporter=tap",
     "preversion": "npm run lint && npm run test",
     "postversion": "git push && git push --tags && node ./scripts/publish-packages.js",
-    "prepublish": "cd deps/ImageMagick && make distclean",
     "postpublish": "gh workflow run test-package.yml -F version=$npm_package_version"
   },
   "keywords": [
