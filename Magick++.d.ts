@@ -3643,18 +3643,6 @@ export  class WarningXServer extends Magick.Warning {
   constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.WarningRegistry | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.WarningUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningResourceLimit | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningType | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.WarningStream | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen | Magick.WarningXServer);
 }
 
-export function formatExceptionMessage(): string;
-
-export function createException(): Magick.Exception;
-
-export function throwExceptionExplicit(severity_: MagickCore.ExceptionType, reason_: string, description_: string): void;
-
-export function throwExceptionExplicit(severity_: MagickCore.ExceptionType, reason_: string): void;
-
-export function throwException(quiet_: boolean): void;
-
-export function throwException(): void;
-
 export  class ChannelMoments {
 
   constructor();
