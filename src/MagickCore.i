@@ -43,7 +43,7 @@
 %typemap(out) MagickCore::MagickBooleanType {
   $result = Napi::Boolean::New(env, $1);
 }
-%typemap(ts) MagickCore::MagickBooleanType "bool";
+%typemap(ts) MagickCore::MagickBooleanType "boolean";
 
 // The security API is a plain-C API and it require some special typemaps, like:
 // * the special case of GetPolicyList
