@@ -1,4 +1,5 @@
 import { execFileSync } from 'child_process';
+import * as os from 'os';
 import * as chai from 'chai';
 
 const assert = chai.assert;
@@ -10,9 +11,9 @@ it('ImageMagick version information', () => {
   console.log('Built with ImageMagick', MagickLibVersionText);
 });
 
-it('Security Policy', function() {
+it('Security Policy', function () {
   this.timeout(10000);
-  execFileSync('npx',
+  execFileSync(os.platform() === 'win32' ? 'npx.cmd' : 'npx',
     ['mocha', '--config', '.mocharc.security.json'],
-    { cwd: __dirname, shell: true });
+    { cwd: __dirname });
 });
