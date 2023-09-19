@@ -7,10 +7,15 @@
 %rename("%s") MagickCore;
 %rename("%s", regextarget=1) ".+Operator$";
 %rename("%s", regextarget=1) ".+Op$";
-%rename("%s", regextarget=1) "Policy";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Options$";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Type$";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+[Vv]ersion.+";
+
+// Never ignore the security policy API which is in MagickCore
+%rename("%s", regextarget=1) "Policy";
+%ignore MagickCore::GetPolicyInfoList;
+%rename("%s") MagickCore::IsRightsAuthorized;
+
 // Include all enum items of enums that are not ignored
 %rename("%s", regextarget=1, %$isenumitem) "";
 
@@ -35,20 +40,20 @@
 // There is are no reasons to use this function from JS
 %ignore MagickCore::CloneString;
 
-// Never ignore the security policy API which is in MagickCore
-%rename("%s") MagickCore::GetPolicyList;
-//%rename("%s") MagickCore::SetMagickSecurityPolicy;
-//%rename("%s") MagickCore::SetMagickSecurityPolicyValue;
-//%rename("%s") MagickCore::IsRightsAuthorized;
+%typemap(out) MagickCore::MagickBooleanType {
+  $result = Napi::Boolean::New(env, $1);
+}
+%typemap(ts) MagickCore::MagickBooleanType "bool";
 
-// The security API is a plain-C API and it require some special typemaps, like
+// The security API is a plain-C API and it require some special typemaps, like:
 // * the special case of GetPolicyList
-%typemap(in) (const char *, size_t *, MagickCore::ExceptionInfo *)
+%typemap(in, numinputs=0, noblock=1) (const char *, size_t *, MagickCore::ExceptionInfo *)
     (MagickCore::ExceptionInfo _global_error, size_t _global_number_policies) {
-  $typemap(in, const char *);
+  $1 = const_cast<char*>("");
   $2 = &_global_number_policies;
   $3 = &_global_error;
 }
+%typemap(tsout) (const char *, size_t *, MagickCore::ExceptionInfo *) "string[]";
 %typemap(out) char **GetPolicyList {
   if ($1 == SWIG_NULLPTR) {
     SWIG_Raise(_global_error.reason);
@@ -61,7 +66,6 @@
   }
   $result = array;
 }
-
 // * returning an exception in an argument
 %typemap(in, numinputs=0, noblock=1) (MagickCore::ExceptionInfo *) (MagickCore::ExceptionInfo _global_error) {
   $1 = &_global_error;
@@ -71,7 +75,6 @@
     SWIG_Raise(_global_error.reason);
   }
 }
-
 // * returning data in a FILE* (only nullptr at the moment)
 %typemap(in, numinputs=0, noblock=1) (FILE *) "$1 = SWIG_NULLPTR;"
 %typemap(argout, noblock=1) (MagickCore::ExceptionInfo *) {
