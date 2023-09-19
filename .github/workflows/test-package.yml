@@ -45,8 +45,8 @@ jobs:
       - name: Install node-magickwand from npm
         run: |
           npm install --force node-magickwand@${{ github.event.inputs.version }}
-          mkdir -p ../deps/ImageMagick/config
-          cp ../node_modules/node-magickwand/deps/ImageMagick/config/policy-websafe.xml ../deps/ImageMagick/config
+          mkdir -p deps/ImageMagick/config
+          cp node_modules/node-magickwand/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
         shell: bash
       - name: Run the unit tests
         run: |
@@ -93,8 +93,8 @@ jobs:
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
           npm install --force node-magickwand@${{ github.event.inputs.version }} --build-from-source
-          mkdir -p ../deps/ImageMagick/config
-          cp ../node_modules/node-magickwand/deps/ImageMagick/config/policy-websafe.xml ../deps/ImageMagick/config
+          mkdir -p deps/ImageMagick/config
+          cp node_modules/node-magickwand/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
         shell: bash
       - name: Run the unit tests
         run: |
