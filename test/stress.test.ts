@@ -9,6 +9,19 @@ const assert = chai.assert;
 
 const wizard = path.join(__dirname, 'data', 'wizard.png');
 
+/*
+ * This test is a typical example of an operation prone to the
+ * Node.js/libuv thread starvation problem described in the
+ * SWIG Node-API manual
+ * 
+ * It will launch a very large number of operations
+ * - step 1 (reading) is completely not inter-dependent
+ * - step 2 (compositing) is slightly inter-dependent
+ *     100 operations trying to lock 10 images
+ * - step 3 (comparing) is very inter-dependent
+ *     all ops try to lock the reference image
+ */
+
 describe('stress tests (slow)', () => {
   it('CompositeOp', function(done){
     this.timeout(10000);
