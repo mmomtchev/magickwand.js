@@ -106,7 +106,7 @@ describe('stress tests (slow)', () => {
 
     // Overlay 100 images over the two targets in round-robin mode,
     // launching all operations simultaneously
-    // (they will two by two since they will lock the target image)
+    // (they will run two by two since they will lock the target image)
     const q = [] as Promise<void>[];
     for (let i = 0; i < 100; i++) {
       process.env.VERBOSE_STRESS && console.time(`overlayed image ${i}`);
