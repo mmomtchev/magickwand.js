@@ -23,7 +23,7 @@ const wizard = path.join(__dirname, 'data', 'wizard.png');
  */
 
 describe('stress tests (slow)', () => {
-  it('CompositeOp', function(done){
+  it('random read w/ OverlayCompositeOp', function (done) {
     this.timeout(10000);
 
     // Produce a reference image
@@ -88,6 +88,40 @@ describe('stress tests (slow)', () => {
       );
     }
 
-    Promise.all(q).then(() => void done());
+    Promise.all(q).then(() => done());
+  });
+
+  it('random write w/ OverlayCompositeOp', function (done) {
+    this.timeout(10000);
+
+    const original = new Magick.Image(wizard);
+    // 2 targets
+    const targets = [new Magick.Image(original), new Magick.Image(original)];
+
+    // Make 100 copies
+    const im = [] as Magick.Image[];
+    for (let i = 0; i < 100; i++) {
+      im[i] = new Magick.Image(original);
+    }
+
+    // Overlay 100 images over the two targets in round-robin mode,
+    // launching all operations simultaneously
+    // (they will two by two since they will lock the target image)
+    const q = [] as Promise<void>[];
+    for (let i = 0; i < 100; i++) {
+      process.env.VERBOSE_STRESS && console.time(`overlayed image ${i}`);
+      q.push(targets[i % 2].compositeAsync(im[i], '0x0', MagickCore.OverlayCompositeOp)
+        .then(() => {
+          process.env.VERBOSE_STRESS && console.timeEnd(`overlayed image ${i}`);
+          // 10x10 is a white pixel
+          const px = targets[i % 2].pixelColor(10, 10);
+          assert.strictEqual(px.pixelType(), Magick.Color.RGBAPixel);
+          assert.isTrue(px.isValid());
+          assert.strictEqual(px.quantumAlpha(), 65535);
+          assert.strictEqual(px.quantumBlack(), 0);
+        }));
+    }
+
+    Promise.all(q).then(() => done());
   });
 });
