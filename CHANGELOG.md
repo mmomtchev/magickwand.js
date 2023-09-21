@@ -1,5 +1,14 @@
 # Changelog
 
+##
+
+ - Update conan dependencies on POSIX
+    - `glib` 2.76.2 to 2.78.0
+    - `libjpeg-turbo` 2.1.5 to 3.0.0
+    - `libtiff` 4.5.0 to 4.6.0
+    - `libwebp` 1.3.0 to 1.3.1
+    - `xz_utils` 5.4.2 to 5.4.4
+
 ## [0.9.4] 2023-09-19
 
  - Update ImageMagick to 7.1.1-16
