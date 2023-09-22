@@ -22,14 +22,16 @@ const wizard = path.join(__dirname, 'data', 'wizard.png');
  *     all ops try to lock the reference image
  */
 
-describe('stress tests (slow)', () => {
+describe('stress tests (slow)', function () {
+  this.timeout(10000);
+  this.slow(2000);
+  const original = new Magick.Image(wizard);
+
   it('random read w/ OverlayCompositeOp', function (done) {
-    this.timeout(10000);
 
     // Produce a reference image
-    const imOriginal = new Magick.Image(wizard);
-    const imRef = new Magick.Image(wizard);
-    imRef.composite(imOriginal, '0x0', MagickCore.OverlayCompositeOp);
+    const imRef = new Magick.Image(original);
+    imRef.composite(original, '0x0', MagickCore.OverlayCompositeOp);
     const px = imRef.pixelColor(40, 50);
     assert.strictEqual(px.pixelType(), Magick.Color.RGBAPixel);
     assert.isTrue(px.isValid());
@@ -88,13 +90,11 @@ describe('stress tests (slow)', () => {
       );
     }
 
-    Promise.all(q).then(() => done());
+    Promise.all(q).then(() => done()).catch(done);
   });
 
+  
   it('random write w/ OverlayCompositeOp', function (done) {
-    this.timeout(10000);
-
-    const original = new Magick.Image(wizard);
     // 2 targets
     const targets = [new Magick.Image(original), new Magick.Image(original)];
 
@@ -122,6 +122,41 @@ describe('stress tests (slow)', () => {
         }));
     }
 
-    Promise.all(q).then(() => done());
+    Promise.all(q).then(() => done()).catch(done);
+  });
+
+
+  it('w/ rejections', function (done) {
+    // Make 100 empty images
+    const im = [] as Magick.Image[];
+    for (let i = 0; i < 100; i++) {
+      im[i] = new Magick.Image;
+    }
+
+    // Half of them broken
+    const q = [] as Promise<boolean>[];
+    for (let i = 0; i < 100; i++) {
+      q.push(im[i].readAsync(i % 2 === 0 ? wizard : 'notwizard.png')
+        .then(() => true)
+        .catch(() => false)
+      );
+    }
+
+    Promise.all(q)
+      .then((r) => Promise.all(r.map((result, idx) => {
+        if (idx % 2 === 0) {
+          assert.isTrue(result);
+          return im[idx].compareAsync(original);
+        } else {
+          assert.isFalse(r[idx]);
+          return Promise.resolve(true);
+        }
+      }
+      )))
+      .then((r) => {
+        r.map((x) => void assert.isTrue(x));
+        done();
+      })
+      .catch(done);
   });
 });
