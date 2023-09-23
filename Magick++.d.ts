@@ -3332,315 +3332,32 @@ export  class PathMovetoRel extends Magick.VPathBase {
   copy(): Magick.VPathBase;
 }
 
-export  class Exception {
+export  class ErrorPolicy {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception);
-
-  constructor(original_: Magick.Exception);
-
-  clone(original_: Magick.Exception): Magick.Exception;
-
-  what(): string;
-
-  nested(): Magick.Exception;
-
-  nested(nested_: Magick.Exception): void;
+  constructor(what_: string, nested_: any | Magick.ErrorPolicy);
 }
 
-export  class Error extends Magick.Exception {
+export  class ErrorType {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception | Magick.Error);
+  constructor(what_: string, nested_: any | Magick.ErrorPolicy | Magick.ErrorType);
 }
 
-export  class ErrorBlob extends Magick.Error {
+export  class WarningPolicy {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception | Magick.Error | Magick.ErrorBlob);
+  constructor(what_: string, nested_: any | Magick.ErrorPolicy | Magick.ErrorType | Magick.WarningPolicy);
 }
 
-export  class ErrorCache extends Magick.Error {
+export  class WarningType {
 
   constructor(what_: string);
 
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorCache | Magick.Error | Magick.ErrorBlob);
-}
-
-export  class ErrorCoder extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorCoder | Magick.ErrorCache | Magick.Error | Magick.ErrorBlob);
-}
-
-export  class ErrorConfigure extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorCoder | Magick.ErrorCache | Magick.Error | Magick.ErrorConfigure | Magick.ErrorBlob);
-}
-
-export  class ErrorCorruptImage extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorCoder | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorBlob);
-}
-
-export  class ErrorDelegate extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorCoder | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorBlob | Magick.ErrorDelegate);
-}
-
-export  class ErrorDraw extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorDraw | Magick.ErrorCoder | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorBlob | Magick.ErrorDelegate);
-}
-
-export  class ErrorFileOpen extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorDraw | Magick.ErrorCoder | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
-}
-
-export  class ErrorImage extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorDraw | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
-}
-
-export  class ErrorMissingDelegate extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorDraw | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
-}
-
-export  class ErrorModule extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorDraw | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
-}
-
-export  class ErrorMonitor extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorDraw | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
-}
-
-export  class ErrorOption extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
-}
-
-export  class ErrorPolicy extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
-}
-
-export  class ErrorRegistry extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
-}
-
-export  class ErrorResourceLimit extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
-}
-
-export  class ErrorStream extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorStream | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
-}
-
-export  class ErrorType extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
-}
-
-export  class ErrorUndefined extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
-}
-
-export  class ErrorXServer extends Magick.Error {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.ErrorFileOpen);
-}
-
-export  class Warning extends Magick.Exception {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.ErrorFileOpen);
-}
-
-export  class WarningBlob extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.ErrorFileOpen);
-}
-
-export  class WarningCache extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.ErrorFileOpen);
-}
-
-export  class WarningCoder extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningConfigure extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningCorruptImage extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningDelegate extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningDraw extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.WarningDraw | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningFileOpen extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningImage extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningConfigure | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningMissingDelegate extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningModule extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningMonitor extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningMonitor | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningOption extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningPolicy extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningRegistry extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.WarningRegistry | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningResourceLimit extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.WarningRegistry | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningResourceLimit | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningStream extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.WarningRegistry | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningResourceLimit | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.WarningStream | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningType extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.WarningRegistry | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningResourceLimit | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningType | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.WarningStream | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningUndefined extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.WarningRegistry | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.WarningUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningResourceLimit | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningType | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.WarningStream | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen);
-}
-
-export  class WarningXServer extends Magick.Warning {
-
-  constructor(what_: string);
-
-  constructor(what_: string, nested_: Magick.Exception | Magick.ErrorPolicy | Magick.WarningImage | Magick.WarningCache | Magick.ErrorDraw | Magick.WarningRegistry | Magick.ErrorOption | Magick.ErrorCoder | Magick.ErrorUndefined | Magick.WarningUndefined | Magick.ErrorImage | Magick.ErrorCache | Magick.Error | Magick.ErrorCorruptImage | Magick.WarningBlob | Magick.ErrorStream | Magick.ErrorType | Magick.WarningCorruptImage | Magick.ErrorConfigure | Magick.ErrorMonitor | Magick.WarningDelegate | Magick.ErrorRegistry | Magick.ErrorResourceLimit | Magick.WarningPolicy | Magick.ErrorModule | Magick.WarningDraw | Magick.WarningFileOpen | Magick.ErrorMissingDelegate | Magick.ErrorXServer | Magick.WarningModule | Magick.WarningResourceLimit | Magick.WarningOption | Magick.WarningMonitor | Magick.WarningType | Magick.WarningConfigure | Magick.WarningMissingDelegate | Magick.WarningStream | Magick.ErrorBlob | Magick.ErrorDelegate | Magick.Warning | Magick.WarningCoder | Magick.ErrorFileOpen | Magick.WarningXServer);
+  constructor(what_: string, nested_: any | Magick.ErrorPolicy | Magick.ErrorType | Magick.WarningPolicy | Magick.WarningType);
 }
 
 export  class ChannelMoments {
