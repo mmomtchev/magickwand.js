@@ -26,7 +26,7 @@ using namespace Magick;
 %apply int { ssize_t };
 
 // ImageMagick throws instances of Magick::Exception
-// Always catch them and rethrow them with SWIG_Raise
+// Always catch them and rethrow the message them with SWIG_Raise
 // SWIG_Raise handles both sync and async throwing
 %exception {
   try {
@@ -102,6 +102,12 @@ using namespace Magick;
 %ignore Magick::throwExceptionExplicit;
 %ignore Magick::formatExceptionMessage;
 %ignore Magick::createException;
+// Ignore the Magick::Exceptions, these do not inherit from JS Error
+// and are not very practical, we throw everything as JS Error
+// with the original message (see above)
+%rename("$ignore", regextarget=1, fullname=1) "^Magick::Exception";
+%rename("$ignore", regextarget=1, fullname=1) "^Magick::Error";
+%rename("$ignore", regextarget=1, fullname=1) "^Magick::Warning";
 
 // These need special handling and the functionality they provide
 // is already covered
