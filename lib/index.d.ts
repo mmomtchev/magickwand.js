@@ -1,4 +1,4 @@
-export { Magick, MagickCore, std, MagickLibVersionText } from "./Magick++";
+export * from './Magick++';
 
 declare module './Magick++' {
   namespace std {

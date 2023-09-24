@@ -207,7 +207,7 @@ This project serves as showcase and testing grounds for SWIG/Node-API.
 
 ImageMagick is a very widely used software. Security vulnerabilities tend to be very well known and are usually fixed very fast.
 
-The current ImageMagick version can be checked in the `MagickLibVersionText` global exported constant.
+The current ImageMagick version can be checked in the `MagickLibVersionText` / `MagickLibAddendum` global exported constants.
 
 **Special care must be exercised when ImageMagick is used to process images coming from untrusted sources**. Although possible, outright arbitrary code execution by embedded malicious code in an image is extremely rare and there has been only one such case during the last 30 years - the infamous [`ImageTragick`](https://www.cve.org/CVERecord?id=CVE-2016-3714) exploit in 2016. **It did not affect users who had restrictive security policies.**
 

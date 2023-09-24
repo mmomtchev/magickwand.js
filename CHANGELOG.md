@@ -9,6 +9,7 @@
     - `libtiff` 4.5.0 to 4.6.0
     - `libwebp` 1.3.0 to 1.3.1
     - `xz_utils` 5.4.2 to 5.4.4
+ - Export all `MagickCore` macros to JavaScript - including `MagickCore.MagickLibAddendum`
  - Remove some unused types to reduce code size and compilation times
 
 ### [0.9.4] 2023-09-19

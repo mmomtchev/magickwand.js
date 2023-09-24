@@ -4,11 +4,11 @@ import * as chai from 'chai';
 
 const assert = chai.assert;
 
-import { MagickLibVersionText } from 'node-magickwand';
+import { MagickLibVersionText, MagickLibAddendum } from 'node-magickwand';
 
 it('ImageMagick version information', () => {
   assert.isString(MagickLibVersionText);
-  console.log('Built with ImageMagick', MagickLibVersionText);
+  console.log(`Built with ImageMagick ${MagickLibVersionText}${MagickLibAddendum}`);
 });
 
 it('Security Policy', function () {
