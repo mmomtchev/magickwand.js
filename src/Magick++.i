@@ -111,7 +111,8 @@ using namespace Magick;
 
 // These need special handling and the functionality they provide
 // is already covered
-%rename("$ignore", regextarget=1, fullname=1) "^Magick::Pixels";
+%ignore Magick::Pixels;
+%ignore Magick::PixelData;
 
 // Get all the basic types from MagickCore::*
 // Everything else is optional

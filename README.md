@@ -88,7 +88,7 @@ console.log(`${blob}`);
 
 // Convert to RGBA (raw) and write it to a TypedArray
 await im.magickAsync('RGBA');
-// Conversion to Uint16 is automatic
+// Conversion to Uint16 is automatic (it recognizes the type of the array)
 const pixels = new Uint16Array(im.size().width() * im.size().height() * 4);
 im.write(0, 0, im.size().width(), im.size().height(), 'RGBA', pixels);
 console.log(`Get pixel from ${wizard} 0 : 0 = ${pixels[0]}`);
@@ -125,7 +125,7 @@ Your best source of further information is the Magick++ documentation itself:
 * The tutorial: https://imagemagick.org/Magick++/tutorial/Magick++_tutorial.pdf
 * The full API: https://www.imagemagick.org/Magick++/Documentation.html
 
-(only the `Pixels::` methods are not implemented in JavaScript - use `Image.pixelColor` to get individual pixels or write the image to a `TypedArray` with `RGB`/`RGBA`/`CMYK` encoding to get a large region)
+(only the `Pixels` and `PixelData` classes are not implemented in JavaScript - use `Image.pixelColor` to get individual pixels or write the image to a `TypedArray` with `RGB`/`RGBA`/`CMYK` encoding to get a large region)
 
 Also, if you have a code editor capable of reading the TypeScript bindings, such as Visual Studio Code, it will provide online help for each method.
 
