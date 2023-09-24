@@ -1517,9 +1517,71 @@ export function MagickSetSecurityPolicy(arg0: any, arg1: string): boolean;
 
 export const NAPI_VERSION: number;
 
+export const MagickCoreSignature: number;
+
+export const MagickPathExtent: number;
+
+export const MagickTimeExtent: number;
+
+export const MagickEpsilon: number;
+
+export const MagickMaximumValue: number;
+
+export const MagickMinimumValue: number;
+
+export const MagickOffsetFormat: string;
+
+export const MagickSizeFormat: string;
+
+export const MagickMaxBufferExtent: number;
+
+export const MagickMinBufferExtent: number;
+
+export const MagickLogFilename: string;
+
+export const MagickPackageName: string;
+
+export const MagickCopyright: string;
+
+export const MagickLibVersion: number;
+
 export const MagickLibVersionText: string;
 
+export const MagickLibAddendum: string;
+
+export const MagickLibInterface: number;
+
+export const MagickLibMinInterface: number;
+
+export const MagickPlatform: string;
+
 export const MagickppLibVersionText: string;
+
+export const MagickppLibAddendum: string;
+
+export const MagickppLibInterface: number;
+
+export const MagickppLibMinInterface: number;
+
+export const MagickGitRevision: string;
+
+export const MagickReleaseDate: string;
+
+export const MagickAuthoritativeLicense: string;
+
+export const MagickAuthoritativeURL: string;
+
+export const MagickHomeURL: string;
+
+export const MagickQuantumDepth: string;
+
+export const MagickQuantumRange: string;
+
+export const MagickHDRISupport: string;
+
+export const MagickVersion: string;
+
+export const MagickWandSignature: number;
 
 export const Magick_CoderInfo_header: number;
 
