@@ -3,6 +3,7 @@
 ###
 
  - Update ImageMagick to 7.1.1-18
+ - Fix [#26](https://github.com/mmomtchev/node-magickwand/issues/26), crash when using `Image.display` multiple times
  - Update conan dependencies on POSIX
     - `glib` 2.76.2 to 2.78.0
     - `libjpeg-turbo` 2.1.5 to 3.0.0
