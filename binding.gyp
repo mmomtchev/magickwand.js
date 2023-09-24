@@ -225,6 +225,7 @@
             'CORE_<(winlibid)_coders_.lib',
             'CORE_<(winlibid)_croco_.lib',
             'CORE_<(winlibid)_de265_.lib',
+            'CORE_<(winlibid)_deflate_.lib',
             'CORE_<(winlibid)_exr_.lib',
             'CORE_<(winlibid)_ffi_.lib',
             'CORE_<(winlibid)_filters_.lib',
