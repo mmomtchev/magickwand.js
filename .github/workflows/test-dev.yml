@@ -43,7 +43,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ubuntu-latest]
+        platform: [ubuntu-22.04]
 
     steps:
       - uses: actions/checkout@v3
@@ -64,4 +64,5 @@ jobs:
       - run: npx @mapbox/node-pre-gyp build -j max
       - run: asan mocha -i -g Security --repeats 1000
         env:
+          LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6
           LSAN_OPTIONS: suppressions=${GITHUB_WORKSPACE}/test/napi-leaks-suppression.txt
