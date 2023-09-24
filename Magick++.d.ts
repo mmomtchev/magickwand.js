@@ -5806,19 +5806,6 @@ export  class Image {
   replaceImageAsync(replacement_: any): Promise<any>;
 }
 
-export  class PixelData {
-
-  constructor(image_: Magick.Image, map_: string, type_: MagickCore.StorageType);
-
-  constructor(image_: Magick.Image, x_: number, y_: number, width_: number, height_: number, map_: string, type_: MagickCore.StorageType);
-
-  data(): any;
-
-  length(): number;
-
-  size(): number;
-}
-
 export  class ResourceLimits {
 
  static area(limit_: number): void;
