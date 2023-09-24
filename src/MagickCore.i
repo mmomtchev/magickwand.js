@@ -9,7 +9,7 @@
 %rename("%s", regextarget=1) ".+Op$";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Options$";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Type$";
-%rename("%s", regextarget=1, %$not %$isfunction) ".+[Vv]ersion.+";
+%rename("%s", regextarget=1, %$isconstant) "Magick.+";
 
 // Never ignore the security policy API which is in MagickCore
 %rename("%s", regextarget=1) "Policy";
