@@ -10,7 +10,7 @@ on:
     branches: ["*"]
 
 jobs:
-  build:
+  release:
     runs-on: ${{ matrix.platform }}
 
     strategy:
@@ -36,3 +36,32 @@ jobs:
       - run: npx @mapbox/node-pre-gyp configure
       - run: npx @mapbox/node-pre-gyp build -j max
       - run: npm test
+
+  debug-asan:
+    runs-on: ${{ matrix.platform }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: true
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: Install fonts on Ubuntu
+        run: |
+          [[ '${{ matrix.platform }}' =~ 'ubuntu' ]] && sudo apt-get install -y fonts-ubuntu || true
+        shell: bash
+      - run: npm install --ignore-scripts
+      - run: npm run deps:download
+      - run: npx @mapbox/node-pre-gyp configure --debug --enable_asan
+      - run: npx @mapbox/node-pre-gyp build -j max
+      - run: asan mocha -i -g Security --repeats 500
+        env:
+          LSAN_OPTIONS: suppressions=${GITHUB_WORKSPACE}/test/napi-leaks-suppression.txt
