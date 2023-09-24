@@ -65,4 +65,4 @@ jobs:
       - run: asan mocha -i -g Security --repeats 1000
         env:
           LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6
-          LSAN_OPTIONS: suppressions=${GITHUB_WORKSPACE}/test/napi-leaks-suppression.txt
+          LSAN_OPTIONS: suppressions=${{ github.workspace }}/test/napi-leaks-suppression.txt
