@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 
-import { Magick, MagickCore } from '..';
+import { Magick, MagickCore } from 'node-magickwand';
 
 chai.use(chaiAsPromised);
 const assert = chai.assert;
