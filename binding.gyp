@@ -125,12 +125,6 @@
             '<(PRODUCT_DIR)/node-magickwand.node'
           ],
           'destination': '<(module_path)'
-        },
-        {
-          'files': [
-            '<(module_root_dir)/swig/Magick++.d.ts'
-          ],
-          'destination': '<(module_root_dir)/lib'
         }
       ]
     }
