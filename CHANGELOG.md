@@ -1,6 +1,6 @@
 # Changelog
 
-###
+### [0.9.5] 2023-09-25
 
  - Update ImageMagick to 7.1.1-18
  - Fix [#26](https://github.com/mmomtchev/node-magickwand/issues/26), crash when using `Image.display` multiple times
@@ -10,6 +10,7 @@
     - `libtiff` 4.5.0 to 4.6.0
     - `libwebp` 1.3.0 to 1.3.1
     - `xz_utils` 5.4.2 to 5.4.4
+ - Add `libdeflate` on Windows
  - Export all `MagickCore` macros to JavaScript - including `MagickCore.MagickLibAddendum`
  - Remove some unused types to reduce code size and compilation times
 
