@@ -6,6 +6,11 @@ on:
       version:
         description: "Package version to test"
         required: true
+      im_version:
+        description: "ImageMagick commit-ish to checkout"
+        required: false
+        default: 'main'
+
 
 jobs:
   test_npm_binaries:
@@ -122,6 +127,7 @@ jobs:
         with:
           repository: 'imagemagick/ImageMagick'
           path: 'ImageMagick'
+          ref: ${{ github.event.inputs.im_version }}
       - name: Build and install ImageMagick-7
         run: |
           cd ImageMagick
