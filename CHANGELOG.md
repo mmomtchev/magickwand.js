@@ -12,6 +12,7 @@
     - `xz_utils` 5.4.2 to 5.4.4
  - Add `libdeflate` on Windows
  - Export all `MagickCore` macros to JavaScript - including `MagickCore.MagickLibAddendum`
+ - Fix and test rebuilding against an externally installed ImageMagick-7
  - Remove some unused types to reduce code size and compilation times
 
 ### [0.9.4] 2023-09-19
