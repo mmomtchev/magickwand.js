@@ -165,13 +165,30 @@ npx @mapbox/node-pre-gyp configure   # --debug for debug mode
 npx @mapbox/node-pre-gyp build
 ```
 
-Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the data used internally by ImageMagick - images still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. Unless you can regenerate the SWIG wrappers, you will have to use the very latest ImageMagick version. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
+Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the data used internally by ImageMagick - images still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. Unless you can regenerate the SWIG wrappers, you will have to use the exact same version that was used when they were regenerated. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
 ```shell
 npx @mapbox/node-pre-gyp configure --shared_imagemagick
-LDFLAGS=-L/usr/local/lib CFLAGS=-I/usr/local/include/ImageMagick-7 CXXFLAGS=-I/usr/local/include/ImageMagick-7 npx @mapbox/node-pre-gyp build
+
+LDFLAGS=-L/usr/local/lib \
+CFLAGS=-I/usr/local/include/ImageMagick-7 \
+CXXFLAGS=-I/usr/local/include/ImageMagick-7 \
+npx @mapbox/node-pre-gyp build \
+--magicklibs="-lMagick++-7.Q16HDRI -lMagickWand-7.Q16HDRI -lMagickCore-7.Q16HDRI"
 ```
 
-To regenerate the SWIG wrappers, you will have to have to build yourself SWIG 4.2.0-mmom from https://github.com/mmomtchev/swig/tree/mmom and then run
+Or when directly installing with rebuilding from `npm`:
+
+```shell
+LDFLAGS=-L/usr/local/lib \
+CFLAGS=-I/usr/local/include/ImageMagick-7 \
+CXXFLAGS=-I/usr/local/include/ImageMagick-7 \
+npm install node-magickwand --build-from-source --shared_imagemagick \
+--magicklibs="-lMagick++-7.Q16HDRI -lMagickWand-7.Q16HDRI -lMagickCore-7.Q16HDRI"
+```
+
+In this case, it would be possible to use a non Q16HDRI build or any other specially built ImageMagick-7 as long as its version is an exact match.
+
+If you want to use a different ImageMagick-7 version, you will have to regenerate the SWIG wrappers. You will have to have to build yourself SWIG 4.2.0-mmom from https://github.com/mmomtchev/swig/tree/mmom and then run
 ```
 npm run swig
 ```

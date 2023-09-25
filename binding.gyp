@@ -63,6 +63,7 @@
       'conditions': [
         # Link against a system-installed ImageMagick
         ['shared_imagemagick == "true"', {
+          'libraries': [ '<@(magicklibs)' ]
         }],
         # Link against the included ImageMagick
         ['shared_imagemagick == "false"', {
