@@ -148,6 +148,9 @@ jobs:
           npm install --force node-magickwand@${{ github.event.inputs.version }} --build-from-source --shared_imagemagick --magicklibs="-lMagick++-7.Q16HDRI -lMagickWand-7.Q16HDRI -lMagickCore-7.Q16HDRI"
           mkdir -p deps/ImageMagick/config
           cp node_modules/node-magickwand/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
+        env:
+          CFLAGS: -I/usr/include/ImageMagick-7
+          CXXFLAGS: -I/usr/include/ImageMagick-7 
         shell: bash
       - name: Run the unit tests
         run: |
