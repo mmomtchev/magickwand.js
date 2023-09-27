@@ -5825,8 +5825,6 @@ export  class Image {
 
   zoomAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
-  constructor(image_: any);
-
   image(): any;
 
   imageAsync(): Promise<any>;
