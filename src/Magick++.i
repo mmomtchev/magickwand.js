@@ -102,6 +102,7 @@ using namespace Magick;
 %ignore Magick::throwExceptionExplicit;
 %ignore Magick::formatExceptionMessage;
 %ignore Magick::createException;
+%ignore Magick::Image::Image(MagickCore::Image *image_);
 // Ignore the Magick::Exceptions, these do not inherit from JS Error
 // and are not very practical, we throw everything as JS Error
 // with the original message (see above)
