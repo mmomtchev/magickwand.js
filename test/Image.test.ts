@@ -40,6 +40,11 @@ describe('Image', () => {
       assert.strictEqual(im1.size().width(), 10);
       assert.strictEqual(im2.size().width(), 80);
     });
+
+    it('rejects null', () => {
+      // @ts-ignore
+      assert.throws(() => new Image(null), /Illegal arguments for construction/);
+    });
   });
 
   describe('pixelColor', () => {
