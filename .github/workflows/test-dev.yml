@@ -35,6 +35,7 @@ jobs:
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure
       - run: npx @mapbox/node-pre-gyp build -j max
+      - run: node scripts/gen-es6.js lib/index.mjs
       - run: npm test
 
   debug-asan:
@@ -62,6 +63,7 @@ jobs:
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --debug --enable_asan
       - run: npx @mapbox/node-pre-gyp build -j max
+      - run: node scripts/gen-es6.js lib/index.mjs
       - run: node node_modules/mocha/bin/mocha.js -i -g Security --repeats 1000
         env:
           LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6

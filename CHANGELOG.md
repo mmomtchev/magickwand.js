@@ -1,6 +1,7 @@
 # Changelog
 
 ###
+  - Add support for ES6 named exports
   - Fix [#35](https://github.com/mmomtchev/node-magickwand/issues/35), do not allow `null` as an argument for `Magick.Image`
 
 ### [0.9.5] 2023-09-25

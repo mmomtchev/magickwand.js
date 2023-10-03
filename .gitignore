@@ -1,5 +1,5 @@
 node_modules
 build
 lib/binding
-lib/Magick++.d.ts
+lib/index.mjs
 swig

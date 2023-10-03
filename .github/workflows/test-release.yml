@@ -34,5 +34,6 @@ jobs:
           npm run deps:download
       - name: Install precompiled binary
         run: npx @mapbox/node-pre-gyp install
+      - run: node scripts/gen-es6.js lib/index.mjs
       - name: Run unit tests
         run: npm test

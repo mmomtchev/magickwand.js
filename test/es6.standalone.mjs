@@ -1,6 +1,5 @@
 import { assert } from 'chai';
-import IM from 'node-magickwand';
-const { Magick } = IM;
+import { Magick } from 'node-magickwand';
 
 describe('ES6 import', () => {
   it('Image constructor', () => {

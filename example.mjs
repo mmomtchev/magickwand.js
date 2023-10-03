@@ -1,8 +1,6 @@
-import IM from './lib/index.js';
+import { Magick } from './lib/index.mjs';
 import { fileURLToPath } from 'url';
 import * as path from 'path';
-
-const { Magick } = IM;
 
 // The famous ImageMagick wizard
 const wizard = path.join(path.dirname(fileURLToPath(import.meta.url)), 'test', 'data', 'wizard.png');
