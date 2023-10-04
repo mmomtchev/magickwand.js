@@ -28,11 +28,9 @@ npm install node-magickwand
 This will install pre-built binaries on Windows x64, Linux x64 and macOS x64. It will try to compile the module on all other platforms.
 
 ```js
-import IM from 'node-magickwand';
+import { Magick } from 'node-magickwand';
 import { fileURLToPath } from 'url';
 import * as path from 'path';
-
-const { Magick } = IM;
 
 // The famous ImageMagick wizard
 const wizard = path.join(path.dirname(fileURLToPath(import.meta.url)),

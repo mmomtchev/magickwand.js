@@ -27,6 +27,7 @@ jobs:
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure
       - run: npx @mapbox/node-pre-gyp build -j max
+      - run: node scripts/gen-es6.js lib/index.mjs
       - run: npm test
       - run: npx @mapbox/node-pre-gyp package
       - run: npx @mmomtchev/node-pre-gyp-github publish

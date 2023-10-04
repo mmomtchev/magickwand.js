@@ -41,6 +41,14 @@
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended"
       ]
+    },
+    {
+      "files": [
+        "test/*.mjs"
+      ],
+      "parserOptions": {
+        "sourceType": "module"
+      }
     }
   ]
 }
