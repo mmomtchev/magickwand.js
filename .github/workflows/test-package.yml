@@ -56,7 +56,6 @@ jobs:
       - name: Run the unit tests
         run: |
           cd test
-          sed -i "s/\.\./node-magickwand/g" stress.test.ts
           npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc *.test.ts *.standalone.*js
         env:
           TS_NODE_PROJECT: tsconfig.standalone.json 
@@ -105,7 +104,6 @@ jobs:
       - name: Run the unit tests
         run: |
           cd test
-          sed -i "s/\.\./node-magickwand/g" stress.test.ts
           npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc *.test.ts *.standalone.*js
         env:
           TS_NODE_PROJECT: tsconfig.standalone.json 
@@ -163,7 +161,6 @@ jobs:
       - name: Run the unit tests
         run: |
           cd test
-          sed -i "s/\.\./node-magickwand/g" stress.test.ts
           npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc *.test.ts *.standalone.*js
         env:
           TS_NODE_PROJECT: tsconfig.standalone.json 
