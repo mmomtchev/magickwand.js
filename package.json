@@ -19,7 +19,7 @@
     "publish:generated": "node scripts/publish-generated.js",
     "preinstall": "npm run deps:download",
     "install": "node-pre-gyp install --fallback-to-build && node scripts/gen-es6.js lib/index.mjs",
-    "lint": "eslint lib/*.js test/*.ts",
+    "lint": "eslint lib/*.cjs test/*.ts",
     "test": "mocha --reporter=tap",
     "preversion": "npm run lint && npm run test",
     "postversion": "git push && git push --tags && node ./scripts/publish-packages.js",
