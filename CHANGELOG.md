@@ -1,5 +1,9 @@
 # Changelog
 
+### [0.9.7]
+
+ - Fix [#39](https://github.com/mmomtchev/node-magickwand/issues/39), do not install `conan` in the system directory
+
 ### [0.9.6] 2023-10-04
 
  - Update ImageMagick to 7.1.1-19
