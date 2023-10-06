@@ -139,7 +139,11 @@ The `Image.display()` function works and it is an excellent debugging tool. On m
 npm install node-magickwand --build-from-source
 ```
 
-You will need a working C++11 environment. On Windows nothing but VS 2022 works at the moment. This will also rebuild the included Magick++ library.
+You will need a working C++11 environment.
+
+On Windows nothing but VS 2022 works at the moment. This will also rebuild the included Magick++ library.
+
+On Linux and macOS it uses `pip3` to install the `conan` module which builds a number of required libraries in `${HOME}/.conan`. After building, you can safely delete this directory if you wish, since `node-magickwand` is statically linked.
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
