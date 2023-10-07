@@ -2,7 +2,9 @@
 
 ### [0.9.7]
 
+ - Enable OpenMP in the pre-built binaries on Linux and macOS (it was already enabled on Windows)
  - Fix [#39](https://github.com/mmomtchev/node-magickwand/issues/39), do not install `conan` in the system directory
+ - Add a number of generic version information getters to `MagickCore` including `MagickCore.GetMagickFeatures()` that allow to check the build configuration
 
 ### [0.9.6] 2023-10-04
 

@@ -26,3 +26,6 @@ leak:PagedSpace::RefillLabMain
 leak:OldLargeObjectSpace::AllocateRaw
 leak:BaselineBatchCompiler::EnqueueFunction
 leak:Compiler::FinalizeTurbofanCompilationJob
+
+# False alarm due to OpenMP having an independent allocator
+leak:___kmp_allocate

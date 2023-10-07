@@ -19,6 +19,14 @@
 // Include all enum items of enums that are not ignored
 %rename("%s", regextarget=1, %$isenumitem) "";
 
+// Include some generic info methods
+%rename("%s") MagickCore::GetMagickCopyright;
+%rename("%s") MagickCore::GetMagickDelegates;
+%rename("%s") MagickCore::GetMagickFeatures;
+%rename("%s") MagickCore::GetMagickLicense;
+%rename("%s") MagickCore::GetMagickPackageName;
+%rename("%s") MagickCore::GetMagickReleaseDate;
+
 // Ignore all Magick:: methods with PixelInfo when ignoring MagickCore::PixelInfo
 %rename("$ignore", regextarget=1, fullname=1) "PixelInfo";
 %ignore operator PixelInfo;
