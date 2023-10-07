@@ -14,7 +14,7 @@ cd deps/ImageMagick
 sh ./configure $2 --prefix=$1/ImageMagick                   \
     --disable-installed                                     \
     --disable-shared --enable-static                        \
-    --without-utilities --without-perl --enable-openmp      \
+    --without-utilities --without-perl                      \
     --disable-docs                                          \
     > /dev/null
 
