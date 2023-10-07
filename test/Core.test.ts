@@ -24,7 +24,6 @@ it('ImageMagick version information', () => {
   assert.isString(MagickCore.GetMagickCopyright());
   assert.isString(MagickCore.GetMagickDelegates());
   assert.isString(MagickCore.GetMagickFeatures());
-  assert.isString(MagickCore.GetMagickHomeURL());
   assert.isString(MagickCore.GetMagickLicense());
   assert.isString(MagickCore.GetMagickPackageName());
   assert.isString(MagickCore.GetMagickReleaseDate());

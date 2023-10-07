@@ -23,7 +23,6 @@
 %rename("%s") MagickCore::GetMagickCopyright;
 %rename("%s") MagickCore::GetMagickDelegates;
 %rename("%s") MagickCore::GetMagickFeatures;
-%rename("%s") MagickCore::GetMagickHomeURL;
 %rename("%s") MagickCore::GetMagickLicense;
 %rename("%s") MagickCore::GetMagickPackageName;
 %rename("%s") MagickCore::GetMagickReleaseDate;
