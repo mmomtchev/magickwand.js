@@ -10,6 +10,7 @@ import { MagickCore } from 'node-magickwand';
 const features = MagickCore.GetMagickFeatures().trimEnd().split(' ').join(',');
 console.log(`Built with ImageMagick ${IM.MagickLibVersionText}${IM.MagickLibAddendum}` +
   ` from ${MagickCore.GetMagickReleaseDate()} [${features}] (${IM.MagickVersion}) `);
+console.log(`Includes ${MagickCore.GetMagickDelegates().split(' ').join(',')}`);
 
 it('ImageMagick version information', () => {
   assert.isString(IM.MagickLibVersionText);
