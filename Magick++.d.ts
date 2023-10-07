@@ -1246,8 +1246,6 @@ export const AllEvents: LogEventType;
 
 export type LogEventType = number & { readonly [_SWIG_enum_tag]: 'LogEventType'; };
 
-export function GetMagickHomeURL(arg0?: void): string;
-
 export function GetMagickCopyright(arg0?: void): string;
 
 export function GetMagickDelegates(arg0?: void): string;
