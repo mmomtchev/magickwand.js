@@ -2,6 +2,7 @@
 
 ### [0.9.7]
 
+ - Update ImageMagick to 7.1.1-20
  - Enable OpenMP in the pre-built binaries on Linux and macOS (it was already enabled on Windows)
  - Fix [#39](https://github.com/mmomtchev/node-magickwand/issues/39), do not install `conan` in the system directory
  - Add a number of generic version information getters to `MagickCore` including `MagickCore.GetMagickFeatures()` that allow to check the build configuration
