@@ -197,6 +197,14 @@ npm run swig
 
 * `npm test` should work at this point
 
+## Browser-compatible WASM version
+
+The WASM version uses SWIG Node-API WASM and it is still a very early alpha. Asynchronous support is still not implemented.
+
+SWIG Node-API WASM is available from https://github.com/mmomtchev/swig/tree/wasm
+
+There is no documentation available at the moment.
+
 ## Using this project as a tutorial for creating C++ bindings for Node.js with SWIG
 
 ImageMagick is the perfect candidate for an automatically generated with SWIG Node.js addon:
