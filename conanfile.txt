@@ -2,7 +2,6 @@
 libaom-av1/3.6.0
 brotli/1.0.9
 bzip2/1.0.8
-#cairo/1.17.6
 libde265/1.0.11
 openexr/3.1.5
 libffi/3.4.4
@@ -17,12 +16,10 @@ highway/1.0.3
 jasper/4.0.0
 jbig/20160605
 libjpeg-turbo/3.0.0
-#libjxl/0.6.1
 lcms/2.14
 lzma_sdk/9.20
 openjpeg/2.5.0
 llvm-openmp/12.0.1
-#pango/1.50.10
 pixman/0.40.0
 libpng/1.6.39
 libraw/0.21.1
@@ -34,10 +31,6 @@ xz_utils/5.4.4
 zlib/1.2.13
 
 [options]
-#cairo:with_opengl=False
-#cairo:with_xlib=False
-#cairo:with_xlib_xrender=False
-#cairo:with_xcb=False
 jasper:with_libjpeg=libjpeg-turbo
 libtiff:jpeg=libjpeg-turbo
 libraw:with_jpeg=libjpeg-turbo
