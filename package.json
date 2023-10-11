@@ -64,6 +64,7 @@
     "@typescript-eslint/parser": "^6.7.3",
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
+    "emnapi": "^0.42.0",
     "eslint": "^8.50.0",
     "eslint-plugin-mocha": "^10.1.0",
     "gh-pages": "^5.0.0",
@@ -73,8 +74,9 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@emnapi/runtime": "^0.42.0",
     "@mapbox/node-pre-gyp": "^1.0.10",
-    "node-addon-api": "^5.1.0"
+    "node-addon-api": "^7.0.0"
   },
   "engines": {
     "node": ">=14"

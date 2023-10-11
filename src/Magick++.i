@@ -123,6 +123,7 @@ using namespace Magick;
 // Async is very expensive (compilation-wise) and free Github Actions runners
 // are limited to 7GB. Sponsorship of this project will go a long way
 // towards more features.
+#ifdef ASYNC
 %feature("async:locking", "1");
 %define LOCKED_ASYNC(TYPE)
 %apply SWIGTYPE  LOCK {TYPE};
@@ -145,6 +146,7 @@ using namespace Magick;
 %feature("async", "0") *::operator>=;
 %feature("async", "0") *::operator==;
 %feature("async", "0") *::operator!=;
+#endif
 
 // Various special cases - Buffers, TypedArrays, std::vectors...
 %include "Image.i"

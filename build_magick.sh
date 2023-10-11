@@ -5,6 +5,6 @@ unset SDKROOT
 
 cd deps/ImageMagick
 
-make -j4 || true
+make -j4
 make install
 rm -rf $1/ImageMagick/lib/*.*a
