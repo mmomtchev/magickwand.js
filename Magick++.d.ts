@@ -1620,23 +1620,13 @@ export  class Blob {
 
   base64(base64_: string): void;
 
-  base64Async(base64_: string): Promise<void>;
-
   base64(): string;
-
-  base64Async(): Promise<string>;
 
   length(): number;
 
-  lengthAsync(): Promise<number>;
-
   update(data_: Buffer): void;
 
-  updateAsync(data_: Buffer): Promise<void>;
-
   data(): Buffer;
-
-  dataAsync(): Promise<Buffer>;
 }
 
 export function equal(left_: any, right_: any): number;
@@ -3639,2243 +3629,1123 @@ export  class Image {
 
   adjoin(flag_: boolean): void;
 
-  adjoinAsync(flag_: boolean): Promise<void>;
-
   adjoin(): boolean;
-
-  adjoinAsync(): Promise<boolean>;
 
   alpha(alphaFlag_: boolean): void;
 
-  alphaAsync(alphaFlag_: boolean): Promise<void>;
-
   alpha(): boolean;
-
-  alphaAsync(): Promise<boolean>;
 
   matteColor(matteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  matteColorAsync(matteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   matteColor(): Magick.Color;
-
-  matteColorAsync(): Promise<Magick.Color>;
 
   animationDelay(delay_: number): void;
 
-  animationDelayAsync(delay_: number): Promise<void>;
-
   animationDelay(): number;
-
-  animationDelayAsync(): Promise<number>;
 
   animationIterations(iterations_: number): void;
 
-  animationIterationsAsync(iterations_: number): Promise<void>;
-
   animationIterations(): number;
-
-  animationIterationsAsync(): Promise<number>;
 
   backgroundColor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  backgroundColorAsync(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   backgroundColor(): Magick.Color;
-
-  backgroundColorAsync(): Promise<Magick.Color>;
 
   backgroundTexture(backgroundTexture_: string): void;
 
-  backgroundTextureAsync(backgroundTexture_: string): Promise<void>;
-
   backgroundTexture(): string;
-
-  backgroundTextureAsync(): Promise<string>;
 
   baseColumns(): number;
 
-  baseColumnsAsync(): Promise<number>;
-
   baseFilename(): string;
-
-  baseFilenameAsync(): Promise<string>;
 
   baseRows(): number;
 
-  baseRowsAsync(): Promise<number>;
-
   blackPointCompensation(flag_: boolean): void;
-
-  blackPointCompensationAsync(flag_: boolean): Promise<void>;
 
   blackPointCompensation(): boolean;
 
-  blackPointCompensationAsync(): Promise<boolean>;
-
   borderColor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  borderColorAsync(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   borderColor(): Magick.Color;
 
-  borderColorAsync(): Promise<Magick.Color>;
-
   boundingBox(): Magick.Geometry;
-
-  boundingBoxAsync(): Promise<Magick.Geometry>;
 
   boxColor(boxColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  boxColorAsync(boxColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   boxColor(): Magick.Color;
-
-  boxColorAsync(): Promise<Magick.Color>;
 
   channelDepth(channel_: MagickCore.ChannelType, depth_: number): void;
 
-  channelDepthAsync(channel_: MagickCore.ChannelType, depth_: number): Promise<void>;
-
   channelDepth(channel_: MagickCore.ChannelType): number;
-
-  channelDepthAsync(channel_: MagickCore.ChannelType): Promise<number>;
 
   channels(): number;
 
-  channelsAsync(): Promise<number>;
-
   classType(class_: MagickCore.ClassType): void;
-
-  classTypeAsync(class_: MagickCore.ClassType): Promise<void>;
 
   classType(): MagickCore.ClassType;
 
-  classTypeAsync(): Promise<MagickCore.ClassType>;
-
   colorFuzz(fuzz_: number): void;
-
-  colorFuzzAsync(fuzz_: number): Promise<void>;
 
   colorFuzz(): number;
 
-  colorFuzzAsync(): Promise<number>;
-
   colorMapSize(entries_: number): void;
-
-  colorMapSizeAsync(entries_: number): Promise<void>;
 
   colorMapSize(): number;
 
-  colorMapSizeAsync(): Promise<number>;
-
   colorSpace(colorSpace_: MagickCore.ColorspaceType): void;
-
-  colorSpaceAsync(colorSpace_: MagickCore.ColorspaceType): Promise<void>;
 
   colorSpace(): MagickCore.ColorspaceType;
 
-  colorSpaceAsync(): Promise<MagickCore.ColorspaceType>;
-
   colorSpaceType(colorSpace_: MagickCore.ColorspaceType): void;
-
-  colorSpaceTypeAsync(colorSpace_: MagickCore.ColorspaceType): Promise<void>;
 
   colorSpaceType(): MagickCore.ColorspaceType;
 
-  colorSpaceTypeAsync(): Promise<MagickCore.ColorspaceType>;
-
   columns(): number;
-
-  columnsAsync(): Promise<number>;
 
   comment(comment_: string): void;
 
-  commentAsync(comment_: string): Promise<void>;
-
   comment(): string;
-
-  commentAsync(): Promise<string>;
 
   compose(compose_: MagickCore.CompositeOperator): void;
 
-  composeAsync(compose_: MagickCore.CompositeOperator): Promise<void>;
-
   compose(): MagickCore.CompositeOperator;
-
-  composeAsync(): Promise<MagickCore.CompositeOperator>;
 
   compressType(compressType_: MagickCore.CompressionType): void;
 
-  compressTypeAsync(compressType_: MagickCore.CompressionType): Promise<void>;
-
   compressType(): MagickCore.CompressionType;
-
-  compressTypeAsync(): Promise<MagickCore.CompressionType>;
 
   debug(flag_: boolean): void;
 
-  debugAsync(flag_: boolean): Promise<void>;
-
   debug(): boolean;
-
-  debugAsync(): Promise<boolean>;
 
   density(density_: Magick.Point): void;
 
-  densityAsync(density_: Magick.Point): Promise<void>;
-
   density(): Magick.Point;
-
-  densityAsync(): Promise<Magick.Point>;
 
   depth(depth_: number): void;
 
-  depthAsync(depth_: number): Promise<void>;
-
   depth(): number;
-
-  depthAsync(): Promise<number>;
 
   directory(): string;
 
-  directoryAsync(): Promise<string>;
-
   endian(endian_: MagickCore.EndianType): void;
-
-  endianAsync(endian_: MagickCore.EndianType): Promise<void>;
 
   endian(): MagickCore.EndianType;
 
-  endianAsync(): Promise<MagickCore.EndianType>;
-
   exifProfile(exifProfile_: Magick.Blob): void;
-
-  exifProfileAsync(exifProfile_: Magick.Blob): Promise<void>;
 
   exifProfile(): Magick.Blob;
 
-  exifProfileAsync(): Promise<Magick.Blob>;
-
   fileName(fileName_: string): void;
-
-  fileNameAsync(fileName_: string): Promise<void>;
 
   fileName(): string;
 
-  fileNameAsync(): Promise<string>;
-
   fileSize(): number;
-
-  fileSizeAsync(): Promise<number>;
 
   fillColor(fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  fillColorAsync(fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   fillColor(): Magick.Color;
-
-  fillColorAsync(): Promise<Magick.Color>;
 
   fillRule(fillRule_: any): void;
 
-  fillRuleAsync(fillRule_: any): Promise<void>;
-
   fillRule(): any;
-
-  fillRuleAsync(): Promise<any>;
 
   fillPattern(fillPattern_: Magick.Image): void;
 
-  fillPatternAsync(fillPattern_: Magick.Image): Promise<void>;
-
   fillPattern(): Magick.Image;
-
-  fillPatternAsync(): Promise<Magick.Image>;
 
   filterType(filterType_: MagickCore.FilterType): void;
 
-  filterTypeAsync(filterType_: MagickCore.FilterType): Promise<void>;
-
   filterType(): MagickCore.FilterType;
-
-  filterTypeAsync(): Promise<MagickCore.FilterType>;
 
   font(font_: string): void;
 
-  fontAsync(font_: string): Promise<void>;
-
   font(): string;
-
-  fontAsync(): Promise<string>;
 
   fontFamily(family_: string): void;
 
-  fontFamilyAsync(family_: string): Promise<void>;
-
   fontFamily(): string;
-
-  fontFamilyAsync(): Promise<string>;
 
   fontPointsize(pointSize_: number): void;
 
-  fontPointsizeAsync(pointSize_: number): Promise<void>;
-
   fontPointsize(): number;
-
-  fontPointsizeAsync(): Promise<number>;
 
   fontStyle(style_: MagickCore.StyleType): void;
 
-  fontStyleAsync(style_: MagickCore.StyleType): Promise<void>;
-
   fontStyle(): MagickCore.StyleType;
-
-  fontStyleAsync(): Promise<MagickCore.StyleType>;
 
   fontWeight(weight_: number): void;
 
-  fontWeightAsync(weight_: number): Promise<void>;
-
   fontWeight(): number;
-
-  fontWeightAsync(): Promise<number>;
 
   format(): string;
 
-  formatAsync(): Promise<string>;
-
   formatExpression(expression: string): string;
-
-  formatExpressionAsync(expression: string): Promise<string>;
 
   gamma(): number;
 
-  gammaAsync(): Promise<number>;
-
   geometry(): Magick.Geometry;
-
-  geometryAsync(): Promise<Magick.Geometry>;
 
   gifDisposeMethod(disposeMethod_: MagickCore.DisposeType): void;
 
-  gifDisposeMethodAsync(disposeMethod_: MagickCore.DisposeType): Promise<void>;
-
   gifDisposeMethod(): MagickCore.DisposeType;
-
-  gifDisposeMethodAsync(): Promise<MagickCore.DisposeType>;
 
   hasChannel(channel: any): boolean;
 
-  hasChannelAsync(channel: any): Promise<boolean>;
-
   highlightColor(color_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  highlightColorAsync(color_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   iccColorProfile(colorProfile_: Magick.Blob): void;
 
-  iccColorProfileAsync(colorProfile_: Magick.Blob): Promise<void>;
-
   iccColorProfile(): Magick.Blob;
-
-  iccColorProfileAsync(): Promise<Magick.Blob>;
 
   interlaceType(interlace_: MagickCore.InterlaceType): void;
 
-  interlaceTypeAsync(interlace_: MagickCore.InterlaceType): Promise<void>;
-
   interlaceType(): MagickCore.InterlaceType;
-
-  interlaceTypeAsync(): Promise<MagickCore.InterlaceType>;
 
   interpolate(interpolate_: any): void;
 
-  interpolateAsync(interpolate_: any): Promise<void>;
-
   interpolate(): any;
-
-  interpolateAsync(): Promise<any>;
 
   iptcProfile(iptcProfile_: Magick.Blob): void;
 
-  iptcProfileAsync(iptcProfile_: Magick.Blob): Promise<void>;
-
   iptcProfile(): Magick.Blob;
-
-  iptcProfileAsync(): Promise<Magick.Blob>;
 
   isOpaque(): boolean;
 
-  isOpaqueAsync(): Promise<boolean>;
-
   isValid(isValid_: boolean): void;
-
-  isValidAsync(isValid_: boolean): Promise<void>;
 
   isValid(): boolean;
 
-  isValidAsync(): Promise<boolean>;
-
   label(label_: string): void;
-
-  labelAsync(label_: string): Promise<void>;
 
   label(): string;
 
-  labelAsync(): Promise<string>;
-
   lowlightColor(color_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  lowlightColorAsync(color_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   magick(magick_: string): void;
 
-  magickAsync(magick_: string): Promise<void>;
-
   magick(): string;
-
-  magickAsync(): Promise<string>;
 
   masklightColor(color_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  masklightColorAsync(color_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   meanErrorPerPixel(): number;
-
-  meanErrorPerPixelAsync(): Promise<number>;
 
   modulusDepth(modulusDepth_: number): void;
 
-  modulusDepthAsync(modulusDepth_: number): Promise<void>;
-
   modulusDepth(): number;
-
-  modulusDepthAsync(): Promise<number>;
 
   monochrome(monochromeFlag_: boolean): void;
 
-  monochromeAsync(monochromeFlag_: boolean): Promise<void>;
-
   monochrome(): boolean;
-
-  monochromeAsync(): Promise<boolean>;
 
   montageGeometry(): Magick.Geometry;
 
-  montageGeometryAsync(): Promise<Magick.Geometry>;
-
   normalizedMaxError(): number;
-
-  normalizedMaxErrorAsync(): Promise<number>;
 
   normalizedMeanError(): number;
 
-  normalizedMeanErrorAsync(): Promise<number>;
-
   orientation(orientation_: MagickCore.OrientationType): void;
-
-  orientationAsync(orientation_: MagickCore.OrientationType): Promise<void>;
 
   orientation(): MagickCore.OrientationType;
 
-  orientationAsync(): Promise<MagickCore.OrientationType>;
-
   page(pageSize_: Magick.Geometry): void;
-
-  pageAsync(pageSize_: Magick.Geometry): Promise<void>;
 
   page(): Magick.Geometry;
 
-  pageAsync(): Promise<Magick.Geometry>;
-
   quality(quality_: number): void;
-
-  qualityAsync(quality_: number): Promise<void>;
 
   quality(): number;
 
-  qualityAsync(): Promise<number>;
-
   quantizeColors(colors_: number): void;
-
-  quantizeColorsAsync(colors_: number): Promise<void>;
 
   quantizeColors(): number;
 
-  quantizeColorsAsync(): Promise<number>;
-
   quantizeColorSpace(colorSpace_: MagickCore.ColorspaceType): void;
-
-  quantizeColorSpaceAsync(colorSpace_: MagickCore.ColorspaceType): Promise<void>;
 
   quantizeColorSpace(): MagickCore.ColorspaceType;
 
-  quantizeColorSpaceAsync(): Promise<MagickCore.ColorspaceType>;
-
   quantizeDither(ditherFlag_: boolean): void;
-
-  quantizeDitherAsync(ditherFlag_: boolean): Promise<void>;
 
   quantizeDither(): boolean;
 
-  quantizeDitherAsync(): Promise<boolean>;
-
   quantizeDitherMethod(ditherMethod_: any): void;
-
-  quantizeDitherMethodAsync(ditherMethod_: any): Promise<void>;
 
   quantizeDitherMethod(): any;
 
-  quantizeDitherMethodAsync(): Promise<any>;
-
   quantizeTreeDepth(treeDepth_: number): void;
-
-  quantizeTreeDepthAsync(treeDepth_: number): Promise<void>;
 
   quantizeTreeDepth(): number;
 
-  quantizeTreeDepthAsync(): Promise<number>;
-
   quiet(quiet_: boolean): void;
-
-  quietAsync(quiet_: boolean): Promise<void>;
 
   quiet(): boolean;
 
-  quietAsync(): Promise<boolean>;
-
   renderingIntent(renderingIntent_: any): void;
-
-  renderingIntentAsync(renderingIntent_: any): Promise<void>;
 
   renderingIntent(): any;
 
-  renderingIntentAsync(): Promise<any>;
-
   resolutionUnits(resolutionUnits_: MagickCore.ResolutionType): void;
-
-  resolutionUnitsAsync(resolutionUnits_: MagickCore.ResolutionType): Promise<void>;
 
   resolutionUnits(): MagickCore.ResolutionType;
 
-  resolutionUnitsAsync(): Promise<MagickCore.ResolutionType>;
-
   rows(): number;
-
-  rowsAsync(): Promise<number>;
 
   samplingFactor(samplingFactor_: string): void;
 
-  samplingFactorAsync(samplingFactor_: string): Promise<void>;
-
   samplingFactor(): string;
-
-  samplingFactorAsync(): Promise<string>;
 
   scene(scene_: number): void;
 
-  sceneAsync(scene_: number): Promise<void>;
-
   scene(): number;
-
-  sceneAsync(): Promise<number>;
 
   size(geometry_: Magick.Geometry | string): void;
 
-  sizeAsync(geometry_: Magick.Geometry | string): Promise<void>;
-
   size(): Magick.Geometry;
-
-  sizeAsync(): Promise<Magick.Geometry>;
 
   strokeAntiAlias(flag_: boolean): void;
 
-  strokeAntiAliasAsync(flag_: boolean): Promise<void>;
-
   strokeAntiAlias(): boolean;
-
-  strokeAntiAliasAsync(): Promise<boolean>;
 
   strokeColor(strokeColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  strokeColorAsync(strokeColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   strokeColor(): Magick.Color;
-
-  strokeColorAsync(): Promise<Magick.Color>;
 
   strokeDashArray(strokeDashArray_: any): void;
 
-  strokeDashArrayAsync(strokeDashArray_: any): Promise<void>;
-
   strokeDashArray(): any;
-
-  strokeDashArrayAsync(): Promise<any>;
 
   strokeDashOffset(strokeDashOffset_: number): void;
 
-  strokeDashOffsetAsync(strokeDashOffset_: number): Promise<void>;
-
   strokeDashOffset(): number;
-
-  strokeDashOffsetAsync(): Promise<number>;
 
   strokeLineCap(lineCap_: any): void;
 
-  strokeLineCapAsync(lineCap_: any): Promise<void>;
-
   strokeLineCap(): any;
-
-  strokeLineCapAsync(): Promise<any>;
 
   strokeLineJoin(lineJoin_: any): void;
 
-  strokeLineJoinAsync(lineJoin_: any): Promise<void>;
-
   strokeLineJoin(): any;
-
-  strokeLineJoinAsync(): Promise<any>;
 
   strokeMiterLimit(miterLimit_: number): void;
 
-  strokeMiterLimitAsync(miterLimit_: number): Promise<void>;
-
   strokeMiterLimit(): number;
-
-  strokeMiterLimitAsync(): Promise<number>;
 
   strokePattern(strokePattern_: Magick.Image): void;
 
-  strokePatternAsync(strokePattern_: Magick.Image): Promise<void>;
-
   strokePattern(): Magick.Image;
-
-  strokePatternAsync(): Promise<Magick.Image>;
 
   strokeWidth(strokeWidth_: number): void;
 
-  strokeWidthAsync(strokeWidth_: number): Promise<void>;
-
   strokeWidth(): number;
-
-  strokeWidthAsync(): Promise<number>;
 
   subImage(subImage_: number): void;
 
-  subImageAsync(subImage_: number): Promise<void>;
-
   subImage(): number;
-
-  subImageAsync(): Promise<number>;
 
   subRange(subRange_: number): void;
 
-  subRangeAsync(subRange_: number): Promise<void>;
-
   subRange(): number;
-
-  subRangeAsync(): Promise<number>;
 
   textAntiAlias(flag_: boolean): void;
 
-  textAntiAliasAsync(flag_: boolean): Promise<void>;
-
   textAntiAlias(): boolean;
-
-  textAntiAliasAsync(): Promise<boolean>;
 
   textDirection(direction_: MagickCore.DirectionType): void;
 
-  textDirectionAsync(direction_: MagickCore.DirectionType): Promise<void>;
-
   textDirection(): MagickCore.DirectionType;
-
-  textDirectionAsync(): Promise<MagickCore.DirectionType>;
 
   textEncoding(encoding_: string): void;
 
-  textEncodingAsync(encoding_: string): Promise<void>;
-
   textEncoding(): string;
-
-  textEncodingAsync(): Promise<string>;
 
   textGravity(gravity_: MagickCore.GravityType): void;
 
-  textGravityAsync(gravity_: MagickCore.GravityType): Promise<void>;
-
   textGravity(): MagickCore.GravityType;
-
-  textGravityAsync(): Promise<MagickCore.GravityType>;
 
   textInterlineSpacing(spacing_: number): void;
 
-  textInterlineSpacingAsync(spacing_: number): Promise<void>;
-
   textInterlineSpacing(): number;
-
-  textInterlineSpacingAsync(): Promise<number>;
 
   textInterwordSpacing(spacing_: number): void;
 
-  textInterwordSpacingAsync(spacing_: number): Promise<void>;
-
   textInterwordSpacing(): number;
-
-  textInterwordSpacingAsync(): Promise<number>;
 
   textKerning(kerning_: number): void;
 
-  textKerningAsync(kerning_: number): Promise<void>;
-
   textKerning(): number;
-
-  textKerningAsync(): Promise<number>;
 
   textUnderColor(underColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  textUnderColorAsync(underColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   textUnderColor(): Magick.Color;
-
-  textUnderColorAsync(): Promise<Magick.Color>;
 
   totalColors(): number;
 
-  totalColorsAsync(): Promise<number>;
-
   transformRotation(angle_: number): void;
-
-  transformRotationAsync(angle_: number): Promise<void>;
 
   transformSkewX(skewx_: number): void;
 
-  transformSkewXAsync(skewx_: number): Promise<void>;
-
   transformSkewY(skewy_: number): void;
-
-  transformSkewYAsync(skewy_: number): Promise<void>;
 
   type(type_: MagickCore.ImageType): void;
 
-  typeAsync(type_: MagickCore.ImageType): Promise<void>;
-
   type(): MagickCore.ImageType;
-
-  typeAsync(): Promise<MagickCore.ImageType>;
 
   verbose(verboseFlag_: boolean): void;
 
-  verboseAsync(verboseFlag_: boolean): Promise<void>;
-
   verbose(): boolean;
-
-  verboseAsync(): Promise<boolean>;
 
   virtualPixelMethod(virtualPixelMethod_: any): void;
 
-  virtualPixelMethodAsync(virtualPixelMethod_: any): Promise<void>;
-
   virtualPixelMethod(): any;
-
-  virtualPixelMethodAsync(): Promise<any>;
 
   x11Display(display_: string): void;
 
-  x11DisplayAsync(display_: string): Promise<void>;
-
   x11Display(): string;
-
-  x11DisplayAsync(): Promise<string>;
 
   xResolution(): number;
 
-  xResolutionAsync(): Promise<number>;
-
   yResolution(): number;
-
-  yResolutionAsync(): Promise<number>;
 
   adaptiveBlur(radius_: number, sigma_: number): void;
 
-  adaptiveBlurAsync(radius_: number, sigma_: number): Promise<void>;
-
   adaptiveBlur(radius_: number): void;
-
-  adaptiveBlurAsync(radius_: number): Promise<void>;
 
   adaptiveBlur(): void;
 
-  adaptiveBlurAsync(): Promise<void>;
-
   adaptiveResize(geometry_: Magick.Geometry | string): void;
-
-  adaptiveResizeAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   adaptiveSharpen(radius_: number, sigma_: number): void;
 
-  adaptiveSharpenAsync(radius_: number, sigma_: number): Promise<void>;
-
   adaptiveSharpen(radius_: number): void;
-
-  adaptiveSharpenAsync(radius_: number): Promise<void>;
 
   adaptiveSharpen(): void;
 
-  adaptiveSharpenAsync(): Promise<void>;
-
   adaptiveSharpenChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): void;
-
-  adaptiveSharpenChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): Promise<void>;
 
   adaptiveSharpenChannel(channel_: MagickCore.ChannelType, radius_: number): void;
 
-  adaptiveSharpenChannelAsync(channel_: MagickCore.ChannelType, radius_: number): Promise<void>;
-
   adaptiveSharpenChannel(channel_: MagickCore.ChannelType): void;
-
-  adaptiveSharpenChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   adaptiveThreshold(width_: number, height_: number, bias_: number): void;
 
-  adaptiveThresholdAsync(width_: number, height_: number, bias_: number): Promise<void>;
-
   adaptiveThreshold(width_: number, height_: number): void;
-
-  adaptiveThresholdAsync(width_: number, height_: number): Promise<void>;
 
   addNoise(noiseType_: MagickCore.NoiseType, attenuate_: number): void;
 
-  addNoiseAsync(noiseType_: MagickCore.NoiseType, attenuate_: number): Promise<void>;
-
   addNoise(noiseType_: MagickCore.NoiseType): void;
-
-  addNoiseAsync(noiseType_: MagickCore.NoiseType): Promise<void>;
 
   addNoiseChannel(channel_: MagickCore.ChannelType, noiseType_: MagickCore.NoiseType, attenuate_: number): void;
 
-  addNoiseChannelAsync(channel_: MagickCore.ChannelType, noiseType_: MagickCore.NoiseType, attenuate_: number): Promise<void>;
-
   addNoiseChannel(channel_: MagickCore.ChannelType, noiseType_: MagickCore.NoiseType): void;
-
-  addNoiseChannelAsync(channel_: MagickCore.ChannelType, noiseType_: MagickCore.NoiseType): Promise<void>;
 
   affineTransform(affine: Magick.DrawableAffine): void;
 
-  affineTransformAsync(affine: Magick.DrawableAffine): Promise<void>;
-
   alpha(alpha_: number): void;
-
-  alphaAsync(alpha_: number): Promise<void>;
 
   alphaChannel(alphaOption_: any): void;
 
-  alphaChannelAsync(alphaOption_: any): Promise<void>;
-
   annotate(text_: string, location_: Magick.Geometry): void;
-
-  annotateAsync(text_: string, location_: Magick.Geometry): Promise<void>;
 
   annotate(text_: string, boundingArea_: Magick.Geometry, gravity_: MagickCore.GravityType): void;
 
-  annotateAsync(text_: string, boundingArea_: Magick.Geometry, gravity_: MagickCore.GravityType): Promise<void>;
-
   annotate(text_: string, boundingArea_: Magick.Geometry, gravity_: MagickCore.GravityType, degrees_: number): void;
-
-  annotateAsync(text_: string, boundingArea_: Magick.Geometry, gravity_: MagickCore.GravityType, degrees_: number): Promise<void>;
 
   annotate(text_: string, gravity_: MagickCore.GravityType): void;
 
-  annotateAsync(text_: string, gravity_: MagickCore.GravityType): Promise<void>;
-
   artifact(name_: string, value_: string): void;
-
-  artifactAsync(name_: string, value_: string): Promise<void>;
 
   artifact(name_: string): string;
 
-  artifactAsync(name_: string): Promise<string>;
-
   attribute(name_: string, value_: string): void;
 
-  attributeAsync(name_: string, value_: string): Promise<void>;
-
   attribute(name_: string, value_: string): void;
-
-  attributeAsync(name_: string, value_: string): Promise<void>;
 
   attribute(name_: string): string;
 
-  attributeAsync(name_: string): Promise<string>;
-
   autoGamma(): void;
-
-  autoGammaAsync(): Promise<void>;
 
   autoGammaChannel(channel_: MagickCore.ChannelType): void;
 
-  autoGammaChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
-
   autoLevel(): void;
-
-  autoLevelAsync(): Promise<void>;
 
   autoLevelChannel(channel_: MagickCore.ChannelType): void;
 
-  autoLevelChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
-
   autoOrient(): void;
-
-  autoOrientAsync(): Promise<void>;
 
   autoThreshold(method_: any): void;
 
-  autoThresholdAsync(method_: any): Promise<void>;
-
   blackThreshold(threshold_: string): void;
-
-  blackThresholdAsync(threshold_: string): Promise<void>;
 
   blackThresholdChannel(channel_: MagickCore.ChannelType, threshold_: string): void;
 
-  blackThresholdChannelAsync(channel_: MagickCore.ChannelType, threshold_: string): Promise<void>;
-
   blueShift(factor_: number): void;
-
-  blueShiftAsync(factor_: number): Promise<void>;
 
   blueShift(): void;
 
-  blueShiftAsync(): Promise<void>;
-
   blur(radius_: number, sigma_: number): void;
-
-  blurAsync(radius_: number, sigma_: number): Promise<void>;
 
   blur(radius_: number): void;
 
-  blurAsync(radius_: number): Promise<void>;
-
   blur(): void;
-
-  blurAsync(): Promise<void>;
 
   blurChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): void;
 
-  blurChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): Promise<void>;
-
   blurChannel(channel_: MagickCore.ChannelType, radius_: number): void;
-
-  blurChannelAsync(channel_: MagickCore.ChannelType, radius_: number): Promise<void>;
 
   blurChannel(channel_: MagickCore.ChannelType): void;
 
-  blurChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
-
   border(geometry_: Magick.Geometry | string): void;
-
-  borderAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   border(): void;
 
-  borderAsync(): Promise<void>;
-
   brightnessContrast(brightness_: number, contrast_: number): void;
-
-  brightnessContrastAsync(brightness_: number, contrast_: number): Promise<void>;
 
   brightnessContrast(brightness_: number): void;
 
-  brightnessContrastAsync(brightness_: number): Promise<void>;
-
   brightnessContrast(): void;
-
-  brightnessContrastAsync(): Promise<void>;
 
   brightnessContrastChannel(channel_: MagickCore.ChannelType, brightness_: number, contrast_: number): void;
 
-  brightnessContrastChannelAsync(channel_: MagickCore.ChannelType, brightness_: number, contrast_: number): Promise<void>;
-
   brightnessContrastChannel(channel_: MagickCore.ChannelType, brightness_: number): void;
-
-  brightnessContrastChannelAsync(channel_: MagickCore.ChannelType, brightness_: number): Promise<void>;
 
   brightnessContrastChannel(channel_: MagickCore.ChannelType): void;
 
-  brightnessContrastChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
-
   cannyEdge(radius_: number, sigma_: number, lowerPercent_: number, upperPercent_: number): void;
-
-  cannyEdgeAsync(radius_: number, sigma_: number, lowerPercent_: number, upperPercent_: number): Promise<void>;
 
   cannyEdge(radius_: number, sigma_: number, lowerPercent_: number): void;
 
-  cannyEdgeAsync(radius_: number, sigma_: number, lowerPercent_: number): Promise<void>;
-
   cannyEdge(radius_: number, sigma_: number): void;
-
-  cannyEdgeAsync(radius_: number, sigma_: number): Promise<void>;
 
   cannyEdge(radius_: number): void;
 
-  cannyEdgeAsync(radius_: number): Promise<void>;
-
   cannyEdge(): void;
-
-  cannyEdgeAsync(): Promise<void>;
 
   cdl(cdl_: string): void;
 
-  cdlAsync(cdl_: string): Promise<void>;
-
   channel(channel_: MagickCore.ChannelType): void;
-
-  channelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   charcoal(radius_: number, sigma_: number): void;
 
-  charcoalAsync(radius_: number, sigma_: number): Promise<void>;
-
   charcoal(radius_: number): void;
-
-  charcoalAsync(radius_: number): Promise<void>;
 
   charcoal(): void;
 
-  charcoalAsync(): Promise<void>;
-
   charcoalChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): void;
-
-  charcoalChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): Promise<void>;
 
   charcoalChannel(channel_: MagickCore.ChannelType, radius_: number): void;
 
-  charcoalChannelAsync(channel_: MagickCore.ChannelType, radius_: number): Promise<void>;
-
   charcoalChannel(channel_: MagickCore.ChannelType): void;
-
-  charcoalChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   chop(geometry_: Magick.Geometry | string): void;
 
-  chopAsync(geometry_: Magick.Geometry | string): Promise<void>;
-
   chromaBluePrimary(x_: number, y_: number, z_: number): void;
-
-  chromaBluePrimaryAsync(x_: number, y_: number, z_: number): Promise<void>;
 
   chromaBluePrimary(x_: any, y_: any, z_: any): void;
 
-  chromaBluePrimaryAsync(x_: any, y_: any, z_: any): Promise<void>;
-
   chromaGreenPrimary(x_: number, y_: number, z_: number): void;
-
-  chromaGreenPrimaryAsync(x_: number, y_: number, z_: number): Promise<void>;
 
   chromaGreenPrimary(x_: any, y_: any, z_: any): void;
 
-  chromaGreenPrimaryAsync(x_: any, y_: any, z_: any): Promise<void>;
-
   chromaRedPrimary(x_: number, y_: number, z_: number): void;
-
-  chromaRedPrimaryAsync(x_: number, y_: number, z_: number): Promise<void>;
 
   chromaRedPrimary(x_: any, y_: any, z_: any): void;
 
-  chromaRedPrimaryAsync(x_: any, y_: any, z_: any): Promise<void>;
-
   chromaWhitePoint(x_: number, y_: number, z_: number): void;
-
-  chromaWhitePointAsync(x_: number, y_: number, z_: number): Promise<void>;
 
   chromaWhitePoint(x_: any, y_: any, z_: any): void;
 
-  chromaWhitePointAsync(x_: any, y_: any, z_: any): Promise<void>;
-
   clamp(): void;
-
-  clampAsync(): Promise<void>;
 
   clampChannel(channel_: MagickCore.ChannelType): void;
 
-  clampChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
-
   clip(): void;
-
-  clipAsync(): Promise<void>;
 
   clipPath(pathname_: string, inside_: boolean): void;
 
-  clipPathAsync(pathname_: string, inside_: boolean): Promise<void>;
-
   clut(clutImage_: Magick.Image, method: any): void;
-
-  clutAsync(clutImage_: Magick.Image, method: any): Promise<void>;
 
   clutChannel(channel_: MagickCore.ChannelType, clutImage_: Magick.Image, method: any): void;
 
-  clutChannelAsync(channel_: MagickCore.ChannelType, clutImage_: Magick.Image, method: any): Promise<void>;
-
   colorize(alpha_: number, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  colorizeAsync(alpha_: number, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   colorize(alphaRed_: number, alphaGreen_: number, alphaBlue_: number, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  colorizeAsync(alphaRed_: number, alphaGreen_: number, alphaBlue_: number, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   colorMap(index_: number, color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  colorMapAsync(index_: number, color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   colorMap(index_: number): Magick.Color;
 
-  colorMapAsync(index_: number): Promise<Magick.Color>;
-
   colorMatrix(order_: number, color_matrix_: any): void;
-
-  colorMatrixAsync(order_: number, color_matrix_: any): Promise<void>;
 
   compare(reference_: Magick.Image): boolean;
 
-  compareAsync(reference_: Magick.Image): Promise<boolean>;
-
   compare(reference_: Magick.Image, metric_: MagickCore.MetricType): number;
-
-  compareAsync(reference_: Magick.Image, metric_: MagickCore.MetricType): Promise<number>;
 
   compareChannel(channel_: MagickCore.ChannelType, reference_: Magick.Image, metric_: MagickCore.MetricType): number;
 
-  compareChannelAsync(channel_: MagickCore.ChannelType, reference_: Magick.Image, metric_: MagickCore.MetricType): Promise<number>;
-
   compare(reference_: Magick.Image, metric_: MagickCore.MetricType, distortion: any): Magick.Image;
-
-  compareAsync(reference_: Magick.Image, metric_: MagickCore.MetricType, distortion: any): Promise<Magick.Image>;
 
   compareChannel(channel_: MagickCore.ChannelType, reference_: Magick.Image, metric_: MagickCore.MetricType, distortion: any): Magick.Image;
 
-  compareChannelAsync(channel_: MagickCore.ChannelType, reference_: Magick.Image, metric_: MagickCore.MetricType, distortion: any): Promise<Magick.Image>;
-
   composite(compositeImage_: Magick.Image, offset_: Magick.Geometry | string, compose_: MagickCore.CompositeOperator): void;
-
-  compositeAsync(compositeImage_: Magick.Image, offset_: Magick.Geometry | string, compose_: MagickCore.CompositeOperator): Promise<void>;
 
   composite(compositeImage_: Magick.Image, offset_: Magick.Geometry | string): void;
 
-  compositeAsync(compositeImage_: Magick.Image, offset_: Magick.Geometry | string): Promise<void>;
-
   composite(compositeImage_: Magick.Image, gravity_: MagickCore.GravityType, compose_: MagickCore.CompositeOperator): void;
-
-  compositeAsync(compositeImage_: Magick.Image, gravity_: MagickCore.GravityType, compose_: MagickCore.CompositeOperator): Promise<void>;
 
   composite(compositeImage_: Magick.Image, gravity_: MagickCore.GravityType): void;
 
-  compositeAsync(compositeImage_: Magick.Image, gravity_: MagickCore.GravityType): Promise<void>;
-
   composite(compositeImage_: Magick.Image, xOffset_: number, yOffset_: number, compose_: MagickCore.CompositeOperator): void;
-
-  compositeAsync(compositeImage_: Magick.Image, xOffset_: number, yOffset_: number, compose_: MagickCore.CompositeOperator): Promise<void>;
 
   composite(compositeImage_: Magick.Image, xOffset_: number, yOffset_: number): void;
 
-  compositeAsync(compositeImage_: Magick.Image, xOffset_: number, yOffset_: number): Promise<void>;
-
   connectedComponents(connectivity_: number): void;
-
-  connectedComponentsAsync(connectivity_: number): Promise<void>;
 
   contrast(sharpen_: boolean): void;
 
-  contrastAsync(sharpen_: boolean): Promise<void>;
-
   contrastStretch(blackPoint_: number, whitePoint_: number): void;
-
-  contrastStretchAsync(blackPoint_: number, whitePoint_: number): Promise<void>;
 
   contrastStretchChannel(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number): void;
 
-  contrastStretchChannelAsync(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number): Promise<void>;
-
   convolve(order_: number, kernel_: any): void;
-
-  convolveAsync(order_: number, kernel_: any): Promise<void>;
 
   copyPixels(source_: Magick.Image, geometry_: Magick.Geometry | string, offset_: Magick.Offset): void;
 
-  copyPixelsAsync(source_: Magick.Image, geometry_: Magick.Geometry | string, offset_: Magick.Offset): Promise<void>;
-
   crop(geometry_: Magick.Geometry | string): void;
-
-  cropAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   cycleColormap(amount_: number): void;
 
-  cycleColormapAsync(amount_: number): Promise<void>;
-
   decipher(passphrase_: string): void;
-
-  decipherAsync(passphrase_: string): Promise<void>;
 
   defineSet(magick_: string, key_: string, flag_: boolean): void;
 
-  defineSetAsync(magick_: string, key_: string, flag_: boolean): Promise<void>;
-
   defineSet(magick_: string, key_: string): boolean;
-
-  defineSetAsync(magick_: string, key_: string): Promise<boolean>;
 
   defineValue(magick_: string, key_: string, value_: string): void;
 
-  defineValueAsync(magick_: string, key_: string, value_: string): Promise<void>;
-
   defineValue(magick_: string, key_: string): string;
-
-  defineValueAsync(magick_: string, key_: string): Promise<string>;
 
   deskew(threshold_: number): void;
 
-  deskewAsync(threshold_: number): Promise<void>;
-
   despeckle(): void;
-
-  despeckleAsync(): Promise<void>;
 
   display(): void;
 
-  displayAsync(): Promise<void>;
-
   distort(method_: any, numberArguments_: number, arguments_: any, bestfit_: boolean): void;
-
-  distortAsync(method_: any, numberArguments_: number, arguments_: any, bestfit_: boolean): Promise<void>;
 
   distort(method_: any, numberArguments_: number, arguments_: any): void;
 
-  distortAsync(method_: any, numberArguments_: number, arguments_: any): Promise<void>;
-
   draw(drawable_: Magick.DrawableBase): void;
-
-  drawAsync(drawable_: Magick.DrawableBase): Promise<void>;
 
   draw(drawable_: Magick.DrawableBase[]): void;
 
-  drawAsync(drawable_: Magick.DrawableBase[]): Promise<void>;
-
   edge(radius_: number): void;
-
-  edgeAsync(radius_: number): Promise<void>;
 
   edge(): void;
 
-  edgeAsync(): Promise<void>;
-
   emboss(radius_: number, sigma_: number): void;
-
-  embossAsync(radius_: number, sigma_: number): Promise<void>;
 
   emboss(radius_: number): void;
 
-  embossAsync(radius_: number): Promise<void>;
-
   emboss(): void;
-
-  embossAsync(): Promise<void>;
 
   encipher(passphrase_: string): void;
 
-  encipherAsync(passphrase_: string): Promise<void>;
-
   enhance(): void;
-
-  enhanceAsync(): Promise<void>;
 
   equalize(): void;
 
-  equalizeAsync(): Promise<void>;
-
   erase(): void;
-
-  eraseAsync(): Promise<void>;
 
   evaluate(channel_: MagickCore.ChannelType, operator_: MagickCore.MagickEvaluateOperator, rvalue_: number): void;
 
-  evaluateAsync(channel_: MagickCore.ChannelType, operator_: MagickCore.MagickEvaluateOperator, rvalue_: number): Promise<void>;
-
   evaluate(channel_: MagickCore.ChannelType, function_: any, number_parameters_: number, parameters_: any): void;
-
-  evaluateAsync(channel_: MagickCore.ChannelType, function_: any, number_parameters_: number, parameters_: any): Promise<void>;
 
   evaluate(channel_: MagickCore.ChannelType, x_: number, y_: number, columns_: number, rows_: number, operator_: MagickCore.MagickEvaluateOperator, rvalue_: number): void;
 
-  evaluateAsync(channel_: MagickCore.ChannelType, x_: number, y_: number, columns_: number, rows_: number, operator_: MagickCore.MagickEvaluateOperator, rvalue_: number): Promise<void>;
-
   extent(geometry_: Magick.Geometry | string): void;
-
-  extentAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   extent(geometry_: Magick.Geometry | string, backgroundColor: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  extentAsync(geometry_: Magick.Geometry | string, backgroundColor: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   extent(geometry_: Magick.Geometry | string, backgroundColor: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: MagickCore.GravityType): void;
-
-  extentAsync(geometry_: Magick.Geometry | string, backgroundColor: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: MagickCore.GravityType): Promise<void>;
 
   extent(geometry_: Magick.Geometry | string, gravity_: MagickCore.GravityType): void;
 
-  extentAsync(geometry_: Magick.Geometry | string, gravity_: MagickCore.GravityType): Promise<void>;
-
   flip(): void;
-
-  flipAsync(): Promise<void>;
 
   floodFillAlpha(x_: number, y_: number, alpha_: number, invert_: boolean): void;
 
-  floodFillAlphaAsync(x_: number, y_: number, alpha_: number, invert_: boolean): Promise<void>;
-
   floodFillAlpha(x_: number, y_: number, alpha_: number): void;
-
-  floodFillAlphaAsync(x_: number, y_: number, alpha_: number): Promise<void>;
 
   floodFillAlpha(x_: number, y_: number, alpha_: number, target_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  floodFillAlphaAsync(x_: number, y_: number, alpha_: number, target_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
-
   floodFillAlpha(x_: number, y_: number, alpha_: number, target_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  floodFillAlphaAsync(x_: number, y_: number, alpha_: number, target_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
-
   floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   floodFillColor(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
-
   floodFillColor(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
-
   floodFillColor(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  floodFillColorAsync(point_: Magick.Geometry, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   floodFillColor(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
-
   floodFillColor(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  floodFillColorAsync(x_: number, y_: number, fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   floodFillTexture(point_: Magick.Geometry, texture_: Magick.Image, invert_: boolean): void;
 
-  floodFillTextureAsync(point_: Magick.Geometry, texture_: Magick.Image, invert_: boolean): Promise<void>;
-
   floodFillTexture(point_: Magick.Geometry, texture_: Magick.Image): void;
-
-  floodFillTextureAsync(point_: Magick.Geometry, texture_: Magick.Image): Promise<void>;
 
   floodFillTexture(x_: number, y_: number, texture_: Magick.Image, invert_: boolean): void;
 
-  floodFillTextureAsync(x_: number, y_: number, texture_: Magick.Image, invert_: boolean): Promise<void>;
-
   floodFillTexture(x_: number, y_: number, texture_: Magick.Image): void;
-
-  floodFillTextureAsync(x_: number, y_: number, texture_: Magick.Image): Promise<void>;
 
   floodFillTexture(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  floodFillTextureAsync(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
-
   floodFillTexture(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  floodFillTextureAsync(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   floodFillTexture(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  floodFillTextureAsync(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
-
   floodFillTexture(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  floodFillTextureAsync(x_: number, y_: number, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   flop(): void;
 
-  flopAsync(): Promise<void>;
-
   fontTypeMetrics(text_: string, metrics: Magick.TypeMetric): void;
-
-  fontTypeMetricsAsync(text_: string, metrics: Magick.TypeMetric): Promise<void>;
 
   fontTypeMetricsMultiline(text_: string, metrics: Magick.TypeMetric): void;
 
-  fontTypeMetricsMultilineAsync(text_: string, metrics: Magick.TypeMetric): Promise<void>;
-
   frame(geometry_: Magick.Geometry | string): void;
-
-  frameAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   frame(): void;
 
-  frameAsync(): Promise<void>;
-
   frame(width_: number, height_: number, innerBevel_: number, outerBevel_: number): void;
-
-  frameAsync(width_: number, height_: number, innerBevel_: number, outerBevel_: number): Promise<void>;
 
   frame(width_: number, height_: number, innerBevel_: number): void;
 
-  frameAsync(width_: number, height_: number, innerBevel_: number): Promise<void>;
-
   frame(width_: number, height_: number): void;
-
-  frameAsync(width_: number, height_: number): Promise<void>;
 
   fx(expression_: string): void;
 
-  fxAsync(expression_: string): Promise<void>;
-
   fx(expression_: string, channel_: MagickCore.ChannelType): void;
-
-  fxAsync(expression_: string, channel_: MagickCore.ChannelType): Promise<void>;
 
   gamma(gamma_: number): void;
 
-  gammaAsync(gamma_: number): Promise<void>;
-
   gamma(gammaRed_: number, gammaGreen_: number, gammaBlue_: number): void;
-
-  gammaAsync(gammaRed_: number, gammaGreen_: number, gammaBlue_: number): Promise<void>;
 
   gaussianBlur(radius_: number, sigma_: number): void;
 
-  gaussianBlurAsync(radius_: number, sigma_: number): Promise<void>;
-
   gaussianBlurChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): void;
-
-  gaussianBlurChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): Promise<void>;
 
   getConstPixels(x_: number, y_: number, columns_: number, rows_: number): any;
 
-  getConstPixelsAsync(x_: number, y_: number, columns_: number, rows_: number): Promise<any>;
-
   getConstMetacontent(): any;
-
-  getConstMetacontentAsync(): Promise<any>;
 
   getMetacontent(): any;
 
-  getMetacontentAsync(): Promise<any>;
-
   getPixels(x_: number, y_: number, columns_: number, rows_: number): any;
-
-  getPixelsAsync(x_: number, y_: number, columns_: number, rows_: number): Promise<any>;
 
   grayscale(method_: any): void;
 
-  grayscaleAsync(method_: any): Promise<void>;
-
   haldClut(clutImage_: Magick.Image): void;
-
-  haldClutAsync(clutImage_: Magick.Image): Promise<void>;
 
   houghLine(width_: number, height_: number, threshold_: number): void;
 
-  houghLineAsync(width_: number, height_: number, threshold_: number): Promise<void>;
-
   houghLine(width_: number, height_: number): void;
-
-  houghLineAsync(width_: number, height_: number): Promise<void>;
 
   identifyType(): MagickCore.ImageType;
 
-  identifyTypeAsync(): Promise<MagickCore.ImageType>;
-
   implode(factor_: number): void;
-
-  implodeAsync(factor_: number): Promise<void>;
 
   inverseFourierTransform(phase_: Magick.Image): void;
 
-  inverseFourierTransformAsync(phase_: Magick.Image): Promise<void>;
-
   inverseFourierTransform(phase_: Magick.Image, magnitude_: boolean): void;
-
-  inverseFourierTransformAsync(phase_: Magick.Image, magnitude_: boolean): Promise<void>;
 
   kuwahara(radius_: number, sigma_: number): void;
 
-  kuwaharaAsync(radius_: number, sigma_: number): Promise<void>;
-
   kuwahara(radius_: number): void;
-
-  kuwaharaAsync(radius_: number): Promise<void>;
 
   kuwahara(): void;
 
-  kuwaharaAsync(): Promise<void>;
-
   kuwaharaChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): void;
-
-  kuwaharaChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): Promise<void>;
 
   kuwaharaChannel(channel_: MagickCore.ChannelType, radius_: number): void;
 
-  kuwaharaChannelAsync(channel_: MagickCore.ChannelType, radius_: number): Promise<void>;
-
   kuwaharaChannel(channel_: MagickCore.ChannelType): void;
-
-  kuwaharaChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   level(blackPoint_: number, whitePoint_: number, gamma_: number): void;
 
-  levelAsync(blackPoint_: number, whitePoint_: number, gamma_: number): Promise<void>;
-
   level(blackPoint_: number, whitePoint_: number): void;
-
-  levelAsync(blackPoint_: number, whitePoint_: number): Promise<void>;
 
   levelChannel(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number, gamma_: number): void;
 
-  levelChannelAsync(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number, gamma_: number): Promise<void>;
-
   levelChannel(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number): void;
-
-  levelChannelAsync(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number): Promise<void>;
 
   levelColors(blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  levelColorsAsync(blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
-
   levelColors(blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  levelColorsAsync(blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   levelColorsChannel(channel_: MagickCore.ChannelType, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  levelColorsChannelAsync(channel_: MagickCore.ChannelType, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
-
   levelColorsChannel(channel_: MagickCore.ChannelType, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  levelColorsChannelAsync(channel_: MagickCore.ChannelType, blackColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, whiteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   levelize(blackPoint_: number, whitePoint_: number, gamma_: number): void;
 
-  levelizeAsync(blackPoint_: number, whitePoint_: number, gamma_: number): Promise<void>;
-
   levelize(blackPoint_: number, whitePoint_: number): void;
-
-  levelizeAsync(blackPoint_: number, whitePoint_: number): Promise<void>;
 
   levelizeChannel(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number, gamma_: number): void;
 
-  levelizeChannelAsync(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number, gamma_: number): Promise<void>;
-
   levelizeChannel(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number): void;
-
-  levelizeChannelAsync(channel_: MagickCore.ChannelType, blackPoint_: number, whitePoint_: number): Promise<void>;
 
   linearStretch(blackPoint_: number, whitePoint_: number): void;
 
-  linearStretchAsync(blackPoint_: number, whitePoint_: number): Promise<void>;
-
   liquidRescale(geometry_: Magick.Geometry | string): void;
-
-  liquidRescaleAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   localContrast(radius_: number, strength_: number): void;
 
-  localContrastAsync(radius_: number, strength_: number): Promise<void>;
-
   localContrastChannel(channel_: MagickCore.ChannelType, radius_: number, strength_: number): void;
-
-  localContrastChannelAsync(channel_: MagickCore.ChannelType, radius_: number, strength_: number): Promise<void>;
 
   magnify(): void;
 
-  magnifyAsync(): Promise<void>;
-
   map(mapImage_: Magick.Image, dither_: boolean): void;
-
-  mapAsync(mapImage_: Magick.Image, dither_: boolean): Promise<void>;
 
   map(mapImage_: Magick.Image): void;
 
-  mapAsync(mapImage_: Magick.Image): Promise<void>;
-
   meanShift(width_: number, height_: number, color_distance_: number): void;
-
-  meanShiftAsync(width_: number, height_: number, color_distance_: number): Promise<void>;
 
   medianFilter(radius_: number): void;
 
-  medianFilterAsync(radius_: number): Promise<void>;
-
   medianFilter(): void;
-
-  medianFilterAsync(): Promise<void>;
 
   minify(): void;
 
-  minifyAsync(): Promise<void>;
-
   modulate(brightness_: number, saturation_: number, hue_: number): void;
-
-  modulateAsync(brightness_: number, saturation_: number, hue_: number): Promise<void>;
 
   moments(): Magick.ImageMoments;
 
-  momentsAsync(): Promise<Magick.ImageMoments>;
-
   morphology(method_: any, kernel_: string, iterations_: number): void;
-
-  morphologyAsync(method_: any, kernel_: string, iterations_: number): Promise<void>;
 
   morphology(method_: any, kernel_: string): void;
 
-  morphologyAsync(method_: any, kernel_: string): Promise<void>;
-
   morphology(method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string, iterations_: number): void;
-
-  morphologyAsync(method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string, iterations_: number): Promise<void>;
 
   morphology(method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string): void;
 
-  morphologyAsync(method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string): Promise<void>;
-
   morphologyChannel(channel_: MagickCore.ChannelType, method_: any, kernel_: string, iterations_: number): void;
-
-  morphologyChannelAsync(channel_: MagickCore.ChannelType, method_: any, kernel_: string, iterations_: number): Promise<void>;
 
   morphologyChannel(channel_: MagickCore.ChannelType, method_: any, kernel_: string): void;
 
-  morphologyChannelAsync(channel_: MagickCore.ChannelType, method_: any, kernel_: string): Promise<void>;
-
   morphologyChannel(channel_: MagickCore.ChannelType, method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string, iterations_: number): void;
-
-  morphologyChannelAsync(channel_: MagickCore.ChannelType, method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string, iterations_: number): Promise<void>;
 
   morphologyChannel(channel_: MagickCore.ChannelType, method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string): void;
 
-  morphologyChannelAsync(channel_: MagickCore.ChannelType, method_: any, kernel_: MagickCore.KernelInfoType, arguments_: string): Promise<void>;
-
   motionBlur(radius_: number, sigma_: number, angle_: number): void;
-
-  motionBlurAsync(radius_: number, sigma_: number, angle_: number): Promise<void>;
 
   negate(grayscale_: boolean): void;
 
-  negateAsync(grayscale_: boolean): Promise<void>;
-
   negate(): void;
-
-  negateAsync(): Promise<void>;
 
   negateChannel(channel_: MagickCore.ChannelType, grayscale_: boolean): void;
 
-  negateChannelAsync(channel_: MagickCore.ChannelType, grayscale_: boolean): Promise<void>;
-
   negateChannel(channel_: MagickCore.ChannelType): void;
-
-  negateChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
 
   normalize(): void;
 
-  normalizeAsync(): Promise<void>;
-
   oilPaint(radius_: number, sigma: number): void;
-
-  oilPaintAsync(radius_: number, sigma: number): Promise<void>;
 
   oilPaint(radius_: number): void;
 
-  oilPaintAsync(radius_: number): Promise<void>;
-
   oilPaint(): void;
-
-  oilPaintAsync(): Promise<void>;
 
   opaque(opaqueColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): void;
 
-  opaqueAsync(opaqueColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, invert_: boolean): Promise<void>;
-
   opaque(opaqueColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  opaqueAsync(opaqueColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   orderedDither(thresholdMap_: string): void;
 
-  orderedDitherAsync(thresholdMap_: string): Promise<void>;
-
   orderedDitherChannel(channel_: MagickCore.ChannelType, thresholdMap_: string): void;
-
-  orderedDitherChannelAsync(channel_: MagickCore.ChannelType, thresholdMap_: string): Promise<void>;
 
   perceptible(epsilon_: number): void;
 
-  perceptibleAsync(epsilon_: number): Promise<void>;
-
   perceptibleChannel(channel_: MagickCore.ChannelType, epsilon_: number): void;
-
-  perceptibleChannelAsync(channel_: MagickCore.ChannelType, epsilon_: number): Promise<void>;
 
   perceptualHash(): Magick.ImagePerceptualHash;
 
-  perceptualHashAsync(): Promise<Magick.ImagePerceptualHash>;
-
   ping(imageSpec_: string): void;
-
-  pingAsync(imageSpec_: string): Promise<void>;
 
   ping(blob_: Magick.Blob): void;
 
-  pingAsync(blob_: Magick.Blob): Promise<void>;
-
   pixelColor(x_: number, y_: number, color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  pixelColorAsync(x_: number, y_: number, color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   pixelColor(x_: number, y_: number): Magick.Color;
 
-  pixelColorAsync(x_: number, y_: number): Promise<Magick.Color>;
-
   polaroid(caption_: string, angle_: number, method_: any): void;
-
-  polaroidAsync(caption_: string, angle_: number, method_: any): Promise<void>;
 
   posterize(levels_: number, method_: any): void;
 
-  posterizeAsync(levels_: number, method_: any): Promise<void>;
-
   posterizeChannel(channel_: MagickCore.ChannelType, levels_: number, method_: any): void;
-
-  posterizeChannelAsync(channel_: MagickCore.ChannelType, levels_: number, method_: any): Promise<void>;
 
   process(name_: string, argc_: number, argv_: any): void;
 
-  processAsync(name_: string, argc_: number, argv_: any): Promise<void>;
-
   profile(name_: string, colorProfile_: Magick.Blob): void;
-
-  profileAsync(name_: string, colorProfile_: Magick.Blob): Promise<void>;
 
   profile(name_: string): Magick.Blob;
 
-  profileAsync(name_: string): Promise<Magick.Blob>;
-
   quantize(measureError_: boolean): void;
-
-  quantizeAsync(measureError_: boolean): Promise<void>;
 
   quantize(): void;
 
-  quantizeAsync(): Promise<void>;
-
   raise(geometry_: Magick.Geometry | string, raisedFlag_: boolean): void;
-
-  raiseAsync(geometry_: Magick.Geometry | string, raisedFlag_: boolean): Promise<void>;
 
   raise(geometry_: Magick.Geometry | string): void;
 
-  raiseAsync(geometry_: Magick.Geometry | string): Promise<void>;
-
   raise(): void;
-
-  raiseAsync(): Promise<void>;
 
   randomThreshold(low_: number, high_: number): void;
 
-  randomThresholdAsync(low_: number, high_: number): Promise<void>;
-
   randomThresholdChannel(channel_: MagickCore.ChannelType, low_: number, high_: number): void;
-
-  randomThresholdChannelAsync(channel_: MagickCore.ChannelType, low_: number, high_: number): Promise<void>;
 
   read(blob_: Magick.Blob): void;
 
-  readAsync(blob_: Magick.Blob): Promise<void>;
-
   read(blob_: Magick.Blob, size_: Magick.Geometry | string): void;
-
-  readAsync(blob_: Magick.Blob, size_: Magick.Geometry | string): Promise<void>;
 
   read(blob_: Magick.Blob, size_: Magick.Geometry | string, depth_: number): void;
 
-  readAsync(blob_: Magick.Blob, size_: Magick.Geometry | string, depth_: number): Promise<void>;
-
   read(blob_: Magick.Blob, size_: Magick.Geometry | string, depth_: number, magick_: string): void;
-
-  readAsync(blob_: Magick.Blob, size_: Magick.Geometry | string, depth_: number, magick_: string): Promise<void>;
 
   read(blob_: Magick.Blob, size_: Magick.Geometry | string, magick_: string): void;
 
-  readAsync(blob_: Magick.Blob, size_: Magick.Geometry | string, magick_: string): Promise<void>;
-
   read(size_: Magick.Geometry | string, imageSpec_: string): void;
-
-  readAsync(size_: Magick.Geometry | string, imageSpec_: string): Promise<void>;
 
   read(width_: number, height_: number, map_: string, type_: Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Float32Array | Float64Array | BigUint64Array): void;
 
-  readAsync(width_: number, height_: number, map_: string, type_: Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Float32Array | Float64Array | BigUint64Array): Promise<void>;
-
   read(imageSpec_: string): void;
-
-  readAsync(imageSpec_: string): Promise<void>;
 
   readMask(mask_: Magick.Image): void;
 
-  readMaskAsync(mask_: Magick.Image): Promise<void>;
-
   readMask(): Magick.Image;
-
-  readMaskAsync(): Promise<Magick.Image>;
 
   readPixels(quantum_: MagickCore.QuantumType, source_: any): void;
 
-  readPixelsAsync(quantum_: MagickCore.QuantumType, source_: any): Promise<void>;
-
   reduceNoise(): void;
-
-  reduceNoiseAsync(): Promise<void>;
 
   reduceNoise(order_: number): void;
 
-  reduceNoiseAsync(order_: number): Promise<void>;
-
   repage(): void;
-
-  repageAsync(): Promise<void>;
 
   resample(density_: Magick.Point): void;
 
-  resampleAsync(density_: Magick.Point): Promise<void>;
-
   resize(geometry_: Magick.Geometry | string): void;
-
-  resizeAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   roll(roll_: Magick.Geometry): void;
 
-  rollAsync(roll_: Magick.Geometry): Promise<void>;
-
   roll(columns_: number, rows_: number): void;
-
-  rollAsync(columns_: number, rows_: number): Promise<void>;
 
   rotate(degrees_: number): void;
 
-  rotateAsync(degrees_: number): Promise<void>;
-
   rotationalBlur(angle_: number): void;
-
-  rotationalBlurAsync(angle_: number): Promise<void>;
 
   rotationalBlurChannel(channel_: MagickCore.ChannelType, angle_: number): void;
 
-  rotationalBlurChannelAsync(channel_: MagickCore.ChannelType, angle_: number): Promise<void>;
-
   sample(geometry_: Magick.Geometry | string): void;
-
-  sampleAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   scale(geometry_: Magick.Geometry | string): void;
 
-  scaleAsync(geometry_: Magick.Geometry | string): Promise<void>;
-
   segment(clusterThreshold_: number, smoothingThreshold_: number): void;
-
-  segmentAsync(clusterThreshold_: number, smoothingThreshold_: number): Promise<void>;
 
   segment(clusterThreshold_: number): void;
 
-  segmentAsync(clusterThreshold_: number): Promise<void>;
-
   segment(): void;
-
-  segmentAsync(): Promise<void>;
 
   selectiveBlur(radius_: number, sigma_: number, threshold_: number): void;
 
-  selectiveBlurAsync(radius_: number, sigma_: number, threshold_: number): Promise<void>;
-
   selectiveBlurChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number, threshold_: number): void;
-
-  selectiveBlurChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number, threshold_: number): Promise<void>;
 
   separate(channel_: MagickCore.ChannelType): Magick.Image;
 
-  separateAsync(channel_: MagickCore.ChannelType): Promise<Magick.Image>;
-
   sepiaTone(threshold_: number): void;
-
-  sepiaToneAsync(threshold_: number): Promise<void>;
 
   setColorMetric(reference_: Magick.Image): boolean;
 
-  setColorMetricAsync(reference_: Magick.Image): Promise<boolean>;
-
   setPixels(x_: number, y_: number, columns_: number, rows_: number): any;
-
-  setPixelsAsync(x_: number, y_: number, columns_: number, rows_: number): Promise<any>;
 
   shade(azimuth_: number, elevation_: number, colorShading_: boolean): void;
 
-  shadeAsync(azimuth_: number, elevation_: number, colorShading_: boolean): Promise<void>;
-
   shade(azimuth_: number, elevation_: number): void;
-
-  shadeAsync(azimuth_: number, elevation_: number): Promise<void>;
 
   shade(azimuth_: number): void;
 
-  shadeAsync(azimuth_: number): Promise<void>;
-
   shade(): void;
-
-  shadeAsync(): Promise<void>;
 
   shadow(percentAlpha_: number, sigma_: number, x_: number, y_: number): void;
 
-  shadowAsync(percentAlpha_: number, sigma_: number, x_: number, y_: number): Promise<void>;
-
   shadow(percentAlpha_: number, sigma_: number, x_: number): void;
-
-  shadowAsync(percentAlpha_: number, sigma_: number, x_: number): Promise<void>;
 
   shadow(percentAlpha_: number, sigma_: number): void;
 
-  shadowAsync(percentAlpha_: number, sigma_: number): Promise<void>;
-
   shadow(percentAlpha_: number): void;
-
-  shadowAsync(percentAlpha_: number): Promise<void>;
 
   shadow(): void;
 
-  shadowAsync(): Promise<void>;
-
   sharpen(radius_: number, sigma_: number): void;
-
-  sharpenAsync(radius_: number, sigma_: number): Promise<void>;
 
   sharpen(radius_: number): void;
 
-  sharpenAsync(radius_: number): Promise<void>;
-
   sharpen(): void;
-
-  sharpenAsync(): Promise<void>;
 
   sharpenChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): void;
 
-  sharpenChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): Promise<void>;
-
   sharpenChannel(channel_: MagickCore.ChannelType, radius_: number): void;
-
-  sharpenChannelAsync(channel_: MagickCore.ChannelType, radius_: number): Promise<void>;
 
   sharpenChannel(channel_: MagickCore.ChannelType): void;
 
-  sharpenChannelAsync(channel_: MagickCore.ChannelType): Promise<void>;
-
   shave(geometry_: Magick.Geometry | string): void;
-
-  shaveAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   shear(xShearAngle_: number, yShearAngle_: number): void;
 
-  shearAsync(xShearAngle_: number, yShearAngle_: number): Promise<void>;
-
   sigmoidalContrast(sharpen_: boolean, contrast: number, midpoint: number): void;
-
-  sigmoidalContrastAsync(sharpen_: boolean, contrast: number, midpoint: number): Promise<void>;
 
   sigmoidalContrast(sharpen_: boolean, contrast: number): void;
 
-  sigmoidalContrastAsync(sharpen_: boolean, contrast: number): Promise<void>;
-
   signature(force_: boolean): string;
-
-  signatureAsync(force_: boolean): Promise<string>;
 
   signature(): string;
 
-  signatureAsync(): Promise<string>;
-
   sketch(radius_: number, sigma_: number, angle_: number): void;
-
-  sketchAsync(radius_: number, sigma_: number, angle_: number): Promise<void>;
 
   sketch(radius_: number, sigma_: number): void;
 
-  sketchAsync(radius_: number, sigma_: number): Promise<void>;
-
   sketch(radius_: number): void;
-
-  sketchAsync(radius_: number): Promise<void>;
 
   sketch(): void;
 
-  sketchAsync(): Promise<void>;
-
   solarize(factor_: number): void;
-
-  solarizeAsync(factor_: number): Promise<void>;
 
   solarize(): void;
 
-  solarizeAsync(): Promise<void>;
-
   sparseColor(channel_: MagickCore.ChannelType, method_: any, numberArguments_: number, arguments_: any): void;
-
-  sparseColorAsync(channel_: MagickCore.ChannelType, method_: any, numberArguments_: number, arguments_: any): Promise<void>;
 
   splice(geometry_: Magick.Geometry | string): void;
 
-  spliceAsync(geometry_: Magick.Geometry | string): Promise<void>;
-
   splice(geometry_: Magick.Geometry | string, backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  spliceAsync(geometry_: Magick.Geometry | string, backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   splice(geometry_: Magick.Geometry | string, backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: MagickCore.GravityType): void;
 
-  spliceAsync(geometry_: Magick.Geometry | string, backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, gravity_: MagickCore.GravityType): Promise<void>;
-
   spread(amount_: number): void;
-
-  spreadAsync(amount_: number): Promise<void>;
 
   spread(): void;
 
-  spreadAsync(): Promise<void>;
-
   statistics(): Magick.ImageStatistics;
-
-  statisticsAsync(): Promise<Magick.ImageStatistics>;
 
   stegano(watermark_: Magick.Image): void;
 
-  steganoAsync(watermark_: Magick.Image): Promise<void>;
-
   stereo(rightImage_: Magick.Image): void;
-
-  stereoAsync(rightImage_: Magick.Image): Promise<void>;
 
   strip(): void;
 
-  stripAsync(): Promise<void>;
-
   subImageSearch(reference_: Magick.Image, metric_: MagickCore.MetricType, offset_: Magick.Geometry, similarityMetric_: any, similarityThreshold: number): Magick.Image;
-
-  subImageSearchAsync(reference_: Magick.Image, metric_: MagickCore.MetricType, offset_: Magick.Geometry, similarityMetric_: any, similarityThreshold: number): Promise<Magick.Image>;
 
   subImageSearch(reference_: Magick.Image, metric_: MagickCore.MetricType, offset_: Magick.Geometry, similarityMetric_: any): Magick.Image;
 
-  subImageSearchAsync(reference_: Magick.Image, metric_: MagickCore.MetricType, offset_: Magick.Geometry, similarityMetric_: any): Promise<Magick.Image>;
-
   swirl(degrees_: number): void;
-
-  swirlAsync(degrees_: number): Promise<void>;
 
   syncPixels(): void;
 
-  syncPixelsAsync(): Promise<void>;
-
   texture(texture_: Magick.Image): void;
-
-  textureAsync(texture_: Magick.Image): Promise<void>;
 
   threshold(threshold_: number): void;
 
-  thresholdAsync(threshold_: number): Promise<void>;
-
   thumbnail(geometry_: Magick.Geometry | string): void;
-
-  thumbnailAsync(geometry_: Magick.Geometry | string): Promise<void>;
 
   tint(opacity_: string): void;
 
-  tintAsync(opacity_: string): Promise<void>;
-
   transformOrigin(x_: number, y_: number): void;
-
-  transformOriginAsync(x_: number, y_: number): Promise<void>;
 
   transformReset(): void;
 
-  transformResetAsync(): Promise<void>;
-
   transformScale(sx_: number, sy_: number): void;
-
-  transformScaleAsync(sx_: number, sy_: number): Promise<void>;
 
   transparent(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, inverse_: boolean): void;
 
-  transparentAsync(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, inverse_: boolean): Promise<void>;
-
   transparent(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
-
-  transparentAsync(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   transparentChroma(colorLow_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, colorHigh_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  transparentChromaAsync(colorLow_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, colorHigh_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   transpose(): void;
-
-  transposeAsync(): Promise<void>;
 
   transverse(): void;
 
-  transverseAsync(): Promise<void>;
-
   trim(): void;
-
-  trimAsync(): Promise<void>;
 
   uniqueColors(): Magick.Image;
 
-  uniqueColorsAsync(): Promise<Magick.Image>;
-
   unsharpmask(radius_: number, sigma_: number, amount_: number, threshold_: number): void;
-
-  unsharpmaskAsync(radius_: number, sigma_: number, amount_: number, threshold_: number): Promise<void>;
 
   unsharpmaskChannel(channel_: MagickCore.ChannelType, radius_: number, sigma_: number, amount_: number, threshold_: number): void;
 
-  unsharpmaskChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number, amount_: number, threshold_: number): Promise<void>;
-
   vignette(radius_: number, sigma_: number, x_: number, y_: number): void;
-
-  vignetteAsync(radius_: number, sigma_: number, x_: number, y_: number): Promise<void>;
 
   vignette(radius_: number, sigma_: number, x_: number): void;
 
-  vignetteAsync(radius_: number, sigma_: number, x_: number): Promise<void>;
-
   vignette(radius_: number, sigma_: number): void;
-
-  vignetteAsync(radius_: number, sigma_: number): Promise<void>;
 
   vignette(radius_: number): void;
 
-  vignetteAsync(radius_: number): Promise<void>;
-
   vignette(): void;
-
-  vignetteAsync(): Promise<void>;
 
   wave(amplitude_: number, wavelength_: number): void;
 
-  waveAsync(amplitude_: number, wavelength_: number): Promise<void>;
-
   wave(amplitude_: number): void;
-
-  waveAsync(amplitude_: number): Promise<void>;
 
   wave(): void;
 
-  waveAsync(): Promise<void>;
-
   waveletDenoise(threshold_: number, softness_: number): void;
-
-  waveletDenoiseAsync(threshold_: number, softness_: number): Promise<void>;
 
   whiteThreshold(threshold_: string): void;
 
-  whiteThresholdAsync(threshold_: string): Promise<void>;
-
   whiteThresholdChannel(channel_: MagickCore.ChannelType, threshold_: string): void;
-
-  whiteThresholdChannelAsync(channel_: MagickCore.ChannelType, threshold_: string): Promise<void>;
 
   write(blob_: Magick.Blob): void;
 
-  writeAsync(blob_: Magick.Blob): Promise<void>;
-
   write(blob_: Magick.Blob, magick_: string): void;
-
-  writeAsync(blob_: Magick.Blob, magick_: string): Promise<void>;
 
   write(blob_: Magick.Blob, magick_: string, depth_: number): void;
 
-  writeAsync(blob_: Magick.Blob, magick_: string, depth_: number): Promise<void>;
-
   write(x_: number, y_: number, columns_: number, rows_: number, map_: string, type_: Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Float32Array | Float64Array | BigUint64Array): void;
-
-  writeAsync(x_: number, y_: number, columns_: number, rows_: number, map_: string, type_: Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Float32Array | Float64Array | BigUint64Array): Promise<void>;
 
   write(imageSpec_: string): void;
 
-  writeAsync(imageSpec_: string): Promise<void>;
-
   writeMask(mask_: Magick.Image): void;
-
-  writeMaskAsync(mask_: Magick.Image): Promise<void>;
 
   writeMask(): Magick.Image;
 
-  writeMaskAsync(): Promise<Magick.Image>;
-
   writePixels(quantum_: MagickCore.QuantumType, destination_: any): void;
-
-  writePixelsAsync(quantum_: MagickCore.QuantumType, destination_: any): Promise<void>;
 
   zoom(geometry_: Magick.Geometry | string): void;
 
-  zoomAsync(geometry_: Magick.Geometry | string): Promise<void>;
-
   image(): any;
-
-  imageAsync(): Promise<any>;
 
   constImage(): any;
 
-  constImageAsync(): Promise<any>;
-
   imageInfo(): any;
-
-  imageInfoAsync(): Promise<any>;
 
   constImageInfo(): any;
 
-  constImageInfoAsync(): Promise<any>;
-
   options(): any;
-
-  optionsAsync(): Promise<any>;
 
   constOptions(): any;
 
-  constOptionsAsync(): Promise<any>;
-
   quantizeInfo(): any;
-
-  quantizeInfoAsync(): Promise<any>;
 
   constQuantizeInfo(): any;
 
-  constQuantizeInfoAsync(): Promise<any>;
-
   modifyImage(): void;
 
-  modifyImageAsync(): Promise<void>;
-
   replaceImage(replacement_: any): any;
-
-  replaceImageAsync(replacement_: any): Promise<any>;
 }
 
 export  class ResourceLimits {
@@ -5966,119 +4836,61 @@ export  class Montage {
 
   backgroundColor(backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  backgroundColorAsync(backgroundColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   backgroundColor(): Magick.Color;
-
-  backgroundColorAsync(): Promise<Magick.Color>;
 
   fileName(fileName_: string): void;
 
-  fileNameAsync(fileName_: string): Promise<void>;
-
   fileName(): string;
-
-  fileNameAsync(): Promise<string>;
 
   fillColor(fill_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  fillColorAsync(fill_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   fillColor(): Magick.Color;
-
-  fillColorAsync(): Promise<Magick.Color>;
 
   font(font_: string): void;
 
-  fontAsync(font_: string): Promise<void>;
-
   font(): string;
-
-  fontAsync(): Promise<string>;
 
   geometry(geometry_: Magick.Geometry | string): void;
 
-  geometryAsync(geometry_: Magick.Geometry | string): Promise<void>;
-
   geometry(): Magick.Geometry;
-
-  geometryAsync(): Promise<Magick.Geometry>;
 
   gravity(gravity_: MagickCore.GravityType): void;
 
-  gravityAsync(gravity_: MagickCore.GravityType): Promise<void>;
-
   gravity(): MagickCore.GravityType;
-
-  gravityAsync(): Promise<MagickCore.GravityType>;
 
   label(label_: string): void;
 
-  labelAsync(label_: string): Promise<void>;
-
   label(): string;
-
-  labelAsync(): Promise<string>;
 
   pointSize(pointSize_: number): void;
 
-  pointSizeAsync(pointSize_: number): Promise<void>;
-
   pointSize(): number;
-
-  pointSizeAsync(): Promise<number>;
 
   shadow(shadow_: boolean): void;
 
-  shadowAsync(shadow_: boolean): Promise<void>;
-
   shadow(): boolean;
-
-  shadowAsync(): Promise<boolean>;
 
   strokeColor(stroke_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  strokeColorAsync(stroke_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   strokeColor(): Magick.Color;
-
-  strokeColorAsync(): Promise<Magick.Color>;
 
   texture(texture_: string): void;
 
-  textureAsync(texture_: string): Promise<void>;
-
   texture(): string;
-
-  textureAsync(): Promise<string>;
 
   tile(tile_: Magick.Geometry): void;
 
-  tileAsync(tile_: Magick.Geometry): Promise<void>;
-
   tile(): Magick.Geometry;
-
-  tileAsync(): Promise<Magick.Geometry>;
 
   title(title_: string): void;
 
-  titleAsync(title_: string): Promise<void>;
-
   title(): string;
-
-  titleAsync(): Promise<string>;
 
   transparentColor(transparentColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  transparentColorAsync(transparentColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   transparentColor(): Magick.Color;
 
-  transparentColorAsync(): Promise<Magick.Color>;
-
   updateMontageInfo(montageInfo_: any): void;
-
-  updateMontageInfoAsync(montageInfo_: any): Promise<void>;
 }
 
 export  class MontageFramed extends Magick.Montage {
@@ -6087,39 +4899,21 @@ export  class MontageFramed extends Magick.Montage {
 
   matteColor(matteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  matteColorAsync(matteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   matteColor(): Magick.Color;
-
-  matteColorAsync(): Promise<Magick.Color>;
 
   borderColor(borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
-  borderColorAsync(borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
-
   borderColor(): Magick.Color;
-
-  borderColorAsync(): Promise<Magick.Color>;
 
   borderWidth(borderWidth_: number): void;
 
-  borderWidthAsync(borderWidth_: number): Promise<void>;
-
   borderWidth(): number;
-
-  borderWidthAsync(): Promise<number>;
 
   frameGeometry(frame_: Magick.Geometry): void;
 
-  frameGeometryAsync(frame_: Magick.Geometry): Promise<void>;
-
   frameGeometry(): Magick.Geometry;
 
-  frameGeometryAsync(): Promise<Magick.Geometry>;
-
   updateMontageInfo(montageInfo_: any): void;
-
-  updateMontageInfoAsync(montageInfo_: any): Promise<void>;
 }
 
 export  class adaptiveBlurImage {
@@ -6131,8 +4925,6 @@ export  class adaptiveBlurImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class adaptiveThresholdImage {
@@ -6142,8 +4934,6 @@ export  class adaptiveThresholdImage {
   constructor(width_: number, height_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class addNoiseImage {
@@ -6153,8 +4943,6 @@ export  class addNoiseImage {
   constructor(noiseType_: MagickCore.NoiseType);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class affineTransformImage {
@@ -6162,8 +4950,6 @@ export  class affineTransformImage {
   constructor(affine_: Magick.DrawableAffine);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class annotateImage {
@@ -6177,8 +4963,6 @@ export  class annotateImage {
   constructor(text_: string, gravity_: MagickCore.GravityType);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class blurImage {
@@ -6190,8 +4974,6 @@ export  class blurImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class borderImage {
@@ -6201,8 +4983,6 @@ export  class borderImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class channelImage {
@@ -6210,8 +4990,6 @@ export  class channelImage {
   constructor(channel_: MagickCore.ChannelType);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class charcoalImage {
@@ -6223,8 +5001,6 @@ export  class charcoalImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class chopImage {
@@ -6232,8 +5008,6 @@ export  class chopImage {
   constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class cdlImage {
@@ -6241,8 +5015,6 @@ export  class cdlImage {
   constructor(cdl_: string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class colorizeImage {
@@ -6252,8 +5024,6 @@ export  class colorizeImage {
   constructor(alpha_: number, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class colorMatrixImage {
@@ -6261,8 +5031,6 @@ export  class colorMatrixImage {
   constructor(order_: number, color_matrix_: any);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class colorSpaceImage {
@@ -6270,8 +5038,6 @@ export  class colorSpaceImage {
   constructor(colorSpace_: MagickCore.ColorspaceType);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class commentImage {
@@ -6279,8 +5045,6 @@ export  class commentImage {
   constructor(comment_: string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class compositeImage {
@@ -6294,8 +5058,6 @@ export  class compositeImage {
   constructor(compositeImage_: Magick.Image, offset_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class contrastImage {
@@ -6303,8 +5065,6 @@ export  class contrastImage {
   constructor(sharpen_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class cropImage {
@@ -6312,8 +5072,6 @@ export  class cropImage {
   constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class cycleColormapImage {
@@ -6328,8 +5086,6 @@ export  class despeckleImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class distortImage {
@@ -6339,8 +5095,6 @@ export  class distortImage {
   constructor(method_: any, number_arguments_: number, arguments_: any);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class drawImage {
@@ -6350,8 +5104,6 @@ export  class drawImage {
   constructor(drawable_: Magick.DrawableBase[]);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class edgeImage {
@@ -6361,8 +5113,6 @@ export  class edgeImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class embossImage {
@@ -6372,8 +5122,6 @@ export  class embossImage {
   constructor(radius_: number, sigma_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class enhanceImage {
@@ -6381,8 +5129,6 @@ export  class enhanceImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class equalizeImage {
@@ -6390,8 +5136,6 @@ export  class equalizeImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class fillColorImage {
@@ -6406,8 +5150,6 @@ export  class flipImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class floodFillAlphaImage {
@@ -6417,8 +5159,6 @@ export  class floodFillAlphaImage {
   constructor(x_: number, y_: number, alpha_: number, target_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class floodFillColorImage {
@@ -6461,8 +5201,6 @@ export  class floodFillTextureImage {
   constructor(point_: Magick.Geometry, texture_: Magick.Image, borderColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class flopImage {
@@ -6470,8 +5208,6 @@ export  class flopImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class frameImage {
@@ -6487,8 +5223,6 @@ export  class frameImage {
   constructor(width_: number, height_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class gammaImage {
@@ -6498,8 +5232,6 @@ export  class gammaImage {
   constructor(gammaRed_: number, gammaGreen_: number, gammaBlue_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class gaussianBlurImage {
@@ -6507,8 +5239,6 @@ export  class gaussianBlurImage {
   constructor(width_: number, sigma_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class haldClutImage {
@@ -6516,8 +5246,6 @@ export  class haldClutImage {
   constructor(haldClutImage_: Magick.Image);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class implodeImage {
@@ -6527,8 +5255,6 @@ export  class implodeImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class inverseFourierTransformImage {
@@ -6536,8 +5262,6 @@ export  class inverseFourierTransformImage {
   constructor(phaseImage_: Magick.Image);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class isValidImage {
@@ -6545,8 +5269,6 @@ export  class isValidImage {
   constructor(isValid_: boolean);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class labelImage {
@@ -6554,8 +5276,6 @@ export  class labelImage {
   constructor(label_: string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class levelImage {
@@ -6565,8 +5285,6 @@ export  class levelImage {
   constructor(black_point: number, white_point: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class magnifyImage {
@@ -6574,8 +5292,6 @@ export  class magnifyImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class mapImage {
@@ -6585,8 +5301,6 @@ export  class mapImage {
   constructor(mapImage_: Magick.Image);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class medianConvolveImage {
@@ -6596,8 +5310,6 @@ export  class medianConvolveImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class minifyImage {
@@ -6605,8 +5317,6 @@ export  class minifyImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class modulateImage {
@@ -6614,8 +5324,6 @@ export  class modulateImage {
   constructor(brightness_: number, saturation_: number, hue_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class negateImage {
@@ -6625,8 +5333,6 @@ export  class negateImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class normalizeImage {
@@ -6634,8 +5340,6 @@ export  class normalizeImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class oilPaintImage {
@@ -6645,8 +5349,6 @@ export  class oilPaintImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class alphaImage {
@@ -6654,8 +5356,6 @@ export  class alphaImage {
   constructor(alpha_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class opaqueImage {
@@ -6663,8 +5363,6 @@ export  class opaqueImage {
   constructor(opaqueColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono, penColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class quantizeImage {
@@ -6674,8 +5372,6 @@ export  class quantizeImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class raiseImage {
@@ -6687,8 +5383,6 @@ export  class raiseImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class ReadOptions {
@@ -6727,8 +5421,6 @@ export  class reduceNoiseImage {
   constructor(order_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class resizeImage {
@@ -6736,8 +5428,6 @@ export  class resizeImage {
   constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class rollImage {
@@ -6747,8 +5437,6 @@ export  class rollImage {
   constructor(columns_: number, rows_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class rotateImage {
@@ -6756,8 +5444,6 @@ export  class rotateImage {
   constructor(degrees_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class sampleImage {
@@ -6765,8 +5451,6 @@ export  class sampleImage {
   constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class scaleImage {
@@ -6774,8 +5458,6 @@ export  class scaleImage {
   constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class segmentImage {
@@ -6787,8 +5469,6 @@ export  class segmentImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class shadeImage {
@@ -6802,8 +5482,6 @@ export  class shadeImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class shadowImage {
@@ -6819,8 +5497,6 @@ export  class shadowImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class sharpenImage {
@@ -6832,8 +5508,6 @@ export  class sharpenImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class shaveImage {
@@ -6841,8 +5515,6 @@ export  class shaveImage {
   constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class shearImage {
@@ -6850,8 +5522,6 @@ export  class shearImage {
   constructor(xShearAngle_: number, yShearAngle_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class solarizeImage {
@@ -6859,8 +5529,6 @@ export  class solarizeImage {
   constructor(factor_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class spliceImage {
@@ -6868,8 +5536,6 @@ export  class spliceImage {
   constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class spreadImage {
@@ -6879,8 +5545,6 @@ export  class spreadImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class steganoImage {
@@ -6888,8 +5552,6 @@ export  class steganoImage {
   constructor(waterMark_: Magick.Image);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class stereoImage {
@@ -6897,8 +5559,6 @@ export  class stereoImage {
   constructor(rightImage_: Magick.Image);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class strokeColorImage {
@@ -6913,8 +5573,6 @@ export  class swirlImage {
   constructor(degrees_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class textureImage {
@@ -6922,8 +5580,6 @@ export  class textureImage {
   constructor(texture_: Magick.Image);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class thresholdImage {
@@ -6931,8 +5587,6 @@ export  class thresholdImage {
   constructor(threshold_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class transparentImage {
@@ -6940,8 +5594,6 @@ export  class transparentImage {
   constructor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class trimImage {
@@ -6949,8 +5601,6 @@ export  class trimImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class waveImage {
@@ -6962,8 +5612,6 @@ export  class waveImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class zoomImage {
@@ -6971,8 +5619,6 @@ export  class zoomImage {
   constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class adjoinImage {
@@ -6980,8 +5626,6 @@ export  class adjoinImage {
   constructor(flag_: boolean);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class animationDelayImage {
@@ -6989,8 +5633,6 @@ export  class animationDelayImage {
   constructor(delay_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class animationIterationsImage {
@@ -6998,8 +5640,6 @@ export  class animationIterationsImage {
   constructor(iterations_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class backgroundColorImage {
@@ -7014,8 +5654,6 @@ export  class backgroundTextureImage {
   constructor(backgroundTexture_: string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class borderColorImage {
@@ -7037,8 +5675,6 @@ export  class chromaBluePrimaryImage {
   constructor(x_: number, y_: number, z_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class chromaGreenPrimaryImage {
@@ -7046,8 +5682,6 @@ export  class chromaGreenPrimaryImage {
   constructor(x_: number, y_: number, z_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class chromaRedPrimaryImage {
@@ -7055,8 +5689,6 @@ export  class chromaRedPrimaryImage {
   constructor(x_: number, y_: number, z_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class chromaWhitePointImage {
@@ -7064,8 +5696,6 @@ export  class chromaWhitePointImage {
   constructor(x_: number, y_: number, z_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class colorFuzzImage {
@@ -7073,8 +5703,6 @@ export  class colorFuzzImage {
   constructor(fuzz_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class colorMapImage {
@@ -7082,8 +5710,6 @@ export  class colorMapImage {
   constructor(index_: number, color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class composeImage {
@@ -7091,8 +5717,6 @@ export  class composeImage {
   constructor(compose_: MagickCore.CompositeOperator);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class compressTypeImage {
@@ -7100,8 +5724,6 @@ export  class compressTypeImage {
   constructor(compressType_: MagickCore.CompressionType);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class densityImage {
@@ -7109,8 +5731,6 @@ export  class densityImage {
   constructor(point_: Magick.Point);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class depthImage {
@@ -7118,8 +5738,6 @@ export  class depthImage {
   constructor(depth_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class endianImage {
@@ -7127,8 +5745,6 @@ export  class endianImage {
   constructor(endian_: MagickCore.EndianType);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class fileNameImage {
@@ -7136,8 +5752,6 @@ export  class fileNameImage {
   constructor(fileName_: string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class filterTypeImage {
@@ -7145,8 +5759,6 @@ export  class filterTypeImage {
   constructor(filterType_: MagickCore.FilterType);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class fontImage {
@@ -7154,8 +5766,6 @@ export  class fontImage {
   constructor(font_: string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class fontPointsizeImage {
@@ -7163,8 +5773,6 @@ export  class fontPointsizeImage {
   constructor(pointsize_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class gifDisposeMethodImage {
@@ -7172,8 +5780,6 @@ export  class gifDisposeMethodImage {
   constructor(disposeMethod_: MagickCore.DisposeType);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class interlaceTypeImage {
@@ -7181,8 +5787,6 @@ export  class interlaceTypeImage {
   constructor(interlace_: MagickCore.InterlaceType);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class magickImage {
@@ -7190,8 +5794,6 @@ export  class magickImage {
   constructor(magick_: string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class alphaFlagImage {
@@ -7199,8 +5801,6 @@ export  class alphaFlagImage {
   constructor(alphaFlag_: boolean);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class matteColorImage {
@@ -7215,8 +5815,6 @@ export  class monochromeImage {
   constructor(monochromeFlag_: boolean);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class pixelColorImage {
@@ -7231,8 +5829,6 @@ export  class pageImage {
   constructor(pageSize_: Magick.Geometry);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class qualityImage {
@@ -7240,8 +5836,6 @@ export  class qualityImage {
   constructor(quality_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class quantizeColorsImage {
@@ -7263,8 +5857,6 @@ export  class quantizeDitherImage {
   constructor(ditherFlag_: boolean);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class quantizeTreeDepthImage {
@@ -7272,8 +5864,6 @@ export  class quantizeTreeDepthImage {
   constructor(treeDepth_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class renderingIntentImage {
@@ -7281,8 +5871,6 @@ export  class renderingIntentImage {
   constructor(renderingIntent_: any);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class resolutionUnitsImage {
@@ -7290,8 +5878,6 @@ export  class resolutionUnitsImage {
   constructor(resolutionUnits_: MagickCore.ResolutionType);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class sceneImage {
@@ -7299,8 +5885,6 @@ export  class sceneImage {
   constructor(scene_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class sizeImage {
@@ -7308,8 +5892,6 @@ export  class sizeImage {
   constructor(geometry_: Magick.Geometry | string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class stripImage {
@@ -7317,8 +5899,6 @@ export  class stripImage {
   constructor();
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class subImageImage {
@@ -7326,8 +5906,6 @@ export  class subImageImage {
   constructor(subImage_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class subRangeImage {
@@ -7335,8 +5913,6 @@ export  class subRangeImage {
   constructor(subRange_: number);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class textAntiAliasImage {
@@ -7344,8 +5920,6 @@ export  class textAntiAliasImage {
   constructor(flag_: boolean);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class typeImage {
@@ -7353,8 +5927,6 @@ export  class typeImage {
   constructor(type_: MagickCore.ImageType);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class verboseImage {
@@ -7362,8 +5934,6 @@ export  class verboseImage {
   constructor(verbose_: boolean);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export  class x11DisplayImage {
@@ -7371,8 +5941,6 @@ export  class x11DisplayImage {
   constructor(display_: string);
 
   call(image_: Magick.Image): void;
-
-  callAsync(image_: Magick.Image): Promise<void>;
 }
 
 export function coderInfoList(isReadable_: Magick.CoderInfo_MatchType, isWritable_: Magick.CoderInfo_MatchType, isMultiFrame_: Magick.CoderInfo_MatchType): std.coderInfoArray;
@@ -7385,11 +5953,7 @@ export function coderInfoList(): std.coderInfoArray;
 
 export function appendImages(first_: any, stack_: boolean): Magick.Image;
 
-export function appendImagesAsync(first_: any, stack_: boolean): Promise<Magick.Image>;
-
 export function appendImages(first_: any): Magick.Image;
-
-export function appendImagesAsync(first_: any): Promise<Magick.Image>;
 
 export function averageImages(first_: any): Magick.Image;
 
@@ -7403,11 +5967,7 @@ export function deconstructImages(first_: any): Magick.Image[];
 
 export function forwardFourierTransformImage(image_: Magick.Image): Magick.Image[];
 
-export function forwardFourierTransformImageAsync(image_: Magick.Image): Promise<Magick.Image[]>;
-
 export function forwardFourierTransformImage(image_: Magick.Image, magnitude_: boolean): Magick.Image[];
-
-export function forwardFourierTransformImageAsync(image_: Magick.Image, magnitude_: boolean): Promise<Magick.Image[]>;
 
 export function montageImages(first_: any, options_: Magick.Montage | Magick.MontageFramed): Magick.Image[];
 
@@ -7415,35 +5975,19 @@ export function morphImages(first_: any, frames_: number): Magick.Image[];
 
 export function readImages(imageSpec_: string, options: Magick.ReadOptions): Magick.Image[];
 
-export function readImagesAsync(imageSpec_: string, options: Magick.ReadOptions): Promise<Magick.Image[]>;
-
 export function readImages(imageSpec_: string): Magick.Image[];
-
-export function readImagesAsync(imageSpec_: string): Promise<Magick.Image[]>;
 
 export function readImages(blob_: Magick.Blob, options: Magick.ReadOptions): Magick.Image[];
 
-export function readImagesAsync(blob_: Magick.Blob, options: Magick.ReadOptions): Promise<Magick.Image[]>;
-
 export function readImages(blob_: Magick.Blob): Magick.Image[];
-
-export function readImagesAsync(blob_: Magick.Blob): Promise<Magick.Image[]>;
 
 export function writeImages(first_: any, imageSpec_: string, adjoin_: boolean): void;
 
-export function writeImagesAsync(first_: any, imageSpec_: string, adjoin_: boolean): Promise<void>;
-
 export function writeImages(first_: any, imageSpec_: string): void;
-
-export function writeImagesAsync(first_: any, imageSpec_: string): Promise<void>;
 
 export function writeImages(first_: any, blob_: Magick.Blob, adjoin_: boolean): void;
 
-export function writeImagesAsync(first_: any, blob_: Magick.Blob, adjoin_: boolean): Promise<void>;
-
 export function writeImages(first_: any, blob_: Magick.Blob): void;
-
-export function writeImagesAsync(first_: any, blob_: Magick.Blob): Promise<void>;
 
 
 }
