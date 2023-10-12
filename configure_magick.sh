@@ -27,5 +27,6 @@ cat build/conanbuildinfo.args | sed 's/-framework.*//g;
     s/[[:space:]]\+-m64[[:space:]]\+/ /g;
     s/[[:space:]]\+-O3[[:space:]]\+/ /g;
     s/[[:space:]]\+-s[[:space:]]\+/ /g;
+    s/[[:space:]]\+-Wl,-rpath[^[:space:]]\+[[:space:]]\+/ /g;
     s/[[:space:]]\+-DNDEBUG[[:space:]]\+/ /g;'
 echo -n " ${X11_LIBS} ${XEXT_LIBS}"

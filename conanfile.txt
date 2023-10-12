@@ -37,6 +37,7 @@ libraw:with_jpeg=libjpeg-turbo
 #glib:shared=False
 #glib:fPIC=True
 #harfbuzz:with_glib=False
+libwebp:with_simd=False
 
 [generators]
 compiler_args

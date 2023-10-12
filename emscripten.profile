@@ -4,7 +4,6 @@ include(default)
 os=Emscripten
 arch=wasm
 compiler=clang
-#compiler.version=15
 compiler.libcxx=libc++
 
 [options]

@@ -119,11 +119,12 @@ using namespace Magick;
 // Everything else is optional
 %include "MagickCore.i"
 
+// WASM async is still not implemented
+#ifndef WASM
 // Enable async on select classes
 // Async is very expensive (compilation-wise) and free Github Actions runners
 // are limited to 7GB. Sponsorship of this project will go a long way
 // towards more features.
-#ifdef ASYNC
 %feature("async:locking", "1");
 %define LOCKED_ASYNC(TYPE)
 %apply SWIGTYPE  LOCK {TYPE};
