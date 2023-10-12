@@ -14,7 +14,7 @@
     ],
     'configurations': {
       'Debug': {
-        'defines': [],
+        'defines': [ 'DEBUG' ],
         'ldflags': [ '-Wl,-z,now' ],
         'xcode_settings': {
           'OTHER_LDFLAGS': [ '-Wl,-bind_at_load' ]
@@ -26,6 +26,8 @@
         ]
       },
       'Release': {
+        'cflags_cc': [ '-O2' ],
+        'defines': [ 'NDEBUG' ]
       }
     }
   },
@@ -340,6 +342,12 @@
               }]
             ],
             'action': [ 'sh', 'build_magick_wasm.sh', '<(module_path)', '<(hdri)' ]
+          },
+          {
+            'action_name': 'dummy-wasm',
+            'inputs': [ '<(PRODUCT_DIR)/node-magickwand.js' ],
+            'outputs': [ '<(PRODUCT_DIR)/node-magickwand.wasm' ],
+            'action': [ 'true' ]
           }
         ],
         'direct_dependent_settings': {
