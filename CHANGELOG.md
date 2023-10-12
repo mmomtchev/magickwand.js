@@ -2,6 +2,7 @@
 
 ### [0.9.7]
 
+ - Update `libwebp` to 1.3.2 to fix a number of recent critical vulnerabilities including CVE-2023-4863
  - Update ImageMagick to 7.1.1-20
  - Enable OpenMP in the pre-built binaries on Linux and macOS (it was already enabled on Windows)
  - Fix [#39](https://github.com/mmomtchev/node-magickwand/issues/39), do not install `conan` in the system directory
