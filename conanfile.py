@@ -45,14 +45,15 @@ class ImageMagickDelegates(ConanFile):
     def requirements(self):
       if self.settings.arch != 'wasm':
         # Fonts and OpenMP are not available on WASM targets
-        self.requires += (
+        for pkg in (
           'libffi/3.4.4',
           'fontconfig/2.14.2',
           'glib/2.78.0',
           'harfbuzz/7.1.0',
           'highway/1.0.3',
           'llvm-openmp/12.0.1'
-        )
+        ):
+          self.requires(pkg)
 
     def configure(self):
       if self.settings.arch != 'wasm':
