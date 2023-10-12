@@ -40,7 +40,7 @@ class ImageMagickDelegates(ConanFile):
       'libjpeg-turbo'
     }
 
-    generators = 'compiler_args', 'pkg_config'
+    generators = 'compiler_args', 'pkg_config', 'json'
 
     def requirements(self):
       if self.settings.arch != 'wasm':

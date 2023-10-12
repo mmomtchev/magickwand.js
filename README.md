@@ -205,6 +205,13 @@ SWIG Node-API WASM is available from https://github.com/mmomtchev/swig/tree/wasm
 
 There is no documentation available at the moment.
 
+Build with:
+
+```
+node-pre-gyp configure --nodedir=./wasm --target_arch=wasm32 --target_platform=wasm
+node-pre-gyp build
+```
+
 ## Using this project as a tutorial for creating C++ bindings for Node.js with SWIG
 
 ImageMagick is the perfect candidate for an automatically generated with SWIG Node.js addon:

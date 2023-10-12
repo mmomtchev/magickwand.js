@@ -14,9 +14,7 @@
     ],
     'configurations': {
       'Debug': {
-        'defines': [
-          'SWIGRUNTIME_DEBUG'
-        ],
+        'defines': [],
         'ldflags': [ '-Wl,-z,now' ],
         'xcode_settings': {
           'OTHER_LDFLAGS': [ '-Wl,-bind_at_load' ]
@@ -39,7 +37,9 @@
       ],      
       'cflags': [
         '-Wno-deprecated-declarations',
-        '-Wno-unused-function'
+        '-Wno-unused-function',
+        # clang does not properly identify SWIG defines containing throw or goto
+        '-Wno-sometimes-uninitialized'
       ],
       'cflags_cc': [
         '-std=c++11',
@@ -61,6 +61,18 @@
         }
       },
       'conditions': [
+        # Emscripten compilation options
+        ['target_arch == "wasm32"', {
+          'cflags': [
+		        '-sNO_DISABLE_EXCEPTION_CATCHING'
+          ],
+          'ldflags': [
+		        '--embed-file=<(module_root_dir)/test/data/wizard.gif@wizard.gif',
+		        '-sNO_DISABLE_EXCEPTION_CATCHING',
+            '-sMODULARIZE',
+		        '--bind'
+          ]
+        }],
         # Link against a system-installed ImageMagick
         ['shared_imagemagick == "true"', {
           'libraries': [ '<@(magicklibs)' ]
@@ -80,7 +92,7 @@
         ['enable_hdri == "true"', {
           'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
         }],
-        # Regenerate the SWIG wrappers when needed
+        # Regenerate the SWIG wrappers when needed (this is currently broken)
         ['enable_hdri!=default_hdri or regen_swig=="true"', {
           'actions': [{
             'conditions': [
@@ -107,32 +119,23 @@
               'src/Magick++.i'
             ]
           }]
-        }]
-      ],
-      'dependencies': [
-        "<!(node -p \"require('node-addon-api').gyp\")"
-      ],
-      'sources': [
-        'swig/Magick++.cxx'
-      ],
-    },
-    {
-      'target_name': 'action_after_build',
-      'type': 'none',
-      'dependencies': [ '<(module_name)' ],
-      'copies': [
+        }],
+        ['target_arch != "wasm32"', {
+          'sources': [
+            'swig/Magick++.cxx'
+          ]
+        },
         {
-          'files': [
-            '<(PRODUCT_DIR)/node-magickwand.node'
-          ],
-          'destination': '<(module_path)'
-        }
-      ]
+          'sources': [
+            'swig/wasm/Magick++.cxx',
+          ]
+        }]
+      ],      
     }
   ],
   'conditions': [
     # Build the included ImageMagick library on POSIX
-    ['OS != "win" and shared_imagemagick == "false"', {
+    ['target_arch != "wasm32" and (OS == "linux" or OS =="mac") and shared_imagemagick == "false"', {
       'targets': [{
         'conditions': [
           ['enable_hdri == "false"', {
@@ -184,7 +187,7 @@
       }]
     }],
     # Build the included ImageMagick library on Windows
-    ['OS == "win" and shared_imagemagick == "false"', {
+    ['target_arch != "wasm32" and OS == "win" and shared_imagemagick == "false"', {
       'targets': [{
         'conditions': [
           ['enable_hdri == "false"', {
@@ -255,6 +258,102 @@
           # This is the Windows version of the same hack as above
           # Here we invoke the official ImageMagick-Windows downloader
           'inputs': [ '<!@(configure_magick.bat > configure.log)' ]
+        }
+      }]
+    }],
+    # Copy the final binary native DLL
+    ['target_arch != "wasm32"', {
+      'targets': [
+        {
+          'target_name': 'action_after_build',
+          'type': 'none',
+          'dependencies': [ '<(module_name)' ],
+          'copies': [
+            {
+              'files': [
+                '<(PRODUCT_DIR)/node-magickwand.node'
+              ],
+              'destination': '<(module_path)'
+            }
+          ]
+        }
+      ]
+    }],
+    # Build the included ImageMagick library for WASM
+    ['target_arch == "wasm32"', {
+      'variables': {
+        'target_platform': 'wasm',
+        'emcc_path': '<!((pip3 install --user "conan<2.0.0" && cd build && python3 -m conans.conan install .. -pr:b=default -pr:h=../emscripten.profile -of build --build=missing) > /dev/null && node -p "JSON.parse(fs.readFileSync(\'build/conanbuildinfo.json\')).deps_env_info.CC")'
+      },
+      'make_global_settings': [
+        ['CXX', '<(emcc_path)'],
+        ['CC', '<(emcc_path)'],
+        ['CXX.target', '<(emcc_path)'],
+        ['CC.target', '<(emcc_path)'],
+        ['LINK', '<(emcc_path)']
+      ],
+      'targets': [
+        # Copy the final binary WASM
+        {
+          'target_name': 'action_after_build',
+          'type': 'none',
+          'dependencies': [ '<(module_name)' ],
+          'copies': [
+            {
+              'files': [
+                '<(PRODUCT_DIR)/node-magickwand.js',
+                '<(PRODUCT_DIR)/node-magickwand.wasm'
+              ],
+              'destination': '<(module_path)'
+            }
+          ]
+        },
+        {
+        'conditions': [
+          ['enable_hdri == "false"', {
+            'variables': {
+              'hdri': '--disable-hdri',
+              'magickdefines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+              'magicklibs': [ '-lMagick++-7.Q16', '-lMagickWand-7.Q16', '-lMagickCore-7.Q16' ]
+            }
+          }],
+          ['enable_hdri == "true"', {
+            'variables': {
+              'hdri': '--enable-hdri',
+              'magickdefines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+              'magicklibs': [ '-lMagick++-7.Q16HDRI', '-lMagickWand-7.Q16HDRI', '-lMagickCore-7.Q16HDRI' ]
+            }
+          }]
+        ],
+        'target_name': 'imagemagick',
+        'type': 'none',
+        'actions': [
+          {
+            'action_name': 'make',
+            'inputs': [ '<(module_root_dir)/deps/ImageMagick/configure' ],
+            'conditions': [
+              ['enable_hdri == "false"', {
+                'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16.a' ],
+              }],
+              ['enable_hdri == "true"', {
+                'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16HDRI.a' ],
+              }]
+            ],
+            'action': [ 'sh', 'build_magick_wasm.sh', '<(module_path)', '<(hdri)' ]
+          }
+        ],
+        'direct_dependent_settings': {
+          'defines': [ '<@(magickdefines)' ],
+          'libraries': [
+            '-L../deps/ImageMagick/Magick++/lib/.libs/',
+            '-L../deps/ImageMagick/MagickWand/.libs/',
+            '-L../deps/ImageMagick/MagickCore/.libs',
+            '<@(magicklibs)',
+            # This an ugly hack that enable running of shell commands during node-gyp configure
+            # node-gyp configure needs to evaluate this expression to generate the platform-specific files
+            # (originally by TooTallNate for libffi) 
+            '<!@(bash configure_magick_wasm.sh <(hdri))'
+          ]
         }
       }]
     }]

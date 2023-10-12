@@ -1,5 +1,5 @@
 const emnapi = require('@emnapi/runtime');
-require('./build/imagemagick.js')()
+require('./lib/binding/wasm-wasm32/node-magickwand.js')()
   .then((mod) => {
     const binding = mod.emnapiInit({ context: emnapi.getDefaultContext() });
     const { Magick, MagickCore, MagickVersion } = binding;
