@@ -72,7 +72,9 @@ for (const file of [
   'Magick++.cxx',
   'magick++.i',
   'magickwand.i',
-  'Magick++.d.ts'
+  'Magick++.d.ts',
+  'wasm/Magick++.cxx',
+  'wasm/Magick++.d.ts'
 ]) {
   q.push(download(
     `https://raw.githubusercontent.com/mmomtchev/node-magickwand/${commit}/${file}`,
