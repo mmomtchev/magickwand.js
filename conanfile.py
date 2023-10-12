@@ -13,8 +13,6 @@ class ImageMagickDelegates(ConanFile):
       'libde265/1.0.11',
       'openexr/3.1.5',
       'fftw/3.3.10',
-      'freetype/2.13.0',
-      'fribidi/1.0.12',
       'libheif/1.13.0',
       'jasper/4.0.0',
       'jbig/20160605',
@@ -48,6 +46,8 @@ class ImageMagickDelegates(ConanFile):
         for pkg in (
           'libffi/3.4.4',
           'fontconfig/2.14.2',
+          'freetype/2.13.0',
+          'fribidi/1.0.12',
           'glib/2.78.0',
           'harfbuzz/7.1.0',
           'highway/1.0.3',
