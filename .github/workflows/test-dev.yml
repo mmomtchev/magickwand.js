@@ -27,6 +27,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
+      - name: Cache conan artifacts
+        id: conan-artifacts
+        uses: actions/cache@v3
+        with:
+          path: .conan
+          key: ${{ runner.os }}-conan
       - name: Install fonts on Ubuntu
         run: |
           [[ '${{ matrix.platform }}' =~ 'ubuntu' ]] && sudo apt-get install -y fonts-ubuntu || true
@@ -53,6 +59,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
+      - name: Cache conan artifacts
+        id: conan-artifacts
+        uses: actions/cache@v3
+        with:
+          path: .conan
+          key: wasm-conan
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --nodedir=./wasm --target_arch=wasm32 --target_platform=wasm
@@ -75,6 +87,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
+      - name: Cache conan artifacts
+        id: conan-artifacts
+        uses: actions/cache@v3
+        with:
+          path: .conan
+          key: ${{ runner.os }}-conan
       - name: Install fonts on Ubuntu
         run: |
           [[ '${{ matrix.platform }}' =~ 'ubuntu' ]] && sudo apt-get install -y fonts-ubuntu || true
