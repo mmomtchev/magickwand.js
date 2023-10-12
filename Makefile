@@ -1,6 +1,6 @@
 all: build/imagemagick.js
 
-build/conan.wasm.args: Makefile conanfile.txt
+build/conan.wasm.args: Makefile conanfile.py
 	( cd build && python3 -m conans.conan install .. -pr:b=default -pr:h=../emscripten.profile -of build --build=missing )
 	sh configure_magick_wasm.sh
 	sh build_magick_wasm.sh
