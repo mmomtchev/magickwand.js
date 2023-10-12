@@ -228,6 +228,8 @@ ImageMagick is a very widely used software. Security vulnerabilities tend to be 
 
 The current ImageMagick version can be checked in the `MagickLibVersionText` / `MagickLibAddendum` global exported constants.
 
+**Versions of `node-magickwand` up to 0.9.6 including are compiled with a vulnerable `libwebp`.**
+
 **Special care must be exercised when ImageMagick is used to process images coming from untrusted sources**. Although possible, outright arbitrary code execution by embedded malicious code in an image is extremely rare and there has been only one such case during the last 30 years - the infamous [`ImageTragick`](https://www.cve.org/CVERecord?id=CVE-2016-3714) exploit in 2016. **It did not affect users who had restrictive security policies.**
 
 However DoS attacks are much more common as it is relatively easy to construct an image that will be of relatively small size when compressed, but it will expand to fill all available memory once uncompressed.
