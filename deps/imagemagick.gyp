@@ -10,8 +10,30 @@
       'includes': [
         '../wasm.gypi'
       ]
+    }],
+    # TODO: Implement no-HDRI build on Windows
+    ['enable_hdri == "false"', {
+      'variables': {
+        'hdri': '--disable-hdri',
+        'magickdefines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+        'magicklibs': [ '-lMagick++-7.Q16', '-lMagickWand-7.Q16', '-lMagickCore-7.Q16' ]
+      }
+    }],
+    ['enable_hdri == "true"', {
+      'variables': {
+        'hdri': '--enable-hdri',
+        'magickdefines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
+        'magicklibs': [ '-lMagick++-7.Q16HDRI', '-lMagickWand-7.Q16HDRI', '-lMagickCore-7.Q16HDRI' ]
+      }
     }]
   ],
+  'direct_dependent_settings': {
+    'defines': [ '<@(magickdefines)' ],
+    'include_dirs': [
+      '<(module_root_dir)/deps/ImageMagick/Magick++/lib',
+      '<(module_root_dir)/deps/ImageMagick'
+    ]
+  },
   'targets': [{
     'target_name': 'imagemagick',
     # It is in fact a static_library but we do everything manually
@@ -54,28 +76,7 @@
             ]
           }
         ],
-        'conditions': [
-          ['enable_hdri == "false"', {
-            'variables': {
-              'hdri': '--disable-hdri',
-              'magickdefines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-              'magicklibs': [ '-lMagick++-7.Q16', '-lMagickWand-7.Q16', '-lMagickCore-7.Q16' ]
-            }
-          }],
-          ['enable_hdri == "true"', {
-            'variables': {
-              'hdri': '--enable-hdri',
-              'magickdefines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-              'magicklibs': [ '-lMagick++-7.Q16HDRI', '-lMagickWand-7.Q16HDRI', '-lMagickCore-7.Q16HDRI' ]
-            }
-          }]
-        ],
         'direct_dependent_settings': {
-          'defines': [ '<@(magickdefines)' ],
-          'include_dirs': [
-            '<(module_root_dir)/deps/ImageMagick/Magick++/lib',
-            '<(module_root_dir)/deps/ImageMagick'
-          ],
           'libraries': [
             '-L<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/',
             '-L<(module_root_dir)/deps/ImageMagick/MagickWand/.libs/',
@@ -94,13 +95,6 @@
       }],
       # Windows build
       ['target_platform != "wasm" and OS == "win"', {
-        'conditions': [
-          ['enable_hdri == "false"', {
-            # TODO: Implement no-HDRI build on Windows
-          }],
-          ['enable_hdri == "true"', {
-          }]
-        ],
         'actions': [
           {
             'action_name': 'make',
@@ -110,18 +104,6 @@
           }
         ],
         'direct_dependent_settings': {
-          'conditions': [
-            ['enable_hdri == "false"', {
-              'defines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-            }],
-            ['enable_hdri == "true"', {
-              'defines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-            }]
-          ],
-          'include_dirs': [
-            '<(module_root_dir)/deps/ImageMagick/Magick++/lib',
-            '<(module_root_dir)/deps/ImageMagick'
-          ],
           'libraries': [
             'CORE_<(winlibid)_aom_.lib',
             'CORE_<(winlibid)_brotli_.lib',
