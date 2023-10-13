@@ -1612,7 +1612,7 @@ export  class Blob {
 
   constructor();
 
-  constructor(data_: ArrayBuffer);
+  constructor(data_: Buffer);
 
   constructor(blob_: Magick.Blob);
 
@@ -1630,13 +1630,13 @@ export  class Blob {
 
   lengthAsync(): Promise<number>;
 
-  update(data_: ArrayBuffer): void;
+  update(data_: Buffer): void;
 
-  updateAsync(data_: ArrayBuffer): Promise<void>;
+  updateAsync(data_: Buffer): Promise<void>;
 
-  data(): ArrayBuffer;
+  data(): Buffer;
 
-  dataAsync(): Promise<ArrayBuffer>;
+  dataAsync(): Promise<Buffer>;
 }
 
 export function equal(left_: any, right_: any): number;
@@ -3647,23 +3647,43 @@ export  class Image {
 
   alpha(alphaFlag_: boolean): void;
 
+  alphaAsync(alphaFlag_: boolean): Promise<void>;
+
   alpha(): boolean;
+
+  alphaAsync(): Promise<boolean>;
 
   matteColor(matteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
+  matteColorAsync(matteColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
+
   matteColor(): Magick.Color;
+
+  matteColorAsync(): Promise<Magick.Color>;
 
   animationDelay(delay_: number): void;
 
+  animationDelayAsync(delay_: number): Promise<void>;
+
   animationDelay(): number;
+
+  animationDelayAsync(): Promise<number>;
 
   animationIterations(iterations_: number): void;
 
+  animationIterationsAsync(iterations_: number): Promise<void>;
+
   animationIterations(): number;
+
+  animationIterationsAsync(): Promise<number>;
 
   backgroundColor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
+  backgroundColorAsync(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
+
   backgroundColor(): Magick.Color;
+
+  backgroundColorAsync(): Promise<Magick.Color>;
 
   backgroundTexture(backgroundTexture_: string): void;
 
@@ -3675,9 +3695,15 @@ export  class Image {
 
   baseColumns(): number;
 
+  baseColumnsAsync(): Promise<number>;
+
   baseFilename(): string;
 
+  baseFilenameAsync(): Promise<string>;
+
   baseRows(): number;
+
+  baseRowsAsync(): Promise<number>;
 
   blackPointCompensation(flag_: boolean): void;
 
@@ -3689,7 +3715,11 @@ export  class Image {
 
   borderColor(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
+  borderColorAsync(color_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
+
   borderColor(): Magick.Color;
+
+  borderColorAsync(): Promise<Magick.Color>;
 
   boundingBox(): Magick.Geometry;
 
@@ -3705,9 +3735,15 @@ export  class Image {
 
   channelDepth(channel_: MagickCore.ChannelType, depth_: number): void;
 
+  channelDepthAsync(channel_: MagickCore.ChannelType, depth_: number): Promise<void>;
+
   channelDepth(channel_: MagickCore.ChannelType): number;
 
+  channelDepthAsync(channel_: MagickCore.ChannelType): Promise<number>;
+
   channels(): number;
+
+  channelsAsync(): Promise<number>;
 
   classType(class_: MagickCore.ClassType): void;
 
@@ -3751,6 +3787,8 @@ export  class Image {
 
   columns(): number;
 
+  columnsAsync(): Promise<number>;
+
   comment(comment_: string): void;
 
   commentAsync(comment_: string): Promise<void>;
@@ -3777,7 +3815,11 @@ export  class Image {
 
   debug(flag_: boolean): void;
 
+  debugAsync(flag_: boolean): Promise<void>;
+
   debug(): boolean;
+
+  debugAsync(): Promise<boolean>;
 
   density(density_: Magick.Point): void;
 
@@ -3796,6 +3838,8 @@ export  class Image {
   depthAsync(): Promise<number>;
 
   directory(): string;
+
+  directoryAsync(): Promise<string>;
 
   endian(endian_: MagickCore.EndianType): void;
 
@@ -3823,43 +3867,83 @@ export  class Image {
 
   fileSize(): number;
 
+  fileSizeAsync(): Promise<number>;
+
   fillColor(fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
+
+  fillColorAsync(fillColor_: Magick.Color | string | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   fillColor(): Magick.Color;
 
+  fillColorAsync(): Promise<Magick.Color>;
+
   fillRule(fillRule_: any): void;
+
+  fillRuleAsync(fillRule_: any): Promise<void>;
 
   fillRule(): any;
 
+  fillRuleAsync(): Promise<any>;
+
   fillPattern(fillPattern_: Magick.Image): void;
+
+  fillPatternAsync(fillPattern_: Magick.Image): Promise<void>;
 
   fillPattern(): Magick.Image;
 
+  fillPatternAsync(): Promise<Magick.Image>;
+
   filterType(filterType_: MagickCore.FilterType): void;
+
+  filterTypeAsync(filterType_: MagickCore.FilterType): Promise<void>;
 
   filterType(): MagickCore.FilterType;
 
+  filterTypeAsync(): Promise<MagickCore.FilterType>;
+
   font(font_: string): void;
+
+  fontAsync(font_: string): Promise<void>;
 
   font(): string;
 
+  fontAsync(): Promise<string>;
+
   fontFamily(family_: string): void;
+
+  fontFamilyAsync(family_: string): Promise<void>;
 
   fontFamily(): string;
 
+  fontFamilyAsync(): Promise<string>;
+
   fontPointsize(pointSize_: number): void;
+
+  fontPointsizeAsync(pointSize_: number): Promise<void>;
 
   fontPointsize(): number;
 
+  fontPointsizeAsync(): Promise<number>;
+
   fontStyle(style_: MagickCore.StyleType): void;
+
+  fontStyleAsync(style_: MagickCore.StyleType): Promise<void>;
 
   fontStyle(): MagickCore.StyleType;
 
+  fontStyleAsync(): Promise<MagickCore.StyleType>;
+
   fontWeight(weight_: number): void;
+
+  fontWeightAsync(weight_: number): Promise<void>;
 
   fontWeight(): number;
 
+  fontWeightAsync(): Promise<number>;
+
   format(): string;
+
+  formatAsync(): Promise<string>;
 
   formatExpression(expression: string): string;
 
@@ -3871,6 +3955,8 @@ export  class Image {
 
   geometry(): Magick.Geometry;
 
+  geometryAsync(): Promise<Magick.Geometry>;
+
   gifDisposeMethod(disposeMethod_: MagickCore.DisposeType): void;
 
   gifDisposeMethodAsync(disposeMethod_: MagickCore.DisposeType): Promise<void>;
@@ -3881,7 +3967,11 @@ export  class Image {
 
   hasChannel(channel: any): boolean;
 
+  hasChannelAsync(channel: any): Promise<boolean>;
+
   highlightColor(color_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
+
+  highlightColorAsync(color_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
 
   iccColorProfile(colorProfile_: Magick.Blob): void;
 
@@ -3921,11 +4011,19 @@ export  class Image {
 
   isValid(isValid_: boolean): void;
 
+  isValidAsync(isValid_: boolean): Promise<void>;
+
   isValid(): boolean;
+
+  isValidAsync(): Promise<boolean>;
 
   label(label_: string): void;
 
+  labelAsync(label_: string): Promise<void>;
+
   label(): string;
+
+  labelAsync(): Promise<string>;
 
   lowlightColor(color_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
@@ -4041,7 +4139,11 @@ export  class Image {
 
   quiet(quiet_: boolean): void;
 
+  quietAsync(quiet_: boolean): Promise<void>;
+
   quiet(): boolean;
+
+  quietAsync(): Promise<boolean>;
 
   renderingIntent(renderingIntent_: any): void;
 
@@ -4060,6 +4162,8 @@ export  class Image {
   resolutionUnitsAsync(): Promise<MagickCore.ResolutionType>;
 
   rows(): number;
+
+  rowsAsync(): Promise<number>;
 
   samplingFactor(samplingFactor_: string): void;
 
@@ -4175,35 +4279,67 @@ export  class Image {
 
   textAntiAlias(flag_: boolean): void;
 
+  textAntiAliasAsync(flag_: boolean): Promise<void>;
+
   textAntiAlias(): boolean;
+
+  textAntiAliasAsync(): Promise<boolean>;
 
   textDirection(direction_: MagickCore.DirectionType): void;
 
+  textDirectionAsync(direction_: MagickCore.DirectionType): Promise<void>;
+
   textDirection(): MagickCore.DirectionType;
+
+  textDirectionAsync(): Promise<MagickCore.DirectionType>;
 
   textEncoding(encoding_: string): void;
 
+  textEncodingAsync(encoding_: string): Promise<void>;
+
   textEncoding(): string;
+
+  textEncodingAsync(): Promise<string>;
 
   textGravity(gravity_: MagickCore.GravityType): void;
 
+  textGravityAsync(gravity_: MagickCore.GravityType): Promise<void>;
+
   textGravity(): MagickCore.GravityType;
+
+  textGravityAsync(): Promise<MagickCore.GravityType>;
 
   textInterlineSpacing(spacing_: number): void;
 
+  textInterlineSpacingAsync(spacing_: number): Promise<void>;
+
   textInterlineSpacing(): number;
+
+  textInterlineSpacingAsync(): Promise<number>;
 
   textInterwordSpacing(spacing_: number): void;
 
+  textInterwordSpacingAsync(spacing_: number): Promise<void>;
+
   textInterwordSpacing(): number;
+
+  textInterwordSpacingAsync(): Promise<number>;
 
   textKerning(kerning_: number): void;
 
+  textKerningAsync(kerning_: number): Promise<void>;
+
   textKerning(): number;
+
+  textKerningAsync(): Promise<number>;
 
   textUnderColor(underColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): void;
 
+  textUnderColorAsync(underColor_: Magick.Color | Magick.ColorHSL | Magick.ColorGray | Magick.ColorYUV | Magick.ColorCMYK | Magick.ColorRGB | Magick.ColorMono): Promise<void>;
+
   textUnderColor(): Magick.Color;
+
+  textUnderColorAsync(): Promise<Magick.Color>;
 
   totalColors(): number;
 
@@ -4231,7 +4367,11 @@ export  class Image {
 
   verbose(verboseFlag_: boolean): void;
 
+  verboseAsync(verboseFlag_: boolean): Promise<void>;
+
   verbose(): boolean;
+
+  verboseAsync(): Promise<boolean>;
 
   virtualPixelMethod(virtualPixelMethod_: any): void;
 
@@ -4251,7 +4391,11 @@ export  class Image {
 
   xResolution(): number;
 
+  xResolutionAsync(): Promise<number>;
+
   yResolution(): number;
+
+  yResolutionAsync(): Promise<number>;
 
   adaptiveBlur(radius_: number, sigma_: number): void;
 
@@ -4322,6 +4466,8 @@ export  class Image {
   affineTransformAsync(affine: Magick.DrawableAffine): Promise<void>;
 
   alpha(alpha_: number): void;
+
+  alphaAsync(alpha_: number): Promise<void>;
 
   alphaChannel(alphaOption_: any): void;
 
