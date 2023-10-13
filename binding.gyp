@@ -173,6 +173,13 @@
               'destination': '<(module_path)'
             }
           ]
+        },
+        {
+          # Dummy action to signal gyp that .wasm is produced with .js
+          'action_name': 'dummy-wasm',
+          'inputs': [ '<(PRODUCT_DIR)/node-magickwand.js' ],
+          'outputs': [ '<(PRODUCT_DIR)/node-magickwand.wasm' ],
+          'action': [ 'true' ]
         }
       ]
     }]
