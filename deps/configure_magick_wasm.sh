@@ -6,7 +6,7 @@ unset SDKROOT
 # Get the build flags from conan and shunt the auto-detection from the system
 export EM_PKG_CONFIG_PATH=$(pwd)/build
 
-EMSDK_PATH=`node -e "console.log(JSON.parse(fs.readFileSync('../build/conanbuildinfo.json')).deps_env_info.EMSDK)"`
+EMSDK_PATH=`node -p "JSON.parse(fs.readFileSync('../build/conanbuildinfo.json')).deps_env_info.EMSDK"`
 . ${EMSDK_PATH}/emsdk_env.sh
 
 cd ImageMagick
