@@ -3,6 +3,6 @@
 unset MAKEFLAGS
 unset SDKROOT
 
-cd deps/ImageMagick
+cd ImageMagick
 
 make -j4

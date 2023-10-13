@@ -10,7 +10,7 @@ on:
     branches: ["*"]
 
 jobs:
-  release:
+  native:
     runs-on: ${{ matrix.platform }}
 
     strategy:

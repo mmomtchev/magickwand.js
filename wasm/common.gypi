@@ -25,6 +25,7 @@
       '-sNODEJS_CATCH_REJECTION=0',
       '-sAUTO_JS_LIBRARIES=0',
       '-sAUTO_NATIVE_LIBRARIES=0',
+      '--bind'
     ],
     'defines': [
       '__STDC_FORMAT_MACROS',
@@ -59,7 +60,7 @@
       ['wasm_threads == 1', {
         'cflags': [ '-pthread' ],
         'ldflags': [ '-pthread' ],
-      }],
-    ],
+      }]
+    ]
   }
 }

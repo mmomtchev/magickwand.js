@@ -1,11 +1,11 @@
 SET SCRIPT_DIR=%~dp0
 
-cd %SCRIPT_DIR%\deps\ImageMagick-Windows
+cd %SCRIPT_DIR%\ImageMagick-Windows
 (rd /q /s ImageMagick) ^& if %ERRORLEVEL% leq 1 set ERRORLEVEL = 0
 call CloneRepositories.cmd
 rd /q /s ImageMagick
 mklink /J ImageMagick ..\ImageMagick
-cd %SCRIPT_DIR%
+cd %SCRIPT_DIR%\..
 
 mkdir build\bin
 if not exist "deps\ImageMagick-Windows\VisualMagick\bin\ffmpeg.exe" (
