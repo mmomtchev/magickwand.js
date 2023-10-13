@@ -69,7 +69,9 @@ jobs:
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --nodedir=./wasm --target_arch=wasm32 --target_platform=wasm
       - run: npx @mapbox/node-pre-gyp build -j max
-      - run: node run.js
+      - run: |
+          cd test/browser/webpack/
+          npx webpack --mode=production
 
   debug-asan:
     runs-on: ${{ matrix.platform }}
