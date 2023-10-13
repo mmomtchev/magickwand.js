@@ -96,7 +96,7 @@
       # Windows build
       ['target_platform != "wasm" and OS == "win"', {
         'variables': {
-          'magick_win_lib': 'ImageMagick-Windows/VisualMagick/lib'
+          'magick_win_lib': '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/lib'
         },
         'actions': [
           {
