@@ -49,6 +49,19 @@
       "parserOptions": {
         "sourceType": "module"
       }
+    },
+    {
+      "files": [
+        "test/browser/**/*.js"
+      ],
+      "env": {
+        "browser": true,
+        "es6": true,
+        "es2020": true
+      },
+      "parserOptions": {
+        "sourceType": "module"
+      }
     }
   ]
 }

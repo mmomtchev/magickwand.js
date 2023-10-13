@@ -65,6 +65,7 @@
     "@typescript-eslint/parser": "^6.7.3",
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
+    "copy-webpack-plugin": "^11.0.0",
     "emnapi": "^0.42.0",
     "eslint": "^8.50.0",
     "eslint-plugin-mocha": "^10.1.0",
@@ -72,7 +73,10 @@
     "mocha": "github:mmomtchev/mocha#repeats",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
     "@emnapi/runtime": "^0.42.0",
