@@ -78,7 +78,7 @@
             'action_name': 'make',
             'inputs': [ '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/VisualStaticMT.sln' ],
             'outputs': [ '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/lib/CORE_<(winlibid)_Magick++_.lib' ],
-            'action': [ '<(module_root_dir)/build_magick.bat', '<(module_path)', '<(winbuildtype)' ]
+            'action': [ '<(module_root_dir)/deps/build_magick.bat', '<(module_path)', '<(winbuildtype)' ]
           }
         ],
         'direct_dependent_settings': {
@@ -142,12 +142,8 @@
     }],
     # Build the included ImageMagick library for WASM
     ['target_arch == "wasm32"', {
-      'make_global_settings': [
-        ['CXX', '<!(node -p "JSON.parse(fs.readFileSync(\'../build/conanbuildinfo.json\')).deps_env_info.CXX")'],
-        ['CC', '<!(node -p "JSON.parse(fs.readFileSync(\'../build/conanbuildinfo.json\')).deps_env_info.CC")'],
-        ['CXX.target', '<!(node -p "JSON.parse(fs.readFileSync(\'../build/conanbuildinfo.json\')).deps_env_info.CXX")'],
-        ['CC.target', '<!(node -p "JSON.parse(fs.readFileSync(\'../build/conanbuildinfo.json\')).deps_env_info.CC")'],
-        ['LINK', '<!(node -p "JSON.parse(fs.readFileSync(\'../build/conanbuildinfo.json\')).deps_env_info.CC")']
+      'includes': [
+        '../wasm.gypi'
       ],
       'targets': [
         {
