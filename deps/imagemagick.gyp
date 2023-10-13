@@ -142,6 +142,13 @@
     }],
     # Build the included ImageMagick library for WASM
     ['target_arch == "wasm32"', {
+      'make_global_settings': [
+        ['CXX', '<!(node -p "JSON.parse(fs.readFileSync(\'../build/conanbuildinfo.json\')).deps_env_info.CXX")'],
+        ['CC', '<!(node -p "JSON.parse(fs.readFileSync(\'../build/conanbuildinfo.json\')).deps_env_info.CC")'],
+        ['CXX.target', '<!(node -p "JSON.parse(fs.readFileSync(\'../build/conanbuildinfo.json\')).deps_env_info.CXX")'],
+        ['CC.target', '<!(node -p "JSON.parse(fs.readFileSync(\'../build/conanbuildinfo.json\')).deps_env_info.CC")'],
+        ['LINK', '<!(node -p "JSON.parse(fs.readFileSync(\'../build/conanbuildinfo.json\')).deps_env_info.CC")']
+      ],
       'targets': [
         {
         'conditions': [
@@ -174,7 +181,7 @@
                 'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16HDRI.a' ],
               }]
             ],
-            'action': [ 'sh', '<(module_root_dir)/deps/build_magick_wasm.sh', '<(module_path)', '<(hdri)' ]
+            'action': [ 'bash', '<(module_root_dir)/deps/build_magick_wasm.sh', '<(module_path)', '<(hdri)' ]
           },
           {
             'action_name': 'dummy-wasm',
@@ -194,7 +201,7 @@
             '-L<(module_root_dir)/deps/ImageMagick/MagickWand/.libs/',
             '-L<(module_root_dir)/deps/ImageMagick/MagickCore/.libs',
             '<@(magicklibs)',
-            '<!@(sh configure_magick_wasm.sh <(hdri))'
+            '<!@(bash configure_magick_wasm.sh <(hdri))'
           ]
         }
       }]

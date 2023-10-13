@@ -150,15 +150,15 @@
       # WASM does not support an external ImageMagick
       'variables': {
         'target_platform': 'wasm',
-        'emcc_path': '<!((pip3 install --user "conan<2.0.0" && cd build && python3 -m conans.conan install .. -pr:b=default -pr:h=../emscripten.profile -of build --build=missing) > /dev/null && node -p "JSON.parse(fs.readFileSync(\'build/conanbuildinfo.json\')).deps_env_info.CC")'
+        'emcc_path': '<!((pip3 install --user "conan<2.0.0" && cd build && python3 -m conans.conan install .. -pr:b=default -pr:h=../emscripten.profile -of build --build=missing) > /dev/null)'
       },
       # This comes from conan
       'make_global_settings': [
-        ['CXX', '<(emcc_path)'],
-        ['CC', '<(emcc_path)'],
-        ['CXX.target', '<(emcc_path)'],
-        ['CC.target', '<(emcc_path)'],
-        ['LINK', '<(emcc_path)']
+        ['CXX', '<!(node -p "JSON.parse(fs.readFileSync(\'build/conanbuildinfo.json\')).deps_env_info.CXX")'],
+        ['CC', '<!(node -p "JSON.parse(fs.readFileSync(\'build/conanbuildinfo.json\')).deps_env_info.CC")'],
+        ['CXX.target', '<!(node -p "JSON.parse(fs.readFileSync(\'build/conanbuildinfo.json\')).deps_env_info.CXX")'],
+        ['CC.target', '<!(node -p "JSON.parse(fs.readFileSync(\'build/conanbuildinfo.json\')).deps_env_info.CC")'],
+        ['LINK', '<!(node -p "JSON.parse(fs.readFileSync(\'build/conanbuildinfo.json\')).deps_env_info.CC")']
       ],
       'targets': [
         {
