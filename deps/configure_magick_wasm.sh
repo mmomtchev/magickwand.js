@@ -20,9 +20,7 @@ emconfigure ./configure $1                                  \
 
 cd ../..
 
-cat build/conanbuildinfo.args | sed 's/-framework.*//g;
-    s/[[:space:]]\+-m64[[:space:]]\+/ /g;
-    s/[[:space:]]\+-O3[[:space:]]\+/ /g;
-    s/[[:space:]]\+-s[[:space:]]\+/ /g;
-    s/[[:space:]]\+-Wl,-rpath[^[:space:]]\+//g;
-    s/[[:space:]]\+-DNDEBUG[[:space:]]\+/ /g;'
+LIBPATHS=`node -p "JSON.parse(fs.readFileSync('build/conanbuildinfo.json')).dependencies.map((dep) => dep.lib_paths).flat().map((path) => '-L' + path).join(' ')"`
+LIBS=`node -p "JSON.parse(fs.readFileSync('build/conanbuildinfo.json')).dependencies.map((dep) => dep.libs).flat().map((path) => '-l' + path).join(' ')"`
+
+echo -n "${LIBPATHS} ${LIBS}"
