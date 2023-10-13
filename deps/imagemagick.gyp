@@ -38,7 +38,7 @@
                 'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16HDRI.a' ],
               }]
             ],
-            'action': [ 'sh', '<(module_root_dir)/build_magick.sh', '<(module_path)', '<(hdri)' ]
+            'action': [ 'sh', '<(module_root_dir)/deps/build_magick.sh', '<(module_path)', '<(hdri)' ]
           }
         ],
         'direct_dependent_settings': {
