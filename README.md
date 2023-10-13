@@ -212,6 +212,8 @@ node-pre-gyp configure --nodedir=./wasm --target_arch=wasm32 --target_platform=w
 node-pre-gyp build
 ```
 
+At the moment this cross-compilation is possible only Linux.
+
 ## Using this project as a tutorial for creating C++ bindings for Node.js with SWIG
 
 ImageMagick is the perfect candidate for an automatically generated with SWIG Node.js addon:

@@ -5,9 +5,43 @@
     'winlibid%': 'RL'
   },
   'conditions': [
-    # Build the included ImageMagick library on POSIX
-    ['target_arch != "wasm32" and (OS == "linux" or OS =="mac")', {
-      'targets': [{
+    ['target_platform == "wasm"', {
+      'includes': [
+        '../wasm.gypi'
+      ]
+    }]
+  ],
+  'targets': [{
+    'target_name': 'imagemagick',
+    # It is in fact a static_library but we do everything manually
+    'type': 'none',
+    'conditions': [
+      # Linux / macOS / WASM build
+      # (the WASM build is very similar to a POSIX build)
+      ['target_platform == "wasm" or OS == "linux" or OS =="mac"', {
+        'conditions': [
+          # On WASM conan is already installed by the main gyp
+          ['target_platform != "wasm"', {
+            'variables': {
+              'conaninfo': '<!@((pip3 install --user "conan<2.0.0" && cd ../build && python3 -m conans.conan install .. -pr:b=default -pr:h=default -of build --build=missing --build=openjpeg) > /dev/null)'
+            }
+          }]
+        ],
+        'actions': [
+          {
+            'action_name': 'make',
+            'inputs': [ '<(module_root_dir)/deps/ImageMagick/configure' ],
+            'conditions': [
+              ['enable_hdri == "false"', {
+                'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16.a' ],
+              }],
+              ['enable_hdri == "true"', {
+                'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16HDRI.a' ],
+              }]
+            ],
+            'action': [ 'sh', '<(module_root_dir)/deps/build_magick.sh', '<(module_path)', '<(hdri)' ]
+          }
+        ],
         'conditions': [
           ['enable_hdri == "false"', {
             'variables': {
@@ -24,23 +58,6 @@
             }
           }]
         ],
-        'target_name': 'imagemagick',
-        'type': 'none',
-        'actions': [
-          {
-            'action_name': 'make',
-            'inputs': [ '<(module_root_dir)/deps/ImageMagick/configure' ],
-            'conditions': [
-              ['enable_hdri == "false"', {
-                'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16.a' ],
-              }],
-              ['enable_hdri == "true"', {
-                'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16HDRI.a' ],
-              }]
-            ],
-            'action': [ 'sh', '<(module_root_dir)/deps/build_magick.sh', '<(module_path)', '<(hdri)' ]
-          }
-        ],
         'direct_dependent_settings': {
           'defines': [ '<@(magickdefines)' ],
           'include_dirs': [
@@ -51,19 +68,20 @@
             '-L<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/',
             '-L<(module_root_dir)/deps/ImageMagick/MagickWand/.libs/',
             '-L<(module_root_dir)/deps/ImageMagick/MagickCore/.libs',
-            '<@(magicklibs)',
-            # This an ugly hack that enable running of shell commands during node-gyp configure
-            # node-gyp configure needs to evaluate this expression to generate the platform-specific files
-            # (originally by TooTallNate for libffi) 
-            '<!@((pip3 install --user "conan<2.0.0" && cd ../build && python3 -m conans.conan install .. -pr:b=default -pr:h=default -of build --build=missing --build=openjpeg) > /dev/null)',
-            '<!@(sh configure_magick.sh <(module_path) <(hdri))'
+            '<@(magicklibs)'
+          ],
+          'conditions': [
+            ['target_platform != "wasm"', {
+              'libraries': [ '<!@(sh configure_magick.sh <(module_path) <(hdri))' ]
+            }],
+            ['target_platform == "wasm"', {
+              'libraries': [ '<!@(bash configure_magick_wasm.sh <(hdri))' ]
+            }]
           ]
         }
-      }]
-    }],
-    # Build the included ImageMagick library on Windows
-    ['target_arch != "wasm32" and OS == "win"', {
-      'targets': [{
+      }],
+      # Windows build
+      ['target_platform != "wasm" and OS == "win"', {
         'conditions': [
           ['enable_hdri == "false"', {
             # TODO: Implement no-HDRI build on Windows
@@ -71,8 +89,6 @@
           ['enable_hdri == "true"', {
           }]
         ],
-        'target_name': 'imagemagick',
-        'type': 'none',
         'actions': [
           {
             'action_name': 'make',
@@ -134,73 +150,9 @@
             'CORE_<(winlibid)_zip_.lib',
             'CORE_<(winlibid)_zlib_.lib'
           ],
-          # This is the Windows version of the same hack as above
-          # Here we invoke the official ImageMagick-Windows downloader
           'inputs': [ '<!@(configure_magick.bat > configure.log)' ]
         }
       }]
-    }],
-    # Build the included ImageMagick library for WASM
-    ['target_arch == "wasm32"', {
-      'includes': [
-        '../wasm.gypi'
-      ],
-      'targets': [
-        {
-        'conditions': [
-          ['enable_hdri == "false"', {
-            'variables': {
-              'hdri': '--disable-hdri',
-              'magickdefines': [ 'MAGICKCORE_HDRI_ENABLE=0', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-              'magicklibs': [ '-lMagick++-7.Q16', '-lMagickWand-7.Q16', '-lMagickCore-7.Q16' ]
-            }
-          }],
-          ['enable_hdri == "true"', {
-            'variables': {
-              'hdri': '--enable-hdri',
-              'magickdefines': [ 'MAGICKCORE_HDRI_ENABLE=1', 'MAGICKCORE_QUANTUM_DEPTH=16' ],
-              'magicklibs': [ '-lMagick++-7.Q16HDRI', '-lMagickWand-7.Q16HDRI', '-lMagickCore-7.Q16HDRI' ]
-            }
-          }]
-        ],
-        'target_name': 'imagemagick',
-        'type': 'none',
-        'actions': [
-          {
-            'action_name': 'make',
-            'inputs': [ '<(module_root_dir)/deps/ImageMagick/configure' ],
-            'conditions': [
-              ['enable_hdri == "false"', {
-                'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16.a' ],
-              }],
-              ['enable_hdri == "true"', {
-                'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16HDRI.a' ],
-              }]
-            ],
-            'action': [ 'bash', '<(module_root_dir)/deps/build_magick_wasm.sh', '<(module_path)', '<(hdri)' ]
-          },
-          {
-            'action_name': 'dummy-wasm',
-            'inputs': [ '<(PRODUCT_DIR)/node-magickwand.js' ],
-            'outputs': [ '<(PRODUCT_DIR)/node-magickwand.wasm' ],
-            'action': [ 'true' ]
-          }
-        ],
-        'direct_dependent_settings': {
-          'defines': [ '<@(magickdefines)' ],
-          'include_dirs': [
-            '<(module_root_dir)/deps/ImageMagick/Magick++/lib',
-            '<(module_root_dir)/deps/ImageMagick'
-          ],
-          'libraries': [
-            '-L<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/',
-            '-L<(module_root_dir)/deps/ImageMagick/MagickWand/.libs/',
-            '-L<(module_root_dir)/deps/ImageMagick/MagickCore/.libs',
-            '<@(magicklibs)',
-            '<!@(bash configure_magick_wasm.sh <(hdri))'
-          ]
-        }
-      }]
-    }]
-  ]
+    ]
+  }]
 }

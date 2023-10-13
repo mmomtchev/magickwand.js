@@ -61,7 +61,7 @@
       },
       'conditions': [
         # Emscripten compilation options
-        ['target_arch == "wasm32"', {
+        ['target_platform == "wasm"', {
           'cflags': [
 		        '-sNO_DISABLE_EXCEPTION_CATCHING'
           ],
@@ -114,7 +114,7 @@
             ]
           }]
         }],
-        ['target_arch != "wasm32"', {
+        ['target_platform != "wasm"', {
           'sources': [
             'swig/Magick++.cxx'
           ]
@@ -128,7 +128,7 @@
     }
   ],
   'conditions': [
-    ['target_arch != "wasm32"', {
+    ['target_platform != "wasm"', {
       'targets': [
         {
           # Copy the final binary native DLL
@@ -146,11 +146,13 @@
         }
       ]
     }],
-    ['target_arch == "wasm32"', {
+    ['target_platform == "wasm"', {
       # WASM does not support an external ImageMagick
       'variables': {
-        'target_platform': 'wasm',
-        'emcc_path': '<!((pip3 install --user "conan<2.0.0" && cd build && python3 -m conans.conan install .. -pr:b=default -pr:h=../emscripten.profile -of build --build=missing) > /dev/null)'
+        # This an ugly hack that enable running of shell commands during node-gyp configure
+        # node-gyp configure needs to evaluate this expression to generate the platform-specific files
+        # (originally by TooTallNate for libffi) 
+        'conaninfo': '<!((pip3 install --user "conan<2.0.0" && cd build && python3 -m conans.conan install .. -pr:b=default -pr:h=../emscripten.profile -of build --build=missing) > /dev/null)'
       },
       'includes': [
         'wasm.gypi'
