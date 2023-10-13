@@ -1,4 +1,4 @@
-import { Magick } from './lib/index.mjs';
+import { Magick, MagickCore } from './lib/native/index.mjs';
 import { fileURLToPath } from 'url';
 import * as path from 'path';
 
@@ -81,7 +81,7 @@ await im2.blurAsync(0.5);
 
 // Compositing (overlaying)
 const im3 = new Magick.Image(im.size(), new Magick.Color(0, 65535, 0, 32768));
-await im2.compositeAsync(im3, '0x0+0+0', IM.MagickCore.MultiplyCompositeOp);
+await im2.compositeAsync(im3, '0x0+0+0', MagickCore.MultiplyCompositeOp);
 
 // Crop
 im.crop('10x8+5+5');

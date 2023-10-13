@@ -44,9 +44,10 @@
     },
     {
       "files": [
-        "test/*.mjs"
+        "*.mjs"
       ],
       "parserOptions": {
+        "ecmaVersion": 2022,
         "sourceType": "module"
       }
     },
