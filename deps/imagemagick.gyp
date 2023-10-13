@@ -18,7 +18,7 @@
     'type': 'none',
     'conditions': [
       # On WASM conan is already installed by the main gyp
-      ['target_platform != "wasm"', {
+      ['target_platform != "wasm" and (OS == "linux" or OS =="mac")', {
         'variables': {
           'conaninfo': '<!((pip3 install --user "conan<2.0.0" && cd ../build && python3 -m conans.conan install .. -pr:b=default -pr:h=default -of build --build=missing --build=openjpeg) > /dev/null)'
         }
