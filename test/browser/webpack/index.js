@@ -1,5 +1,4 @@
-import * as emnapi from '@emnapi/runtime';
-import IM_import from '../../../lib/binding/wasm-wasm32/node-magickwand';
+import IM from 'node-magickwand/wasm';
 
 // TODO Now that we support browsers,
 // implement direct reading from ArrayBuffer in SWIG
@@ -17,10 +16,7 @@ function component() {
   const root = document.createElement('div');
   root.innerHTML = 'Loading ImageMagick...';
 
-  console.log('import', IM_import);
-  IM_import().then((IM_emnapi) => {
-    const IM = IM_emnapi.emnapiInit({ context: emnapi.getDefaultContext() });
-    const { Magick, MagickCore, MagickVersion } = IM;
+  IM.then(({ Magick, MagickCore, MagickVersion }) => {
     root.innerHTML = '';
 
     const version = document.createElement('div');

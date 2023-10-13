@@ -3,11 +3,16 @@
   "version": "0.9.7",
   "description": "Node.js bindings for imagemagick",
   "main": "./lib/index.cjs",
-  "module": "./lib/index.mjs",
   "types": "./lib/index.d.ts",
   "exports": {
-    "import": "./lib/index.mjs",
-    "require": "./lib/index.cjs"
+    ".": {
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.cjs"
+    },
+    "./wasm": {
+      "types": "./lib/wasm/index.d.ts",
+      "import": "./lib/wasm/index.js"
+    }
   },
   "scripts": {
     "deps:magickcore": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickCore swig/magickcore.i",

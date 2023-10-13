@@ -66,7 +66,8 @@
           'ldflags': [
 		        '--embed-file=<(module_root_dir)/test/data/wizard.gif@wizard.gif',
 		        '-sNO_DISABLE_EXCEPTION_CATCHING',
-            '-sMODULARIZE'
+            '-sMODULARIZE',
+            '-sENVIRONMENT=web,webview'
           ]
         }],
         # Link against a system-installed ImageMagick
