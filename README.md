@@ -214,6 +214,15 @@ node-pre-gyp build
 
 At the moment this cross-compilation is possible only Linux.
 
+To see the web browser demo:
+
+```
+cd test/browser/webpack/
+npx webpack-cli serve --mode=development --env development
+```
+
+Then open `http://localhost:8030`.
+
 ## Using this project as a tutorial for creating C++ bindings for Node.js with SWIG
 
 ImageMagick is the perfect candidate for an automatically generated with SWIG Node.js addon:
