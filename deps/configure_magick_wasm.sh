@@ -7,7 +7,7 @@ unset SDKROOT
 export EM_PKG_CONFIG_PATH=$(pwd)/build
 
 EMSDK_PATH=`node -e "console.log(JSON.parse(fs.readFileSync('../build/conanbuildinfo.json')).deps_env_info.EMSDK)"`
-source ${EMSDK_PATH}/emsdk_env.sh
+. ${EMSDK_PATH}/emsdk_env.sh
 
 cd ImageMagick
 # Do not include the utilities which increase the size of the npm package
