@@ -27,17 +27,17 @@
       }
     }]
   ],
-  'direct_dependent_settings': {
-    'defines': [ '<@(magickdefines)' ],
-    'include_dirs': [
-      '<(module_root_dir)/deps/ImageMagick/Magick++/lib',
-      '<(module_root_dir)/deps/ImageMagick'
-    ]
-  },
   'targets': [{
     'target_name': 'imagemagick',
     # It is in fact a static_library but we do everything manually
     'type': 'none',
+    'direct_dependent_settings': {
+      'defines': [ '<@(magickdefines)' ],
+      'include_dirs': [
+        '<(module_root_dir)/deps/ImageMagick/Magick++/lib',
+        '<(module_root_dir)/deps/ImageMagick'
+      ]
+    },
     'conditions': [
       # On WASM conan is already installed by the main gyp
       ['target_platform != "wasm" and (OS == "linux" or OS =="mac")', {
