@@ -85,7 +85,7 @@
           ],
           'conditions': [
             ['target_platform != "wasm"', {
-              'libraries': [ '<!@(sh configure_magick.sh <(module_path) <(hdri))' ]
+              'libraries': [ '<!@(bash configure_magick.sh <(module_path) <(hdri))' ]
             }],
             ['target_platform == "wasm"', {
               'libraries': [ '<!@(bash configure_magick_wasm.sh <(hdri))' ]
