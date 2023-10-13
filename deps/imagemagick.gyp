@@ -95,6 +95,9 @@
       }],
       # Windows build
       ['target_platform != "wasm" and OS == "win"', {
+        'variables': {
+          'magick_win_lib': 'ImageMagick-Windows/VisualMagick/lib'
+        },
         'actions': [
           {
             'action_name': 'make',
@@ -104,50 +107,45 @@
           }
         ],
         'direct_dependent_settings': {
-          'msvs_settings': {
-            'VCLinkerTool': {
-              'AdditionalLibraryDirectories': '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/lib/'
-            }
-          },
           'libraries': [
-            'CORE_<(winlibid)_aom_.lib',
-            'CORE_<(winlibid)_brotli_.lib',
-            'CORE_<(winlibid)_bzlib_.lib',
-            'CORE_<(winlibid)_cairo_.lib',
-            'CORE_<(winlibid)_coders_.lib',
-            'CORE_<(winlibid)_croco_.lib',
-            'CORE_<(winlibid)_de265_.lib',
-            'CORE_<(winlibid)_deflate_.lib',
-            'CORE_<(winlibid)_exr_.lib',
-            'CORE_<(winlibid)_ffi_.lib',
-            'CORE_<(winlibid)_filters_.lib',
-            'CORE_<(winlibid)_freetype_.lib',
-            'CORE_<(winlibid)_fribidi_.lib',
-            'CORE_<(winlibid)_glib_.lib',
-            'CORE_<(winlibid)_harfbuzz_.lib',
-            'CORE_<(winlibid)_heif_.lib',
-            'CORE_<(winlibid)_highway_.lib',
-            'CORE_<(winlibid)_jasper_.lib',
-            'CORE_<(winlibid)_jpeg-turbo_.lib',
-            'CORE_<(winlibid)_jpeg-xl_.lib',
-            'CORE_<(winlibid)_lcms_.lib',
-            'CORE_<(winlibid)_lqr_.lib',
-            'CORE_<(winlibid)_lzma_.lib',
-            'CORE_<(winlibid)_Magick++_.lib',
-            'CORE_<(winlibid)_MagickCore_.lib',
-            'CORE_<(winlibid)_MagickWand_.lib',
-            'CORE_<(winlibid)_openjpeg_.lib',
-            'CORE_<(winlibid)_pango_.lib',
-            'CORE_<(winlibid)_pixman_.lib',
-            'CORE_<(winlibid)_png_.lib',
-            'CORE_<(winlibid)_raqm_.lib',
-            'CORE_<(winlibid)_raw_.lib',
-            'CORE_<(winlibid)_rsvg_.lib',
-            'CORE_<(winlibid)_tiff_.lib',
-            'CORE_<(winlibid)_webp_.lib',
-            'CORE_<(winlibid)_xml_.lib',
-            'CORE_<(winlibid)_zip_.lib',
-            'CORE_<(winlibid)_zlib_.lib'
+            '<(magick_win_lib)/CORE_<(winlibid)_aom_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_brotli_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_bzlib_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_cairo_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_coders_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_croco_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_de265_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_deflate_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_exr_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_ffi_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_filters_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_freetype_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_fribidi_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_glib_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_harfbuzz_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_heif_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_highway_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_jasper_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_jpeg-turbo_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_jpeg-xl_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_lcms_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_lqr_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_lzma_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_Magick++_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_MagickCore_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_MagickWand_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_openjpeg_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_pango_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_pixman_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_png_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_raqm_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_raw_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_rsvg_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_tiff_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_webp_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_xml_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_zip_.lib',
+            '<(magick_win_lib)/CORE_<(winlibid)_zlib_.lib'
           ],
           'inputs': [ '<!@(configure_magick.bat > configure.log)' ]
         }
