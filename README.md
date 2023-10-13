@@ -212,7 +212,7 @@ node-pre-gyp configure --nodedir=./wasm --target_arch=wasm32 --target_platform=w
 node-pre-gyp build
 ```
 
-At the moment this cross-compilation is possible only Linux.
+At the moment this cross-compilation is possible only on Linux.
 
 To see the web browser demo:
 
