@@ -42,9 +42,11 @@ function component() {
         wizard.rotate(10);
         wizard.magick('GIF');
 
+        // Display the image by converting the Magick.Blob to a JS Blob
         wizard.write(blob);
+        const jsBlob = new Blob([blob.data()], { type: 'image/gif' });
         const image = document.createElement('img');
-        image.src = 'data:image/gif;base64,' + blob.base64();
+        image.src = window.URL.createObjectURL(jsBlob);
         root.appendChild(image);
       });
   });
