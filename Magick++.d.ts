@@ -1612,7 +1612,7 @@ export  class Blob {
 
   constructor();
 
-  constructor(data_: Buffer);
+  constructor(data_: ArrayBuffer);
 
   constructor(blob_: Magick.Blob);
 
@@ -1630,13 +1630,13 @@ export  class Blob {
 
   lengthAsync(): Promise<number>;
 
-  update(data_: Buffer): void;
+  update(data_: ArrayBuffer): void;
 
-  updateAsync(data_: Buffer): Promise<void>;
+  updateAsync(data_: ArrayBuffer): Promise<void>;
 
-  data(): Buffer;
+  data(): ArrayBuffer;
 
-  dataAsync(): Promise<Buffer>;
+  dataAsync(): Promise<ArrayBuffer>;
 }
 
 export function equal(left_: any, right_: any): number;

@@ -1612,7 +1612,7 @@ export  class Blob {
 
   constructor();
 
-  constructor(data_: Buffer);
+  constructor(data_: ArrayBuffer);
 
   constructor(blob_: Magick.Blob);
 
@@ -1624,9 +1624,9 @@ export  class Blob {
 
   length(): number;
 
-  update(data_: Buffer): void;
+  update(data_: ArrayBuffer): void;
 
-  data(): Buffer;
+  data(): ArrayBuffer;
 }
 
 export function equal(left_: any, right_: any): number;
