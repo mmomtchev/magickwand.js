@@ -10,7 +10,6 @@ SET DEST=%1\ImageMagick
 ECHO SCRIPT_DIR IS %SCRIPT_DIR%, DEST IS %DEST%, %1
 rd /q /s %DEST%
 mkdir %DEST%
-copy "%SCRIPT_DIR%\deps\ImageMagick-Windows\VisualMagick\bin\*.exe" %DEST%
 copy "%SCRIPT_DIR%\deps\ImageMagick-Windows\ImageMagick\config\colors.xml" %DEST%
 copy "%SCRIPT_DIR%\deps\ImageMagick-Windows\ImageMagick\config\english.xml" %DEST%
 copy "%SCRIPT_DIR%\deps\ImageMagick-Windows\ImageMagick\config\locale.xml" %DEST%
