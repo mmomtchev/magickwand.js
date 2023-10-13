@@ -20,7 +20,6 @@ using namespace Magick;
 %include "std_vector.i"
 %include "typemaps.i"
 %include "exception.i"
-%include "nodejs_buffer.i"
 
 %apply unsigned { size_t };
 %apply int { ssize_t };

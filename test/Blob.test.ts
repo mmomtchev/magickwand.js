@@ -31,7 +31,7 @@ describe('Blob', () => {
 
     it('from Buffer', () => {
       const data = fs.readFileSync(path.join(__dirname, 'data', 'wizard.png'));
-      const blob = new Blob(data);
+      const blob = new Blob(data.buffer);
       const image = new Image;
       image.read(blob);
       assert.strictEqual(image.size().width(), im.size().width());
@@ -60,8 +60,8 @@ describe('Blob', () => {
       im.magick('RGBA');
       im.write(blob);
       const buffer = blob.data();
-      assert.instanceOf(buffer, Buffer);
-      assert.lengthOf(buffer, rawLength);
+      assert.instanceOf(buffer, ArrayBuffer);
+      assert.strictEqual(buffer.byteLength, rawLength);
     });
   });
 

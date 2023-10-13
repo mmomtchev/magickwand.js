@@ -1,17 +1,5 @@
 import IM from 'node-magickwand/wasm';
 
-// TODO Now that we support browsers,
-// implement direct reading from ArrayBuffer in SWIG
-function arrayBufferToBase64(buffer) {
-  var binary = '';
-  var bytes = new Uint8Array(buffer);
-  var len = bytes.byteLength;
-  for (var i = 0; i < len; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return window.btoa(binary);
-}
-
 function component() {
   const root = document.createElement('div');
   root.innerHTML = 'Loading ImageMagick...';
@@ -46,10 +34,8 @@ function component() {
     fetch('https://xn--h1agbaj9c.xn--b1afuaj9c.com/wizard.png')
       .then((r) => r.arrayBuffer())
       .then((r) => {
-        const b64data = arrayBufferToBase64(r);
+        const blob = new Magick.Blob(r);
         const wizard = new Magick.Image;
-        const blob = new Magick.Blob;
-        blob.base64(b64data);
         wizard.read(blob);
 
         wizard.resize('25%x25%');
