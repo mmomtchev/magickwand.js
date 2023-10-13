@@ -129,9 +129,9 @@
   ],
   'conditions': [
     ['target_arch != "wasm32"', {
-      # Copy the final binary native DLL
       'targets': [
         {
+          # Copy the final binary native DLL
           'target_name': 'action_after_build',
           'type': 'none',
           'dependencies': [ '<(module_name)' ],
