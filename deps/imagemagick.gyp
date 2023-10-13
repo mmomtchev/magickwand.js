@@ -2,7 +2,8 @@
   'variables': {
     'enable_hdri%': 'true',
     'winbuildtype%': '/p:Configuration=Release,Platform=x64',
-    'winlibid%': 'RL'
+    'winlibid%': 'RL',
+    'target_platform%': 'os'
   },
   'conditions': [
     ['target_platform == "wasm"', {
@@ -39,7 +40,14 @@
                 'outputs': [ '<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/libMagick++-7.Q16HDRI.a' ],
               }]
             ],
-            'action': [ 'sh', '<(module_root_dir)/deps/build_magick.sh', '<(module_path)', '<(hdri)' ]
+            'conditions': [
+              ['target_platform != "wasm"', {
+                'action': [ 'sh', '<(module_root_dir)/deps/build_magick.sh', '<(module_path)', '<(hdri)' ]
+              }],
+              ['target_platform == "wasm"', {
+                'action': [ 'sh', '<(module_root_dir)/deps/build_magick_wasm.sh' ]
+              }],
+            ]
           }
         ],
         'conditions': [
