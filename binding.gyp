@@ -55,9 +55,6 @@
             '/wo6246',
             '/wo28182'
           ]
-        },
-        'VCLinkerTool': {
-          'AdditionalLibraryDirectories': '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/lib'
         }
       },
       'conditions': [

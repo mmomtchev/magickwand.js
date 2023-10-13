@@ -104,6 +104,11 @@
           }
         ],
         'direct_dependent_settings': {
+          'msvs_settings': {
+            'VCLinkerTool': {
+              'AdditionalLibraryDirectories': '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/lib/'
+            }
+          },
           'libraries': [
             'CORE_<(winlibid)_aom_.lib',
             'CORE_<(winlibid)_brotli_.lib',
