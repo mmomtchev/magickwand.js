@@ -44,13 +44,13 @@
         'direct_dependent_settings': {
           'defines': [ '<@(magickdefines)' ],
           'include_dirs': [
-            'deps/ImageMagick/Magick++/lib',
-            'deps/ImageMagick'
+            '<(module_root_dir)/deps/ImageMagick/Magick++/lib',
+            '<(module_root_dir)/deps/ImageMagick'
           ],
           'libraries': [
-            '-L../deps/ImageMagick/Magick++/lib/.libs/',
-            '-L../deps/ImageMagick/MagickWand/.libs/',
-            '-L../deps/ImageMagick/MagickCore/.libs',
+            '-L<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/',
+            '-L<(module_root_dir)/deps/ImageMagick/MagickWand/.libs/',
+            '-L<(module_root_dir)/deps/ImageMagick/MagickCore/.libs',
             '<@(magicklibs)',
             # This an ugly hack that enable running of shell commands during node-gyp configure
             # node-gyp configure needs to evaluate this expression to generate the platform-specific files
@@ -91,8 +91,8 @@
             }]
           ],
           'include_dirs': [
-            'deps/ImageMagick/Magick++/lib',
-            'deps/ImageMagick'
+            '<(module_root_dir)/deps/ImageMagick/Magick++/lib',
+            '<(module_root_dir)/deps/ImageMagick'
           ],
           'libraries': [
             'CORE_<(winlibid)_aom_.lib',
@@ -186,13 +186,13 @@
         'direct_dependent_settings': {
           'defines': [ '<@(magickdefines)' ],
           'include_dirs': [
-            'deps/ImageMagick/Magick++/lib',
-            'deps/ImageMagick'
+            '<(module_root_dir)/deps/ImageMagick/Magick++/lib',
+            '<(module_root_dir)/deps/ImageMagick'
           ],
           'libraries': [
-            '-L../deps/ImageMagick/Magick++/lib/.libs/',
-            '-L../deps/ImageMagick/MagickWand/.libs/',
-            '-L../deps/ImageMagick/MagickCore/.libs',
+            '-L<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/',
+            '-L<(module_root_dir)/deps/ImageMagick/MagickWand/.libs/',
+            '-L<(module_root_dir)/deps/ImageMagick/MagickCore/.libs',
             '<@(magicklibs)',
             '<!@(sh configure_magick_wasm.sh <(hdri))'
           ]
