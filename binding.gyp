@@ -4,6 +4,7 @@
     'enable_asan%': 'false',
     'enable_hdri%': 'true',
     'regen_swig%': 'false',
+    'target_platform%': 'os'
   },
   'target_defaults': {
     'includes': [
