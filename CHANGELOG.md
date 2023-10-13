@@ -1,6 +1,6 @@
 # Changelog
 
-### [0.9.7]
+### [0.9.7] 2023-10-12
 
  - Update `libwebp` to 1.3.2 to fix a number of recent critical vulnerabilities including CVE-2023-4863
  - Update ImageMagick to 7.1.1-20
