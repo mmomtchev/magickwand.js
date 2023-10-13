@@ -163,7 +163,7 @@
           # Copy the final binary WASM
           'target_name': 'action_after_build',
           'type': 'none',
-          'dependencies': [ '<(module_name)' ],
+          'dependencies': [ '<(module_name)', 'dummy_produce_wasm' ],
           'copies': [
             {
               'files': [
@@ -176,10 +176,14 @@
         },
         {
           # Dummy action to signal gyp that .wasm is produced with .js
-          'action_name': 'dummy-wasm',
-          'inputs': [ '<(PRODUCT_DIR)/node-magickwand.js' ],
-          'outputs': [ '<(PRODUCT_DIR)/node-magickwand.wasm' ],
-          'action': [ 'true' ]
+          'target_name': 'dummy_produce_wasm',
+          'type': 'none',
+          'actions': [{
+            'action_name': 'dummy_action_wasm',
+            'inputs': [ '<(PRODUCT_DIR)/node-magickwand.js' ],
+            'outputs': [ '<(PRODUCT_DIR)/node-magickwand.wasm' ],
+            'action': [ 'true' ]
+          }]
         }
       ]
     }]
