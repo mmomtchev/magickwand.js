@@ -71,7 +71,7 @@
                 'action': [ 'sh', '<(module_root_dir)/deps/build_magick.sh', '<(module_path)', '<(hdri)' ]
               }],
               ['target_platform == "wasm"', {
-                'action': [ 'sh', '<(module_root_dir)/deps/build_magick_wasm.sh' ]
+                'action': [ 'bash', '<(module_root_dir)/deps/build_magick_wasm.sh' ]
               }],
             ]
           }

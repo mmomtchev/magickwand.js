@@ -3,6 +3,9 @@
 unset MAKEFLAGS
 unset SDKROOT
 
+EMSDK_PATH=`node -p "JSON.parse(fs.readFileSync('../build/conanbuildinfo.json')).deps_env_info.EMSDK"`
+. ${EMSDK_PATH}/emsdk_env.sh
+
 cd ImageMagick
 
-make -j4
+emmake make -j4
