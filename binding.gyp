@@ -68,6 +68,9 @@
 		        '-sNO_DISABLE_EXCEPTION_CATCHING',
             '-sMODULARIZE',
             '-sENVIRONMENT=web,webview',
+            # Emscripten cannot grow the stack size (yes, it feels so MS-DOS/1980s)
+            # On the other side ImageMagick's PNG implementation is
+            # a particularly voracious stack consumer
             '-sSTACK_SIZE=262144'
           ]
         }],
