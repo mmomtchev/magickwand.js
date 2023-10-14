@@ -67,7 +67,8 @@
 		        '--embed-file=<(module_root_dir)/test/data/wizard.gif@wizard.gif',
 		        '-sNO_DISABLE_EXCEPTION_CATCHING',
             '-sMODULARIZE',
-            '-sENVIRONMENT=web,webview'
+            '-sENVIRONMENT=web,webview',
+            '-sSTACK_SIZE=262144'
           ]
         }],
         # Link against a system-installed ImageMagick

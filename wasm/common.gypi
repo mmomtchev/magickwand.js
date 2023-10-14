@@ -40,8 +40,8 @@
     'configurations': {
       'Debug': {
         'defines': [ 'DEBUG', '_DEBUG' ],
-        'cflags': [ '-g', '-O0' ],
-        'ldflags': [ '-sSAFE_HEAP=1' ],
+        'cflags': [ '-g', '-O1',  ],
+        'ldflags': [ '-sSAFE_HEAP=1', '-gsource-map', '-sASSERTIONS=2', '-sSTACK_OVERFLOW_CHECK=2' ],
       },
       'Release': {
         'cflags': [ '-O3' ],
