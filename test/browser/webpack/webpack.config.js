@@ -12,7 +12,7 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        path.resolve(__dirname, '..', '..', '..', 'lib/binding/wasm-wasm32/node-magickwand.wasm')
+        path.resolve(__dirname, '..', '..', '..', 'lib/binding/emscripten-wasm32/node-magickwand.wasm')
       ]
     })
   ],
