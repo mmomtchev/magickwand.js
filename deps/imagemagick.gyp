@@ -6,7 +6,7 @@
     'target_platform%': 'os'
   },
   'conditions': [
-    ['target_platform == "wasm"', {
+    ['target_platform == "emscripten"', {
       'includes': [
         '../wasm.gypi'
       ]
@@ -40,14 +40,14 @@
     },
     'conditions': [
       # On WASM conan is already installed by the main gyp
-      ['target_platform != "wasm" and (OS == "linux" or OS =="mac")', {
+      ['target_platform != "emscripten" and (OS == "linux" or OS =="mac")', {
         'variables': {
           'conaninfo': '<!((pip3 install --user "conan<2.0.0" && cd ../build && python3 -m conans.conan install .. -pr:b=default -pr:h=default -of build --build=missing --build=openjpeg) > /dev/null)'
         }
       }],
       # Linux / macOS / WASM build
       # (the WASM build is very similar to a POSIX build)
-      ['target_platform == "wasm" or OS == "linux" or OS =="mac"', {
+      ['target_platform == "emscripten" or OS == "linux" or OS =="mac"', {
         'actions': [
           {
             'action_name': 'make',
@@ -67,10 +67,10 @@
                   '<(module_root_dir)/deps/ImageMagick/MagickCore/.libs/libMagickCore-7.Q16HDRI.a'
                 ],
               }],
-              ['target_platform != "wasm"', {
+              ['target_platform != "emscripten"', {
                 'action': [ 'sh', '<(module_root_dir)/deps/build_magick.sh', '<(module_path)', '<(hdri)' ]
               }],
-              ['target_platform == "wasm"', {
+              ['target_platform == "emscripten"', {
                 'action': [ 'bash', '<(module_root_dir)/deps/build_magick_wasm.sh' ]
               }],
             ]
@@ -84,17 +84,17 @@
             '<@(magicklibs)'
           ],
           'conditions': [
-            ['target_platform != "wasm"', {
+            ['target_platform != "emscripten"', {
               'libraries': [ '<!@(bash configure_magick.sh <(module_path) <(hdri))' ]
             }],
-            ['target_platform == "wasm"', {
+            ['target_platform == "emscripten"', {
               'libraries': [ '<!@(bash configure_magick_wasm.sh <(hdri))' ]
             }]
           ]
         }
       }],
       # Windows build
-      ['target_platform != "wasm" and OS == "win"', {
+      ['target_platform != "emscripten" and OS == "win"', {
         'variables': {
           'magick_win_lib': '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/lib'
         },

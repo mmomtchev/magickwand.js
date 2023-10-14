@@ -208,7 +208,7 @@ There is no documentation available at the moment.
 Build with:
 
 ```
-node-pre-gyp configure --nodedir=./wasm --target_arch=wasm32 --target_platform=wasm
+node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
 node-pre-gyp build
 ```
 

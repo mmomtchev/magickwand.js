@@ -59,7 +59,7 @@
       },
       'conditions': [
         # Emscripten compilation options
-        ['target_platform == "wasm"', {
+        ['target_platform == "emscripten"', {
           'cflags': [
 		        '-sNO_DISABLE_EXCEPTION_CATCHING'
           ],
@@ -117,7 +117,7 @@
             ]
           }]
         }],
-        ['target_platform != "wasm"', {
+        ['target_platform != "emscripten"', {
           'sources': [
             'swig/Magick++.cxx'
           ]
@@ -131,7 +131,7 @@
     }
   ],
   'conditions': [
-    ['target_platform != "wasm"', {
+    ['target_platform != "emscripten"', {
       'targets': [
         {
           # Copy the final binary native DLL
@@ -149,7 +149,7 @@
         }
       ]
     }],
-    ['target_platform == "wasm"', {
+    ['target_platform == "emscripten"', {
       # WASM does not support an external ImageMagick
       'variables': {
         # This an ugly hack that enable running of shell commands during node-gyp configure

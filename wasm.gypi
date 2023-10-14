@@ -1,6 +1,6 @@
 {
   'conditions': [
-    ['target_arch == "wasm32"', {
+    ['target_platform == "emscripten"', {
       # This comes from conan
       'make_global_settings': [
         ['CXX', '<!(node -p "JSON.parse(fs.readFileSync(\'<(module_root_dir)/build/conanbuildinfo.json\')).deps_env_info.CXX")'],

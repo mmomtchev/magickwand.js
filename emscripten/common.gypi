@@ -4,7 +4,7 @@
     'OS': 'emscripten',
     'clang': 1,
     'target_arch%': 'wasm32',
-    'target_platform%': 'wasm',
+    'target_platform%': 'emscripten',
     'wasm_threads%': 0,
     'product_extension%': 'js',
   },
