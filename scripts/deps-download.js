@@ -31,4 +31,10 @@ try {
   process.exit(1);
 }
 
-cp.execSync(`git --work-tree=${generated_path} checkout ${commit}`);
+fs.mkdirSync(generated_path, { recursive: true });
+const list = cp.execSync(`git ls-tree --name-only ${commit}`).toString().trim().split('\n');
+for (const file of list) {
+  console.log(`downloading ${file}`);
+  const data = cp.spawnSync('git', ['show', `${commit}:${file}`]).stdout;
+  fs.writeFileSync(path.resolve(generated_path, file), data);
+}
