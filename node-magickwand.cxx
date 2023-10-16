@@ -18313,7 +18313,7 @@ Napi::Value exports_MagickGitRevision_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"98bb1d414:20231008");
+    jsresult = SWIG_FromCharPtr((const char *)"664dd58cf:20231015");
     
     
     
@@ -18342,7 +18342,7 @@ Napi::Value exports_MagickReleaseDate_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"2023-10-08");
+    jsresult = SWIG_FromCharPtr((const char *)"2023-10-15");
     
     
     
@@ -18429,7 +18429,7 @@ Napi::Value exports_MagickHomeURL_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"file:///home/mmom/src/node-magickwand/lib/binding/linux-x64/ImageMagick/share/doc/ImageMagick-7/index.html");
+    jsresult = SWIG_FromCharPtr((const char *)"file:///usr/local/share/doc/ImageMagick-7/index.html");
     
     
     
@@ -18545,7 +18545,7 @@ Napi::Value exports_MagickVersion_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"ImageMagick 7.1.1-21 (Beta) Q16-HDRI x86_64 98bb1d414:20231008 https://imagemagick.org");
+    jsresult = SWIG_FromCharPtr((const char *)"ImageMagick 7.1.1-21 (Beta) Q16-HDRI x86_64 664dd58cf:20231015 https://imagemagick.org");
     
     
     
