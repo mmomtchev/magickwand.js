@@ -40,7 +40,7 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure
-      - run: npx @mapbox/node-pre-gyp build -j max
+      - run: npx @mapbox/node-pre-gyp build
       - run: node scripts/gen-es6.js lib/index.mjs
       - run: npm test
 
@@ -68,7 +68,7 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
-      - run: npx @mapbox/node-pre-gyp build -j max
+      - run: npx @mapbox/node-pre-gyp build
       - run: |
           cd test/browser/webpack/
           npx webpack --mode=production
@@ -103,7 +103,7 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --debug --enable_asan
-      - run: npx @mapbox/node-pre-gyp build -j max
+      - run: npx @mapbox/node-pre-gyp build
       - run: node scripts/gen-es6.js lib/index.mjs
         env:
           LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6
