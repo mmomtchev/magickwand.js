@@ -35,6 +35,6 @@ fs.mkdirSync(generated_path, { recursive: true });
 const list = cp.execSync(`git ls-tree --name-only ${commit}`).toString().trim().split('\n');
 for (const file of list) {
   console.log(`downloading ${file}`);
-  const data = cp.spawnSync('git', ['show', `${commit}:${file}`]).stdout;
+  const data = cp.spawnSync('git', ['show', `${commit}:${file}`], { maxBuffer: 32 * 1024 * 1024 }).stdout;
   fs.writeFileSync(path.resolve(generated_path, file), data);
 }
