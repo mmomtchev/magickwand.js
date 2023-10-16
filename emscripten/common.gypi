@@ -19,8 +19,8 @@
     ],
     'ldflags': [
       '--js-library=<!(node -p "require(\'emnapi\').js_library")',
-      "-sALLOW_MEMORY_GROWTH=1",
-      "-sEXPORTED_FUNCTIONS=['_malloc','_free']",
+      '-sALLOW_MEMORY_GROWTH=1',
+      '-sEXPORTED_FUNCTIONS=["_napi_register_wasm_v1","_malloc","_free"]',
       '-sNODEJS_CATCH_EXIT=0',
       '-sNODEJS_CATCH_REJECTION=0',
       '-sAUTO_JS_LIBRARIES=0',

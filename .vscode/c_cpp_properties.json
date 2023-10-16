@@ -6,7 +6,8 @@
                 "${default}",
                 "${workspaceFolder}/deps/ImageMagick/Magick++/lib",
                 "${workspaceFolder}/deps/ImageMagick/MagickWand",
-                "${workspaceFolder}/deps/ImageMagick"
+                "${workspaceFolder}/deps/ImageMagick",
+                "${workspaceFolder}"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",

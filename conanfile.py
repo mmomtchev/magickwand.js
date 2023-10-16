@@ -4,7 +4,6 @@ required_conan_version = ">=1.60.0"
 
 class ImageMagickDelegates(ConanFile):
     settings = 'os', 'compiler', 'build_type', 'arch'
-    print(settings)
 
     requires = (
       'libaom-av1/3.6.0',
@@ -18,7 +17,6 @@ class ImageMagickDelegates(ConanFile):
       'jbig/20160605',
       'libjpeg-turbo/3.0.0',
       'lcms/2.14',
-      'lzma_sdk/9.20',
       'openjpeg/2.5.0',
       'pixman/0.40.0',
       'libpng/1.6.39',
@@ -43,7 +41,9 @@ class ImageMagickDelegates(ConanFile):
     def requirements(self):
       if self.settings.arch != 'wasm':
         # Fonts and OpenMP are not available on WASM targets
+        # LZMA is blocked by https://github.com/conan-io/conan-center-index/issues/20602
         for pkg in (
+          'lzma_sdk/9.20',
           'libffi/3.4.4',
           'fontconfig/2.14.2',
           'freetype/2.13.0',

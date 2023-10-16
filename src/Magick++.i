@@ -5,7 +5,7 @@
 #endif
 
 #define MAGICKCORE_EXCLUDE_DEPRECATED
-%{
+%insert(header) %{
 // Includes the header in the wrapper code
 #define MAGICKCORE_EXCLUDE_DEPRECATED
 #include <Magick++.h>
@@ -118,12 +118,13 @@ using namespace Magick;
 // Everything else is optional
 %include "MagickCore.i"
 
-// WASM async is still not implemented
-#ifndef WASM
 // Enable async on select classes
-// Async is very expensive (compilation-wise) and free Github Actions runners
-// are limited to 7GB. Sponsorship of this project will go a long way
-// towards more features.
+// Async versions of methods add about 150% more code
+// compared to the sync versions
+//
+// We prefer to avoid bloating the final library with useless async
+// methods - only I/O and CPU heavy operations really need to be async
+//
 %feature("async:locking", "1");
 %define LOCKED_ASYNC(TYPE)
 %apply SWIGTYPE  LOCK {TYPE};
@@ -146,7 +147,6 @@ using namespace Magick;
 %feature("async", "0") *::operator>=;
 %feature("async", "0") *::operator==;
 %feature("async", "0") *::operator!=;
-#endif
 
 // Various special cases - Buffers, TypedArrays, std::vectors...
 %include "Image.i"

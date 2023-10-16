@@ -12,7 +12,9 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        path.resolve(__dirname, '..', '..', '..', 'lib/binding/emscripten-wasm32/node-magickwand.wasm')
+        path.resolve(__dirname, '..', '..', '..', 'lib/binding/emscripten-wasm32/node-magickwand.wasm'),
+        path.resolve(__dirname, '..', '..', '..', 'lib/binding/emscripten-wasm32/node-magickwand.js'),
+        path.resolve(__dirname, '..', '..', '..', 'lib/binding/emscripten-wasm32/node-magickwand.worker.js')
       ]
     })
   ],
@@ -21,13 +23,9 @@ module.exports = {
     static: {
       directory: __dirname,
     },
-    // Shared-memory multithreading will require this
-    // (when it starts working)
-    headers: process.env.COOP
-      ? {
-        'Cross-Origin-Opener-Policy': 'same-origin',
-        'Cross-Origin-Embedder-Policy': 'require-corp'
-      }
-      : undefined
+    headers: {
+      'Cross-Origin-Opener-Policy': 'same-origin',
+      'Cross-Origin-Embedder-Policy': 'require-corp'
+    }
   }
 };

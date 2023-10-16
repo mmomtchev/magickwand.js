@@ -33,19 +33,25 @@
     {
       'target_name': 'node-magickwand',
       'include_dirs': [
-        "<!@(node -p \"require('node-addon-api').include\")"
+        '<!@(node -p "require(\'node-addon-api\').include")',
+        '<(module_root_dir)'
       ],
       'cflags': [
         '-Wno-deprecated-declarations',
         '-Wno-unused-function',
-        # clang does not properly identify SWIG defines containing throw or goto
-        '-Wno-sometimes-uninitialized'
       ],
       'cflags_cc': [
         '-std=c++11',
         '-Wno-type-limits',
         '-Wno-deprecated-copy'
       ],
+      'xcode_settings': {
+        'OTHER_CFLAGS': [
+          # SWIG has defines containing throw or goto
+          # and/or functions that always throw (clang version)
+          '-Wno-sometimes-uninitialized',
+        ]
+      },
       'msvs_settings': {
         'VCCLCompilerTool': {
           # PREfast requires too much memory for Github Actions
@@ -60,18 +66,40 @@
       'conditions': [
         # Emscripten compilation options
         ['target_platform == "emscripten"', {
+          'variables': {
+            'emscripten_pthread': [
+              # Emscripten + emnapi libuv multithreading
+              '-pthread',
+              '-DEMNAPI_WORKER_POOL_SIZE=4'
+            ]
+          },
           'cflags': [
-		        '-sNO_DISABLE_EXCEPTION_CATCHING'
+            # SWIG has defines containing throw or goto
+            # and/or functions that always throw (clang version)
+            '-Wno-sometimes-uninitialized',
+		        '-sNO_DISABLE_EXCEPTION_CATCHING',
+            '<@(emscripten_pthread)'
           ],
           'ldflags': [
 		        '--embed-file=<(module_root_dir)/test/data/wizard.gif@wizard.gif',
 		        '-sNO_DISABLE_EXCEPTION_CATCHING',
             '-sMODULARIZE',
-            '-sENVIRONMENT=web,webview',
+            '-sENVIRONMENT=web,webview,worker',
+            '-sEXPORT_NAME=Magick',
+            '--pre-js=<(module_root_dir)/src/pre.js',
             # Emscripten cannot grow the stack size (yes, it feels so MS-DOS/1980s)
             # On the other side ImageMagick's PNG implementation is
             # a particularly voracious stack consumer
-            '-sSTACK_SIZE=262144'
+            '-sSTACK_SIZE=1MB',
+            '<@(emscripten_pthread)',
+            '-sDEFAULT_PTHREAD_STACK_SIZE=1MB',
+            '-sPTHREAD_POOL_SIZE=4',
+          ]
+        }, {
+          'cflags': [
+            # SWIG has defines containing throw or goto
+            # and/or functions that always throw (gcc version)
+            '-Wno-maybe-uninitialized'
           ]
         }],
         # Link against a system-installed ImageMagick
@@ -106,7 +134,7 @@
             ],
             'action_name': 'swig_wrappers',
             'inputs': [ 'src/Magick++.i' ],
-            'outputs': [ 'swig/Magick++.cxx' ],
+            'outputs': [ 'swig/node-magickwand.cxx' ],
             'action': [
               'swig', '-javascript', '-typescript', '-napi', '-c++',
               '-Ideps/ImageMagick/Magick++/lib', '-Ideps/ImageMagick',
@@ -116,17 +144,10 @@
               'src/Magick++.i'
             ]
           }]
-        }],
-        ['target_platform != "emscripten"', {
-          'sources': [
-            'swig/Magick++.cxx'
-          ]
-        },
-        {
-          'sources': [
-            'swig/wasm/Magick++.cxx',
-          ]
         }]
+      ],
+      'sources': [
+        '<!@(ls swig/node-magickwand*.cxx)'
       ]
     }
   ],
@@ -170,6 +191,7 @@
             {
               'files': [
                 '<(PRODUCT_DIR)/node-magickwand.js',
+                '<(PRODUCT_DIR)/node-magickwand.worker.js',
                 '<(PRODUCT_DIR)/node-magickwand.wasm'
               ],
               'destination': '<(module_path)'
@@ -183,7 +205,10 @@
           'actions': [{
             'action_name': 'dummy_action_wasm',
             'inputs': [ '<(PRODUCT_DIR)/node-magickwand.js' ],
-            'outputs': [ '<(PRODUCT_DIR)/node-magickwand.wasm' ],
+            'outputs': [
+              '<(PRODUCT_DIR)/node-magickwand.wasm',
+              '<(PRODUCT_DIR)/node-magickwand.worker.js'
+            ],
             'action': [ 'true' ]
           }]
         }
