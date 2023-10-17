@@ -43,8 +43,6 @@ jobs:
       - run: npx @mapbox/node-pre-gyp build
       - name: Generate ES6 bindings
         run: node scripts/gen-es6.js lib/index.mjs
-      - name: Link package
-        run: sudo npm link
       - run: npm test
         env:
           MOCHA_INTEGRATION: native
