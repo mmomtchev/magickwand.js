@@ -76,9 +76,9 @@ jobs:
       - run: npx @mapbox/node-pre-gyp build
       - name: Link package
         run: sudo npm link
-      - run: npm test
+      - run: npm test -g integration
         env:
-          MOCHA_INTEGRATION: wasm
+          MOCHA_INTEGRATION: browser
 
   debug-asan:
     runs-on: ${{ matrix.platform }}
