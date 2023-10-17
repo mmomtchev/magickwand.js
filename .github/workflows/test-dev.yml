@@ -73,8 +73,10 @@ jobs:
       - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
       - run: npx @mapbox/node-pre-gyp build
       - name: Link package
-        run: sudo npm link
-      - run: npm test -- -g integration
+        run: sudo npm link --ignore-scripts
+      - run: |
+          cd test
+          npx mocha -g integration.test.ts
         env:
           MOCHA_INTEGRATION: browser
 
