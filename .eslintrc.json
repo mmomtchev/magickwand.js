@@ -54,16 +54,40 @@
     },
     {
       "files": [
-        "test/browser/**/*.js"
+        "test/integration/browser*/*.js",
+        "example/browser/**/*.js"
+      ],
+      "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module"
+      },
+      "env": {
+        "browser": true,
+        "es6": true,
+        "es2020": true
+      }
+    },
+    {
+      "files": [
+        "test/integration/browser*/*.ts"
       ],
       "env": {
         "browser": true,
         "es6": true,
         "es2020": true
       },
-      "parserOptions": {
-        "sourceType": "module"
-      }
+      "parser": "@typescript-eslint/parser",
+      "plugins": [
+        "@typescript-eslint"
+      ],
+      "rules": {
+        "@typescript-eslint/ban-ts-comment": "off"
+      },
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ]
     }
   ]
 }

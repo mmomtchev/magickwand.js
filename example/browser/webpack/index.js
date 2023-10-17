@@ -6,7 +6,7 @@ async function component() {
 
   const { Magick, MagickCore, MagickVersion } = await IM;
 
-  root.innerHTML = '';
+  root.innerHTML = '';  
 
   const version = document.createElement('div');
   version.innerHTML = MagickVersion;

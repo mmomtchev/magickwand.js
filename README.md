@@ -217,7 +217,7 @@ At the moment this cross-compilation is possible only on Linux.
 To see the web browser demo:
 
 ```
-cd test/browser/webpack/
+cd example/browser/webpack/
 npx webpack-cli serve --mode=development --env development
 ```
 

@@ -11,7 +11,7 @@ EMSDK_PATH=`node -p "JSON.parse(fs.readFileSync('../build/conanbuildinfo.json'))
 
 cd ImageMagick
 # Do not include the utilities which increase the size of the npm package
-emconfigure ./configure $1                                  \
+emconfigure ./configure $2 --prefix=$1/ImageMagick          \
     --disable-installed                                     \
     --disable-shared --enable-static                        \
     --without-utilities --without-perl                      \

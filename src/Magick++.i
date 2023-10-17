@@ -6,6 +6,10 @@
 
 #define MAGICKCORE_EXCLUDE_DEPRECATED
 %insert(header) %{
+#ifdef __EMSCRIPTEN__
+// There are few very subtle differences between native and WASM (see Image.i)
+#include <emnapi.h>
+#endif
 // Includes the header in the wrapper code
 #define MAGICKCORE_EXCLUDE_DEPRECATED
 #include <Magick++.h>

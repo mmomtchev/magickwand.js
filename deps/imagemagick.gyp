@@ -71,7 +71,7 @@
                 'action': [ 'sh', '<(module_root_dir)/deps/build_magick.sh', '<(module_path)', '<(hdri)' ]
               }],
               ['target_platform == "emscripten"', {
-                'action': [ 'bash', '<(module_root_dir)/deps/build_magick_wasm.sh' ]
+                'action': [ 'bash', '<(module_root_dir)/deps/build_magick_wasm.sh', '<(module_path)', '<(hdri)' ]
               }],
             ]
           }
@@ -88,7 +88,7 @@
               'libraries': [ '<!@(bash configure_magick.sh <(module_path) <(hdri))' ]
             }],
             ['target_platform == "emscripten"', {
-              'libraries': [ '<!@(bash configure_magick_wasm.sh <(hdri))' ]
+              'libraries': [ '<!@(bash configure_magick_wasm.sh <(module_path) <(hdri))' ]
             }]
           ]
         }

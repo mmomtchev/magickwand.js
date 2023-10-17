@@ -9,3 +9,5 @@ EMSDK_PATH=`node -p "JSON.parse(fs.readFileSync('../build/conanbuildinfo.json'))
 cd ImageMagick
 
 emmake make -j4
+make install
+rm -rf $1/ImageMagick/lib/*.*a

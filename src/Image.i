@@ -19,15 +19,41 @@
   return $input.IsTypedArray();
 }
 
+// This check typemap guarantees safety of the TypedArray passed by the user for Image.read
 %typemap(check)
-(const size_t width_, const size_t height_, const std::string &map_, const Magick::StorageType type_, const void *pixels_),
-(const size_t columns_, const size_t rows_, const std::string &map_, const Magick::StorageType type_, void *pixels_)
+(const size_t width_, const size_t height_, const std::string &map_, const Magick::StorageType type_, const void *pixels_)
 {
   if ($1 * $2 * $3->size() != _global_typed_array.ElementLength()) {
     SWIG_exception_fail(SWIG_IndexError,
       "The number of elements in the TypedArray does not match the number of pixels in the image");
   }
 }
+
+// This check typemap guarantees safety of the TypedArray passed by the user for Image.write
+// Additionally it stores a persistent reference for the next typemap in WASM mode
+%typemap(check)
+(const size_t columns_, const size_t rows_, const std::string &map_, const Magick::StorageType type_, void *pixels_)
+(Napi::Reference<Napi::Value> _global_array_ref)
+%{
+  if ($1 * $2 * $3->size() != _global_typed_array.ElementLength()) {
+    SWIG_exception_fail(SWIG_IndexError,
+      "The number of elements in the TypedArray does not match the number of pixels in the image");
+  }
+#ifdef __EMSCRIPTEN__
+  _global_array_ref = Napi::Persistent(_global_typed_array.ArrayBuffer().As<Napi::Value>());
+#endif
+%}
+
+// This is one of the very few differences between Node-API for native modules and emnapi for WASM
+// WASM operates with a separate heap, so when going out of the Image.write function we must copy
+// the data back to the JS memory space
+%typemap(argout) (const size_t columns_, const size_t rows_, const std::string &map_, const Magick::StorageType type_, void *pixels_)
+%{
+#ifdef __EMSCRIPTEN__
+napi_value ab_value = _global_array_ref.Value();
+emnapi_sync_memory(env, false, &ab_value, 0, NAPI_AUTO_LENGTH);
+#endif
+%}
 
 %typemap(ts) (const Magick::StorageType type_, void *pixels_) PixelTypedArray;
 
@@ -37,7 +63,7 @@
 // Classes use templates and must be built as a single file
 // Github Actions are limited to 7GB of RAM
 //
-// Sponsorhip of this project will be used for more RAM
+// Sponsorship of this project will help a lot
 %feature("async", "0") Magick::Image::alpha;
 %feature("async", "0") Magick::Image::matteColor;
 %feature("async", "0") Magick::Image::animationDelay;

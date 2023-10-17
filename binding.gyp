@@ -82,6 +82,11 @@
           ],
           'ldflags': [
 		        '--embed-file=<(module_root_dir)/test/data/wizard.gif@wizard.gif',
+            '--embed-file=<(module_path)/ImageMagick/etc/ImageMagick-7/policy.xml@policy.xml',
+            '--embed-file=<(module_path)/ImageMagick/etc/ImageMagick-7/colors.xml@colors.xml',
+            '--embed-file=<(module_path)/ImageMagick/etc/ImageMagick-7/log.xml@log.xml',
+            '--embed-file=<(module_path)/ImageMagick/share/ImageMagick-7/locale.xml@locale.xml',
+            '--embed-file=<(module_path)/ImageMagick/share/ImageMagick-7/english.xml@english.xml',
 		        '-sNO_DISABLE_EXCEPTION_CATCHING',
             '-sMODULARIZE',
             '-sENVIRONMENT=web,webview,worker',
