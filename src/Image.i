@@ -1,5 +1,5 @@
-// Magick::Image::read from (const StorageType type_, const void *pixels_) is a special case
-// We want to make it work with a TypedArray
+// Magick::Image::read & Magick::Image::write with (const StorageType type_, const void *pixels_) are a special case
+// We want to make these work with a TypedArray
 %include "StorageType.i";
 
 // This typemap creates a "global" local variable to be used by the check typemap
