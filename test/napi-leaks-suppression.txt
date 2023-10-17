@@ -25,6 +25,7 @@ leak:CompactionSpace::Expand
 leak:Heap::IterateRoots
 leak:Heap::PerformGarbageCollection
 leak:Heap::InsertIntoRememberedSetFromCode
+leak:Heap::SetUpSpaces
 leak:PagedSpace::RefillLabMain
 leak:OldLargeObjectSpace::AllocateRaw
 leak:BaselineBatchCompiler::EnqueueFunction
