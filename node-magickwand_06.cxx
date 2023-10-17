@@ -59,27 +59,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("matteColorAsync");
-  members.insert({
-    "matteColorAsync",
-      _Magick_Image_templ::InstanceMethod("matteColorAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_matteColorAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("matteColor");
   members.insert({
     "matteColor",
       _Magick_Image_templ::InstanceMethod("matteColor",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_matteColor,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("animationDelayAsync");
-  members.insert({
-    "animationDelayAsync",
-      _Magick_Image_templ::InstanceMethod("animationDelayAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_animationDelayAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -91,27 +75,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("animationIterationsAsync");
-  members.insert({
-    "animationIterationsAsync",
-      _Magick_Image_templ::InstanceMethod("animationIterationsAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_animationIterationsAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("animationIterations");
   members.insert({
     "animationIterations",
       _Magick_Image_templ::InstanceMethod("animationIterations",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_animationIterations,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("backgroundColorAsync");
-  members.insert({
-    "backgroundColorAsync",
-      _Magick_Image_templ::InstanceMethod("backgroundColorAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_backgroundColorAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -139,14 +107,6 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("baseColumnsAsync");
-  members.insert({
-    "baseColumnsAsync",
-      _Magick_Image_templ::InstanceMethod("baseColumnsAsync",
-        &_Magick_Image_templ::_wrap_Magick_Image_baseColumnsAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("baseColumns");
   members.insert({
     "baseColumns",
@@ -155,27 +115,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("baseFilenameAsync");
-  members.insert({
-    "baseFilenameAsync",
-      _Magick_Image_templ::InstanceMethod("baseFilenameAsync",
-        &_Magick_Image_templ::_wrap_Magick_Image_baseFilenameAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("baseFilename");
   members.insert({
     "baseFilename",
       _Magick_Image_templ::InstanceMethod("baseFilename",
         &_Magick_Image_templ::_wrap_Magick_Image_baseFilename,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("baseRowsAsync");
-  members.insert({
-    "baseRowsAsync",
-      _Magick_Image_templ::InstanceMethod("baseRowsAsync",
-        &_Magick_Image_templ::_wrap_Magick_Image_baseRowsAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -200,14 +144,6 @@ void _Magick_Image_inst::GetMembers(
     "blackPointCompensation",
       _Magick_Image_templ::InstanceMethod("blackPointCompensation",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_blackPointCompensation,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("borderColorAsync");
-  members.insert({
-    "borderColorAsync",
-      _Magick_Image_templ::InstanceMethod("borderColorAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_borderColorAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -251,27 +187,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("channelDepthAsync");
-  members.insert({
-    "channelDepthAsync",
-      _Magick_Image_templ::InstanceMethod("channelDepthAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_channelDepthAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("channelDepth");
   members.insert({
     "channelDepth",
       _Magick_Image_templ::InstanceMethod("channelDepth",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_channelDepth,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("channelsAsync");
-  members.insert({
-    "channelsAsync",
-      _Magick_Image_templ::InstanceMethod("channelsAsync",
-        &_Magick_Image_templ::_wrap_Magick_Image_channelsAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -363,14 +283,6 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("columnsAsync");
-  members.insert({
-    "columnsAsync",
-      _Magick_Image_templ::InstanceMethod("columnsAsync",
-        &_Magick_Image_templ::_wrap_Magick_Image_columnsAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("columns");
   members.insert({
     "columns",
@@ -427,14 +339,6 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("debugAsync");
-  members.insert({
-    "debugAsync",
-      _Magick_Image_templ::InstanceMethod("debugAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_debugAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("debug");
   members.insert({
     "debug",
@@ -472,14 +376,6 @@ void _Magick_Image_inst::GetMembers(
     "depth",
       _Magick_Image_templ::InstanceMethod("depth",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_depth,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("directoryAsync");
-  members.insert({
-    "directoryAsync",
-      _Magick_Image_templ::InstanceMethod("directoryAsync",
-        &_Magick_Image_templ::_wrap_Magick_Image_directoryAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -539,27 +435,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("fileSizeAsync");
-  members.insert({
-    "fileSizeAsync",
-      _Magick_Image_templ::InstanceMethod("fileSizeAsync",
-        &_Magick_Image_templ::_wrap_Magick_Image_fileSizeAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("fileSize");
   members.insert({
     "fileSize",
       _Magick_Image_templ::InstanceMethod("fileSize",
         &_Magick_Image_templ::_wrap_Magick_Image_fileSize,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("fillColorAsync");
-  members.insert({
-    "fillColorAsync",
-      _Magick_Image_templ::InstanceMethod("fillColorAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_fillColorAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -571,27 +451,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("fillRuleAsync");
-  members.insert({
-    "fillRuleAsync",
-      _Magick_Image_templ::InstanceMethod("fillRuleAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_fillRuleAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("fillRule");
   members.insert({
     "fillRule",
       _Magick_Image_templ::InstanceMethod("fillRule",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_fillRule,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("fillPatternAsync");
-  members.insert({
-    "fillPatternAsync",
-      _Magick_Image_templ::InstanceMethod("fillPatternAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_fillPatternAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -603,27 +467,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("filterTypeAsync");
-  members.insert({
-    "filterTypeAsync",
-      _Magick_Image_templ::InstanceMethod("filterTypeAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_filterTypeAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("filterType");
   members.insert({
     "filterType",
       _Magick_Image_templ::InstanceMethod("filterType",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_filterType,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("fontAsync");
-  members.insert({
-    "fontAsync",
-      _Magick_Image_templ::InstanceMethod("fontAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_fontAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -635,27 +483,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("fontFamilyAsync");
-  members.insert({
-    "fontFamilyAsync",
-      _Magick_Image_templ::InstanceMethod("fontFamilyAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_fontFamilyAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("fontFamily");
   members.insert({
     "fontFamily",
       _Magick_Image_templ::InstanceMethod("fontFamily",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_fontFamily,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("fontPointsizeAsync");
-  members.insert({
-    "fontPointsizeAsync",
-      _Magick_Image_templ::InstanceMethod("fontPointsizeAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_fontPointsizeAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -667,14 +499,6 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("fontStyleAsync");
-  members.insert({
-    "fontStyleAsync",
-      _Magick_Image_templ::InstanceMethod("fontStyleAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_fontStyleAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("fontStyle");
   members.insert({
     "fontStyle",
@@ -683,27 +507,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("fontWeightAsync");
-  members.insert({
-    "fontWeightAsync",
-      _Magick_Image_templ::InstanceMethod("fontWeightAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_fontWeightAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("fontWeight");
   members.insert({
     "fontWeight",
       _Magick_Image_templ::InstanceMethod("fontWeight",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_fontWeight,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("formatAsync");
-  members.insert({
-    "formatAsync",
-      _Magick_Image_templ::InstanceMethod("formatAsync",
-        &_Magick_Image_templ::_wrap_Magick_Image_formatAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -731,14 +539,6 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("geometryAsync");
-  members.insert({
-    "geometryAsync",
-      _Magick_Image_templ::InstanceMethod("geometryAsync",
-        &_Magick_Image_templ::_wrap_Magick_Image_geometryAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("geometry");
   members.insert({
     "geometry",
@@ -763,27 +563,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("hasChannelAsync");
-  members.insert({
-    "hasChannelAsync",
-      _Magick_Image_templ::InstanceMethod("hasChannelAsync",
-        &_Magick_Image_templ::_wrap_Magick_Image_hasChannelAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("hasChannel");
   members.insert({
     "hasChannel",
       _Magick_Image_templ::InstanceMethod("hasChannel",
         &_Magick_Image_templ::_wrap_Magick_Image_hasChannel,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("highlightColorAsync");
-  members.insert({
-    "highlightColorAsync",
-      _Magick_Image_templ::InstanceMethod("highlightColorAsync",
-        &_Magick_Image_templ::_wrap_Magick_Image_highlightColorAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -875,27 +659,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("isValidAsync");
-  members.insert({
-    "isValidAsync",
-      _Magick_Image_templ::InstanceMethod("isValidAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_isValidAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("isValid");
   members.insert({
     "isValid",
       _Magick_Image_templ::InstanceMethod("isValid",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_isValid,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("labelAsync");
-  members.insert({
-    "labelAsync",
-      _Magick_Image_templ::InstanceMethod("labelAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_labelAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -1179,14 +947,6 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("quietAsync");
-  members.insert({
-    "quietAsync",
-      _Magick_Image_templ::InstanceMethod("quietAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_quietAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("quiet");
   members.insert({
     "quiet",
@@ -1224,14 +984,6 @@ void _Magick_Image_inst::GetMembers(
     "resolutionUnits",
       _Magick_Image_templ::InstanceMethod("resolutionUnits",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_resolutionUnits,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("rowsAsync");
-  members.insert({
-    "rowsAsync",
-      _Magick_Image_templ::InstanceMethod("rowsAsync",
-        &_Magick_Image_templ::_wrap_Magick_Image_rowsAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -1467,27 +1219,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("textAntiAliasAsync");
-  members.insert({
-    "textAntiAliasAsync",
-      _Magick_Image_templ::InstanceMethod("textAntiAliasAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_textAntiAliasAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("textAntiAlias");
   members.insert({
     "textAntiAlias",
       _Magick_Image_templ::InstanceMethod("textAntiAlias",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_textAntiAlias,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("textDirectionAsync");
-  members.insert({
-    "textDirectionAsync",
-      _Magick_Image_templ::InstanceMethod("textDirectionAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_textDirectionAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -1499,27 +1235,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("textEncodingAsync");
-  members.insert({
-    "textEncodingAsync",
-      _Magick_Image_templ::InstanceMethod("textEncodingAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_textEncodingAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("textEncoding");
   members.insert({
     "textEncoding",
       _Magick_Image_templ::InstanceMethod("textEncoding",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_textEncoding,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("textGravityAsync");
-  members.insert({
-    "textGravityAsync",
-      _Magick_Image_templ::InstanceMethod("textGravityAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_textGravityAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -1531,27 +1251,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("textInterlineSpacingAsync");
-  members.insert({
-    "textInterlineSpacingAsync",
-      _Magick_Image_templ::InstanceMethod("textInterlineSpacingAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_textInterlineSpacingAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("textInterlineSpacing");
   members.insert({
     "textInterlineSpacing",
       _Magick_Image_templ::InstanceMethod("textInterlineSpacing",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_textInterlineSpacing,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("textInterwordSpacingAsync");
-  members.insert({
-    "textInterwordSpacingAsync",
-      _Magick_Image_templ::InstanceMethod("textInterwordSpacingAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_textInterwordSpacingAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -1563,27 +1267,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("textKerningAsync");
-  members.insert({
-    "textKerningAsync",
-      _Magick_Image_templ::InstanceMethod("textKerningAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_textKerningAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("textKerning");
   members.insert({
     "textKerning",
       _Magick_Image_templ::InstanceMethod("textKerning",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_textKerning,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("textUnderColorAsync");
-  members.insert({
-    "textUnderColorAsync",
-      _Magick_Image_templ::InstanceMethod("textUnderColorAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_textUnderColorAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -1675,14 +1363,6 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("verboseAsync");
-  members.insert({
-    "verboseAsync",
-      _Magick_Image_templ::InstanceMethod("verboseAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_verboseAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("verbose");
   members.insert({
     "verbose",
@@ -1723,27 +1403,11 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
-  members.erase("xResolutionAsync");
-  members.insert({
-    "xResolutionAsync",
-      _Magick_Image_templ::InstanceMethod("xResolutionAsync",
-        &_Magick_Image_templ::_wrap_Magick_Image_xResolutionAsync,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
   members.erase("xResolution");
   members.insert({
     "xResolution",
       _Magick_Image_templ::InstanceMethod("xResolution",
         &_Magick_Image_templ::_wrap_Magick_Image_xResolution,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("yResolutionAsync");
-  members.insert({
-    "yResolutionAsync",
-      _Magick_Image_templ::InstanceMethod("yResolutionAsync",
-        &_Magick_Image_templ::_wrap_Magick_Image_yResolutionAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -1880,14 +1544,6 @@ void _Magick_Image_inst::GetMembers(
     "affineTransform",
       _Magick_Image_templ::InstanceMethod("affineTransform",
         &_Magick_Image_templ::_wrap_Magick_Image_affineTransform,
-        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
-    });
-  // jsnapi_register_member_function
-  members.erase("alphaAsync");
-  members.insert({
-    "alphaAsync",
-      _Magick_Image_templ::InstanceMethod("alphaAsync",
-        &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_alphaAsync,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
