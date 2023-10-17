@@ -75,8 +75,13 @@ jobs:
       - name: Link package
         run: sudo npm link --ignore-scripts
       - run: |
-          cd test
-          npx mocha integration.test.ts
+          cd test/integration/browser-webpack-ts-cjs/
+          npm i
+          npm link node-magickwand
+          cat node_modules/node-magickwand/package.json 
+          npm run build
+          cd ..
+          npx karma start browser-webpack-ts-cjs.karma.cjs
         env:
           MOCHA_INTEGRATION: browser
 
