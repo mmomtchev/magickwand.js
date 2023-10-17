@@ -76,7 +76,7 @@ jobs:
       - run: npx @mapbox/node-pre-gyp build
       - name: Link package
         run: sudo npm link
-      - run: npm test -g integration
+      - run: npm test -- -g integration
         env:
           MOCHA_INTEGRATION: browser
 
