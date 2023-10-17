@@ -30,3 +30,58 @@
 }
 
 %typemap(ts) (const Magick::StorageType type_, void *pixels_) PixelTypedArray;
+
+// These methods will be built without async version
+// (they are considered latency-free)
+// This is to reduce the RAM requirements when building
+// Classes use templates and must be built as a single file
+// Github Actions are limited to 7GB of RAM
+//
+// Sponsorhip of this project will be used for more RAM
+%feature("async", "0") Magick::Image::alpha;
+%feature("async", "0") Magick::Image::matteColor;
+%feature("async", "0") Magick::Image::animationDelay;
+%feature("async", "0") Magick::Image::animationIterations;
+%feature("async", "0") Magick::Image::backgroundColor;
+%feature("async", "0") Magick::Image::baseColumns;
+%feature("async", "0") Magick::Image::baseRows;
+%feature("async", "0") Magick::Image::baseFilename;
+%feature("async", "0") Magick::Image::borderColor;
+%feature("async", "0") Magick::Image::channelDepth;
+%feature("async", "0") Magick::Image::channels;
+%feature("async", "0") Magick::Image::columns;
+%feature("async", "0") Magick::Image::debug;
+%feature("async", "0") Magick::Image::directory;
+%feature("async", "0") Magick::Image::fileSize;
+%feature("async", "0") Magick::Image::fillColor;
+%feature("async", "0") Magick::Image::fillRule;
+%feature("async", "0") Magick::Image::fillPattern;
+%feature("async", "0") Magick::Image::filterType;
+%feature("async", "0") Magick::Image::font;
+%feature("async", "0") Magick::Image::fontFamily;
+%feature("async", "0") Magick::Image::fontPointsize;
+%feature("async", "0") Magick::Image::fontStyle;
+%feature("async", "0") Magick::Image::fontWeight;
+%feature("async", "0") Magick::Image::format;
+%feature("async", "0") Magick::Image::geometry;
+%feature("async", "0") Magick::Image::hasChannel;
+%feature("async", "0") Magick::Image::highlightColor;
+%feature("async", "0") Magick::Image::isValid;
+%feature("async", "0") Magick::Image::label;
+%feature("async", "0") Magick::Image::quiet;
+%feature("async", "0") Magick::Image::rows;
+%feature("async", "0") Magick::Image::textAntiAlias;
+%feature("async", "0") Magick::Image::textDirection;
+%feature("async", "0") Magick::Image::textEncoding;
+%feature("async", "0") Magick::Image::textGravity;
+%feature("async", "0") Magick::Image::textInterlineSpacing;
+%feature("async", "0") Magick::Image::textInterwordSpacing;
+%feature("async", "0") Magick::Image::textKerning;
+%feature("async", "0") Magick::Image::textUnderColor;
+%feature("async", "0") Magick::Image::verbose;
+%feature("async", "0") Magick::Image::xResolution;
+%feature("async", "0") Magick::Image::yResolution;
+
+
+
+
