@@ -8,12 +8,10 @@ import * as IM from 'node-magickwand';
 import { MagickCore } from 'node-magickwand';
 
 describe('Core', () => {
-  before(() => {
-    const features = MagickCore.GetMagickFeatures().trimEnd().split(' ').join(',');
-    console.log(`Built with ImageMagick ${IM.MagickLibVersionText}${IM.MagickLibAddendum}` +
-      ` from ${MagickCore.GetMagickReleaseDate()} [${features}] (${IM.MagickVersion}) `);
-    console.log(`Includes ${MagickCore.GetMagickDelegates().split(' ').join(',')}`);
-  });
+  const features = MagickCore.GetMagickFeatures().trimEnd().split(' ').join(',');
+  console.log(`Built with ImageMagick ${IM.MagickLibVersionText}${IM.MagickLibAddendum}` +
+    ` from ${MagickCore.GetMagickReleaseDate()} [${features}] (${IM.MagickVersion}) `);
+  console.log(`Includes ${MagickCore.GetMagickDelegates().split(' ').join(',')}`);
 
   it('ImageMagick version information', () => {
     assert.isString(IM.MagickLibVersionText);
