@@ -4,6 +4,8 @@ async function component() {
   const root = document.createElement('div');
   root.innerHTML = 'Loading ImageMagick...';
 
+  // The browser WASM version features asynchronous loading
+  // This is inevitable since the WASM transpilation API itself is asynchronous
   const { Magick, MagickCore, MagickVersion } = await IM;
 
   root.innerHTML = '';  
@@ -70,6 +72,8 @@ async function component() {
     await im.magickAsync('WEBP');
     const blob = new Magick.Blob;
     await im.writeAsync(blob);
+
+    // Convert Magick.Blob to JS blob and display it directly
     const jsBlob = new Blob([blob.data()], { type: 'image/webp' });
     const image = document.createElement('img');
     image.src = URL.createObjectURL(jsBlob);
