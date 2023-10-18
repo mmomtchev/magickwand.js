@@ -27,7 +27,7 @@
     "preinstall": "npm run deps:download",
     "install": "node-pre-gyp install --fallback-to-build && node scripts/gen-es6.js lib/index.mjs",
     "lint": "eslint lib/*.cjs test/*.ts",
-    "test": "mocha --reporter=tap",
+    "test": "mocha --reporter=tap test/*.test.ts",
     "preversion": "npm run lint && npm run test",
     "postversion": "git push && git push --tags && node ./scripts/publish-packages.js",
     "postpublish": "gh workflow run test-package.yml -F version=$npm_package_version"

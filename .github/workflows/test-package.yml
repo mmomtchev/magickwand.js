@@ -56,9 +56,10 @@ jobs:
       - name: Run the unit tests
         run: |
           cd test
-          npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts *.standalone.*js
+          npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts
         env:
-          TS_NODE_PROJECT: tsconfig.standalone.json 
+          MOCHA_INTEGRATION: node,browser
+          MOCHA_MAGICK_INSTALL: npm install --force node-magickwand@${{ github.event.inputs.version }}
 
 
   test_npm_rebuild:
@@ -104,9 +105,10 @@ jobs:
       - name: Run the unit tests
         run: |
           cd test
-          npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts *.standalone.*js
+          npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts
         env:
-          TS_NODE_PROJECT: tsconfig.standalone.json 
+          MOCHA_INTEGRATION: node,browser
+          MOCHA_MAGICK_INSTALL: npm install --force node-magickwand@${{ github.event.inputs.version }}
 
 
   test_npm_rebuild_shared:
@@ -161,6 +163,7 @@ jobs:
       - name: Run the unit tests
         run: |
           cd test
-          npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts *.standalone.*js
+          npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts
         env:
-          TS_NODE_PROJECT: tsconfig.standalone.json 
+          MOCHA_INTEGRATION: node,browser
+          MOCHA_MAGICK_INSTALL: npm install --force node-magickwand@${{ github.event.inputs.version }}

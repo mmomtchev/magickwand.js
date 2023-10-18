@@ -77,7 +77,7 @@ jobs:
           npx mocha integration.test.ts
         env:
           MOCHA_INTEGRATION: browser
-          MOCHA_MAGICK_INSTALL: ln -s ../../.. node_modules/node-magickwand
+          MOCHA_MAGICK_INSTALL: ln -s ../../../.. node_modules/node-magickwand
 
   debug-asan:
     runs-on: ${{ matrix.platform }}

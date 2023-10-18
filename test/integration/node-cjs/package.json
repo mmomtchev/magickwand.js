@@ -1,0 +1,12 @@
+{
+  "name": "node-cjs",
+  "version": "1.0.0",
+  "description": "node-cjs integration test",
+  "scripts": {
+    "test": "npx mocha index.cjs"
+  },
+  "type": "module",
+  "dependencies": {
+    "chai": "^4.3.10"
+  }
+}
