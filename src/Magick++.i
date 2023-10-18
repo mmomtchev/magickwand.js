@@ -5,7 +5,11 @@
 #endif
 
 #define MAGICKCORE_EXCLUDE_DEPRECATED
-%{
+%insert(header) %{
+#ifdef __EMSCRIPTEN__
+// There are few very subtle differences between native and WASM (see Image.i)
+#include <emnapi.h>
+#endif
 // Includes the header in the wrapper code
 #define MAGICKCORE_EXCLUDE_DEPRECATED
 #include <Magick++.h>
@@ -20,7 +24,6 @@ using namespace Magick;
 %include "std_vector.i"
 %include "typemaps.i"
 %include "exception.i"
-%include "nodejs_buffer.i"
 
 %apply unsigned { size_t };
 %apply int { ssize_t };
@@ -120,9 +123,12 @@ using namespace Magick;
 %include "MagickCore.i"
 
 // Enable async on select classes
-// Async is very expensive (compilation-wise) and free Github Actions runners
-// are limited to 7GB. Sponsorship of this project will go a long way
-// towards more features.
+// Async versions of methods add about 150% more code
+// compared to the sync versions
+//
+// We prefer to avoid bloating the final library with useless async
+// methods - only I/O and CPU heavy operations really need to be async
+//
 %feature("async:locking", "1");
 %define LOCKED_ASYNC(TYPE)
 %apply SWIGTYPE  LOCK {TYPE};

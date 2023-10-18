@@ -15,12 +15,17 @@ leak:FcStrBufString
 leak:node::builtins::BuiltinLoader::LoadBuiltinSource
 leak:ProcessWrap::OnExit
 leak:StringBytes::Encode
+leak:Realm::ExecuteBootstrapper
 
 # Known leaks in V8
 leak:Heap_GenerationalBarrierSlow
 leak:Scavenger::ScavengePage
+leak:Scavenger::Process
 leak:CompactionSpace::Expand
 leak:Heap::IterateRoots
+leak:Heap::PerformGarbageCollection
+leak:Heap::InsertIntoRememberedSetFromCode
+leak:Heap::SetUpSpaces
 leak:Heap::PerformGarbageCollection
 leak:PagedSpace::RefillLabMain
 leak:OldLargeObjectSpace::AllocateRaw

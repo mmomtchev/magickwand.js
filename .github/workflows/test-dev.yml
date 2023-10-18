@@ -10,7 +10,7 @@ on:
     branches: ["*"]
 
 jobs:
-  release:
+  native:
     runs-on: ${{ matrix.platform }}
 
     strategy:
@@ -27,6 +27,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
+      - name: Cache conan artifacts
+        id: conan-artifacts
+        uses: actions/cache@v3
+        with:
+          path: ~/.conan
+          key: ${{ runner.os }}-conan
       - name: Install fonts on Ubuntu
         run: |
           [[ '${{ matrix.platform }}' =~ 'ubuntu' ]] && sudo apt-get install -y fonts-ubuntu || true
@@ -34,9 +40,45 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure
-      - run: npx @mapbox/node-pre-gyp build -j max
-      - run: node scripts/gen-es6.js lib/index.mjs
+      - run: npx @mapbox/node-pre-gyp build
+      - name: Generate ES6 bindings
+        run: node scripts/gen-es6.js lib/index.mjs
       - run: npm test
+        env:
+          MOCHA_INTEGRATION: native
+
+  wasm:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: true
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: Cache conan artifacts
+        id: conan-artifacts
+        uses: actions/cache@v3
+        with:
+          path: ~/.conan
+          key: wasm-conan
+      - run: npm install --ignore-scripts
+      - run: npm run deps:download
+      - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
+      - run: npx @mapbox/node-pre-gyp build
+      - name: Run headless test
+        uses: GabrielBB/xvfb-action@v1
+        env:
+          MOCHA_INTEGRATION: browser
+          MOCHA_MAGICK_INSTALL: ln -s ../../../.. node_modules/node-magickwand
+        with:
+          run: npx mocha test/integration.test.ts
 
   debug-asan:
     runs-on: ${{ matrix.platform }}
@@ -55,6 +97,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
+      - name: Cache conan artifacts
+        id: conan-artifacts
+        uses: actions/cache@v3
+        with:
+          path: ~/.conan
+          key: ${{ runner.os }}-conan
       - name: Install fonts on Ubuntu
         run: |
           [[ '${{ matrix.platform }}' =~ 'ubuntu' ]] && sudo apt-get install -y fonts-ubuntu || true
@@ -62,12 +110,13 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --debug --enable_asan
-      - run: npx @mapbox/node-pre-gyp build -j max
-      - run: node scripts/gen-es6.js lib/index.mjs
+      - run: npx @mapbox/node-pre-gyp build
+      - name: Generate ES6 bindings
+        run: node scripts/gen-es6.js lib/index.mjs
         env:
           LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6
           LSAN_OPTIONS: suppressions=${{ github.workspace }}/test/napi-leaks-suppression.txt
-      - run: node node_modules/mocha/bin/mocha.js -i -g Security --repeats 1000
+      - run: node node_modules/mocha/bin/mocha.js -i -g Security --repeats 1000 test/*.test.ts
         env:
           LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6
           LSAN_OPTIONS: suppressions=${{ github.workspace }}/test/napi-leaks-suppression.txt

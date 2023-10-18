@@ -1,5 +1,4 @@
 const cp = require('child_process');
-const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
@@ -32,51 +31,10 @@ try {
   process.exit(1);
 }
 
-async function download(url, targetFile) {
-  console.log('downloading', url, 'to', targetFile);
-  await fs.promises.mkdir(path.dirname(targetFile), { recursive: true });
-  await fs.promises.rm(targetFile, { force: true });
-  return new Promise((resolve, reject) => {
-    https.get(url, response => {
-      const code = response.statusCode ?? 0;
-
-      if (code >= 400) {
-        return reject(new Error(response.statusMessage));
-      }
-
-      // handle redirects
-      if (code > 300 && code < 400 && !!response.headers.location) {
-        return resolve(
-          download(response.headers.location, targetFile)
-        );
-      }
-
-      // save the file to disk
-      const fileWriter = fs
-        .createWriteStream(targetFile)
-        .on('finish', () => {
-          fileWriter.close();
-          resolve({});
-        });
-
-      response.pipe(fileWriter);
-    }).on('error', error => {
-      reject(error);
-    });
-  });
+fs.mkdirSync(generated_path, { recursive: true });
+const list = cp.execSync(`git ls-tree --name-only ${commit}`).toString().trim().split('\n');
+for (const file of list) {
+  console.log(`downloading ${file}`);
+  const data = cp.spawnSync('git', ['show', `${commit}:${file}`], { maxBuffer: 32 * 1024 * 1024 }).stdout;
+  fs.writeFileSync(path.resolve(generated_path, file), data);
 }
-
-const q = [];
-for (const file of [
-  'magickcore.i',
-  'Magick++.cxx',
-  'magick++.i',
-  'magickwand.i',
-  'Magick++.d.ts'
-]) {
-  q.push(download(
-    `https://raw.githubusercontent.com/mmomtchev/node-magickwand/${commit}/${file}`,
-    path.resolve(generated_path, file)
-  ));
-}
-Promise.all(q).then(() => console.log('done'));

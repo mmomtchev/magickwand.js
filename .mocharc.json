@@ -1,5 +1,4 @@
 {
-  "spec": "test/*.test.*s",
   "v8-expose-gc": true,
   "timeout": "5000",
   "require": [

@@ -1,5 +1,5 @@
-// Magick::Image::read from (const StorageType type_, const void *pixels_) is a special case
-// We want to make it work with a TypedArray
+// Magick::Image::read & Magick::Image::write with (const StorageType type_, const void *pixels_) are a special case
+// We want to make these work with a TypedArray
 %include "StorageType.i";
 
 // This typemap creates a "global" local variable to be used by the check typemap
@@ -19,9 +19,9 @@
   return $input.IsTypedArray();
 }
 
+// This check typemap guarantees safety of the TypedArray passed by the user for Image.read
 %typemap(check)
-(const size_t width_, const size_t height_, const std::string &map_, const Magick::StorageType type_, const void *pixels_),
-(const size_t columns_, const size_t rows_, const std::string &map_, const Magick::StorageType type_, void *pixels_)
+(const size_t width_, const size_t height_, const std::string &map_, const Magick::StorageType type_, const void *pixels_)
 {
   if ($1 * $2 * $3->size() != _global_typed_array.ElementLength()) {
     SWIG_exception_fail(SWIG_IndexError,
@@ -29,4 +29,85 @@
   }
 }
 
+// This check typemap guarantees safety of the TypedArray passed by the user for Image.write
+// Additionally it stores a persistent reference for the next typemap in WASM mode
+%typemap(check)
+(const size_t columns_, const size_t rows_, const std::string &map_, const Magick::StorageType type_, void *pixels_)
+(Napi::Reference<Napi::Value> _global_array_ref)
+%{
+  if ($1 * $2 * $3->size() != _global_typed_array.ElementLength()) {
+    SWIG_exception_fail(SWIG_IndexError,
+      "The number of elements in the TypedArray does not match the number of pixels in the image");
+  }
+#ifdef __EMSCRIPTEN__
+  _global_array_ref = Napi::Persistent(_global_typed_array.ArrayBuffer().As<Napi::Value>());
+#endif
+%}
+
+// This is one of the very few differences between Node-API for native modules and emnapi for WASM
+// WASM operates with a separate heap, so when going out of the Image.write function we must copy
+// the data back to the JS memory space
+%typemap(argout) (const size_t columns_, const size_t rows_, const std::string &map_, const Magick::StorageType type_, void *pixels_)
+%{
+#ifdef __EMSCRIPTEN__
+napi_value ab_value = _global_array_ref.Value();
+emnapi_sync_memory(env, false, &ab_value, 0, NAPI_AUTO_LENGTH);
+#endif
+%}
+
 %typemap(ts) (const Magick::StorageType type_, void *pixels_) PixelTypedArray;
+
+// These methods will be built without async version
+// (they are considered latency-free)
+// This is to reduce the RAM requirements when building
+// Classes use templates and must be built as a single file
+// Github Actions are limited to 7GB of RAM
+//
+// Sponsorship of this project will help a lot
+%feature("async", "0") Magick::Image::alpha;
+%feature("async", "0") Magick::Image::matteColor;
+%feature("async", "0") Magick::Image::animationDelay;
+%feature("async", "0") Magick::Image::animationIterations;
+%feature("async", "0") Magick::Image::backgroundColor;
+%feature("async", "0") Magick::Image::baseColumns;
+%feature("async", "0") Magick::Image::baseRows;
+%feature("async", "0") Magick::Image::baseFilename;
+%feature("async", "0") Magick::Image::borderColor;
+%feature("async", "0") Magick::Image::channelDepth;
+%feature("async", "0") Magick::Image::channels;
+%feature("async", "0") Magick::Image::columns;
+%feature("async", "0") Magick::Image::debug;
+%feature("async", "0") Magick::Image::directory;
+%feature("async", "0") Magick::Image::fileSize;
+%feature("async", "0") Magick::Image::fillColor;
+%feature("async", "0") Magick::Image::fillRule;
+%feature("async", "0") Magick::Image::fillPattern;
+%feature("async", "0") Magick::Image::filterType;
+%feature("async", "0") Magick::Image::font;
+%feature("async", "0") Magick::Image::fontFamily;
+%feature("async", "0") Magick::Image::fontPointsize;
+%feature("async", "0") Magick::Image::fontStyle;
+%feature("async", "0") Magick::Image::fontWeight;
+%feature("async", "0") Magick::Image::format;
+%feature("async", "0") Magick::Image::geometry;
+%feature("async", "0") Magick::Image::hasChannel;
+%feature("async", "0") Magick::Image::highlightColor;
+%feature("async", "0") Magick::Image::isValid;
+%feature("async", "0") Magick::Image::label;
+%feature("async", "0") Magick::Image::quiet;
+%feature("async", "0") Magick::Image::rows;
+%feature("async", "0") Magick::Image::textAntiAlias;
+%feature("async", "0") Magick::Image::textDirection;
+%feature("async", "0") Magick::Image::textEncoding;
+%feature("async", "0") Magick::Image::textGravity;
+%feature("async", "0") Magick::Image::textInterlineSpacing;
+%feature("async", "0") Magick::Image::textInterwordSpacing;
+%feature("async", "0") Magick::Image::textKerning;
+%feature("async", "0") Magick::Image::textUnderColor;
+%feature("async", "0") Magick::Image::verbose;
+%feature("async", "0") Magick::Image::xResolution;
+%feature("async", "0") Magick::Image::yResolution;
+
+
+
+

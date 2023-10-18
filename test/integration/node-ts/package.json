@@ -1,0 +1,11 @@
+{
+  "name": "node-ts",
+  "version": "1.0.0",
+  "description": "node-ts integration test",
+  "scripts": {
+    "test": "npx mocha index.ts"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  }
+}

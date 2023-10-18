@@ -46,19 +46,22 @@ jobs:
           mv node-magickwand-${{ github.event.inputs.version }}/test .
       - name: Install dependencies
         run: |
-          npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths @types/chai @types/chai-as-promised @types/mocha @types/node
+          npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths @types/chai @types/chai-as-promised @types/mocha @types/node karma karma-chrome-launcher karma-mocha
       - name: Install node-magickwand from npm
         run: |
           npm install --force node-magickwand@${{ github.event.inputs.version }}
           mkdir -p deps/ImageMagick/config
           cp node_modules/node-magickwand/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
         shell: bash
-      - name: Run the unit tests
-        run: |
-          cd test
-          npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts *.standalone.*js
+      - name: Run the unit tests headless
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: |
+            cd test
+            npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts
         env:
-          TS_NODE_PROJECT: tsconfig.standalone.json 
+          MOCHA_INTEGRATION: node,browser
+          MOCHA_MAGICK_INSTALL: npm install --force node-magickwand@${{ github.event.inputs.version }}
 
 
   test_npm_rebuild:
@@ -93,7 +96,7 @@ jobs:
           mv node-magickwand-${{ github.event.inputs.version }}/test .
       - name: Install dependencies
         run: |
-          npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths @types/chai @types/chai-as-promised @types/mocha @types/node
+          npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths @types/chai @types/chai-as-promised @types/mocha @types/node karma karma-chrome-launcher karma-mocha
       - name: Install node-magickwand from npm
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
@@ -101,12 +104,15 @@ jobs:
           mkdir -p deps/ImageMagick/config
           cp node_modules/node-magickwand/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
         shell: bash
-      - name: Run the unit tests
-        run: |
-          cd test
-          npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts *.standalone.*js
+      - name: Run the unit tests headless
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: |
+            cd test
+            npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts
         env:
-          TS_NODE_PROJECT: tsconfig.standalone.json 
+          MOCHA_INTEGRATION: node,browser
+          MOCHA_MAGICK_INSTALL: npm install --force node-magickwand@${{ github.event.inputs.version }}
 
 
   test_npm_rebuild_shared:
@@ -147,7 +153,7 @@ jobs:
           mv node-magickwand-${{ github.event.inputs.version }}/test .
       - name: Install dependencies
         run: |
-          npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths @types/chai @types/chai-as-promised @types/mocha @types/node
+          npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths @types/chai @types/chai-as-promised @types/mocha @types/node karma karma-chrome-launcher karma-mocha
       - name: Install node-magickwand from npm
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
@@ -158,9 +164,12 @@ jobs:
           CFLAGS: -I/usr/include/ImageMagick-7
           CXXFLAGS: -I/usr/include/ImageMagick-7 
         shell: bash
-      - name: Run the unit tests
-        run: |
-          cd test
-          npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts *.standalone.*js
+      - name: Run the unit tests headless
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: |
+            cd test
+            npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts
         env:
-          TS_NODE_PROJECT: tsconfig.standalone.json 
+          MOCHA_INTEGRATION: node,browser
+          MOCHA_MAGICK_INSTALL: npm install --force node-magickwand@${{ github.event.inputs.version }}
