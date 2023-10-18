@@ -5,7 +5,7 @@ import chalk from 'chalk';
 let native = false;
 let wasm = false;
 
-console.log(chalk.greenBright(`Trying to install prebuilt binaries for ${os.platform()}-${os.arch()}...`));
+console.log(chalk.cyan(`Trying to install prebuilt native binaries for ${os.platform()}-${os.arch()}...`));
 try {
   cp.execSync('node-pre-gyp install');
   native = true;
@@ -15,7 +15,7 @@ try {
 }
 
 if (!native) {
-  console.log(chalk.greenBright(`Trying to rebuild from source for ${os.platform()}-${os.arch()}...`));
+  console.log(chalk.cyan(`Trying to rebuild from source for ${os.platform()}-${os.arch()}...`));
   try {
     cp.execSync('node-pre-gyp install --build-from-source');
     native = true;
@@ -25,7 +25,7 @@ if (!native) {
   }
 }
 
-console.log(chalk.greenBright('Trying to install WASM binaries for emscripten-wasm32...'));
+console.log(chalk.cyan('Trying to install WASM binaries for emscripten-wasm32...'));
 try {
   cp.execSync('node-pre-gyp install --target_platform=emscripten --target_arch=wasm32');
   wasm = true;
@@ -35,7 +35,7 @@ try {
 }
 
 if (native) {
-  console.log(chalk.greenBright('Generating Node.js ES6 importts'));
+  console.log(chalk.cyan('Generating Node.js ES6 importts'));
   try {
     cp.execSync('node scripts/gen-es6.js lib/index.mjs');
   } catch (e) {
@@ -44,11 +44,11 @@ if (native) {
 }
 
 if (native)
-  console.log(chalk.bgCyan('Native module is available'));
+  console.log(chalk.greenBright('Native module is available'));
 else
   console.log(chalk.red('No native module installed'));
 
 if (wasm)
-  console.log(chalk.bgCyan('WASM browser module is available'));
+  console.log(chalk.greenBright('WASM browser module is available'));
 else
   console.log(chalk.red('No WASM browser module installed'));
