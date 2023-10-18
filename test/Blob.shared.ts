@@ -1,3 +1,5 @@
+// These tests are shared between Node.js and the browser
+
 import type * as IM from 'node-magickwand';
 
 export default function (
@@ -56,7 +58,7 @@ export default function (
     });
 
     describe('buffer', () => {
-      it('retrieve data in Buffer', () => {
+      it('retrieve data in ArrayBuffer', () => {
         const blob = new Blob;
         im.magick('RGBA');
         im.write(blob);

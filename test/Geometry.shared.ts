@@ -1,3 +1,5 @@
+// These tests are shared between Node.js and the browser
+
 export default function (
   assert: typeof import('chai').assert,
   Magick: typeof import('node-magickwand').Magick
