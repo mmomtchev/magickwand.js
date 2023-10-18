@@ -14,6 +14,15 @@
       "types": "./lib/wasm/index.d.ts",
       "import": "./lib/wasm/index.js",
       "require": "./lib/wasm/index.cjs"
+    },
+    "./wasm/main": {
+      "default": "./lib/binding/emscripten-wasm32/node-magickwand.js"
+    },
+    "./wasm/worker": {
+      "default": "./lib/binding/emscripten-wasm32/node-magickwand.worker.js"
+    },
+    "./wasm/wasm": {
+      "default": "./lib/binding/emscripten-wasm32/node-magickwand.wasm"
     }
   },
   "scripts": {
