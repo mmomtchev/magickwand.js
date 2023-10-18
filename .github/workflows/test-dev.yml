@@ -116,7 +116,7 @@ jobs:
         env:
           LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6
           LSAN_OPTIONS: suppressions=${{ github.workspace }}/test/napi-leaks-suppression.txt
-      - run: node node_modules/mocha/bin/mocha.js -i -g Security --repeats 1000
+      - run: node node_modules/mocha/bin/mocha.js -i -g Security --repeats 1000 test/*.test.ts
         env:
           LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6
           LSAN_OPTIONS: suppressions=${{ github.workspace }}/test/napi-leaks-suppression.txt
