@@ -7,13 +7,20 @@ const assert = chai.assert;
 import IM from 'node-magickwand/wasm';
 
 import ImageTest from '../../Image.shared';
+import BlobTest from '../../Blob.shared';
+import GeometryTest from '../../Geometry.shared';
+import ColorTest from '../../Color.shared';
 
 describe('Image', () => {
   before('test', (done) => {
-    IM.then(({ Magick, MagickCore, MagickVersion }) => {
+    IM.then(({ Magick, MagickCore, MagickVersion, FS }) => {
       assert.isString(MagickVersion);
+      const data = FS.readFile('wizard.gif', { encoding: 'binary'}).buffer;
 
       ImageTest('wizard.gif', assert, Magick, MagickCore);
+      BlobTest('wizard.gif', data, assert, Magick);
+      GeometryTest(assert, Magick);
+      ColorTest(assert, Magick);
       done();
     });
   });
