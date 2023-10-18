@@ -72,12 +72,13 @@ jobs:
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
       - run: npx @mapbox/node-pre-gyp build
-      - run: |
-          cd test
-          npx mocha integration.test.ts
+      - name: Run headless test
+        uses: GabrielBB/xvfb-action@v1
         env:
           MOCHA_INTEGRATION: browser
           MOCHA_MAGICK_INSTALL: ln -s ../../../.. node_modules/node-magickwand
+        with:
+          run: npx mocha test/integration.test.ts
 
   debug-asan:
     runs-on: ${{ matrix.platform }}
