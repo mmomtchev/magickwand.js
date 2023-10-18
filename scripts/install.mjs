@@ -35,7 +35,7 @@ try {
 }
 
 if (native) {
-  console.log(chalk.cyan('Generating Node.js ES6 importts'));
+  console.log(chalk.cyan('Generating Node.js ES6 imports'));
   try {
     cp.execSync('node scripts/gen-es6.js lib/index.mjs');
   } catch (e) {
@@ -52,3 +52,6 @@ if (wasm)
   console.log(chalk.greenBright('WASM browser module is available'));
 else
   console.log(chalk.red('No WASM browser module installed'));
+
+if (!wasm && !native)
+  process.exit(1);
