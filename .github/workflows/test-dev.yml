@@ -72,24 +72,12 @@ jobs:
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
       - run: npx @mapbox/node-pre-gyp build
-      - name: Link package
-        run: |
-          ls -al /usr/lib/node_modules/
-          sudo npm link --ignore-scripts
-          ls -al /usr/lib/node_modules/
-          cat /usr/lib/node_modules/node-magickwand/package.json
-
       - run: |
-          cd test/integration/browser-webpack-ts-cjs/
-          npm i
-          npm link node-magickwand
-          ls -al node_modules
-          cat node_modules/node-magickwand/package.json 
-          npm run build
-          cd ..
-          npx karma start browser-webpack-ts-cjs.karma.cjs
+          cd test
+          npx mocha integration.test.ts
         env:
           MOCHA_INTEGRATION: browser
+          MOCHA_MAGICK_INSTALL: ln -s ../../.. node_modules/node-magickwand
 
   debug-asan:
     runs-on: ${{ matrix.platform }}
