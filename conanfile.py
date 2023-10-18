@@ -34,7 +34,6 @@ class ImageMagickDelegates(ConanFile):
       'jasper:with_libjpeg': 'libjpeg-turbo',
       'libtiff:jpeg': 'libjpeg-turbo',
       'libraw:with_jpeg': 'libjpeg-turbo',
-      'zstd:build_programs': False
     }
 
     generators = 'pkg_config', 'json'
@@ -64,3 +63,5 @@ class ImageMagickDelegates(ConanFile):
         # While Emscripten supports SIMD, Node.js does not and cannot run the resulting WASM bundle
         # The performance gain is not very significant and it has a huge compatibility issue
         self.options['libwebp'].with_simd = False
+        # When building with emscripten, the main exe is called zstd.js and all symlinks are broken
+        self.options['zstd'].build_programs = False
