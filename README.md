@@ -61,7 +61,6 @@ await im.scaleAsync('160x212');
 await im.rotateAsync(60);
 
 // Extract the RGBA data
-await im.magickAsync('RGBA');
 // Conversion to Uint16 is automatic (it recognizes the type of the array)
 const pixels = new Uint16Array(im.size().width() * im.size().height() * 4);
 await im.writeAsync(0, 0, im.size().width(), im.size().height(), 'RGBA', pixels);
