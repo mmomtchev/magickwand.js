@@ -159,7 +159,7 @@ The WASM version uses SWIG Node-API WASM and it is less mature than the Node.js 
 
 SWIG Node-API WASM is available from https://github.com/mmomtchev/swig/tree/wasm
 
-There is no documentation for SWIG WASM available at the moment, but you can simply use the pregenerated C++ files.
+There is no documentation for SWIG Node-API WASM available at the moment, so if you need to regenerate the C++ source files, you will be on your own. SWIG Node-API WASM is currently under active development.
 
 Build with:
 
@@ -170,7 +170,7 @@ node-pre-gyp build
 
 At the moment this cross-compilation is possible only on Linux.
 
-## Using this project as a tutorial for creating C++ bindings for Node.js with SWIG
+## Using this project as a tutorial for creating C++ bindings for Node.js and emscripten/WASM with SWIG Node-API
 
 ImageMagick is the perfect candidate for an automatically generated with SWIG Node.js addon:
 
@@ -190,7 +190,7 @@ There is also a [medium article about using the new NAPI support in SWIG](https:
 * The module supports `worker_threads` but it cannot be unloaded cleanly and it should be loaded in the main thread, before using it in worker threads, to prevent Node.js from unloading it
 * Building on Windows without HDRI enabled or with a different quantum size than 16 bits is not supported
 * If rebuilding when installing from `npm` fails on Windows with the error: `npm ERR! fatal: not a git repository (or any of the parent directories): .git`, see [#21](https://github.com/mmomtchev/node-magickwand/issues/21)
-* Fonts do not work in the WASM version and are unlikely to be implemented in near future as this will require a complex interface with the browser font engine
+* Fonts do not work in the WASM version and are unlikely to be implemented in the near future as this will require a complex interface with the browser font engine
 
 # Future plans
 
