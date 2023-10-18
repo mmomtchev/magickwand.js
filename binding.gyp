@@ -181,7 +181,7 @@
         # This an ugly hack that enable running of shell commands during node-gyp configure
         # node-gyp configure needs to evaluate this expression to generate the platform-specific files
         # (originally by TooTallNate for libffi) 
-        'conaninfo': '<!((pip3 install --user "conan<2.0.0" && conan config set general.skip_broken_symlinks_check=true && cd build && python3 -m conans.conan install .. -pr:b=default -pr:h=../emscripten.profile -of build --build=missing) > /dev/null)'
+        'conaninfo': '<!((pip3 install --user "conan<2.0.0" && cd build && python3 -m conans.conan install .. -pr:b=default -pr:h=../emscripten.profile -of build --build=missing) > /dev/null)'
       },
       'includes': [
         'wasm.gypi'

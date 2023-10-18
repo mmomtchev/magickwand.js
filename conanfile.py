@@ -26,14 +26,15 @@ class ImageMagickDelegates(ConanFile):
       'libxml2/2.10.4',
       'libzip/1.9.2',
       'xz_utils/5.4.4',
-      'zlib/1.2.13'
+      'zlib/1.2.13',
+      'zstd/1.5.5'
     )
 
     default_options = {
       'jasper:with_libjpeg': 'libjpeg-turbo',
       'libtiff:jpeg': 'libjpeg-turbo',
-      'libraw:with_jpeg':
-      'libjpeg-turbo'
+      'libraw:with_jpeg': 'libjpeg-turbo',
+      'zstd:build_programs': False
     }
 
     generators = 'pkg_config', 'json'
