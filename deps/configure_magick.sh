@@ -1,5 +1,12 @@
 #!/bin/bash
 
+exec 3>&1 4>&2 >../configure.log 2>&1
+
+CONFIGURE_OPTS=""
+if [ "$3" == "False" ]; then
+    CONFIGURE_OPTS="--without-x"
+fi
+
 unset MAKEFLAGS
 unset SDKROOT
 
@@ -16,6 +23,7 @@ sh ./configure $2 --prefix=$1/ImageMagick                   \
     --disable-shared --enable-static                        \
     --without-utilities --without-perl                      \
     --disable-docs                                          \
+    ${CONFIGURE_OPTS}                                       \
     > /dev/null
 
 X11_LIBS=`egrep -o '^\s*X11_LIBS\s*=.*' Makefile | cut -f 2 -d "="`
@@ -25,5 +33,7 @@ cd ../..
 
 LIBPATHS=`node -p "JSON.parse(fs.readFileSync('build/conanbuildinfo.json')).dependencies.map((dep) => dep.lib_paths).flat().map((path) => '-L' + path).join(' ')"`
 LIBS=`node -p "JSON.parse(fs.readFileSync('build/conanbuildinfo.json')).dependencies.map((dep) => dep.libs).flat().map((path) => '-l' + path).join(' ')"`
+
+exec 1>&3 2>&4
 
 echo -n "${LIBPATHS} ${LIBS} ${X11_LIBS} ${XEXT_LIBS}"
