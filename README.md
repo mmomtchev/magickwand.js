@@ -13,7 +13,7 @@ It adds many new features and offers a substantial performance boost and usabili
 
 The pre-built binaries are fully self-contained and do not need an existing ImageMagick installation. It is also possible to rebuild the package against a shared ImageMagick-7 when using the native version in Node.js.
 
-The default WASM version is also fully self-contained and it is 2MB (*minimal*) to 5MB (*default*) gzipped depending on the supported image formats.
+The default WASM version is also fully self-contained and it is 1.5MB (*minimal w/ brotli*) to 5MB (*default w/ gzip*) depending on the supported image formats.
 
 Both versions support synchronous and asynchronous multi-threaded operations with an identical API and identical TypeScript bindings. WASM requires `SharedArrayBuffer` (read about [COOP / COEP](https://web.dev/articles/coop-coep)). The Node.js native bindings also support OpenMP multithreading.
 
@@ -186,7 +186,7 @@ node-pre-gyp configure \
 
 This is not supported for the Windows build which is monolithic. It is supported for Linux, macOS and WASM.
 
-If the WASM binary is rebuilt with no additional libraries, its size will be brought down to 2MB gzipped. Further reduction is possible by disabling unneeded SWIG wrappers but this requires to manually edit the SWIG source files and to regenerate the C++ files. Producing a version that supports only synchronous mode and does not require COOP/COEP is also possible. I will consider any offer for commercial support of such dedicated light version.
+If the WASM binary is rebuilt with no additional libraries, its size will be brought down to 1.5MB compressed with brotli. Further reduction is possible by disabling unneeded SWIG wrappers but this requires to manually edit the SWIG source files and to regenerate the C++ files. Producing a version that supports only synchronous mode and does not require COOP/COEP is also possible. I will consider any offer for commercial support of such dedicated light version.
 
 ## Using this project as a tutorial for creating C++ bindings for Node.js and emscripten/WASM with SWIG Node-API
 
