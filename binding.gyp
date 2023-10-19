@@ -148,7 +148,7 @@
         }]
       ],
       'sources': [
-        '<!@(node -p "fs.readdirSync(\'swig\').filter((f) => f.match(/cxx$/)).map((f) => path.join(\'swig\', f))")'
+        '<!@(node -p "fs.readdirSync(\'swig\').filter((f) => f.match(/cxx$/)).map((f) => path.join(\'swig\', f)).join(\' \')")'
       ]
     }
   ],
