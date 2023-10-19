@@ -1,6 +1,6 @@
 #!/bin/bash
 
-exec 3>&1 4>&2 >../build/configure.log 2>&1
+exec 3>&1 4>&2 >../build/magick_configure.log 2>&1
 
 CONFIGURE_OPTS=""
 if [ "$3" == "False" ]; then

@@ -40,8 +40,8 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure
-      - name: configure.log
-        run: cat build/configure.log
+      - name: magick_configure.log
+        run: cat build/magick_configure.log
         shell: bash
       - run: npx @mapbox/node-pre-gyp build
       - name: Generate ES6 bindings
@@ -88,8 +88,8 @@ jobs:
             --jbig=True --cms=False --xml=False --gzip=False --zip=False            \
             --bzip2=True --zstd=False --xz=False --lzma=False --simd=False          \
             --openmp=True --display=False
-      - name: configure.log
-        run: cat build/configure.log
+      - name: magick_configure.log
+        run: cat build/magick_configure.log
         shell: bash
       - run: npx @mapbox/node-pre-gyp build
       - name: Generate ES6 bindings
@@ -119,8 +119,8 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
-      - name: configure.log
-        run: cat build/configure.log
+      - name: magick_configure.log
+        run: cat build/magick_configure.log
         shell: bash
       - run: npx @mapbox/node-pre-gyp build
       - name: Check size
@@ -168,8 +168,8 @@ jobs:
             --jbig=False --cms=False --xml=False --gzip=False --zip=False            \
             --bzip2=False --zstd=False --xz=False --lzma=False --simd=False          \
             --openmp=False --display=False
-      - name: configure.log
-        run: cat build/configure.log
+      - name: magick_configure.log
+        run: cat build/magick_configure.log
         shell: bash
       - run: npx @mapbox/node-pre-gyp build
       - name: Check size
@@ -207,8 +207,8 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --debug --enable_asan
-      - name: configure.log
-        run: cat build/configure.log
+      - name: magick_configure.log
+        run: cat build/magick_configure.log
         shell: bash
       - run: npx @mapbox/node-pre-gyp build
       - name: Generate ES6 bindings
