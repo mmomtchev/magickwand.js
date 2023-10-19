@@ -148,7 +148,7 @@
         }]
       ],
       'sources': [
-        '<!@(ls swig/node-magickwand*.cxx)'
+        '<!@(node -p "fs.readdirSync(\'swig\').filter((f) => f.match(/cxx$/)).map((f) => `swig/${f}`)")'
       ]
     }
   ],
