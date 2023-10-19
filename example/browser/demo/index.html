@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>magickwand.js WASM demo</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+    crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <script src="bundle.js"></script>
+  <style>
+    .loader {
+      min-height: 20vh;
+    }
+
+    .display {
+      width: 60vw;
+      height: 60vh;
+    }
+
+    .image {
+      max-width: calc(60vw - 3rem);
+      max-height: calc(60vh - 3rem);
+    }
+
+  </style>
+  <div class="d-flex flex-column">
+    <div class="d-flex flex-row p-2">
+      <div class="p-2 border shadow">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">ImageMagick WASM</h5>
+            <h6 class="card-subtitle" id="im-version">loading ImageMagick WASM...</h6>
+            <p class="card-text" id="im-features">loading ImageMagick WASM...</p>
+            <p class="card-text" id="im-delegates">loading ImageMagick WASM...</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label for="file" class="ms-2 p-2 shadow h-100 v-100 border loader btn btn-secondary">Drag & drop an image file or click to load</label>
+        <input id="file" name="file" type="file" class="d-none" />
+      </div>
+    </div>
+    <div id="status" class="m-4">Idle</div>
+    <div class="d-flex m-4 flex-row">
+      <div class="p-4 me-2 border">
+        <div class="m-2 p-1 border">
+          <label for="rotate">Rotation</label>
+          <input id="rotate" name="rotate" type="number">
+          <button id="btn-rotate" class="m-1 btn btn-secondary">Rotate</button>
+        </div>
+        <div class="m-2 p-1 border">
+          <div>
+            <label for="shear-x">Shear X</label>
+            <input id="shear-x" name="shear-x" type="number">
+          </div>
+          <div>
+            <label for="shear-y">Shear Y</label>
+            <input id="shear-y" name="shear-y" type="number">
+          </div>
+          <button id="btn-shear" class="m-1 btn btn-secondary">Shear</button>
+        </div>
+      </div>
+      <div class="display p-4 border">
+        <img id="target" class="image">
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

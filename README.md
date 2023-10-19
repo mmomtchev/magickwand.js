@@ -66,14 +66,15 @@ const pixels = new Uint16Array(im.size().width() * im.size().height() * 4);
 await im.writeAsync(0, 0, im.size().width(), im.size().height(), 'RGBA', pixels);
 ```
 
-To see the web browser demo:
+To see run the web browser example:
 
 ```
-cd example/browser/webpack/
-npx webpack-cli serve --mode=development --env development
+npm run example:browser
 ```
 
 Then open `http://localhost:8030`.
+
+There is also an online demo at [https://magickwand.momtchev.com/](https://magickwand.momtchev.com/).
 
 Your best source of further information is the Magick++ documentation itself:
 * The tutorial: https://imagemagick.org/Magick++/tutorial/Magick++_tutorial.pdf
