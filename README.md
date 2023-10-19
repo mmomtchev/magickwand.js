@@ -13,7 +13,7 @@ It adds many new features and offers a substantial performance boost and usabili
 
 The pre-built binaries are fully self-contained and do not need an existing ImageMagick installation. It is also possible to rebuild the package against a shared ImageMagick-7 when using the native version in Node.js.
 
-The WASM version is also fully self-contained and it is about 5MB gzipped.
+The default WASM version is also fully self-contained and it is 1.5MB (*minimal w/ brotli*) to 5MB (*default w/ gzip*) depending on the supported image formats.
 
 Both versions support synchronous and asynchronous multi-threaded operations with an identical API and identical TypeScript bindings. WASM requires `SharedArrayBuffer` (read about [COOP / COEP](https://web.dev/articles/coop-coep)). The Node.js native bindings also support OpenMP multithreading.
 
@@ -170,6 +170,24 @@ node-pre-gyp build
 
 At the moment this cross-compilation is possible only on Linux.
 
+### Building a *light* version
+
+Building a lighter custom binary which does not include some of the builtin libraries is possible by specifying:
+
+```
+node-pre-gyp configure \
+    --fonts=False --jpeg=False --png=False --tiff=False \
+    --webp=False --jpeg2000=False --raw=False --openmedia=False \
+    --brotli=False --h265=False --exr=False --fftw=False --heif=False \
+    --jbig=False --cms=False --xml=False --gzip=False --zip=False \
+    --bzip2=False --zstd=False --xz=False --lzma=False --simd=False \
+    --openmp=False --display=False
+```
+
+This is not supported for the Windows build which is monolithic. It is supported for Linux, macOS and WASM. It disables the included delegates, but keep in mind that on Linux and macOS, the ImageMagick configure script will still detect the presence of some system libraries (`jpeg`, `bzip2`, `jbig` and `OpenMP`) and will try to use them, producing a binary that will need the dynamically loaded versions of those libraries on your system.
+
+If the WASM binary is rebuilt with no additional libraries, its size will be brought down to 1.5MB compressed with brotli. Further reduction is possible by disabling unneeded SWIG wrappers but this requires to manually edit the SWIG source files and to regenerate the C++ files. Producing a version that supports only synchronous mode and does not require COOP/COEP is also possible. I will consider any offer for commercial support of such dedicated light version.
+
 ## Using this project as a tutorial for creating C++ bindings for Node.js and emscripten/WASM with SWIG Node-API
 
 ImageMagick is the perfect candidate for an automatically generated with SWIG Node.js addon:
@@ -184,6 +202,7 @@ There is also a [medium article about using the new NAPI support in SWIG](https:
 
 ## Known to be broken at the moment
 
+* Regenerating the SWIG bindings is possible only with my own unpublished SWIG checked out from Github
 * Rebuilding when installing requires Node.js >= 18.0 on all platforms
 * Additionally, rebuilding when installing on Windows works only with VS 2022
 * The debug build on Windows requires manually setting `winbuildtype` and `winbuildid` due to restrictions in `gyp`
@@ -235,3 +254,5 @@ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH RE
 # Disclaimer
 
 `node-magickwand` is not affiliated in any way with ImageMagick LLC.
+
+The WASM version is a separate distinct port from [the WASM port of one of the ImageMagick authors](https://www.npmjs.com/package/@imagemagick/magick-wasm).

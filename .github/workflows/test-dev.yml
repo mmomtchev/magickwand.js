@@ -40,12 +40,60 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure
+      - name: magick_configure.log
+        run: cat build/magick_configure.log
+        shell: bash
       - run: npx @mapbox/node-pre-gyp build
       - name: Generate ES6 bindings
         run: node scripts/gen-es6.js lib/index.mjs
       - run: npm test
         env:
           MOCHA_INTEGRATION: node
+
+  native-light:
+    runs-on: ${{ matrix.platform }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: true
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: Cache conan artifacts
+        id: conan-artifacts
+        uses: actions/cache@v3
+        with:
+          path: ~/.conan
+          key: ${{ runner.os }}-conan
+      - name: Install fonts on Ubuntu
+        run: |
+          [[ '${{ matrix.platform }}' =~ 'ubuntu' ]] && sudo apt-get install -y fonts-ubuntu || true
+        shell: bash
+      - run: npm install --ignore-scripts
+      - run: npm run deps:download
+      - name: Configure light version
+        run: |
+          npx @mapbox/node-pre-gyp configure                                        \
+            --fonts=False --jpeg=True --png=False --tiff=False                      \
+            --webp=False --jpeg2000=False --raw=False --openmedia=False             \
+            --brotli=False --h265=False --exr=False --fftw=False --heif=False       \
+            --jbig=True --cms=False --xml=False --gzip=False --zip=False            \
+            --bzip2=True --zstd=False --xz=False --lzma=False --simd=False          \
+            --openmp=True --display=False
+      - name: magick_configure.log
+        run: cat build/magick_configure.log
+        shell: bash
+      - run: npx @mapbox/node-pre-gyp build
+      - name: Generate ES6 bindings
+        run: node scripts/gen-es6.js lib/index.mjs
 
   wasm:
     runs-on: ubuntu-latest
@@ -71,7 +119,14 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
+      - name: magick_configure.log
+        run: cat build/magick_configure.log
+        shell: bash
       - run: npx @mapbox/node-pre-gyp build
+      - name: Check size
+        run: |
+          echo "::notice::Default WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/node-magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
+          echo "::notice::Default WASM version is $(( `brotli -9c lib/binding/emscripten-wasm32/node-magickwand.wasm | wc -c` / 1024 )) KBytes brotlied"
       - name: Run headless test
         uses: GabrielBB/xvfb-action@v1
         env:
@@ -79,6 +134,48 @@ jobs:
           MOCHA_MAGICK_INSTALL: ln -s ../../../.. node_modules/node-magickwand
         with:
           run: npx mocha test/integration.test.ts
+
+  wasm-light:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: true
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: Cache conan artifacts
+        id: conan-artifacts
+        uses: actions/cache@v3
+        with:
+          path: ~/.conan
+          key: wasm-light-conan
+      - run: npm install --ignore-scripts
+      - run: npm run deps:download
+      - name: Configure light version
+        run: |
+          npx @mapbox/node-pre-gyp configure                                         \
+            --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten \
+            --fonts=False --jpeg=False --png=False --tiff=False                      \
+            --webp=False --jpeg2000=False --raw=False --openmedia=False              \
+            --brotli=False --h265=False --exr=False --fftw=False --heif=False        \
+            --jbig=False --cms=False --xml=False --gzip=False --zip=False            \
+            --bzip2=False --zstd=False --xz=False --lzma=False --simd=False          \
+            --openmp=False --display=False
+      - name: magick_configure.log
+        run: cat build/magick_configure.log
+        shell: bash
+      - run: npx @mapbox/node-pre-gyp build
+      - name: Check size
+        run: |
+          echo "::notice::Light WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/node-magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
+          echo "::notice::Light WASM version is $(( `brotli -9c lib/binding/emscripten-wasm32/node-magickwand.wasm | wc -c` / 1024 )) KBytes brotlied"
 
   debug-asan:
     runs-on: ${{ matrix.platform }}
@@ -102,7 +199,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.conan
-          key: ${{ runner.os }}-conan
+          key: asan-conan
       - name: Install fonts on Ubuntu
         run: |
           [[ '${{ matrix.platform }}' =~ 'ubuntu' ]] && sudo apt-get install -y fonts-ubuntu || true
@@ -110,6 +207,9 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --debug --enable_asan
+      - name: magick_configure.log
+        run: cat build/magick_configure.log
+        shell: bash
       - run: npx @mapbox/node-pre-gyp build
       - name: Generate ES6 bindings
         run: node scripts/gen-es6.js lib/index.mjs

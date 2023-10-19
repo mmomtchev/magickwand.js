@@ -1,9 +1,10 @@
 {
+  'includes': [
+    '../arguments.gypi'
+  ],
   'variables': {
-    'enable_hdri%': 'true',
     'winbuildtype%': '/p:Configuration=Release,Platform=x64',
     'winlibid%': 'RL',
-    'target_platform%': 'os'
   },
   'conditions': [
     ['target_platform == "emscripten"', {
@@ -41,9 +42,9 @@
     'conditions': [
       # On WASM conan is already installed by the main gyp
       ['target_platform != "emscripten" and (OS == "linux" or OS =="mac")', {
-        'variables': {
-          'conaninfo': '<!((pip3 install --user "conan<2.0.0" && cd ../build && python3 -m conans.conan install .. -pr:b=default -pr:h=default -of build --build=missing --build=openjpeg) > /dev/null)'
-        }
+        'includes': [
+          '../builtins.gypi'
+        ]
       }],
       # Linux / macOS / WASM build
       # (the WASM build is very similar to a POSIX build)
@@ -85,7 +86,7 @@
           ],
           'conditions': [
             ['target_platform != "emscripten"', {
-              'libraries': [ '<!@(bash configure_magick.sh <(module_path) <(hdri))' ]
+              'libraries': [ '<!@(bash configure_magick.sh <(module_path) <(hdri) <(display))' ]
             }],
             ['target_platform == "emscripten"', {
               'libraries': [ '<!@(bash configure_magick_wasm.sh <(module_path) <(hdri))' ]
@@ -147,7 +148,7 @@
             '<(magick_win_lib)/CORE_<(winlibid)_zip_.lib',
             '<(magick_win_lib)/CORE_<(winlibid)_zlib_.lib'
           ],
-          'inputs': [ '<!@(configure_magick.bat > configure.log)' ]
+          'inputs': [ '<!@(configure_magick.bat > ../build/magick_configure.log)' ]
         }
       }]
     ]

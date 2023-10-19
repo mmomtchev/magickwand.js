@@ -1,5 +1,7 @@
 #!/bin/bash
 
+exec 3>&1 4>&2 >../build/magick_configure.log 2>&1
+
 unset MAKEFLAGS
 unset SDKROOT
 
@@ -22,5 +24,7 @@ cd ../..
 
 LIBPATHS=`node -p "JSON.parse(fs.readFileSync('build/conanbuildinfo.json')).dependencies.map((dep) => dep.lib_paths).flat().map((path) => '-L' + path).join(' ')"`
 LIBS=`node -p "JSON.parse(fs.readFileSync('build/conanbuildinfo.json')).dependencies.map((dep) => dep.libs).flat().map((path) => '-l' + path).join(' ')"`
+
+exec 1>&3 2>&4
 
 echo -n "${LIBPATHS} ${LIBS}"

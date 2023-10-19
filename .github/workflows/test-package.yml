@@ -116,6 +116,47 @@ jobs:
           MOCHA_INTEGRATION: node,browser
           MOCHA_MAGICK_INSTALL: npm install --force node-magickwand@${{ github.event.inputs.version }}
 
+  test_npm_rebuild_light:
+    runs-on: ${{ matrix.platform }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - ubuntu-22.04
+        node-version: [18.x]
+
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Create package.json
+        run: npm init --yes
+      - name: Install fonts on Ubuntu
+        run: |
+          [[ '${{ matrix.platform }}' =~ 'ubuntu' ]] && sudo apt-get install -y fonts-ubuntu || true
+        shell: bash
+      - name: Set up the unit tests
+        run: |
+          curl https://codeload.github.com/mmomtchev/node-magickwand/zip/refs/tags/v${{ github.event.inputs.version }} --output repo.zip
+          unzip repo.zip
+          mv node-magickwand-${{ github.event.inputs.version }}/test .
+      - name: Install dependencies
+        run: |
+          npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths @types/chai @types/chai-as-promised @types/mocha @types/node karma karma-chrome-launcher karma-mocha
+      - name: Install node-magickwand from npm
+        run: |
+          [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
+          npm install --force node-magickwand@${{ github.event.inputs.version }}
+            --build-from-source                                                      \
+            --fonts=False --jpeg=False --png=False --tiff=False                      \
+            --webp=False --jpeg2000=False --raw=False --openmedia=False              \
+            --brotli=False --h265=False --exr=False --fftw=False --heif=False        \
+            --jbig=False --cms=False --xml=False --gzip=False --zip=False            \
+            --bzip2=False --zstd=False --xz=False --lzma=False --simd=False          \
+            --openmp=False --display=False
+        shell: bash
 
   test_npm_rebuild_shared:
     runs-on: ${{ matrix.platform }}
