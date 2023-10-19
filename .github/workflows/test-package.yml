@@ -60,6 +60,7 @@ jobs:
             cd test
             npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts
         env:
+          TS_NODE_PROJECT: tsconfig.standalone.json
           MOCHA_INTEGRATION: node,browser
           MOCHA_MAGICK_INSTALL: npm install --force node-magickwand@${{ github.event.inputs.version }}
 
@@ -111,6 +112,7 @@ jobs:
             cd test
             npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts
         env:
+          TS_NODE_PROJECT: tsconfig.standalone.json
           MOCHA_INTEGRATION: node,browser
           MOCHA_MAGICK_INSTALL: npm install --force node-magickwand@${{ github.event.inputs.version }}
 
@@ -171,5 +173,6 @@ jobs:
             cd test
             npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts
         env:
+          TS_NODE_PROJECT: tsconfig.standalone.json
           MOCHA_INTEGRATION: node,browser
           MOCHA_MAGICK_INSTALL: npm install --force node-magickwand@${{ github.event.inputs.version }}

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "downlevelIteration": true,
+    "esModuleInterop": true,
     "noEmit": true,
     "target": "es2020",
     "module": "commonjs",

@@ -4,6 +4,7 @@
     "strict": true,
     "strictNullChecks": true,
     "target": "ES2020",
+    "esModuleInterop": true,
     "paths": {
       "node-magickwand": [
         "."
