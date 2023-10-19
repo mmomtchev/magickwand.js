@@ -40,6 +40,9 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure
+      - name: configure.log
+        run: cat build/configure.log
+        shell: bash
       - run: npx @mapbox/node-pre-gyp build
       - name: Generate ES6 bindings
         run: node scripts/gen-es6.js lib/index.mjs
@@ -85,6 +88,9 @@ jobs:
             --jbig=False --cms=False --xml=False --gzip=False --zip=False            \
             --bzip2=False --zstd=False --xz=False --lzma=False --simd=False          \
             --openmp=False --display=False
+      - name: configure.log
+        run: cat build/configure.log
+        shell: bash
       - run: npx @mapbox/node-pre-gyp build
       - name: Generate ES6 bindings
         run: node scripts/gen-es6.js lib/index.mjs
@@ -113,6 +119,9 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
+      - name: configure.log
+        run: cat build/configure.log
+        shell: bash
       - run: npx @mapbox/node-pre-gyp build
       - name: Check size
         run: |
@@ -159,6 +168,9 @@ jobs:
             --jbig=False --cms=False --xml=False --gzip=False --zip=False            \
             --bzip2=False --zstd=False --xz=False --lzma=False --simd=False          \
             --openmp=False --display=False
+      - name: configure.log
+        run: cat build/configure.log
+        shell: bash
       - run: npx @mapbox/node-pre-gyp build
       - name: Check size
         run: |
@@ -195,6 +207,9 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --debug --enable_asan
+      - name: configure.log
+        run: cat build/configure.log
+        shell: bash
       - run: npx @mapbox/node-pre-gyp build
       - name: Generate ES6 bindings
         run: node scripts/gen-es6.js lib/index.mjs

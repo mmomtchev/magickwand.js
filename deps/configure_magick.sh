@@ -1,6 +1,6 @@
 #!/bin/bash
 
-exec 3>&1 4>&2 >../configure.log 2>&1
+exec 3>&1 4>&2 >../build/configure.log 2>&1
 
 CONFIGURE_OPTS=""
 if [ "$3" == "False" ]; then
@@ -23,8 +23,7 @@ sh ./configure $2 --prefix=$1/ImageMagick                   \
     --disable-shared --enable-static                        \
     --without-utilities --without-perl                      \
     --disable-docs                                          \
-    ${CONFIGURE_OPTS}                                       \
-    > /dev/null
+    ${CONFIGURE_OPTS}
 
 X11_LIBS=`egrep -o '^\s*X11_LIBS\s*=.*' Makefile | cut -f 2 -d "="`
 XEXT_LIBS=`egrep -o '^\s*XEXT_LIBS\s*=.*' Makefile | cut -f 2 -d "="`

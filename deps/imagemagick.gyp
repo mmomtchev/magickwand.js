@@ -148,7 +148,7 @@
             '<(magick_win_lib)/CORE_<(winlibid)_zip_.lib',
             '<(magick_win_lib)/CORE_<(winlibid)_zlib_.lib'
           ],
-          'inputs': [ '<!@(configure_magick.bat > configure.log)' ]
+          'inputs': [ '<!@(configure_magick.bat > ../build/magick_configure.log)' ]
         }
       }]
     ]
