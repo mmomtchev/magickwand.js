@@ -3,7 +3,7 @@ name: Github packages publish
 on: workflow_dispatch
 
 jobs:
-  publish:
+  native:
     runs-on: ${{ matrix.platform }}
 
     strategy:
@@ -29,7 +29,40 @@ jobs:
       - run: npx @mapbox/node-pre-gyp build
       - run: node scripts/gen-es6.js lib/index.mjs
       - run: npm test
+        env:
+          MOCHA_INTEGRATION: node
+          MOCHA_MAGICK_INSTALL: ln -s ../../../.. node_modules/node-magickwand
       - run: npx @mapbox/node-pre-gyp package
       - run: npx @mmomtchev/node-pre-gyp-github publish
+        env:
+          NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.NODE_PRE_GYP_GITHUB_TOKEN }}
+
+  wasm:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: true
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: npm install --ignore-scripts
+      - run: npm run deps:download
+      - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
+      - run: npx @mapbox/node-pre-gyp build
+      - run: node scripts/gen-es6.js lib/index.mjs
+      - run: npx @mapbox/node-pre-gyp build
+      - name: Run headless test
+        uses: GabrielBB/xvfb-action@v1
+        env:
+          MOCHA_INTEGRATION: browser
+          MOCHA_MAGICK_INSTALL: ln -s ../../../.. node_modules/node-magickwand
+        with:
+          run: npx mocha test/integration.test.ts
+      - run: npx @mapbox/node-pre-gyp package --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
+      - run: npx @mmomtchev/node-pre-gyp-github publish --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
         env:
           NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.NODE_PRE_GYP_GITHUB_TOKEN }}

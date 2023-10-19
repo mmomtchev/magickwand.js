@@ -45,7 +45,7 @@ jobs:
         run: node scripts/gen-es6.js lib/index.mjs
       - run: npm test
         env:
-          MOCHA_INTEGRATION: native
+          MOCHA_INTEGRATION: node
 
   wasm:
     runs-on: ubuntu-latest
