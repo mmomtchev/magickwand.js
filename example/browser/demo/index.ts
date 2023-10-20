@@ -72,8 +72,8 @@ IM.then(({ Magick, MagickCore, MagickVersion }) => {
     status.innerHTML = 'Displaying';
     const blob = new Magick.Blob;
     if (!['PNG', 'JPEG', 'GIF', 'WEBP'].includes(magickImage.magick())) {
-      status.innerHTML = 'Converting to PNG';
-      await magickImage.magickAsync('PNG');
+      status.innerHTML = 'Converting to WEBP';
+      await magickImage.magickAsync('WEBP');
     }
     await magickImage.writeAsync(blob);
     status.innerHTML = 'Importing into the browser';
