@@ -71,12 +71,15 @@ IM.then(({ Magick, MagickCore, MagickVersion }) => {
   async function displayImage() {
     status.innerHTML = 'Displaying';
     const blob = new Magick.Blob;
-    status.innerHTML = 'Converting to PNG';
-    await magickImage.magickAsync('png');
-    status.innerHTML = 'Exporting to Blob';
+    const type = magickImage.magick();
+    console.log(`detected ${type} image`);
+    if (!['PNG', 'JPEG', 'GIF', 'WEBP'].includes(type)) {
+      status.innerHTML = 'Converting to PNG';
+      await magickImage.magickAsync('PNG');
+    }
     await magickImage.writeAsync(blob);
     status.innerHTML = 'Importing into the browser';
-    const jsBlob = new Blob([blob.data()], { type: 'image/png' });
+    const jsBlob = new Blob([blob.data()], { type: `image/${magickImage.magick().toUpperCase()}` });
     const target = document.getElementById('target') as HTMLImageElement;
     target.src = URL.createObjectURL(jsBlob);
     status.innerHTML = 'Idle';
