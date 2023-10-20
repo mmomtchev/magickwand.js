@@ -211,6 +211,7 @@ There is also a [medium article about using the new NAPI support in SWIG](https:
 * Building on Windows without HDRI enabled or with a different quantum size than 16 bits is not supported
 * If rebuilding when installing from `npm` fails on Windows with the error: `npm ERR! fatal: not a git repository (or any of the parent directories): .git`, see [#21](https://github.com/mmomtchev/node-magickwand/issues/21)
 * Fonts do not work in the WASM version and are unlikely to be implemented in the near future as this will require a complex interface with the browser font engine
+* Using the PNG encoder for large images in the WASM version leads to stack overflows, the native version encoder and the WASM decoder work fine
 
 # Future plans
 

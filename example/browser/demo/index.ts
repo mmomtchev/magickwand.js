@@ -47,13 +47,13 @@ IM.then(({ Magick, MagickCore, MagickVersion }) => {
           throw new Error('not an image');
         console.log('loaded', b64.length, 'bytes');
         const payload = b64.split(',', 2);
-        console.log(b64.substring(0, 100));
         status.innerHTML = 'Decoding Base64';
         const magickBlob = new Magick.Blob;
         await magickBlob.base64Async(payload[1]);
         status.innerHTML = 'Decoding image';
         await magickImage.readAsync(magickBlob);
-        console.log(`size ${magickImage.size().width()}x${magickImage.size().height()}`);
+        const type = magickImage.magick();
+        console.log(`detected ${type} image, size ${magickImage.size().width()}x${magickImage.size().height()}`);
         await displayImage();
       } catch (e) {
         status.innerHTML = 'Idle';
@@ -71,9 +71,7 @@ IM.then(({ Magick, MagickCore, MagickVersion }) => {
   async function displayImage() {
     status.innerHTML = 'Displaying';
     const blob = new Magick.Blob;
-    const type = magickImage.magick();
-    console.log(`detected ${type} image`);
-    if (!['PNG', 'JPEG', 'GIF', 'WEBP'].includes(type)) {
+    if (!['PNG', 'JPEG', 'GIF', 'WEBP'].includes(magickImage.magick())) {
       status.innerHTML = 'Converting to PNG';
       await magickImage.magickAsync('PNG');
     }
