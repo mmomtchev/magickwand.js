@@ -24,15 +24,14 @@ module.exports = {
       patterns: [
         require.resolve('node-magickwand/wasm/main'),
         require.resolve('node-magickwand/wasm/worker'),
-        require.resolve('node-magickwand/wasm/wasm')
+        require.resolve('node-magickwand/wasm/wasm'),
+        'index.html',
+        'spinner.svg'
       ]
     })
   ],
   devServer: {
     port: 8031,
-    static: {
-      directory: __dirname,
-    },
     headers: {
       'Cross-Origin-Opener-Policy': 'same-origin',
       'Cross-Origin-Embedder-Policy': 'require-corp'
