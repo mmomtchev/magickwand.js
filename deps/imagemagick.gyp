@@ -1,13 +1,16 @@
 {
+  # These are all the command-line switches and their default values
   'includes': [
     '../arguments.gypi'
   ],
   'variables': {
+    # Debug builds on Windows require manually adjusting these
     'winbuildtype%': '/p:Configuration=Release,Platform=x64',
     'winlibid%': 'RL',
   },
   'conditions': [
     ['target_platform == "emscripten"', {
+      # wasm enables the cross-compilation
       'includes': [
         '../wasm.gypi'
       ]
@@ -29,6 +32,7 @@
     }]
   ],
   'targets': [{
+    # This is the built-in ImageMagick
     'target_name': 'imagemagick',
     # It is in fact a static_library but we do everything manually
     'type': 'none',
@@ -42,6 +46,7 @@
     'conditions': [
       # On WASM conan is already installed by the main gyp
       ['target_platform != "emscripten" and (OS == "linux" or OS =="mac")', {
+        # builtins pulls conan
         'includes': [
           '../builtins.gypi'
         ]
