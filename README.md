@@ -35,6 +35,8 @@ Refer to the [`example`](https://github.com/mmomtchev/node-magickwand/tree/main/
 
 Refer to the [`test/integration`](https://github.com/mmomtchev/node-magickwand/tree/main/test/integration) directory for integration examples with various environments including `webpack` and TypeScript.
 
+### Using from Node.js (native module)
+
 ```js
 import { Magick } from 'node-magickwand';
 import { fileURLToPath } from 'url';
@@ -66,6 +68,8 @@ const pixels = new Uint16Array(im.size().width() * im.size().height() * 4);
 await im.writeAsync(0, 0, im.size().width(), im.size().height(), 'RGBA', pixels);
 ```
 
+### Using in the browser (WASM module)
+
 To see run the web browser example:
 
 ```
@@ -75,6 +79,8 @@ npm run example:browser
 Then open `http://localhost:8030`.
 
 There is also an online demo at [https://magickwand.momtchev.com/](https://magickwand.momtchev.com/).
+
+### Documentation
 
 Your best source of further information is the Magick++ documentation itself:
 * The tutorial: https://imagemagick.org/Magick++/tutorial/Magick++_tutorial.pdf
