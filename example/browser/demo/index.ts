@@ -77,7 +77,7 @@ IM.then(({ Magick, MagickCore, MagickVersion }) => {
     }
     await magickImage.writeAsync(blob);
     status.innerHTML = 'Importing into the browser';
-    const jsBlob = new Blob([blob.data()], { type: `image/${magickImage.magick().toUpperCase()}` });
+    const jsBlob = new Blob([blob.data()], { type: `image/${magickImage.magick().toLowerCase()}` });
     const target = document.getElementById('target') as HTMLImageElement;
     target.src = URL.createObjectURL(jsBlob);
     status.innerHTML = 'Idle';
