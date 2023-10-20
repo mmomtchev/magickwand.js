@@ -49,6 +49,7 @@ jobs:
       - run: npm test
         env:
           MOCHA_INTEGRATION: node
+          MOCHA_MAGICK_INSTALL: ln -s ${{ github.workspace }} node_modules/node-magickwand
 
   native-light:
     runs-on: ${{ matrix.platform }}
@@ -131,7 +132,7 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         env:
           MOCHA_INTEGRATION: browser
-          MOCHA_MAGICK_INSTALL: ln -s ../../../.. node_modules/node-magickwand
+          MOCHA_MAGICK_INSTALL: ln -s ${{ github.workspace }} node_modules/node-magickwand
         with:
           run: npx mocha test/integration.test.ts
 

@@ -31,7 +31,7 @@ jobs:
       - run: npm test
         env:
           MOCHA_INTEGRATION: node
-          MOCHA_MAGICK_INSTALL: ln -s ../../../.. node_modules/node-magickwand
+          MOCHA_MAGICK_INSTALL: ln -s ${{ github.workspace }} node_modules/node-magickwand
       - run: npx @mapbox/node-pre-gyp package
       - run: npx @mmomtchev/node-pre-gyp-github publish
         env:
@@ -59,7 +59,7 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         env:
           MOCHA_INTEGRATION: browser
-          MOCHA_MAGICK_INSTALL: ln -s ../../../.. node_modules/node-magickwand
+          MOCHA_MAGICK_INSTALL: ln -s ${{ github.workspace }} node_modules/node-magickwand
         with:
           run: npx mocha test/integration.test.ts
       - run: npx @mapbox/node-pre-gyp package --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten

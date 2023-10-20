@@ -42,4 +42,4 @@ jobs:
             npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts
         env:
           MOCHA_INTEGRATION: node,browser
-          MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync('../../../..', 'node_modules/node-magickwand', os.platform() == 'win32' ? 'junction': 'dir')\""
+          MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync('${{ github.workspace }}', 'node_modules/node-magickwand', os.platform() == 'win32' ? 'junction': 'dir')\""
