@@ -9,7 +9,7 @@ compiler.libcxx=libc++
 [conf]
 tools.build:cflags=['-pthread']
 tools.build:cxxflags=['-pthread']
-tools.build:sharedlinkflags=['-pthread', '-sDEFAULT_PTHREAD_STACK_SIZE=1MB', '-sSTACK_SIZE=1MB']
+tools.build:sharedlinkflags=['-pthread', '-sDEFAULT_PTHREAD_STACK_SIZE=2MB', '-sSTACK_SIZE=2MB']
 
 [options]
 

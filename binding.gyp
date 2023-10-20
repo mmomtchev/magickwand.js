@@ -92,9 +92,9 @@
             # Emscripten cannot grow the stack size (yes, it feels so MS-DOS/1980s)
             # On the other side ImageMagick's PNG implementation is
             # a particularly voracious stack consumer
-            '-sSTACK_SIZE=1MB',
+            '-sSTACK_SIZE=2MB',
             '<@(emscripten_pthread)',
-            '-sDEFAULT_PTHREAD_STACK_SIZE=1MB',
+            '-sDEFAULT_PTHREAD_STACK_SIZE=2MB',
             '-sPTHREAD_POOL_SIZE=4',
           ]
         }, {
