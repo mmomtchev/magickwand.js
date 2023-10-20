@@ -171,6 +171,16 @@ node-pre-gyp build
 
 At the moment this cross-compilation is possible only on Linux.
 
+Keep in mind that if you want to switch between building a native and a WASM version, you should do:
+
+```
+rm -rf build
+cd deps/ImageMagick
+make distclean
+```
+
+Otherwise, in between `conan`, `gyp` and the ImageMagick's own build, you might run into weird dependency problems.
+
 ### Building a *light* version
 
 Building a lighter custom binary which does not include some of the builtin libraries is possible by specifying:
