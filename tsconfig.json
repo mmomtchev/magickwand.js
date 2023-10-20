@@ -8,6 +8,9 @@
     "paths": {
       "node-magickwand": [
         "."
+      ],
+      "node-magickwand/wasm": [
+        "./lib/wasm"
       ]
     }
   }

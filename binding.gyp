@@ -66,6 +66,7 @@
             'emscripten_pthread': [
               # Emscripten + emnapi libuv multithreading
               '-pthread',
+              '-DEMNAPI_USE_PROXYING=0',
               '-DEMNAPI_WORKER_POOL_SIZE=4'
             ]
           },

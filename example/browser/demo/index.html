@@ -41,31 +41,15 @@
         </div>
       </div>
       <div>
-        <label for="file" class="ms-2 p-2 shadow h-100 v-100 border loader btn btn-secondary">Drag & drop an image file or click to load</label>
+        <label id="dropzone" for="file" class="ms-2 p-2 shadow h-100 v-100 border loader btn btn-secondary">Drag & drop an image file or click to load</label>
         <input id="file" name="file" type="file" class="d-none" />
       </div>
     </div>
-    <div id="status" class="m-4">Idle</div>
+    <div class="m-4 p-2 border shadow"><em id="status">Idle</em></div>
     <div class="d-flex m-4 flex-row">
-      <div class="p-4 me-2 border">
-        <div class="m-2 p-1 border">
-          <label for="rotate">Rotation</label>
-          <input id="rotate" name="rotate" type="number">
-          <button id="btn-rotate" class="m-1 btn btn-secondary">Rotate</button>
-        </div>
-        <div class="m-2 p-1 border">
-          <div>
-            <label for="shear-x">Shear X</label>
-            <input id="shear-x" name="shear-x" type="number">
-          </div>
-          <div>
-            <label for="shear-y">Shear Y</label>
-            <input id="shear-y" name="shear-y" type="number">
-          </div>
-          <button id="btn-shear" class="m-1 btn btn-secondary">Shear</button>
-        </div>
+      <div id="controls" class="p-4 me-2 border shadow">
       </div>
-      <div class="display p-4 border">
+      <div class="display p-4 shadow border">
         <img id="target" class="image">
       </div>
     </div>
