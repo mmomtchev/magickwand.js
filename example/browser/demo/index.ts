@@ -54,6 +54,30 @@ IM.then(({ Magick, MagickCore, MagickVersion }) => {
   }
 
   /**
+   * Enable the spinner and block the UI
+   */
+  function spinnerEnable(msg: string) {
+    status.innerHTML = msg;
+    document.getElementById('spinner')!.classList.remove('d-none');
+    const btns = document.getElementsByTagName('button');
+    for (let i = 0; i < btns.length; i++) {
+      btns[i].classList.add('disabled');
+    }
+  }
+
+  /**
+   * Disable the spinner and enable the UI
+   */
+  function spinnerDisable() {
+    status.innerHTML = 'Idle';
+    document.getElementById('spinner')!.classList.add('d-none');
+    const btns = document.getElementsByTagName('button');
+    for (let i = 0; i < btns.length; i++) {
+      btns[i].classList.remove('disabled');
+    }
+  }
+
+  /**
    * @param file Load an image in a File struct
    */
   function loadImage(file: File | undefined) {
@@ -61,7 +85,7 @@ IM.then(({ Magick, MagickCore, MagickVersion }) => {
       console.warn('failed loading', file);
       return;
     }
-    status.innerHTML = 'Loading';
+    spinnerEnable('Loading');
     const reader = new FileReader();
     reader.onload = async (event) => {
       try {
@@ -70,21 +94,21 @@ IM.then(({ Magick, MagickCore, MagickVersion }) => {
           throw new Error('not an image');
         console.log('loaded', b64.length, 'bytes');
         const payload = b64.split(',', 2);
-        status.innerHTML = 'Decoding Base64';
+        spinnerEnable('Decoding Base64');
         const magickBlob = new Magick.Blob;
         await magickBlob.base64Async(payload[1]);
-        status.innerHTML = 'Decoding image';
+        spinnerEnable('Decoding image');
         await magickImage.readAsync(magickBlob);
         const type = magickImage.magick();
         console.log(`detected ${type} image, size ${magickImage.size().width()}x${magickImage.size().height()}`);
         await displayImage();
       } catch (e) {
-        status.innerHTML = 'Idle';
+        spinnerDisable();
         console.error(e);
       }
     };
     reader.onerror = (error) => {
-      status.innerHTML = 'Idle';
+      spinnerDisable();
       console.error(error);
     };
 
@@ -95,18 +119,18 @@ IM.then(({ Magick, MagickCore, MagickVersion }) => {
    * Display the stored image
    */
   async function displayImage() {
-    status.innerHTML = 'Displaying';
+    spinnerEnable('Displaying');
     const blob = new Magick.Blob;
     if (!['PNG', 'JPEG', 'GIF', 'WEBP'].includes(magickImage.magick())) {
-      status.innerHTML = 'Converting to WEBP';
+      spinnerEnable('Converting to WEBP');
       await magickImage.magickAsync('WEBP');
     }
     await magickImage.writeAsync(blob);
-    status.innerHTML = 'Importing into the browser';
+    spinnerEnable('Importing into the browser');
     const jsBlob = new Blob([blob.data()], { type: `image/${magickImage.magick().toLowerCase()}` });
     const target = document.getElementById('target') as HTMLImageElement;
     target.src = URL.createObjectURL(jsBlob);
-    status.innerHTML = 'Idle';
+    spinnerDisable();
   }
 
   /**
@@ -157,13 +181,13 @@ IM.then(({ Magick, MagickCore, MagickVersion }) => {
       for (let i = 0; i < argCount; i++) {
         args[i] = parseFloat((document.getElementById(`${name}-${i}`) as HTMLInputElement).value || '0');
       }
-      status.innerHTML = `Calling Magick.Image.${name}Async(${args.join(', ')})`;
+      spinnerEnable(`Calling Magick.Image.${name}Async(${args.join(', ')})`);
       (magickImage as any)[`${name}Async`].apply(magickImage, args)
         .then(displayImage)
         .catch((e: Error) => {
           console.error(e);
         })
-        .then(() => void (status.innerHTML = 'Idle'));
+        .then(spinnerDisable);
     });
 
     return root;
