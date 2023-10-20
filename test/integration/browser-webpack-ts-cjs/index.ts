@@ -10,6 +10,7 @@ import ImageTest from '../../Image.shared';
 import BlobTest from '../../Blob.shared';
 import GeometryTest from '../../Geometry.shared';
 import ColorTest from '../../Color.shared';
+import stressTest from '../../stress.shared';
 
 describe('Image', () => {
   before('test', (done) => {
@@ -21,6 +22,7 @@ describe('Image', () => {
       BlobTest('wizard.gif', data, assert, Magick);
       GeometryTest(assert, Magick);
       ColorTest(assert, Magick);
+      stressTest('wizard.gif', assert, Magick, MagickCore);
       done();
     });
   });
