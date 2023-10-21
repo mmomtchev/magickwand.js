@@ -64,6 +64,6 @@ jobs:
         run: |
           touch lib/binding/emscripten-wasm32/node-magickwand.node
           npx @mapbox/node-pre-gyp package --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
-          npx @mmomtchev/node-pre-gyp-github publish --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
+          npx @mmomtchev/node-pre-gyp-github publish
         env:
           NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.NODE_PRE_GYP_GITHUB_TOKEN }}
