@@ -37,9 +37,7 @@ jobs:
       - name: Run the unit tests headless
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: |
-            cd test
-            npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts
+          run: cd test && npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 *.test.ts
         env:
           MOCHA_INTEGRATION: node,browser
           MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'node-magickwand'), os.platform() == 'win32' ? 'junction': 'dir')\""
