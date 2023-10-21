@@ -60,7 +60,10 @@ jobs:
           MOCHA_MAGICK_INSTALL: ln -s ${{ github.workspace }} node_modules/node-magickwand
         with:
           run: npx mocha test/integration.test.ts
-      - run: npx @mapbox/node-pre-gyp package --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
-      - run: npx @mmomtchev/node-pre-gyp-github publish --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
+      - name: Package and publish
+        run: |
+          touch lib/binding/emscripten-wasm32/node-magickwand.node
+          npx @mapbox/node-pre-gyp package --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
+          npx @mmomtchev/node-pre-gyp-github publish --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
         env:
           NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.NODE_PRE_GYP_GITHUB_TOKEN }}
