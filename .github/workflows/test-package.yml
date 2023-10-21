@@ -58,7 +58,7 @@ jobs:
         with:
           run: npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 test/*.test.ts
         env:
-          TS_NODE_PROJECT: test/tsconfig.standalone.json
+          TS_NODE_PROJECT: ${{ github.workspace }}/test/tsconfig.standalone.json
           MOCHA_INTEGRATION: node,browser
           MOCHA_MAGICK_INSTALL: npm install --force node-magickwand@${{ github.event.inputs.version }}
 
@@ -108,7 +108,7 @@ jobs:
         with:
           run: npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 test/*.test.ts
         env:
-          TS_NODE_PROJECT: test/tsconfig.standalone.json
+          TS_NODE_PROJECT: ${{ github.workspace }}/test/tsconfig.standalone.json
           MOCHA_INTEGRATION: node,browser
           MOCHA_MAGICK_INSTALL: npm install --force node-magickwand@${{ github.event.inputs.version }}
 
@@ -144,7 +144,7 @@ jobs:
       - name: Install node-magickwand from npm
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
-          npm install --force node-magickwand@${{ github.event.inputs.version }}
+          npm install --force node-magickwand@${{ github.event.inputs.version }}     \
             --build-from-source                                                      \
             --fonts=False --jpeg=False --png=False --tiff=False                      \
             --webp=False --jpeg2000=False --raw=False --openmedia=False              \
@@ -208,6 +208,6 @@ jobs:
         with:
           run: npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 test/*.test.ts
         env:
-          TS_NODE_PROJECT: test/tsconfig.standalone.json
+          TS_NODE_PROJECT: ${{ github.workspace }}/test/tsconfig.standalone.json
           MOCHA_INTEGRATION: node,browser
           MOCHA_MAGICK_INSTALL: npm install --force node-magickwand@${{ github.event.inputs.version }}
