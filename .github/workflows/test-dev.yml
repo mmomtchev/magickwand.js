@@ -49,7 +49,7 @@ jobs:
       - run: npm test
         env:
           MOCHA_INTEGRATION: node
-          MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync('${{ github.workspace }}', 'node_modules/node-magickwand', os.platform() == 'win32' ? 'junction': 'dir')\""
+          MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(String.raw`${{ github.workspace }}`, path.resolve('node_modules', 'node-magickwand'), os.platform() == 'win32' ? 'junction': 'dir')\""
 
   native-light:
     runs-on: ${{ matrix.platform }}
