@@ -14,6 +14,8 @@ describe('integration tests', function() {
   const browserEnabled = (process.env.MOCHA_INTEGRATION || '').split(',').includes('browser');
   const nodeEnabled = (process.env.MOCHA_INTEGRATION || '').split(',').includes('node');
 
+  const env = { ...process.env, TS_NODE_PROJECT: undefined };
+
   for (const test of list) {
     if (!(fs.statSync(path.resolve(testDir, test))).isDirectory())
       continue;
@@ -39,14 +41,14 @@ describe('integration tests', function() {
         try {
           fs.rmSync('node_modules', { recursive: true });
         } catch { /* empty */ }
-        execSync('npm install');
-        execSync(install);
+        execSync('npm install', { env });
+        execSync(install, { env });
         if (browser) {
-          execSync('npm run build', { stdio: 'pipe' });
+          execSync('npm run build', { stdio: 'pipe', env });
           process.chdir(root);
-          execSync(`karma start ${karmaPath}`);
+          execSync(`karma start ${karmaPath}`, { env });
         } else {
-          execSync('npm test');
+          execSync('npm test', { env });
         }
       } catch (e) {
         const execErr = e as Error & { stdout: Buffer, stderr: Buffer; };
