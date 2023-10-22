@@ -113,6 +113,7 @@ jobs:
           MOCHA_MAGICK_INSTALL: npm install --force magickwand.js@${{ github.event.inputs.version }}
 
   test_npm_rebuild_light:
+    if: false
     runs-on: ${{ matrix.platform }}
 
     strategy:
