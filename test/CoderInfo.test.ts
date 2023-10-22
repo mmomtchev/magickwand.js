@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import { Magick } from 'node-magickwand';
+import { Magick } from 'magickwand.js';
 const { CoderInfo, coderInfoList } = Magick;
 
 describe('CoderInfo', () => {

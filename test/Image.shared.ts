@@ -3,8 +3,8 @@
 export default function (
   path: string,
   assert: typeof import('chai').assert,
-  Magick: typeof import('node-magickwand').Magick,
-  MagickCore: typeof import('node-magickwand').MagickCore
+  Magick: typeof import('magickwand.js').Magick,
+  MagickCore: typeof import('magickwand.js').MagickCore
 ) {
   const { Image, Geometry, Color } = Magick;
   const { MultiplyCompositeOp } = MagickCore;

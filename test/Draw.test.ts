@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import { Magick, MagickCore } from 'node-magickwand';
+import { Magick, MagickCore } from 'magickwand.js';
 const { Image, Coordinate } = Magick;
 
 describe('Drawable', () => {

@@ -33,7 +33,7 @@
   'targets': [
     {
       # The main binary target - both native or WASM
-      'target_name': 'node-magickwand',
+      'target_name': 'magickwand.js',
       'include_dirs': [
         '<!@(node -p "require(\'node-addon-api\').include")',
         '<(module_root_dir)'
@@ -148,7 +148,7 @@
             ],
             'action_name': 'swig_wrappers',
             'inputs': [ 'src/Magick++.i' ],
-            'outputs': [ 'swig/node-magickwand.cxx' ],
+            'outputs': [ 'swig/magickwand.js.cxx' ],
             'action': [
               'swig', '-javascript', '-typescript', '-napi', '-c++',
               '-Ideps/ImageMagick/Magick++/lib', '-Ideps/ImageMagick',
@@ -177,7 +177,7 @@
           'copies': [
             {
               'files': [
-                '<(PRODUCT_DIR)/node-magickwand.node'
+                '<(PRODUCT_DIR)/magickwand.js.node'
               ],
               'destination': '<(module_path)'
             }
@@ -202,9 +202,9 @@
           'copies': [
             {
               'files': [
-                '<(PRODUCT_DIR)/node-magickwand.js',
-                '<(PRODUCT_DIR)/node-magickwand.worker.js',
-                '<(PRODUCT_DIR)/node-magickwand.wasm'
+                '<(PRODUCT_DIR)/magickwand.js.js',
+                '<(PRODUCT_DIR)/magickwand.js.worker.js',
+                '<(PRODUCT_DIR)/magickwand.js.wasm'
               ],
               'destination': '<(module_path)'
             }
@@ -216,10 +216,10 @@
           'type': 'none',
           'actions': [{
             'action_name': 'dummy_action_wasm',
-            'inputs': [ '<(PRODUCT_DIR)/node-magickwand.js' ],
+            'inputs': [ '<(PRODUCT_DIR)/magickwand.js.js' ],
             'outputs': [
-              '<(PRODUCT_DIR)/node-magickwand.wasm',
-              '<(PRODUCT_DIR)/node-magickwand.worker.js'
+              '<(PRODUCT_DIR)/magickwand.js.wasm',
+              '<(PRODUCT_DIR)/magickwand.js.worker.js'
             ],
             'action': [ 'true' ]
           }]

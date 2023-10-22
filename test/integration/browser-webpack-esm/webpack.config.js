@@ -10,9 +10,9 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        require.resolve('node-magickwand/wasm/main'),
-        require.resolve('node-magickwand/wasm/worker'),
-        require.resolve('node-magickwand/wasm/wasm')
+        require.resolve('magickwand.js/wasm/main'),
+        require.resolve('magickwand.js/wasm/worker'),
+        require.resolve('magickwand.js/wasm/wasm')
       ]
     })
   ],

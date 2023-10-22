@@ -1,6 +1,7 @@
 # Changelog
 
 # [1.0.0]
+ - **`node-magickwand` becomes `magickwand.js`**
  - **WASM target for true dual environment 3+1 platforms support - native on Linux, macOS and Windows and WASM for browser JavaScript**
  - Now that browser JavaScript is supported, `Magick.Blob` uses an `ArrayBuffer`, to retrieve the underlying `ArrayBuffer` from a `Buffer` use `b.buffer` and to wrap an `ArrayBuffer` in a `Buffer` use `Buffer.from(ab)` - both of these do not actually copy the data and have no performance impact
  - Support building a *light* version by disabling delegate libraries
@@ -10,19 +11,19 @@
  - Update `libwebp` to 1.3.2 to fix a number of recent critical vulnerabilities including CVE-2023-4863
  - Update ImageMagick to 7.1.1-20
  - Enable OpenMP in the pre-built binaries on Linux and macOS (it was already enabled on Windows)
- - Fix [#39](https://github.com/mmomtchev/node-magickwand/issues/39), do not install `conan` in the system directory
+ - Fix [#39](https://github.com/mmomtchev/magickwand.js/issues/39), do not install `conan` in the system directory
  - Add a number of generic version information getters to `MagickCore` including `MagickCore.GetMagickFeatures()` that allow to check the build configuration
 
 ### [0.9.6] 2023-10-04
 
  - Update ImageMagick to 7.1.1-19
  - Add support for ES6 named exports
- - Fix [#35](https://github.com/mmomtchev/node-magickwand/issues/35), do not allow `null` as an argument for `Magick.Image` 
+ - Fix [#35](https://github.com/mmomtchev/magickwand.js/issues/35), do not allow `null` as an argument for `Magick.Image` 
 
 ### [0.9.5] 2023-09-25
 
  - Update ImageMagick to 7.1.1-18
- - Fix [#26](https://github.com/mmomtchev/node-magickwand/issues/26), crash when using `Image.display` multiple times
+ - Fix [#26](https://github.com/mmomtchev/magickwand.js/issues/26), crash when using `Image.display` multiple times
  - Update conan dependencies on POSIX
     - `glib` 2.76.2 to 2.78.0
     - `libjpeg-turbo` 2.1.5 to 3.0.0
@@ -43,17 +44,17 @@
 
 ### [0.9.3] 2023-09-17
 
- - Fix [#20](https://github.com/mmomtchev/node-magickwand/issues/20), rebuilding when installing from `npm` fails on macOS/Linux with `fatal error: MagickCore/magick-baseconfig.h: No such file or directory`
- - Fix [#21](https://github.com/mmomtchev/node-magickwand/issues/21), rebuilding when installing from `npm` fails on Windows `npm ERR! fatal: not a git repository (or any of the parent directories): .git`
+ - Fix [#20](https://github.com/mmomtchev/magickwand.js/issues/20), rebuilding when installing from `npm` fails on macOS/Linux with `fatal error: MagickCore/magick-baseconfig.h: No such file or directory`
+ - Fix [#21](https://github.com/mmomtchev/magickwand.js/issues/21), rebuilding when installing from `npm` fails on Windows `npm ERR! fatal: not a git repository (or any of the parent directories): .git`
 
 ### [0.9.2] 2023-09-16
 
- - Fix [#14](https://github.com/mmomtchev/node-magickwand/issues/14), rebuilding when installing from `npm` fails
- - Fix [#19](https://github.com/mmomtchev/node-magickwand/issues/19), possible memory corruption issue when throwing asynchronously on macOS
+ - Fix [#14](https://github.com/mmomtchev/magickwand.js/issues/14), rebuilding when installing from `npm` fails
+ - Fix [#19](https://github.com/mmomtchev/magickwand.js/issues/19), possible memory corruption issue when throwing asynchronously on macOS
 
 ### [0.9.1] 2023-09-15
 
- - Fix [#17](https://github.com/mmomtchev/node-magickwand/issues/17), crashes with `undefined symbol ...` on Linux when invoking methods in MagickWand such as `AnimateImages`
+ - Fix [#17](https://github.com/mmomtchev/magickwand.js/issues/17), crashes with `undefined symbol ...` on Linux when invoking methods in MagickWand such as `AnimateImages`
 
 ## [0.9.0] 2023-09-14
 

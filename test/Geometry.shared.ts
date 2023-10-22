@@ -2,7 +2,7 @@
 
 export default function (
   assert: typeof import('chai').assert,
-  Magick: typeof import('node-magickwand').Magick
+  Magick: typeof import('magickwand.js').Magick
 ) {
   const { Geometry } = Magick;
 
