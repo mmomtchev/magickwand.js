@@ -5,7 +5,7 @@
 [![Node.js CI](https://github.com/mmomtchev/magickwand.js/actions/workflows/test-dev.yml/badge.svg)](https://github.com/mmomtchev/magickwand.js/actions/workflows/test-dev.yml)
 [![npm](https://img.shields.io/npm/v/magickwand.js)](https://www.npmjs.com/package/magickwand.js)
 
-This package is a full native port of the ImageMagick-7 C++ library to both Node.js native addon and browser WASM using SWIG Node-API.
+This package is a full native port of the ImageMagick-7 C++ library to both Node.js native addon and browser WASM using [SWIG Node-API](https://www.swig.org/) + [`emnapi`](https://toyobayashi.github.io/emnapi-docs/guide/).
 
 Unlike all other ImageMagick `npm` packages, it does not use the CLI to interact with the utilities, but offers direct access to the full C++ API. It supports both synchronous and multithreaded asynchronous operations, it is integrated with `TypedArray`s and `ArrayBuffer` and it has full TypeScript support.
 
