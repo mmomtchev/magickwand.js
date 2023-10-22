@@ -83,12 +83,12 @@ jobs:
       - name: Configure light version
         run: |
           npx @mapbox/node-pre-gyp configure                                        \
-            --fonts=false --jpeg=True --png=false --tiff=false                      \
+            --fonts=false --jpeg=true --png=false --tiff=false                      \
             --webp=false --jpeg2000=false --raw=false --openmedia=false             \
             --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
-            --jbig=True --cms=false --xml=false --gzip=false --zip=false            \
-            --bzip2=True --zstd=false --xz=false --lzma=false --simd=false          \
-            --openmp=True --display=false
+            --jbig=true --cms=false --xml=false --gzip=false --zip=false            \
+            --bzip2=true --zstd=false --xz=false --lzma=false --simd=false          \
+            --openmp=true --display=false
       - name: magick_configure.log
         run: cat build/magick_configure.log
         shell: bash
