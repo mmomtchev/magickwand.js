@@ -29,7 +29,7 @@ There is also a [medium article about using the new Node-API support in SWIG](ht
 
 ## Usage
 
-```
+```shell
 npm install magickwand.js
 ```
 
@@ -76,7 +76,7 @@ await im.writeAsync(0, 0, im.size().width(), im.size().height(), 'RGBA', pixels)
 
 To see run the web browser example:
 
-```
+```shell
 npm run example:browser
 ```
 
@@ -86,7 +86,7 @@ There is also an online demo at [https://magickwand.momtchev.com/](https://magic
 
 You can run it locally with:
 
-```
+```shell
 npm run demo:start
 ```
 
@@ -108,7 +108,7 @@ When using Node.js with X-Windows, the `Image.display()` function works and it i
 
 ### Rebuilding from npm with the built-in ImageMagick library
 
-```
+```shell
 npm install magickwand.js --build-from-source
 ```
 
@@ -140,7 +140,7 @@ npx @mapbox/node-pre-gyp configure   # --debug for debug mode
 npx @mapbox/node-pre-gyp build
 ```
 
-Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the data used internally by ImageMagick - images still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. **Unless you can regenerate the SWIG wrappers, you will have to use the exact same version (the latest one at the release date) that was used when they were generated**. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
+Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the data used internally by ImageMagick - image files still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. **Unless you can regenerate the SWIG wrappers, you will have to use the exact same version (the latest one at the release date) that was used when they were generated**. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
 ```shell
 npx @mapbox/node-pre-gyp configure --shared_imagemagick
 
@@ -164,7 +164,7 @@ npm install magickwand.js --build-from-source --shared_imagemagick \
 In this case, it would be possible to use a non Q16HDRI build or any other specially built ImageMagick-7 as long as its version is an exact match.
 
 If you want to use a different ImageMagick-7 version, you will have to regenerate the SWIG wrappers. You will have to have to build yourself SWIG 4.2.0-mmom from https://github.com/mmomtchev/swig/tree/mmom and then run
-```
+```shell
 npm run swig
 ```
 
@@ -174,12 +174,13 @@ npm run swig
 
 The WASM version uses SWIG Node-API WASM and `emnapi` and it is less mature than the Node.js native version.
 
-There is no documentation for SWIG Node-API WASM available at the moment, so if you need to regenerate the C++ source files, you will be on your own. SWIG Node-API WASM is currently under active development.
+There is no documentation for SWIG Node-API WASM available at the moment, so if you need to modify the wrappers, you will be on your own. SWIG Node-API WASM is currently under active development.
 
 Build with:
 
-```
-node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
+```shell
+node-pre-gyp configure --nodedir=./emscripten \
+  --target_arch=wasm32 --target_platform=emscripten
 node-pre-gyp build
 ```
 
@@ -187,7 +188,7 @@ At the moment this cross-compilation is possible only on Linux.
 
 Keep in mind that if you want to switch between building a native and a WASM version, you should do:
 
-```
+```shell
 rm -rf build
 cd deps/ImageMagick
 make distclean
@@ -199,7 +200,7 @@ Otherwise, in between `conan`, `gyp` and the ImageMagick's own build, you might 
 
 Building a lighter custom binary which does not include some of the builtin libraries is possible by specifying:
 
-```
+```shell
 node-pre-gyp configure \
     --fonts=False --jpeg=False --png=False --tiff=False \
     --webp=False --jpeg2000=False --raw=False --openmedia=False \
@@ -219,11 +220,11 @@ ImageMagick is the perfect candidate for an automatically generated with SWIG No
 
 ![](https://gist.githubusercontent.com/mmomtchev/3ca8f7c96a0a09ef1dd530c8f73dd959/raw/5a54c384c99c336bb2bc71b75cf0109c6b2c69e7/SWIG-positioning.png)
 
-ImageMagick has an absolutely huge number of API methods and objects - the SWIG-generated module totals more than 400k lines of C++ code - and this is only covering the `Magick++` API and the enums from the `MagickWand` API. However there are relatively few distinct method signatures. The whole SWIG project which brings you this full API to Node.js, measures a grand total of only **656** lines - half of which are comments!!
+ImageMagick has an absolutely huge number of API methods and objects - the SWIG-generated module totals more than 400k lines of C++ code - and this is only covering the `Magick++` API and the enums from the `MagickWand` API. However there are relatively few distinct method signatures. The whole SWIG project which brings you this full API to Node.js and the browser, measures a grand total of only **656** lines - half of which are comments!!
 
-I have tried to be as verbose as possible throughout the `Magick++.i` file - you should start there. ImageMagick is a very complex C++ project with over 30 years history and it uses (almost) every single SWIG feature. Study the various JS wrappers that expect special arguments (`Buffer`, `TypedArray`, arrays), remember to check the ImageMagick header file for the original C++ function and you should be able to use its SWIG typemaps as a starting point in your project.
+I have tried to be as verbose as possible throughout the `Magick++.i` file - you should start there. ImageMagick is a very complex C++ project with over 30 years history and it uses (almost) every single SWIG feature. Study the various JS wrappers that expect special arguments (`ArrayBuffer`, `TypedArray`, arrays), remember to check the ImageMagick header file for the original C++ function and you should be able to use its SWIG typemaps as a starting point in your project.
 
-There is also a [medium article about using the new NAPI support in SWIG](https://mmomtchev.medium.com/effortlessly-porting-a-major-c-library-to-node-js-with-swig-napi-3c1a5c4a233f).
+There is also a [medium article about using the new Node-API support in SWIG](https://mmomtchev.medium.com/effortlessly-porting-a-major-c-library-to-node-js-with-swig-napi-3c1a5c4a233f).
 
 Current status of SWIG Node-API as of 2023-10-22:
 ---
@@ -246,10 +247,10 @@ SWIG checked out from https://github.com/mmomtchev/swig/tree/mmom is the only ve
 * The Node.js native module supports `worker_threads` but it cannot be unloaded cleanly and it should be loaded in the main thread, before using it in worker threads, to prevent Node.js from unloading it when a worker quits (*fixing this will require changes in Node.js*)
 * Building on Windows without HDRI enabled or with a different quantum size than 16 bits is not supported
 * If rebuilding when installing from `npm` fails on Windows with the error: `npm ERR! fatal: not a git repository (or any of the parent directories): .git`, see [#21](https://github.com/mmomtchev/magickwand.js/issues/21)
-* Fonts do not work in the WASM version and are unlikely to be implemented in the near future as this will require a complex interface with the browser font engine
+* Fonts do not work in the WASM version and are unlikely to be implemented in the near future as a proper implementation will require a complex interface with the browser font engine
 * Using the PNG encoder for large images in the WASM version leads to stack overflows, the native version encoder and the WASM decoder work fine
 * Generally, if you get strange exceptions in the WASM code, the most probable reason is a stack overflow - currently, `emscripten` cannot grow the stack which is limited to 2MB and cannot reliably report stack overflows without incurring a significant performance penalty
-* The loader of the WASM version has its Node.js support disabled to improve its `webpack` compatibility - as Node.js has its own native version, WASM should not be needed
+* The loader of the WASM version has its Node.js support disabled to improve its `webpack` compatibility - as Node.js has its own native version, there is no need for WASM
 
 # Future plans
 
