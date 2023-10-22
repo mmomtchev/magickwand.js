@@ -5,11 +5,13 @@
 [![Node.js CI](https://github.com/mmomtchev/magickwand.js/actions/workflows/test-dev.yml/badge.svg)](https://github.com/mmomtchev/magickwand.js/actions/workflows/test-dev.yml)
 [![npm](https://img.shields.io/npm/v/magickwand.js)](https://www.npmjs.com/package/magickwand.js)
 
-This package is a full native port of the ImageMagick-7 C++ library to both Node.js native and browser WASM using SWIG Node-API.
+This package is a full native port of the ImageMagick-7 C++ library to both Node.js native addon and browser WASM using SWIG Node-API.
 
 Unlike all other ImageMagick `npm` packages, it does not use the CLI to interact with the utilities, but offers direct access to the full C++ API. It supports both synchronous and multithreaded asynchronous operations, it is integrated with `TypedArray`s and `ArrayBuffer` and it has full TypeScript support.
 
 It adds many new features and offers a substantial performance boost and usability benefits over the previous CLI ports.
+
+The Node.js native addon version and the browser WASM version share the same SWIG interface files, the same generated C++ wrappers, the same API, the same TypeScript bindings and the same unit tests which are run both in the browser and in Node.js. Both support asynchronous parallel processing using the same multi-threading model.
 
 The pre-built binaries are fully self-contained and do not need an existing ImageMagick installation. It is also possible to rebuild the package against a shared ImageMagick-7 when using the native version in Node.js.
 
@@ -17,7 +19,7 @@ The default WASM version is also fully self-contained and its size range is from
 
 Both versions support synchronous and asynchronous multi-threaded operations with an identical API and identical TypeScript bindings. WASM requires `SharedArrayBuffer` (read about [COOP / COEP](https://web.dev/articles/coop-coep)). The Node.js native bindings also support OpenMP multithreading and SIMD instructions.
 
-The project is currently to be considered of beta quality, but it is actively developed and maintained because of it its special status as SWIG Node-API showcase project.
+The project is currently to be considered of beta quality, but it is actively developed and maintained because of it its special status as SWIG Node-API showcase project. It is a testament to SWIG Node-API's capabilities, namely producing a 400k C++ lines multi-threaded and dual-environment project out of 600 lines of SWIG code.
 
 It is feature-complete and it should be reasonably stable. The Node.js native version is designed to be well-suited for server-side use with an Express.js-like framework. It has been debugged for memory leaks and, and when only asynchronous methods are used, it should never block the event loop. See also [Security](#security).
 
