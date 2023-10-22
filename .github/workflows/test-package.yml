@@ -144,14 +144,14 @@ jobs:
       - name: Install magickwand.js from npm
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
-          npm install --force magickwand.js@${{ github.event.inputs.version }}     \
-            --build-from-source                                                      \
-            --fonts=False --jpeg=False --tiff=False                                  \
-            --webp=False --jpeg2000=False --raw=False --openmedia=False              \
-            --brotli=False --h265=False --exr=False --fftw=False --heif=False        \
-            --jbig=False --xml=False --gzip=False --zip=False                        \
-            --bzip2=False --zstd=False --xz=False --lzma=False --simd=False          \
-            --openmp=False --display=False
+          npm install --force magickwand.js@${{ github.event.inputs.version }}      \
+            --build-from-source                                                     \
+            --fonts=false --jpeg=True --png=false --tiff=false                      \
+            --webp=false --jpeg2000=false --raw=false --openmedia=false             \
+            --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
+            --jbig=True --cms=false --xml=false --gzip=false --zip=false            \
+            --bzip2=True --zstd=false --xz=false --lzma=false --simd=false          \
+            --openmp=True --display=false
         shell: bash
 
   test_npm_rebuild_shared:
