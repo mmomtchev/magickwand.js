@@ -5,7 +5,9 @@
 [![Node.js CI](https://github.com/mmomtchev/magickwand.js/actions/workflows/test-dev.yml/badge.svg)](https://github.com/mmomtchev/magickwand.js/actions/workflows/test-dev.yml)
 [![npm](https://img.shields.io/npm/v/magickwand.js)](https://www.npmjs.com/package/magickwand.js)
 
-This package is a full native port of the ImageMagick-7 C++ library to both Node.js native addon and browser WASM using [SWIG Node-API](https://www.swig.org/) + [`emnapi`](https://toyobayashi.github.io/emnapi-docs/guide/).
+##### *formerly known as `node-magickwand`*
+
+This package is a full native port of the ImageMagick-7 C++ library to both Node.js native and browser WASM using [SWIG Node-API](https://www.swig.org/) + [`emnapi`](https://toyobayashi.github.io/emnapi-docs/guide/).
 
 Unlike all other ImageMagick `npm` packages, it does not use the CLI to interact with the utilities, but offers direct access to the full C++ API. It supports both synchronous and multithreaded asynchronous operations, it is integrated with `TypedArray`s and `ArrayBuffer` and it has full TypeScript support.
 
@@ -17,7 +19,7 @@ The pre-built binaries are fully self-contained and do not need an existing Imag
 
 The default WASM version is also fully self-contained and its size range is from 1.5MB (*minimal, compressed w/ brotli*) to 5MB (*default full build compressed w/ gzip*) depending on the supported image formats.
 
-Both versions support synchronous and asynchronous multi-threaded operations with an identical API and identical TypeScript bindings. WASM requires `SharedArrayBuffer` (read about [COOP / COEP](https://web.dev/articles/coop-coep)). The Node.js native bindings also support OpenMP multithreading and SIMD instructions.
+Both versions support synchronous and asynchronous multi-threaded operations with an identical API and identical TypeScript bindings. WASM requires `SharedArrayBuffer` (read about [COOP / COEP](https://web.dev/articles/coop-coep)). The Node.js native version also support OpenMP multithreading and SIMD instructions.
 
 The project is currently to be considered of beta quality, but it is actively developed and maintained because of it its special status as SWIG Node-API showcase project. It is a testament to SWIG Node-API's capabilities, namely producing a 400k C++ lines multi-threaded and dual-environment project out of 600 lines of SWIG code.
 
@@ -261,6 +263,7 @@ SWIG Node-API roadmap:
 * Improved STL containers support avoiding the need for special handling of methods that require `std::vector` support
 
 `magickwand.js` roadmap:
+* SIMD support for the WASM version
 * Allow configuration from the CLI of the included wrappers - allowing to build an ultra-light version that includes support only for the methods selected by the user
 
 # Security
