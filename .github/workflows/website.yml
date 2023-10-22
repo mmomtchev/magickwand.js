@@ -14,15 +14,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
       - name: Use latest Node.js
         uses: actions/setup-node@v3
       - name: Get version
         run: |
           if [ -n "${{ inputs.version }}" ]; then
-            echo COMMIT="${{ inputs.version }}"  >> $GITHB_ENV
+            echo COMMIT="${{ inputs.version }}"  >> $GITHUB_ENV
           else
-            echo COMMIT="${{ github.ref }}"  >> $GITHB_ENV
+            echo COMMIT="${{ github.ref }}"  >> $GITHUB_ENV
+          fi
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ env.COMMIT }}
       - name: Create site
         run: tar -cvf "$RUNNER_TEMP/artifact.tar" README.md
       - name: Upload to Github Pages
