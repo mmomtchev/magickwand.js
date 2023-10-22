@@ -225,15 +225,15 @@ There is also a [medium article about using the new NAPI support in SWIG](https:
 
 Current status of SWIG Node-API as of 2023-10-22:
 ---
-| Feature | Status | Documentation | 
+| Feature | Status | Documentation |
 --- | --- | --- |
 | Base Node-API support | ***merged, scheduled for 4.2.0*** | Part of the official SWIG 4.2.0 documentation |
 | Asynchronous methods | ***[swig/PR#2654](https://github.com/swig/swig/pull/2654) in review*** | Part of the official SWIG documentation (in [swig/PR#2654](https://github.com/swig/swig/pull/2654)) |
-| TypeScript support | [mmomtchev/swig#typescript](https://github.com/mmomtchev/swig/tree/typescript) polishing | Ony the [medium story](https://mmomtchev.medium.com/effortlessly-porting-a-major-c-library-to-node-js-with-swig-napi-3c1a5c4a233f)
-| WASM / `emscripten` / `emnapi` compatibility | [mmomtchev/swig#wasm](https://github.com/mmomtchev/swig/tree/wasm), in development | None at all |
+| TypeScript support | [mmomtchev/swig#typescript](https://github.com/mmomtchev/swig/tree/typescript), polishing for PR | Ony the [medium story](https://mmomtchev.medium.com/effortlessly-porting-a-major-c-library-to-node-js-with-swig-napi-3c1a5c4a233f)
+| WASM / `emscripten` / `emnapi` compatibility | [mmomtchev/swig#wasm](https://github.com/mmomtchev/swig/tree/wasm), mostly working | None at all |
 | Code Splitting | [mmomtchev/swig#mmom](https://github.com/mmomtchev/swig/tree/mmom), Proof of Concept | None at all |
 
-SWIG checked out from https://github.com/mmomtchev/swig/tree/mmom is the only version that can generate this project. Besides the above features, it contains several additional small patches which are still under discussion.
+SWIG checked out from https://github.com/mmomtchev/swig/tree/mmom is the only version that can generate this project. Besides the above features, it contains several additional small patches some which are still under discussion - such as applying `%feature` to a class.
 
 ## Known to be broken at the moment
 
