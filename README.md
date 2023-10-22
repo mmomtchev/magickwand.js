@@ -241,16 +241,27 @@ SWIG checked out from https://github.com/mmomtchev/swig/tree/mmom is the only ve
 * Rebuilding when installing requires Node.js >= 18.0 on all platforms
 * Additionally, rebuilding when installing on Windows works only with VS 2022
 * The debug build on Windows requires manually setting `winbuildtype` and `winbuildid` due to restrictions in `gyp`
-* The module supports `worker_threads` but it cannot be unloaded cleanly and it should be loaded in the main thread, before using it in worker threads, to prevent Node.js from unloading it
+* The Node.js native module supports `worker_threads` but it cannot be unloaded cleanly and it should be loaded in the main thread, before using it in worker threads, to prevent Node.js from unloading it when a worker quits (*fixing this will require changes in Node.js*)
 * Building on Windows without HDRI enabled or with a different quantum size than 16 bits is not supported
 * If rebuilding when installing from `npm` fails on Windows with the error: `npm ERR! fatal: not a git repository (or any of the parent directories): .git`, see [#21](https://github.com/mmomtchev/magickwand.js/issues/21)
 * Fonts do not work in the WASM version and are unlikely to be implemented in the near future as this will require a complex interface with the browser font engine
 * Using the PNG encoder for large images in the WASM version leads to stack overflows, the native version encoder and the WASM decoder work fine
-* Generally, if you get strange exceptions in the WASM code, the most probable reason is a stack overflow - currently, emscripten cannot grow the stack which is limited to 2MB
+* Generally, if you get strange exceptions in the WASM code, the most probable reason is a stack overflow - currently, `emscripten` cannot grow the stack which is limited to 2MB and cannot reliably report stack overflows without incurring a significant performance penalty
+* The loader of the WASM version has its Node.js support disabled to improve its `webpack` compatibility - as Node.js has its own native version, WASM should not be needed
 
 # Future plans
 
 This project serves as showcase and testing grounds for SWIG Node-API.
+
+SWIG Node-API roadmap:
+* a `wasi-wasm32` target in addition to the `emscripten-wasm32` target
+* a much slower for async operations but more compatible WASM version that does not require COOP/COEP but uses message passing between web browser threads
+* Direct implicit casting of objects, avoiding the special handling of `Geometry` and `Color`
+* Automatic transparent handling of `ArrayBuffer`s in a way that hides any differences between the Node.js native and the browser WASM environment
+* Improved STL containers support avoiding the need for special handling of methods that require `std::vector` support
+
+`magickwand.js` roadmap:
+* Allow configuration from the CLI of the included wrappers - allowing to build an ultra-light version that includes support only for the methods selected by the user
 
 # Security
 
@@ -258,7 +269,7 @@ ImageMagick is a very widely used software. Security vulnerabilities tend to be 
 
 The current ImageMagick version can be checked in the `MagickLibVersionText` / `MagickLibAddendum` global exported constants.
 
-**Versions of `magickwand.js` up to 0.9.6 including are compiled with a vulnerable `libwebp`.**
+**IMPORTANT:** Versions of `magickwand.js` up to 0.9.6 including are compiled with a `libwebp` vulnerable to [CVE-2023-4863](https://www.cve.org/CVERecord?id=CVE-2023-4863).
 
 **Special care must be exercised when ImageMagick is used to process images coming from untrusted sources**. Although possible, outright arbitrary code execution by embedded malicious code in an image is extremely rare and there has been only one such case during the last 30 years - the infamous [`ImageTragick`](https://www.cve.org/CVERecord?id=CVE-2016-3714) exploit in 2016. **It did not affect users who had restrictive security policies.**
 
@@ -280,8 +291,6 @@ assert(MagickCore.IsRightsAuthorized(
 
 The current security policy can be dumped to `stdout` by calling `MagickCore.ListPolicyInfo()`. There is also an online tool for analyzing security policies at https://imagemagick-secevaluator.doyensec.com/.
 
-
-
 **In all other cases** security should not be of any concern.
 
 # License
@@ -296,4 +305,4 @@ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH RE
 
 `magickwand.js` is not affiliated in any way with ImageMagick LLC.
 
-In particular, the WASM version is an independent distinct port from [the WASM port of one of the ImageMagick authors](https://www.npmjs.com/package/@imagemagick/magick-wasm).
+In particular, the WASM version is an independent and distinct port from [the WASM port of one of the ImageMagick authors](https://www.npmjs.com/package/@imagemagick/magick-wasm).
