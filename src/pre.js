@@ -3,5 +3,5 @@
 
 var Module = {
   ...(Module || {}),
-  'mainScriptUrlOrBlob': 'node-magickwand.js'
+  'mainScriptUrlOrBlob': 'magickwand.js.js'
 };

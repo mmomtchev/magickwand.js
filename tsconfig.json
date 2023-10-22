@@ -6,10 +6,10 @@
     "target": "ES2020",
     "esModuleInterop": true,
     "paths": {
-      "node-magickwand": [
+      "magickwand.js": [
         "."
       ],
-      "node-magickwand/wasm": [
+      "magickwand.js/wasm": [
         "./lib/wasm"
       ]
     }

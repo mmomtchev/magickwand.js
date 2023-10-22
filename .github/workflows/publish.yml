@@ -31,7 +31,7 @@ jobs:
       - run: npm test
         env:
           MOCHA_INTEGRATION: node
-          MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'node-magickwand'), os.platform() == 'win32' ? 'junction': 'dir')\""
+          MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
       - run: npx @mapbox/node-pre-gyp package
       - run: npx @mmomtchev/node-pre-gyp-github publish
         env:
@@ -57,12 +57,12 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         env:
           MOCHA_INTEGRATION: browser
-          MOCHA_MAGICK_INSTALL: ln -s ${{ github.workspace }} node_modules/node-magickwand
+          MOCHA_MAGICK_INSTALL: ln -s ${{ github.workspace }} node_modules/magickwand.js
         with:
           run: npx mocha test/integration.test.ts
       - name: Package and publish
         run: |
-          touch lib/binding/emscripten-wasm32/node-magickwand.node
+          touch lib/binding/emscripten-wasm32/magickwand.js.node
           npx @mapbox/node-pre-gyp package --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
           npx @mmomtchev/node-pre-gyp-github publish
         env:

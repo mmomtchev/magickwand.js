@@ -4,8 +4,8 @@ import * as chai from 'chai';
 
 const assert = chai.assert;
 
-import * as IM from 'node-magickwand';
-import { MagickCore } from 'node-magickwand';
+import * as IM from 'magickwand.js';
+import { MagickCore } from 'magickwand.js';
 
 describe('Core', () => {
   const features = MagickCore.GetMagickFeatures().trimEnd().split(' ').join(',');

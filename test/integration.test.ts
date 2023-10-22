@@ -8,7 +8,7 @@ describe('integration tests', function() {
   const testDir = path.resolve(__dirname, 'integration');
   const list = fs.readdirSync(testDir);
 
-  const install = process.env.MOCHA_MAGICK_INSTALL ?? 'npm link node-magickwand';
+  const install = process.env.MOCHA_MAGICK_INSTALL ?? 'npm link magickwand.js';
   const root = process.cwd();
 
   const browserEnabled = (process.env.MOCHA_INTEGRATION || '').split(',').includes('browser');

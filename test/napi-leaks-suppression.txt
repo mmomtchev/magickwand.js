@@ -5,7 +5,7 @@
 leak:napi_module_register
 leak:napi_register_module_v1
 
-# Known leaks in node-magickwand (ie SWIG Node-API)
+# Known leaks in magickwand.js (ie SWIG Node-API)
 leak:GetMembers
 
 # Known leaks in fontconfig
