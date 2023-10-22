@@ -10,7 +10,7 @@ on:
         description: "commit-ish to publish"
 
 jobs:
-  test_published:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
