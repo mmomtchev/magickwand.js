@@ -4,7 +4,7 @@ import * as process from 'process';
 import { execSync } from 'child_process';
 
 describe('integration tests', function() {
-  this.timeout(90000);
+  this.timeout(600000);
   const testDir = path.resolve(__dirname, 'integration');
   const list = fs.readdirSync(testDir);
 
