@@ -1,9 +1,9 @@
-import { Magick, MagickCore } from './lib/native/index.mjs';
+import { Magick, MagickCore } from '../lib/index.mjs';
 import { fileURLToPath } from 'url';
 import * as path from 'path';
 
 // The famous ImageMagick wizard
-const wizard = path.join(path.dirname(fileURLToPath(import.meta.url)), 'test', 'data', 'wizard.png');
+const wizard = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'test', 'data', 'wizard.png');
 
 // Read a new image (synchronously)
 let im = new Magick.Image(wizard);
@@ -20,6 +20,14 @@ console.log(`PNG support: ${infoPNG && infoPNG.isReadable()}`);
 
 // Convert it to PNG
 await im.magickAsync('PNG');
+
+// Extract specific JPEG EXIF data / PNG attributes / ...
+console.log('EXIF DateTime:', await im.attributeAsync('EXIF:DateTime'));
+console.log('PNG text field:', await im.attributeAsync('png:text'));
+
+// Get all the metadata
+// More info here: https://imagemagick.org/script/escape.php
+console.log('All metadata: ', await im.formatExpressionAsync('%[*:*]'));
 
 // Rescale and rotate it
 await im.scaleAsync('160x212');
