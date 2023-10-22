@@ -202,12 +202,12 @@ Building a lighter custom binary which does not include some of the builtin libr
 
 ```shell
 node-pre-gyp configure \
-    --fonts=False --jpeg=False --png=False --tiff=False \
-    --webp=False --jpeg2000=False --raw=False --openmedia=False \
-    --brotli=False --h265=False --exr=False --fftw=False --heif=False \
-    --jbig=False --cms=False --xml=False --gzip=False --zip=False \
-    --bzip2=False --zstd=False --xz=False --lzma=False --simd=False \
-    --openmp=False --display=False
+    --fonts=false --jpeg=false --png=false --tiff=false \
+    --webp=false --jpeg2000=false --raw=false --openmedia=false \
+    --brotli=false --h265=false --exr=false --fftw=false --heif=false \
+    --jbig=false --cms=false --xml=false --gzip=false --zip=false \
+    --bzip2=false --zstd=false --xz=false --lzma=false --simd=false \
+    --openmp=false --display=false
 ```
 
 This is not supported for the Windows build which is monolithic. It is supported for Linux, macOS and WASM. It disables the included delegates, but keep in mind that on Linux and macOS, the ImageMagick configure script will still detect the presence of some system libraries (`jpeg`, `bzip2`, `jbig` and `OpenMP`) and will try to use them, producing a binary that will need the dynamically loaded versions of those libraries on your system. This is not a problem with the WASM version as it is very unlikely that you will have system-installed WASM-version libraries that ImageMagick will detect and use.
