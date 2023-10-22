@@ -1,0 +1,31 @@
+name: Update the website
+
+on:
+  release:
+    types: [published]
+
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "commit-ish to publish"
+
+jobs:
+  test_published:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use latest Node.js
+        uses: actions/setup-node@v3
+      - name: Get version
+        run: |
+          if [ -n "${{ inputs.version }}" ]; then
+            echo COMMIT="${{ inputs.version }}"  >> $GITHB_ENV
+          else
+            echo COMMIT="${{ github.ref }}"  >> $GITHB_ENV
+      - name: Create site
+        run: tar -cvf "$RUNNER_TEMP/artifact.tar" README.md
+      - name: Publish
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ${{ runner.temp }}/artifact.tar
