@@ -1,5 +1,4 @@
 const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './index.js',
@@ -7,15 +6,6 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build')
   },
-  plugins: [
-    new CopyWebpackPlugin({
-      patterns: [
-        require.resolve('magickwand.js/wasm/main'),
-        require.resolve('magickwand.js/wasm/worker'),
-        require.resolve('magickwand.js/wasm/wasm')
-      ]
-    })
-  ],
   devServer: {
     port: 8030,
     static: {

@@ -93,13 +93,14 @@
             '--embed-file=<(module_path)/ImageMagick/share/ImageMagick-7/english.xml@english.xml',
             # SWIG Node-API uses exceptions extensively (for now, an exception-less version is coming)
 		        '-sNO_DISABLE_EXCEPTION_CATCHING',
-            # We live in the ES6 / bundlers era
+            # We live in the ES6 / bundlers era - these produce a bundler-friendly ES6
             '-sMODULARIZE',
+            '-sEXPORT_NAME=Magick',
+            '-sEXPORT_ES6',
+            '-sUSE_ES6_IMPORT_META',
             # Node.js has its own native modules and Node.js compatibility
             # in the loader requires kludges in webpack 
             '-sENVIRONMENT=web,webview,worker',
-            '-sEXPORT_NAME=Magick',
-            '--pre-js=<(module_root_dir)/src/pre.js',
             # Emscripten cannot grow the stack size (yes, it feels so MS-DOS/1980s)
             # On the other side ImageMagick's PNG implementation is
             # a particularly voracious stack consumer

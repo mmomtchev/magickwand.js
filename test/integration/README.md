@@ -2,7 +2,7 @@
 
 These can also be used as configuration examples for the different supported environments.
 
-Most of the unit tests are run in `browser-webpack-ts-esm` and `node-ts`.
+Most of the browser unit tests are run in `browser-webpack-ts-esm`.
 
 ## Browser
 
@@ -19,7 +19,6 @@ npm run build
 * `browser-webpack-ts-esm` browser, webpack, TyptScript transpiled to ES6, `"type": "module"`
 * `browser-rollup-esm` browser, rollup, ES6 modules, `"type": "module"`
 * `browser-react-ts` browser, React, create-react-app, TypeScript transpiled to CJS
-  Currently the React integration depends on `react-app-rewired` and contains a `config-overrides.js`. Support of a stock `create-react-app` configuration is a major goal of this project.
 
 # Node.js
 
