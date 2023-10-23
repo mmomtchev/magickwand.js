@@ -6,7 +6,7 @@ module.exports = {
   input: 'index.js',
   output: {
     dir: 'build',
-    format: 'amd'
+    format: 'iife'
   },
   plugins: [
     nodeResolve({ browser: true }),
