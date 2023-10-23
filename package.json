@@ -11,9 +11,8 @@
       "require": "./lib/index.cjs"
     },
     "./wasm": {
-      "types": "./lib/wasm/index.d.ts",
-      "import": "./lib/wasm/index.js",
-      "require": "./lib/wasm/index.cjs"
+      "types": "./wasm/index.d.ts",
+      "default": "./wasm/index.js"
     },
     "./wasm/main": {
       "default": "./lib/binding/emscripten-wasm32/magickwand.js.js"

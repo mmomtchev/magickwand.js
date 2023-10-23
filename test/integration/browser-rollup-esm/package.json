@@ -3,14 +3,13 @@
   "version": "1.0.0",
   "description": "browser/webpack/esm integration test",
   "scripts": {
-    "build": "webpack --mode=production"
+    "build": "rollup -c"
   },
   "type": "module",
   "devDependencies": {
-    "webpack": "^5.76.0",
-    "webpack-cli": "^5.0.1"
-  },
-  "dependencies": {
-    "copy-webpack-plugin": "^11.0.0"
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "rollup": "^4.1.4",
+    "rollup-plugin-copy": "^3.5.0"
   }
 }

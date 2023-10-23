@@ -1,7 +1,7 @@
 {
-  "name": "node-ts",
+  "name": "node-ts-cjs",
   "version": "1.0.0",
-  "description": "node-ts integration test",
+  "description": "node-ts-cjs integration test",
   "scripts": {
     "test": "npx mocha --require ts-node/register index.ts"
   },

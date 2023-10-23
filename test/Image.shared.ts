@@ -1,10 +1,11 @@
 // These tests are shared between Node.js and the browser
+import type * as IM from '../lib/index.d.ts';
 
 export default function (
   path: string,
   assert: typeof import('chai').assert,
-  Magick: typeof import('magickwand.js').Magick,
-  MagickCore: typeof import('magickwand.js').MagickCore
+  Magick: typeof IM.Magick,
+  MagickCore: typeof IM.MagickCore
 ) {
   const { Image, Geometry, Color } = Magick;
   const { MultiplyCompositeOp } = MagickCore;

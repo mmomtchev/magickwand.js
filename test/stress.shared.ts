@@ -1,13 +1,13 @@
 // These tests are shared between Node.js and the browser
-import type * as IM from 'magickwand.js';
+import type * as IM from '../lib/index.d.ts';
 
 const verbose = (typeof process !== 'undefined' && process.env.VERBOSE_STRESS !== undefined);
 
 export default function (
   wizard: string,
   assert: typeof import('chai').assert,
-  Magick: typeof import('magickwand.js').Magick,
-  MagickCore: typeof import('magickwand.js').MagickCore
+  Magick: typeof IM.Magick,
+  MagickCore: typeof IM.MagickCore
 ) {
   /*
    * This test is a typical example of an operation prone to the

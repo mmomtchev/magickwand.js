@@ -1,0 +1,12 @@
+{
+  "name": "node-ts-esm",
+  "version": "1.0.0",
+  "description": "node-ts-esm integration test",
+  "type": "module",
+  "scripts": {
+    "test": "npx mocha --loader=ts-node/esm index.ts"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  }
+}

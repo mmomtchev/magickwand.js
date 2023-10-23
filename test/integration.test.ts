@@ -46,7 +46,7 @@ describe('integration tests', function() {
         if (browser) {
           execSync('npm run build', { stdio: 'pipe', env });
           process.chdir(root);
-          execSync(`karma start ${karmaPath}`, { env });
+          execSync(`npx karma start ${karmaPath}`, { env });
         } else {
           execSync('npm test', { env });
         }
