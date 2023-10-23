@@ -26,6 +26,9 @@ module.exports = function (config) {
       { pattern: path.join(__dirname, 'browser-react-ts', 'build', 'static', 'js', '*'), served: true, included: false },
       { pattern: path.join(__dirname, 'browser-react-ts', 'build', 'static', 'media', '*'), served: true, included: false }
     ],
+    proxies: {
+      '/static/': '/base/browser-react-ts/build/static/',
+    },
     customHeaders: [
       { name: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
       { name: 'Cross-Origin-Embedder-Policy', value: 'require-corp' }

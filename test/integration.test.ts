@@ -14,7 +14,7 @@ describe('integration tests', function() {
   const browserEnabled = (process.env.MOCHA_INTEGRATION || '').split(',').includes('browser');
   const nodeEnabled = (process.env.MOCHA_INTEGRATION || '').split(',').includes('node');
 
-  const env = { ...process.env, TS_NODE_PROJECT: undefined };
+  const env = { ...process.env, TS_NODE_PROJECT: undefined, CI: undefined };
 
   for (const test of list) {
     if (!(fs.statSync(path.resolve(testDir, test))).isDirectory())

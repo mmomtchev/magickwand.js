@@ -51,7 +51,9 @@
     "image",
     "resize",
     "convert",
-    "filters"
+    "filters",
+    "node.js",
+    "wasm"
   ],
   "binary": {
     "module_name": "magickwand.js",
