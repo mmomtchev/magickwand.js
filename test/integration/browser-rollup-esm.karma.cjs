@@ -1,5 +1,5 @@
 //
-// webpack + TypeScript transpiled to ESM
+// rollup + ESM
 //
 
 module.exports = function (config) {
@@ -13,8 +13,8 @@ module.exports = function (config) {
       }
     },
     files: [
-      { pattern: 'browser-webpack-ts-esm/build/bundle.js', included: true },
-      { pattern: 'browser-webpack-ts-esm/build/*', served: true, included: false }
+      { pattern: 'browser-rollup-esm/build/bundle.js', included: true },
+      { pattern: 'browser-rollup-esm/build/*', served: true, included: false }
     ],
     customHeaders: [
       { name: 'Cross-Origin-Opener-Policy', value: 'same-origin' },

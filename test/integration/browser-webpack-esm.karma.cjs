@@ -1,5 +1,5 @@
 //
-// webpack + TypeScript transpiled to CJS
+// webpack + ESM
 //
 
 module.exports = function (config) {

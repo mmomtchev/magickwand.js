@@ -7,7 +7,7 @@ const assert = chai.assert;
 import IM from 'magickwand.js/wasm';
 
 describe('Image', () => {
-  it('ImageMagick version information', () =>
+  it('ImageMagick version information', () => {
     IM.then(({ MagickCore, MagickVersion, MagickQuantumDepth, MagickQuantumRange, MagickHDRISupport, NAPI_VERSION }) => {
       assert.isString(MagickVersion);
       assert.strictEqual(MagickQuantumDepth, 'Q16');
@@ -20,6 +20,6 @@ describe('Image', () => {
       assert.isString(MagickCore.GetMagickLicense());
       assert.isString(MagickCore.GetMagickPackageName());
       assert.isString(MagickCore.GetMagickReleaseDate());
-    })
-  );
+    });
+  });
 });
