@@ -45,7 +45,7 @@
     {
       "files": [
         "*.mjs",
-        "lib/wasm/*.js"
+        "wasm/*.js"
       ],
       "parserOptions": {
         "ecmaVersion": 2022,
