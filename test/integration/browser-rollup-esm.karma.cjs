@@ -13,7 +13,7 @@ module.exports = function (config) {
       }
     },
     files: [
-      { pattern: 'browser-rollup-esm/build/bundle.js', included: true },
+      { pattern: 'browser-rollup-esm/build/index.js', included: true },
       { pattern: 'browser-rollup-esm/build/*', served: true, included: false }
     ],
     customHeaders: [
