@@ -4,20 +4,11 @@ import chalk from 'chalk';
 
 let native = false;
 let wasm = false;
-let build = false;
 
-if (process.argv.indexOf('--build-from-source') !== -1) {
-  process.argv.splice(process.argv.indexOf('--build-from-source'), 1);
-  build = true;
-  console.log('Forced rebuild from source');
-}
-
-if (!build) {
+if (!process.env.npm_config_build_from_source) {
   console.log(chalk.cyan(`Trying to install prebuilt native binaries for ${os.platform()}-${os.arch()}...`));
   try {
-    const args = ['node-pre-gyp', 'install', ...process.argv.slice(2)];
-    console.log('$', args.join(' '));
-    cp.execFileSync('npx', args);
+    cp.execFileSync('npx', ['node-pre-gyp', 'install']);
     native = true;
   } catch (e) {
     console.log(chalk.yellow('Failed...'));
@@ -25,12 +16,10 @@ if (!build) {
   }
 }
 
-if (!native || build) {
+if (!native || process.env.npm_config_build_from_source) {
   console.log(chalk.cyan(`Trying to rebuild from source for ${os.platform()}-${os.arch()}...`));
   try {
-    const args = ['node-pre-gyp', 'install', '--build-from-source', ...process.argv.slice(2)];
-    console.log('$', args.join(' '));
-    cp.execFileSync('npx', args);
+    cp.execFileSync('npx', ['node-pre-gyp', 'install', '--build-from-source']);
     native = true;
   } catch (e) {
     console.log(chalk.yellow('Failed...'));
@@ -40,9 +29,7 @@ if (!native || build) {
 
 console.log(chalk.cyan('Trying to install WASM binaries for emscripten-wasm32...'));
 try {
-  const args = ['node-pre-gyp', 'install', '--target_platform=emscripten', '-target_arch=wasm32', ...process.argv.slice(2)];
-  console.log('$', args.join(' '));
-  cp.execFileSync('npx', args);
+  cp.execFileSync('npx', ['node-pre-gyp', 'install', '--target_platform=emscripten', '-target_arch=wasm32']);
   wasm = true;
 } catch (e) {
   console.log(chalk.yellow('Failed...'));
