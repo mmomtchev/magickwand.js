@@ -10,7 +10,7 @@
           ' && cd build'
           ' && python3 -m conans.conan install .. -pr:b=default -pr:h=../emscripten.profile -of build --build=missing'
           # These translate the JS true/false need for npm to Python True/False needed for conan
-          ' -ofonts=<!(node <(module_root_dir)/scripts/true-false.js node <(module_root_dir)/scripts/true-false.js <(fonts)")'
+          ' -ofonts=<!(node <(module_root_dir)/scripts/true-false.js <(fonts))'
           ' -ojpeg=<!(node <(module_root_dir)/scripts/true-false.js <(jpeg))'
           ' -opng=<!(node <(module_root_dir)/scripts/true-false.js <(png))'
           ' -otiff=<!(node <(module_root_dir)/scripts/true-false.js <(tiff))'
