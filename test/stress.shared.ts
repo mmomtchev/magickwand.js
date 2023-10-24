@@ -1,5 +1,5 @@
 // These tests are shared between Node.js and the browser
-import type * as IM from '../lib/index.d.ts';
+import type * as IM from 'magickwand.js';
 
 const verbose = (typeof process !== 'undefined' && process.env.VERBOSE_STRESS !== undefined);
 
