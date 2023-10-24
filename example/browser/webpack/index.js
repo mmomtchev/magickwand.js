@@ -2,7 +2,7 @@ import IM from 'magickwand.js/wasm';
 
 async function component() {
   const root = document.createElement('div');
-  root.innerHTML = 'Loading ImageMagick...';
+  root.innerHTML = 'Loading imagemagick.js...';
 
   // The browser WASM version features asynchronous loading
   // This is inevitable since the WASM transpilation API itself is asynchronous
@@ -35,16 +35,17 @@ async function component() {
   }
 
   // Download an image and load it in ImageMagick
-  // This requires that CORS is enabled on the remote webserver
+  // This requires that either the image is served from the same origin
+  // or that CORS is enabled on the remote webserver
   // Otherwise the browser won't let the JS code access the raw image data
-  fetch('https://xn--h1agbaj9c.xn--b1afuaj9c.com/wizard.png')
+  fetch('wizard.png')
     .then(async (r) => {
       const ab = await r.arrayBuffer();
       const blob = new Magick.Blob(ab);
       const wizard = new Magick.Image;
       await wizard.readAsync(blob);
 
-      await wizard.resizeAsync('25%x25%');
+      await wizard.rescaleAsync('250%x250%');
       await wizard.rotateAsync(10);
       await wizard.magickAsync('WEBP');
 

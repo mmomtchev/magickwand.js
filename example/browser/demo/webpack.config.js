@@ -19,12 +19,20 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
   },
+  ignoreWarnings: [
+    // These have to be fixed in emscripten
+    // https://github.com/emscripten-core/emscripten/issues/20503
+    {
+      module: /magickwand\.worker\.js$/,
+      message: /dependency is an expression/,
+    },
+    {
+      message: /Circular dependency/
+    },
+  ],
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        require.resolve('magickwand.js/wasm/main'),
-        require.resolve('magickwand.js/wasm/worker'),
-        require.resolve('magickwand.js/wasm/wasm'),
         'index.html',
         'spinner.svg'
       ]
