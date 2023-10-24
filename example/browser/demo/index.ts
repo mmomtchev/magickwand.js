@@ -1,4 +1,5 @@
 import IM from 'magickwand.js/wasm';
+import pkg from '../../../package.json';
 
 IM.then(({ Magick, MagickCore, MagickVersion }) => {
 
@@ -11,6 +12,9 @@ IM.then(({ Magick, MagickCore, MagickVersion }) => {
   const status = document.getElementById('status')!;
 
   async function magickInfo() {
+    const pkgVersion = document.getElementById('mw-version')!;
+    pkgVersion.innerHTML = pkg.version;
+
     const version = document.getElementById('im-version')!;
     version.innerHTML = MagickVersion;
     console.log(MagickVersion);
