@@ -45,7 +45,7 @@ async function component() {
       const wizard = new Magick.Image;
       await wizard.readAsync(blob);
 
-      await wizard.rescaleAsync('250%x250%');
+      await wizard.resizeAsync('150%x150%');
       await wizard.rotateAsync(10);
       await wizard.magickAsync('WEBP');
 
