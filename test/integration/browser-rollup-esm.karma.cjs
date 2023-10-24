@@ -13,6 +13,7 @@ module.exports = function (config) {
       }
     },
     files: [
+      { pattern: 'browser-rollup-esm/test.js', included: true },
       { pattern: 'browser-rollup-esm/build/index.js', included: true },
       { pattern: 'browser-rollup-esm/build/*', served: true, included: false },
       { pattern: 'browser-rollup-esm/build/assets/*', served: true, included: false }
