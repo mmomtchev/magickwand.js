@@ -263,6 +263,7 @@ SWIG Node-API roadmap:
 * Automatic transparent handling of `ArrayBuffer`s in a way that hides any differences between the Node.js native and the browser WASM environment
 * Improved STL containers support avoiding the need for special handling of methods that require `std::vector` support
 * Regexp support for `%feature` avoiding the need to explicitly list all the async classes
+* Provide memory allocation information to the GC
 
 `magickwand.js` roadmap:
 * SIMD support for the WASM version
