@@ -1,6 +1,6 @@
 {
   "name": "magickwand.js",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.1",
   "description": "JavaScript and TypeScript bindings for ImageMagick-7 - native and WASM",
   "main": "./lib/index.cjs",
   "types": "./lib/index.d.ts",
