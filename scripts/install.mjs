@@ -5,12 +5,15 @@ import chalk from 'chalk';
 let native = false;
 let wasm = false;
 
+const cmd = os.platform() === 'win32' ? 'npx.cmd' : 'npx';
+
 if (!process.env.npm_config_build_from_source) {
   console.log(chalk.cyan(`Trying to install prebuilt native binaries for ${os.platform()}-${os.arch()}...`));
   try {
-    cp.execFileSync('npx', ['node-pre-gyp', 'install']);
+    cp.execFileSync(cmd, ['node-pre-gyp', 'install']);
     native = true;
   } catch (e) {
+    console.log(e);
     console.log(chalk.yellow('Failed...'));
     native = false;
   }
@@ -19,7 +22,7 @@ if (!process.env.npm_config_build_from_source) {
 if (!native || process.env.npm_config_build_from_source) {
   console.log(chalk.cyan(`Trying to rebuild from source for ${os.platform()}-${os.arch()}...`));
   try {
-    cp.execFileSync('npx', ['node-pre-gyp', 'install', '--build-from-source']);
+    cp.execFileSync(cmd, ['node-pre-gyp', 'install', '--build-from-source']);
     native = true;
   } catch (e) {
     console.log(chalk.yellow('Failed...'));
@@ -29,7 +32,7 @@ if (!native || process.env.npm_config_build_from_source) {
 
 console.log(chalk.cyan('Trying to install WASM binaries for emscripten-wasm32...'));
 try {
-  cp.execFileSync('npx', ['node-pre-gyp', 'install', '--target_platform=emscripten', '-target_arch=wasm32']);
+  cp.execFileSync(cmd, ['node-pre-gyp', 'install', '--target_platform=emscripten', '-target_arch=wasm32']);
   wasm = true;
 } catch (e) {
   console.log(chalk.yellow('Failed...'));
