@@ -33,7 +33,7 @@
   'targets': [
     {
       # The main binary target - both native or WASM
-      'target_name': 'magickwand.js',
+      'target_name': 'magickwand',
       'include_dirs': [
         '<!@(node -p "require(\'node-addon-api\').include")',
         '<(module_root_dir)'
@@ -178,7 +178,7 @@
           'copies': [
             {
               'files': [
-                '<(PRODUCT_DIR)/magickwand.js.node'
+                '<(PRODUCT_DIR)/magickwand.node'
               ],
               'destination': '<(module_path)'
             }
@@ -203,9 +203,9 @@
           'copies': [
             {
               'files': [
-                '<(PRODUCT_DIR)/magickwand.js.js',
-                '<(PRODUCT_DIR)/magickwand.js.worker.js',
-                '<(PRODUCT_DIR)/magickwand.js.wasm'
+                '<(PRODUCT_DIR)/magickwand.js',
+                '<(PRODUCT_DIR)/magickwand.worker.js',
+                '<(PRODUCT_DIR)/magickwand.wasm'
               ],
               'destination': '<(module_path)'
             }
@@ -217,10 +217,10 @@
           'type': 'none',
           'actions': [{
             'action_name': 'dummy_action_wasm',
-            'inputs': [ '<(PRODUCT_DIR)/magickwand.js.js' ],
+            'inputs': [ '<(PRODUCT_DIR)/magickwand.js' ],
             'outputs': [
-              '<(PRODUCT_DIR)/magickwand.js.wasm',
-              '<(PRODUCT_DIR)/magickwand.js.worker.js'
+              '<(PRODUCT_DIR)/magickwand.wasm',
+              '<(PRODUCT_DIR)/magickwand.worker.js'
             ],
             'action': [ 'true' ]
           }]

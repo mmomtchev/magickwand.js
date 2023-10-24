@@ -62,7 +62,7 @@ jobs:
           run: npx mocha test/integration.test.ts
       - name: Package and publish
         run: |
-          touch lib/binding/emscripten-wasm32/magickwand.js.node
+          touch lib/binding/emscripten-wasm32/magickwand.node
           npx @mapbox/node-pre-gyp package --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
           npx @mmomtchev/node-pre-gyp-github publish
         env:

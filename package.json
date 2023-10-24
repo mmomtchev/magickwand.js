@@ -1,7 +1,7 @@
 {
   "name": "magickwand.js",
   "version": "1.0.0-beta.1",
-  "description": "Node.js bindings for imagemagick",
+  "description": "JavaScript and TypeScript bindings for ImageMagick-7 - native and WASM",
   "main": "./lib/index.cjs",
   "types": "./lib/index.d.ts",
   "exports": {
@@ -15,13 +15,13 @@
       "default": "./wasm/index.js"
     },
     "./wasm/main": {
-      "default": "./lib/binding/emscripten-wasm32/magickwand.js.js"
+      "default": "./lib/binding/emscripten-wasm32/magickwand.js"
     },
     "./wasm/worker": {
-      "default": "./lib/binding/emscripten-wasm32/magickwand.js.worker.js"
+      "default": "./lib/binding/emscripten-wasm32/magickwand.worker.js"
     },
     "./wasm/wasm": {
-      "default": "./lib/binding/emscripten-wasm32/magickwand.js.wasm"
+      "default": "./lib/binding/emscripten-wasm32/magickwand.wasm"
     }
   },
   "scripts": {
@@ -56,7 +56,7 @@
     "wasm"
   ],
   "binary": {
-    "module_name": "magickwand.js",
+    "module_name": "magickwand",
     "module_path": "./lib/binding/{platform}-{arch}",
     "remote_path": "v{version}",
     "host": "https://github.com/mmomtchev/magickwand.js/releases/download/",
