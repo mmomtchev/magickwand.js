@@ -28,7 +28,7 @@ jobs:
       - run: npx @mapbox/node-pre-gyp configure
       - run: npx @mapbox/node-pre-gyp build
       - run: node scripts/gen-es6.js lib/index.mjs
-      - run: npm test
+      - run: npx mocha test/node.test.ts test/integration.test.ts
         env:
           MOCHA_INTEGRATION: node
           MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
@@ -59,7 +59,7 @@ jobs:
           MOCHA_INTEGRATION: browser
           MOCHA_MAGICK_INSTALL: ln -s ${{ github.workspace }} node_modules/magickwand.js
         with:
-          run: npx mocha test/integration.test.ts
+          run: npx mocha test/browser.test.ts test/integration.test.ts
       - name: Package and publish
         run: |
           touch lib/binding/emscripten-wasm32/magickwand.node
