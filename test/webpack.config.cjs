@@ -6,7 +6,8 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        loader: 'ts-loader',
+        options: { configFile: process.env.TS_NODE_PROJECT },
         exclude: /node_modules/,
       }
     ],
