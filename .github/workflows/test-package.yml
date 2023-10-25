@@ -49,6 +49,7 @@ jobs:
           npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths \
             @types/chai @types/chai-as-promised @types/mocha @types/node \
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
+        shell: bash
       - name: Install magickwand.js from npm
         run: |
           npm install --force magickwand.js@${{ github.event.inputs.version }}
@@ -100,6 +101,7 @@ jobs:
           npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths \
             @types/chai @types/chai-as-promised @types/mocha @types/node \
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
+        shell: bash
       - name: Install magickwand.js from npm
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
@@ -147,6 +149,7 @@ jobs:
           npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths \
             @types/chai @types/chai-as-promised @types/mocha @types/node \
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
+        shell: bash
       - name: Install magickwand.js from npm
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
@@ -201,6 +204,7 @@ jobs:
           npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths \
             @types/chai @types/chai-as-promised @types/mocha @types/node \
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
+        shell: bash
       - name: Install magickwand.js from npm
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
