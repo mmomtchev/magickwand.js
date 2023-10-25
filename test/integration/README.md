@@ -2,8 +2,6 @@
 
 These can also be used as configuration examples for the different supported environments.
 
-Most of the browser unit tests are run in `browser-webpack-ts-esm`.
-
 ## Browser
 
 Test runs:
