@@ -40,6 +40,9 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure
+      - name: conan.log
+        run: cat build/conan.log
+        shell: bash
       - name: magick_configure.log
         run: cat build/magick_configure.log
         shell: bash
@@ -120,6 +123,9 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
+      - name: conan.log
+        run: cat build/conan.log
+        shell: bash
       - name: magick_configure.log
         run: cat build/magick_configure.log
         shell: bash
@@ -169,6 +175,9 @@ jobs:
             --jbig=false --cms=false --xml=false --gzip=false --zip=false            \
             --bzip2=false --zstd=false --xz=false --lzma=false --simd=false          \
             --openmp=false --display=false
+      - name: conan.log
+        run: cat build/conan.log
+        shell: bash
       - name: magick_configure.log
         run: cat build/magick_configure.log
         shell: bash
