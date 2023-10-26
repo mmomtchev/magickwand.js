@@ -42,7 +42,7 @@ jobs:
       - run: npx @mapbox/node-pre-gyp configure
       - name: conan.log
         run: cat build/conan.log
-        shell: bash
+        if: runner.os != 'Windows'
       - name: magick_configure.log
         run: cat build/magick_configure.log
         shell: bash
@@ -125,7 +125,6 @@ jobs:
       - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
       - name: conan.log
         run: cat build/conan.log
-        shell: bash
       - name: magick_configure.log
         run: cat build/magick_configure.log
         shell: bash
