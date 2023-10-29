@@ -31,3 +31,5 @@ npm test
 * `node-esm` Node.js, ES6 modules, `"type": "module"`
 * `node-ts-cjs` Node.js, TypeScript transpiled to CJS
 * `node-ts-esm` Node.js, TypeScript transpiled to ES6, `"type": "module"`
+
+Also, if using Node.js 20 + TypeScript + ES6 modules, you should be aware of https://github.com/TypeStrong/ts-node/issues/1997
