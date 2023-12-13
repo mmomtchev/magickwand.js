@@ -67,3 +67,26 @@
   delete $1;
 }
 %typemap(ts)        Magick::VPathList const & "Magick.VPathBase[]";
+
+// Functions that expect a CoordinateList should take a JS array of
+// Magick.Coordinate
+%typemap(in)        Magick::CoordinateList const & {
+  if ($input.IsArray()) {
+    $1 = new Magick::CoordinateList;
+    Napi::Array array = $input.As<Napi::Array>();
+    for (size_t i = 0; i < array.Length(); i++) {
+      Magick::Coordinate *p = nullptr;
+      if (!SWIG_IsOK(SWIG_NAPI_ConvertPtr(array.Get(i), reinterpret_cast<void **>(&p), $descriptor(Magick::Coordinate *), 0)) || p == nullptr) {
+        SWIG_exception_fail(SWIG_TypeError, "in method '$symname', array element is not a Magick::Coordinate");
+      }
+      // Emplace the newly constructed objects in the std::container
+      $1->emplace_back(Magick::Coordinate(*p));
+    }
+  } else {
+    SWIG_exception_fail(SWIG_TypeError, "in method '$symname', argument $argnum is not an array");
+  }
+}
+%typemap(freearg)   Magick::CoordinateList const & {
+  delete $1;
+}
+%typemap(ts)        Magick::CoordinateList const & "Magick.Coordinate[]";
