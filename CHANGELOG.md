@@ -5,7 +5,7 @@
  - **WASM target for true dual environment 3+1 platforms support - native on Linux, macOS and Windows and WASM for browser JavaScript**
  - Now that browser JavaScript is supported, `Magick.Blob` uses an `ArrayBuffer`, to retrieve the underlying `ArrayBuffer` from a `Buffer` use `b.buffer` and to wrap an `ArrayBuffer` in a `Buffer` use `Buffer.from(ab)` - both of these do not actually copy the data and have no performance impact
  - Support building a *light* version by disabling delegate libraries
- - Update ImageMagick to 7.1.1-21
+ - Update ImageMagick to 7.1.1-22
 
 ### [0.9.7] 2023-10-12
 
