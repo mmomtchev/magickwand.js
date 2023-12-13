@@ -18081,7 +18081,7 @@ Napi::Value exports_MagickLibAddendum_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"-21");
+    jsresult = SWIG_FromCharPtr((const char *)"-22");
     
     
     
@@ -18226,7 +18226,7 @@ Napi::Value exports_MagickppLibAddendum_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"-21");
+    jsresult = SWIG_FromCharPtr((const char *)"-22");
     
     
     
@@ -18313,7 +18313,7 @@ Napi::Value exports_MagickGitRevision_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"dcffc2de3:20231021");
+    jsresult = SWIG_FromCharPtr((const char *)"b5350adcb:20231203");
     
     
     
@@ -18342,7 +18342,7 @@ Napi::Value exports_MagickReleaseDate_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"2023-10-21");
+    jsresult = SWIG_FromCharPtr((const char *)"2023-12-03");
     
     
     
@@ -18429,7 +18429,7 @@ Napi::Value exports_MagickHomeURL_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"file:///home/mmom/src/magickwand.js/lib/binding/emscripten-wasm32/ImageMagick/share/doc/ImageMagick-7/index.html");
+    jsresult = SWIG_FromCharPtr((const char *)"file:///home/mmom/src/magickwand.js/lib/binding/linux-x64/ImageMagick/share/doc/ImageMagick-7/index.html");
     
     
     
@@ -18545,7 +18545,7 @@ Napi::Value exports_MagickVersion_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"ImageMagick 7.1.1-21 Q16-HDRI x86_64 dcffc2de3:20231021 https://imagemagick.org");
+    jsresult = SWIG_FromCharPtr((const char *)"ImageMagick 7.1.1-22 Q16-HDRI x86_64 b5350adcb:20231203 https://imagemagick.org");
     
     
     
@@ -22996,7 +22996,7 @@ SWIGINTERN swig_type_info _swigt__p_Magick__ColorHSL = {"_p_Magick__ColorHSL", "
 SWIGINTERN swig_type_info _swigt__p_Magick__ColorMono = {"_p_Magick__ColorMono", "p_Magick__ColorMono|Magick::ColorMono *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_Magick__ColorRGB = {"_p_Magick__ColorRGB", "Magick::ColorRGB *|p_Magick__ColorRGB", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_Magick__ColorYUV = {"_p_Magick__ColorYUV", "Magick::ColorYUV *|p_Magick__ColorYUV", 0, 0, (void*)0, 0};
-SWIGINTERN swig_type_info _swigt__p_Magick__Coordinate = {"_p_Magick__Coordinate", "p_Magick__Coordinate|Magick::Coordinate *", 0, 0, (void*)0, 0};
+SWIGINTERN swig_type_info _swigt__p_Magick__Coordinate = {"_p_Magick__Coordinate", "p_Magick__Coordinate|std::vector< Magick::Coordinate >::value_type *|Magick::Coordinate *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_Magick__Drawable = {"_p_Magick__Drawable", "p_Magick__Drawable|Magick::Drawable *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_Magick__DrawableAffine = {"_p_Magick__DrawableAffine", "Magick::DrawableAffine *|p_Magick__DrawableAffine", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_Magick__DrawableAlpha = {"_p_Magick__DrawableAlpha", "p_Magick__DrawableAlpha|Magick::DrawableAlpha *", 0, 0, (void*)0, 0};
@@ -23275,7 +23275,7 @@ SWIGINTERN swig_type_info _swigt__p_size_t = {"_p_size_t", "size_t *", 0, 0, (vo
 SWIGINTERN swig_type_info _swigt__p_size_type = {"_p_size_type", "size_type *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_std__exception = {"_p_std__exception", "std::exception *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_std__vectorT_Magick__CoderInfo_t = {"_p_std__vectorT_Magick__CoderInfo_t", "p_std__vectorT_Magick__CoderInfo_t|std::vector< Magick::CoderInfo > *", 0, 0, (void*)0, 0};
-SWIGINTERN swig_type_info _swigt__p_std__vectorT_Magick__Coordinate_t = {"_p_std__vectorT_Magick__Coordinate_t", "Magick::CoordinateList *|std::vector< Magick::Coordinate > *", 0, 0, (void*)0, 0};
+SWIGINTERN swig_type_info _swigt__p_std__vectorT_Magick__Coordinate_t = {"_p_std__vectorT_Magick__Coordinate_t", "Magick::CoordinateList *|p_std__vectorT_Magick__Coordinate_t|std::vector< Magick::Coordinate > *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_std__vectorT_Magick__Drawable_t = {"_p_std__vectorT_Magick__Drawable_t", "Magick::DrawableList *|std::vector< Magick::Drawable > *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_std__vectorT_Magick__PathArcArgs_t = {"_p_std__vectorT_Magick__PathArcArgs_t", "Magick::PathArcArgsList *|std::vector< Magick::PathArcArgs > *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_std__vectorT_Magick__PathCurvetoArgs_t = {"_p_std__vectorT_Magick__PathCurvetoArgs_t", "Magick::PathCurveToArgsList *|std::vector< Magick::PathCurvetoArgs > *", 0, 0, (void*)0, 0};

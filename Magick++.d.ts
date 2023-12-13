@@ -7329,6 +7329,31 @@ export  class coderInfoArray {
   set(i: number, val: Magick.CoderInfo): void;
 }
 
+export  class CoordinateList {
+
+  constructor();
+
+  constructor(n: number);
+
+  constructor(other: any);
+
+  size(): number;
+
+  capacity(): number;
+
+  reserve(n: number): void;
+
+  isEmpty(): boolean;
+
+  clear(): void;
+
+  add(x: Magick.Coordinate): void;
+
+  get(i: number): any;
+
+  set(i: number, val: Magick.Coordinate): void;
+}
+
 
 }
 
