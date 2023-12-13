@@ -169,6 +169,7 @@ using namespace Magick;
 // Templates need to be instantiated - you can't instantiate new ones at runtime
 %template(coderInfoArray)               std::vector<Magick::CoderInfo>;
 %template(coderInfoList)                Magick::coderInfoList<std::vector<Magick::CoderInfo>>;
+%template(CoordinateList)               std::vector<Magick::Coordinate>;
 %template(appendImages)                 Magick::appendImages<ImageListIterator>;
 %template(averageImages)                Magick::averageImages<ImageListIterator>;
 %template(flattenImages)                Magick::flattenImages<ImageListIterator>;

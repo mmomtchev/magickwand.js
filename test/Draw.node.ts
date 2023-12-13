@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import { Magick, MagickCore } from 'magickwand.js';
+import { Magick, MagickCore, std } from 'magickwand.js';
 const { Image, Coordinate } = Magick;
 
 describe('Drawable', () => {
@@ -38,6 +38,25 @@ describe('Drawable', () => {
     im.draw(new Magick.DrawableText(20, 20, 'text'));
     const px = im.pixelColor(21, 21);
     assert.strictEqual(px.quantumRed(), 65535);
+  });
+
+  it('polygon', () => {
+    const im = new Image('100x100', 'white');
+
+    im.fillColor('cyan');
+
+    // TODO: This interface is in dire need of "nativization"
+    const list = new std.CoordinateList;
+    list.add(new Magick.Coordinate(5, 5));
+    list.add(new Magick.Coordinate(15, 5));
+    list.add(new Magick.Coordinate(15, 15));
+    list.add(new Magick.Coordinate(5, 15));
+
+    im.draw(new Magick.DrawablePolygon(list));
+    const px = im.pixelColor(10, 10);
+    assert.strictEqual(px.quantumRed(), 0);
+    assert.strictEqual(px.quantumGreen(), 65535);
+    assert.strictEqual(px.quantumBlue(), 65535);
   });
 
   it('SVG-like vector path drawing', () => {
