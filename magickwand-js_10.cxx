@@ -9,124 +9,10 @@
 #include "swig/magickwand-js.h"
 
 
-// js_global_overloaded_function
-Napi::Value _wrap_readImages__SWIG_2(const Napi::CallbackInfo &info) {
-  Napi::Env env = info.Env();
-  Napi::Value jsresult;
-  ImageListContainer *arg1 = (ImageListContainer *) 0 ;
-  Magick::Blob *arg2 = 0 ;
-  Magick::ReadOptions *arg3 = 0 ;
-  ImageListContainer temp_list1 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  
-  // js_locks_list
-  SWIG_Locks_List SWIG_locks;
-  
-#ifdef NAPI_CPP_EXCEPTIONS
-  try {
-#endif
-    
-    // js_guard
-    SWIG_Guard SWIG_guard(SWIG_locks);
-    
-    {
-      arg1 = &temp_list1;
-    }
-    res2 = SWIG_ConvertPtr(info[0], &argp2, SWIGTYPE_p_Magick__Blob,  0 );
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "readImages" "', argument " "2"" of type '" "Magick::Blob const &""'"); 
-    }
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "readImages" "', argument " "2"" of type '" "Magick::Blob const &""'"); 
-    }
-    arg2 = reinterpret_cast< Magick::Blob * >(argp2);res3 = SWIG_ConvertPtr(info[1], &argp3, SWIGTYPE_p_Magick__ReadOptions,  0 );
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "readImages" "', argument " "3"" of type '" "Magick::ReadOptions &""'"); 
-    }
-    if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "readImages" "', argument " "3"" of type '" "Magick::ReadOptions &""'"); 
-    }
-    arg3 = reinterpret_cast< Magick::ReadOptions * >(argp3);
-    {
-      SWIG_NAPI_ObjectWrap_inst *ow = SWIG_NULLPTR;
-      if (info[0].IsObject()) {
-        Napi::Object obj;
-        NAPI_CHECK_RESULT(info[0].ToObject(), obj);
-        if (SWIG_NAPI_IsWrappedObject(env, obj)) {
-          ow = Napi::ObjectWrap<SWIG_NAPI_ObjectWrap_inst>::Unwrap(obj);
-          if (ow != SWIG_NULLPTR && SWIG_locks.count(ow) == 0) {
-            SWIG_locks.insert({
-              reinterpret_cast<void*>(ow), {
-                [ow](){
-                  ow->lock();
-                }, [ow](){
-                  ow->unlock();
-                }
-                }
-            });
-          }
-        }
-      }
-    }
-    
-    
-    // js_lock
-    SWIG_guard.lock();
-    
-    
-    
-    {
-      try {
-        Magick::SWIGTEMPLATEDISAMBIGUATOR readImages< ImageListContainer >(arg1,(Magick::Blob const &)*arg2,*arg3);
-      } catch (const Magick::Exception &e) {
-        do {
-          SWIG_NAPI_Raise(env, e.what()); SWIG_fail; 
-        } while (0);
-        SWIG_fail;
-      }
-    }
-    
-    
-    
-    jsresult = env.Undefined();
-    {
-      if (arg1 != nullptr) {
-        Napi::Array array = Napi::Array::New(env, arg1->size());
-        size_t i = 0;
-        // Iterate over the std::Container using standard C++ semantics
-        for (auto it = arg1->begin(); it != arg1->end(); it++, i++) {
-          Napi::Value element = SWIG_NAPI_NewPointerObj(env, new Magick::Image(*it), SWIGTYPE_p_Magick__Image, SWIG_POINTER_OWN);
-          array.Set(i, element);
-        }
-        jsresult = array;
-      } else {
-        jsresult = env.Null();
-      }
-    }
-    
-    
-    return jsresult;
-#ifdef NAPI_CPP_EXCEPTIONS
-  } catch (...) {
-    std::rethrow_exception(std::current_exception());
-  }
-#else
-  goto fail;
-fail:
-  
-#endif
-  return Napi::Value();
-}
-
-
-
 // js_global_overloaded_function_async
 Napi::Value _wrap_readImagesAsync__SWIG_3(const Napi::CallbackInfo &info) {
   // js_async_worker_local_class
-  class _std_CoordinateList__wrap_readImagesAsync__SWIG_3_Tasklet : public SWIG_NAPI_AsyncContext {
+  class _std_coderInfoArray__wrap_readImagesAsync__SWIG_3_Tasklet : public SWIG_NAPI_AsyncContext {
     Napi::Env env;
     ImageListContainer *arg1 = (ImageListContainer *) 0 ;
     Magick::Blob *arg2 = 0 ;
@@ -138,7 +24,7 @@ Napi::Value _wrap_readImagesAsync__SWIG_3(const Napi::CallbackInfo &info) {
     SWIG_Locks_List SWIG_locks;
     
   public:
-    _std_CoordinateList__wrap_readImagesAsync__SWIG_3_Tasklet(Napi::Env _env)
+    _std_coderInfoArray__wrap_readImagesAsync__SWIG_3_Tasklet(Napi::Env _env)
     :SWIG_NAPI_AsyncContext(_env), env(_env) {
       
     }
@@ -259,12 +145,12 @@ Napi::Value _wrap_readImagesAsync__SWIG_3(const Napi::CallbackInfo &info) {
   };
   
   Napi::Env env = info.Env();
-  _std_CoordinateList__wrap_readImagesAsync__SWIG_3_Tasklet *context = SWIG_NULLPTR;
+  _std_coderInfoArray__wrap_readImagesAsync__SWIG_3_Tasklet *context = SWIG_NULLPTR;
   SWIG_NAPI_AsyncWorker *worker = SWIG_NULLPTR;
   if(static_cast<int>(info.Length()) < 1 || static_cast<int>(info.Length()) > 1) {
     SWIG_Error(SWIG_ERROR, "Illegal number of arguments for _wrap_readImagesAsync__SWIG_3.");
   }
-  context = new _std_CoordinateList__wrap_readImagesAsync__SWIG_3_Tasklet(env);
+  context = new _std_coderInfoArray__wrap_readImagesAsync__SWIG_3_Tasklet(env);
   worker = new SWIG_NAPI_AsyncWorker(
     env, "SWIG__wrap_readImagesAsync__SWIG_3_Async_Worker", context);
   return worker->Run(info);
@@ -706,7 +592,7 @@ fail:
 // js_global_overloaded_function_async
 Napi::Value _wrap_writeImagesAsync__SWIG_0(const Napi::CallbackInfo &info) {
   // js_async_worker_local_class
-  class _std_CoordinateList__wrap_writeImagesAsync__SWIG_0_Tasklet : public SWIG_NAPI_AsyncContext {
+  class _std_coderInfoArray__wrap_writeImagesAsync__SWIG_0_Tasklet : public SWIG_NAPI_AsyncContext {
     Napi::Env env;
     ImageListIterator arg1 ;
     ImageListIterator arg2 ;
@@ -721,7 +607,7 @@ Napi::Value _wrap_writeImagesAsync__SWIG_0(const Napi::CallbackInfo &info) {
     SWIG_Locks_List SWIG_locks;
     
   public:
-    _std_CoordinateList__wrap_writeImagesAsync__SWIG_0_Tasklet(Napi::Env _env)
+    _std_coderInfoArray__wrap_writeImagesAsync__SWIG_0_Tasklet(Napi::Env _env)
     :SWIG_NAPI_AsyncContext(_env), env(_env) {
       
     }
@@ -835,12 +721,12 @@ Napi::Value _wrap_writeImagesAsync__SWIG_0(const Napi::CallbackInfo &info) {
   };
   
   Napi::Env env = info.Env();
-  _std_CoordinateList__wrap_writeImagesAsync__SWIG_0_Tasklet *context = SWIG_NULLPTR;
+  _std_coderInfoArray__wrap_writeImagesAsync__SWIG_0_Tasklet *context = SWIG_NULLPTR;
   SWIG_NAPI_AsyncWorker *worker = SWIG_NULLPTR;
   if(static_cast<int>(info.Length()) < 3 || static_cast<int>(info.Length()) > 3) {
     SWIG_Error(SWIG_ERROR, "Illegal number of arguments for _wrap_writeImagesAsync__SWIG_0.");
   }
-  context = new _std_CoordinateList__wrap_writeImagesAsync__SWIG_0_Tasklet(env);
+  context = new _std_coderInfoArray__wrap_writeImagesAsync__SWIG_0_Tasklet(env);
   worker = new SWIG_NAPI_AsyncWorker(
     env, "SWIG__wrap_writeImagesAsync__SWIG_0_Async_Worker", context);
   return worker->Run(info);
@@ -958,7 +844,7 @@ fail:
 // js_global_overloaded_function_async
 Napi::Value _wrap_writeImagesAsync__SWIG_1(const Napi::CallbackInfo &info) {
   // js_async_worker_local_class
-  class _std_CoordinateList__wrap_writeImagesAsync__SWIG_1_Tasklet : public SWIG_NAPI_AsyncContext {
+  class _std_coderInfoArray__wrap_writeImagesAsync__SWIG_1_Tasklet : public SWIG_NAPI_AsyncContext {
     Napi::Env env;
     ImageListIterator arg1 ;
     ImageListIterator arg2 ;
@@ -970,7 +856,7 @@ Napi::Value _wrap_writeImagesAsync__SWIG_1(const Napi::CallbackInfo &info) {
     SWIG_Locks_List SWIG_locks;
     
   public:
-    _std_CoordinateList__wrap_writeImagesAsync__SWIG_1_Tasklet(Napi::Env _env)
+    _std_coderInfoArray__wrap_writeImagesAsync__SWIG_1_Tasklet(Napi::Env _env)
     :SWIG_NAPI_AsyncContext(_env), env(_env) {
       
     }
@@ -1080,12 +966,12 @@ Napi::Value _wrap_writeImagesAsync__SWIG_1(const Napi::CallbackInfo &info) {
   };
   
   Napi::Env env = info.Env();
-  _std_CoordinateList__wrap_writeImagesAsync__SWIG_1_Tasklet *context = SWIG_NULLPTR;
+  _std_coderInfoArray__wrap_writeImagesAsync__SWIG_1_Tasklet *context = SWIG_NULLPTR;
   SWIG_NAPI_AsyncWorker *worker = SWIG_NULLPTR;
   if(static_cast<int>(info.Length()) < 2 || static_cast<int>(info.Length()) > 2) {
     SWIG_Error(SWIG_ERROR, "Illegal number of arguments for _wrap_writeImagesAsync__SWIG_1.");
   }
-  context = new _std_CoordinateList__wrap_writeImagesAsync__SWIG_1_Tasklet(env);
+  context = new _std_coderInfoArray__wrap_writeImagesAsync__SWIG_1_Tasklet(env);
   worker = new SWIG_NAPI_AsyncWorker(
     env, "SWIG__wrap_writeImagesAsync__SWIG_1_Async_Worker", context);
   return worker->Run(info);
@@ -1196,7 +1082,7 @@ fail:
 // js_global_overloaded_function_async
 Napi::Value _wrap_writeImagesAsync__SWIG_2(const Napi::CallbackInfo &info) {
   // js_async_worker_local_class
-  class _std_CoordinateList__wrap_writeImagesAsync__SWIG_2_Tasklet : public SWIG_NAPI_AsyncContext {
+  class _std_coderInfoArray__wrap_writeImagesAsync__SWIG_2_Tasklet : public SWIG_NAPI_AsyncContext {
     Napi::Env env;
     ImageListIterator arg1 ;
     ImageListIterator arg2 ;
@@ -1212,7 +1098,7 @@ Napi::Value _wrap_writeImagesAsync__SWIG_2(const Napi::CallbackInfo &info) {
     SWIG_Locks_List SWIG_locks;
     
   public:
-    _std_CoordinateList__wrap_writeImagesAsync__SWIG_2_Tasklet(Napi::Env _env)
+    _std_coderInfoArray__wrap_writeImagesAsync__SWIG_2_Tasklet(Napi::Env _env)
     :SWIG_NAPI_AsyncContext(_env), env(_env) {
       
     }
@@ -1336,12 +1222,12 @@ Napi::Value _wrap_writeImagesAsync__SWIG_2(const Napi::CallbackInfo &info) {
   };
   
   Napi::Env env = info.Env();
-  _std_CoordinateList__wrap_writeImagesAsync__SWIG_2_Tasklet *context = SWIG_NULLPTR;
+  _std_coderInfoArray__wrap_writeImagesAsync__SWIG_2_Tasklet *context = SWIG_NULLPTR;
   SWIG_NAPI_AsyncWorker *worker = SWIG_NULLPTR;
   if(static_cast<int>(info.Length()) < 3 || static_cast<int>(info.Length()) > 3) {
     SWIG_Error(SWIG_ERROR, "Illegal number of arguments for _wrap_writeImagesAsync__SWIG_2.");
   }
-  context = new _std_CoordinateList__wrap_writeImagesAsync__SWIG_2_Tasklet(env);
+  context = new _std_coderInfoArray__wrap_writeImagesAsync__SWIG_2_Tasklet(env);
   worker = new SWIG_NAPI_AsyncWorker(
     env, "SWIG__wrap_writeImagesAsync__SWIG_2_Async_Worker", context);
   return worker->Run(info);
@@ -1468,7 +1354,7 @@ fail:
 // js_global_overloaded_function_async
 Napi::Value _wrap_writeImagesAsync__SWIG_3(const Napi::CallbackInfo &info) {
   // js_async_worker_local_class
-  class _std_CoordinateList__wrap_writeImagesAsync__SWIG_3_Tasklet : public SWIG_NAPI_AsyncContext {
+  class _std_coderInfoArray__wrap_writeImagesAsync__SWIG_3_Tasklet : public SWIG_NAPI_AsyncContext {
     Napi::Env env;
     ImageListIterator arg1 ;
     ImageListIterator arg2 ;
@@ -1481,7 +1367,7 @@ Napi::Value _wrap_writeImagesAsync__SWIG_3(const Napi::CallbackInfo &info) {
     SWIG_Locks_List SWIG_locks;
     
   public:
-    _std_CoordinateList__wrap_writeImagesAsync__SWIG_3_Tasklet(Napi::Env _env)
+    _std_coderInfoArray__wrap_writeImagesAsync__SWIG_3_Tasklet(Napi::Env _env)
     :SWIG_NAPI_AsyncContext(_env), env(_env) {
       
     }
@@ -1601,12 +1487,12 @@ Napi::Value _wrap_writeImagesAsync__SWIG_3(const Napi::CallbackInfo &info) {
   };
   
   Napi::Env env = info.Env();
-  _std_CoordinateList__wrap_writeImagesAsync__SWIG_3_Tasklet *context = SWIG_NULLPTR;
+  _std_coderInfoArray__wrap_writeImagesAsync__SWIG_3_Tasklet *context = SWIG_NULLPTR;
   SWIG_NAPI_AsyncWorker *worker = SWIG_NULLPTR;
   if(static_cast<int>(info.Length()) < 2 || static_cast<int>(info.Length()) > 2) {
     SWIG_Error(SWIG_ERROR, "Illegal number of arguments for _wrap_writeImagesAsync__SWIG_3.");
   }
-  context = new _std_CoordinateList__wrap_writeImagesAsync__SWIG_3_Tasklet(env);
+  context = new _std_coderInfoArray__wrap_writeImagesAsync__SWIG_3_Tasklet(env);
   worker = new SWIG_NAPI_AsyncWorker(
     env, "SWIG__wrap_writeImagesAsync__SWIG_3_Async_Worker", context);
   return worker->Run(info);
@@ -4715,16 +4601,6 @@ if (SWIGTYPE_p_std__vectorT_Magick__CoderInfo_t->clientdata == SWIG_NULLPTR) {
 Napi::FunctionReference *_std_coderInfoArray_ctor_ref = new Napi::FunctionReference();
 *_std_coderInfoArray_ctor_ref = Napi::Persistent(_std_coderInfoArray_ctor);
 env.GetInstanceData<EnvInstanceData>()->ctor[237] = _std_coderInfoArray_ctor_ref;
-/* Class: CoordinateList (_std_CoordinateList) */
-// jsnapi_registerclass
-Napi::Function _std_CoordinateList_ctor = _std_CoordinateList_inst::GetClass(env);
-std.Set("CoordinateList", _std_CoordinateList_ctor);
-if (SWIGTYPE_p_std__vectorT_Magick__Coordinate_t->clientdata == SWIG_NULLPTR) {
-  SWIGTYPE_p_std__vectorT_Magick__Coordinate_t->clientdata = new size_t(238);
-}
-Napi::FunctionReference *_std_CoordinateList_ctor_ref = new Napi::FunctionReference();
-*_std_CoordinateList_ctor_ref = Napi::Persistent(_std_CoordinateList_ctor);
-env.GetInstanceData<EnvInstanceData>()->ctor[238] = _std_CoordinateList_ctor_ref;
 
 
   /* enable inheritance */
@@ -8304,21 +8180,6 @@ do {
   NAPI_CHECK_RESULT(SWIG_NAPI_ObjectWrap_ctor.Get("prototype"), protoBase);
   NAPI_CHECK_MAYBE(setProto.Call({
     _std_coderInfoArray_ctor, SWIG_NAPI_ObjectWrap_ctor
-  }));
-  NAPI_CHECK_MAYBE(setProto.Call({
-    protoSub, protoBase
-  }));
-} while (0);
-
-
-// Inheritance for _std_CoordinateList (CoordinateList) <- SWIG_NAPI_ObjectWrap
-// jsnapi_setup_inheritance
-do {
-  Napi::Value protoBase, protoSub;
-  NAPI_CHECK_RESULT(_std_CoordinateList_ctor.Get("prototype"), protoSub);
-  NAPI_CHECK_RESULT(SWIG_NAPI_ObjectWrap_ctor.Get("prototype"), protoBase);
-  NAPI_CHECK_MAYBE(setProto.Call({
-    _std_CoordinateList_ctor, SWIG_NAPI_ObjectWrap_ctor
   }));
   NAPI_CHECK_MAYBE(setProto.Call({
     protoSub, protoBase

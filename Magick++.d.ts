@@ -2157,7 +2157,7 @@ export  class DrawableArc extends Magick.DrawableBase {
 
 export  class DrawableBezier extends Magick.DrawableBase {
 
-  constructor(coordinates_: any);
+  constructor(coordinates_: Magick.Coordinate[]);
 
   constructor(original_: Magick.DrawableBezier);
 
@@ -2541,7 +2541,7 @@ export  class DrawablePointSize extends Magick.DrawableBase {
 
 export  class DrawablePolygon extends Magick.DrawableBase {
 
-  constructor(coordinates_: any);
+  constructor(coordinates_: Magick.Coordinate[]);
 
   constructor(original_: Magick.DrawablePolygon);
 
@@ -2552,7 +2552,7 @@ export  class DrawablePolygon extends Magick.DrawableBase {
 
 export  class DrawablePolyline extends Magick.DrawableBase {
 
-  constructor(coordinates_: any);
+  constructor(coordinates_: Magick.Coordinate[]);
 
   constructor(original_: Magick.DrawablePolyline);
 
@@ -3191,7 +3191,7 @@ export  class PathSmoothCurvetoAbs extends Magick.VPathBase {
 
   constructor(coordinates_: Magick.Coordinate);
 
-  constructor(coordinates_: any);
+  constructor(coordinates_: Magick.Coordinate[]);
 
   constructor(original_: Magick.PathSmoothCurvetoAbs);
 
@@ -3204,7 +3204,7 @@ export  class PathSmoothCurvetoRel extends Magick.VPathBase {
 
   constructor(coordinates_: Magick.Coordinate);
 
-  constructor(coordinates_: any);
+  constructor(coordinates_: Magick.Coordinate[]);
 
   constructor(original_: Magick.PathSmoothCurvetoRel);
 
@@ -3280,7 +3280,7 @@ export  class PathSmoothQuadraticCurvetoAbs extends Magick.VPathBase {
 
   constructor(coordinate_: Magick.Coordinate);
 
-  constructor(coordinates_: any);
+  constructor(coordinates_: Magick.Coordinate[]);
 
   constructor(original_: Magick.PathSmoothQuadraticCurvetoAbs);
 
@@ -3293,7 +3293,7 @@ export  class PathSmoothQuadraticCurvetoRel extends Magick.VPathBase {
 
   constructor(coordinate_: Magick.Coordinate);
 
-  constructor(coordinates_: any);
+  constructor(coordinates_: Magick.Coordinate[]);
 
   constructor(original_: Magick.PathSmoothQuadraticCurvetoRel);
 
@@ -3306,7 +3306,7 @@ export  class PathLinetoAbs extends Magick.VPathBase {
 
   constructor(coordinate_: Magick.Coordinate);
 
-  constructor(coordinates_: any);
+  constructor(coordinates_: Magick.Coordinate[]);
 
   constructor(original_: Magick.PathLinetoAbs);
 
@@ -3319,7 +3319,7 @@ export  class PathLinetoRel extends Magick.VPathBase {
 
   constructor(coordinate_: Magick.Coordinate);
 
-  constructor(coordinates_: any);
+  constructor(coordinates_: Magick.Coordinate[]);
 
   constructor(original_: Magick.PathLinetoRel);
 
@@ -3384,7 +3384,7 @@ export  class PathMovetoAbs extends Magick.VPathBase {
 
   constructor(coordinate_: Magick.Coordinate);
 
-  constructor(coordinates_: any);
+  constructor(coordinates_: Magick.Coordinate[]);
 
   constructor(original_: Magick.PathMovetoAbs);
 
@@ -3397,7 +3397,7 @@ export  class PathMovetoRel extends Magick.VPathBase {
 
   constructor(coordinate_: Magick.Coordinate);
 
-  constructor(coordinates_: any);
+  constructor(coordinates_: Magick.Coordinate[]);
 
   constructor(original_: Magick.PathMovetoRel);
 
@@ -7327,31 +7327,6 @@ export  class coderInfoArray {
   get(i: number): any;
 
   set(i: number, val: Magick.CoderInfo): void;
-}
-
-export  class CoordinateList {
-
-  constructor();
-
-  constructor(n: number);
-
-  constructor(other: any);
-
-  size(): number;
-
-  capacity(): number;
-
-  reserve(n: number): void;
-
-  isEmpty(): boolean;
-
-  clear(): void;
-
-  add(x: Magick.Coordinate): void;
-
-  get(i: number): any;
-
-  set(i: number, val: Magick.Coordinate): void;
 }
 
 
