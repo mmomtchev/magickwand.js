@@ -5,11 +5,14 @@ import chalk from 'chalk';
 let native = false;
 let wasm = false;
 
+const verbose = process.env.npm_config_loglevel === 'verbose';
+const opts = verbose ? { stdio: 'inherit' } : undefined;
+
 const cmd = os.platform() === 'win32' ? 'npx.cmd' : 'npx';
 if (!process.env.npm_config_build_from_source) {
   console.log(chalk.cyan(`Trying to install prebuilt native binaries for ${os.platform()}-${os.arch()}...`));
   try {
-    cp.execFileSync(cmd, ['node-pre-gyp', 'install']);
+    cp.execFileSync(cmd, ['node-pre-gyp', 'install'], opts);
     native = true;
   } catch (e) {
     console.log(e);
@@ -21,9 +24,10 @@ if (!process.env.npm_config_build_from_source) {
 if (!native || process.env.npm_config_build_from_source) {
   console.log(chalk.cyan(`Trying to rebuild from source for ${os.platform()}-${os.arch()}...`));
   try {
-    cp.execFileSync(cmd, ['node-pre-gyp', 'install', '--build-from-source']);
+    cp.execFileSync(cmd, ['node-pre-gyp', 'install', '--build-from-source'], opts);
     native = true;
   } catch (e) {
+    if (verbose) console.log(e);
     console.log(chalk.yellow('Failed...'));
     native = false;
   }
@@ -37,6 +41,7 @@ try {
   );
   wasm = true;
 } catch (e) {
+  if (verbose) console.log(e);
   console.log(chalk.yellow('Failed...'));
   wasm = false;
 }
@@ -46,6 +51,7 @@ if (native) {
   try {
     cp.execSync('node scripts/gen-es6.js lib/index.mjs');
   } catch (e) {
+    if (verbose) console.log(e);
     console.log(chalk.yellow('Failed...'));
   }
 }
