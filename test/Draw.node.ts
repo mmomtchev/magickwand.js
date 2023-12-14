@@ -40,6 +40,22 @@ describe('Drawable', () => {
     assert.strictEqual(px.quantumRed(), 65535);
   });
 
+  it('polygon', () => {
+    const im = new Image('100x100', 'white');
+
+    im.fillColor('cyan');
+    im.draw(new Magick.DrawablePolygon([
+      new Magick.Coordinate(5, 5),
+      new Magick.Coordinate(15, 5),
+      new Magick.Coordinate(15, 15),
+      new Magick.Coordinate(5, 15)
+    ]));
+    const px = im.pixelColor(10, 10);
+    assert.strictEqual(px.quantumRed(), 0);
+    assert.strictEqual(px.quantumGreen(), 65535);
+    assert.strictEqual(px.quantumBlue(), 65535);
+  });
+
   it('SVG-like vector path drawing', () => {
     const im = new Image('100x100', 'white');
 
