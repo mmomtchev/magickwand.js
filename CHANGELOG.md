@@ -1,6 +1,7 @@
 # Changelog
 
-# [1.0.0]
+# [1.0.0] 2023-12-14
+
  - **`node-magickwand` becomes `magickwand.js`**
  - **WASM target for true dual environment 3+1 platforms support - native on Linux, macOS and Windows and WASM for browser JavaScript**
  - Now that browser JavaScript is supported, `Magick.Blob` uses an `ArrayBuffer`, to retrieve the underlying `ArrayBuffer` from a `Buffer` use `b.buffer` and to wrap an `ArrayBuffer` in a `Buffer` use `Buffer.from(ab)` - both of these do not actually copy the data and have no performance impact
