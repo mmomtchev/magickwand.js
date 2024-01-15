@@ -35,7 +35,7 @@
           ' -osimd=<!(node <(module_root_dir)/scripts/true-false.js <(simd))'
           ' -oopenmp=<!(node <(module_root_dir)/scripts/true-false.js <(openmp))'
           ' -odisplay=<!(node <(module_root_dir)/scripts/true-false.js <(display))'
-          ' > conan.log 2>&1 )'
+          ' 1>&2 )'
       }
     }],
     ['target_platform != "emscripten"', {
@@ -69,7 +69,7 @@
           ' -osimd=<!(node <(module_root_dir)/scripts/true-false.js <(simd))'
           ' -oopenmp=<!(node <(module_root_dir)/scripts/true-false.js <(openmp))'
           ' -odisplay=<!(node <(module_root_dir)/scripts/true-false.js <(display))'
-          ' > conan.log 2>&1 )'
+          ' 1>&2 )'
       }
     }]
   ]
