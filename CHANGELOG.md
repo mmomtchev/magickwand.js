@@ -1,5 +1,10 @@
 # Changelog
 
+### [1.0.1] 2024-01-18
+
+ - Update ImageMagick to 7.1.1-26
+ - Regenerate the wrappers with the published version of SWIG JSE
+
 # [1.0.0] 2023-12-14
 
  - **`node-magickwand` becomes `magickwand.js`**

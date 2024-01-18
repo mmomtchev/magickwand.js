@@ -120,9 +120,8 @@ On Linux and macOS it uses `pip3` to install the `conan` module which builds a n
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
-* In order to regenerate the C++ wrapping code, you will need the still unreleased SWIG 4.2.0 with Node-API, asynchronous execution, TypeScript, WASM and code splitting - available exclusively from https://github.com/mmomtchev/swig/tree/mmom - as of 2023-09-14, the basic Node-API has been merged to the main SWIG trunk, the async support is in review, everything else is still in development
-  * Building with the old SWIG Node/V8 interface is not possible - the typemaps are not compatible
-  * Alternatively, if you don't want to build a development version of SWIG yourself, you can clone the `generated` branch where all files have been pre-generated - `npm run deps:download` does this automatically after `npm install`
+* In order to regenerate the C++ wrapping code, you will need SWIG JavaScript Evolution 5.0.0 - available from https://github.com/mmomtchev/swig.git (as of 2024-01-18, the basic Node-API has been merged to the main SWIG trunk, the async support is in review, everything else is available only in SWIG JSE)
+* Alternatively, if you don't want to rebuild SWIG JSE yourself, you can clone the `generated` branch where all files have been pre-generated - `npm run deps:download` does this automatically after `npm install`
 
 * Recursively clone the repo
 ```shell
