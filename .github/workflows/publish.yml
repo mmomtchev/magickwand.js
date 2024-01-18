@@ -30,7 +30,6 @@ jobs:
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure
       - run: npx @mapbox/node-pre-gyp build
-      - run: node scripts/gen-es6.js lib/index.mjs
       - run: npx mocha test/node.test.ts test/integration.test.ts
         env:
           MOCHA_INTEGRATION: node

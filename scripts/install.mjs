@@ -46,16 +46,6 @@ try {
   wasm = false;
 }
 
-if (native) {
-  console.log(chalk.cyan('Generating Node.js ES6 imports'));
-  try {
-    cp.execSync('node scripts/gen-es6.js lib/index.mjs');
-  } catch (e) {
-    if (verbose) console.log(e);
-    console.log(chalk.yellow('Failed...'));
-  }
-}
-
 if (native)
   console.log(chalk.greenBright('Native module is available'));
 else
