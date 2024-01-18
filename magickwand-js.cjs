@@ -13,7 +13,7 @@
  *
  * ---------------------------------------------------------------------------*/
 
-var dll = require('../lib/node-pre-gyp.cjs');
+var dll = require(require('path').resolve(__dirname, '..', 'lib', 'index.cjs'));
 var {
   MagickLibVersion,
   MagickLibAddendum,
