@@ -83,16 +83,18 @@ export default function (
       describe('TypedArray ' + typed.name, () => {
         it('read', () => {
           const im = new Image();
-          const pixels = new typed(15 * 20 * 4);
+          // Test with a subarray offset 1024 from the underlying ArrayBuffer
+          // to ensure offsets are handled correctly
+          const pixels = new typed(15 * 20 * 4 + 1024);
 
           if (pixels instanceof BigUint64Array)
-            pixels.fill(2n ** (8n * BigInt(typed.BYTES_PER_ELEMENT)) - 1n);
+            pixels.subarray(1024).fill(2n ** (8n * BigInt(typed.BYTES_PER_ELEMENT)) - 1n);
           else if (pixels instanceof Float32Array || pixels instanceof Float64Array)
-            pixels.fill(1);
+            pixels.subarray(1024).fill(1);
           else
-            pixels.fill(2 ** (8 * typed.BYTES_PER_ELEMENT) - 1);
+            pixels.subarray(1024).fill(2 ** (8 * typed.BYTES_PER_ELEMENT) - 1);
 
-          im.read(15, 20, 'RGBA', pixels);
+          im.read(15, 20, 'RGBA', pixels.subarray(1024));
 
           const px = im.pixelColor(5, 5);
           assert.strictEqual(px.pixelType(), Color.RGBAPixel);
@@ -104,7 +106,7 @@ export default function (
           assert.strictEqual(px.quantumGreen(), 65535);
 
           assert.throws(() => {
-            im.read(20, 20, 'RGBA', pixels);
+            im.read(20, 20, 'RGBA', pixels.subarray(1024));
           }, /does not match the number of pixels/);
         });
 
