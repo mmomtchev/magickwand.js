@@ -2,5 +2,4 @@ Attic
 node_modules
 build
 lib/binding
-lib/index.mjs
 swig
