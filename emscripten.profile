@@ -15,5 +15,6 @@ tools.build:sharedlinkflags=['-pthread', '-sDEFAULT_PTHREAD_STACK_SIZE=2MB', '-s
 
 [tool_requires]
 emsdk/3.1.44
+meson/1.3.1
 
 [env]
