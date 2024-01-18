@@ -1,7 +1,7 @@
 %module magickwand
 
-#if SWIG_VERSION < 0x040200
-#error magickwand.js requires SWIG 4.2.0
+#ifndef SWIG_JAVASCRIPT_EVOLUTION
+#error magickwand.js requires SWIG JavaScript Evolution
 #endif
 
 #define MAGICKCORE_EXCLUDE_DEPRECATED
@@ -134,7 +134,7 @@ using namespace Magick;
 %apply SWIGTYPE  LOCK {TYPE};
 %apply SWIGTYPE *LOCK {TYPE *};
 %apply SWIGTYPE &LOCK {TYPE &};
-%feature("async", "Async") TYPE;
+%feature("async", "Async") TYPE::$any;
 %enddef
 %include "AsyncClasses.i"
 // And some global functions

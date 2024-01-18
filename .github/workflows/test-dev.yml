@@ -47,8 +47,6 @@ jobs:
         run: cat build/magick_configure.log
         shell: bash
       - run: npx @mapbox/node-pre-gyp build
-      - name: Generate ES6 bindings
-        run: node scripts/gen-es6.js lib/index.mjs
       - run: npx mocha test/node.test.ts test/integration.test.ts
         env:
           MOCHA_INTEGRATION: node
@@ -96,8 +94,6 @@ jobs:
         run: cat build/magick_configure.log
         shell: bash
       - run: npx @mapbox/node-pre-gyp build
-      - name: Generate ES6 bindings
-        run: node scripts/gen-es6.js lib/index.mjs
 
   wasm:
     runs-on: ubuntu-latest
@@ -215,11 +211,6 @@ jobs:
         run: cat build/magick_configure.log
         shell: bash
       - run: npx @mapbox/node-pre-gyp build
-      - name: Generate ES6 bindings
-        run: node scripts/gen-es6.js lib/index.mjs
-        env:
-          LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6
-          LSAN_OPTIONS: suppressions=${{ github.workspace }}/test/napi-leaks-suppression.txt
       - run: node node_modules/mocha/bin/mocha.js -i -g Security --repeats 1000 test/node.test.ts
         env:
           LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6
