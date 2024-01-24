@@ -21,7 +21,17 @@
       std::string *$1;
       $typemap(in, const std::string &);
       // Construct the object from this string
-      from_string_temp = $*ltype(*$1);
+      try {
+        // SWIG will automatically insert an exception handler in actions
+        // but this does not apply to typemaps - here we call ImageMagick code
+        // which can throw
+        from_string_temp = $*ltype(*$1);
+      } catch (const Magick::Exception &e) {
+        // SWIG_Raise is the language-independent macro which expands to
+        // the language-specific function call, it is available only in .i files
+        SWIG_NAPI_Raise(env, e.what());
+        SWIG_fail;
+      }
       // The string is not needed anymore
       delete $1;
     }
