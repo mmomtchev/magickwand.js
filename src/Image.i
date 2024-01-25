@@ -57,6 +57,18 @@ emnapi_sync_memory(env, false, &ab_value, 0, NAPI_AUTO_LENGTH);
 
 %typemap(ts) (const Magick::StorageType type_, void *pixels_) PixelTypedArray;
 
+// font TypeMetric is returned in a pointer
+%typemap(in, numinputs=0) Magick::TypeMetric *metrics %{
+  $1 = new Magick::TypeMetric;
+%}
+%typemap(argout) Magick::TypeMetric *metrics %{
+  $result = SWIG_NAPI_NewPointerObj(env, $1, $1_descriptor, SWIG_POINTER_OWN);
+  $1 = nullptr;
+%}
+%typemap(freearg) Magick::TypeMetric *metrics %{
+  delete $1;
+%}
+
 // These methods will be built without async version
 // (they are considered latency-free)
 // This is to reduce the RAM requirements when building
