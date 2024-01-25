@@ -63,9 +63,11 @@ emnapi_sync_memory(env, false, &ab_value, 0, NAPI_AUTO_LENGTH);
 %}
 %typemap(argout) Magick::TypeMetric *metrics %{
   $result = SWIG_NAPI_NewPointerObj(env, $1, $1_descriptor, SWIG_POINTER_OWN);
+  // If we return the object, prevent the next typemap from freeing it
   $1 = nullptr;
 %}
 %typemap(freearg) Magick::TypeMetric *metrics %{
+  // This applies only to the exception path
   delete $1;
 %}
 
