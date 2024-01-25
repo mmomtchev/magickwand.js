@@ -18020,7 +18020,7 @@ Napi::Value exports_MagickLibAddendum_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"-26");
+    jsresult = SWIG_FromCharPtr((const char *)"-28 (Beta)");
     
     
     
@@ -18165,7 +18165,7 @@ Napi::Value exports_MagickppLibAddendum_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"-26");
+    jsresult = SWIG_FromCharPtr((const char *)"-28 (Beta)");
     
     
     
@@ -18252,7 +18252,7 @@ Napi::Value exports_MagickGitRevision_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"a12f6d128:20240107");
+    jsresult = SWIG_FromCharPtr((const char *)"0225ac41a:20240121");
     
     
     
@@ -18281,7 +18281,7 @@ Napi::Value exports_MagickReleaseDate_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"2024-01-07");
+    jsresult = SWIG_FromCharPtr((const char *)"2024-01-21");
     
     
     
@@ -18484,7 +18484,7 @@ Napi::Value exports_MagickVersion_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"ImageMagick 7.1.1-26 Q16-HDRI x86_64 a12f6d128:20240107 https://imagemagick.org");
+    jsresult = SWIG_FromCharPtr((const char *)"ImageMagick 7.1.1-28 (Beta) Q16-HDRI x86_64 0225ac41a:20240121 https://imagemagick.org");
     
     
     

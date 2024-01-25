@@ -4919,6 +4919,10 @@ export  class Image {
 
   gaussianBlurChannelAsync(channel_: MagickCore.ChannelType, radius_: number, sigma_: number): Promise<void>;
 
+  getConstPixels(x_: number, y_: number, columns_: number, rows_: number): any;
+
+  getConstPixelsAsync(x_: number, y_: number, columns_: number, rows_: number): Promise<any>;
+
   getConstMetacontent(): any;
 
   getConstMetacontentAsync(): Promise<any>;
@@ -4926,6 +4930,10 @@ export  class Image {
   getMetacontent(): any;
 
   getMetacontentAsync(): Promise<any>;
+
+  getPixels(x_: number, y_: number, columns_: number, rows_: number): any;
+
+  getPixelsAsync(x_: number, y_: number, columns_: number, rows_: number): Promise<any>;
 
   grayscale(method_: any): void;
 
@@ -5287,6 +5295,10 @@ export  class Image {
 
   readMaskAsync(): Promise<Magick.Image>;
 
+  readPixels(quantum_: MagickCore.QuantumType, source_: any): void;
+
+  readPixelsAsync(quantum_: MagickCore.QuantumType, source_: any): Promise<void>;
+
   reduceNoise(): void;
 
   reduceNoiseAsync(): Promise<void>;
@@ -5366,6 +5378,10 @@ export  class Image {
   setColorMetric(reference_: Magick.Image): boolean;
 
   setColorMetricAsync(reference_: Magick.Image): Promise<boolean>;
+
+  setPixels(x_: number, y_: number, columns_: number, rows_: number): any;
+
+  setPixelsAsync(x_: number, y_: number, columns_: number, rows_: number): Promise<any>;
 
   shade(azimuth_: number, elevation_: number, colorShading_: boolean): void;
 
@@ -5666,6 +5682,10 @@ export  class Image {
   writeMask(): Magick.Image;
 
   writeMaskAsync(): Promise<Magick.Image>;
+
+  writePixels(quantum_: MagickCore.QuantumType, destination_: any): void;
+
+  writePixelsAsync(quantum_: MagickCore.QuantumType, destination_: any): Promise<void>;
 
   zoom(geometry_: Magick.Geometry | string): void;
 
