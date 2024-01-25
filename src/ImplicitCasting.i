@@ -18,7 +18,7 @@
     {
       // We apply the default std::string typemap - it parses
       // its argument in a local temporary $1
-      std::string *$1;
+      std::string *$1 = nullptr;
       $typemap(in, const std::string &);
       // Construct the object from this string
       try {
@@ -27,6 +27,7 @@
         // which can throw
         from_string_temp = $*ltype(*$1);
       } catch (const Magick::Exception &e) {
+        delete $1;
         // SWIG_Raise is the language-independent macro which expands to
         // the language-specific function call, it is available only in .i files
         SWIG_NAPI_Raise(env, e.what());
