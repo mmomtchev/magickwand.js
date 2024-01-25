@@ -4867,13 +4867,13 @@ export  class Image {
 
   flopAsync(): Promise<void>;
 
-  fontTypeMetrics(text_: string): void;
+  fontTypeMetrics(text_: string, metrics: Magick.TypeMetric): void;
 
-  fontTypeMetricsAsync(text_: string): Promise<void>;
+  fontTypeMetricsAsync(text_: string, metrics: Magick.TypeMetric): Promise<void>;
 
-  fontTypeMetricsMultiline(text_: string): void;
+  fontTypeMetricsMultiline(text_: string, metrics: Magick.TypeMetric): void;
 
-  fontTypeMetricsMultilineAsync(text_: string): Promise<void>;
+  fontTypeMetricsMultilineAsync(text_: string, metrics: Magick.TypeMetric): Promise<void>;
 
   frame(geometry_: Magick.Geometry | string): void;
 
