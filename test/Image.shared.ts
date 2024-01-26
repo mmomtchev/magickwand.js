@@ -45,6 +45,12 @@ export default function (
         // @ts-ignore
         assert.throws(() => new Image(null), /Illegal arguments for construction/);
       });
+
+      it('handling invalid color', () => {
+        assert.throws(() => {
+          new Image('100x100', 'invalid');
+        }, /unrecognized color `invalid'/);
+      });
     });
 
     describe('pixelColor', () => {

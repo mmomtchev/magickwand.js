@@ -1,5 +1,10 @@
 # Changelog
 
+### [1.0.2]
+
+ - Upgrade ImageMagick to the latest 7.1.1-27 (git)
+ - Fix [#72](https://github.com/mmomtchev/magickwand.js/issues/72), exception in constructors used for implicit casting are not catchable
+
 ### [1.0.1] 2024-01-18
 
  - Update ImageMagick to 7.1.1-26

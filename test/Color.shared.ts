@@ -76,6 +76,12 @@ export default function (
           .map((v) => Math.floor(v * 255).toString(16).padStart(2, '0')).join(''),
           '#ff7f0160');
       });
+
+      it('handling invalid color', () => {
+        assert.throws(() => {
+          new Color('invalid');
+        }, /unrecognized color `invalid'/);
+      });
     });
   });
 }
