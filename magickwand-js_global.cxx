@@ -13043,7 +13043,7 @@ SWIGINTERN swig_type_info _swigt__p__PolicyInfo = {"_p__PolicyInfo", "MagickCore
 SWIGINTERN swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_double = {"_p_double", "MagickCore::MagickDoubleType *|MagickCore::MagickRealType *|double *", 0, 0, (void*)0, 0};
-SWIGINTERN swig_type_info _swigt__p_float = {"_p_float", "Magick::Quantum *|MagickCore::MagickFloatType *|float *", 0, 0, (void*)0, 0};
+SWIGINTERN swig_type_info _swigt__p_float = {"_p_float", "MagickCore::MagickFloatType *|float *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_long_long = {"_p_long_long", "MagickCore::MagickOffsetType *|long long *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_p_MagickCore___Image = {"_p_p_MagickCore___Image", "MagickCore::Image **|MagickCore::_Image **", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_p_char = {"_p_p_char", "char **", 0, 0, (void*)0, 0};
@@ -13059,7 +13059,6 @@ SWIGINTERN swig_type_info _swigt__p_std__vectorT_Magick__PathCurvetoArgs_t = {"_
 SWIGINTERN swig_type_info _swigt__p_std__vectorT_Magick__PathQuadraticCurvetoArgs_t = {"_p_std__vectorT_Magick__PathQuadraticCurvetoArgs_t", "Magick::PathQuadraticCurvetoArgsList *|std::vector< Magick::PathQuadraticCurvetoArgs > *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_std__vectorT_Magick__VPath_t = {"_p_std__vectorT_Magick__VPath_t", "Magick::VPathList *|std::vector< Magick::VPath > *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_uintptr_t = {"_p_uintptr_t", "MagickCore::MagickAddressType *|uintptr_t *", 0, 0, (void*)0, 0};
-SWIGINTERN swig_type_info _swigt__p_unsigned_char = {"_p_unsigned_char", "unsigned char *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_unsigned_int = {"_p_unsigned_int", "MagickCore::MagickStatusType *|unsigned int *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_unsigned_long_long = {"_p_unsigned_long_long", "MagickCore::MagickSizeType *|unsigned long long *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
@@ -13429,7 +13428,6 @@ SWIGINTERN swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__vectorT_Magick__PathQuadraticCurvetoArgs_t,
   &_swigt__p_std__vectorT_Magick__VPath_t,
   &_swigt__p_uintptr_t,
-  &_swigt__p_unsigned_char,
   &_swigt__p_unsigned_int,
   &_swigt__p_unsigned_long_long,
   &_swigt__p_value_type,
@@ -13796,7 +13794,6 @@ SWIGINTERN swig_cast_info _swigc__p_std__vectorT_Magick__PathCurvetoArgs_t[] = {
 SWIGINTERN swig_cast_info _swigc__p_std__vectorT_Magick__PathQuadraticCurvetoArgs_t[] = {  {&_swigt__p_std__vectorT_Magick__PathQuadraticCurvetoArgs_t, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_std__vectorT_Magick__VPath_t[] = {  {&_swigt__p_std__vectorT_Magick__VPath_t, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_uintptr_t[] = {  {&_swigt__p_uintptr_t, 0, 0, 0},{0, 0, 0, 0}};
-SWIGINTERN swig_cast_info _swigc__p_unsigned_char[] = {  {&_swigt__p_unsigned_char, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_unsigned_int[] = {  {&_swigt__p_unsigned_int, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_unsigned_long_long[] = {  {&_swigt__p_unsigned_long_long, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -14163,7 +14160,6 @@ SWIGINTERN swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__vectorT_Magick__PathQuadraticCurvetoArgs_t,
   _swigc__p_std__vectorT_Magick__VPath_t,
   _swigc__p_uintptr_t,
-  _swigc__p_unsigned_char,
   _swigc__p_unsigned_int,
   _swigc__p_unsigned_long_long,
   _swigc__p_value_type,
@@ -14173,6 +14169,6 @@ SWIGINTERN swig_cast_info *swig_cast_initial[] = {
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (END) -------- */
 
-SWIGINTERN swig_type_info *swig_types[366];
-SWIGINTERN swig_module_info swig_module = {swig_types, 365, 0, 0, 0, 0};
+SWIGINTERN swig_type_info *swig_types[365];
+SWIGINTERN swig_module_info swig_module = {swig_types, 364, 0, 0, 0, 0};
 
