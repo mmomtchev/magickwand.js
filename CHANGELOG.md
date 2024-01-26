@@ -3,6 +3,7 @@
 ### [1.0.2]
 
  - Upgrade ImageMagick to the latest 7.1.1-27 (git)
+ - Fix [#73](https://github.com/mmomtchev/magickwand.js/issues/73), render `Image.fontTypeMetrics` usable from JS
  - Fix [#72](https://github.com/mmomtchev/magickwand.js/issues/72), exception in constructors used for implicit casting are not catchable
  - Fix [#71](https://github.com/mmomtchev/magickwand.js/issues/71), do not generate wrappers for the unusable from JS `Image.{get|set|read|write}Pixels`
 
