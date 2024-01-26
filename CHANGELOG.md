@@ -1,6 +1,6 @@
 # Changelog
 
-### [1.0.2]
+### [1.0.2] 2024-01-26
 
  - Upgrade ImageMagick to the latest 7.1.1-27 (git)
  - Fix [#73](https://github.com/mmomtchev/magickwand.js/issues/73), render `Image.fontTypeMetrics` usable from JS
