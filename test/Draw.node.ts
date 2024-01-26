@@ -40,6 +40,20 @@ describe('Drawable', () => {
     assert.strictEqual(px.quantumRed(), 65535);
   });
 
+  it('font metrics', () => {
+    const im = new Image('100x100', 'white');
+
+    im.fontFamily('sans-serif');
+    im.fontStyle(MagickCore.ItalicStyle);
+    im.fontWeight(400);
+    const metrics = im.fontTypeMetrics('Some text');
+
+    assert.isNumber(metrics.textWidth());
+    assert.isNumber(metrics.textHeight());
+    assert.isAbove(metrics.textWidth(), 10);
+    assert.isAbove(metrics.textHeight(), 5);
+  });
+
   it('polygon', () => {
     const im = new Image('100x100', 'white');
 
