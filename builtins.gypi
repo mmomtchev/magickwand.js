@@ -43,7 +43,7 @@
         'conaninfo':
           '<!(pip3 install --user "conan<2.0.0"'
           ' && cd ../build'
-          ' && python3 -m conans.conan install .. -pr:b=default -pr:h=default -of build --build=missing --build=openjpeg'
+          ' && python3 -m conans.conan install .. -pr:b=../posix.profile -pr:h=../posix.profile -of build --build=missing --build=openjpeg'
           ' -ofonts=<!(node <(module_root_dir)/scripts/true-false.js <(fonts))'
           ' -ojpeg=<!(node <(module_root_dir)/scripts/true-false.js <(jpeg))'
           ' -opng=<!(node <(module_root_dir)/scripts/true-false.js <(png))'
