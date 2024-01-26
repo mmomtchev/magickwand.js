@@ -117,6 +117,11 @@ using namespace Magick;
 // is already covered
 %ignore Magick::Pixels;
 %ignore Magick::PixelData;
+%ignore Magick::Image::setPixels;
+%ignore Magick::Image::getPixels;
+%ignore Magick::Image::getConstPixels;
+%ignore Magick::Image::readPixels;
+%ignore Magick::Image::writePixels;
 
 // Get all the basic types from MagickCore::*
 // Everything else is optional
