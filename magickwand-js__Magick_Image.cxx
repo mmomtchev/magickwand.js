@@ -2771,6 +2771,22 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
+  members.erase("getConstPixelsAsync");
+  members.insert({
+    "getConstPixelsAsync",
+      _Magick_Image_templ::InstanceMethod("getConstPixelsAsync",
+        &_Magick_Image_templ::_wrap_Magick_Image_getConstPixelsAsync,
+        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
+    });
+  // jsnapi_register_member_function
+  members.erase("getConstPixels");
+  members.insert({
+    "getConstPixels",
+      _Magick_Image_templ::InstanceMethod("getConstPixels",
+        &_Magick_Image_templ::_wrap_Magick_Image_getConstPixels,
+        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
+    });
+  // jsnapi_register_member_function
   members.erase("getConstMetacontentAsync");
   members.insert({
     "getConstMetacontentAsync",
@@ -2800,6 +2816,22 @@ void _Magick_Image_inst::GetMembers(
     "getMetacontent",
       _Magick_Image_templ::InstanceMethod("getMetacontent",
         &_Magick_Image_templ::_wrap_Magick_Image_getMetacontent,
+        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
+    });
+  // jsnapi_register_member_function
+  members.erase("getPixelsAsync");
+  members.insert({
+    "getPixelsAsync",
+      _Magick_Image_templ::InstanceMethod("getPixelsAsync",
+        &_Magick_Image_templ::_wrap_Magick_Image_getPixelsAsync,
+        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
+    });
+  // jsnapi_register_member_function
+  members.erase("getPixels");
+  members.insert({
+    "getPixels",
+      _Magick_Image_templ::InstanceMethod("getPixels",
+        &_Magick_Image_templ::_wrap_Magick_Image_getPixels,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -3619,6 +3651,22 @@ void _Magick_Image_inst::GetMembers(
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
+  members.erase("readPixelsAsync");
+  members.insert({
+    "readPixelsAsync",
+      _Magick_Image_templ::InstanceMethod("readPixelsAsync",
+        &_Magick_Image_templ::_wrap_Magick_Image_readPixelsAsync,
+        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
+    });
+  // jsnapi_register_member_function
+  members.erase("readPixels");
+  members.insert({
+    "readPixels",
+      _Magick_Image_templ::InstanceMethod("readPixels",
+        &_Magick_Image_templ::_wrap_Magick_Image_readPixels,
+        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
+    });
+  // jsnapi_register_member_function
   members.erase("reduceNoiseAsync");
   members.insert({
     "reduceNoiseAsync",
@@ -3872,6 +3920,22 @@ void _Magick_Image_inst::GetMembers(
     "setColorMetric",
       _Magick_Image_templ::InstanceMethod("setColorMetric",
         &_Magick_Image_templ::_wrap_Magick_Image_setColorMetric,
+        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
+    });
+  // jsnapi_register_member_function
+  members.erase("setPixelsAsync");
+  members.insert({
+    "setPixelsAsync",
+      _Magick_Image_templ::InstanceMethod("setPixelsAsync",
+        &_Magick_Image_templ::_wrap_Magick_Image_setPixelsAsync,
+        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
+    });
+  // jsnapi_register_member_function
+  members.erase("setPixels");
+  members.insert({
+    "setPixels",
+      _Magick_Image_templ::InstanceMethod("setPixels",
+        &_Magick_Image_templ::_wrap_Magick_Image_setPixels,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
@@ -4544,6 +4608,22 @@ void _Magick_Image_inst::GetMembers(
     "writeMask",
       _Magick_Image_templ::InstanceMethod("writeMask",
         &_Magick_Image_templ::_wrap_Image__wrap_Magick_Image_writeMask,
+        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
+    });
+  // jsnapi_register_member_function
+  members.erase("writePixelsAsync");
+  members.insert({
+    "writePixelsAsync",
+      _Magick_Image_templ::InstanceMethod("writePixelsAsync",
+        &_Magick_Image_templ::_wrap_Magick_Image_writePixelsAsync,
+        static_cast<napi_property_attributes>(napi_writable | napi_configurable))
+    });
+  // jsnapi_register_member_function
+  members.erase("writePixels");
+  members.insert({
+    "writePixels",
+      _Magick_Image_templ::InstanceMethod("writePixels",
+        &_Magick_Image_templ::_wrap_Magick_Image_writePixels,
         static_cast<napi_property_attributes>(napi_writable | napi_configurable))
     });
   // jsnapi_register_member_function
