@@ -108,7 +108,7 @@ jobs:
       - name: Install magickwand.js from npm
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
-          npm install --verbose --foreground-scripts=true \
+          npm install --verbose --foreground-scripts=True \
             magickwand.js@${{ github.event.inputs.version }} --build-from-source
           mkdir -p deps/ImageMagick/config
           cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
@@ -213,7 +213,7 @@ jobs:
       - name: Install magickwand.js from npm
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
-          npm install --verbose --foreground-scripts=true      \
+          npm install --verbose --foreground-scripts=True      \
             magickwand.js@${{ github.event.inputs.version }}   \
             --build-from-source --shared_imagemagick           \
             --magicklibs="-lMagick++-7.Q16HDRI -lMagickWand-7.Q16HDRI -lMagickCore-7.Q16HDRI"

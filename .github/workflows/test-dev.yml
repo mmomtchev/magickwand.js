@@ -89,13 +89,13 @@ jobs:
       - run: npm run deps:download
       - name: Configure light version
         run: |
-          npx @mapbox/node-pre-gyp configure                                        \
-            --fonts=false --jpeg=true --png=false --tiff=false                      \
-            --webp=false --jpeg2000=false --raw=false --openmedia=false             \
-            --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
-            --jbig=true --cms=false --xml=false --gzip=false --zip=false            \
-            --bzip2=true --zstd=false --xz=false --lzma=false --simd=false          \
-            --openmp=true --display=false
+          npm run configure:native                                                  \
+            -ofonts=False -ojpeg=True -opng=False -otiff=False                      \
+            -owebp=False -ojpeg2000=False -oraw=False -oopenmedia=False             \
+            -obrotli=False -oh265=False -oexr=False -offtw=False -oheif=False       \
+            -ojbig=True -ocms=False -oxml=False -ogzip=False -ozip=False            \
+            -obzip2=True -ozstd=False -oxz=False -olzma=False -osimd=False          \
+            -oopenmp=True -odisplay=False
       - name: magick_configure.log
         run: cat build/magick_configure.log
         shell: bash
@@ -168,12 +168,12 @@ jobs:
         run: |
           npx @mapbox/node-pre-gyp configure                                         \
             --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten \
-            --fonts=false --jpeg=false --png=false --tiff=false                      \
-            --webp=false --jpeg2000=false --raw=false --openmedia=false              \
-            --brotli=false --h265=false --exr=false --fftw=false --heif=false        \
-            --jbig=false --cms=false --xml=false --gzip=false --zip=false            \
-            --bzip2=false --zstd=false --xz=false --lzma=false --simd=false          \
-            --openmp=false --display=false
+            -ofonts=False -ojpeg=False -opng=False -otiff=False                      \
+            -owebp=False -ojpeg2000=False -oraw=False -oopenmedia=False              \
+            -obrotli=False -oh265=False -oexr=False -offtw=False -oheif=False        \
+            -ojbig=False -ocms=False -oxml=False -ogzip=False -ozip=False            \
+            -obzip2=False -ozstd=False -oxz=False -olzma=False -osimd=False          \
+            -oopenmp=False -odisplay=False
       - name: magick_configure.log
         run: cat build/magick_configure.log
         shell: bash

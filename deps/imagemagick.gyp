@@ -12,7 +12,7 @@
     ['target_platform == "emscripten"', {
       # wasm enables the cross-compilation
       'includes': [
-        '../wasm.gypi'
+        '../build/conan_compiler.gypi'
       ]
     }],
     # TODO: Implement no-HDRI build on Windows
@@ -45,11 +45,8 @@
     },
     'conditions': [
       # On WASM conan is already installed by the main gyp
-      ['target_platform != "emscripten" and (OS == "linux" or OS =="mac")', {
-        # builtins pulls conan
-        'includes': [
-          '../builtins.gypi'
-        ]
+      ['target_platform == "emscripten" or OS == "linux" or OS =="mac"', {
+        'dependencies': [ '../build/conan_delegates.gyp:conan_delegates' ]
       }],
       # Linux / macOS / WASM build
       # (the WASM build is very similar to a POSIX build)

@@ -8,8 +8,40 @@ let wasm = false;
 const verbose = process.env.npm_config_loglevel === 'verbose';
 const opts = verbose ? { stdio: 'inherit' } : undefined;
 
+const delegates = [
+  'fonts',
+  'jpeg',
+  'png',
+  'tiff',
+  'webp',
+  'jpeg2000',
+  'raw',
+  'openmedia',
+  'brotli',
+  'h265',
+  'exr',
+  'fftw',
+  'heif',
+  'jbig',
+  'cms',
+  'xml',
+  'gzip',
+  'zip',
+  'bzip2',
+  'zstd',
+  'xz',
+  'lzma',
+  'simd',
+  'openmp',
+  'display'
+];
+let conanOpts = [];
+for (const d of delegates)
+  if (process.env[`npm_config_${d}`])
+    conanOpts.push(`-o${d}=${process.env[`npm_config_${d}`].toLowerCase() === 'true' ? 'True' : 'False'}`);
+
 const cmd = os.platform() === 'win32' ? 'npx.cmd' : 'npx';
-if (!process.env.npm_config_build_from_source) {
+if (!process.env.npm_config_build_from_source && conanOpts.length === 0) {
   console.log(chalk.cyan(`Trying to install prebuilt native binaries for ${os.platform()}-${os.arch()}...`));
   try {
     cp.execFileSync(cmd, ['node-pre-gyp', 'install'], opts);
@@ -24,6 +56,9 @@ if (!process.env.npm_config_build_from_source) {
 if (!native || process.env.npm_config_build_from_source) {
   console.log(chalk.cyan(`Trying to rebuild from source for ${os.platform()}-${os.arch()}...`));
   try {
+    if (verbose) console.log(conanOpts);
+    cp.execFileSync(cmd, ['npm', 'run', 'conan:native'], [...opts, ...conanOpts]);
+
     cp.execFileSync(cmd, ['node-pre-gyp', 'install', '--build-from-source'], opts);
     native = true;
   } catch (e) {
