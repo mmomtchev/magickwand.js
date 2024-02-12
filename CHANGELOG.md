@@ -1,5 +1,9 @@
 # Changelog
 
+### [1.0.3]
+
+ - Upgrade ImageMagick to the latest 7.1.1-28
+
 ### [1.0.2] 2024-01-26
 
  - Upgrade ImageMagick to the latest 7.1.1-27 (git)
