@@ -66,6 +66,11 @@ class ImageMagickDelegates(ConanFile):
     generators = 'PkgConfigDeps'
 
     def requirements(self):
+      print(self.settings.os)
+      if self.settings.os == 'Windows':
+        # On Windows ImageMagick is self-contained
+        return
+
       # Fonts are not available on WASM targets
       if self.options.fonts and self.settings.arch != 'wasm':
         [self.requires(x) for x in ('libffi/3.4.4', 'fontconfig/2.14.2', 'freetype/2.13.2', 'fribidi/1.0.12', 'glib/2.78.1', 'harfbuzz/8.3.0')]
@@ -186,43 +191,34 @@ class ImageMagickDelegates(ConanFile):
         ])
         libs          += [f'"-l{lib}"'  for lib    in info.cpp_info.libs]
 
-      save(self, 'conan_delegates.gyp',
-      '{ "includes": [ "conan_compiler.gypi" ],\n' +
-      '  "targets": [{\n' + 
-      '  "target_name": "conan_delegates",\n' +
-      '  "type": "static_library",\n' +
-      '  "actions": [{\n' +
-      '    "action_name": "conan",\n' +
-      '    "inputs": [],\n' +
-      '    "outputs": [ "<(STATIC_LIB_PREFIX)conan_delegates.<(STATIC_LIB_SUFFIX)" ],\n' +
-      '    "action": []\n' +
-      '  }],\n' +
-      '  "direct_dependent_settings": {\n' +
-      '    "include_dirs": [\n' +
-      '      ' + ', '.join(include_dirs) + '\n' +
-      '    ],\n' +
-      '    "defines": [\n' +
-      '      ' + ', '.join(defines) + '\n' +
-      '    ],\n' +
-      '    "cflags": [\n' +
-      '      ' + ', '.join(cflags) + '\n' +
-      '    ],\n' +
-      '    "cxxflags": [\n' +
-      '      ' + ', '.join(cxxflags) + '\n' +
-      '    ],\n' +
-      '  },\n' +
-      '  "link_settings": {\n' +
-      '    "ldflags": [\n' +
-      '      ' + ', '.join(linkflags) + '\n' +
-      '    ],\n' +
-      '    "libraries": [\n' +
-      '      ' + ', '.join(libs) + '\n' +
-      '    ],\n' +
-      '    "library_dirs": [\n' +
-      '      ' + ', '.join(lib_dirs) + '\n' +
-      '    ]\n' +
-      '  }\n' +
-      '}]}\n'
+      save(self, 'conan_compile_settings.gypi',
+        '{\n' +
+        '  "include_dirs": [\n' +
+        '    ' + ', '.join(include_dirs) + '\n' +
+        '  ],\n' +
+        '  "defines": [\n' +
+        '    ' + ', '.join(defines) + '\n' +
+        '  ],\n' +
+        '  "cflags": [\n' +
+        '    ' + ', '.join(cflags) + '\n' +
+        '  ],\n' +
+        '  "cxxflags": [\n' +
+        '    ' + ', '.join(cxxflags) + '\n' +
+        '  ]\n' +
+        '}\n'
+      )
+      save(self, 'conan_link_settings.gypi',
+        '{\n' +
+        '  "ldflags": [\n' +
+        '    ' + ', '.join(linkflags) + '\n' +
+        '  ],\n' +
+        '  "libraries": [\n' +
+        '    ' + ', '.join(libs) + '\n' +
+        '  ],\n' +
+        '  "library_dirs": [\n' +
+        '    ' + ', '.join(lib_dirs) + '\n' +
+        '  ]\n' +
+        '}\n'
       )
 
       if self.conf.get('tools.build:compiler_executables'):

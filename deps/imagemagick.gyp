@@ -43,11 +43,11 @@
         '<(module_root_dir)/deps/ImageMagick'
       ]
     },
+    'includes': [
+      '../build/conan_compile_settings.gypi',
+      '../build/conan_link_settings.gypi'
+    ],
     'conditions': [
-      # On WASM conan is already installed by the main gyp
-      ['target_platform == "emscripten" or OS == "linux" or OS =="mac"', {
-        'dependencies': [ '../build/conan_delegates.gyp:conan_delegates' ]
-      }],
       # Linux / macOS / WASM build
       # (the WASM build is very similar to a POSIX build)
       ['target_platform == "emscripten" or OS == "linux" or OS =="mac"', {
@@ -94,6 +94,9 @@
               'libraries': [ '<!@(bash configure_magick_wasm.sh <(module_path) <(hdri))' ]
             }]
           ]
+        },
+        'link_settings': {
+          'includes': [ '../build/conan_link_settings.gypi' ]
         }
       }],
       # Windows build
