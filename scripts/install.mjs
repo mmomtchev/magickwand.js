@@ -56,8 +56,12 @@ if (!process.env.npm_config_build_from_source && conanOpts.length === 0) {
 if (!native || process.env.npm_config_build_from_source) {
   console.log(chalk.cyan(`Trying to rebuild from source for ${os.platform()}-${os.arch()}...`));
   try {
-    if (verbose) console.log(conanOpts);
-    cp.execFileSync(cmd, ['npm', 'run', 'conan:native'], [...opts, ...conanOpts]);
+    if (os.platform() !== 'win32') {
+      if (verbose) console.log(conanOpts);
+      cp.execFileSync(cmd, ['npm', 'run', 'conan:native'], [...opts, ...conanOpts]);
+    } else {
+      if (verbose) console.log('Skipping conan on Windows');
+    }
 
     cp.execFileSync(cmd, ['node-pre-gyp', 'install', '--build-from-source'], opts);
     native = true;
