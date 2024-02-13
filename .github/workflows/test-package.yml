@@ -39,9 +39,8 @@ jobs:
       - name: Create package.json
         run: npm init --yes
       - name: Install fonts on Ubuntu
-        run: |
-          [[ '${{ matrix.platform }}' =~ 'ubuntu' ]] && sudo apt-get install -y fonts-ubuntu || true
-        shell: bash
+        run: sudo apt-get install -y fonts-ubuntu || true
+        if: startsWith(matrix.platform, 'ubuntu')
       - name: Set up the unit tests
         run: |
           curl https://codeload.github.com/mmomtchev/magickwand.js/zip/refs/tags/v${{ github.event.inputs.version }} --output repo.zip
@@ -91,9 +90,8 @@ jobs:
       - name: Create package.json
         run: npm init --yes
       - name: Install fonts on Ubuntu
-        run: |
-          [[ '${{ matrix.platform }}' =~ 'ubuntu' ]] && sudo apt-get install -y fonts-ubuntu || true
-        shell: bash
+        run: sudo apt-get install -y fonts-ubuntu || true
+        if: startsWith(matrix.platform, 'ubuntu')
       - name: Set up the unit tests
         run: |
           curl https://codeload.github.com/mmomtchev/magickwand.js/zip/refs/tags/v${{ github.event.inputs.version }} --output repo.zip
@@ -140,9 +138,8 @@ jobs:
       - name: Create package.json
         run: npm init --yes
       - name: Install fonts on Ubuntu
-        run: |
-          [[ '${{ matrix.platform }}' =~ 'ubuntu' ]] && sudo apt-get install -y fonts-ubuntu || true
-        shell: bash
+        run: sudo apt-get install -y fonts-ubuntu || true
+        if: startsWith(matrix.platform, 'ubuntu')
       - name: Set up the unit tests
         run: |
           curl https://codeload.github.com/mmomtchev/magickwand.js/zip/refs/tags/v${{ github.event.inputs.version }} --output repo.zip
@@ -196,9 +193,8 @@ jobs:
       - name: Create package.json
         run: npm init --yes
       - name: Install fonts on Ubuntu
-        run: |
-          [[ '${{ matrix.platform }}' =~ 'ubuntu' ]] && sudo apt-get install -y fonts-ubuntu || true
-        shell: bash
+        run: sudo apt-get install -y fonts-ubuntu || true
+        if: startsWith(matrix.platform, 'ubuntu')
       - name: Set up the unit tests
         run: |
           curl https://codeload.github.com/mmomtchev/magickwand.js/zip/refs/tags/v${{ github.event.inputs.version }} --output repo.zip
