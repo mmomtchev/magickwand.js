@@ -187,9 +187,16 @@ class ImageMagickDelegates(ConanFile):
         libs          += [f'"-l{lib}"'  for lib    in info.cpp_info.libs]
 
       save(self, 'conan_delegates.gyp',
-      '{ "targets": [{\n' + 
+      '{ "includes": [ "conan_compiler.gypi" ],\n' +
+      '  "targets": [{\n' + 
       '  "target_name": "conan_delegates",\n' +
       '  "type": "shared_library",\n' +
+      '  "actions": [{\n' +
+      '    "action_name": "conan",\n' +
+      '    "inputs": [],\n' +
+      '    "outputs": [ "<(STATIC_LIB_PREFIX)conan_delegates.<(STATIC_LIB_SUFFIX)" ],\n' +
+      '    "action": []\n' +
+      '  }],\n' +
       '  "direct_dependent_settings": {\n' +
       '    "include_dirs": [\n' +
       '      ' + ', '.join(include_dirs) + '\n' +

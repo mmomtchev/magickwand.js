@@ -124,7 +124,7 @@ jobs:
         with:
           path: ~/.conan
           key: wasm-conan
-      - run: npm run conan:wasm
+      - run: npm run conan:emscripten
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
@@ -165,7 +165,7 @@ jobs:
         with:
           path: ~/.conan
           key: wasm-light-conan
-      - run: npm run conan:wasm
+      - run: npm run conan:emscripten
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - name: Configure light version

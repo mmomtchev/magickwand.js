@@ -54,7 +54,7 @@ jobs:
         with:
           node-version: 18.x
       - name: Install conan dependencies
-        run: npm run conan:wasm
+        run: npm run conan:emscripten
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
