@@ -94,7 +94,7 @@ jobs:
       - run: npm run deps:download
       - name: Configure light version
         run: |
-          npm run configure:native                                                  \
+          npx @mapbox/node-pre-gyp configure                                        \
             -ofonts=False -ojpeg=True -opng=False -otiff=False                      \
             -owebp=False -ojpeg2000=False -oraw=False -oopenmedia=False             \
             -obrotli=False -oh265=False -oexr=False -offtw=False -oheif=False       \
