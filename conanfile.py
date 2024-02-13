@@ -189,7 +189,7 @@ class ImageMagickDelegates(ConanFile):
       save(self, 'conan_delegates.gyp',
       '{ "targets": [{\n' + 
       '  "target_name": "conan_delegates",\n' +
-      '  "type": "static_library",\n' +
+      '  "type": "shared_library",\n' +
       '  "direct_dependent_settings": {\n' +
       '    "include_dirs": [\n' +
       '      ' + ', '.join(include_dirs) + '\n' +
