@@ -167,6 +167,7 @@ class ImageMagickDelegates(ConanFile):
     def generate(self):
       include_dirs = []
       linkflags = []
+      lib_dirs = []
       libs = []
       cflags = []
       cxxflags = []
@@ -177,33 +178,41 @@ class ImageMagickDelegates(ConanFile):
         cflags        += [f'"{flag}"'   for flag   in info.cpp_info.cflags]
         cxxflags      += [f'"{flag}"'   for flag   in info.cpp_info.cxxflags]
         defines       += [f'"{define}"' for define in info.cpp_info.defines]
-        linkflags     += [f'"-L{dir}"'  for dir    in info.cpp_info.libdirs]
+        lib_dirs      += [f'"{dir}"'    for dir    in info.cpp_info.libdirs]
         linkflags     += [f'"{flag}"'   for flag   in info.cpp_info.sharedlinkflags]
-        libs          += [f'"{lib}"'    for lib    in info.cpp_info.libs]
-        libs          += [f'"{lib}"'    for lib    in info.cpp_info.system_libs]
+        libs          += [f'"-l{lib}"'  for lib    in info.cpp_info.system_libs]
+        libs          += reversed([f'"-l{lib}"'  for lib    in
+          [item for sublist in [comp.libs for comp in info.cpp_info.components.values()] for item in sublist]
+        ])
+        libs          += [f'"-l{lib}"'  for lib    in info.cpp_info.libs]
 
       save(self, 'conan_delegates.gyp',
       '{ "targets": [{\n' + 
       '  "target_name": "conan_delegates",\n' +
-      '  "type": "none",\n' +
+      '  "type": "static_library",\n' +
       '  "direct_dependent_settings": {\n' +
       '    "include_dirs": [\n' +
-      '      ' + ', '.join(set(include_dirs)) + '\n' +
+      '      ' + ', '.join(include_dirs) + '\n' +
       '    ],\n' +
       '    "defines": [\n' +
-      '      ' + ', '.join(set(defines)) + '\n' +
+      '      ' + ', '.join(defines) + '\n' +
       '    ],\n' +
       '    "cflags": [\n' +
-      '      ' + ', '.join(set(cflags)) + '\n' +
+      '      ' + ', '.join(cflags) + '\n' +
       '    ],\n' +
       '    "cxxflags": [\n' +
-      '      ' + ', '.join(set(cxxflags)) + '\n' +
+      '      ' + ', '.join(cxxflags) + '\n' +
       '    ],\n' +
-      '    "linkflags": [\n' +
-      '      ' + ', '.join(set(linkflags)) + '\n' +
+      '  },\n' +
+      '  "link_settings": {\n' +
+      '    "ldflags": [\n' +
+      '      ' + ', '.join(linkflags) + '\n' +
       '    ],\n' +
-      '    "libs": [\n' +
-      '      ' + ', '.join(set(libs)) + '\n' +
+      '    "libraries": [\n' +
+      '      ' + ', '.join(libs) + '\n' +
+      '    ],\n' +
+      '    "library_dirs": [\n' +
+      '      ' + ', '.join(lib_dirs) + '\n' +
       '    ]\n' +
       '  }\n' +
       '}]}\n'
