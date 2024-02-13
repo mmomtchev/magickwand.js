@@ -209,21 +209,24 @@ class ImageMagickDelegates(ConanFile):
       '}]}\n'
       )
 
-      cc = self.conf.get('tools.build:compiler_executables')['c']
-      cpp = self.conf.get('tools.build:compiler_executables')['cpp']
-      save(self, 'conan_compiler.gypi', 
-      '{ "conditions": [\n' +
-      '  ["target_platform == \'emscripten\'", {\n' +
-      '   "make_global_settings": [\n' +
-      f'      ["CXX", "{cpp}"],\n' +
-      f'      ["CC", "{cc}"],\n' +
-      f'      ["CXX.target", "{cpp}"],\n' +
-      f'      ["CC.target", "{cc}"],\n' +
-      f'      ["LINK", "{cc}"],\n' +
-      '   ]\n' +
-      ' }]\n' + 
-      ']}\n'
-      )
+      if self.conf.get('tools.build:compiler_executables'):
+        cc = self.conf.get('tools.build:compiler_executables')['c']
+        cpp = self.conf.get('tools.build:compiler_executables')['cpp']
+        save(self, 'conan_compiler.gypi', 
+        '{ "conditions": [\n' +
+        '  ["target_platform == \'emscripten\'", {\n' +
+        '   "make_global_settings": [\n' +
+        f'      ["CXX", "{cpp}"],\n' +
+        f'      ["CC", "{cc}"],\n' +
+        f'      ["CXX.target", "{cpp}"],\n' +
+        f'      ["CC.target", "{cc}"],\n' +
+        f'      ["LINK", "{cc}"],\n' +
+        '   ]\n' +
+        ' }]\n' + 
+        ']}\n'
+        )
+      else:
+        save(self, 'conan_compiler.gypi', '{}')
 
       if 'emsdk' in self.dependencies.build:
         save(self, 'conan_emsdk.path', str(self.dependencies.build['emsdk'].package_path))
