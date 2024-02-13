@@ -190,7 +190,7 @@ class ImageMagickDelegates(ConanFile):
       '{ "includes": [ "conan_compiler.gypi" ],\n' +
       '  "targets": [{\n' + 
       '  "target_name": "conan_delegates",\n' +
-      '  "type": "shared_library",\n' +
+      '  "type": "static_library",\n' +
       '  "actions": [{\n' +
       '    "action_name": "conan",\n' +
       '    "inputs": [],\n' +
