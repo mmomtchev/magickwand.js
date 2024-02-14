@@ -58,7 +58,7 @@ if (!native || process.env.npm_config_build_from_source) {
   try {
     if (os.platform() !== 'win32') {
       if (verbose) console.log(conanOpts);
-      cp.execFileSync(cmd, ['npm', 'run', 'conan:native'], [...opts, ...conanOpts]);
+      cp.execFileSync(cmd, ['npm', 'run', 'conan:native', '--', ...conanOpts], opts);
     } else {
       if (verbose) console.log('Skipping conan on Windows');
     }
