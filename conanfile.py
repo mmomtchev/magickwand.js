@@ -1,5 +1,7 @@
 from conan import ConanFile
 from conan.tools.files import save
+from conan.tools import CppInfo
+
 
 required_conan_version = ">=2.0.0"
 
@@ -66,7 +68,6 @@ class ImageMagickDelegates(ConanFile):
     generators = 'PkgConfigDeps'
 
     def requirements(self):
-      print(self.settings.os)
       if self.settings.os == 'Windows':
         # On Windows ImageMagick is self-contained
         return
@@ -170,26 +171,21 @@ class ImageMagickDelegates(ConanFile):
         self.options['zstd'].build_programs = False
 
     def generate(self):
-      include_dirs = []
-      linkflags = []
-      lib_dirs = []
-      libs = []
-      cflags = []
-      cxxflags = []
-      defines = []
+      aggregated_cpp_info = CppInfo(self)
+      deps = self.dependencies.host.topological_sort
+      deps = [dep for dep in reversed(deps.values())]
+      for dep in deps:
+          dep_cppinfo = dep.cpp_info.aggregated_components()
+          aggregated_cpp_info.merge(dep_cppinfo)
 
-      for dep, info in self.dependencies.items():
-        include_dirs  += [f'"{dir}"'    for dir    in info.cpp_info.includedirs]
-        cflags        += [f'"{flag}"'   for flag   in info.cpp_info.cflags]
-        cxxflags      += [f'"{flag}"'   for flag   in info.cpp_info.cxxflags]
-        defines       += [f'"{define}"' for define in info.cpp_info.defines]
-        lib_dirs      += [f'"{dir}"'    for dir    in info.cpp_info.libdirs]
-        linkflags     += [f'"{flag}"'   for flag   in info.cpp_info.sharedlinkflags]
-        libs          += [f'"-l{lib}"'  for lib    in info.cpp_info.system_libs]
-        libs          += reversed([f'"-l{lib}"'  for lib    in
-          [item for sublist in [comp.libs for comp in info.cpp_info.components.values()] for item in sublist]
-        ])
-        libs          += [f'"-l{lib}"'  for lib    in info.cpp_info.libs]
+      include_dirs   = [f'"{dir}"'    for dir    in aggregated_cpp_info.includedirs]        
+      cflags         = [f'"{flag}"'   for flag   in aggregated_cpp_info.cflags]
+      cxxflags       = [f'"{flag}"'   for flag   in aggregated_cpp_info.cxxflags]
+      defines        = [f'"{define}"' for define in aggregated_cpp_info.defines]
+      lib_dirs       = [f'"{dir}"'    for dir    in aggregated_cpp_info.libdirs]
+      linkflags      = [f'"{flag}"'   for flag   in aggregated_cpp_info.sharedlinkflags]
+      libs           = [f'"-l{lib}"'  for lib    in aggregated_cpp_info.libs]
+      libs          += [f'"-l{lib}"'  for lib    in aggregated_cpp_info.system_libs]
 
       save(self, 'conan_compile_settings.gypi',
         '{\n' +
