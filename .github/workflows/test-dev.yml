@@ -83,20 +83,21 @@ jobs:
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
         shell: bash
-      - name: Install conan dependencies on Linux and macOS
-        run: npm run conan:native
-        if: runner.os == 'Linux' || runner.os == 'macOS'
-      - run: npm install --ignore-scripts
-      - run: npm run deps:download
-      - name: Configure light version
+      - name: Install conan dependencies on Linux and macOS (light)
         run: |
-          npx @mapbox/node-pre-gyp configure                                        \
+          npm run conan:native --                                                   \
             -ofonts=False -ojpeg=True -opng=False -otiff=False                      \
             -owebp=False -ojpeg2000=False -oraw=False -oopenmedia=False             \
             -obrotli=False -oh265=False -oexr=False -offtw=False -oheif=False       \
             -ojbig=True -ocms=False -oxml=False -ogzip=False -ozip=False            \
             -obzip2=True -ozstd=False -oxz=False -olzma=False -osimd=False          \
             -oopenmp=True -odisplay=False
+
+        if: runner.os == 'Linux' || runner.os == 'macOS'
+      - run: npm install --ignore-scripts
+      - run: npm run deps:download
+      - name: Configure light version
+        run: npx @mapbox/node-pre-gyp configure
       - name: magick_configure.log
         run: cat build/magick_configure.log
         shell: bash
@@ -164,19 +165,19 @@ jobs:
         with:
           path: ~/.conan2
           key: wasm-light-conan
-      - run: npm run conan:emscripten
+      - name: Install conan dependencies (light)
+        run: |
+          npm run conan:emscripten --                                               \
+            -ofonts=False -ojpeg=True -opng=False -otiff=False                      \
+            -owebp=False -ojpeg2000=False -oraw=False -oopenmedia=False             \
+            -obrotli=False -oh265=False -oexr=False -offtw=False -oheif=False       \
+            -ojbig=True -ocms=False -oxml=False -ogzip=False -ozip=False            \
+            -obzip2=True -ozstd=False -oxz=False -olzma=False -osimd=False          \
+            -oopenmp=True -odisplay=False
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - name: Configure light version
-        run: |
-          npx @mapbox/node-pre-gyp configure                                         \
-            --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten \
-            -ofonts=False -ojpeg=False -opng=False -otiff=False                      \
-            -owebp=False -ojpeg2000=False -oraw=False -oopenmedia=False              \
-            -obrotli=False -oh265=False -oexr=False -offtw=False -oheif=False        \
-            -ojbig=False -ocms=False -oxml=False -ogzip=False -ozip=False            \
-            -obzip2=False -ozstd=False -oxz=False -olzma=False -osimd=False          \
-            -oopenmp=False -odisplay=False
+        run: npx @mapbox/node-pre-gyp configure
       - name: magick_configure.log
         run: cat build/magick_configure.log
         shell: bash
