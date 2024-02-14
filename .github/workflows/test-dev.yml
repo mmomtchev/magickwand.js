@@ -176,8 +176,8 @@ jobs:
             -oopenmp=True -odisplay=False
       - run: npm install --ignore-scripts
       - run: npm run deps:download
-      - name: Configure light version
-        run: npx @mapbox/node-pre-gyp configure
+      - name: Configure WASM version
+        run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
       - name: magick_configure.log
         run: cat build/magick_configure.log
         shell: bash
