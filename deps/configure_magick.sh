@@ -25,9 +25,13 @@ sh ./configure $2 --prefix=$1/ImageMagick                   \
     --disable-docs                                          \
     ${CONFIGURE_OPTS}
 
+# X11 does not come from conan, X11 is autodetected by ImageMagick
+# and reported to node-gyp
 X11_LIBS=`egrep -o '^\s*X11_LIBS\s*=.*' Makefile | cut -f 2 -d "="`
 XEXT_LIBS=`egrep -o '^\s*XEXT_LIBS\s*=.*' Makefile | cut -f 2 -d "="`
 
 cd ../..
 
 exec 1>&3 2>&4
+
+echo -n "${X11_LIBS} ${XEXT_LIBS}"
