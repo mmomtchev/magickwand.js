@@ -191,7 +191,7 @@
       # builtins pulls conan and emsdk
       # wasm enables the cross-compilation
       'includes': [
-        'build/conan_compiler.gypi'
+        'conan/conan_compiler.gypi'
       ],
       'targets': [
         {

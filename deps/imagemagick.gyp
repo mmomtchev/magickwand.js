@@ -12,7 +12,7 @@
     ['target_platform == "emscripten"', {
       # wasm enables the cross-compilation
       'includes': [
-        '../build/conan_compiler.gypi'
+        '../conan/conan_compiler.gypi'
       ]
     }],
     # TODO: Implement no-HDRI build on Windows
@@ -44,8 +44,8 @@
       ]
     },
     'includes': [
-      '../build/conan_compile_settings.gypi',
-      '../build/conan_link_settings.gypi'
+      '../conan/conan_compile_settings.gypi',
+      '../conan/conan_link_settings.gypi'
     ],
     'conditions': [
       # Linux / macOS / WASM build
@@ -96,7 +96,7 @@
           ]
         },
         'link_settings': {
-          'includes': [ '../build/conan_link_settings.gypi' ]
+          'includes': [ '../conan/conan_link_settings.gypi' ]
         }
       }],
       # Windows build

@@ -40,11 +40,12 @@ for (const d of delegates)
   if (process.env[`npm_config_${d}`])
     conanOpts.push(`-o${d}=${process.env[`npm_config_${d}`].toLowerCase() === 'true' ? 'True' : 'False'}`);
 
-const cmd = os.platform() === 'win32' ? 'npx.cmd' : 'npx';
+const npx = os.platform() === 'win32' ? 'npx.cmd' : 'npx';
+const npm = os.platform() === 'win32' ? 'npm.cmd' : 'npm';
 if (!process.env.npm_config_build_from_source && conanOpts.length === 0) {
   console.log(chalk.cyan(`Trying to install prebuilt native binaries for ${os.platform()}-${os.arch()}...`));
   try {
-    cp.execFileSync(cmd, ['node-pre-gyp', 'install'], opts);
+    cp.execFileSync(npx, ['node-pre-gyp', 'install'], opts);
     native = true;
   } catch (e) {
     console.log(e);
@@ -56,14 +57,12 @@ if (!process.env.npm_config_build_from_source && conanOpts.length === 0) {
 if (!native || process.env.npm_config_build_from_source) {
   console.log(chalk.cyan(`Trying to rebuild from source for ${os.platform()}-${os.arch()}...`));
   try {
-    if (os.platform() !== 'win32') {
-      if (verbose) console.log(conanOpts);
-      cp.execFileSync(cmd, ['npm', 'run', 'conan:native', '--', ...conanOpts], opts);
-    } else {
-      if (verbose) console.log('Skipping conan on Windows');
-    }
+    console.log('Launching conan');
+    if (verbose) console.log('conanOpts', conanOpts);
+    cp.execFileSync(npm, ['run', 'conan:native', '--', ...conanOpts], opts);
 
-    cp.execFileSync(cmd, ['node-pre-gyp', 'install', '--build-from-source'], opts);
+    console.log('Launching node-pre-gyp for native');
+    cp.execFileSync(npx, ['node-pre-gyp', 'install', '--build-from-source'], opts);
     native = true;
   } catch (e) {
     if (verbose) console.log(e);
@@ -74,7 +73,8 @@ if (!native || process.env.npm_config_build_from_source) {
 
 console.log(chalk.cyan('Trying to install WASM binaries for emscripten-wasm32...'));
 try {
-  cp.execFileSync(cmd,
+  console.log('Launching node-pre-gyp for WASM');
+  cp.execFileSync(npx,
     ['node-pre-gyp', 'install', '--target_platform=emscripten', '--target_arch=wasm32'],
     { env: { ...process.env, npm_config_build_from_source: undefined } }
   );

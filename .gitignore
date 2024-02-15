@@ -1,5 +1,6 @@
 Attic
 node_modules
 build
+/conan
 lib/binding
-swig
+/swig

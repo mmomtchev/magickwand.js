@@ -3,7 +3,7 @@
 unset MAKEFLAGS
 unset SDKROOT
 
-EMSDK_PATH=`cat ../build/conan_emsdk.path`
+EMSDK_PATH=`cat ../conan/conan_emsdk.path`
 . ${EMSDK_PATH}/bin/emsdk_env.sh
 
 cd ImageMagick

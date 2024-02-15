@@ -8,7 +8,7 @@ unset SDKROOT
 # Get the build flags from conan and shunt the auto-detection from the system
 export EM_PKG_CONFIG_PATH=$(pwd)/../build
 
-EMSDK_PATH=`cat ../build/conan_emsdk.path`
+EMSDK_PATH=`cat ../conan/conan_emsdk.path`
 . ${EMSDK_PATH}/bin/emsdk_env.sh
 
 cd ImageMagick
