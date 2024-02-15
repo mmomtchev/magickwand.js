@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.0]
+
+ - New build system based on conan 2
+
 ### [1.0.3]
 
  - Upgrade ImageMagick to the latest 7.1.1-28
