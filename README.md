@@ -171,19 +171,33 @@ npm run swig
 
 ### Rebuilding the WASM version
 
-The WASM version uses SWIG Node-API WASM and `emnapi` and it is less mature than the Node.js native version.
+The WASM version uses [SWIG JSE](https://github.com/mmomtchev/swig) and `emnapi`.
 
-There is no documentation for SWIG Node-API WASM available at the moment, so if you need to modify the wrappers, you will be on your own. SWIG Node-API WASM is currently under active development.
-
-Build with:
+Generally, the prebuilt WASM binaries should work for everyone. Currently, `npm install` is not capable of rebuilding it. To rebuild the WASM version yourself, you should start by building the conan dependencies:
 
 ```shell
-node-pre-gyp configure --nodedir=./emscripten \
-  --target_arch=wasm32 --target_platform=emscripten
+npm run conan:emscripten
+```
+
+Or to build a minimal version that excludes many optional dependencies:
+
+```shell
+npm run conan:emscripten --                                               \
+  -ofonts=False -ojpeg=True -opng=False -otiff=False                      \
+  -owebp=False -ojpeg2000=False -oraw=False -oopenmedia=False             \
+  -obrotli=False -oh265=False -oexr=False -offtw=False -oheif=False       \
+  -ojbig=True -ocolor=False -oxml=False -ogzip=False -ozip=False            \
+  -obzip2=True -ozstd=False -oxz=False -olzma=False -osimd=False          \
+  -oopenmp=True -odisplay=False
+```
+
+Then launch:
+```shell
+npm run configure:emscripten
 node-pre-gyp build
 ```
 
-At the moment this cross-compilation is possible only on Linux.
+At the moment this cross-compilation has been tested only on Linux.
 
 Keep in mind that if you want to switch between building a native and a WASM version, you should do:
 
@@ -200,16 +214,16 @@ Otherwise, in between `conan`, `gyp` and the ImageMagick's own build, you might 
 Building a lighter custom binary which does not include some of the builtin libraries is possible by specifying:
 
 ```shell
-node-pre-gyp configure \
+npm install --build-from-source --verbose \
     --fonts=false --jpeg=false --png=false --tiff=false \
     --webp=false --jpeg2000=false --raw=false --openmedia=false \
     --brotli=false --h265=false --exr=false --fftw=false --heif=false \
-    --jbig=false --cms=false --xml=false --gzip=false --zip=false \
+    --jbig=false --color=false --xml=false --gzip=false --zip=false \
     --bzip2=false --zstd=false --xz=false --lzma=false --simd=false \
     --openmp=false --display=false
 ```
 
-This is not supported for the Windows build which is monolithic. It is supported for Linux, macOS and WASM. It disables the included delegates, but keep in mind that on Linux and macOS, the ImageMagick configure script will still detect the presence of some system libraries (`jpeg`, `bzip2`, `jbig` and `OpenMP`) and will try to use them, producing a binary that will need the dynamically loaded versions of those libraries on your system. This is not a problem with the WASM version as it is very unlikely that you will have system-installed WASM-version libraries that ImageMagick will detect and use.
+This is not supported for the Windows build which is monolithic. It is supported for Linux, macOS and WASM (see above for WASM). It disables the included delegates, but keep in mind that on Linux and macOS, the ImageMagick configure script will still detect the presence of some system libraries (`jpeg`, `bzip2`, `jbig` and `OpenMP`) and will try to use them, producing a binary that will need the dynamically loaded versions of those libraries on your system. This is not a problem with the WASM version as it is very unlikely that you will have system-installed WASM-version libraries that ImageMagick will detect and use.
 
 If the WASM binary is rebuilt with no additional libraries, its size will be brought down to 1.5MB compressed with brotli. Further reduction is possible by disabling unneeded SWIG wrappers but this requires to manually edit the SWIG source files and to regenerate the C++ files. Producing a version that supports only synchronous mode and does not require COOP/COEP is also possible. I will consider any offer for commercial support of such dedicated light version.
 

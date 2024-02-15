@@ -20,7 +20,7 @@
     'fftw%': 'true',
     'heif%': 'true',
     'jbig%': 'true',
-    'cms%': 'true',
+    'color%': 'true',
     'xml%': 'true',
     'gzip%': 'true',
     'zip%': 'true',

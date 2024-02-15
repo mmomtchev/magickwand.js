@@ -23,9 +23,11 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install fonts on Ubuntu
-        run: |
-          [[ '${{ matrix.platform }}' =~ 'ubuntu' ]] && sudo apt-get install -y fonts-ubuntu || true
-        shell: bash
+        run: sudo apt-get install -y fonts-ubuntu || true
+        if: startsWith(matrix.platform, 'ubuntu')
+      - name: Install conan dependencies on Linux and macOS
+        run: npm run conan:native
+        if: runner.os == 'Linux' || runner.os == 'macOS'
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure
@@ -51,6 +53,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
+      - name: Install conan dependencies
+        run: npm run conan:emscripten
       - run: npm install --ignore-scripts
       - run: npm run deps:download
       - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten

@@ -1,6 +1,10 @@
-from conans import ConanFile, CMake
+from conan import ConanFile
+from conan.tools.files import save
+from conan.tools import CppInfo
 
-required_conan_version = ">=1.60.0"
+
+required_conan_version = ">=2.0.0"
+
 
 class ImageMagickDelegates(ConanFile):
     settings = 'os', 'compiler', 'build_type', 'arch'
@@ -20,7 +24,7 @@ class ImageMagickDelegates(ConanFile):
       'fftw': [ True, False ],
       'heif': [ True, False ],
       'jbig': [ True, False ],
-      'cms': [ True, False ],
+      'color': [ True, False ],
       'xml': [ True, False ],
       'gzip': [ True, False ],
       'zip': [ True, False ],
@@ -48,7 +52,7 @@ class ImageMagickDelegates(ConanFile):
       'fftw': True,
       'heif': True,
       'jbig': True,
-      'cms': True,
+      'color': True,
       'xml': True,
       'gzip':True,
       'zip': True,
@@ -61,12 +65,16 @@ class ImageMagickDelegates(ConanFile):
       'display': True
     }
 
-    generators = 'pkg_config', 'json'
+    generators = 'PkgConfigDeps'
 
     def requirements(self):
+      if self.settings.os == 'Windows':
+        # On Windows ImageMagick is self-contained
+        return
+
       # Fonts are not available on WASM targets
       if self.options.fonts and self.settings.arch != 'wasm':
-        [self.requires(x) for x in ('libffi/3.4.4', 'fontconfig/2.14.2', 'freetype/2.13.0', 'fribidi/1.0.12', 'glib/2.78.0', 'harfbuzz/7.1.0')]
+        [self.requires(x) for x in ('libffi/3.4.4', 'fontconfig/2.14.2', 'freetype/2.13.2', 'fribidi/1.0.12', 'glib/2.78.1', 'harfbuzz/8.3.0')]
 
       # LZMA is blocked by https://github.com/conan-io/conan-center-index/issues/20602
       if self.options.lzma and self.settings.arch != 'wasm':
@@ -82,10 +90,10 @@ class ImageMagickDelegates(ConanFile):
         self.requires('libzip/1.9.2')
 
       if self.options.brotli:
-        self.requires('brotli/1.0.9')
+        self.requires('brotli/1.1.0')
 
       if self.options.xz:
-        self.requires('xz_utils/5.4.4')
+        self.requires('xz_utils/5.4.5')
 
       if self.options.gzip:
         self.requires('zlib/1.2.13')
@@ -93,7 +101,7 @@ class ImageMagickDelegates(ConanFile):
       if self.options.fftw:
         self.requires('fftw/3.3.10')
 
-      if self.options.cms:
+      if self.options.color:
         self.requires('lcms/2.14')
 
       if self.options.xml:
@@ -103,7 +111,7 @@ class ImageMagickDelegates(ConanFile):
         self.requires('libaom-av1/3.6.0')
 
       if self.options.h265:
-        self.requires('libde265/1.0.11')
+        self.requires('libde265/1.0.12')
 
       if self.options.heif:
         self.requires('libheif/1.13.0')
@@ -115,26 +123,25 @@ class ImageMagickDelegates(ConanFile):
         self.requires('openexr/3.1.5')
 
       if self.options.png:
-        self.requires('libpng/1.6.39')
+        self.requires('libpng/1.6.42')
 
       if self.options.webp:
         self.requires('libwebp/1.3.2')
 
+      if self.options.jpeg2000 or self.options.tiff or self.options.raw:
+        self.requires('libjpeg-turbo/3.0.2', override=True)
+
       if self.options.jpeg2000:
-        [self.requires(x) for x in ('jasper/4.0.0', 'libjpeg-turbo/3.0.0')]
-        self.options['libtiff'].jpeg = 'libjpeg-turbo'
+        self.requires('jasper/4.0.0')
 
       if self.options.tiff:
-        [self.requires(x) for x in ('libtiff/4.6.0', 'libjpeg-turbo/3.0.0')]
-        self.options['libtiff'].jpeg = 'libjpeg-turbo'
+        self.requires('libtiff/4.6.0')
 
       if self.options.raw:
-        [self.requires(x) for x in ('libraw/0.21.1', 'libjpeg-turbo/3.0.0')]
-        self.options['libraw'].with_jpeg = 'libjpeg-turbo'
+        self.requires('libraw/0.21.2')
 
       if self.options.jpeg:
-        [self.requires(x) for x in ('openjpeg/2.5.0', 'libjpeg-turbo/3.0.0')]
-        self.options['jasper'].with_libjpeg = 'libjpeg-turbo'
+        self.requires('openjpeg/2.5.0')
 
       if self.options.simd and self.settings.arch != 'wasm':
         self.requires('highway/1.0.3')
@@ -150,6 +157,10 @@ class ImageMagickDelegates(ConanFile):
         self.options['glib'].shared = False
         self.options['glib'].fPIC = True
 
+      self.options['jasper'].with_libjpeg = 'libjpeg-turbo'
+      self.options['libtiff'].jpeg = 'libjpeg-turbo'
+      self.options['libraw'].with_jpeg = 'libjpeg-turbo'
+
       # While Emscripten supports SIMD, Node.js does not and cannot run the resulting WASM bundle
       # The performance gain is not very significant and it has a huge compatibility issue
       if self.options.webp and (self.settings.arch == 'wasm' or not self.options.simd):
@@ -158,3 +169,72 @@ class ImageMagickDelegates(ConanFile):
       # When building with emscripten, the main exe is called zstd.js and all symlinks are broken
       if self.settings.arch == 'wasm' and self.options.zstd:
         self.options['zstd'].build_programs = False
+
+    def generate(self):
+      aggregated_cpp_info = CppInfo(self)
+      deps = self.dependencies.host.topological_sort
+      deps = [dep for dep in reversed(deps.values())]
+      for dep in deps:
+          dep_cppinfo = dep.cpp_info.aggregated_components()
+          aggregated_cpp_info.merge(dep_cppinfo)
+
+      include_dirs   = [f'"{dir}"'    for dir    in aggregated_cpp_info.includedirs]        
+      cflags         = [f'"{flag}"'   for flag   in aggregated_cpp_info.cflags]
+      cxxflags       = [f'"{flag}"'   for flag   in aggregated_cpp_info.cxxflags]
+      defines        = [f'"{define}"' for define in aggregated_cpp_info.defines]
+      lib_dirs       = [f'"{dir}"'    for dir    in aggregated_cpp_info.libdirs]
+      linkflags      = [f'"{flag}"'   for flag   in aggregated_cpp_info.sharedlinkflags]
+      libs           = [f'"-l{lib}"'  for lib    in aggregated_cpp_info.libs]
+      libs          += [f'"-l{lib}"'  for lib    in aggregated_cpp_info.system_libs]
+
+      save(self, 'conan_compile_settings.gypi',
+        '{\n' +
+        '  "include_dirs": [\n' +
+        '    ' + ', '.join(include_dirs) + '\n' +
+        '  ],\n' +
+        '  "defines": [\n' +
+        '    ' + ', '.join(defines) + '\n' +
+        '  ],\n' +
+        '  "cflags": [\n' +
+        '    ' + ', '.join(cflags) + '\n' +
+        '  ],\n' +
+        '  "cxxflags": [\n' +
+        '    ' + ', '.join(cxxflags) + '\n' +
+        '  ]\n' +
+        '}\n'
+      )
+      save(self, 'conan_link_settings.gypi',
+        '{\n' +
+        '  "ldflags": [\n' +
+        '    ' + ', '.join(linkflags) + '\n' +
+        '  ],\n' +
+        '  "libraries": [\n' +
+        '    ' + ', '.join(libs) + '\n' +
+        '  ],\n' +
+        '  "library_dirs": [\n' +
+        '    ' + ', '.join(lib_dirs) + '\n' +
+        '  ]\n' +
+        '}\n'
+      )
+
+      if self.conf.get('tools.build:compiler_executables'):
+        cc = self.conf.get('tools.build:compiler_executables')['c']
+        cpp = self.conf.get('tools.build:compiler_executables')['cpp']
+        save(self, 'conan_compiler.gypi', 
+        '{ "conditions": [\n' +
+        '  ["target_platform == \'emscripten\'", {\n' +
+        '   "make_global_settings": [\n' +
+        f'      ["CXX", "{cpp}"],\n' +
+        f'      ["CC", "{cc}"],\n' +
+        f'      ["CXX.target", "{cpp}"],\n' +
+        f'      ["CC.target", "{cc}"],\n' +
+        f'      ["LINK", "{cc}"],\n' +
+        '   ]\n' +
+        ' }]\n' + 
+        ']}\n'
+        )
+      else:
+        save(self, 'conan_compiler.gypi', '{}')
+
+      if 'emsdk' in self.dependencies.build:
+        save(self, 'conan_emsdk.path', str(self.dependencies.build['emsdk'].package_path))

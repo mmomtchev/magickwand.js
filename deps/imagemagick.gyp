@@ -12,7 +12,7 @@
     ['target_platform == "emscripten"', {
       # wasm enables the cross-compilation
       'includes': [
-        '../wasm.gypi'
+        '../conan/conan_compiler.gypi'
       ]
     }],
     # TODO: Implement no-HDRI build on Windows
@@ -43,14 +43,11 @@
         '<(module_root_dir)/deps/ImageMagick'
       ]
     },
+    'includes': [
+      '../conan/conan_compile_settings.gypi',
+      '../conan/conan_link_settings.gypi'
+    ],
     'conditions': [
-      # On WASM conan is already installed by the main gyp
-      ['target_platform != "emscripten" and (OS == "linux" or OS =="mac")', {
-        # builtins pulls conan
-        'includes': [
-          '../builtins.gypi'
-        ]
-      }],
       # Linux / macOS / WASM build
       # (the WASM build is very similar to a POSIX build)
       ['target_platform == "emscripten" or OS == "linux" or OS =="mac"', {
@@ -97,6 +94,9 @@
               'libraries': [ '<!@(bash configure_magick_wasm.sh <(module_path) <(hdri))' ]
             }]
           ]
+        },
+        'link_settings': {
+          'includes': [ '../conan/conan_link_settings.gypi' ]
         }
       }],
       # Windows build

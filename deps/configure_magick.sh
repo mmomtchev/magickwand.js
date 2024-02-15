@@ -14,7 +14,7 @@ unset SDKROOT
 export CFLAGS="-fPIC"
 export CXXFLAGS="-fPIC"
 # Get the build flags from conan and shunt the auto-detection from the system
-export PKG_CONFIG_LIBDIR=$(pwd)/../build
+export PKG_CONFIG_LIBDIR=$(pwd)/../conan
 
 cd ImageMagick
 # Do not include the utilities which increase the size of the npm package
@@ -25,14 +25,13 @@ sh ./configure $2 --prefix=$1/ImageMagick                   \
     --disable-docs                                          \
     ${CONFIGURE_OPTS}
 
+# X11 does not come from conan, X11 is autodetected by ImageMagick
+# and reported to node-gyp
 X11_LIBS=`egrep -o '^\s*X11_LIBS\s*=.*' Makefile | cut -f 2 -d "="`
 XEXT_LIBS=`egrep -o '^\s*XEXT_LIBS\s*=.*' Makefile | cut -f 2 -d "="`
 
 cd ../..
 
-LIBPATHS=`node -p "JSON.parse(fs.readFileSync('build/conanbuildinfo.json')).dependencies.map((dep) => dep.lib_paths).flat().map((path) => '-L' + path).join(' ')"`
-LIBS=`node -p "JSON.parse(fs.readFileSync('build/conanbuildinfo.json')).dependencies.map((dep) => dep.libs).flat().map((path) => '-l' + path).join(' ')"`
-
 exec 1>&3 2>&4
 
-echo -n "${LIBPATHS} ${LIBS} ${X11_LIBS} ${XEXT_LIBS}"
+echo -n "${X11_LIBS} ${XEXT_LIBS}"
