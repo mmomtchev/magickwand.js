@@ -164,7 +164,7 @@ jobs:
             -ofonts=False -ojpeg=True -opng=False -otiff=False                      \
             -owebp=False -ojpeg2000=False -oraw=False -oopenmedia=False             \
             -obrotli=False -oh265=False -oexr=False -offtw=False -oheif=False       \
-            -ojbig=True -ocms=False -oxml=False -ogzip=False -ozip=False            \
+            -ojbig=True -ocolor=False -oxml=False -ogzip=False -ozip=False          \
             -obzip2=True -ozstd=False -oxz=False -olzma=False -osimd=False          \
             -oopenmp=True -odisplay=False
       - run: npm install --ignore-scripts
