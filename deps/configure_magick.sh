@@ -14,7 +14,7 @@ unset SDKROOT
 export CFLAGS="-fPIC"
 export CXXFLAGS="-fPIC"
 # Get the build flags from conan and shunt the auto-detection from the system
-export PKG_CONFIG_LIBDIR=$(pwd)/../build
+export PKG_CONFIG_LIBDIR=$(pwd)/../conan
 
 cd ImageMagick
 # Do not include the utilities which increase the size of the npm package
