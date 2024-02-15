@@ -214,7 +214,7 @@ Otherwise, in between `conan`, `gyp` and the ImageMagick's own build, you might 
 Building a lighter custom binary which does not include some of the builtin libraries is possible by specifying:
 
 ```shell
-node-pre-gyp configure \
+npm install --build-from-source --verbose \
     --fonts=false --jpeg=false --png=false --tiff=false \
     --webp=false --jpeg2000=false --raw=false --openmedia=false \
     --brotli=false --h265=false --exr=false --fftw=false --heif=false \
@@ -223,7 +223,7 @@ node-pre-gyp configure \
     --openmp=false --display=false
 ```
 
-This is not supported for the Windows build which is monolithic. It is supported for Linux, macOS and WASM. It disables the included delegates, but keep in mind that on Linux and macOS, the ImageMagick configure script will still detect the presence of some system libraries (`jpeg`, `bzip2`, `jbig` and `OpenMP`) and will try to use them, producing a binary that will need the dynamically loaded versions of those libraries on your system. This is not a problem with the WASM version as it is very unlikely that you will have system-installed WASM-version libraries that ImageMagick will detect and use.
+This is not supported for the Windows build which is monolithic. It is supported for Linux, macOS and WASM (see above for WASM). It disables the included delegates, but keep in mind that on Linux and macOS, the ImageMagick configure script will still detect the presence of some system libraries (`jpeg`, `bzip2`, `jbig` and `OpenMP`) and will try to use them, producing a binary that will need the dynamically loaded versions of those libraries on your system. This is not a problem with the WASM version as it is very unlikely that you will have system-installed WASM-version libraries that ImageMagick will detect and use.
 
 If the WASM binary is rebuilt with no additional libraries, its size will be brought down to 1.5MB compressed with brotli. Further reduction is possible by disabling unneeded SWIG wrappers but this requires to manually edit the SWIG source files and to regenerate the C++ files. Producing a version that supports only synchronous mode and does not require COOP/COEP is also possible. I will consider any offer for commercial support of such dedicated light version.
 
