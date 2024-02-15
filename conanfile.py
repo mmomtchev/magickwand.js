@@ -24,7 +24,7 @@ class ImageMagickDelegates(ConanFile):
       'fftw': [ True, False ],
       'heif': [ True, False ],
       'jbig': [ True, False ],
-      'cms': [ True, False ],
+      'color': [ True, False ],
       'xml': [ True, False ],
       'gzip': [ True, False ],
       'zip': [ True, False ],
@@ -52,7 +52,7 @@ class ImageMagickDelegates(ConanFile):
       'fftw': True,
       'heif': True,
       'jbig': True,
-      'cms': True,
+      'color': True,
       'xml': True,
       'gzip':True,
       'zip': True,
@@ -101,7 +101,7 @@ class ImageMagickDelegates(ConanFile):
       if self.options.fftw:
         self.requires('fftw/3.3.10')
 
-      if self.options.cms:
+      if self.options.color:
         self.requires('lcms/2.14')
 
       if self.options.xml:

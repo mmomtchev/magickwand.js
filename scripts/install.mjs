@@ -54,7 +54,7 @@ const delegates = [
   'fftw',
   'heif',
   'jbig',
-  'cms',
+  'color',
   'xml',
   'gzip',
   'zip',

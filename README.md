@@ -186,7 +186,7 @@ npm run conan:emscripten --                                               \
   -ofonts=False -ojpeg=True -opng=False -otiff=False                      \
   -owebp=False -ojpeg2000=False -oraw=False -oopenmedia=False             \
   -obrotli=False -oh265=False -oexr=False -offtw=False -oheif=False       \
-  -ojbig=True -ocms=False -oxml=False -ogzip=False -ozip=False            \
+  -ojbig=True -ocolor=False -oxml=False -ogzip=False -ozip=False            \
   -obzip2=True -ozstd=False -oxz=False -olzma=False -osimd=False          \
   -oopenmp=True -odisplay=False
 ```
@@ -218,7 +218,7 @@ npm install --build-from-source --verbose \
     --fonts=false --jpeg=false --png=false --tiff=false \
     --webp=false --jpeg2000=false --raw=false --openmedia=false \
     --brotli=false --h265=false --exr=false --fftw=false --heif=false \
-    --jbig=false --cms=false --xml=false --gzip=false --zip=false \
+    --jbig=false --color=false --xml=false --gzip=false --zip=false \
     --bzip2=false --zstd=false --xz=false --lzma=false --simd=false \
     --openmp=false --display=false
 ```

@@ -88,7 +88,7 @@ jobs:
             --fonts=false --jpeg=true --png=false --tiff=false                      \
             --webp=false --jpeg2000=false --raw=false --openmedia=false             \
             --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
-            --jbig=true --cms=false --xml=false --gzip=false --zip=false            \
+            --jbig=true --color=false --xml=false --gzip=false --zip=false            \
             --bzip2=true --zstd=false --xz=false --lzma=false --simd=false          \
             --openmp=true --display=false
       - name: magick_configure.log
