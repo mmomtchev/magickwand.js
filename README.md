@@ -171,19 +171,33 @@ npm run swig
 
 ### Rebuilding the WASM version
 
-The WASM version uses SWIG Node-API WASM and `emnapi` and it is less mature than the Node.js native version.
+The WASM version uses [SWIG JSE](https://github.com/mmomtchev/swig) and `emnapi`.
 
-There is no documentation for SWIG Node-API WASM available at the moment, so if you need to modify the wrappers, you will be on your own. SWIG Node-API WASM is currently under active development.
-
-Build with:
+Generally, the prebuilt WASM binaries should work for everyone. Currently, `npm install` is not capable of rebuilding it. To rebuild the WASM version yourself, you should start by building the conan dependencies:
 
 ```shell
-node-pre-gyp configure --nodedir=./emscripten \
-  --target_arch=wasm32 --target_platform=emscripten
+npm run conan:emscripten
+```
+
+Or to build a minimal version that excludes many optional dependencies:
+
+```shell
+npm run conan:emscripten --                                               \
+  -ofonts=False -ojpeg=True -opng=False -otiff=False                      \
+  -owebp=False -ojpeg2000=False -oraw=False -oopenmedia=False             \
+  -obrotli=False -oh265=False -oexr=False -offtw=False -oheif=False       \
+  -ojbig=True -ocms=False -oxml=False -ogzip=False -ozip=False            \
+  -obzip2=True -ozstd=False -oxz=False -olzma=False -osimd=False          \
+  -oopenmp=True -odisplay=False
+```
+
+Then launch:
+```shell
+npm run configure:emscripten
 node-pre-gyp build
 ```
 
-At the moment this cross-compilation is possible only on Linux.
+At the moment this cross-compilation has been tested only on Linux.
 
 Keep in mind that if you want to switch between building a native and a WASM version, you should do:
 
