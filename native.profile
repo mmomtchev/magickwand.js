@@ -7,3 +7,6 @@ include(default)
 
 [options]
 
+[tool_requires]
+meson/1.3.1
+
