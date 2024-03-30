@@ -288,7 +288,15 @@ ImageMagick is a very widely used software. Security vulnerabilities tend to be 
 
 The current ImageMagick version can be checked in the `MagickLibVersionText` / `MagickLibAddendum` global exported constants.
 
-**IMPORTANT:** Versions of `magickwand.js` up to 0.9.6 including are compiled with a `libwebp` vulnerable to [CVE-2023-4863](https://www.cve.org/CVERecord?id=CVE-2023-4863).
+
+---
+**IMPORTANT**
+
+* Versions of `magickwand.js` up to 0.9.6 including are compiled with a `libwebp` vulnerable to [CVE-2023-4863](https://www.cve.org/CVERecord?id=CVE-2023-4863).
+
+* Prebuilt binaries of `magickwand.js` are **NOT** affected by [CVE-2024-3094](https://nvd.nist.gov/vuln/detail/CVE-2024-3094) since these are linked with xz-utils 5.4.5, the last version before the backdoor.
+
+---
 
 **Special care must be exercised when ImageMagick is used to process images coming from untrusted sources**. Although possible, outright arbitrary code execution by embedded malicious code in an image is extremely rare and there has been only one such case during the last 30 years - the infamous [`ImageTragick`](https://www.cve.org/CVERecord?id=CVE-2016-3714) exploit in 2016. **It did not affect users who had restrictive security policies.**
 
