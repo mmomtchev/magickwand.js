@@ -39,8 +39,8 @@
     'direct_dependent_settings': {
       'defines': [ '<@(magickdefines)' ],
       'include_dirs': [
-        '<(module_root_dir)/deps/ImageMagick/Magick++/lib',
-        '<(module_root_dir)/deps/ImageMagick'
+        '<(module_root_dir)/deps/ImageMagick-Windows/ImageMagick/Magick++/lib',
+        '<(module_root_dir)/deps/ImageMagick-Windows/ImageMagick'
       ]
     },
     'includes': [
