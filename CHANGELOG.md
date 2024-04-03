@@ -3,6 +3,7 @@
 ## [1.1.0]
 
  - New build system based on conan 2
+ - Upgrade ImageMagick to the latest 7.1.1-30 (git)
 
 ### [1.0.3]
 

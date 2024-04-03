@@ -37,11 +37,7 @@
     # It is in fact a static_library but we do everything manually
     'type': 'none',
     'direct_dependent_settings': {
-      'defines': [ '<@(magickdefines)' ],
-      'include_dirs': [
-        '<(module_root_dir)/deps/ImageMagick/Magick++/lib',
-        '<(module_root_dir)/deps/ImageMagick'
-      ]
+      'defines': [ '<@(magickdefines)' ]
     },
     'includes': [
       '../conan/conan_compile_settings.gypi',
@@ -80,6 +76,10 @@
           }
         ],
         'direct_dependent_settings': {
+          'include_dirs': [
+            '<(module_root_dir)/deps/ImageMagick/Magick++/lib',
+            '<(module_root_dir)/deps/ImageMagick'
+          ],
           'libraries': [
             '-L<(module_root_dir)/deps/ImageMagick/Magick++/lib/.libs/',
             '-L<(module_root_dir)/deps/ImageMagick/MagickWand/.libs/',
@@ -102,7 +102,7 @@
       # Windows build
       ['target_platform != "emscripten" and OS == "win"', {
         'variables': {
-          'magick_win_lib': '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/lib'
+          'magick_win_lib': '<(module_root_dir)/deps/ImageMagick-Windows/Output/lib'
         },
         'actions': [
           {
@@ -113,6 +113,10 @@
           }
         ],
         'direct_dependent_settings': {
+          'include_dirs': [
+            '<(module_root_dir)/deps/ImageMagick-Windows/ImageMagick/Magick++/lib',
+            '<(module_root_dir)/deps/ImageMagick-Windows/ImageMagick'
+          ],
           'libraries': [
             '<(magick_win_lib)/CORE_<(winlibid)_aom_.lib',
             '<(magick_win_lib)/CORE_<(winlibid)_brotli_.lib',
