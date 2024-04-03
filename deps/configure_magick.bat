@@ -6,6 +6,8 @@ cd ImageMagick-Windows
 call CloneRepositories.IM7.cmd
 cd %SCRIPT_DIR%\..
 
+mklink /J ImageMagick ImageMagick-Windows\ImageMagick
+
 if not exist "deps\ImageMagick-Windows\Build\bin\ffmpeg.exe" (
   powershell Invoke-WebRequest -Uri https://github.com/ImageMagick/ImageMagick-Windows/releases/download/20200615/ffmpeg-4.2.3-win64.exe -OutFile deps\ImageMagick-Windows\Build\bin\ffmpeg.exe
 )
