@@ -102,7 +102,7 @@
       # Windows build
       ['target_platform != "emscripten" and OS == "win"', {
         'variables': {
-          'magick_win_lib': '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/lib'
+          'magick_win_lib': '<(module_root_dir)/deps/ImageMagick-Windows/Output/lib'
         },
         'actions': [
           {
