@@ -50,7 +50,7 @@ class ImageMagickDelegates(ConanFile):
       'brotli': True,
       'h265': True,
       'exr': True,
-      'fftw': True,
+      'fftw': False,
       'heif': True,
       'jbig': True,
       'color': True,
