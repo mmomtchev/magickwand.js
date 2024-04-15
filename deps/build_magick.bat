@@ -16,15 +16,12 @@ copy "%SCRIPT_DIR%\ImageMagick-Windows\ImageMagick\config\locale.xml" %DEST%
 copy "%SCRIPT_DIR%\ImageMagick-Windows\ImageMagick\config\log.xml" %DEST%
 copy "%SCRIPT_DIR%\ImageMagick-Windows\ImageMagick\config\mime.xml" %DEST%
 copy "%SCRIPT_DIR%\ImageMagick-Windows\ImageMagick\config\quantization-table.xml" %DEST%
-copy "%SCRIPT_DIR%\ImageMagick-Windows\VisualMagick\bin\configure.xml" %DEST%
-copy "%SCRIPT_DIR%\ImageMagick-Windows\VisualMagick\bin\ImageMagick.rdf" %DEST%
-copy "%SCRIPT_DIR%\ImageMagick-Windows\VisualMagick\bin\delegates.xml" %DEST%
-copy "%SCRIPT_DIR%\ImageMagick-Windows\VisualMagick\bin\policy.xml" %DEST%
-copy "%SCRIPT_DIR%\ImageMagick-Windows\VisualMagick\bin\sRGB.icc" %DEST%
-copy "%SCRIPT_DIR%\ImageMagick-Windows\VisualMagick\bin\thresholds.xml" %DEST%
-copy "%SCRIPT_DIR%\ImageMagick-Windows\VisualMagick\bin\type-ghostscript.xml" %DEST%
-copy "%SCRIPT_DIR%\ImageMagick-Windows\VisualMagick\bin\type.xml" %DEST%
+copy "%SCRIPT_DIR%\ImageMagick-Windows\Output\bin\configure.xml" %DEST%
+copy "%SCRIPT_DIR%\ImageMagick-Windows\Output\bin\delegates.xml" %DEST%
+copy "%SCRIPT_DIR%\ImageMagick-Windows\Output\bin\policy.xml" %DEST%
+copy "%SCRIPT_DIR%\ImageMagick-Windows\Output\bin\sRGB.icc" %DEST%
+copy "%SCRIPT_DIR%\ImageMagick-Windows\Output\bin\thresholds.xml" %DEST%
+copy "%SCRIPT_DIR%\ImageMagick-Windows\Output\bin\type-ghostscript.xml" %DEST%
+copy "%SCRIPT_DIR%\ImageMagick-Windows\Output\bin\type.xml" %DEST%
 
 copy "%SCRIPT_DIR%\ImageMagick-Windows\ImageMagick\LICENSE" %DEST%\LICENSE.txt
-copy "%SCRIPT_DIR%\ImageMagick-Windows\VisualMagick\NOTICE.txt" %DEST%
-copy "%SCRIPT_DIR%\ImageMagick-Windows\ImageMagick\README.txt" %DEST%
