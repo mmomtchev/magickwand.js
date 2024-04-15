@@ -107,7 +107,7 @@
         'actions': [
           {
             'action_name': 'make',
-            'inputs': [ '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/VisualStaticMT.sln' ],
+            'inputs': [ '<(module_root_dir)/deps/ImageMagick-Windows/IM7.Static.sln' ],
             'outputs': [ '<(module_root_dir)/deps/ImageMagick-Windows/VisualMagick/lib/CORE_<(winlibid)_Magick++_.lib' ],
             'action': [ '<(module_root_dir)/deps/build_magick.bat', '<(module_path)', '<(winbuildtype)' ]
           }
