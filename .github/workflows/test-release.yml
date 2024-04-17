@@ -31,12 +31,8 @@ jobs:
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
-      - name: Retrieve dependencies
-        run: |
-          npm install --ignore-scripts
-          npm run deps:download
-      - name: Install precompiled binaries
-        run: node scripts/install.mjs
+      - name: Install through npm
+        run: npm install
       - name: Run the unit tests headless
         uses: GabrielBB/xvfb-action@v1
         with:
