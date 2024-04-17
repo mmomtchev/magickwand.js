@@ -18077,7 +18077,7 @@ Napi::Value exports_MagickLibAddendum_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"-30 (Beta)");
+    jsresult = SWIG_FromCharPtr((const char *)"-30");
     
     
     
@@ -18222,7 +18222,7 @@ Napi::Value exports_MagickppLibAddendum_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"-30 (Beta)");
+    jsresult = SWIG_FromCharPtr((const char *)"-30");
     
     
     
@@ -18309,7 +18309,7 @@ Napi::Value exports_MagickGitRevision_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"36d01b6d1:20240329");
+    jsresult = SWIG_FromCharPtr((const char *)"babe7ad2f:20240407");
     
     
     
@@ -18338,7 +18338,7 @@ Napi::Value exports_MagickReleaseDate_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"2024-03-29");
+    jsresult = SWIG_FromCharPtr((const char *)"2024-04-07");
     
     
     
@@ -18425,7 +18425,7 @@ Napi::Value exports_MagickHomeURL_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"file:///home/mmom/src/magickwand.js-main/lib/binding/linux-x64/ImageMagick/share/doc/ImageMagick-7/index.html");
+    jsresult = SWIG_FromCharPtr((const char *)"file:///home/mmom/src/tmp/magickwand.js/lib/binding/linux-x64/ImageMagick/share/doc/ImageMagick-7/index.html");
     
     
     
@@ -18541,7 +18541,7 @@ Napi::Value exports_MagickVersion_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"ImageMagick 7.1.1-30 (Beta) Q16-HDRI x86_64 36d01b6d1:20240329 https://imagemagick.org");
+    jsresult = SWIG_FromCharPtr((const char *)"ImageMagick 7.1.1-30 Q16-HDRI x86_64 babe7ad2f:20240407 https://imagemagick.org");
     
     
     
