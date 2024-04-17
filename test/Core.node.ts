@@ -34,7 +34,7 @@ describe('Core', () => {
     this.timeout(10000);
     execFileSync(os.platform() === 'win32' ? 'npx.cmd' : 'npx',
       ['mocha', '--config', '.mocharc.security.json'],
-      { cwd: __dirname });
+      { cwd: __dirname, shell: true });
   });
 
 });
