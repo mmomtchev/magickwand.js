@@ -74,7 +74,9 @@ class ImageMagickDelegates(ConanFile):
 
       # Fonts are not available on WASM targets
       if self.options.fonts and self.settings.arch != 'wasm':
-        [self.requires(x) for x in ('libffi/3.4.4', 'fontconfig/2.14.2', 'freetype/2.13.2', 'fribidi/1.0.12', 'glib/2.78.1', 'harfbuzz/8.3.0')]
+        [self.requires(x, force=True) for x in (
+          'libffi/3.4.4', 'fontconfig/2.14.2', 'freetype/2.13.2', 'fribidi/1.0.12', 'glib/2.78.1', 'harfbuzz/8.3.0'
+        )]
 
       # LZMA is blocked by https://github.com/conan-io/conan-center-index/issues/20602
       if self.options.lzma and self.settings.arch != 'wasm':
@@ -129,7 +131,7 @@ class ImageMagickDelegates(ConanFile):
         self.requires('libwebp/1.3.2')
 
       if self.options.jpeg2000 or self.options.tiff or self.options.raw:
-        self.requires('libjpeg-turbo/3.0.2', override=True)
+        self.requires('libjpeg-turbo/3.0.2', force=True)
 
       if self.options.jpeg2000:
         self.requires('jasper/4.0.0')
