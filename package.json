@@ -39,7 +39,7 @@
     "lint": "eslint lib/*.cjs test/*.ts",
     "test": "mocha --reporter=tap test/*.test.ts",
     "preversion": "npm run lint && npm run test",
-    "postversion": "git push && git push --tags && node ./scripts/publish-packages.js",
+    "postversion": "git push && git push --tags && node ./scripts/publish-packages.mjs",
     "postpublish": "gh workflow run test-package.yml -F version=$npm_package_version",
     "configure:emscripten": "node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten",
     "example:browser": "cd example/browser/webpack && npx webpack-cli serve --mode=development --env development",

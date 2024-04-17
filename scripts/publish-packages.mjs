@@ -1,12 +1,16 @@
 // This script tries to find a publishing workflow with a dispatch trigger
 // in the Github Actions of the current project
 
-const exec = require('util').promisify(require('child_process').exec);
-const path = require('path');
-const { Octokit } = require('@octokit/core');
+import { promisify } from 'node:util';
+import { exec as execCb } from 'node:child_process';
+import * as path from 'node:path';
+import { promises as fs } from 'node:fs';
+import { Octokit } from '@octokit/core';
+import { fileURLToPath } from 'node:url';
+const exec = promisify(execCb);
 
 const octokit = new Octokit({ auth: process.env.NODE_PRE_GYP_GITHUB_TOKEN });
-const package_json = require(path.resolve(__dirname, '..', 'package.json'));
+const package_json = JSON.parse(await fs.readFile(path.resolve(fileURLToPath(import.meta.url), '..', '..', 'package.json')));
 const pkg = {
   repo: package_json.binary.hosting.repo.split('/')[1],
   owner: package_json.binary.hosting.repo.split('/')[0]
