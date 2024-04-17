@@ -16,6 +16,7 @@
         "tap",
         "--timeout",
         "0",
+        "test/*.test.ts"
       ],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
