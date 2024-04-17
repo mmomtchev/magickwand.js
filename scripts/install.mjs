@@ -37,7 +37,10 @@ let native = false;
 let wasm = false;
 
 const verbose = process.env.npm_config_loglevel === 'verbose';
-const opts = verbose ? { stdio: 'inherit' } : undefined;
+const opts = {
+  stdio: verbose ? 'inherit' : undefined,
+  shell: true
+};
 
 const delegates = [
   'fonts',
