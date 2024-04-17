@@ -4,9 +4,10 @@
 
  - New build system based on conan 2
  - Upgrade ImageMagick to the latest 7.1.1-30 (git)
+ 
+### [1.0.3] 2024-04-17
 
-### [1.0.3]
-
+ - Compatibility with Node.js 18.20.2 / 21.7.3 after https://github.com/nodejs/node/issues/52475
  - Upgrade ImageMagick to the latest 7.1.1-28
 
 ### [1.0.2] 2024-01-26
