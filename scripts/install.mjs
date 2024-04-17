@@ -123,7 +123,7 @@ try {
   console.log('Launching node-pre-gyp for WASM');
   cp.execFileSync(npx,
     ['node-pre-gyp', 'install', '--target_platform=emscripten', '--target_arch=wasm32'],
-    { env: { ...process.env, npm_config_build_from_source: undefined } }
+    { env: { ...process.env, npm_config_build_from_source: undefined }, ...opts }
   );
   wasm = true;
 } catch (e) {
