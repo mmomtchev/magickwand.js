@@ -13,6 +13,13 @@ deps/ImageMagick/www/**
 deps/ImageMagick/PerlMagick/**
 !deps/ImageMagick/PerlMagick/**/*.in
 
+/deps/ImageMagick/MagickCore/MagickCore-config
+/deps/ImageMagick/MagickCore/magick-baseconfig.h
+/deps/ImageMagick/MagickCore/threshold-map.h
+/deps/ImageMagick/MagickCore/version.h
+/deps/ImageMagick/Magick++/bin/Magick++-config
+/deps/ImageMagick/MagickWand/MagickWand-config
+
 *.a
 *.o
 *.la
