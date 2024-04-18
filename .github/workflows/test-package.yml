@@ -40,9 +40,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
       - name: Create package.json
         run: npm init --yes
       - name: Install fonts on Ubuntu
@@ -95,9 +92,6 @@ jobs:
       - name: Enable long paths on Windows
         run: git config --system core.longpaths true
         if: runner.os == 'Windows'
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
