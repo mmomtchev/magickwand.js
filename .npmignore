@@ -17,8 +17,13 @@ deps/ImageMagick/PerlMagick/**
 /deps/ImageMagick/MagickCore/magick-baseconfig.h
 /deps/ImageMagick/MagickCore/threshold-map.h
 /deps/ImageMagick/MagickCore/version.h
-/deps/ImageMagick/Magick++/bin/Magick++-config
+/deps/ImageMagick/MagickCore/MagickCore-7.Q16HDRI.pc
+/deps/ImageMagick/MagickCore/ImageMagick-7.Q16HDRI.pc
 /deps/ImageMagick/MagickWand/MagickWand-config
+/deps/ImageMagick/MagickWand/MagickWand-7.Q16HDRI.pc
+/deps/ImageMagick/Magick++/bin/Magick++-config
+/deps/ImageMagick/Magick++/lib/Magick++-7.Q16HDRI.pc
+/deps/ImageMagick/local.exp
 
 *.a
 *.o

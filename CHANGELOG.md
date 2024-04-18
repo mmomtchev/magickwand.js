@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.1] 2024-04-18
+
+ - Fix rebuild from source on Windows
+
 ## [1.1.0] 2024-04-17
 
  - New build system based on conan 2

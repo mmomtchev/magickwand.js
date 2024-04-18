@@ -1,15 +1,16 @@
 name: Test npm package
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
-      version:
-        description: "Package version to test"
-        required: true
-      im_version:
-        description: "ImageMagick commit-ish to checkout"
-        required: false
-        default: 'main'
+      package:
+        type: string
+        default: magickwand.js@latest
+        description: package tarball or npm name to install
+      download:
+        type: boolean
+        default: false
+        description: whether the package artifact needs to be downloaded
 
 
 jobs:
@@ -41,23 +42,25 @@ jobs:
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
-      - name: Set up the unit tests
-        run: |
-          curl https://codeload.github.com/mmomtchev/magickwand.js/zip/refs/tags/v${{ github.event.inputs.version }} --output repo.zip
-          unzip repo.zip
-          mv magickwand.js-${{ github.event.inputs.version }}/test .
       - name: Install dependencies
         run: |
           npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths \
             @types/chai @types/chai-as-promised @types/mocha @types/node \
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
         shell: bash
-      - name: Install magickwand.js from npm
+      - name: Download the package
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ github.event.inputs.package }}
+        if: github.event.inputs.download
+      - name: Install magickwand.js from ${{ inputs.package }}
         run: |
-          npm install --force magickwand.js@${{ github.event.inputs.version }}
+          npm install ${{ inputs.package }}
           mkdir -p deps/ImageMagick/config
           cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
         shell: bash
+      - name: Set up the unit tests
+        run: mv node_modules/magickwand.js/test .
       - name: Run the unit tests headless
         uses: GabrielBB/xvfb-action@v1
         with:
@@ -65,7 +68,7 @@ jobs:
         env:
           TS_NODE_PROJECT: ${{ github.workspace }}/test/tsconfig.standalone.json
           MOCHA_INTEGRATION: node,browser
-          MOCHA_MAGICK_INSTALL: npm install --force magickwand.js@${{ github.event.inputs.version }}
+          MOCHA_MAGICK_INSTALL: npm install --force ${{ inputs.download && format('{0}/{1}', github.workspace, inputs.package) || inputs.package }}
 
 
   test_npm_rebuild:
@@ -80,7 +83,7 @@ jobs:
           - windows-2022
           - macos-11
           - macos-12
-        node-version: [18.x, 20.x]
+        node-version: [18.x, 20.x, 21.x]
 
     steps:
       - name: Enable long paths on Windows
@@ -98,25 +101,27 @@ jobs:
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
-      - name: Set up the unit tests
-        run: |
-          curl https://codeload.github.com/mmomtchev/magickwand.js/zip/refs/tags/v${{ github.event.inputs.version }} --output repo.zip
-          unzip repo.zip
-          mv magickwand.js-${{ github.event.inputs.version }}/test .
       - name: Install dependencies
         run: |
           npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths \
             @types/chai @types/chai-as-promised @types/mocha @types/node \
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
         shell: bash
-      - name: Install magickwand.js from npm
+      - name: Download the package
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ github.event.inputs.package }}
+        if: github.event.inputs.download
+      - name: Install magickwand.js from ${{ inputs.package }}
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
-          npm install --verbose --foreground-scripts=true \
-            magickwand.js@${{ github.event.inputs.version }} --build-from-source
+          npm install --verbose --foreground-scripts \
+            ${{ inputs.package }} --build-from-source
           mkdir -p deps/ImageMagick/config
           cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
         shell: bash
+      - name: Set up the unit tests
+        run: mv node_modules/magickwand.js/test .
       - name: Run the unit tests headless
         uses: GabrielBB/xvfb-action@v1
         with:
@@ -124,7 +129,8 @@ jobs:
         env:
           TS_NODE_PROJECT: ${{ github.workspace }}/test/tsconfig.standalone.json
           MOCHA_INTEGRATION: node,browser
-          MOCHA_MAGICK_INSTALL: npm install --force magickwand.js@${{ github.event.inputs.version }}
+          MOCHA_MAGICK_INSTALL: npm install --force ${{ inputs.download && format('{0}/{1}', github.workspace, inputs.package) || inputs.package }}
+
 
   test_npm_rebuild_light:
     runs-on: ${{ matrix.platform }}
@@ -146,30 +152,27 @@ jobs:
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
-      - name: Set up the unit tests
-        run: |
-          curl https://codeload.github.com/mmomtchev/magickwand.js/zip/refs/tags/v${{ github.event.inputs.version }} --output repo.zip
-          unzip repo.zip
-          mv magickwand.js-${{ github.event.inputs.version }}/test .
-      - name: Install dependencies
-        run: |
-          npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths \
-            @types/chai @types/chai-as-promised @types/mocha @types/node \
-            karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
-        shell: bash
-      - name: Install magickwand.js from npm
+      - name: Download the package
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ github.event.inputs.package }}
+        if: github.event.inputs.download
+      - name: Install magickwand.js from ${{ inputs.package }}
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
-          npm install --verbose --foreground-scripts=true                           \
-            magickwand.js@${{ github.event.inputs.version }}                        \
+          npm install --verbose --foreground-scripts                                \
+            ${{ inputs.package }}                        \
             --build-from-source                                                     \
             --fonts=false --jpeg=true --png=false --tiff=false                      \
             --webp=false --jpeg2000=false --raw=false --openmedia=false             \
             --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
-            --jbig=true --color=false --xml=false --gzip=false --zip=false            \
+            --jbig=true --color=false --xml=false --gzip=false --zip=false          \
             --bzip2=true --zstd=false --xz=false --lzma=false --simd=false          \
             --openmp=true --display=false
         shell: bash
+      - name: Test loading the package
+        run: node -p 'require("magickwand.js").MagickCore.GetMagickDelegates()'
+
 
   test_npm_rebuild_shared:
     runs-on: ${{ matrix.platform }}
@@ -201,22 +204,22 @@ jobs:
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
-      - name: Set up the unit tests
-        run: |
-          curl https://codeload.github.com/mmomtchev/magickwand.js/zip/refs/tags/v${{ github.event.inputs.version }} --output repo.zip
-          unzip repo.zip
-          mv magickwand.js-${{ github.event.inputs.version }}/test .
       - name: Install dependencies
         run: |
           npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths \
             @types/chai @types/chai-as-promised @types/mocha @types/node \
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
         shell: bash
-      - name: Install magickwand.js from npm
+      - name: Download the package
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ github.event.inputs.package }}
+        if: github.event.inputs.download
+      - name: Install magickwand.js from ${{ inputs.package }}
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
           npm install --verbose --foreground-scripts=true      \
-            magickwand.js@${{ github.event.inputs.version }}   \
+            ${{ inputs.package }}                              \
             --build-from-source --shared_imagemagick           \
             --magicklibs="-lMagick++-7.Q16HDRI -lMagickWand-7.Q16HDRI -lMagickCore-7.Q16HDRI"
           mkdir -p deps/ImageMagick/config
@@ -225,6 +228,8 @@ jobs:
           CFLAGS: -I/usr/include/ImageMagick-7
           CXXFLAGS: -I/usr/include/ImageMagick-7 
         shell: bash
+      - name: Set up the unit tests
+        run: mv node_modules/magickwand.js/test .
       - name: Run the unit tests headless
         uses: GabrielBB/xvfb-action@v1
         with:
@@ -232,4 +237,4 @@ jobs:
         env:
           TS_NODE_PROJECT: ${{ github.workspace }}/test/tsconfig.standalone.json
           MOCHA_INTEGRATION: node,browser
-          MOCHA_MAGICK_INSTALL: npm install --force magickwand.js@${{ github.event.inputs.version }}
+          MOCHA_MAGICK_INSTALL: npm install --force ${{ inputs.download && format('{0}/{1}', github.workspace, inputs.package) || inputs.package }}
