@@ -11,6 +11,12 @@ on:
         type: boolean
         default: false
         description: whether the package artifact needs to be downloaded
+  workflow_dispatch:
+    inputs:
+      package:
+        type: string
+        default: magickwand.js@latest
+        description: package tarball or npm name to install
 
 
 jobs:
