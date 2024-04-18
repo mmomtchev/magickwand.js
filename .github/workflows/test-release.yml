@@ -62,6 +62,7 @@ jobs:
       - name: Pack
         id: pack
         run: |
+          npm run deps:download
           npm pack
           echo package=`echo magickwand.js-*.tgz` >> $GITHUB_OUTPUT
       - name: Upload tarball
