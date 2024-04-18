@@ -42,13 +42,10 @@ jobs:
           MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
 
 
-  test_package:
-    runs-on: ${{ matrix.platform }}
-
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: [ubuntu-latest]
+  pack:
+    runs-on: ubuntu-latest
+    outputs:
+      package: ${{ steps.pack.outputs.package }}
 
     steps:
       - uses: actions/checkout@v4
@@ -63,16 +60,20 @@ jobs:
         with:
           python-version: "3.11"
       - name: Pack
+        id: pack
         run: |
           npm pack
-          echo FILE=`echo magickwand.js-*.tgz` >> $GITHUB_ENV
+          echo package=`echo magickwand.js-*.tgz` >> $GITHUB_OUTPUT
       - name: Upload tarball
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.FILE }}
-          path: ${{ env.FILE }}
-      - name: Test package
-        uses: mmomtchev/magickwand.js/.github/workflows/test-package.yml@win-build
-        with:
-          package: ${{ env.FILE }}
-          download: true
+          name: ${{ steps.pack.outputs.package }}
+          path: ${{ steps.pack.outputs.package }}
+
+
+  test_package:
+    uses: mmomtchev/magickwand.js/.github/workflows/test-package.yml@win-build
+    needs: pack
+    with:
+      package: ${{ needs.pack.outputs.package }}
+      download: true
