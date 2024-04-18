@@ -65,7 +65,7 @@ class ImageMagickDelegates(ConanFile):
       'display': True
     }
 
-    generators = 'PkgConfigDeps'
+    generators = [ 'MesonToolchain', 'PkgConfigDeps', 'CMakeDeps' ]
 
     def requirements(self):
       if self.settings.os == 'Windows':
