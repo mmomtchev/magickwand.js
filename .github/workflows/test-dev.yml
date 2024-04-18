@@ -42,8 +42,6 @@ jobs:
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
-      - name: Install conan dependencies
-        run: npm run conan:native
       - name: Build magickwand.js
         run: npm install --build-from-source --verbose --foreground-scripts
       - name: magick_configure.log

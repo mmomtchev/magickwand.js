@@ -40,3 +40,41 @@ jobs:
         env:
           MOCHA_INTEGRATION: node,browser
           MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
+
+
+  pack:
+    runs-on: ubuntu-latest
+    outputs:
+      package: ${{ steps.pack.outputs.package }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Pack
+        id: pack
+        run: |
+          npm run deps:download
+          npm pack
+          echo package=`echo magickwand.js-*.tgz` >> $GITHUB_OUTPUT
+      - name: Upload tarball
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.pack.outputs.package }}
+          path: ${{ steps.pack.outputs.package }}
+
+
+  test_package:
+    uses: mmomtchev/magickwand.js/.github/workflows/test-package.yml@win-build
+    needs: pack
+    with:
+      package: ${{ needs.pack.outputs.package }}
+      download: true
