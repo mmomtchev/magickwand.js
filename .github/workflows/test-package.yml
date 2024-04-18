@@ -83,6 +83,9 @@ jobs:
         node-version: [18.x, 20.x]
 
     steps:
+      - name: Enable long paths on Windows
+        run: git config --system core.longpaths true
+        if: runner.os == 'Windows'
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
