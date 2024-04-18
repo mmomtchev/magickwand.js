@@ -45,11 +45,10 @@ jobs:
       - name: Install conan dependencies
         run: npm run conan:native
       - name: Build magickwand.js
-        run: npm install --build-from-source --verbose
+        run: npm install --build-from-source --verbose --foreground-scripts
       - name: magick_configure.log
         run: cat build/magick_configure.log
         shell: bash
-      - run: npx @mapbox/node-pre-gyp build
       - run: npx mocha test/node.test.ts test/integration.test.ts
         env:
           MOCHA_INTEGRATION: node
