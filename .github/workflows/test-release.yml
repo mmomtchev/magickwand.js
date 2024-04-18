@@ -72,7 +72,7 @@ jobs:
           name: ${{ env.FILE }}
           path: ${{ env.FILE }}
       - name: Test package
-        uses: ./test-package.yml
+        uses: mmomtchev/magickwand.js/.github/workflows/test-package.yml@win-build
         with:
           package: ${{ env.FILE }}
           download: true
