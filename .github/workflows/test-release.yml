@@ -73,7 +73,7 @@ jobs:
 
 
   test_package:
-    uses: mmomtchev/magickwand.js/.github/workflows/test-package.yml@win-build
+    uses: mmomtchev/magickwand.js/.github/workflows/test-package.yml@main
     needs: pack
     with:
       package: ${{ needs.pack.outputs.package }}
