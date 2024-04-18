@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.x]
+
+ - Support rebuilding from source with Python 3.12 without `distutils`
+
 ## [1.1.0] 2024-04-17
 
  - New build system based on conan 2
