@@ -57,8 +57,8 @@ jobs:
       - name: Download the package
         uses: actions/download-artifact@v4
         with:
-          name: ${{ github.event.inputs.package }}
-        if: github.event.inputs.download
+          name: ${{ inputs.package }}
+        if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
         run: |
           npm install ${{ inputs.package }}
@@ -116,8 +116,8 @@ jobs:
       - name: Download the package
         uses: actions/download-artifact@v4
         with:
-          name: ${{ github.event.inputs.package }}
-        if: github.event.inputs.download
+          name: ${{ inputs.package }}
+        if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
@@ -161,8 +161,8 @@ jobs:
       - name: Download the package
         uses: actions/download-artifact@v4
         with:
-          name: ${{ github.event.inputs.package }}
-        if: github.event.inputs.download
+          name: ${{ inputs.package }}
+        if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
@@ -219,8 +219,8 @@ jobs:
       - name: Download the package
         uses: actions/download-artifact@v4
         with:
-          name: ${{ github.event.inputs.package }}
-        if: github.event.inputs.download
+          name: ${{ inputs.package }}
+        if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
