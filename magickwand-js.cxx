@@ -996,7 +996,7 @@ Napi::Value exports_MagickOffsetFormat_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"lld");
+    jsresult = SWIG_FromCharPtr((const char *)"ld");
     
     
     
@@ -1025,7 +1025,7 @@ Napi::Value exports_MagickSizeFormat_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"llu");
+    jsresult = SWIG_FromCharPtr((const char *)"lu");
     
     
     
@@ -18077,7 +18077,7 @@ Napi::Value exports_MagickLibAddendum_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"-30");
+    jsresult = SWIG_FromCharPtr((const char *)"-30 (Beta)");
     
     
     
@@ -18222,7 +18222,7 @@ Napi::Value exports_MagickppLibAddendum_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"-30");
+    jsresult = SWIG_FromCharPtr((const char *)"-30 (Beta)");
     
     
     
@@ -18309,7 +18309,7 @@ Napi::Value exports_MagickGitRevision_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"babe7ad2f:20240407");
+    jsresult = SWIG_FromCharPtr((const char *)"36d01b6d1:20240329");
     
     
     
@@ -18338,7 +18338,7 @@ Napi::Value exports_MagickReleaseDate_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"2024-04-07");
+    jsresult = SWIG_FromCharPtr((const char *)"2024-03-29");
     
     
     
@@ -18425,7 +18425,7 @@ Napi::Value exports_MagickHomeURL_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"file:///home/mmom/src/tmp/magickwand.js/lib/binding/linux-x64/ImageMagick/share/doc/ImageMagick-7/index.html");
+    jsresult = SWIG_FromCharPtr((const char *)"file:///ImageMagick/share/doc/ImageMagick-7/index.html");
     
     
     
@@ -18541,7 +18541,7 @@ Napi::Value exports_MagickVersion_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"ImageMagick 7.1.1-30 Q16-HDRI x86_64 babe7ad2f:20240407 https://imagemagick.org");
+    jsresult = SWIG_FromCharPtr((const char *)"ImageMagick 7.1.1-30 (Beta) Q16-HDRI x86_64 36d01b6d1:20240329 https://imagemagick.org");
     
     
     
@@ -22244,29 +22244,6 @@ int SWIG_AsVal_unsigned_SS_int (Napi::Value valRef, unsigned int* val)
 fail:
   return SWIG_ERROR;
 }
-
-
-#ifdef SWIG_LONG_LONG_AVAILABLE
-SWIGINTERN
-int SWIG_AsVal_unsigned_SS_long_SS_long (Napi::Value obj, unsigned long long *val)
-{
-  if(!obj.IsNumber()) {
-    return SWIG_TypeError;
-  }
-  if (obj.ToNumber().Int64Value() < 0) {
-    return SWIG_TypeError;
-  }
-  if (val) {
-    Napi::Number num;
-    NAPI_CHECK_RESULT(obj.ToNumber(), num);
-    *val = static_cast<unsigned long long>(num.Int64Value());
-  }
-  return SWIG_OK;
-  goto fail;
-fail:
-  return SWIG_ERROR;
-}
-#endif
 
 
 // js_global_getter
