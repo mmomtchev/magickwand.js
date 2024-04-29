@@ -27,7 +27,7 @@
   "scripts": {
     "deps:download": "node scripts/deps-download.js",
     "publish:generated": "node scripts/publish-generated.js",
-    "noinstall": "xpm install && xpm run init && xpm run prepare --config native && xpm run build --config native",
+    "install": "xpm install && xpm run npm-install",
     "preinstall": "npm run deps:download",
     "lint": "eslint lib/*.cjs test/*.ts",
     "test": "mocha --reporter=tap test/*.test.ts",
@@ -167,7 +167,7 @@
         "{{ properties.commandConanInit }}",
         "{{ properties.commandMesonInstall }}"
       ],
-      "install": [
+      "npm-install": [
         "{{ properties.scriptbuildFromSource }}",
         "{{ properties.scriptbuildWASMFromSource }}"
       ]
