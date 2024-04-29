@@ -144,7 +144,7 @@ class ImageMagickDelegates(ConanFile):
       if self.options.simd and self.settings.arch != 'wasm':
         self.requires('highway/1.0.3')
 
-      if self.options.openmp and self.settings.arch != 'wasm':
+      if self.options.openmp and self.settings.arch != 'wasm' and self.settings.os != 'Windows':
         self.requires('llvm-openmp/12.0.1')
 
       if self.options.display and self.settings.arch != 'wasm':
