@@ -3,6 +3,7 @@ const fs = require('fs');
 const child = require('child_process');
 
 const dirs = [
+  'src',
   'deps/ImageMagick/Magick++/lib',
   'deps/ImageMagick'
 ];

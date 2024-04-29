@@ -5,7 +5,8 @@
     "magickcore.h": "c",
     "version.h": "c",
     "option.h": "c",
-    "cache-view.h": "c"
+    "cache-view.h": "c",
+    "magick-config.h": "c"
   },
   "C_Cpp.default.configurationProvider": "mesonbuild.mesonbuild"
 }

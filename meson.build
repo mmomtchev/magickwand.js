@@ -23,7 +23,15 @@ dependencies = []
 
 # We need the Node.js arch name, not the Python one
 arch = run_command('node', '-p', '`${os.platform()}-${os.arch()}`', check: true).stdout().strip()
-lib_dir = meson.global_source_root() / 'lib'
+if meson.is_cross_build()
+  if meson.get_compiler('cpp').get_id() == 'emscripten'
+    arch = 'emscripten-' + target_machine.cpu_family()
+  else
+    error('Only emscripten-wasm32 cross-compilation is supported at the moment')
+  endif
+endif
+root_dir = meson.global_source_root()
+lib_dir = root_dir / 'lib'
 install_dir = lib_dir / 'binding' / arch
 
 cmake_dependencies = [
@@ -33,9 +41,8 @@ cmake_options = [
   {'MAGICKCORE_QUANTUM_DEPTH': '16'},
   {'MAGICK_BUILD_STATIC': true},
   {'MAGICK_HDRI_ENABLE': true},
-  # ImageMagick will be "installed" in ./lib/binding
-  {'CMAKE_INSTALL_PREFIX': install_dir / 'ImageMagick'},
-  {'CMAKE_TOOLCHAIN_FILE': meson.global_build_root() / 'conan_toolchain.cmake'}
+  {'INSTALLED_SUPPORT': false},
+  {'BUILD_UTILITIES': not meson.is_cross_build()},
 ]
 
 # ====================
@@ -45,21 +52,19 @@ cmake_options = [
 # --------------------
 # SWIG compiler options
 # --------------------
-gcc_cpp_args = [
+shared_cpp_args = [
   '-Wno-deprecated-declarations',
   '-Wno-unused-function',
   '-Wno-type-limits',
   '-Wno-deprecated-copy',
-  '-Wno-attributes',
-  '-Wno-maybe-uninitialized'
+  '-Wno-attributes'
 ]
-clang_cpp_args = (
-  gcc_cpp_args + [
+gcc_cpp_args = shared_cpp_args + [ '-Wno-maybe-uninitialized' ]
+clang_cpp_args = shared_cpp_args + [
     '-Wno-sometimes-uninitialized',
     '-Wpotentially-evaluated-expression',
     '-Wundefined-inline',
   ]
-)
 msvc_cpp_args = ['/wo6246', '/wo28182', '/Zc:__cplusplus', '/bigobj']
 
 async = true
@@ -110,7 +115,7 @@ if meson.get_compiler('cpp').get_id() == 'emscripten'
       '-sALLOW_MEMORY_GROWTH=1',
       '-sEXPORTED_FUNCTIONS=["_napi_register_wasm_v1","_malloc","_free"]',
       '-sEXPORTED_RUNTIME_METHODS=["FS"]',
-      '-sINCOMING_MODULE_JS_API=[]',
+      #'-sINCOMING_MODULE_JS_API=["wasmMemory","buffer"]',
       '-sNO_DISABLE_EXCEPTION_CATCHING',
       '--bind',
       '-sMODULARIZE',
@@ -119,6 +124,16 @@ if meson.get_compiler('cpp').get_id() == 'emscripten'
       # Pay attention to this value, if you overflow it, you will get
       # all kinds of weird errors
       '-sSTACK_SIZE=1MB',
+      # This should probably be optional
+      '-sENVIRONMENT=web,webview,worker',
+      # This one is used for unit testing, it is only 4Kb
+      f'--embed-file=@root_dir@/test/data/wizard.gif@wizard.gif',
+      # These are needed by ImageMagick
+      f'--embed-file=@install_dir@/etc/ImageMagick-7/policy.xml@policy.xml',
+      f'--embed-file=@install_dir@/etc/ImageMagick-7/colors.xml@colors.xml',
+      f'--embed-file=@install_dir@/etc/ImageMagick-7/log.xml@log.xml',
+      f'--embed-file=@install_dir@/share/ImageMagick-7/locale.xml@locale.xml',
+      f'--embed-file=@install_dir@/share/ImageMagick-7/english.xml@english.xml'
     ],
     language: ['c', 'cpp'],
   )
@@ -191,13 +206,6 @@ cmake_opts.add_cmake_defines(
   ],
 )
 cmake_opts.add_cmake_defines(cmake_options)
-if get_option('debug')
-  cmake_opts.add_cmake_defines({'CMAKE_BUILD_TYPE': 'Debug'})
-else
-  cmake_opts.add_cmake_defines({'CMAKE_BUILD_TYPE': 'Release'})
-endif
-cmake_opts.set_install(false)
-cmake_opts.set_install(true, target: 'generate_proj_db')
 
 foreach cmake_dep : cmake_dependencies
   project = cmake.subproject(cmake_dep.get('project'), options: cmake_opts)
@@ -214,7 +222,7 @@ endforeach
 main_target = shared_module(
   module_name,
   sources,
-  include_directories: [includes, 'src'],
+  include_directories: [includes],
   name_prefix: '',
   name_suffix: name_suffix,
   install: true,

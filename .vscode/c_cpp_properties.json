@@ -4,12 +4,34 @@
             "name": "Linux",
             "includePath": [
                 "${default}",
+                "${workspaceFolder}/build/native/deps/ImageMagick/__CMake_build",
                 "${workspaceFolder}/deps/ImageMagick/Magick++/lib",
                 "${workspaceFolder}/deps/ImageMagick/MagickWand",
                 "${workspaceFolder}/deps/ImageMagick",
                 "${workspaceFolder}"
             ],
-            "defines": [],
+            "defines": [
+                "MAGICKCORE_QUANTUM_DEPTH=16",
+                "MAGICKCORE_HDRI_ENABLE=1"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "c++14"
+        },
+        {
+            "name": "WASM",
+            "includePath": [
+                "${default}",
+                "${workspaceFolder}/build/wasm/deps/ImageMagick/__CMake_build",
+                "${workspaceFolder}/deps/ImageMagick/Magick++/lib",
+                "${workspaceFolder}/deps/ImageMagick/MagickWand",
+                "${workspaceFolder}/deps/ImageMagick",
+                "${workspaceFolder}"
+            ],
+            "defines": [
+                "MAGICKCORE_QUANTUM_DEPTH=16",
+                "MAGICKCORE_HDRI_ENABLE=1"
+            ],
             "compilerPath": "/usr/bin/g++",
             "cStandard": "c17",
             "cppStandard": "c++14"

@@ -41,9 +41,6 @@ jobs:
         if: startsWith(matrix.platform, 'ubuntu')
       - name: Build magickwand.js
         run: npm install --build-from-source --verbose --foreground-scripts
-      - name: magick_configure.log
-        run: cat build/magick_configure.log
-        shell: bash
       - run: npx mocha test/node.test.ts test/integration.test.ts
         env:
           MOCHA_INTEGRATION: node
@@ -82,12 +79,9 @@ jobs:
             --fonts=false --jpeg=true --png=false --tiff=false                      \
             --webp=false --jpeg2000=false --raw=false --openmedia=false             \
             --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
-            --jbig=true --color=false --xml=false --gzip=false --zip=false            \
+            --jbig=true --color=false --xml=false --gzip=false --zip=false          \
             --bzip2=true --zstd=false --xz=false --lzma=false --simd=false          \
             --openmp=true --display=false
-      - name: magick_configure.log
-        run: cat build/magick_configure.log
-        shell: bash
       - run: npx @mapbox/node-pre-gyp build
 
   wasm:
@@ -105,6 +99,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - name: Setup emscripten
+        uses: mymindstorm/setup-emsdk@v13
+        with:
+          version: 3.1.53
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
@@ -112,13 +110,7 @@ jobs:
           path: ~/.conan2
           key: wasm-conan
       - run: npm run conan:emscripten
-      - run: npm install --ignore-scripts
-      - run: npm run deps:download
-      - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
-      - name: magick_configure.log
-        run: cat build/magick_configure.log
-        shell: bash
-      - run: npx @mapbox/node-pre-gyp build
+      - run: npm install --build-wasm-from-source
       - name: Check size
         run: |
           echo "::notice::Default WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
@@ -146,29 +138,24 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - name: Setup emscripten
+        uses: mymindstorm/setup-emsdk@v13
+        with:
+          version: 3.1.53
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
         with:
           path: ~/.conan2
           key: wasm-light-conan
-      - name: Install conan dependencies (light)
-        run: |
-          npm run conan:emscripten --                                               \
+      - run: |
+          npm install --build-wasm-from-source                                      \
             -ofonts=False -ojpeg=True -opng=False -otiff=False                      \
             -owebp=False -ojpeg2000=False -oraw=False -oopenmedia=False             \
             -obrotli=False -oh265=False -oexr=False -offtw=False -oheif=False       \
             -ojbig=True -ocolor=False -oxml=False -ogzip=False -ozip=False          \
             -obzip2=True -ozstd=False -oxz=False -olzma=False -osimd=False          \
             -oopenmp=True -odisplay=False
-      - run: npm install --ignore-scripts
-      - run: npm run deps:download
-      - name: Configure WASM version
-        run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
-      - name: magick_configure.log
-        run: cat build/magick_configure.log
-        shell: bash
-      - run: npx @mapbox/node-pre-gyp build
       - name: Check size
         run: |
           echo "::notice::Light WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"

@@ -65,13 +65,9 @@ class ImageMagickDelegates(ConanFile):
       'display': True
     }
 
-    generators = [ 'MesonToolchain', 'PkgConfigDeps', 'CMakeDeps' ]
+    generators = [ 'MesonToolchain', 'CMakeDeps', 'CMakeToolchain' ]
 
     def requirements(self):
-      if self.settings.os == 'Windows':
-        # On Windows ImageMagick is self-contained
-        return
-
       # Fonts are not available on WASM targets
       if self.options.fonts and self.settings.arch != 'wasm':
         [self.requires(x, force=True) for x in (
@@ -171,72 +167,3 @@ class ImageMagickDelegates(ConanFile):
       # When building with emscripten, the main exe is called zstd.js and all symlinks are broken
       if self.settings.arch == 'wasm' and self.options.zstd:
         self.options['zstd'].build_programs = False
-
-    def generate(self):
-      aggregated_cpp_info = CppInfo(self)
-      deps = self.dependencies.host.topological_sort
-      deps = [dep for dep in reversed(deps.values())]
-      for dep in deps:
-          dep_cppinfo = dep.cpp_info.aggregated_components()
-          aggregated_cpp_info.merge(dep_cppinfo)
-
-      include_dirs   = [f'"{dir}"'    for dir    in aggregated_cpp_info.includedirs]        
-      cflags         = [f'"{flag}"'   for flag   in aggregated_cpp_info.cflags]
-      cxxflags       = [f'"{flag}"'   for flag   in aggregated_cpp_info.cxxflags]
-      defines        = [f'"{define}"' for define in aggregated_cpp_info.defines]
-      lib_dirs       = [f'"{dir}"'    for dir    in aggregated_cpp_info.libdirs]
-      linkflags      = [f'"{flag}"'   for flag   in aggregated_cpp_info.sharedlinkflags]
-      libs           = [f'"-l{lib}"'  for lib    in aggregated_cpp_info.libs]
-      libs          += [f'"-l{lib}"'  for lib    in aggregated_cpp_info.system_libs]
-
-      save(self, 'conan_compile_settings.gypi',
-        '{\n' +
-        '  "include_dirs": [\n' +
-        '    ' + ', '.join(include_dirs) + '\n' +
-        '  ],\n' +
-        '  "defines": [\n' +
-        '    ' + ', '.join(defines) + '\n' +
-        '  ],\n' +
-        '  "cflags": [\n' +
-        '    ' + ', '.join(cflags) + '\n' +
-        '  ],\n' +
-        '  "cxxflags": [\n' +
-        '    ' + ', '.join(cxxflags) + '\n' +
-        '  ]\n' +
-        '}\n'
-      )
-      save(self, 'conan_link_settings.gypi',
-        '{\n' +
-        '  "ldflags": [\n' +
-        '    ' + ', '.join(linkflags) + '\n' +
-        '  ],\n' +
-        '  "libraries": [\n' +
-        '    ' + ', '.join(libs) + '\n' +
-        '  ],\n' +
-        '  "library_dirs": [\n' +
-        '    ' + ', '.join(lib_dirs) + '\n' +
-        '  ]\n' +
-        '}\n'
-      )
-
-      if self.conf.get('tools.build:compiler_executables'):
-        cc = self.conf.get('tools.build:compiler_executables')['c']
-        cpp = self.conf.get('tools.build:compiler_executables')['cpp']
-        save(self, 'conan_compiler.gypi', 
-        '{ "conditions": [\n' +
-        '  ["target_platform == \'emscripten\'", {\n' +
-        '   "make_global_settings": [\n' +
-        f'      ["CXX", "{cpp}"],\n' +
-        f'      ["CC", "{cc}"],\n' +
-        f'      ["CXX.target", "{cpp}"],\n' +
-        f'      ["CC.target", "{cc}"],\n' +
-        f'      ["LINK", "{cc}"],\n' +
-        '   ]\n' +
-        ' }]\n' + 
-        ']}\n'
-        )
-      else:
-        save(self, 'conan_compiler.gypi', '{}')
-
-      if 'emsdk' in self.dependencies.build:
-        save(self, 'conan_emsdk.path', str(self.dependencies.build['emsdk'].package_path))
