@@ -130,7 +130,7 @@
         "darwin": "."
       },
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
-      "cwd": "{{ '/' | path_relative: '.' }}",
+      "cwd": "{{ path.sep | path_relative: '.' }}",
       "installFolderPath": "{{ '/' | path_join: properties.cwd | path_join: 'lib' | path_join: 'binding' | path_join: properties.platformId }}",
       "commandDownloadEnvironment": "node hadron/hadron-download-headers.mjs",
       "commandGenerate_magickcore": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickCore swig/magickcore.i",
