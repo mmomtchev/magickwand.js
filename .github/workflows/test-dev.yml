@@ -30,6 +30,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - uses: seanmiddleditch/gha-setup-ninja@master
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
@@ -63,6 +64,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - uses: seanmiddleditch/gha-setup-ninja@master
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
@@ -99,6 +101,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - uses: seanmiddleditch/gha-setup-ninja@master
       - name: Setup emscripten
         uses: mymindstorm/setup-emsdk@v13
         with:
@@ -139,6 +142,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - uses: seanmiddleditch/gha-setup-ninja@master
       - name: Setup emscripten
         uses: mymindstorm/setup-emsdk@v13
         with:
@@ -180,6 +184,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - uses: seanmiddleditch/gha-setup-ninja@master
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
