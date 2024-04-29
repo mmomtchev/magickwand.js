@@ -13,7 +13,10 @@ const source_path = path.resolve(__dirname, '..', 'src');
 
 const hash = crypto.createHash('md5');
 for (const file of fs.readdirSync(source_path, 'utf8').sort()) {
-  const data = fs.readFileSync(path.resolve(source_path, file), 'utf8').replace(/\r\n/g, '\n');
+  const fullname = path.resolve(source_path, file);
+  const stats = fs.statSync(fullname);
+  if (stats.isDirectory()) continue;
+  const data = fs.readFileSync(fullname, 'utf8').replace(/\r\n/g, '\n');
   hash.update(data);
 }
 const message = hash.digest('hex');

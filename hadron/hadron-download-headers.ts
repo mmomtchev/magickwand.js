@@ -61,6 +61,8 @@ try {
   console.error(e);
 }
 
+fs.mkdirSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'build'), { recursive: true });
+
 fs.writeFile(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'build', 'napi.ini'), environment, (error) => {
   if (error) console.error(error);
 });
