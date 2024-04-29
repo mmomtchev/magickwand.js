@@ -112,7 +112,6 @@ jobs:
         with:
           path: ~/.conan2
           key: wasm-conan
-      - run: npm run conan:emscripten
       - name: Build magickwand.js
         run: npm install --build-wasm-from-source
       - name: Check size
