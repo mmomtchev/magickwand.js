@@ -84,7 +84,6 @@ jobs:
             --jbig=true --color=false --xml=false --gzip=false --zip=false          \
             --bzip2=true --zstd=false --xz=false --lzma=false --simd=false          \
             --openmp=true --display=false
-      - run: npx @mapbox/node-pre-gyp build
 
   wasm:
     runs-on: ubuntu-latest
