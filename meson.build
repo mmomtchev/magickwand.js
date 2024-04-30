@@ -4,7 +4,7 @@
 project(
   'JavaScript bindings for ImageMagick-7',
   ['c', 'cpp'],
-  default_options: ['buildtype=release', 'c_std=c11', 'cpp_std=c++17'],
+  default_options: ['buildtype=release', 'cpp_std=c++17'],
   version: run_command('node', '-p', 'require("./package.json").version', check: true).stdout().strip(),
   subproject_dir: 'deps',
 )
@@ -81,6 +81,9 @@ if meson.get_compiler('cpp').get_id() == 'gcc'
 endif
 if meson.get_compiler('cpp').get_id() == 'msvc'
   add_project_arguments(msvc_cpp_args, language: 'cpp')
+  # This is terribly ugly, but ImageMagick needs to compile emf.c as C++
+  # and meson does not support this
+  add_global_arguments('/std:c++14', language: 'c')
 endif
 if meson.get_compiler('cpp').get_id() == 'emscripten'
   add_project_arguments(clang_cpp_args, language: 'cpp')
