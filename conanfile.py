@@ -130,7 +130,7 @@ class ImageMagickDelegates(ConanFile):
         self.requires('libjpeg-turbo/3.0.2', force=True)
 
       if self.options.jpeg2000:
-        self.requires('jasper/4.2.0')
+        self.requires('jasper/4.2.0', force=True)
 
       if self.options.tiff:
         self.requires('libtiff/4.6.0')
