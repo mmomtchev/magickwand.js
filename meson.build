@@ -129,11 +129,11 @@ if meson.get_compiler('cpp').get_id() == 'emscripten'
       # This one is used for unit testing, it is only 4Kb
       f'--embed-file=@root_dir@/test/data/wizard.gif@wizard.gif',
       # These are needed by ImageMagick
-      f'--embed-file=@install_dir@/etc/ImageMagick-7/policy.xml@policy.xml',
-      f'--embed-file=@install_dir@/etc/ImageMagick-7/colors.xml@colors.xml',
-      f'--embed-file=@install_dir@/etc/ImageMagick-7/log.xml@log.xml',
-      f'--embed-file=@install_dir@/share/ImageMagick-7/locale.xml@locale.xml',
-      f'--embed-file=@install_dir@/share/ImageMagick-7/english.xml@english.xml'
+      f'--embed-file=@root_dir@/deps/ImageMagick/config/policy-open.xml@policy.xml',
+      f'--embed-file=@root_dir@/deps/ImageMagick/config/colors.xml@colors.xml',
+      f'--embed-file=@root_dir@/deps/ImageMagick/config//log.xml@log.xml',
+      f'--embed-file=@root_dir@/deps/ImageMagick/config/locale.xml@locale.xml',
+      f'--embed-file=@root_dir@/deps/ImageMagick/config/english.xml@english.xml'
     ],
     language: ['c', 'cpp'],
   )
