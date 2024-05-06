@@ -1,6 +1,4 @@
 [submodule "deps/ImageMagick"]
 	path = deps/ImageMagick
-	url = https://github.com/ImageMagick/ImageMagick.git
-[submodule "deps/ImageMagick-Windows"]
-	path = deps/ImageMagick-Windows
-	url = https://github.com/ImageMagick/ImageMagick-Windows
+	url = git@github.com:mmomtchev/ImageMagick.git
+	branch = cmake-portable-build
