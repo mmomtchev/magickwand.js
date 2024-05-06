@@ -154,7 +154,7 @@ class ImageMagickDelegates(ConanFile):
         self.requires('llvm-openmp/12.0.1')
 
       if self.options.display and self.settings.arch != 'wasm':
-        self.requires('pixman/0.40.0')
+        self.requires('pixman/0.43.4', force=True)
 
     def configure(self):
       if self.settings.arch != 'wasm' and self.options.fonts:
