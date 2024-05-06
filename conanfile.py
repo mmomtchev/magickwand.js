@@ -32,6 +32,7 @@ class ImageMagickDelegates(ConanFile):
       'zstd': [ True, False ],
       'xz': [ True, False ],
       'lzma': [ True, False ],
+      'cairo': [ True, False ],
       'simd': [ True, False ],
       'openmp': [ True, False ],
       'display': [ True, False ]
@@ -60,6 +61,7 @@ class ImageMagickDelegates(ConanFile):
       'zstd': True,
       'xz': True,
       'lzma': True,
+      'cairo': True,
       'simd': True,
       'openmp': True,
       'display': True
@@ -141,6 +143,10 @@ class ImageMagickDelegates(ConanFile):
       if self.options.jpeg:
         self.requires('openjpeg/2.5.0')
 
+      if self.options.cairo and self.settings.arch != 'wasm':
+        self.requires('cairo/1.17.8', force=True)
+        self.requires('expat/2.6.0', force=True)
+
       if self.options.simd and self.settings.arch != 'wasm':
         self.requires('highway/1.0.3')
 
@@ -155,9 +161,26 @@ class ImageMagickDelegates(ConanFile):
         self.options['glib'].shared = False
         self.options['glib'].fPIC = True
 
-      self.options['jasper'].with_libjpeg = 'libjpeg-turbo'
-      self.options['libtiff'].jpeg = 'libjpeg-turbo'
-      self.options['libraw'].with_jpeg = 'libjpeg-turbo'
+      if self.options.jpeg2000:
+        self.options['jasper'].with_libjpeg = 'libjpeg-turbo'
+      
+      if self.options.tiff:
+        self.options['libtiff'].jpeg = 'libjpeg-turbo'
+
+      if self.options.raw:
+        self.options['libraw'].with_jpeg = 'libjpeg-turbo'
+
+      if self.options.cairo and self.settings.arch != 'wasm':
+        self.options['cairo'].with_png = self.options.png
+        self.options['cairo'].with_glib = self.settings.arch != 'wasm' and self.options.fonts
+        # There is no portable way to include xlib
+        self.options['cairo'].with_xlib = False
+        self.options['cairo'].with_xlib_xrender = False
+        self.options['cairo'].with_xcb = False
+        self.options['cairo'].with_xcb = False
+        self.options['cairo'].with_zlib = self.options.gzip
+        self.options['cairo'].with_freetype = self.settings.arch != 'wasm' and self.options.fonts
+        self.options['cairo'].with_fontconfig = self.settings.arch != 'wasm' and self.options.fonts
 
       # While Emscripten supports SIMD, Node.js does not and cannot run the resulting WASM bundle
       # The performance gain is not very significant and it has a huge compatibility issue
