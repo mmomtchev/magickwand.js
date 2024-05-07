@@ -73,8 +73,10 @@ class ImageMagickDelegates(ConanFile):
       # Fonts are not available on WASM targets
       if self.options.fonts and self.settings.arch != 'wasm':
         [self.requires(x, force=True) for x in (
-          'libffi/3.4.4', 'fontconfig/2.14.2', 'freetype/2.13.2', 'fribidi/1.0.12', 'glib/2.78.1', 'harfbuzz/8.3.0'
+          'libffi/3.4.4', 'freetype/2.13.2', 'fribidi/1.0.12', 'glib/2.78.1', 'harfbuzz/8.3.0'
         )]
+        if self.settings.os != 'Windows':
+          self.requires('fontconfig/2.14.2', force=True)
 
       # LZMA is blocked by https://github.com/conan-io/conan-center-index/issues/20602
       if self.options.lzma and self.settings.arch != 'wasm':
@@ -170,17 +172,18 @@ class ImageMagickDelegates(ConanFile):
       if self.options.raw:
         self.options['libraw'].with_jpeg = 'libjpeg-turbo'
 
+      fonts_enabled = self.settings.arch != 'wasm' and self.options.fonts
       if self.options.cairo and self.settings.arch != 'wasm':
         self.options['cairo'].with_png = self.options.png
-        self.options['cairo'].with_glib = self.settings.arch != 'wasm' and self.options.fonts
+        self.options['cairo'].with_glib = fonts_endabled
         # There is no portable way to include xlib
         self.options['cairo'].with_xlib = False
         self.options['cairo'].with_xlib_xrender = False
         self.options['cairo'].with_xcb = False
         self.options['cairo'].with_xcb = False
         self.options['cairo'].with_zlib = self.options.gzip
-        self.options['cairo'].with_freetype = self.settings.arch != 'wasm' and self.options.fonts
-        self.options['cairo'].with_fontconfig = self.settings.arch != 'wasm' and self.options.fonts
+        self.options['cairo'].with_freetype = fonts_enabled
+        self.options['cairo'].with_fontconfig = fonts_enabled and self.settings.os != 'Windows'
 
       # While Emscripten supports SIMD, Node.js does not and cannot run the resulting WASM bundle
       # The performance gain is not very significant and it has a huge compatibility issue
