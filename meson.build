@@ -196,13 +196,13 @@ add_global_link_arguments(
 # --------------------
 cmake = import('cmake')
 cmake_opts = cmake.subproject_options()
-#cmake_opts.add_cmake_defines(
-#  [
-#    {'CMAKE_FIND_LIBRARY_SUFFIXES': '.a'},
-#    {'BUILD_SHARED_LIBS': false},
-#    {'CMAKE_POSITION_INDEPENDENT_CODE': true},
-#  ],
-#)
+cmake_opts.add_cmake_defines(
+  [
+    {'CMAKE_FIND_LIBRARY_SUFFIXES': '.a'},
+    {'BUILD_SHARED_LIBS': false},
+    {'CMAKE_POSITION_INDEPENDENT_CODE': true},
+  ],
+)
 cmake_opts.add_cmake_defines(cmake_options)
 
 foreach cmake_dep : cmake_dependencies
