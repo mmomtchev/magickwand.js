@@ -175,7 +175,7 @@ class ImageMagickDelegates(ConanFile):
       fonts_enabled = self.settings.arch != 'wasm' and self.options.fonts
       if self.options.cairo and self.settings.arch != 'wasm':
         self.options['cairo'].with_png = self.options.png
-        self.options['cairo'].with_glib = fonts_endabled
+        self.options['cairo'].with_glib = fonts_enabled
         # There is no portable way to include xlib
         self.options['cairo'].with_xlib = False
         self.options['cairo'].with_xlib_xrender = False
