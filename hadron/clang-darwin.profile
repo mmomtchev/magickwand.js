@@ -9,3 +9,4 @@ os=Macos
 
 [conf]
 tools.build:sharedlinkflags=['-static-libstdc++', '-static-libgcc']
+tools.cmake.cmaketoolchain:generator=Ninja
