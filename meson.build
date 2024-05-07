@@ -81,9 +81,6 @@ if meson.get_compiler('cpp').get_id() == 'gcc'
 endif
 if meson.get_compiler('cpp').get_id() == 'msvc'
   add_project_arguments(msvc_cpp_args, language: 'cpp')
-  # This is terribly ugly, but ImageMagick needs to compile emf.c as C++
-  # and meson does not support this
-  add_global_arguments('/std:c++14', language: 'c')
 endif
 if meson.get_compiler('cpp').get_id() == 'emscripten'
   add_project_arguments(clang_cpp_args, language: 'cpp')
@@ -199,15 +196,13 @@ add_global_link_arguments(
 # --------------------
 cmake = import('cmake')
 cmake_opts = cmake.subproject_options()
-cmake_opts.add_cmake_defines(
-  [
-    {'CMAKE_FIND_PACKAGE_PREFER_CONFIG': true},
-    {'CMAKE_PREFIX_PATH': meson.current_build_dir()},
-    {'CMAKE_FIND_LIBRARY_SUFFIXES': '.a'},
-    {'BUILD_SHARED_LIBS': false},
-    {'CMAKE_POSITION_INDEPENDENT_CODE': true},
-  ],
-)
+#cmake_opts.add_cmake_defines(
+#  [
+#    {'CMAKE_FIND_LIBRARY_SUFFIXES': '.a'},
+#    {'BUILD_SHARED_LIBS': false},
+#    {'CMAKE_POSITION_INDEPENDENT_CODE': true},
+#  ],
+#)
 cmake_opts.add_cmake_defines(cmake_options)
 
 foreach cmake_dep : cmake_dependencies
