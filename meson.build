@@ -39,7 +39,7 @@ cmake_dependencies = [
 ]
 cmake_options = [
   {'MAGICKCORE_QUANTUM_DEPTH': '16'},
-  {'MAGICK_BUILD_STATIC': true},
+  {'MAGICK_BUILD_STATIC': not get_option('shared')},
   {'MAGICK_HDRI_ENABLE': true},
   {'INSTALLED_SUPPORT': false},
   {'BUILD_UTILITIES': not meson.is_cross_build()},
@@ -199,7 +199,7 @@ cmake_opts = cmake.subproject_options()
 cmake_opts.add_cmake_defines(
   [
     {'CMAKE_FIND_LIBRARY_SUFFIXES': '.a'},
-    {'BUILD_SHARED_LIBS': false},
+    {'BUILD_SHARED_LIBS': get_option('shared')},
     {'CMAKE_POSITION_INDEPENDENT_CODE': true},
   ],
 )

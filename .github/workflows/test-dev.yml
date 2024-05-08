@@ -77,7 +77,7 @@ jobs:
         shell: bash
       - name: Build magickwand.js
         run: |
-          npm install --build-from-source  --verbose --foreground-scripts               \
+          npm install --build-from-source  --verbose --foreground-scripts --shared      \
             --disable-fonts --enable-jpeg --enable-png --disable-tiff                   \
             --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia         \
             --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif \
