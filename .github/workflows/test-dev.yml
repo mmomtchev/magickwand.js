@@ -78,10 +78,10 @@ jobs:
       - name: Build magickwand.js
         run: |
           npm install --build-from-source                                           \
-            --fonts=false --jpeg=true --png=false --tiff=false                      \
+            --fonts=false --jpeg=true --png=true --tiff=false                       \
             --webp=false --jpeg2000=false --raw=false --openmedia=false             \
             --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
-            --jbig=true --color=false --xml=false --gzip=false --zip=false          \
+            --color=false --xml=false --gzip=false --zip=false                      \
             --bzip2=false --zstd=false --xz=false --lzma=false --simd=false         \
             --openmp=false --display=false --jbig=false --gzip=false                \
             --cairo=false
@@ -155,10 +155,10 @@ jobs:
       - name: Build magickwand.js
         run: |
           npm install --build-wasm-from-source                                      \
-            --fonts=false --jpeg=true --png=false --tiff=false                      \
+            --fonts=false --jpeg=true --png=true --tiff=false                       \
             --webp=false --jpeg2000=false --raw=false --openmedia=false             \
             --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
-            --jbig=true --color=false --xml=false --gzip=false --zip=false          \
+            --color=false --xml=false --gzip=false --zip=false                      \
             --bzip2=false --zstd=false --xz=false --lzma=false --simd=false         \
             --openmp=false --display=false --jbig=false --gzip=false                \
             --cairo=false
