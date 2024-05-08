@@ -77,13 +77,14 @@ jobs:
         shell: bash
       - name: Build magickwand.js
         run: |
-          npm install --build-from-source --verbose                                 \
+          npm install --build-from-source                                           \
             --fonts=false --jpeg=true --png=false --tiff=false                      \
             --webp=false --jpeg2000=false --raw=false --openmedia=false             \
             --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
             --jbig=true --color=false --xml=false --gzip=false --zip=false          \
-            --bzip2=true --zstd=false --xz=false --lzma=false --simd=false          \
-            --openmp=true --display=false
+            --bzip2=false --zstd=false --xz=false --lzma=false --simd=false         \
+            --openmp=false --display=false --jbig=false --gzip=false                \
+            --cairo=false
 
   wasm:
     runs-on: ubuntu-latest
@@ -158,8 +159,9 @@ jobs:
             --webp=false --jpeg2000=false --raw=false --openmedia=false             \
             --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
             --jbig=true --color=false --xml=false --gzip=false --zip=false          \
-            --bzip2=true --zstd=false --xz=false --lzma=false --simd=false          \
-            --openmp=true --display=false
+            --bzip2=false --zstd=false --xz=false --lzma=false --simd=false         \
+            --openmp=false --display=false --jbig=false --gzip=false                \
+            --cairo=false
       - name: Check size
         run: |
           echo "::notice::Light WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
