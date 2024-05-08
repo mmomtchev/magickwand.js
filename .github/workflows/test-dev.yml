@@ -154,12 +154,12 @@ jobs:
       - name: Build magickwand.js
         run: |
           npm install --build-wasm-from-source                                      \
-            -ofonts=False -ojpeg=True -opng=False -otiff=False                      \
-            -owebp=False -ojpeg2000=False -oraw=False -oopenmedia=False             \
-            -obrotli=False -oh265=False -oexr=False -offtw=False -oheif=False       \
-            -ojbig=True -ocolor=False -oxml=False -ogzip=False -ozip=False          \
-            -obzip2=True -ozstd=False -oxz=False -olzma=False -osimd=False          \
-            -oopenmp=True -odisplay=False
+            --fonts=False --jpeg=True --png=False --tiff=False                      \
+            --webp=False --jpeg2000=False --raw=False --openmedia=False             \
+            --brotli=False --h265=False --exr=False --fftw=False --heif=False       \
+            --jbig=True --color=False --xml=False --gzip=False --zip=False          \
+            --bzip2=True --zstd=False --xz=False --lzma=False --simd=False          \
+            --openmp=True --display=False
       - name: Check size
         run: |
           echo "::notice::Light WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
