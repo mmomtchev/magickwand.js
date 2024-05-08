@@ -173,7 +173,7 @@
         "{{ properties.commandMesonInstall }}"
       ],
       "npm-install": [
-        "{% if env.npm_config_loglevel == 'verbose' %}{{ properties.commandEnv[os.platform] }}{% endif %}",
+        "{% if env.npm_config_loglevel %}{{ properties.commandEnv[os.platform] }}{% endif %}",
         "{{ properties.scriptBuildFromSource }}",
         "{{ properties.scriptBuildWASMFromSource }}"
       ]
