@@ -27,7 +27,7 @@
   "scripts": {
     "deps:download": "node scripts/deps-download.js",
     "publish:generated": "node scripts/publish-generated.js",
-    "install": "xpm install && xpm run npm-install",
+    "install": "npx xpm install && npx xpm run npm-install",
     "preinstall": "npm run deps:download",
     "lint": "eslint lib/*.cjs test/*.ts",
     "test": "mocha --reporter=tap test/*.test.ts",
