@@ -81,7 +81,7 @@ jobs:
             --fonts=false --jpeg=true --png=true --tiff=false                       \
             --webp=false --jpeg2000=false --raw=false --openmedia=false             \
             --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
-            --color=false --xml=false --gzip=false --zip=false                      \
+            --color=false --xml=false --gzip=true --zip=false                       \
             --bzip2=false --zstd=false --xz=false --lzma=false --simd=false         \
             --openmp=false --display=false --jbig=false --gzip=false                \
             --cairo=false
@@ -158,7 +158,7 @@ jobs:
             --fonts=false --jpeg=true --png=true --tiff=false                       \
             --webp=false --jpeg2000=false --raw=false --openmedia=false             \
             --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
-            --color=false --xml=false --gzip=false --zip=false                      \
+            --color=false --xml=false --gzip=true --zip=false                       \
             --bzip2=false --zstd=false --xz=false --lzma=false --simd=false         \
             --openmp=false --display=false --jbig=false --gzip=false                \
             --cairo=false
