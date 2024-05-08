@@ -1,9 +1,20 @@
 from conan import ConanFile
 from conan.tools.files import save
 from conan.tools import CppInfo
+from os import environ
 
 
 required_conan_version = ">=2.0.0"
+
+def npm_option(option, default):
+    npm_opt = f'npm_config_{option}'
+    if not npm_opt in environ:
+      return default
+    if environ[npm_opt] == '' or environ[npm_opt].lower() == 'false':
+      return False
+    if environ[npm_opt].lower() == 'true':
+      return True
+    return environ[npm_opt]
 
 
 class ImageMagickDelegates(ConanFile):
@@ -39,32 +50,32 @@ class ImageMagickDelegates(ConanFile):
     }
 
     default_options = {
-      'fonts': True,
-      'jpeg': True,
-      'png': True,
-      'tiff': True,
-      'webp': True,
-      'jpeg2000': True,
-      'raw': True,
-      'openmedia': True,
-      'brotli': True,
-      'h265': True,
-      'exr': True,
-      'fftw': False,
-      'heif': True,
-      'jbig': True,
-      'color': True,
-      'xml': True,
-      'gzip':True,
-      'zip': True,
-      'bzip2': True,
-      'zstd': True,
-      'xz': True,
-      'lzma': True,
-      'cairo': True,
-      'simd': True,
-      'openmp': True,
-      'display': True
+      'fonts':      npm_option('fonts', True),
+      'jpeg':       npm_option('jpeg', True),
+      'png':        npm_option('png', True),
+      'tiff':       npm_option('tiff', True),
+      'webp':       npm_option('webp', True),
+      'jpeg2000':   npm_option('jpeg2000', True),
+      'raw':        npm_option('raw', True),
+      'openmedia':  npm_option('openmedia', True),
+      'brotli':     npm_option('brotli', True),
+      'h265':       npm_option('h265', True),
+      'exr':        npm_option('exr', True),
+      'fftw':       npm_option('fftw', False),
+      'heif':       npm_option('heif', True),
+      'jbig':       npm_option('jbig', True),
+      'color':      npm_option('color', True),
+      'xml':        npm_option('xml', True),
+      'gzip':       npm_option('gzip', True),
+      'zip':        npm_option('zip', True),
+      'bzip2':      npm_option('bzip2', True),
+      'zstd':       npm_option('zstd', True),
+      'xz':         npm_option('xz', True),
+      'lzma':       npm_option('lzma', True),
+      'cairo':      npm_option('cairo', True),
+      'simd':       npm_option('simd', True),
+      'openmp':     npm_option('openmp', True),
+      'display':    npm_option('display', True)
     }
 
     generators = [ 'MesonToolchain', 'CMakeDeps', 'CMakeToolchain' ]

@@ -129,6 +129,11 @@
         "linux": ".",
         "darwin": "."
       },
+      "commandEnv": {
+        "win32": "set",
+        "linux": "env",
+        "darwin": "env"
+      },
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
       "cwd": "{{ path.sep | path_relative: '.' }}",
       "installFolderPath": "{{ '/' | path_join: properties.cwd | path_join: 'lib' | path_join: 'binding' | path_join: properties.platformId }}",
@@ -152,8 +157,8 @@
       "commandBuild": "{{ properties.commandConanBuildEnv }} && {{ properties.python[os.platform] }} -m mesonbuild.mesonmain compile -C {{ properties.buildFolderRelativePath }} -v",
       "commandInstall": "{{ properties.python[os.platform] }} -m mesonbuild.mesonmain install -C {{ properties.buildFolderRelativePath }}",
       "commandClean": "{{ properties.python[os.platform] }} -m mesonbuild.mesonmain compile -C {{ properties.buildFolderRelativePath }} --clean",
-      "scriptbuildFromSource": "{% if env.npm_config_build_from_source %} xpm install && xpm run init && xpm run prepare --config native && xpm run build --config native {% endif %}",
-      "scriptbuildWASMFromSource": "{% if env.npm_config_build_wasm_from_source %} xpm install && xpm run init && xpm run prepare --config wasm && xpm run build --config wasm {% endif %}"
+      "scriptBuildFromSource": "{% if env.npm_config_build_from_source %} xpm install && xpm run init && xpm run prepare --config native && xpm run build --config native {% endif %}",
+      "scriptBuildWASMFromSource": "{% if env.npm_config_build_wasm_from_source %} xpm install && xpm run init && xpm run prepare --config wasm && xpm run build --config wasm {% endif %}"
     },
     "actions": {
       "generate": [
@@ -168,8 +173,9 @@
         "{{ properties.commandMesonInstall }}"
       ],
       "npm-install": [
-        "{{ properties.scriptbuildFromSource }}",
-        "{{ properties.scriptbuildWASMFromSource }}"
+        "{% if env.npm_config_loglevel == 'verbose' %}{{ properties.commandEnv[os.platform] }}{% endif %}",
+        "{{ properties.scriptBuildFromSource }}",
+        "{{ properties.scriptBuildWASMFromSource }}"
       ]
     },
     "buildConfigurations": {
