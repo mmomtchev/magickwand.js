@@ -7,17 +7,13 @@ from os import environ
 required_conan_version = ">=2.0.0"
 
 def npm_option(option, default):
-    npm_opt = f'npm_config_{option}'
-    print(npm_opt, default, f"'{environ[npm_opt] if npm_opt in environ else 'absent'}'")
-    if not npm_opt in environ:
-      return default
-    npm_val = environ[npm_opt].strip().lower()
-    if npm_val == '' or npm_val == 'false':
+    npm_enable_opt = f'npm_config_enable_{option}'
+    npm_disable_opt = f'npm_config_disable_{option}'
+    if npm_disable_opt in environ:
       return False
-    if npm_val == 'true':
+    if npm_enable_opt in environ:
       return True
-    return environ[npm_opt].strip()
-
+    return default
 
 class ImageMagickDelegates(ConanFile):
     settings = 'os', 'compiler', 'build_type', 'arch'

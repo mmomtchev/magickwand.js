@@ -77,13 +77,13 @@ jobs:
         shell: bash
       - name: Build magickwand.js
         run: |
-          npm install --build-from-source  --verbose --foreground-scripts           \
-            --fonts=false --jpeg=true --png=true --tiff=false                       \
-            --webp=false --jpeg2000=false --raw=false --openmedia=false             \
-            --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
-            --color=false --xml=false --gzip=true --zip=false                       \
-            --bzip2=false --zstd=false --xz=false --lzma=false --simd=false         \
-            --openmp=false --display=false --jbig=false --cairo=false
+          npm install --build-from-source  --verbose --foreground-scripts               \
+            --disable-fonts --enable-jpeg --enable-png --disable-tiff                   \
+            --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia         \
+            --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif \
+            --disable-color --disable-xml --enable-gzip --disable-zip                   \
+            --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd   \
+            --disable-openmp --disable-display --disable-jbig --disable-cairo
 
   wasm:
     runs-on: ubuntu-latest
@@ -153,13 +153,13 @@ jobs:
           key: wasm-light-conan
       - name: Build magickwand.js
         run: |
-          npm install --build-from-source --verbose --foreground-scripts            \
-            --fonts=false --jpeg=true --png=true --tiff=false                       \
-            --webp=false --jpeg2000=false --raw=false --openmedia=false             \
-            --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
-            --color=false --xml=false --gzip=true --zip=false                       \
-            --bzip2=false --zstd=false --xz=false --lzma=false --simd=false         \
-            --openmp=false --display=false --jbig=false --cairo=false
+          npm install --build-from-source --verbose --foreground-scripts                \
+            --disable-fonts --enable-jpeg --enable-png --disable-tiff                   \
+            --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia         \
+            --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif \
+            --disable-color --disable-xml --enable-gzip --disable-zip                   \
+            --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd   \
+            --disable-openmp --disable-display --disable-jbig --disable-cairo
       - name: Check size
         run: |
           echo "::notice::Light WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
