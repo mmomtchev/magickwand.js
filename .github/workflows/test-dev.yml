@@ -196,11 +196,11 @@ jobs:
         run: npm install
       - name: Build with ASAN
         run: |
-          xpm install
-          xpm run init
-          xpm run prepare --config native-debug
+          npx xpm install
+          npx xpm run init
+          npx xpm run prepare --config native-debug
           python3 -m mesonbuild.mesonmain configure build/native-debug -Db_sanitize=address
-          xpm run build --config native-debug
+          npx xpm run build --config native-debug
       - run: node node_modules/mocha/bin/mocha.js -i -g Security --repeats 1000 test/node.test.ts
         env:
           LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6
