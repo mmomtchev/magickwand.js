@@ -8,13 +8,15 @@ required_conan_version = ">=2.0.0"
 
 def npm_option(option, default):
     npm_opt = f'npm_config_{option}'
+    print(npm_opt, default, f"'{environ[npm_opt] if npm_opt in environ else 'absent'}'")
     if not npm_opt in environ:
       return default
-    if environ[npm_opt] == '' or environ[npm_opt].lower() == 'false':
+    npm_val = environ[npm_opt].strip().lower()
+    if npm_val == '' or npm_val == 'false':
       return False
-    if environ[npm_opt].lower() == 'true':
+    if npm_val == 'true':
       return True
-    return environ[npm_opt]
+    return environ[npm_opt].strip()
 
 
 class ImageMagickDelegates(ConanFile):
