@@ -77,7 +77,7 @@ jobs:
         shell: bash
       - name: Build magickwand.js
         run: |
-          npm install --build-from-source                                           \
+          npm install --build-from-source  --verbose --foreground-scripts           \
             --fonts=false --jpeg=true --png=true --tiff=false                       \
             --webp=false --jpeg2000=false --raw=false --openmedia=false             \
             --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
@@ -153,7 +153,7 @@ jobs:
           key: wasm-light-conan
       - name: Build magickwand.js
         run: |
-          npm install --build-from-source                                           \
+          npm install --build-from-source --verbose --foreground-scripts            \
             --fonts=false --jpeg=true --png=true --tiff=false                       \
             --webp=false --jpeg2000=false --raw=false --openmedia=false             \
             --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
