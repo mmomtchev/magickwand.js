@@ -116,7 +116,7 @@ You will need a working C++17 environment. This will also rebuild the included M
 
 Currently, this requires to have installed `CMake` and `ninja`, but this requirement will be removed in the future.
 
-On Linux and macOS it uses `pip3` to install the `conan` module which builds a number of required libraries in `${HOME}/.conan`. After building, you can safely delete this directory if you wish, since `magickwand.js` is statically linked by default.
+It will automatically install `conan` and a custom `meson` version in `node_modules/magickwand.js/build/tools`. `conan` will be building in `node_modules/magickwand.js/build/conan` instead of its default directory. If you want to use shared `conan` artifacts that can be kept across builds, set `CONAN_HOME` before launching the build.
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
