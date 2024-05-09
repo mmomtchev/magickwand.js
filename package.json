@@ -193,7 +193,8 @@
         "{% if env.npm_config_loglevel %}{{ properties.commandShowEnv[os.platform] }}{% endif %}",
         "{{ properties.scriptBuildFromSource }}",
         "{{ properties.scriptBuildWASMFromSource }}"
-      ]
+      ],
+      "conan:home": "{{ properties.commandConan[os.platform] }} config home"
     },
     "buildConfigurations": {
       "native": {
