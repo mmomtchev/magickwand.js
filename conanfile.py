@@ -82,7 +82,7 @@ class ImageMagickDelegates(ConanFile):
 
     def requirements(self):
       # Disable all bundled delegates
-      if not self.options.conan:
+      if not self.options.conan or 'npm_config_external' in environ:
         return
 
       # Fonts are not available on WASM targets
@@ -174,7 +174,7 @@ class ImageMagickDelegates(ConanFile):
         self.requires('pixman/0.43.4', force=True)
 
     def configure(self):
-      if not self.options.conan:
+      if not self.options.conan or 'npm_config_external' in environ:
         return
 
       if self.settings.arch != 'wasm' and self.options.fonts:

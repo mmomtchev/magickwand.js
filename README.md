@@ -112,15 +112,15 @@ When using Node.js with X-Windows, the `Image.display()` function works and it i
 npm install magickwand.js --build-from-source
 ```
 
-You will need a working C++11 environment.
+You will need a working C++17 environment. This will also rebuild the included Magick++ library.
 
-On Windows nothing but VS 2022 works at the moment. This will also rebuild the included Magick++ library.
+Currently, this requires to have installed `CMake` and `ninja`, but this requirement will be removed in the future.
 
-On Linux and macOS it uses `pip3` to install the `conan` module which builds a number of required libraries in `${HOME}/.conan`. After building, you can safely delete this directory if you wish, since `magickwand.js` is statically linked.
+On Linux and macOS it uses `pip3` to install the `conan` module which builds a number of required libraries in `${HOME}/.conan`. After building, you can safely delete this directory if you wish, since `magickwand.js` is statically linked by default.
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
-* In order to regenerate the C++ wrapping code, you will need SWIG JavaScript Evolution 5.0.0 - available from https://github.com/mmomtchev/swig.git (as of 2024-01-18, the basic Node-API has been merged to the main SWIG trunk, the async support is in review, everything else is available only in SWIG JSE)
+* In order to regenerate the C++ wrapping code, you will need SWIG JavaScript Evolution 5.0.3 - available from https://github.com/mmomtchev/swig.git (as of 2024-01-18, the basic Node-API has been merged to the main SWIG trunk, the async support is in review, everything else is available only in SWIG JSE)
 * Alternatively, if you don't want to rebuild SWIG JSE yourself, you can clone the `generated` branch where all files have been pre-generated - `npm run deps:download` does this automatically after `npm install`
 
 * Recursively clone the repo
@@ -133,39 +133,25 @@ cd magickwand.js
 
 * or, to do everything manually:
 ```shell
-npm install --ignore-scripts
-npm run deps:download
-npx @mapbox/node-pre-gyp configure   # --debug for debug mode
-npx @mapbox/node-pre-gyp build
+npm install                                # install all npm dependencies
+npm run deps:download                      # retrieve the pregenerated SWIG wrappers
+npx xpm install                            # install the supporting xpm packages
+npx xpm run init                           # install conan and meson
+npx xpm run prepare --config native-debug  # available builds are native, native-debug, wasm and wasm-debug
+python3 -m mesonbuild.mesonmain configure build/native-debug -Db_sanitize=address # optional step to enable ASAN
+npx xpm run build --config native-debug    # build
 ```
 
 Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the data used internally by ImageMagick - image files still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. **Unless you can regenerate the SWIG wrappers, you will have to use the exact same version (the latest one at the release date) that was used when they were generated**. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
 ```shell
-npx @mapbox/node-pre-gyp configure --shared_imagemagick
-
-LDFLAGS=-L/usr/local/lib \
-CFLAGS=-I/usr/local/include/ImageMagick-7 \
-CXXFLAGS=-I/usr/local/include/ImageMagick-7 \
-npx @mapbox/node-pre-gyp build \
---magicklibs="-lMagick++-7.Q16HDRI -lMagickWand-7.Q16HDRI -lMagickCore-7.Q16HDRI"
-```
-
-Or when directly installing with rebuilding from `npm`:
-
-```shell
-LDFLAGS=-L/usr/local/lib \
-CFLAGS=-I/usr/local/include/ImageMagick-7 \
-CXXFLAGS=-I/usr/local/include/ImageMagick-7 \
-npm install magickwand.js --build-from-source --shared_imagemagick \
---magicklibs="-lMagick++-7.Q16HDRI -lMagickWand-7.Q16HDRI -lMagickCore-7.Q16HDRI"
+npm install --build-from-source --verbose --foreground-scripts --external \
+  --extra-cppflags="-I/usr/local/include/ImageMagick-7 -DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16" \
+  --extra-ldflags="-L/usr/local/lib -lMagick++-7.Q16HDRI"
 ```
 
 In this case, it would be possible to use a non Q16HDRI build or any other specially built ImageMagick-7 as long as its version is an exact match.
 
-If you want to use a different ImageMagick-7 version, you will have to regenerate the SWIG wrappers. You will have to have to build yourself SWIG 4.2.0-mmom from https://github.com/mmomtchev/swig/tree/mmom and then run
-```shell
-npm run swig
-```
+If you want to use a different ImageMagick-7 version, you will have to regenerate the SWIG wrappers. A future version might do this automatically since SWIG-jse is now available from `conan` on all OS.
 
 * `npm test` should work at this point
 
@@ -173,57 +159,44 @@ npm run swig
 
 The WASM version uses [SWIG JSE](https://github.com/mmomtchev/swig) and `emnapi`.
 
-Generally, the prebuilt WASM binaries should work for everyone. Currently, `npm install` is not capable of rebuilding it. To rebuild the WASM version yourself, you should start by building the conan dependencies:
+Generally, the prebuilt WASM binaries should work for everyone. To rebuild the WASM version yourself, you should start by building the conan dependencies:
 
 ```shell
-npm run conan:emscripten
+npm install magickwand.js --build-wasm-from-source
 ```
+
+Currently, you need to have EMSDK installed and activated in your environment. A future version might get it automatically from `conan`.
 
 Or to build a minimal version that excludes many optional dependencies:
 
 ```shell
-npm run conan:emscripten --                                               \
-  -ofonts=False -ojpeg=True -opng=False -otiff=False                      \
-  -owebp=False -ojpeg2000=False -oraw=False -oopenmedia=False             \
-  -obrotli=False -oh265=False -oexr=False -offtw=False -oheif=False       \
-  -ojbig=True -ocolor=False -oxml=False -ogzip=False -ozip=False            \
-  -obzip2=True -ozstd=False -oxz=False -olzma=False -osimd=False          \
-  -oopenmp=True -odisplay=False
-```
-
-Then launch:
-```shell
-npm run configure:emscripten
-node-pre-gyp build
+npm install --build-wasm-from-source --verbose --foreground-scripts           \
+  --disable-fonts --enable-jpeg --enable-png --disable-tiff                   \
+  --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia         \
+  --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif \
+  --disable-color --disable-xml --enable-gzip --disable-zip                   \
+  --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd   \
+  --disable-openmp --disable-display --disable-jbig --disable-cairo
 ```
 
 At the moment this cross-compilation has been tested only on Linux.
-
-Keep in mind that if you want to switch between building a native and a WASM version, you should do:
-
-```shell
-rm -rf build
-cd deps/ImageMagick
-make distclean
-```
-
-Otherwise, in between `conan`, `gyp` and the ImageMagick's own build, you might run into weird dependency problems.
 
 ### Building a *light* version
 
 Building a lighter custom binary which does not include some of the builtin libraries is possible by specifying:
 
 ```shell
-npm install --build-from-source --verbose \
-    --fonts=false --jpeg=false --png=false --tiff=false \
-    --webp=false --jpeg2000=false --raw=false --openmedia=false \
-    --brotli=false --h265=false --exr=false --fftw=false --heif=false \
-    --jbig=false --color=false --xml=false --gzip=false --zip=false \
-    --bzip2=false --zstd=false --xz=false --lzma=false --simd=false \
-    --openmp=false --display=false
+npm install --shared --verbose --foreground-scripts                                     \
+  --build-wasm-from-source --build-from-source                                          \
+  --disable-fonts --enable-jpeg --enable-png --disable-tiff                             \
+  --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia                   \
+  --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif           \
+  --disable-color --disable-xml --enable-gzip --disable-zip                             \
+  --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd             \
+  --disable-openmp --disable-display --disable-jbig --disable-cairo
 ```
 
-This is not supported for the Windows build which is monolithic. It is supported for Linux, macOS and WASM (see above for WASM). It disables the included delegates, but keep in mind that on Linux and macOS, the ImageMagick configure script will still detect the presence of some system libraries (`jpeg`, `bzip2`, `jbig` and `OpenMP`) and will try to use them, producing a binary that will need the dynamically loaded versions of those libraries on your system. This is not a problem with the WASM version as it is very unlikely that you will have system-installed WASM-version libraries that ImageMagick will detect and use.
+This disables the included delegates, but keep in mind that the ImageMagick configure script will still detect the presence of some compatible system libraries and will try to use them, producing a custom binary that will need the dynamically loaded versions of those libraries on your system. The WASM version will probably lack support for most formats as it is very unlikely that you will have system-installed WASM-version libraries that ImageMagick will detect and use.
 
 If the WASM binary is rebuilt with no additional libraries, its size will be brought down to 1.5MB compressed with brotli. Further reduction is possible by disabling unneeded SWIG wrappers but this requires to manually edit the SWIG source files and to regenerate the C++ files. Producing a version that supports only synchronous mode and does not require COOP/COEP is also possible. I will consider any offer for commercial support of such dedicated light version.
 

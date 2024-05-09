@@ -21,19 +21,24 @@ sources = sources_raw.stdout().strip().split(',')
 
 dependencies = []
 static = not get_option('shared') and not meson.is_cross_build()
-
+external = get_option('external')
 install_dir = get_option('prefix')
 
-cmake_dependencies = [
-  {'project': 'ImageMagick', 'target': 'Magick++-7.Q16HDRI'}
-]
-cmake_options = [
-  {'MAGICKCORE_QUANTUM_DEPTH': '16'},
-  {'MAGICK_BUILD_STATIC': static},
-  {'MAGICK_HDRI_ENABLE': true},
-  {'INSTALLED_SUPPORT': false},
-  {'BUILD_UTILITIES': not meson.is_cross_build()},
-]
+if not external
+  cmake_dependencies = [
+    {'project': 'ImageMagick', 'target': 'Magick++-7.Q16HDRI'}
+  ]
+  cmake_options = [
+    {'MAGICKCORE_QUANTUM_DEPTH': '16'},
+    {'MAGICK_BUILD_STATIC': static},
+    {'MAGICK_HDRI_ENABLE': true},
+    {'INSTALLED_SUPPORT': false},
+    {'BUILD_UTILITIES': not meson.is_cross_build()},
+  ]
+else
+  cmake_dependencies = []
+  cmake_options = []
+endif
 
 # ====================
 # Everything below this point is the SWIG+Node-API+emnapi system build
@@ -233,7 +238,8 @@ if extra_output_files.length() > 0
 endif
 
 summary({
-  'link ImageMagick statically': static,
-  'asynchronous mode': async,
-  'build CLI tool': not meson.is_cross_build()
+  'link with external ImageMagick': external,
+  'build ImageMagick statically': static and not external,
+  'asynchronous mode': async and not external,
+  'build CLI tool': not meson.is_cross_build() and not external
 })
