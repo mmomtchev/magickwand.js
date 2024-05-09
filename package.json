@@ -195,7 +195,7 @@
         "{{ properties.scriptBuildFromSource }}",
         "{{ properties.scriptBuildWASMFromSource }}"
       ],
-      "conan:home": "{{ properties.commandConan[os.platform] }} config home"
+      "conan:home": "echo {{ properties.conanFolderPath }}"
     },
     "buildConfigurations": {
       "native": {
