@@ -116,7 +116,7 @@ You will need a working C++17 environment. This will also rebuild the included M
 
 Currently, this requires to have installed `CMake` and `ninja`, but this requirement will be removed in the future.
 
-It will automatically install `conan` and a custom `meson` version in `node_modules/magickwand.js/build/tools`. `conan` will be building in `node_modules/magickwand.js/build/conan` instead of its default directory. If you want to use shared `conan` artifacts that can be kept across builds, set `CONAN_HOME` before launching the build.
+It will automatically install `conan` and a custom `meson` version in `node_modules/magickwand.js/build/tools`. `conan` will be building in `~/.cache/node-hadron/conan` (`%LOCALAPPDATA%\node-hadron\conan` on Windows) instead of its default directory. If you want to use shared `conan` artifacts that can be kept across different systems, set `CONAN_HOME` before launching the build.
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
