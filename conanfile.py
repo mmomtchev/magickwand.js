@@ -19,6 +19,7 @@ class ImageMagickDelegates(ConanFile):
     settings = 'os', 'compiler', 'build_type', 'arch'
 
     options = {
+      'conan':     [ True, False ],
       'fonts':     [ True, False ],
       'jpeg':      [ True, False ],
       'png':       [ True, False ],
@@ -48,6 +49,7 @@ class ImageMagickDelegates(ConanFile):
     }
 
     default_options = {
+      'conan':      npm_option('conan', True),
       'fonts':      npm_option('fonts', True),
       'jpeg':       npm_option('jpeg', True),
       'png':        npm_option('png', True),
@@ -79,6 +81,10 @@ class ImageMagickDelegates(ConanFile):
     generators = [ 'MesonToolchain', 'CMakeDeps', 'CMakeToolchain' ]
 
     def requirements(self):
+      # Disable all bundled delegates
+      if not self.options.conan:
+        return
+
       # Fonts are not available on WASM targets
       if self.options.fonts and self.settings.arch != 'wasm':
         [self.requires(x, force=True) for x in (
@@ -168,6 +174,9 @@ class ImageMagickDelegates(ConanFile):
         self.requires('pixman/0.43.4', force=True)
 
     def configure(self):
+      if not self.options.conan:
+        return
+
       if self.settings.arch != 'wasm' and self.options.fonts:
         self.options['glib'].shared = False
         self.options['glib'].fPIC = True
