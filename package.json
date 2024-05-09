@@ -117,7 +117,7 @@
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
       "installFolderPath": "{{ '/' | path_join: properties.cwd | path_join: 'lib' | path_join: 'binding' | path_join: properties.platformId }}",
       "cachePath": {
-        "win32": "{{ env.LOCALAPPDATA | path_join: 'node-hadron' }} ",
+        "win32": "{{ env.LOCALAPPDATA | path_join: 'node-hadron' }}",
         "linux": "{{ env.HOME | path_join: '.cache' | path_join: 'node-hadron' }}",
         "darwin": "{{ env.HOME | path_join: '.cache' | path_join: 'node-hadron' }}"
       },
