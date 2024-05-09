@@ -142,7 +142,11 @@
         "linux": "CONAN_HOME=\"{{ properties.conanFolderPath }}\" PYTHONPATH=\"{{ properties.conanFolderPath }}\" {{ properties.conanFolderPath }}/bin/conan",
         "darwin": "CONAN_HOME=\"{{ properties.conanFolderPath }}\" PYTHONPATH=\"{{ properties.conanFolderPath }}\" {{ properties.conanFolderPath }}/bin/conan"
       },
-      "commandMeson": "{{ properties.mesonFolderPath }}{{ path.sep }}bin{{ path.sep }}meson",
+      "commandMeson": {
+        "win32": "set PYTHONPATH={{ properties.mesonFolderPath }}&& {{ properties.mesonFolderPath }}\\bin\\meson",
+        "linux": "PYTHONPATH=\"{{ properties.mesonFolderPath }}\" && {{ properties.mesonFolderPath }}/bin/meson",
+        "darwin": "PYTHONPATH=\"{{ properties.mesonFolderPath }}\" && {{ properties.mesonFolderPath }}/bin/meson"
+      },
       "commandShowEnv": {
         "win32": "set",
         "linux": "env",
@@ -167,14 +171,14 @@
       "commandConanDependencies": "{{ properties.commandConan[os.platform] }} install . -pr:b=default --build=missing -of {{ properties.buildFolderRelativePath }} --settings=build_type={{ properties.buildType | capitalize }}",
       "commandDependenciesNative": "{{ properties.commandConanDependencies }} -pr:h=./hadron/{{ properties.toolchain }}-{{ os.platform }}.profile",
       "commandDependenciesCross": "{{ properties.commandConanDependencies }} -pr:h=./hadron/{{ properties.toolchain }}.profile",
-      "commandPrepare": "{{ properties.commandMeson }} setup --backend ninja --buildtype {{ properties.buildType }} {{ properties.buildFolderRelativePath }} . -Dprefix={{ properties.installFolderPath }} {{ properties.options }}",
+      "commandPrepare": "{{ properties.commandMeson[os.platform] }} setup --backend ninja --buildtype {{ properties.buildType }} {{ properties.buildFolderRelativePath }} . -Dprefix={{ properties.installFolderPath }} {{ properties.options }}",
       "commandConanBuildEnv": "{{ properties.conansource[os.platform] }} {{ properties.buildFolderRelativePath }}{{ path.sep }}{{ properties.conanbuild[os.platform] }}",
       "commandPrepareNative": "{{ properties.commandConanBuildEnv }} && {{ properties.commandPrepare }} --native-file build{{ path.sep }}napi.ini --native-file hadron{{ path.sep }}conan.ini --native-file hadron{{ path.sep }}{{ properties.toolchain }}-{{ os.platform }}.ini --native-file {{ properties.buildFolderRelativePath }}/conan_meson_native.ini",
       "commandPrepareCross": "{{ properties.commandConanBuildEnv }} && {{ properties.commandPrepare }} --cross-file build{{ path.sep }}napi.ini --cross-file hadron{{ path.sep }}conan.ini --cross-file hadron{{ path.sep }}{{ properties.toolchain }}.ini --cross-file {{ properties.buildFolderRelativePath }}/conan_meson_cross.ini",
-      "commandConfigure": "{{ properties.commandMeson }} configure {{ properties.buildFolderRelativePath }}",
-      "commandBuild": "{{ properties.commandConanBuildEnv }} && {{ properties.commandMeson }} compile -C {{ properties.buildFolderRelativePath }} -v",
-      "commandInstall": "{{ properties.commandMeson }} install -C {{ properties.buildFolderRelativePath }}",
-      "commandClean": "{{ properties.commandMeson }} compile -C {{ properties.buildFolderRelativePath }} --clean",
+      "commandConfigure": "{{ properties.commandMeson[os.platform] }} configure {{ properties.buildFolderRelativePath }}",
+      "commandBuild": "{{ properties.commandConanBuildEnv }} && {{ properties.commandMeson[os.platform] }} compile -C {{ properties.buildFolderRelativePath }} -v",
+      "commandInstall": "{{ properties.commandMeson[os.platform] }} install -C {{ properties.buildFolderRelativePath }}",
+      "commandClean": "{{ properties.commandMeson[os.platform] }} compile -C {{ properties.buildFolderRelativePath }} --clean",
       "scriptBuildFromSource": "{% if env.npm_config_build_from_source %} xpm install && xpm run init && xpm run prepare --config native && xpm run build --config native {% endif %}",
       "scriptBuildWASMFromSource": "{% if env.npm_config_build_wasm_from_source %} xpm install && xpm run init && xpm run prepare --config wasm && xpm run build --config wasm {% endif %}"
     },
