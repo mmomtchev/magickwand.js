@@ -116,12 +116,13 @@
       "module_name": "magickwand",
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
       "installFolderPath": "{{ '/' | path_join: properties.cwd | path_join: 'lib' | path_join: 'binding' | path_join: properties.platformId }}",
-      "toolsFolderPath": "{{ '/' | path_join: properties.cwd | path_join: 'build' | path_join: 'tools' }}",
-      "conanFolderPath": {
-        "win32": "{{ env.LOCALAPPDATA | path_join: 'node-hadron' | path_join: 'conan' }} ",
-        "linux": "{{ env.HOME | path_join: '.cache' | path_join: 'node-hadron' | path_join: 'conan' }} ",
-        "darwin": "{{ env.HOME | path_join: '.cache' | path_join: 'node-hadron' | path_join: 'conan' }} "
+      "cachePath": {
+        "win32": "{{ env.LOCALAPPDATA | path_join: 'node-hadron' }} ",
+        "linux": "{{ env.HOME | path_join: '.cache' | path_join: 'node-hadron' }}",
+        "darwin": "{{ env.HOME | path_join: '.cache' | path_join: 'node-hadron' }}"
       },
+      "toolsFolderPath": "{{ properties.cachePath[os.platform] | path_join: 'tools' }}",
+      "conanFolderPath": "{{ properties.cachePath[os.platform] | path_join: 'conan' }}",
       "conanbuild": {
         "win32": "conanbuild.bat",
         "linux": "conanbuild.sh",
@@ -138,9 +139,9 @@
         "darwin": "PYTHONPATH=\"{{ properties.toolsFolderPath }}\" python3"
       },
       "commandConan": {
-        "win32": "set CONAN_HOME={{ properties.conanFolderPath[os.platform] }} && {{ properties.commandPython[os.platform] }} -m conans.conan",
-        "linux": "CONAN_HOME={{ properties.conanFolderPath[os.platform] }} {{ properties.commandPython[os.platform] }} -m conans.conan",
-        "darwin": "CONAN_HOME={{ properties.conanFolderPath[os.platform] }} {{ properties.commandPython[os.platform] }} -m conans.conan"
+        "win32": "set CONAN_HOME={{ properties.conanFolderPath }} && {{ properties.commandPython[os.platform] }} -m conans.conan",
+        "linux": "CONAN_HOME={{ properties.conanFolderPath }} {{ properties.commandPython[os.platform] }} -m conans.conan",
+        "darwin": "CONAN_HOME={{ properties.conanFolderPath }} {{ properties.commandPython[os.platform] }} -m conans.conan"
       },
       "commandMeson": "{{ properties.commandPython[os.platform] }} -m mesonbuild.mesonmain",
       "commandShowEnv": {
