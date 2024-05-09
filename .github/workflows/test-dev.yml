@@ -35,7 +35,7 @@ jobs:
         id: conan-artifacts
         uses: actions/cache@v4
         with:
-          path: ~/.conan2
+          path: ${{ github.workspace }}/build/conan
           key: ${{ runner.os }}-conan
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
@@ -69,7 +69,7 @@ jobs:
         id: conan-artifacts
         uses: actions/cache@v4
         with:
-          path: ~/.conan2
+          path: ${{ github.workspace }}/build/conan
           key: ${{ runner.os }}-conan
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
@@ -109,7 +109,7 @@ jobs:
         id: conan-artifacts
         uses: actions/cache@v4
         with:
-          path: ~/.conan2
+          path: ${{ github.workspace }}/build/conan
           key: wasm-conan
       - name: Build magickwand.js
         run: npm install --build-wasm-from-source
@@ -149,7 +149,7 @@ jobs:
         id: conan-artifacts
         uses: actions/cache@v4
         with:
-          path: ~/.conan2
+          path: ${{ github.workspace }}/build/conan
           key: wasm-light-conan
       - name: Build magickwand.js
         run: |
@@ -187,7 +187,7 @@ jobs:
         id: conan-artifacts
         uses: actions/cache@v4
         with:
-          path: ~/.conan2
+          path: ${{ github.workspace }}/build/conan
           key: asan-conan
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
