@@ -31,11 +31,14 @@ jobs:
         with:
           node-version: 18.x
       - uses: seanmiddleditch/gha-setup-ninja@master
+      - name: Get conan home
+        shell: bash
+        run: echo CONAN_HOME=`xpm run -q conan:home` >> $GITHUB_ENV
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
         with:
-          path: ${{ github.workspace }}/build/conan
+          path: ${{ env.CONAN_HOME }}
           key: ${{ runner.os }}-conan
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
@@ -65,12 +68,15 @@ jobs:
         with:
           node-version: 18.x
       - uses: seanmiddleditch/gha-setup-ninja@master
+      - name: Get conan home
+        shell: bash
+        run: echo CONAN_HOME=`xpm run -q conan:home` >> $GITHUB_ENV
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
         with:
-          path: ${{ github.workspace }}/build/conan
-          key: ${{ runner.os }}-conan
+          path: ${{ env.CONAN_HOME }}
+          key: linux-light-conan
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
@@ -105,11 +111,14 @@ jobs:
         uses: mymindstorm/setup-emsdk@v13
         with:
           version: 3.1.53
+      - name: Get conan home
+        shell: bash
+        run: echo CONAN_HOME=`xpm run -q conan:home` >> $GITHUB_ENV
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
         with:
-          path: ${{ github.workspace }}/build/conan
+          path: ${{ env.CONAN_HOME }}
           key: wasm-conan
       - name: Build magickwand.js
         run: npm install --build-wasm-from-source
@@ -145,11 +154,14 @@ jobs:
         uses: mymindstorm/setup-emsdk@v13
         with:
           version: 3.1.53
+      - name: Get conan home
+        shell: bash
+        run: echo CONAN_HOME=`xpm run -q conan:home` >> $GITHUB_ENV
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
         with:
-          path: ${{ github.workspace }}/build/conan
+          path: ${{ env.CONAN_HOME }}
           key: wasm-light-conan
       - name: Build magickwand.js
         run: |
@@ -183,12 +195,15 @@ jobs:
         with:
           node-version: 18.x
       - uses: seanmiddleditch/gha-setup-ninja@master
+      - name: Get conan home
+        shell: bash
+        run: echo CONAN_HOME=`xpm run -q conan:home` >> $GITHUB_ENV
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
         with:
-          path: ${{ github.workspace }}/build/conan
-          key: asan-conan
+          path: ${{ env.CONAN_HOME }}
+          key: linux-debug-asan-conan
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
