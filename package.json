@@ -144,8 +144,8 @@
       },
       "commandMeson": {
         "win32": "set PYTHONPATH={{ properties.mesonFolderPath }}&& {{ properties.mesonFolderPath }}\\bin\\meson",
-        "linux": "PYTHONPATH=\"{{ properties.mesonFolderPath }}\" && {{ properties.mesonFolderPath }}/bin/meson",
-        "darwin": "PYTHONPATH=\"{{ properties.mesonFolderPath }}\" && {{ properties.mesonFolderPath }}/bin/meson"
+        "linux": "PYTHONPATH=\"{{ properties.mesonFolderPath }}\" {{ properties.mesonFolderPath }}/bin/meson",
+        "darwin": "PYTHONPATH=\"{{ properties.mesonFolderPath }}\" {{ properties.mesonFolderPath }}/bin/meson"
       },
       "commandShowEnv": {
         "win32": "set",
