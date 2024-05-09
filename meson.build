@@ -20,6 +20,7 @@ sources_raw = run_command(
 sources = sources_raw.stdout().strip().split(',')
 
 dependencies = []
+root_dir = meson.global_source_root()
 static = not get_option('shared') and not meson.is_cross_build()
 external = get_option('external')
 install_dir = get_option('prefix')
