@@ -20,26 +20,16 @@ sources_raw = run_command(
 sources = sources_raw.stdout().strip().split(',')
 
 dependencies = []
+static = not get_option('shared') and not meson.is_cross_build()
 
-# We need the Node.js arch name, not the Python one
-arch = run_command('node', '-p', '`${os.platform()}-${os.arch()}`', check: true).stdout().strip()
-if meson.is_cross_build()
-  if meson.get_compiler('cpp').get_id() == 'emscripten'
-    arch = 'emscripten-' + target_machine.cpu_family()
-  else
-    error('Only emscripten-wasm32 cross-compilation is supported at the moment')
-  endif
-endif
-root_dir = meson.global_source_root()
-lib_dir = root_dir / 'lib'
-install_dir = lib_dir / 'binding' / arch
+install_dir = get_option('prefix')
 
 cmake_dependencies = [
   {'project': 'ImageMagick', 'target': 'Magick++-7.Q16HDRI'}
 ]
 cmake_options = [
   {'MAGICKCORE_QUANTUM_DEPTH': '16'},
-  {'MAGICK_BUILD_STATIC': not get_option('shared')},
+  {'MAGICK_BUILD_STATIC': static},
   {'MAGICK_HDRI_ENABLE': true},
   {'INSTALLED_SUPPORT': false},
   {'BUILD_UTILITIES': not meson.is_cross_build()},
@@ -199,7 +189,7 @@ cmake_opts = cmake.subproject_options()
 cmake_opts.add_cmake_defines(
   [
     {'CMAKE_FIND_LIBRARY_SUFFIXES': '.a'},
-    {'BUILD_SHARED_LIBS': get_option('shared')},
+    {'BUILD_SHARED_LIBS': not static},
     {'CMAKE_POSITION_INDEPENDENT_CODE': true},
   ],
 )
@@ -213,7 +203,6 @@ foreach cmake_dep : cmake_dependencies
   dependencies += [dep]
 endforeach
 
-#err()
 # --------------------
 # Build the module
 # --------------------
@@ -242,3 +231,9 @@ if extra_output_files.length() > 0
     install_dir: install_dir,
   )
 endif
+
+summary({
+  'link ImageMagick statically': static,
+  'asynchronous mode': async,
+  'build CLI tool': not meson.is_cross_build()
+})
