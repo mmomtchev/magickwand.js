@@ -138,9 +138,9 @@
         "darwin": "python3"
       },
       "commandConan": {
-        "win32": "set CONAN_HOME={{ properties.conanFolderPath }}&& {{ properties.conanFolderPath }}\\bin\\conan.exe",
-        "linux": "CONAN_HOME=\"{{ properties.conanFolderPath }}\" {{ properties.conanFolderPath }}/bin/conan",
-        "darwin": "CONAN_HOME=\"{{ properties.conanFolderPath }}\" {{ properties.conanFolderPath }}/bin/conan"
+        "win32": "set CONAN_HOME={{ properties.conanFolderPath }}&&set PYTHONPATH={{ properties.conanFolderPath }}&& {{ properties.conanFolderPath }}\\bin\\conan.exe",
+        "linux": "CONAN_HOME=\"{{ properties.conanFolderPath }}\" PYTHONPATH=\"{{ properties.conanFolderPath }}\" {{ properties.conanFolderPath }}/bin/conan",
+        "darwin": "CONAN_HOME=\"{{ properties.conanFolderPath }}\" PYTHONPATH=\"{{ properties.conanFolderPath }}\" {{ properties.conanFolderPath }}/bin/conan"
       },
       "commandMeson": "{{ properties.mesonFolderPath }}{{ path.sep }}bin{{ path.sep }}meson",
       "commandShowEnv": {
