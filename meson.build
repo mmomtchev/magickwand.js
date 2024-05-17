@@ -7,34 +7,57 @@ project(
   default_options: ['buildtype=release', 'cpp_std=c++17'],
   subproject_dir: 'deps',
 )
-module_name = 'magickwand'
 
+root_dir = meson.global_source_root()
+static = not get_option('shared') and not meson.is_cross_build()
+external = get_option('external')
+
+# The SWIG-generated bindings
 sources = run_command(
   'node',
   '-p', 'fs.readdirSync("@0@").filter(x => x.match(/cxx$/)).map((x) => `swig/${x}`).join(",")'.format(meson.global_source_root() / 'swig'),
   check: true,
 ).stdout().strip().split(',')
 
-dependencies = []
-root_dir = meson.global_source_root()
-static = not get_option('shared') and not meson.is_cross_build()
-external = get_option('external')
-
 if not external
-  cmake_dependencies = [{'project': 'ImageMagick', 'target': 'Magick++-7.Q16HDRI'}]
-  cmake_options = [
-    {'MAGICKCORE_QUANTUM_DEPTH': '16'},
-    {'MAGICK_BUILD_STATIC': static},
-    {'MAGICK_HDRI_ENABLE': true},
-    {'INSTALLED_SUPPORT': false},
-    {'BUILD_UTILITIES': not meson.is_cross_build()},
-  ]
+# --------------------
+# ImageMagick
+# --------------------
+# conan + meson + CMake integration
+# (ie make CMake use the conan-provided libraries - the
+# other important part is in hadron/conan.ini)
+# --------------------
+  cmake = import('cmake')
+  cmake_opts = cmake.subproject_options()
+  cmake_opts.add_cmake_defines(
+    [
+      # These are the ImageMagick build options as supported
+      # by the ImageMagick CMake build system
+      {'MAGICKCORE_QUANTUM_DEPTH': '16'},
+      {'MAGICK_BUILD_STATIC': static},
+      {'MAGICK_HDRI_ENABLE': true},
+      {'INSTALLED_SUPPORT': false},
+      {'BUILD_UTILITIES': not meson.is_cross_build()},
+      # This a meson pecularity on Windows
+      {'CMAKE_FIND_LIBRARY_SUFFIXES': '.a'},
+      # This a standard CMake switch that is probably redundant
+      {'BUILD_SHARED_LIBS': not static},
+      # This is required since we are building ImageMagick as a static library to be
+      # included in a dynamically loadable module
+      {'CMAKE_POSITION_INDEPENDENT_CODE': true},
+    ],
+  )
+  imagemagick = cmake.subproject('ImageMagick', options: cmake_opts)
+  magickpp = imagemagick.dependency('Magick++-7.Q16HDRI')
+  dependencies = [magickpp]
 else
-  cmake_dependencies = []
-  cmake_options = []
+  dependencies = []
 endif
 
 if meson.get_compiler('cpp').get_id() == 'emscripten'
+  if external
+    error('Rebuilding the WASM module with an externally provided ImageMagick library is not possible')
+  endif
   # Embed these files into the WASM bundle
   add_global_link_arguments(
     [
@@ -52,33 +75,11 @@ if meson.get_compiler('cpp').get_id() == 'emscripten'
 endif
 
 # --------------------
-# conan + meson + CMake integration
-# (ie make CMake use the conan-provided libraries - the
-# other important part is in hadron/conan.ini)
-# --------------------
-cmake = import('cmake')
-cmake_opts = cmake.subproject_options()
-cmake_opts.add_cmake_defines(
-  [
-    {'CMAKE_FIND_LIBRARY_SUFFIXES': '.a'},
-    {'BUILD_SHARED_LIBS': not static},
-    {'CMAKE_POSITION_INDEPENDENT_CODE': true},
-  ],
-)
-cmake_opts.add_cmake_defines(cmake_options)
-
-foreach cmake_dep : cmake_dependencies
-  project = cmake.subproject(cmake_dep.get('project'), options: cmake_opts)
-  dep = project.dependency(cmake_dep.get('target'))
-  dependencies += [dep]
-endforeach
-
-# --------------------
 # Build the module
 # --------------------
 napi = import('node-api')
 main_target = napi.extension_module(
-  module_name,
+  'magickwand',
   sources,
   install: true,
   dependencies: dependencies,
