@@ -19,6 +19,32 @@ sources = run_command(
   check: true,
 ).stdout().strip().split(',')
 
+if meson.get_compiler('cpp').get_id() == 'emscripten'
+  if external
+    error('Rebuilding the WASM module with an externally provided ImageMagick library is not possible')
+  endif
+  # Embed these files into the WASM bundle
+  add_global_link_arguments(
+    [
+      # This one is used for unit testing, it is only 4Kb
+      f'--embed-file=@root_dir@/test/data/wizard.gif@wizard.gif',
+      # These are needed by ImageMagick
+      f'--embed-file=@root_dir@/deps/ImageMagick/config/policy-open.xml@policy.xml',
+      f'--embed-file=@root_dir@/deps/ImageMagick/config/colors.xml@colors.xml',
+      f'--embed-file=@root_dir@/deps/ImageMagick/config//log.xml@log.xml',
+      f'--embed-file=@root_dir@/deps/ImageMagick/config/locale.xml@locale.xml',
+      f'--embed-file=@root_dir@/deps/ImageMagick/config/english.xml@english.xml',
+    ],
+    language: ['c', 'cpp'],
+  )
+endif
+
+# The SWIG-generated wrapper for Magick++::Image is huge
+# and requires compiling with /bigobj on Windows
+if meson.get_compiler('cpp').get_id() == 'msvc'
+  add_global_arguments('/bigobj', language: 'cpp')
+endif
+
 if not external
 # --------------------
 # ImageMagick
@@ -52,32 +78,6 @@ if not external
   dependencies = [magickpp]
 else
   dependencies = []
-endif
-
-if meson.get_compiler('cpp').get_id() == 'emscripten'
-  if external
-    error('Rebuilding the WASM module with an externally provided ImageMagick library is not possible')
-  endif
-  # Embed these files into the WASM bundle
-  add_global_link_arguments(
-    [
-      # This one is used for unit testing, it is only 4Kb
-      f'--embed-file=@root_dir@/test/data/wizard.gif@wizard.gif',
-      # These are needed by ImageMagick
-      f'--embed-file=@root_dir@/deps/ImageMagick/config/policy-open.xml@policy.xml',
-      f'--embed-file=@root_dir@/deps/ImageMagick/config/colors.xml@colors.xml',
-      f'--embed-file=@root_dir@/deps/ImageMagick/config//log.xml@log.xml',
-      f'--embed-file=@root_dir@/deps/ImageMagick/config/locale.xml@locale.xml',
-      f'--embed-file=@root_dir@/deps/ImageMagick/config/english.xml@english.xml',
-    ],
-    language: ['c', 'cpp'],
-  )
-endif
-
-# The SWIG-generated wrapper for Magick++::Image is huge
-# and requires compiling with /bigobj on Windows
-if meson.get_compiler('cpp').get_id() == 'msvc'
-  add_global_arguments('/bigobj', language: 'cpp')
 endif
 
 # --------------------
