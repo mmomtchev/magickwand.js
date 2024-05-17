@@ -74,6 +74,12 @@ if meson.get_compiler('cpp').get_id() == 'emscripten'
   )
 endif
 
+# The SWIG-generated wrapper for Magick++::Image is huge
+# and requires compiling with /bigobj on Windows
+if meson.get_compiler('cpp').get_id() == 'msvc'
+  add_global_arguments('/bigobj', language: 'cpp')
+endif
+
 # --------------------
 # Build the module
 # --------------------
