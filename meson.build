@@ -26,6 +26,8 @@ if meson.get_compiler('cpp').get_id() == 'emscripten'
   # Embed these files into the WASM bundle
   add_global_link_arguments(
     [
+      # Export the FS subsystem
+      '-sEXPORTED_RUNTIME_METHODS=["FS"]',
       # This one is used for unit testing, it is only 4Kb
       f'--embed-file=@root_dir@/test/data/wizard.gif@wizard.gif',
       # These are needed by ImageMagick
@@ -37,6 +39,7 @@ if meson.get_compiler('cpp').get_id() == 'emscripten'
     ],
     language: ['c', 'cpp'],
   )
+  add_global_arguments(['-D__STDC_FORMAT_MACROS'], language: ['c', 'cpp'])
 endif
 
 # The SWIG-generated wrapper for Magick++::Image is huge
@@ -44,6 +47,8 @@ endif
 if meson.get_compiler('cpp').get_id() == 'msvc'
   add_global_arguments('/bigobj', language: 'cpp')
 endif
+
+dependencies = []
 
 if not external
 # --------------------
@@ -75,10 +80,11 @@ if not external
   )
   imagemagick = cmake.subproject('ImageMagick', options: cmake_opts)
   magickpp = imagemagick.dependency('Magick++-7.Q16HDRI')
-  dependencies = [magickpp]
-else
-  dependencies = []
+  dependencies += [magickpp]
 endif
+
+thread_dep = dependency('threads')
+dependencies += [thread_dep]
 
 # --------------------
 # Build the module
@@ -89,7 +95,10 @@ main_target = napi.extension_module(
   sources,
   install: true,
   dependencies: dependencies,
-  node_api_options: {'swig': true},
+  node_api_options: {
+    'swig': true,
+    'environments': ['web','webview','worker']
+    },
 )
 
 summary(

@@ -30,7 +30,8 @@ describe('Image', () => {
       ColorTest(assert, Magick);
       stressTest('wizard.gif', assert, Magick, MagickCore);
       done();
-    });
+    })
+      .catch(done);
   });
 
   it('ImageMagick version information', () =>
