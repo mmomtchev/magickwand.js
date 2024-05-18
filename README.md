@@ -138,7 +138,7 @@ npm run deps:download                      # retrieve the pregenerated SWIG wrap
 npx xpm install                            # install the supporting xpm packages
 npx xpm run init                           # install conan and meson
 npx xpm run prepare --config native-debug  # available builds are native, native-debug, wasm and wasm-debug
-python3 -m mesonbuild.mesonmain configure build/native-debug -Db_sanitize=address # optional step to enable ASAN
+npx xpm run configure --config native-debug -- -Db_sanitize=address # optional step to enable ASAN
 npx xpm run build --config native-debug    # build
 ```
 
