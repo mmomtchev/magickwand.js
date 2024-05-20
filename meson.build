@@ -9,7 +9,7 @@ project(
 )
 
 root_dir = meson.global_source_root()
-static = not get_option('shared') and not meson.is_cross_build()
+static = not get_option('shared') or meson.is_cross_build()
 external = get_option('external')
 
 # The SWIG-generated bindings
@@ -39,7 +39,6 @@ if meson.get_compiler('cpp').get_id() == 'emscripten'
     ],
     language: ['c', 'cpp'],
   )
-  add_global_arguments(['-D__STDC_FORMAT_MACROS'], language: ['c', 'cpp'])
 endif
 
 # The SWIG-generated wrapper for Magick++::Image is huge
