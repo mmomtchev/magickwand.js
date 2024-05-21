@@ -64,14 +64,12 @@ if not external
       # These are the ImageMagick build options as supported
       # by the ImageMagick CMake build system
       {'MAGICKCORE_QUANTUM_DEPTH': '16'},
-      {'MAGICK_BUILD_STATIC': static},
+      {'BUILD_SHARED_LIBS': not static},
       {'MAGICK_HDRI_ENABLE': true},
       {'INSTALLED_SUPPORT': false},
       {'BUILD_UTILITIES': not meson.is_cross_build()},
       # This a meson pecularity on Windows
       {'CMAKE_FIND_LIBRARY_SUFFIXES': '.a'},
-      # This a standard CMake switch that is probably redundant
-      {'BUILD_SHARED_LIBS': not static},
       # This is required since we are building ImageMagick as a static library to be
       # included in a dynamically loadable module
       {'CMAKE_POSITION_INDEPENDENT_CODE': true},
