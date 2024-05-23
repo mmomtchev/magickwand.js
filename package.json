@@ -118,7 +118,7 @@
       "cachePath": {
         "win32": "{{ env.LOCALAPPDATA | path_join: 'node-hadron' }}",
         "linux": "{{ env.HOME | path_join: '.cache' | path_join: 'node-hadron' }}",
-        "darwin": "{{ env.HOME | path_join: '.cache' | path_join: 'node-hadron' }}"
+        "darwin": "{{ env.HOME | path_join: 'Library' | path_join: 'Caches' | path_join: 'node-hadron' }}"
       },
       "mesonFolderPath": "{{ properties.cachePath[os.platform] | path_join: 'meson' }}",
       "conanFolderPath": "{{ properties.cachePath[os.platform] | path_join: 'conan' }}",
