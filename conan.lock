@@ -53,6 +53,7 @@
         "nasm/2.15.05#058c93b2214a49ca1cfe9f8f26205568%1703550024.076",
         "meson/1.4.0#024dfac41ea5570cb1aec3ea6fe34d0a%1710913346.419",
         "meson/1.3.2#d1125ba555ec1a94f165a3412fdf7f88%1708699393.753",
+        "meson/1.3.1#7134d7d69e15aaac836309abf62d53ec%1708699390.224",
         "meson/1.2.2#04bdfb85d665c82b08a3510aee3ffd19%1702568761.764",
         "meson/1.2.1#f641f02771e4660c772354736da0b9c6%1702568762.471",
         "m4/1.4.19#b38ced39a01e31fef5435bc634461fd2%1700758725.451",
@@ -75,8 +76,8 @@
             null
         ],
         "freetype/2.13.2": [
-            "freetype/2.13.2",
-            null
+            null,
+            "freetype/2.13.2"
         ],
         "libjpeg-turbo/3.0.2": [
             "libjpeg-turbo/3.0.2",

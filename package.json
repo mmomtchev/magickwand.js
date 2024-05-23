@@ -167,9 +167,15 @@
       "commandConanInstall": "{{ properties.commandPython[os.platform] }} -m pip install --upgrade --force-reinstall --target {{ properties.conanFolderPath }} conan",
       "commandMesonInstall": "{{ properties.commandPython[os.platform] }} -m pip install --upgrade --force-reinstall --target {{ properties.mesonFolderPath }} git+https://github.com/mmomtchev/meson@node_api ",
       "commandConanInit": "{{ properties.commandConan[os.platform] }} profile detect || echo ok",
-      "commandConanDependencies": "{{ properties.commandConan[os.platform] }} install . -pr:b=default --build=missing -of {{ properties.buildFolderRelativePath }} --settings=build_type={{ properties.buildType | capitalize }}",
-      "commandDependenciesNative": "{{ properties.commandConanDependencies }} -pr:h=./hadron/{{ properties.toolchain }}-{{ os.platform }}.profile",
-      "commandDependenciesCross": "{{ properties.commandConanDependencies }} -pr:h=./hadron/{{ properties.toolchain }}.profile",
+      "argsConanShared": "--build=missing -pr:b=default --settings=build_type={{ properties.buildType | capitalize }}",
+      "argsConanNative": "-pr:h=./hadron/{{ properties.toolchain }}-{{ os.platform }}.profile",
+      "argsConanCross": "-pr:h=./hadron/{{ properties.toolchain }}.profile",
+      "commandConanDependencies": "{{ properties.commandConan[os.platform] }} install . {{ properties.argsConanShared }} -of {{ properties.buildFolderRelativePath }}",
+      "commandDependenciesNative": "{{ properties.commandConanDependencies }} {{ properties.argsConanNative }}",
+      "commandDependenciesCross": "{{ properties.commandConanDependencies }} {{ properties.argsConanCross }}",
+      "commandConanLock": "{{ properties.commandConan[os.platform] }} lock create . ",
+      "commandConanLockNative": "{{ properties.commandConanLock }} {{ properties.argsConanNative }}",
+      "commandConanLockCross": "{{ properties.commandConanLock }} {{ properties.argsConanShared}}",
       "commandPrepare": "{{ properties.commandMeson[os.platform] }} setup --backend ninja --buildtype {{ properties.buildType }} {{ properties.buildFolderRelativePath }} . -Dprefix={{ properties.installFolderPath }} {{ properties.options }}",
       "commandConanBuildEnv": "{{ properties.conansource[os.platform] }} {{ properties.buildFolderRelativePath }}{{ path.sep }}{{ properties.conanbuild[os.platform] }}",
       "commandPrepareNative": "{{ properties.commandConanBuildEnv }} && {{ properties.commandPrepare }} --native-file hadron{{ path.sep }}conan.ini --native-file hadron{{ path.sep }}{{ properties.toolchain }}-{{ os.platform }}.ini --native-file {{ properties.buildFolderRelativePath }}/conan_meson_native.ini",
@@ -215,7 +221,8 @@
             "{{ properties.commandBuild }}",
             "{{ properties.commandInstall }}"
           ],
-          "clean": "{{ properties.commandClean }}"
+          "clean": "{{ properties.commandClean }}",
+          "lock": "{{ properties.commandConanLockNative }}"
         }
       },
       "native-xpack": {
@@ -243,7 +250,8 @@
           "prepare": [
             "{{ properties.commandDependenciesCross }}",
             "{{ properties.commandPrepareCross }}"
-          ]
+          ],
+          "lock": "{{ properties.commandConanLockCross }}"
         }
       },
       "native-debug": {
