@@ -71,20 +71,20 @@
     "python_requires": [],
     "overrides": {
         "libffi/3.4.4": [
-            "libffi/3.4.4",
-            null
+            null,
+            "libffi/3.4.4"
         ],
         "freetype/2.13.2": [
-            "freetype/2.13.2",
-            null
+            null,
+            "freetype/2.13.2"
         ],
         "libjpeg-turbo/3.0.2": [
             null,
             "libjpeg-turbo/3.0.2"
         ],
         "pixman/0.43.4#17a592b79b264d61abeec594cc331e58": [
-            null,
-            "pixman/0.43.4"
+            "pixman/0.43.4",
+            null
         ],
         "glib/2.78.3": [
             "glib/2.78.1"
