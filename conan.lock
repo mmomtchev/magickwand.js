@@ -47,11 +47,14 @@
     ],
     "build_requires": [
         "zlib/1.2.13#4e74ebf1361fe6fb60326f473f276eb5%1705999194.457",
+        "strawberryperl/5.32.1.1#8f83d05a60363a422f9033e52d106b47%1666134191.176",
+        "strawberryperl/5.30.0.1#d125df083747d815c66e9ee621f3909f%1666134190.827",
         "pkgconf/2.1.0#27f44583701117b571307cf5b5fe5605%1701537936.436",
         "pkgconf/2.0.3#f996677e96e61e6552d85e83756c328b%1696606182.229",
         "pcre2/10.42#a7a2c122056510509a7525c83d6a6695%1708432300.733",
         "ninja/1.11.1#77587f8c8318662ac8e5a7867eb4be21%1684431244.21",
         "nasm/2.15.05#058c93b2214a49ca1cfe9f8f26205568%1703550024.076",
+        "msys2/cci.latest#5a31efa2bde593541fd5ac3bcc50c01c%1699871190.424",
         "meson/1.4.0#024dfac41ea5570cb1aec3ea6fe34d0a%1710913346.419",
         "meson/1.3.2#d1125ba555ec1a94f165a3412fdf7f88%1708699393.753",
         "meson/1.3.1#7134d7d69e15aaac836309abf62d53ec%1708699390.224",
@@ -71,25 +74,26 @@
         "flex/2.6.4#e35bc44b3fcbcd661e0af0dc5b5b1ad4%1674818991.113",
         "cmake/3.29.2#2b84343440461e8c5952c034d896fb67%1713311246.014",
         "bzip2/1.0.8#457c272f7da34cb9c67456dd217d36c4%1703591832.799",
+        "automake/1.16.5#058bda3e21c36c9aa8425daf3c1faf50%1688481772.751",
         "autoconf/2.71#f9307992909d7fb3df459340f1932809%1711983104.648"
     ],
     "python_requires": [],
     "overrides": {
         "libffi/3.4.4": [
-            null,
-            "libffi/3.4.4"
+            "libffi/3.4.4",
+            null
         ],
         "freetype/2.13.2": [
-            null,
-            "freetype/2.13.2"
+            "freetype/2.13.2",
+            null
         ],
         "libjpeg-turbo/3.0.2": [
-            null,
-            "libjpeg-turbo/3.0.2"
+            "libjpeg-turbo/3.0.2",
+            null
         ],
         "pixman/0.43.4#17a592b79b264d61abeec594cc331e58": [
-            null,
-            "pixman/0.43.4"
+            "pixman/0.43.4",
+            null
         ],
         "glib/2.78.3": [
             "glib/2.78.1"
