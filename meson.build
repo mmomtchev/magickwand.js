@@ -68,8 +68,6 @@ if not external
       {'MAGICK_HDRI_ENABLE': true},
       {'INSTALLED_SUPPORT': false},
       {'BUILD_UTILITIES': not meson.is_cross_build()},
-      # This a meson pecularity on Windows
-      {'CMAKE_FIND_LIBRARY_SUFFIXES': '.a'},
       # This is required since we are building ImageMagick as a static library to be
       # included in a dynamically loadable module
       {'CMAKE_POSITION_INDEPENDENT_CODE': true},
