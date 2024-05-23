@@ -24,6 +24,7 @@
         "libjpeg-turbo/3.0.2#1acc4234a921c5c948652e04c77d3d80%1706213428.499",
         "libiconv/1.17#73fefc1b696e069df90fd1d18aa63edd%1707122814.387",
         "libheif/1.13.0#22a63076c0f8e093cf2d3a1db3bd1229%1693326477.512",
+        "libgettext/0.22#35d2811b2dd27a98f69e4daa86ca2000%1714393058.647",
         "libffi/3.4.4#35eb63842b505824b70aedc1baefc916%1682741110.044",
         "libelf/0.8.13#4f70a3555809ae50cc8add44f0f84288%1682439923.579",
         "libdeflate/1.19#3ea74a4549efc14d4b1202dc4bfbf602%1694914376.803",
@@ -59,11 +60,14 @@
         "m4/1.4.19#b38ced39a01e31fef5435bc634461fd2%1700758725.451",
         "libselinux/3.5#776f35e238362c6b893220f437cb89ae%1700227545.201",
         "libmount/2.39#8a95198b2547a8ca7685eb7a1d002903%1705591483.106",
+        "libiconv/1.17#73fefc1b696e069df90fd1d18aa63edd%1707122814.387",
+        "libgettext/0.22#35d2811b2dd27a98f69e4daa86ca2000%1714393058.647",
         "libffi/3.4.4#35eb63842b505824b70aedc1baefc916%1682741110.044",
         "libelf/0.8.13#4f70a3555809ae50cc8add44f0f84288%1682439923.579",
         "gperf/3.1#1d622ad9717e9348ed3685c9994ad0b9%1709324989.76",
         "gnu-config/cci.20210814#dc430d754f465e8c74463019672fb97b%1701248168.479",
         "glib/2.78.1#6da549beee7208bd9fad0e6141581e8e%1698656551.932",
+        "gettext/0.21#47908e52e736402f11d4ac680cbcd457%1714394718.76",
         "flex/2.6.4#e35bc44b3fcbcd661e0af0dc5b5b1ad4%1674818991.113",
         "cmake/3.29.2#2b84343440461e8c5952c034d896fb67%1713311246.014",
         "bzip2/1.0.8#457c272f7da34cb9c67456dd217d36c4%1703591832.799",
@@ -72,20 +76,20 @@
     "python_requires": [],
     "overrides": {
         "libffi/3.4.4": [
-            "libffi/3.4.4",
-            null
+            null,
+            "libffi/3.4.4"
         ],
         "freetype/2.13.2": [
             null,
             "freetype/2.13.2"
         ],
         "libjpeg-turbo/3.0.2": [
-            "libjpeg-turbo/3.0.2",
-            null
+            null,
+            "libjpeg-turbo/3.0.2"
         ],
         "pixman/0.43.4#17a592b79b264d61abeec594cc331e58": [
-            "pixman/0.43.4",
-            null
+            null,
+            "pixman/0.43.4"
         ],
         "glib/2.78.3": [
             "glib/2.78.1"
