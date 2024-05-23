@@ -37,6 +37,25 @@
       ]
     },
     {
+      "name": "(lldb) Launch mocha",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "/usr/local/bin/node",
+      "args": [
+        "--expose-gc",
+        "${workspaceFolder}/node_modules/mocha/lib/cli/cli.js",
+        "-config",
+        ".mocharc.security.json"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/test",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
+      "setupCommands": [
+      ]
+    },
+    {
       "name": "(Windows) Launch mocha",
       "type": "cppvsdbg",
       "request": "launch",
