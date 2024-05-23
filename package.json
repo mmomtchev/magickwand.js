@@ -122,16 +122,6 @@
       },
       "mesonFolderPath": "{{ properties.cachePath[os.platform] | path_join: 'meson' }}",
       "conanFolderPath": "{{ properties.cachePath[os.platform] | path_join: 'conan' }}",
-      "conanbuild": {
-        "win32": "conanbuild.bat",
-        "linux": "conanbuild.sh",
-        "darwin": "conanbuild.sh"
-      },
-      "conansource": {
-        "win32": "",
-        "linux": ".",
-        "darwin": "."
-      },
       "commandPython": {
         "win32": "python",
         "linux": "python3",
@@ -171,11 +161,10 @@
       "commandDependenciesNative": "{{ properties.commandConanDependencies }} -pr:h=./hadron/{{ properties.toolchain }}-{{ os.platform }}.profile",
       "commandDependenciesCross": "{{ properties.commandConanDependencies }} -pr:h=./hadron/{{ properties.toolchain }}.profile",
       "commandPrepare": "{{ properties.commandMeson[os.platform] }} setup --backend ninja --buildtype {{ properties.buildType }} {{ properties.buildFolderRelativePath }} . -Dprefix={{ properties.installFolderPath }} {{ properties.options }}",
-      "commandConanBuildEnv": "{{ properties.conansource[os.platform] }} {{ properties.buildFolderRelativePath }}{{ path.sep }}{{ properties.conanbuild[os.platform] }}",
-      "commandPrepareNative": "{{ properties.commandConanBuildEnv }} && {{ properties.commandPrepare }} --native-file hadron{{ path.sep }}conan.ini --native-file hadron{{ path.sep }}{{ properties.toolchain }}-{{ os.platform }}.ini --native-file {{ properties.buildFolderRelativePath }}/conan_meson_native.ini",
-      "commandPrepareCross": "{{ properties.commandConanBuildEnv }} && {{ properties.commandPrepare }} --cross-file hadron{{ path.sep }}conan.ini --cross-file hadron{{ path.sep }}{{ properties.toolchain }}.ini --cross-file {{ properties.buildFolderRelativePath }}/conan_meson_cross.ini",
+      "commandPrepareNative": "{{ properties.commandPrepare }} --native-file hadron{{ path.sep }}conan.ini --native-file hadron{{ path.sep }}{{ properties.toolchain }}-{{ os.platform }}.ini --native-file {{ properties.buildFolderRelativePath }}/conan_meson_native.ini",
+      "commandPrepareCross": "{{ properties.commandPrepare }} --cross-file hadron{{ path.sep }}conan.ini --cross-file hadron{{ path.sep }}{{ properties.toolchain }}.ini --cross-file {{ properties.buildFolderRelativePath }}/conan_meson_cross.ini",
       "commandConfigure": "{{ properties.commandMeson[os.platform] }} configure {{ properties.buildFolderRelativePath }}",
-      "commandBuild": "{{ properties.commandConanBuildEnv }} && {{ properties.commandMeson[os.platform] }} compile -C {{ properties.buildFolderRelativePath }} -v",
+      "commandBuild": "{{ properties.commandMeson[os.platform] }} compile -C {{ properties.buildFolderRelativePath }} -v",
       "commandInstall": "{{ properties.commandMeson[os.platform] }} install -C {{ properties.buildFolderRelativePath }}",
       "commandClean": "{{ properties.commandMeson[os.platform] }} compile -C {{ properties.buildFolderRelativePath }} --clean",
       "scriptBuildFromSource": "{% if env.npm_config_build_from_source %} xpm install && xpm run init && xpm run prepare --config native && xpm run build --config native {% endif %}",
