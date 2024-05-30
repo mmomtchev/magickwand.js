@@ -110,10 +110,10 @@
   "xpack": {
     "minimumXpmRequired": "0.14.0",
     "devDependencies": {
-      "@xpack-dev-tools/meson-build": "1.3.2-1.1",
       "@mmomtchev/meson-xpack": "1.4.99-2",
       "@mmomtchev/python-xpack": "3.12.3-2",
-      "@mmomtchev/conan-xpack": "2.3.2-2"
+      "@mmomtchev/conan-xpack": "2.3.2-2",
+      "@xpack-dev-tools/ninja-build": "1.11.1-3.1"
     },
     "properties": {
       "module_name": "magickwand",
