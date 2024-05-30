@@ -237,7 +237,6 @@ jobs:
       - name: Build with ASAN
         run: |
           npx xpm install
-          npx xpm run init
           npx xpm run prepare --config native-debug
           npx xpm run configure --config native-debug -- -Db_sanitize=address
           npx xpm run build --config native-debug

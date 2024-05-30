@@ -156,8 +156,8 @@
       "commandBuild": "{{ properties.commandConanBuildEnv[os.platform] }} meson compile -C {{ properties.buildFolderRelativePath }} -v",
       "commandInstall": "meson install -C {{ properties.buildFolderRelativePath }}",
       "commandClean": "meson compile -C {{ properties.buildFolderRelativePath }} --clean",
-      "scriptBuildFromSource": "{% if env.npm_config_build_from_source %} xpm install && xpm run init && xpm run prepare --config native && xpm run build --config native {% endif %}",
-      "scriptBuildWASMFromSource": "{% if env.npm_config_build_wasm_from_source %} xpm install && xpm run init && xpm run prepare --config wasm && xpm run build --config wasm {% endif %}"
+      "scriptBuildFromSource": "{% if env.npm_config_build_from_source %} xpm install && xpm run prepare --config native && xpm run build --config native {% endif %}",
+      "scriptBuildWASMFromSource": "{% if env.npm_config_build_wasm_from_source %} xpm install && xpm run prepare --config wasm && xpm run build --config wasm {% endif %}"
     },
     "actions": {
       "generate": [
