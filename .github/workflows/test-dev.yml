@@ -35,6 +35,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Install the xpacks
+        run: |
+          npm install xpm
+          npx xpm install
       - name: Get conan home
         shell: bash
         id: conan_home
@@ -72,6 +76,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - name: Install the xpacks
+        run: |
+          npm install xpm
+          npx xpm install
       - name: Get conan home
         shell: bash
         id: conan_home
@@ -115,6 +123,10 @@ jobs:
         uses: mymindstorm/setup-emsdk@v13
         with:
           version: 3.1.53
+      - name: Install the xpacks
+        run: |
+          npm install xpm
+          npx xpm install
       - name: Get conan home
         shell: bash
         id: conan_home
@@ -158,6 +170,10 @@ jobs:
         uses: mymindstorm/setup-emsdk@v13
         with:
           version: 3.1.53
+      - name: Install the xpacks
+        run: |
+          npm install xpm
+          npx xpm install
       - name: Get conan home
         shell: bash
         id: conan_home
@@ -199,6 +215,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - name: Install the xpacks
+        run: |
+          npm install xpm
+          npx xpm install
       - name: Get conan home
         shell: bash
         id: conan_home
