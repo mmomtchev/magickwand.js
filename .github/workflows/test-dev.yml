@@ -30,11 +30,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
-      # stick to Python 3.12 until conan has glib 2.79.0
-      # https://gitlab.gnome.org/GNOME/glib/-/issues/3134
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
       - name: Install the xpacks
         run: |
           npm install xpm
