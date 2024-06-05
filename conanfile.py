@@ -1,6 +1,8 @@
 from conan import ConanFile
 from conan.tools.files import save
 from conan.tools import CppInfo
+from conan.tools.cmake import CMakeToolchain, CMakeDeps
+from conan.tools.meson import MesonToolchain
 from os import environ
 
 
@@ -78,7 +80,9 @@ class ImageMagickDelegates(ConanFile):
       'display':    npm_option('display', True)
     }
 
-    generators = [ 'MesonToolchain', 'CMakeDeps', 'CMakeToolchain' ]
+    # CMakeToolchain is manually instantiated at the end
+    # (this should probably go into a hadron-specific conan library)
+    generators = [ 'MesonToolchain', 'CMakeDeps' ]
 
     def requirements(self):
       # Disable all bundled delegates
@@ -211,3 +215,19 @@ class ImageMagickDelegates(ConanFile):
       # When building with emscripten, the main exe is called zstd.js and all symlinks are broken
       if self.settings.arch == 'wasm' and self.options.zstd:
         self.options['zstd'].build_programs = False
+
+    # We don't want the conan build system - conan works best with the platforms' defaults
+    # We always use ninja on all platforms (this is the meson approach)
+    #
+    # conan uses its own meson and ninja
+    # we use our own meson (hadron xpack) and ninja (xpack)
+    # however everyone shares the same Python (hadron xpack) and cmake (xpack)
+    # (although conan supports replacing its meson and ninja,
+    # this is a source of trouble and brings no benefits)
+    #
+    # This is the least opionated approach - no one imposes anything
+    # and conan remains optional
+    def generate(self):
+        tc = CMakeToolchain(self)
+        tc.blocks.remove("generic_system")
+        tc.generate()

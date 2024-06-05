@@ -71,6 +71,9 @@ if not external
       # This is required since we are building ImageMagick as a static library to be
       # included in a dynamically loadable module
       {'CMAKE_POSITION_INDEPENDENT_CODE': true},
+      # TODO: This does not belong here,
+      # I am still considering my options for a better solution
+      {'CMAKE_MAKE_PROGRAM': 'ninja.cmd'}
     ],
   )
   imagemagick = cmake.subproject('ImageMagick', options: cmake_opts)
