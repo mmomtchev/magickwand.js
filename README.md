@@ -108,15 +108,15 @@ When using Node.js with X-Windows, the `Image.display()` function works and it i
 
 ### Rebuilding from npm with the built-in ImageMagick library
 
+Starting with version 2.0, `magickwand.js` uses the new `hadron` build system specifically developed for dual-environment (browser WASM and native Node.js) Node-API projects. This will be documented separately once it has been stabilized.
+
 ```shell
 npm install magickwand.js --build-from-source
 ```
 
-You will need a working C++17 environment. This will also rebuild the included Magick++ library.
+This will also rebuild the included Magick++ library. Currently, you will need a working C++11 environment as the full xPack version that will rebuild itself with its own compiler is still not ready. The project is tested, and has pre-built binaries, with `gcc` on Linux x64, `clang` on macOS x64 and `MSVC` on Windows x64. As the project contains assembler code (mostly SIMD), and I do not have access to a macOS arm64 build host, I cannot provide macOS x64 binaries.
 
-Currently, this requires to have installed `CMake` and `ninja`, but this requirement will be removed in the future.
-
-It will automatically install `conan` and a custom `meson` version in `~/.cache/node-hadron/tools` (`%LOCALAPPDATA%\node-hadron\tools` on Windows). `conan` will be building in `~/.cache/node-hadron/conan` (`%LOCALAPPDATA%\node-hadron\conan` on Windows) instead of its default directory. If you want to use shared `conan` artifacts that can be kept across different systems, set `CONAN_HOME` before launching the build.
+The xPack fully self-contained version will use `clang` on all platforms.
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
@@ -135,8 +135,7 @@ cd magickwand.js
 ```shell
 npm install                                # install all npm dependencies
 npm run deps:download                      # retrieve the pregenerated SWIG wrappers
-npx xpm install                            # install the supporting xpm packages
-npx xpm run init                           # install conan and meson
+npx xpm install                            # install the supporting xpm packages (python, conan, meson, ninja, cmake)
 npx xpm run prepare --config native-debug  # available builds are native, native-debug, wasm and wasm-debug
 npx xpm run configure --config native-debug -- -Db_sanitize=address # optional step to enable ASAN
 npx xpm run build --config native-debug    # build
@@ -186,17 +185,19 @@ At the moment this cross-compilation has been tested only on Linux.
 Building a lighter custom binary which does not include some of the builtin libraries is possible by specifying:
 
 ```shell
-npm install --shared --verbose --foreground-scripts                                     \
-  --build-wasm-from-source --build-from-source                                          \
-  --disable-fonts --enable-jpeg --enable-png --disable-tiff                             \
-  --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia                   \
-  --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif           \
-  --disable-color --disable-xml --enable-gzip --disable-zip                             \
-  --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd             \
+npm install --shared --verbose --foreground-scripts                            \
+  --build-wasm-from-source --build-from-source                                 \
+  --disable-fonts --enable-jpeg --enable-png --disable-tiff                    \
+  --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia          \
+  --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif  \
+  --disable-color --disable-xml --enable-gzip --disable-zip                    \
+  --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd    \
   --disable-openmp --disable-display --disable-jbig --disable-cairo
 ```
 
-This disables the included delegates, but keep in mind that the ImageMagick configure script will still detect the presence of some compatible system libraries and will try to use them, producing a custom binary that will need the dynamically loaded versions of those libraries on your system. The WASM version will probably lack support for most formats as it is very unlikely that you will have system-installed WASM-version libraries that ImageMagick will detect and use.
+This disables the built-in static delegates, but the ImageMagick configure script will still detect the presence of compatible system libraries and will try to use them, producing a custom binary that will need the dynamically loaded versions of those libraries on your system.
+
+The WASM version will probably lack support for most formats as it is very unlikely that you will have system-installed WASM-version libraries that ImageMagick will detect and use.
 
 If the WASM binary is rebuilt with no additional libraries, its size will be brought down to 1.5MB compressed with brotli. Further reduction is possible by disabling unneeded SWIG wrappers but this requires to manually edit the SWIG source files and to regenerate the C++ files. Producing a version that supports only synchronous mode and does not require COOP/COEP is also possible. I will consider any offer for commercial support of such dedicated light version.
 
@@ -212,29 +213,13 @@ I have tried to be as verbose as possible throughout the `Magick++.i` file - you
 
 There is also a [medium article about using the new Node-API support in SWIG](https://mmomtchev.medium.com/effortlessly-porting-a-major-c-library-to-node-js-with-swig-napi-3c1a5c4a233f).
 
-Current status of SWIG Node-API as of 2023-10-22:
----
-| Feature | Status | Documentation |
---- | --- | --- |
-| Base Node-API support | ***merged, scheduled for 4.2.0*** | Part of the official SWIG 4.2.0 documentation |
-| Asynchronous methods | ***[swig/PR#2654](https://github.com/swig/swig/pull/2654) in review*** | Part of the official SWIG documentation (in [swig/PR#2654](https://github.com/swig/swig/pull/2654)) |
-| TypeScript support | [mmomtchev/swig#typescript](https://github.com/mmomtchev/swig/tree/typescript), polishing for PR | Ony the [medium story](https://mmomtchev.medium.com/effortlessly-porting-a-major-c-library-to-node-js-with-swig-napi-3c1a5c4a233f)
-| WASM / `emscripten` / `emnapi` compatibility | [mmomtchev/swig#wasm](https://github.com/mmomtchev/swig/tree/wasm), mostly working | None at all |
-| Code Splitting | [mmomtchev/swig#mmom](https://github.com/mmomtchev/swig/tree/mmom), Proof of Concept | None at all |
-
-SWIG checked out from https://github.com/mmomtchev/swig/tree/mmom is the only version that can generate this project. Besides the above features, it contains several additional small patches some which are still under discussion - such as applying `%feature` to a class.
-
 ## Known to be broken at the moment
 
-* Regenerating the SWIG bindings is possible only with my own unpublished SWIG checked out from Github
-* Rebuilding when installing requires Node.js >= 18.0 on all platforms
-* Additionally, rebuilding when installing on Windows works only with VS 2022
-* The debug build on Windows requires manually setting `winbuildtype` and `winbuildid` due to restrictions in `gyp`
 * The Node.js native module supports `worker_threads` but it cannot be unloaded cleanly and it should be loaded in the main thread, before using it in worker threads, to prevent Node.js from unloading it when a worker quits (*fixing this will require changes in Node.js*)
-* Building on Windows without HDRI enabled or with a different quantum size than 16 bits is not supported
+* Building without HDRI enabled or with a different quantum size than 16 bits is not supported
 * If rebuilding when installing from `npm` fails on Windows with the error: `npm ERR! fatal: not a git repository (or any of the parent directories): .git`, see [#21](https://github.com/mmomtchev/magickwand.js/issues/21)
 * Fonts do not work in the WASM version and are unlikely to be implemented in the near future as a proper implementation will require a complex interface with the browser font engine
-* Using the PNG encoder for large images in the WASM version leads to stack overflows, the native version encoder and the WASM decoder work fine
+* Using the PNG encoder for large images in the WASM version leads to stack overflows, the native version encoder and the WASM decoder do not have this limitation
 * Generally, if you get strange exceptions in the WASM code, the most probable reason is a stack overflow - currently, `emscripten` cannot grow the stack which is limited to 2MB and cannot reliably report stack overflows without incurring a significant performance penalty
 * The loader of the WASM version has its Node.js support disabled to improve its `webpack` compatibility - as Node.js has its own native version, there is no need for WASM
 
@@ -242,12 +227,9 @@ SWIG checked out from https://github.com/mmomtchev/swig/tree/mmom is the only ve
 
 This project serves as showcase and testing grounds for SWIG Node-API.
 
-SWIG Node-API roadmap:
+SWIG JSE roadmap:
 * a `wasi-wasm32` target in addition to the `emscripten-wasm32` target
-* a much slower for async operations but more compatible WASM version that does not require COOP/COEP but uses message passing between web browser threads
-* Direct implicit casting of objects, avoiding the special handling of `Geometry` and `Color`
-* Automatic transparent handling of `ArrayBuffer`s in a way that hides any differences between the Node.js native and the browser WASM environment
-* Improved STL containers support avoiding the need for special handling of methods that require `std::vector` support
+* a much slower for async operations but more compatible WASM version that does not require COOP/COEP but uses message passing between web browser threads    
 * Regexp support for `%feature` avoiding the need to explicitly list all the async classes
 * Provide memory allocation information to the GC
 
