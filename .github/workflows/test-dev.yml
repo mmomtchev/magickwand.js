@@ -37,7 +37,9 @@ jobs:
       - name: Get conan home
         shell: bash
         id: conan_home
-        run: echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
+        run: |
+          npx xpm run -q conan -- version
+          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
