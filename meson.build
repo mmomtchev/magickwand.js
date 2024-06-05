@@ -97,6 +97,9 @@ main_target = napi.extension_module(
   dependencies: dependencies,
   node_api_options: {
     'swig': true,
+    # Node.js is excluded from the WASM loader on purpose:
+    # * it has its own native build that is much better than WASM
+    # * and including it produces a loader that confuses web bundlers such as Webpack
     'environments': ['web','webview','worker']
     },
 )
