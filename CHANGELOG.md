@@ -1,5 +1,16 @@
 # Changelog
 
+# [2.0.0]
+
+ - Completely redesigned fully portable build using the new `hadron` build system (`xpm` + `meson / node-api` + `conan`)
+   - Fully self-contained static build that does not depend on any system libraries (`conan`)
+   - Identical on all three supported OS - Linux, Windows and macOS - and browser WASM (`meson / node-api`)
+   - No other requirements for the host machine besides Node.js and `npm`
+   - Optional built-in C++ compiler (`xpm`)
+   - Optional light build against the system-installed shared libraries
+   - Fully configurable from the `npm install` command
+   - New `CMake`-based build system for ImageMagick itself available as a stand-alone project targeted at portable open-source projects that distribute ImageMagick as source - https://github.com/mmomtchev/ImageMagick
+
 ## [1.1.0] 2024-04-17
 
  - New build system based on conan 2
