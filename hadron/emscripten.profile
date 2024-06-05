@@ -16,13 +16,9 @@ tools.build:cflags=['-pthread']
 tools.build:cxxflags=['-pthread']
 tools.build:sharedlinkflags=['-pthread', '-sDEFAULT_PTHREAD_STACK_SIZE=2MB', '-sSTACK_SIZE=2MB']
 tools.cmake.cmaketoolchain:user_toolchain=['{{ os.getenv("EMSDK") }}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake']
-tools.cmake.cmaketoolchain:generator=Ninja
 
 [options]
 
 [tool_requires]
 # Alas we need 3.1.53 which is not yet on conan
 #emsdk/3.1.50
-
-[replace_tool_requires]
-meson/*: meson/1.3.1
