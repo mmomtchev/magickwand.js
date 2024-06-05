@@ -70,10 +70,7 @@ if not external
       {'BUILD_UTILITIES': not meson.is_cross_build()},
       # This is required since we are building ImageMagick as a static library to be
       # included in a dynamically loadable module
-      {'CMAKE_POSITION_INDEPENDENT_CODE': true},
-      # TODO: This does not belong here,
-      # I am still considering my options for a better solution
-      {'CMAKE_MAKE_PROGRAM': 'ninja.cmd'}
+      {'CMAKE_POSITION_INDEPENDENT_CODE': true}
     ],
   )
   imagemagick = cmake.subproject('ImageMagick', options: cmake_opts)
