@@ -71,8 +71,13 @@ if not external
       # This is required since we are building ImageMagick as a static library to be
       # included in a dynamically loadable module
       {'CMAKE_POSITION_INDEPENDENT_CODE': true}
-    ],
+    ]
   )
+  # ImageMagick supports fontconfig on Windows (and the Github Actions runners carry it)
+  # but this support is far from perfect and it is totally useless
+  if host_machine.system() == 'windows'
+    cmake_opts.add_cmake_defines([{'FONTCONFIG_DELEGATE': false}])
+  endif
   imagemagick = cmake.subproject('ImageMagick', options: cmake_opts)
   magickpp = imagemagick.dependency('Magick++-7.Q16HDRI')
   dependencies += [magickpp]
