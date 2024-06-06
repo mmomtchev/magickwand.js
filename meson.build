@@ -6,11 +6,23 @@ project(
   ['c', 'cpp'],
   default_options: ['buildtype=release', 'cpp_std=c++17'],
   subproject_dir: 'deps',
+  meson_version: '>=1.4.99'
 )
+napi = import('node-api')
 
 root_dir = meson.global_source_root()
 static = not get_option('shared') or meson.is_cross_build()
 external = get_option('external')
+
+# Show a summary
+summary(
+  {
+    'link with external ImageMagick': external,
+    'build ImageMagick statically': static and not external,
+    'build CLI tool': not meson.is_cross_build() and not external,
+  },
+  section: 'Build options',
+)
 
 # The SWIG-generated bindings
 sources = run_command(
@@ -86,10 +98,54 @@ endif
 thread_dep = dependency('threads')
 dependencies += [thread_dep]
 
+# ImageMagick optional modules
+im_opts_default_on = {
+  'fonts':    [ 'FONTCONFIG_DELEGATE', 'FREETYPE_DELEGATE' ],
+  'jpeg':     [ 'JPEG_DELEGATE' ],
+  'png':      [ 'PNG_DELEGATE' ],
+  'tiff':     [ 'TIFF_DELEGATE' ],
+  'webp':     [ 'WEBP_DELEGATE', 'WEBPMUX_DELEGATE', 'WEBPDEMUX_DELEGATE' ],
+  'jpeg2000': [ 'LIBOPENJP2_DELEGATE' ],
+  'jbig':     [ 'JBIG_DELEGATE' ],
+  'raw':      [ 'RAW_R_DELEGATE' ],
+  'exr':      [ 'OPENEXR_DELEGATE' ],
+  'heif':     [ 'HEIC_DELEGATE' ],
+  'color':    [ 'LCMS_DELEGATE' ],
+  'xml':      [ 'XML_DELEGATE' ],
+  'gzip':     [ 'ZLIB_DELEGATE' ],
+  'zip':      [ 'ZIP_DELEGATE' ],
+  'bzip2':    [ 'BZLIB_DELEGATE' ],
+  'zstd':     [ 'ZSTD_DELEGATE' ],
+  'lzma':     [ 'LZMA_DELEGATE' ],
+  'openmp':   [ 'OPENMP_SUPPORT' ],
+  'display':  [ 'X11_DELEGATE' ],
+  'cairo':    [ 'CAIRO_DELEGATE' ],
+}
+im_opts_default_off = {
+  'fftw': [ 'FFTW_DELEGATE' ],
+  'jxl': [ 'JXL_DELEGATE', 'BROTLI_DELEGATE' ],
+}
+
+foreach opt, defines : im_opts_default_on
+  if not get_option(opt)
+    foreach d : defines
+      cmake_opts.add_cmake_defines([{d: false}])
+    endforeach
+  endif
+  summary(opt, get_option(opt), section: 'Delegate libraries')
+endforeach
+foreach opt, defines : im_opts_default_off
+  if get_option(opt)
+    foreach d : defines
+      cmake_opts.add_cmake_defines([{d: true}])
+    endforeach
+  endif
+  summary(opt, get_option(opt), section: 'Delegate libraries')
+endforeach
+
 # --------------------
 # Build the module
 # --------------------
-napi = import('node-api')
 main_target = napi.extension_module(
   'magickwand',
   sources,
@@ -102,12 +158,4 @@ main_target = napi.extension_module(
     # * and including it produces a loader that confuses web bundlers such as Webpack
     'environments': ['web','webview','worker']
     },
-)
-
-summary(
-  {
-    'link with external ImageMagick': external,
-    'build ImageMagick statically': static and not external,
-    'build CLI tool': not meson.is_cross_build() and not external,
-  },
 )

@@ -114,7 +114,7 @@ Starting with version 2.0, `magickwand.js` uses the new `hadron` build system sp
 npm install magickwand.js --build-from-source
 ```
 
-This will also rebuild the included Magick++ library. Currently, you will need a working C++11 environment as the full xPack version that will rebuild itself with its own compiler is still not ready. The project is tested, and has pre-built binaries, with `gcc` on Linux x64, `clang` on macOS x64 and `MSVC` on Windows x64. As the project contains assembler code (mostly SIMD), and I do not have access to a macOS arm64 build host, I cannot provide macOS x64 binaries.
+This will also rebuild the included Magick++ library. Currently, you will need a working C++17 environment as the full xPack version that will rebuild itself with its own compiler is still not ready. The project is tested, and has pre-built binaries, with `gcc` on Linux x64, `clang` on macOS x64 and `MSVC` on Windows x64. As the project contains assembler code (mostly SIMD), and I do not have access to a macOS arm64 build host, I cannot provide macOS x64 binaries.
 
 The xPack fully self-contained version will use `clang` on all platforms.
 
@@ -143,7 +143,7 @@ npx xpm run build --config native-debug    # build
 
 Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the data used internally by ImageMagick - image files still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. **Unless you can regenerate the SWIG wrappers, you will have to use the exact same version (the latest one at the release date) that was used when they were generated**. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
 ```shell
-npm install --build-from-source --verbose --foreground-scripts --external \
+npm install --build-from-source --verbose --foreground-scripts --enable-external \
   --extra-cppflags="-I/usr/local/include/ImageMagick-7 -DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16" \
   --extra-ldflags="-L/usr/local/lib -lMagick++-7.Q16HDRI"
 ```
@@ -172,34 +172,69 @@ Or to build a minimal version that excludes many optional dependencies:
 npm install --build-wasm-from-source --verbose --foreground-scripts           \
   --disable-fonts --enable-jpeg --enable-png --disable-tiff                   \
   --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia         \
-  --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif \
+  --disable-exr --disable-fftw --disable-heif \
   --disable-color --disable-xml --enable-gzip --disable-zip                   \
   --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd   \
   --disable-openmp --disable-display --disable-jbig --disable-cairo
 ```
 
-At the moment this cross-compilation has been tested only on Linux.
+At the moment this cross-compilation has been tested only on Linux. Rebuilding both the native and WASM module at the same time is supported but currently it is not possible to use different compilation options. This is possible only by manually rebuilding in the `node_modules/magickwand.js` directory using `xpm`.
 
-### Building a *light* version
+### All installation / compilation options
 
-Building a lighter custom binary which does not include some of the builtin libraries is possible by specifying:
+The following options are available when using `npm install`:
 
-```shell
-npm install --shared --verbose --foreground-scripts                            \
-  --build-wasm-from-source --build-from-source                                 \
-  --disable-fonts --enable-jpeg --enable-png --disable-tiff                    \
-  --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia          \
-  --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif  \
-  --disable-color --disable-xml --enable-gzip --disable-zip                    \
-  --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd    \
-  --disable-openmp --disable-display --disable-jbig --disable-cairo
-```
+* `--verbose` and `--foreground-scripts` are generic `npm` options that when used together allow to see the compilation output
 
-This disables the built-in static delegates, but the ImageMagick configure script will still detect the presence of compatible system libraries and will try to use them, producing a custom binary that will need the dynamically loaded versions of those libraries on your system.
+* `--build-from-source` rebuilds the Node.js native module even if a precompiled binary is available
 
-The WASM version will probably lack support for most formats as it is very unlikely that you will have system-installed WASM-version libraries that ImageMagick will detect and use.
+* `--build-wasm-from-source` rebuilds the WASM module even if a precompiled binary is available
+
+* `--disable-conan` disables `conan` completely and uses only the system-installed libraries
+
+* `--enable-shared` builds `ImageMagick` as a shared library and prefers linking against the shared versions of the system libraries, this binary will be smaller and load faster, but it will run only on the system on which it was compiled
+
+* `--enable-external` will build only the JavaScript bindings expecting to link to an already existing ImageMagick installation
+
+* `--cpp_args=` can be used to pass additional arguments when compiling, add `-I` when compiling with an external ImageMagick
+
+* `--cpp_link_args=` can be used to pass additional arguments when linking, add `-L`/`-l` when linking with an external ImageMagick
+
+* `--disable-simd` disables SIMD (always disabled for WASM)
+
+Additionally, the following options control the various ImageMagick submodules. All `--disable-*` options have `--enable-*` counterparts which are enabled by default and `--disable-*-conan` variants which disable only the built-in `conan` delegate but leave the support enabled if the corresponding libraries is system-installed
+
+* `--disable-fonts` for the font delegate libraries (always disabled for WASM)
+* `--disable-jpeg` for `libopenjpeg`
+* `--disable-png` for `libpng`
+* `--disable-tiff` for `libtiff`
+* `--disable-webp` for `libwebp`
+* `--disable-jpeg` for `libjpeg-turbo` (will be auto-enabled by `raw`, `tiff` and `jpeg200`)
+* `--disable-jpeg2000` for `libopenjp2` and `jasper`
+* `--disable-jbig` for `libjbig`
+* `--disable-raw` for `libraw`
+* `--disable-jxl` for `libjxl` (*this is disabled by default as it is broken at the moment*)
+* `--disable-exr` for `OpenEXR`
+* `--disable-fftw` for `FFTW3` (*this is disabled by default as it is broken at the moment*)
+* `--disable-heif` for `libheif`
+* `--disable-color` for  `liblcms2`
+* `--disable-xml` for `libxml2` and enables the built-in basic XML support
+* `--disable-gzip` for `zlib`
+* `--disable-zip` for `libzip`
+* `--disable-bzip2` for `libbz2`
+* `--disable-zstd` for `libzstd`
+* `--disable-lzma` for `liblzma` and `xz-utils`
+* `--disable-openmp` for `OpenMP` (supported only on Linux/native and macOS/native)
+* `--disable-display` for `X11` (supported only on Linux/native and macOS/native with Quartz), no `conan` variant as it always uses the system libraries
+* `--disable-cairo` for `cairo` (always disabled for WASM)
+
+When disabling the built-in static delegates with `--disable-*-conan`, the ImageMagick configure script will still detect the presence of compatible system libraries and will try to use them, producing a custom binary that will need the dynamically loaded versions of those libraries on your system. The system-installed libraries will be detected through the use of the standard `CMake` supplied modules and, when that fails, on Linux and macOS, through `pkg-config`.
+
+A WASM version built this way will probably lack support for most formats as it is very unlikely that you will have system-installed WASM-version libraries that ImageMagick will detect and use.
 
 If the WASM binary is rebuilt with no additional libraries, its size will be brought down to 1.5MB compressed with brotli. Further reduction is possible by disabling unneeded SWIG wrappers but this requires to manually edit the SWIG source files and to regenerate the C++ files. Producing a version that supports only synchronous mode and does not require COOP/COEP is also possible. I will consider any offer for commercial support of such dedicated light version.
+
+Also note that currently the unit testing suite expects all supported delegates to be included.
 
 ## Using this project as a tutorial for creating C++ bindings for Node.js and emscripten/WASM with SWIG Node-API
 

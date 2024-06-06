@@ -93,12 +93,12 @@ jobs:
         shell: bash
       - name: Build magickwand.js
         run: |
-          npm install --build-from-source  --verbose --foreground-scripts --shared      \
-            --disable-fonts --enable-jpeg --enable-png --disable-tiff                   \
-            --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia         \
-            --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif \
-            --disable-color --disable-xml --enable-gzip --disable-zip                   \
-            --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd   \
+          npm install --build-from-source --verbose --foreground-scripts --eanble_shared \
+            --disable-fonts --enable-jpeg --enable-png --disable-tiff                    \
+            --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia          \
+            --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif  \
+            --disable-color --disable-xml --enable-gzip --disable-zip                    \
+            --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd    \
             --disable-openmp --disable-display --disable-jbig --disable-cairo
 
   wasm:
