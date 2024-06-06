@@ -1,0 +1,30 @@
+option( 'shared', type: 'boolean', value: false,
+  description: 'Build and install ImageMagick as a shared library',
+)
+
+option( 'external', type: 'boolean', value: false,
+  description: 'Do not build ImageMagick and link the bindings with an externally provided library',
+)
+
+option('fonts', type: 'boolean', value: true, description: 'Fonts support')
+option('jpeg', type: 'boolean', value: true, description: 'JPEG support')
+option('png', type: 'boolean', value: true, description: 'PNG support')
+option('tiff', type: 'boolean', value: true, description: 'TIFF support')
+option('webp', type: 'boolean', value: true, description: 'WEBP support')
+option('jpeg2000', type: 'boolean', value: true, description: 'JPEG2000 support')
+option('jbig', type: 'boolean', value: true, description: 'JBIG support')
+option('raw', type: 'boolean', value: true, description: 'RAW support')
+option('exr', type: 'boolean', value: true, description: 'EXR support')
+option('heif', type: 'boolean', value: true, description: 'HEIF(C) support')
+option('color', type: 'boolean', value: true, description: 'LCMS support')
+option('xml', type: 'boolean', value: true, description: 'Full XML support')
+option('gzip', type: 'boolean', value: true, description: 'gzip support')
+option('zip', type: 'boolean', value: true, description: 'zip support')
+option('bzip2', type: 'boolean', value: true, description: 'bzip2 support')
+option('zstd', type: 'boolean', value: true, description: 'zstd support')
+option('lzma', type: 'boolean', value: true, description: 'lzma support')
+option('openmp', type: 'boolean', value: true, description: 'OpenMP support (only in Node.js native on Linux or macOS)')
+option('display', type: 'boolean', value: true, description: 'X11 support (only in Node.js native on Linux or macOS/Quartz)')
+option('cairo', type: 'boolean', value: true, description: 'Cairo support (only in Node.js native)')
+option('fftw', type: 'boolean', value: false, description: 'FFTW support (broken)')
+option('jxl', type: 'boolean', value: false, description: 'JXL support (broken)')

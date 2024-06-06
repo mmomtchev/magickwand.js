@@ -1,5 +1,0 @@
-option('shared', type: 'boolean', value: false,
-  description: 'Build and install ImageMagick as a shared library')
-
-option('external', type: 'boolean', value: false,
-  description: 'Do not build ImageMagick and link the bindings with an externally provided library')

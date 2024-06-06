@@ -28,10 +28,8 @@ class ImageMagickDelegates(ConanFile):
       'tiff':      [ True, False ],
       'webp':      [ True, False ],
       'jpeg2000':  [ True, False ],
+      'jxl':       [ True, False ],
       'raw':       [ True, False ],
-      'openmedia': [ True, False ],
-      'brotli':    [ True, False ],
-      'h265':      [ True, False ],
       'exr':       [ True, False ],
       'fftw':      [ True, False ],
       'heif':      [ True, False ],
@@ -42,7 +40,6 @@ class ImageMagickDelegates(ConanFile):
       'zip':       [ True, False ],
       'bzip2':     [ True, False ],
       'zstd':      [ True, False ],
-      'xz':        [ True, False ],
       'lzma':      [ True, False ],
       'cairo':     [ True, False ],
       'simd':      [ True, False ],
@@ -52,32 +49,30 @@ class ImageMagickDelegates(ConanFile):
 
     default_options = {
       'conan':      npm_option('conan', True),
-      'fonts':      npm_option('fonts', True),
-      'jpeg':       npm_option('jpeg', True),
-      'png':        npm_option('png', True),
-      'tiff':       npm_option('tiff', True),
-      'webp':       npm_option('webp', True),
-      'jpeg2000':   npm_option('jpeg2000', True),
-      'raw':        npm_option('raw', True),
-      'openmedia':  npm_option('openmedia', True),
-      'brotli':     npm_option('brotli', True),
-      'h265':       npm_option('h265', True),
-      'exr':        npm_option('exr', True),
-      'fftw':       npm_option('fftw', False),
-      'heif':       npm_option('heif', True),
-      'jbig':       npm_option('jbig', True),
-      'color':      npm_option('color', True),
-      'xml':        npm_option('xml', True),
-      'gzip':       npm_option('gzip', True),
-      'zip':        npm_option('zip', True),
-      'bzip2':      npm_option('bzip2', True),
-      'zstd':       npm_option('zstd', True),
-      'xz':         npm_option('xz', True),
-      'lzma':       npm_option('lzma', True),
-      'cairo':      npm_option('cairo', True),
-      'simd':       npm_option('simd', True),
-      'openmp':     npm_option('openmp', True),
-      'display':    npm_option('display', True)
+      'fonts':      npm_option('fonts', True) and npm_option('fonts-conan', True),
+      'jpeg':       npm_option('jpeg', True) and npm_option('jpeg-conan', True),
+      'png':        npm_option('png', True) and npm_option('png-conan', True),
+      'tiff':       npm_option('tiff', True) and npm_option('tiff-conan', True),
+      'webp':       npm_option('webp', True) and npm_option('webp-conan', True),
+      'jpeg':       npm_option('jpeg', True) and npm_option('jpeg-conan', True),
+      'jpeg2000':   npm_option('jpeg2000', True) and npm_option('jpeg2000-conan', True),
+      'jxl':        npm_option('jxl', False) and npm_option('jxl-conan', True),
+      'raw':        npm_option('raw', True) and npm_option('raw-conan', True),
+      'exr':        npm_option('exr', True) and npm_option('exr-conan', True),
+      'fftw':       npm_option('fftw', False) and npm_option('fftw-conan', True),
+      'heif':       npm_option('heif', True) and npm_option('heif-conan', True),
+      'jbig':       npm_option('jbig', True) and npm_option('jbig-conan', True),
+      'color':      npm_option('color', True) and npm_option('color-conan', True),
+      'xml':        npm_option('xml', True) and npm_option('xml-conan', True),
+      'gzip':       npm_option('gzip', True) and npm_option('gzip-conan', True),
+      'zip':        npm_option('zip', True) and npm_option('zip-conan', True),
+      'bzip2':      npm_option('bzip2', True) and npm_option('bzip2-conan', True),
+      'zstd':       npm_option('zstd', True) and npm_option('zstd-conan', True),
+      'lzma':       npm_option('lzma', True) and npm_option('lzma-conan', True),
+      'cairo':      npm_option('cairo', True) and npm_option('cairo-conan', True),
+      'openmp':     npm_option('openmp', True) and npm_option('openmp-conan', True),
+      'display':    npm_option('display', True) and npm_option('display-conan', True),
+      'simd':       npm_option('simd', True)
     }
 
     # CMakeToolchain is manually instantiated at the end
@@ -100,6 +95,7 @@ class ImageMagickDelegates(ConanFile):
       # LZMA is blocked by https://github.com/conan-io/conan-center-index/issues/20602
       if self.options.lzma and self.settings.arch != 'wasm':
         self.requires('lzma_sdk/9.20')
+        self.requires('xz_utils/5.4.5')
 
       if self.options.bzip2:
         self.requires('bzip2/1.0.8')
@@ -109,12 +105,6 @@ class ImageMagickDelegates(ConanFile):
 
       if self.options.zip:
         self.requires('libzip/1.9.2')
-
-      if self.options.brotli:
-        self.requires('brotli/1.1.0')
-
-      if self.options.xz:
-        self.requires('xz_utils/5.4.5')
 
       if self.options.gzip:
         self.requires('zlib/1.2.13')
@@ -128,14 +118,10 @@ class ImageMagickDelegates(ConanFile):
       if self.options.xml:
         self.requires('libxml2/2.10.4')
 
-      if self.options.openmedia:
-        self.requires('libaom-av1/3.6.0')
-
-      if self.options.h265:
-        self.requires('libde265/1.0.12')
-
       if self.options.heif:
         self.requires('libheif/1.13.0')
+        self.requires('libaom-av1/3.6.0')
+        self.requires('libde265/1.0.12')
 
       if self.options.jbig:
         self.requires('jbig/20160605')
@@ -149,11 +135,12 @@ class ImageMagickDelegates(ConanFile):
       if self.options.webp:
         self.requires('libwebp/1.3.2')
 
-      if self.options.jpeg2000 or self.options.tiff or self.options.raw:
+      if self.options.jpeg2000 or self.options.jpeg or self.options.tiff or self.options.raw:
         self.requires('libjpeg-turbo/3.0.2', force=True)
 
       if self.options.jpeg2000:
         self.requires('jasper/4.2.0', force=True)
+        self.requires('openjpeg/2.5.0')
 
       if self.options.tiff:
         self.requires('libtiff/4.6.0')
@@ -161,15 +148,15 @@ class ImageMagickDelegates(ConanFile):
       if self.options.raw:
         self.requires('libraw/0.21.2')
 
-      if self.options.jpeg:
-        self.requires('openjpeg/2.5.0')
-
       if self.options.cairo and self.settings.arch != 'wasm':
         self.requires('cairo/1.17.8', force=True)
         self.requires('expat/2.6.0', force=True)
 
-      if self.options.simd and self.settings.arch != 'wasm':
-        self.requires('highway/1.0.3')
+      if self.options.jxl:
+        self.requires('libjxl/0.6.1')
+        self.requires('brotli/1.1.0')
+        if not self.options.simd:
+          self.requires('highway/1.0.3')
 
       if self.options.openmp and self.settings.arch != 'wasm' and self.settings.os != 'Windows':
         self.requires('llvm-openmp/12.0.1')
