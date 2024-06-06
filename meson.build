@@ -126,13 +126,15 @@ im_opts_default_off = {
   'jxl': [ 'JXL_DELEGATE', 'BROTLI_DELEGATE' ],
 }
 
+# Parse the options and enable the macros that disable/enable certain delegates
+# A delegate that is enabled is a delegate that will be autoconfigured _if it is found_
 foreach opt, defines : im_opts_default_on
   if not get_option(opt)
     foreach d : defines
       cmake_opts.add_cmake_defines([{d: false}])
     endforeach
   endif
-  summary(opt, get_option(opt), section: 'Delegate libraries')
+  summary(opt, get_option(opt), section: 'Enabled delegates')
 endforeach
 foreach opt, defines : im_opts_default_off
   if get_option(opt)
@@ -140,7 +142,7 @@ foreach opt, defines : im_opts_default_off
       cmake_opts.add_cmake_defines([{d: true}])
     endforeach
   endif
-  summary(opt, get_option(opt), section: 'Delegate libraries')
+  summary(opt, get_option(opt), section: 'Enabled delegates')
 endforeach
 
 # --------------------
