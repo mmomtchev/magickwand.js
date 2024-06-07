@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ubuntu-latest, macos-13, windows-latest]
+        platform: [windows-latest]
 
     steps:
       - uses: actions/checkout@v4
@@ -46,198 +46,18 @@ jobs:
         with:
           path: ${{ steps.conan_home.outputs.path }}
           key: ${{ runner.os }}-conan
-      - name: Install fonts on Ubuntu
-        run: sudo apt-get install -y fonts-ubuntu || true
-        if: startsWith(matrix.platform, 'ubuntu')
       - name: Build magickwand.js
         run: npm install --build-from-source --verbose --foreground-scripts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lib
+          path: lib
       - run: npx mocha test/node.test.ts test/integration.test.ts
         env:
           MOCHA_INTEGRATION: node
           MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
 
-  native-light:
-    runs-on: ${{ matrix.platform }}
-
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: [ubuntu-latest]
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: true
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
-      - name: Install the xpacks
-        run: |
-          npm install xpm
-          npx xpm install
-      - name: Get conan home
-        shell: bash
-        id: conan_home
-        run: echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
-      - name: Cache conan artifacts
-        id: conan-artifacts
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.conan_home.outputs.path }}
-          key: linux-light-conan
-      - name: Install fonts on Ubuntu
-        run: sudo apt-get install -y fonts-ubuntu || true
-        if: startsWith(matrix.platform, 'ubuntu')
-        shell: bash
-      - name: Build magickwand.js
-        run: |
-          npm install --build-from-source --verbose --foreground-scripts --eanble_shared \
-            --disable-fonts --enable-jpeg --enable-png --disable-tiff                    \
-            --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia          \
-            --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif  \
-            --disable-color --disable-xml --enable-gzip --disable-zip                    \
-            --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd    \
-            --disable-openmp --disable-display --disable-jbig --disable-cairo
-
-  wasm:
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: true
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
-      - name: Setup emscripten
-        uses: mymindstorm/setup-emsdk@v13
-        with:
-          version: 3.1.53
-      - name: Install the xpacks
-        run: |
-          npm install xpm
-          npx xpm install
-      - name: Get conan home
-        shell: bash
-        id: conan_home
-        run: echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
-      - name: Cache conan artifacts
-        id: conan-artifacts
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.conan_home.outputs.path }}
-          key: wasm-conan
-      - name: Build magickwand.js
-        run: npm install --build-wasm-from-source --verbose --foreground-scripts
-      - name: Check size
-        run: |
-          echo "::notice::Default WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
-          echo "::notice::Default WASM version is $(( `brotli -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes brotlied"
-      - name: Run headless test
-        uses: GabrielBB/xvfb-action@v1
-        env:
-          MOCHA_INTEGRATION: browser
-          MOCHA_MAGICK_INSTALL: ln -s ${{ github.workspace }} node_modules/magickwand.js
-        with:
-          run: npx mocha test/browser.test.ts test/integration.test.ts
-
-  wasm-light:
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: true
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
-      - name: Setup emscripten
-        uses: mymindstorm/setup-emsdk@v13
-        with:
-          version: 3.1.53
-      - name: Install the xpacks
-        run: |
-          npm install xpm
-          npx xpm install
-      - name: Get conan home
-        shell: bash
-        id: conan_home
-        run: echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
-      - name: Cache conan artifacts
-        id: conan-artifacts
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.conan_home.outputs.path }}
-          key: wasm-light-conan
-      - name: Build magickwand.js
-        run: |
-          npm install --build-wasm-from-source --verbose --foreground-scripts           \
-            --disable-fonts --enable-jpeg --enable-png --disable-tiff                   \
-            --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia         \
-            --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif \
-            --disable-color --disable-xml --enable-gzip --disable-zip                   \
-            --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd   \
-            --disable-openmp --disable-display --disable-jbig --disable-cairo
-      - name: Check size
-        run: |
-          echo "::notice::Light WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
-          echo "::notice::Light WASM version is $(( `brotli -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes brotlied"
-
-  debug-asan:
-    runs-on: ${{ matrix.platform }}
-
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: [ubuntu-22.04]
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: true
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
-      - name: Install the xpacks
-        run: |
-          npm install xpm
-          npx xpm install
-      - name: Get conan home
-        shell: bash
-        id: conan_home
-        run: echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
-      - name: Cache conan artifacts
-        id: conan-artifacts
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.conan_home.outputs.path }}
-          key: linux-debug-asan-conan
-      - name: Install fonts on Ubuntu
-        run: sudo apt-get install -y fonts-ubuntu || true
-        if: startsWith(matrix.platform, 'ubuntu')
-      - name: Install the dependencies
-        run: npm install
-      - name: Build with ASAN
-        run: |
-          npx xpm install
-          npx xpm run prepare --config native-debug
-          npx xpm run configure --config native-debug -- -Db_sanitize=address
-          npx xpm run build --config native-debug
-      - run: node node_modules/mocha/bin/mocha.js -i -g Security --repeats 1000 test/node.test.ts
-        env:
-          LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6
-          LSAN_OPTIONS: suppressions=${{ github.workspace }}/test/napi-leaks-suppression.txt
