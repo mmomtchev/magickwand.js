@@ -14,10 +14,12 @@ on:
 
 jobs:
   native:
-    runs-on: self-hosted
+    runs-on: ${{ matrix.platform }}
 
     strategy:
       fail-fast: false
+      matrix:
+        platform: [self-hosted, windows-latest]
 
     steps:
       - uses: ilammy/msvc-dev-cmd@v1
@@ -33,6 +35,18 @@ jobs:
         run: |
           npm install xpm
           npx xpm install
+      - name: Get conan home
+        shell: bash
+        id: conan_home
+        run: |
+          npx xpm run -q conan -- version
+          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
+      - name: Cache conan artifacts
+        id: conan-artifacts
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.conan_home.outputs.path }}
+          key: ${{ runner.os }}-conan
       - name: Build magickwand.js
         run: |
           npm run deps:download
@@ -48,7 +62,7 @@ jobs:
           name: lib
           path: lib
       - run: |
-         withdll.exe /d:"%VCToolsInstallDir%\bin\Hostx64\x64\clang_rt.asan_dynamic-x86_64.dll" node node_modules\mocha\lib\cli\cli.js -g Security -i test/node.test.ts test/integration.test.ts
+         ${{ github.workspace }}\withdll.exe /d:"%VCToolsInstallDir%\bin\Hostx64\x64\clang_rt.asan_dynamic-x86_64.dll" node node_modules\mocha\lib\cli\cli.js -g Security -i test/node.test.ts test/integration.test.ts
         shell: bash
         env:
           MOCHA_INTEGRATION: node
