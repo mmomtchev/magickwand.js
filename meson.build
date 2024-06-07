@@ -99,7 +99,7 @@ thread_dep = dependency('threads')
 dependencies += [thread_dep]
 
 # ImageMagick optional modules
-im_opts_default_on = {
+im_opts = {
   'fonts':    [ 'FONTCONFIG_DELEGATE', 'FREETYPE_DELEGATE' ],
   'jpeg':     [ 'JPEG_DELEGATE' ],
   'png':      [ 'PNG_DELEGATE' ],
@@ -120,26 +120,16 @@ im_opts_default_on = {
   'openmp':   [ 'OPENMP_SUPPORT' ],
   'display':  [ 'X11_DELEGATE' ],
   'cairo':    [ 'CAIRO_DELEGATE' ],
-}
-im_opts_default_off = {
-  'fftw': [ 'FFTW_DELEGATE' ],
-  'jxl': [ 'JXL_DELEGATE', 'BROTLI_DELEGATE' ],
+  'fftw':     [ 'FFTW_DELEGATE' ],
+  'jxl':      [ 'JXL_DELEGATE', 'BROTLI_DELEGATE' ],
 }
 
 # Parse the options and enable the macros that disable/enable certain delegates
 # A delegate that is enabled is a delegate that will be autoconfigured _if it is found_
-foreach opt, defines : im_opts_default_on
+foreach opt, defines : im_opts
   if not get_option(opt)
     foreach d : defines
       cmake_opts.add_cmake_defines([{d: false}])
-    endforeach
-  endif
-  summary(opt, get_option(opt), section: 'Enabled delegates')
-endforeach
-foreach opt, defines : im_opts_default_off
-  if get_option(opt)
-    foreach d : defines
-      cmake_opts.add_cmake_defines([{d: true}])
     endforeach
   endif
   summary(opt, get_option(opt), section: 'Enabled delegates')
