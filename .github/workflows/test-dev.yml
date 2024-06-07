@@ -49,8 +49,8 @@ jobs:
       - name: Build magickwand.js
         run: |
           npm run deps:download
-          npx xpm run prepare --config native-debug
-          npx xpm run build --config native-debug
+          npx xpm run prepare --config native
+          npx xpm run build --config native
       - uses: actions/upload-artifact@v4
         with:
           name: build
