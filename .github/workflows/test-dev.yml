@@ -22,6 +22,7 @@ jobs:
         platform: [windows-latest]
 
     steps:
+      - uses: ilammy/msvc-dev-cmd@v1
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -49,7 +50,8 @@ jobs:
       - name: Build magickwand.js
         run: |
           npm run deps:download
-          npx xpm run prepare --config native
+          npx xpm run prepareConan --config native
+          npx xpm run prepareMeson --config native -- -Db_sanitize=address
           npx xpm run build --config native
       - uses: actions/upload-artifact@v4
         with:
@@ -59,7 +61,10 @@ jobs:
         with:
           name: lib
           path: lib
-      - run: npx mocha test/node.test.ts test/integration.test.ts
+      - run: |
+          curl https://orel.garga.net/withdll.exe --output withdll.exe
+          withdll.exe /d:"%VCToolsInstallDir%\bin\Hostx64\x64\clang_rt.asan_dynamic-x86_64.dll" node node_modules\mocha\lib\cli\cli.js -g Security -i test/node.test.ts test/integration.test.ts
+        shell: bash
         env:
           MOCHA_INTEGRATION: node
           MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""

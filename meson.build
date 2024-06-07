@@ -58,6 +58,7 @@ endif
 if meson.get_compiler('cpp').get_id() == 'msvc'
   add_global_arguments('/bigobj', language: 'cpp')
 endif
+add_global_arguments(['-D_DISABLE_VECTOR_ANNOTATION', '-D_DISABLE_STRING_ANNOTATION'], language: ['c', 'cpp'])
 
 dependencies = []
 

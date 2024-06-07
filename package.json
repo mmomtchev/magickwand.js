@@ -181,10 +181,8 @@
           "platformId": "{{ os.platform | concat: '-' | concat: os.arch }}"
         },
         "actions": {
-          "prepare": [
-            "{{ properties.commandDependenciesNative }}",
-            "{{ properties.commandPrepareNative }}"
-          ],
+          "prepareConan": "{{ properties.commandDependenciesNative }}",
+          "prepareMeson": "{{ properties.commandPrepareNative }}",
           "configure": "{{ properties.commandConfigure }}",
           "build": [
             "{{ properties.commandBuild }}",
