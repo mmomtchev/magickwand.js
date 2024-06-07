@@ -63,6 +63,7 @@ jobs:
           path: lib
       - run: |
          "${{ github.workspace }}\withdll.exe" /d:"${{ env.VCToolsInstallDir }}\bin\Hostx64\x64\clang_rt.asan_dynamic-x86_64.dll" node node_modules\mocha\lib\cli\cli.js -g Security -i test/node.test.ts test/integration.test.ts
+        shell: cmd
         env:
           MOCHA_INTEGRATION: node
           MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
