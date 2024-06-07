@@ -47,7 +47,9 @@ jobs:
           path: ${{ steps.conan_home.outputs.path }}
           key: ${{ runner.os }}-conan
       - name: Build magickwand.js
-        run: npm install --build-from-source --verbose --foreground-scripts
+        run: |
+          npx xpm run prepare --config native-debug
+          npx xpm run build --config native-debug
       - uses: actions/upload-artifact@v4
         with:
           name: build
