@@ -14,12 +14,10 @@ on:
 
 jobs:
   native:
-    runs-on: ${{ matrix.platform }}
+    runs-on: self-hosted
 
     strategy:
       fail-fast: false
-      matrix:
-        platform: [windows-latest]
 
     steps:
       - uses: ilammy/msvc-dev-cmd@v1
@@ -35,18 +33,6 @@ jobs:
         run: |
           npm install xpm
           npx xpm install
-      - name: Get conan home
-        shell: bash
-        id: conan_home
-        run: |
-          npx xpm run -q conan -- version
-          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
-      - name: Cache conan artifacts
-        id: conan-artifacts
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.conan_home.outputs.path }}
-          key: ${{ runner.os }}-conan
       - name: Build magickwand.js
         run: |
           npm run deps:download
