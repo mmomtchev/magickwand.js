@@ -92,9 +92,7 @@ class ImageMagickDelegates(ConanFile):
         if self.settings.os != 'Windows':
           self.requires('fontconfig/2.14.2', force=True)
 
-      # LZMA is blocked by https://github.com/conan-io/conan-center-index/issues/20602
-      if self.options.lzma and self.settings.arch != 'wasm':
-        self.requires('lzma_sdk/9.20')
+      if self.options.lzma:
         self.requires('xz_utils/5.4.5')
 
       if self.options.bzip2:
