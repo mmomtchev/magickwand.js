@@ -153,7 +153,7 @@ class ImageMagickDelegates(ConanFile):
       if self.options.jxl:
         self.requires('libjxl/0.6.1')
         self.requires('brotli/1.1.0')
-        if not self.options.simd:
+        if self.options.simd:
           self.requires('highway/1.0.3')
 
       if self.options.openmp and self.settings.arch != 'wasm' and self.settings.os != 'Windows':
