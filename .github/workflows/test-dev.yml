@@ -62,7 +62,7 @@ jobs:
           name: lib
           path: lib
       - run: |
-          curl https://orel.garga.net/withdll.exe --output withdll.exe
+          rem curl https://orel.garga.net/withdll.exe --output withdll.exe
           withdll.exe /d:"%VCToolsInstallDir%\bin\Hostx64\x64\clang_rt.asan_dynamic-x86_64.dll" node node_modules\mocha\lib\cli\cli.js -g Security -i test/node.test.ts test/integration.test.ts
         shell: bash
         env:
