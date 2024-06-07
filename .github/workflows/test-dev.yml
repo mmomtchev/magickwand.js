@@ -48,6 +48,7 @@ jobs:
           key: ${{ runner.os }}-conan
       - name: Build magickwand.js
         run: |
+          npm run deps:download
           npx xpm run prepare --config native-debug
           npx xpm run build --config native-debug
       - uses: actions/upload-artifact@v4
