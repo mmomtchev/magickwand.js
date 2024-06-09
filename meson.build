@@ -4,7 +4,14 @@
 project(
   'JavaScript bindings for ImageMagick-7',
   ['c', 'cpp'],
-  default_options: ['buildtype=release', 'cpp_std=c++17'],
+  default_options: [
+    'buildtype=release',
+    'cpp_std=c++17',
+    # Avoid the infamous Windows DLL hell
+    # Here is an example horror story: https://github.com/actions/runner-images/issues/10020
+    # (Node.js and node-gyp hide this from you by linking the runtime statically by default)
+    'b_vscrt=static_from_buildtype'
+  ],
   subproject_dir: 'deps',
   meson_version: '>=1.4.99'
 )
