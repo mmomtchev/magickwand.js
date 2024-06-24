@@ -133,7 +133,7 @@ if not external
   endforeach
 
   # ImageMagick supports fontconfig on Windows (and the Github Actions runners carry it)
-  # but this support is far from perfect and it is totally useless
+  # but this support is far from perfect and it is not needed
   if host_machine.system() == 'windows'
     cmake_opts.add_cmake_defines([{'FONTCONFIG_DELEGATE': false}])
     summary('fonts', false, section: 'Enabled delegates')
