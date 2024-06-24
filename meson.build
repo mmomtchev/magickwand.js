@@ -124,19 +124,20 @@ if not external
   # Parse the options and enable the macros that disable/enable certain delegates
   # A delegate that is enabled is a delegate that will be autoconfigured _if it is found_
   foreach opt, defines : im_opts
-    enabled = get_option(opt)
-    # ImageMagick supports fontconfig on Windows (and the Github Actions runners carry it)
-    # but this support is far from perfect and it is not needed
-    if opt == 'fonts' and host_machine.system() == 'windows'
-      enabled = false
-    endif
-    if not enabled
+    if not get_option(opt)
       foreach d : defines
         cmake_opts.add_cmake_defines([{d: false}])
       endforeach
     endif
     summary(opt, get_option(opt), section: 'Enabled delegates')
   endforeach
+
+  # ImageMagick supports fontconfig on Windows (and the Github Actions runners carry it)
+  # but this support is far from perfect and it is totally useless
+  if host_machine.system() == 'windows'
+    cmake_opts.add_cmake_defines([{'FONTCONFIG_DELEGATE': false}])
+    summary('fonts', false, section: 'Enabled delegates')
+  endif
 
   imagemagick = cmake.subproject('ImageMagick', options: cmake_opts)
   magickpp = imagemagick.dependency('Magick++-7.Q16HDRI')
