@@ -101,9 +101,6 @@ if not external
   if host_machine.system() == 'windows'
     cmake_opts.add_cmake_defines([{'FONTCONFIG_DELEGATE': false}])
   endif
-  imagemagick = cmake.subproject('ImageMagick', options: cmake_opts)
-  magickpp = imagemagick.dependency('Magick++-7.Q16HDRI')
-  dependencies += [magickpp]
 
   # ImageMagick optional modules
   im_opts = {
@@ -141,6 +138,10 @@ if not external
     endif
     summary(opt, get_option(opt), section: 'Enabled delegates')
   endforeach
+
+  imagemagick = cmake.subproject('ImageMagick', options: cmake_opts)
+  magickpp = imagemagick.dependency('Magick++-7.Q16HDRI')
+  dependencies += [magickpp]
 endif
 
 thread_dep = dependency('threads')
