@@ -82,26 +82,18 @@ if not external
 # --------------------
   cmake = import('cmake')
   cmake_opts = cmake.subproject_options()
-  cmake_opts.add_cmake_defines(
-    [
-      # These are the ImageMagick build options as supported
-      # by the ImageMagick CMake build system
-      {'MAGICKCORE_QUANTUM_DEPTH': '16'},
-      {'BUILD_SHARED_LIBS': not static},
-      {'MAGICK_HDRI_ENABLE': true},
-      {'INSTALLED_SUPPORT': false},
-      {'BUILD_UTILITIES': not meson.is_cross_build()},
-      # This is required since we are building ImageMagick as a static library to be
-      # included in a dynamically loadable module
-      {'CMAKE_POSITION_INDEPENDENT_CODE': true}
-    ]
-  )
-  # ImageMagick supports fontconfig on Windows (and the Github Actions runners carry it)
-  # but this support is far from perfect and it is totally useless
-  if host_machine.system() == 'windows'
-    cmake_opts.add_cmake_defines([{'FONTCONFIG_DELEGATE': false}])
-    summary('fonts', false, section: 'Enabled delegates')
-  endif
+  cmake_opts.add_cmake_defines([
+    # These are the ImageMagick build options as supported
+    # by the ImageMagick CMake build system
+    {'MAGICKCORE_QUANTUM_DEPTH': '16'},
+    {'BUILD_SHARED_LIBS': not static},
+    {'MAGICK_HDRI_ENABLE': true},
+    {'INSTALLED_SUPPORT': false},
+    {'BUILD_UTILITIES': not meson.is_cross_build()},
+    # This is required since we are building ImageMagick as a static library to be
+    # included in a dynamically loadable module
+    {'CMAKE_POSITION_INDEPENDENT_CODE': true}
+  ])
 
   # ImageMagick optional modules
   im_opts = {
@@ -132,7 +124,13 @@ if not external
   # Parse the options and enable the macros that disable/enable certain delegates
   # A delegate that is enabled is a delegate that will be autoconfigured _if it is found_
   foreach opt, defines : im_opts
-    if not get_option(opt)
+    enabled = get_option(opt)
+    # ImageMagick supports fontconfig on Windows (and the Github Actions runners carry it)
+    # but this support is far from perfect and it is not needed
+    if opt == 'fonts' and host_machine.system() == 'windows'
+      enabled = false
+    endif
+    if enabled
       foreach d : defines
         cmake_opts.add_cmake_defines([{d: false}])
       endforeach
