@@ -130,7 +130,7 @@ if not external
     if opt == 'fonts' and host_machine.system() == 'windows'
       enabled = false
     endif
-    if enabled
+    if not enabled
       foreach d : defines
         cmake_opts.add_cmake_defines([{d: false}])
       endforeach
