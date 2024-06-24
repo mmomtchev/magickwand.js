@@ -28,7 +28,9 @@ describe('Drawable', () => {
     assert.strictEqual(px.quantumBlue(), 65535);
   });
 
-  it('text', () => {
+  it('text', function() {
+    if (process.env.MOCHA_LIGHT)
+      this.skip();
     const im = new Image('100x100', 'white');
 
     im.strokeColor('red');
@@ -40,7 +42,10 @@ describe('Drawable', () => {
     assert.strictEqual(px.quantumRed(), 65535);
   });
 
-  it('font metrics', () => {
+  it('font metrics', function() {
+    if (process.env.MOCHA_LIGHT)
+      this.skip();
+
     const im = new Image('100x100', 'white');
 
     im.fontFamily('sans-serif');
