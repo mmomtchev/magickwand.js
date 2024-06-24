@@ -100,6 +100,7 @@ if not external
   # but this support is far from perfect and it is totally useless
   if host_machine.system() == 'windows'
     cmake_opts.add_cmake_defines([{'FONTCONFIG_DELEGATE': false}])
+    summary('fonts', false, section: 'Enabled delegates')
   endif
 
   # ImageMagick optional modules
