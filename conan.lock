@@ -1,0 +1,115 @@
+{
+    "version": "0.5",
+    "requires": [
+        "zstd/1.5.5#e03fb7b37b87f0174e9db4a8407e3f4d%1711368958.958",
+        "zlib/1.2.13#4e74ebf1361fe6fb60326f473f276eb5%1705999194.457",
+        "xz_utils/5.4.5#51e5a6e6564f4ea3afd79def01f035ad%1712043875.075",
+        "util-linux-libuuid/2.39.2#339f80aea7e5cf507b5b9839a128909f%1704959804.303",
+        "pixman/0.43.4#17a592b79b264d61abeec594cc331e58%1711369282.592",
+        "pcre2/10.42#a7a2c122056510509a7525c83d6a6695%1708432300.733",
+        "openssl/3.2.1#c7b554068caae5eda12b735ea6f23d70%1712227628.919",
+        "openjpeg/2.5.0#2886244f2492121aa7c6c493a814db06%1709098264.352",
+        "openexr/3.1.5#0c4a23f17d5dc043c73b9b5998def53c%1699230756.876",
+        "lzo/2.10#5725914235423c771cb1c6b607109b45%1685099992.798",
+        "lzma_sdk/9.20#f1fe20056422603432563a07b25f2ee3%1684929159.374",
+        "llvm-openmp/12.0.1#b93ba33a033756b4ceaa57d0b9616ac2%1704180318.816",
+        "libzip/1.9.2#81ae67160af7eb5968bbd7d494e09b12%1701463073.271",
+        "libxml2/2.10.4#0b5dec9a174ddb816e0d13278e2b98e3%1703596470.28",
+        "libwebp/1.3.2#52f69c4a31c5cf033fdd9230d77a8e38%1694806992.059",
+        "libtiff/4.6.0#51d0e7e15d032aeec1b64e65c44ecd9f%1710002558.618",
+        "libselinux/3.5#776f35e238362c6b893220f437cb89ae%1700227545.201",
+        "libraw/0.21.2#a23d10ab30649e1b358ce6a725b511df%1703188166.862",
+        "libpng/1.6.42#fdba4ebf89df3c55d6db0145a2a66a24%1706645815.974",
+        "libmount/2.39#8a95198b2547a8ca7685eb7a1d002903%1705591483.106",
+        "libjpeg-turbo/3.0.2#1acc4234a921c5c948652e04c77d3d80%1706213428.499",
+        "libiconv/1.17#73fefc1b696e069df90fd1d18aa63edd%1707122814.387",
+        "libheif/1.13.0#22a63076c0f8e093cf2d3a1db3bd1229%1693326477.512",
+        "libgettext/0.22#35d2811b2dd27a98f69e4daa86ca2000%1714393058.647",
+        "libffi/3.4.4#35eb63842b505824b70aedc1baefc916%1682741110.044",
+        "libelf/0.8.13#4f70a3555809ae50cc8add44f0f84288%1682439923.579",
+        "libdeflate/1.19#3ea74a4549efc14d4b1202dc4bfbf602%1694914376.803",
+        "libde265/1.0.12#6e7cec8c7e3b1c9bfb6761dfc4d1dbb8%1690354164.82",
+        "libaom-av1/3.6.0#db22f37c8c3cb56d23ac5faccda7cc75%1681143634.402",
+        "lcms/2.14#8a8c02ab8c0631e06d705c38b171f053%1703969656.95",
+        "jbig/20160605#2d29fa02aacd76902e0d2cbbc24631ef%1676066289.194",
+        "jasper/4.2.0#bbda6a34e0a3d3e9caff91c15f632902%1707492379.368",
+        "imath/3.1.9#2e7f5802b247baae47235b4c8d5642c9%1708982814.433",
+        "highway/1.0.3#8ddcc287cd1d041078f1bedb707fddb4%1691811465.632",
+        "harfbuzz/8.3.0#c83405ed297bad6c9e9587e2a19c686a%1713342401.259",
+        "glib/2.78.1#6da549beee7208bd9fad0e6141581e8e%1698656551.932",
+        "fribidi/1.0.12#789f9577b1c288fc0221ca8052289cdf%1695168207.099",
+        "freetype/2.13.2#7934d59c447d72edcd56025dc60e1aeb%1714137854.529",
+        "fontconfig/2.14.2#7dadc780ad05a1c3123a3644b5d6b14b%1713877185.452",
+        "expat/2.6.0#2f92fb3cf504e9731aba6d20dcd641bf%1707241906.746",
+        "cairo/1.17.8#6985730ddd64ceafde4921c0c0a6075c%1713348784.611",
+        "bzip2/1.0.8#457c272f7da34cb9c67456dd217d36c4%1703591832.799",
+        "brotli/1.1.0#d56d7bb9ca722942aba17369cb5c0519%1696161049.808"
+    ],
+    "build_requires": [
+        "zlib/1.2.13#4e74ebf1361fe6fb60326f473f276eb5%1705999194.457",
+        "strawberryperl/5.32.1.1#8f83d05a60363a422f9033e52d106b47%1666134191.176",
+        "strawberryperl/5.30.0.1#d125df083747d815c66e9ee621f3909f%1666134190.827",
+        "pkgconf/2.1.0#27f44583701117b571307cf5b5fe5605%1701537936.436",
+        "pkgconf/2.0.3#f996677e96e61e6552d85e83756c328b%1696606182.229",
+        "pcre2/10.42#a7a2c122056510509a7525c83d6a6695%1708432300.733",
+        "ninja/1.11.1#77587f8c8318662ac8e5a7867eb4be21%1684431244.21",
+        "nasm/2.15.05#058c93b2214a49ca1cfe9f8f26205568%1703550024.076",
+        "msys2/cci.latest#5a31efa2bde593541fd5ac3bcc50c01c%1699871190.424",
+        "meson/1.4.0#024dfac41ea5570cb1aec3ea6fe34d0a%1710913346.419",
+        "meson/1.3.2#d1125ba555ec1a94f165a3412fdf7f88%1708699393.753",
+        "meson/1.3.1#7134d7d69e15aaac836309abf62d53ec%1708699390.224",
+        "meson/1.2.2#04bdfb85d665c82b08a3510aee3ffd19%1702568761.764",
+        "meson/1.2.1#f641f02771e4660c772354736da0b9c6%1702568762.471",
+        "m4/1.4.19#b38ced39a01e31fef5435bc634461fd2%1700758725.451",
+        "libselinux/3.5#776f35e238362c6b893220f437cb89ae%1700227545.201",
+        "libmount/2.39#8a95198b2547a8ca7685eb7a1d002903%1705591483.106",
+        "libiconv/1.17#73fefc1b696e069df90fd1d18aa63edd%1707122814.387",
+        "libgettext/0.22#35d2811b2dd27a98f69e4daa86ca2000%1714393058.647",
+        "libffi/3.4.4#35eb63842b505824b70aedc1baefc916%1682741110.044",
+        "libelf/0.8.13#4f70a3555809ae50cc8add44f0f84288%1682439923.579",
+        "gperf/3.1#1d622ad9717e9348ed3685c9994ad0b9%1709324989.76",
+        "gnu-config/cci.20210814#dc430d754f465e8c74463019672fb97b%1701248168.479",
+        "glib/2.78.1#6da549beee7208bd9fad0e6141581e8e%1698656551.932",
+        "gettext/0.21#47908e52e736402f11d4ac680cbcd457%1714394718.76",
+        "flex/2.6.4#e35bc44b3fcbcd661e0af0dc5b5b1ad4%1674818991.113",
+        "cmake/3.29.2#2b84343440461e8c5952c034d896fb67%1713311246.014",
+        "bzip2/1.0.8#457c272f7da34cb9c67456dd217d36c4%1703591832.799",
+        "automake/1.16.5#058bda3e21c36c9aa8425daf3c1faf50%1688481772.751",
+        "autoconf/2.71#f9307992909d7fb3df459340f1932809%1711983104.648"
+    ],
+    "python_requires": [],
+    "overrides": {
+        "libffi/3.4.4": [
+            "libffi/3.4.4",
+            null
+        ],
+        "freetype/2.13.2": [
+            "freetype/2.13.2",
+            null
+        ],
+        "libjpeg-turbo/3.0.2": [
+            "libjpeg-turbo/3.0.2",
+            null
+        ],
+        "pixman/0.43.4#17a592b79b264d61abeec594cc331e58": [
+            "pixman/0.43.4",
+            null
+        ],
+        "glib/2.78.3": [
+            "glib/2.78.1"
+        ],
+        "expat/[>=2.6.2 <3]": [
+            "expat/2.6.0"
+        ],
+        "libjpeg-turbo/3.0.0": [
+            "libjpeg-turbo/3.0.2#1acc4234a921c5c948652e04c77d3d80"
+        ],
+        "jasper/4.0.0": [
+            "jasper/4.2.0"
+        ],
+        "fontconfig/2.15.0": [
+            "fontconfig/2.14.2"
+        ]
+    },
+    "config_requires": []
+}

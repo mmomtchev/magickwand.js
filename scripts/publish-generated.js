@@ -8,7 +8,10 @@ const source_path = path.resolve(__dirname, '..', 'src');
 
 const hash = crypto.createHash('md5');
 for (const file of fs.readdirSync(source_path, 'utf8').sort()) {
-  hash.update(fs.readFileSync(path.resolve(source_path, file), 'utf8'));
+  const fullname = path.resolve(source_path, file);
+  const stats = fs.statSync(fullname);
+  if (stats.isDirectory()) continue;
+  hash.update(fs.readFileSync(fullname, 'utf8'));
 }
 const message = hash.digest('hex');
 

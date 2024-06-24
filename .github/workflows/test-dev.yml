@@ -30,20 +30,27 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - name: Install the xpacks
+        run: |
+          npm install xpm
+          npx xpm install
+      - name: Get conan home
+        shell: bash
+        id: conan_home
+        run: |
+          npx xpm run -q conan -- version
+          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
         with:
-          path: ~/.conan2
+          path: ${{ steps.conan_home.outputs.path }}
           key: ${{ runner.os }}-conan
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
       - name: Build magickwand.js
-        run: npm install --build-from-source --verbose --foreground-scripts
-      - name: magick_configure.log
-        run: cat build/magick_configure.log
-        shell: bash
+        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm
       - run: npx mocha test/node.test.ts test/integration.test.ts
         env:
           MOCHA_INTEGRATION: node
@@ -66,29 +73,39 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - name: Install the xpacks
+        run: |
+          npm install xpm
+          npx xpm install
+      - name: Get conan home
+        shell: bash
+        id: conan_home
+        run: |
+          npx xpm run -q conan -- version
+          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
         with:
-          path: ~/.conan2
-          key: ${{ runner.os }}-conan
+          path: ${{ steps.conan_home.outputs.path }}
+          key: linux-light-conan
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
         shell: bash
       - name: Build magickwand.js
         run: |
-          npm install --build-from-source --verbose                                 \
-            --fonts=false --jpeg=true --png=false --tiff=false                      \
-            --webp=false --jpeg2000=false --raw=false --openmedia=false             \
-            --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
-            --jbig=true --color=false --xml=false --gzip=false --zip=false            \
-            --bzip2=true --zstd=false --xz=false --lzma=false --simd=false          \
-            --openmp=true --display=false
-      - name: magick_configure.log
-        run: cat build/magick_configure.log
-        shell: bash
-      - run: npx @mapbox/node-pre-gyp build
+          npm install --build-from-source --verbose --foreground-scripts --disable-shared \
+            --disable-fonts --enable-jpeg --enable-png --disable-tiff                     \
+            --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia           \
+            --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif   \
+            --disable-color --disable-xml --enable-gzip --disable-zip                     \
+            --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd     \
+            --disable-openmp --disable-display --disable-jbig --disable-cairo             \
+            --skip-magickwand-wasm
+      - run: npx mocha test/node.test.ts
+        env:
+          MOCHA_LIGHT: 1
 
   wasm:
     runs-on: ubuntu-latest
@@ -105,20 +122,28 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - name: Setup emscripten
+        uses: mymindstorm/setup-emsdk@v13
+        with:
+          version: 3.1.53
+      - name: Install the xpacks
+        run: |
+          npm install xpm
+          npx xpm install
+      - name: Get conan home
+        shell: bash
+        id: conan_home
+        run: |
+          npx xpm run -q conan -- version
+          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
         with:
-          path: ~/.conan2
+          path: ${{ steps.conan_home.outputs.path }}
           key: wasm-conan
-      - run: npm run conan:emscripten
-      - run: npm install --ignore-scripts
-      - run: npm run deps:download
-      - run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
-      - name: magick_configure.log
-        run: cat build/magick_configure.log
-        shell: bash
-      - run: npx @mapbox/node-pre-gyp build
+      - name: Build magickwand.js
+        run: npm install --build-wasm-from-source --verbose --foreground-scripts --skip-magickwand-native
       - name: Check size
         run: |
           echo "::notice::Default WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
@@ -146,33 +171,47 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - name: Setup emscripten
+        uses: mymindstorm/setup-emsdk@v13
+        with:
+          version: 3.1.53
+      - name: Install the xpacks
+        run: |
+          npm install xpm
+          npx xpm install
+      - name: Get conan home
+        shell: bash
+        id: conan_home
+        run: |
+          npx xpm run -q conan -- version
+          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
         with:
-          path: ~/.conan2
+          path: ${{ steps.conan_home.outputs.path }}
           key: wasm-light-conan
-      - name: Install conan dependencies (light)
+      - name: Build magickwand.js
         run: |
-          npm run conan:emscripten --                                               \
-            -ofonts=False -ojpeg=True -opng=False -otiff=False                      \
-            -owebp=False -ojpeg2000=False -oraw=False -oopenmedia=False             \
-            -obrotli=False -oh265=False -oexr=False -offtw=False -oheif=False       \
-            -ojbig=True -ocolor=False -oxml=False -ogzip=False -ozip=False          \
-            -obzip2=True -ozstd=False -oxz=False -olzma=False -osimd=False          \
-            -oopenmp=True -odisplay=False
-      - run: npm install --ignore-scripts
-      - run: npm run deps:download
-      - name: Configure WASM version
-        run: npx @mapbox/node-pre-gyp configure --nodedir=./emscripten --target_arch=wasm32 --target_platform=emscripten
-      - name: magick_configure.log
-        run: cat build/magick_configure.log
-        shell: bash
-      - run: npx @mapbox/node-pre-gyp build
+          npm install --build-wasm-from-source --verbose --foreground-scripts           \
+            --disable-fonts --enable-jpeg --enable-png --disable-tiff                   \
+            --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia         \
+            --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif \
+            --disable-color --disable-xml --enable-gzip --disable-zip                   \
+            --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd   \
+            --disable-openmp --disable-display --disable-jbig --disable-cairo           \
+            --skip-magickwand-native
       - name: Check size
         run: |
           echo "::notice::Light WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
           echo "::notice::Light WASM version is $(( `brotli -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes brotlied"
+      - name: Run headless test
+        uses: GabrielBB/xvfb-action@v1
+        env:
+          MOCHA_LIGHT: 1
+          MOCHA_INTEGRATION: browser
+        with:
+          run: npx mocha test/browser.test.ts
 
   debug-asan:
     runs-on: ${{ matrix.platform }}
@@ -191,24 +230,75 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+      - name: Install the xpacks
+        run: |
+          npm install xpm
+          npx xpm install
+      - name: Get conan home
+        shell: bash
+        id: conan_home
+        run: |
+          npx xpm run -q conan -- version
+          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
       - name: Cache conan artifacts
         id: conan-artifacts
         uses: actions/cache@v4
         with:
-          path: ~/.conan2
-          key: asan-conan
+          path: ${{ steps.conan_home.outputs.path }}
+          key: linux-debug-asan-conan
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
-      - run: npm run conan:native
-      - run: npm install --ignore-scripts
-      - run: npm run deps:download
-      - run: npx @mapbox/node-pre-gyp configure --debug --enable_asan
-      - name: magick_configure.log
-        run: cat build/magick_configure.log
-        shell: bash
-      - run: npx @mapbox/node-pre-gyp build
+      - name: Install the dependencies
+        run: npm install
+      - name: Build with ASAN
+        run: |
+          npx xpm install
+          npx xpm run prepare --config native-debug
+          npx xpm run configure --config native-debug -- -Db_sanitize=address
+          npx xpm run build --config native-debug
       - run: node node_modules/mocha/bin/mocha.js -i -g Security --repeats 1000 test/node.test.ts
         env:
           LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6
           LSAN_OPTIONS: suppressions=${{ github.workspace }}/test/napi-leaks-suppression.txt
+
+
+  external:
+    runs-on: ${{ matrix.platform }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ubuntu-22.04]
+
+    steps:
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
+      - name: Build and install ImageMagick-7
+        run: |
+          cd deps/ImageMagick
+          sh configure --prefix /usr
+          make -j4
+          sudo make install
+      - name: Install fonts on Ubuntu
+        run: sudo apt-get install -y fonts-ubuntu || true
+        if: startsWith(matrix.platform, 'ubuntu')
+      - name: Build with external ImageMagick library
+        run: |
+          [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
+          npm install --verbose --foreground-scripts=true --build-from-source  \
+            --enable-external --enable-shared                                  \
+            --cpp-args="`pkg-config --cflags Magick++`"                        \
+            --cpp-link-args="`pkg-config --libs Magick++`"                     \
+            --skip-magickwand-wasm
+        shell: bash
+      - run: npx mocha test/node.test.ts test/integration.test.ts
+        env:
+          MOCHA_INTEGRATION: node
+          MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
