@@ -57,10 +57,7 @@ jobs:
           name: ${{ inputs.package }}
         if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
-        run: |
-          npm install ${{ inputs.package }}
-          mkdir -p deps/ImageMagick/config
-          cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
+        run: npm install ${{ inputs.package }}
         shell: bash
       - name: Set up the unit tests
         run: mv node_modules/magickwand.js/test .
@@ -117,8 +114,6 @@ jobs:
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
           npm install --verbose --foreground-scripts \
             ${{ inputs.package }} --build-from-source
-          mkdir -p deps/ImageMagick/config
-          cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
         shell: bash
       - name: Set up the unit tests
         run: mv node_modules/magickwand.js/test .
@@ -160,15 +155,14 @@ jobs:
       - name: Install magickwand.js from ${{ inputs.package }}
         run: |
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
-          npm install --verbose --foreground-scripts                                \
-            ${{ inputs.package }}                        \
-            --build-from-source                                                     \
-            --fonts=false --jpeg=true --png=false --tiff=false                      \
-            --webp=false --jpeg2000=false --raw=false --openmedia=false             \
-            --brotli=false --h265=false --exr=false --fftw=false --heif=false       \
-            --jbig=true --color=false --xml=false --gzip=false --zip=false          \
-            --bzip2=true --zstd=false --xz=false --lzma=false --simd=false          \
-            --openmp=true --display=false
+          npm install --verbose --foreground-scripts                                     \
+            ${{ inputs.package }} --build-from-source --enable-shared                    \
+            --disable-fonts --enable-jpeg --enable-png --disable-tiff                    \
+            --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia          \
+            --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif  \
+            --disable-color --disable-xml --enable-gzip --disable-zip                    \
+            --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd    \
+            --disable-openmp --disable-display --disable-jbig --disable-cairo
         shell: bash
       - name: Test loading the package
         run: node -p 'require("magickwand.js").MagickCore.GetMagickDelegates()'
@@ -220,10 +214,9 @@ jobs:
           [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
           npm install --verbose --foreground-scripts=true      \
             ${{ inputs.package }}                              \
-            --build-from-source --shared_imagemagick           \
-            --magicklibs="-lMagick++-7.Q16HDRI -lMagickWand-7.Q16HDRI -lMagickCore-7.Q16HDRI"
-          mkdir -p deps/ImageMagick/config
-          cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
+            --enable-external --enable-shared                  \
+            --cpp-args="`pkg-config --cflags Magick++`"        \
+            --cpp-link-args="`pkg-config --libs Magick++`"
         env:
           CFLAGS: -I/usr/include/ImageMagick-7
           CXXFLAGS: -I/usr/include/ImageMagick-7 

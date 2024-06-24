@@ -104,47 +104,47 @@ if not external
   imagemagick = cmake.subproject('ImageMagick', options: cmake_opts)
   magickpp = imagemagick.dependency('Magick++-7.Q16HDRI')
   dependencies += [magickpp]
+
+  # ImageMagick optional modules
+  im_opts = {
+    'fonts':    [ 'FONTCONFIG_DELEGATE', 'FREETYPE_DELEGATE' ],
+    'jpeg':     [ 'JPEG_DELEGATE' ],
+    'png':      [ 'PNG_DELEGATE' ],
+    'tiff':     [ 'TIFF_DELEGATE' ],
+    'webp':     [ 'WEBP_DELEGATE', 'WEBPMUX_DELEGATE', 'WEBPDEMUX_DELEGATE' ],
+    'jpeg2000': [ 'LIBOPENJP2_DELEGATE' ],
+    'jbig':     [ 'JBIG_DELEGATE' ],
+    'raw':      [ 'RAW_R_DELEGATE' ],
+    'exr':      [ 'OPENEXR_DELEGATE' ],
+    'heif':     [ 'HEIC_DELEGATE' ],
+    'color':    [ 'LCMS_DELEGATE' ],
+    'xml':      [ 'XML_DELEGATE' ],
+    'gzip':     [ 'ZLIB_DELEGATE' ],
+    'zip':      [ 'ZIP_DELEGATE' ],
+    'bzip2':    [ 'BZLIB_DELEGATE' ],
+    'zstd':     [ 'ZSTD_DELEGATE' ],
+    'lzma':     [ 'LZMA_DELEGATE' ],
+    'openmp':   [ 'OPENMP_SUPPORT' ],
+    'display':  [ 'X11_DELEGATE' ],
+    'cairo':    [ 'CAIRO_DELEGATE' ],
+    'fftw':     [ 'FFTW_DELEGATE' ],
+    'jxl':      [ 'JXL_DELEGATE', 'BROTLI_DELEGATE' ],
+  }
+
+  # Parse the options and enable the macros that disable/enable certain delegates
+  # A delegate that is enabled is a delegate that will be autoconfigured _if it is found_
+  foreach opt, defines : im_opts
+    if not get_option(opt)
+      foreach d : defines
+        cmake_opts.add_cmake_defines([{d: false}])
+      endforeach
+    endif
+    summary(opt, get_option(opt), section: 'Enabled delegates')
+  endforeach
 endif
 
 thread_dep = dependency('threads')
 dependencies += [thread_dep]
-
-# ImageMagick optional modules
-im_opts = {
-  'fonts':    [ 'FONTCONFIG_DELEGATE', 'FREETYPE_DELEGATE' ],
-  'jpeg':     [ 'JPEG_DELEGATE' ],
-  'png':      [ 'PNG_DELEGATE' ],
-  'tiff':     [ 'TIFF_DELEGATE' ],
-  'webp':     [ 'WEBP_DELEGATE', 'WEBPMUX_DELEGATE', 'WEBPDEMUX_DELEGATE' ],
-  'jpeg2000': [ 'LIBOPENJP2_DELEGATE' ],
-  'jbig':     [ 'JBIG_DELEGATE' ],
-  'raw':      [ 'RAW_R_DELEGATE' ],
-  'exr':      [ 'OPENEXR_DELEGATE' ],
-  'heif':     [ 'HEIC_DELEGATE' ],
-  'color':    [ 'LCMS_DELEGATE' ],
-  'xml':      [ 'XML_DELEGATE' ],
-  'gzip':     [ 'ZLIB_DELEGATE' ],
-  'zip':      [ 'ZIP_DELEGATE' ],
-  'bzip2':    [ 'BZLIB_DELEGATE' ],
-  'zstd':     [ 'ZSTD_DELEGATE' ],
-  'lzma':     [ 'LZMA_DELEGATE' ],
-  'openmp':   [ 'OPENMP_SUPPORT' ],
-  'display':  [ 'X11_DELEGATE' ],
-  'cairo':    [ 'CAIRO_DELEGATE' ],
-  'fftw':     [ 'FFTW_DELEGATE' ],
-  'jxl':      [ 'JXL_DELEGATE', 'BROTLI_DELEGATE' ],
-}
-
-# Parse the options and enable the macros that disable/enable certain delegates
-# A delegate that is enabled is a delegate that will be autoconfigured _if it is found_
-foreach opt, defines : im_opts
-  if not get_option(opt)
-    foreach d : defines
-      cmake_opts.add_cmake_defines([{d: false}])
-    endforeach
-  endif
-  summary(opt, get_option(opt), section: 'Enabled delegates')
-endforeach
 
 # --------------------
 # Build the module

@@ -93,7 +93,7 @@ jobs:
         shell: bash
       - name: Build magickwand.js
         run: |
-          npm install --build-from-source --verbose --foreground-scripts --enable_shared \
+          npm install --build-from-source --verbose --foreground-scripts --enable-shared \
             --disable-fonts --enable-jpeg --enable-png --disable-tiff                    \
             --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia          \
             --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif  \
@@ -241,3 +241,40 @@ jobs:
         env:
           LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6
           LSAN_OPTIONS: suppressions=${{ github.workspace }}/test/napi-leaks-suppression.txt
+
+
+  external:
+    runs-on: ${{ matrix.platform }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ubuntu-22.04]
+        node-version: [20.x]
+
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Build and install ImageMagick-7
+        run: |
+          cd deps/ImageMagick
+          sh configure --prefix /usr
+          make -j4
+          sudo make install
+      - name: Install fonts on Ubuntu
+        run: sudo apt-get install -y fonts-ubuntu || true
+        if: startsWith(matrix.platform, 'ubuntu')
+      - name: Build with external ImageMagick library
+        run: |
+          [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
+          npm install --verbose --foreground-scripts=true --build-from-source  \
+            --enable-external --enable-shared                                  \
+            --cpp-args="`pkg-config --cflags Magick++`"                        \
+            --cpp-link-args="`pkg-config --libs Magick++`"
+        shell: bash
+      - run: npx mocha test/node.test.ts test/integration.test.ts
+        env:
+          MOCHA_INTEGRATION: node
+          MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""

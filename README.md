@@ -142,10 +142,12 @@ npx xpm run build --config native-debug    # build
 ```
 
 Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the data used internally by ImageMagick - image files still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. **Unless you can regenerate the SWIG wrappers, you will have to use the exact same version (the latest one at the release date) that was used when they were generated**. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
+
 ```shell
-npm install --build-from-source --verbose --foreground-scripts --enable-external \
-  --extra-cppflags="-I/usr/local/include/ImageMagick-7 -DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16" \
-  --extra-ldflags="-L/usr/local/lib -lMagick++-7.Q16HDRI"
+npm install --verbose --foreground-scripts=true --build-from-source  \
+  --enable-external --enable-shared                                  \
+  --cpp-args="`pkg-config --cflags Magick++`"                        \
+  --cpp-link-args="`pkg-config --libs Magick++`"
 ```
 
 In this case, it would be possible to use a non Q16HDRI build or any other specially built ImageMagick-7 as long as its version is an exact match.
