@@ -50,7 +50,7 @@ jobs:
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
       - name: Build magickwand.js
-        run: npm install skip_magickwand_native --build-from-source --verbose --foreground-scripts --skip-magickwand-native
+        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-native
       - run: npx mocha test/node.test.ts test/integration.test.ts
         env:
           MOCHA_INTEGRATION: node
@@ -93,13 +93,13 @@ jobs:
         shell: bash
       - name: Build magickwand.js
         run: |
-          npm install --build-from-source --verbose --foreground-scripts --enable-shared \
-            --disable-fonts --enable-jpeg --enable-png --disable-tiff                    \
-            --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia          \
-            --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif  \
-            --disable-color --disable-xml --enable-gzip --disable-zip                    \
-            --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd    \
-            --disable-openmp --disable-display --disable-jbig --disable-cairo            \
+          npm install --build-from-source --verbose --foreground-scripts --disable-shared \
+            --disable-fonts --enable-jpeg --enable-png --disable-tiff                     \
+            --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia           \
+            --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif   \
+            --disable-color --disable-xml --enable-gzip --disable-zip                     \
+            --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd     \
+            --disable-openmp --disable-display --disable-jbig --disable-cairo             \
             --skip-magickwand-wasm
 
   wasm:
@@ -252,13 +252,12 @@ jobs:
       fail-fast: false
       matrix:
         platform: [ubuntu-22.04]
-        node-version: [20.x]
 
     steps:
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 20.x
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
