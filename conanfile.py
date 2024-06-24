@@ -81,7 +81,7 @@ class ImageMagickDelegates(ConanFile):
 
     def requirements(self):
       # Disable all bundled delegates
-      if not self.options.conan or 'npm_config_external' in environ:
+      if not self.options.conan or 'npm_config_enable_external' in environ:
         return
 
       # Fonts are not available on WASM targets
