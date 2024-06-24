@@ -50,7 +50,7 @@ jobs:
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
       - name: Build magickwand.js
-        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-native
+        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm
       - run: npx mocha test/node.test.ts test/integration.test.ts
         env:
           MOCHA_INTEGRATION: node
