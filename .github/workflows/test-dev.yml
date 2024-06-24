@@ -203,6 +203,7 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         env:
           MOCHA_LIGHT: 1
+          MOCHA_INTEGRATION: browser
         with:
           run: npx mocha test/browser.test.ts
 
