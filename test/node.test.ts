@@ -17,11 +17,11 @@ import TestGeometry from './Geometry.shared';
 import TestStress from './stress.shared';
 
 import './CoderInfo.node';
-import './Core.node';
+//import './Core.node';
 import './Draw.node';
 import './STL.node';
 
-import { Magick, MagickCore } from 'magickwand.js';
+import { Magick, MagickCore } from 'magickwand.js/sync';
 
 const imageFile = path.join(__dirname, 'data', 'wizard.png');
 const imageData = fs.readFileSync(imageFile);

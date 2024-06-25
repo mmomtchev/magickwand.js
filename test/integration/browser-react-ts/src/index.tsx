@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import * as chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 
-import IM from 'magickwand.js/wasm';
+import IM from 'magickwand.js';
 
 chai.use(chaiAsPromised);
 const assert = chai.assert;

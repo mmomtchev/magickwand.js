@@ -29,6 +29,8 @@ There is also a [medium article about using the new Node-API support in SWIG](ht
 
 ## Usage
 
+### Installation
+
 ```shell
 npm install magickwand.js
 ```
@@ -39,12 +41,35 @@ Refer to the [`example`](https://github.com/mmomtchev/magickwand.js/tree/main/ex
 
 Refer to the [`test/integration`](https://github.com/mmomtchev/magickwand.js/tree/main/test/integration) directory for integration examples with various environments including `webpack` and TypeScript.
 
-### Using from Node.js (native module)
+### Importing
+
+Starting from 2.0, ES6 2020 projects can import `magickwand.js` in fully automatic mode, using Node.js 16 [`exports`](https://nodejs.org/api/packages.html#exports-sugar). This means that a single `import` statement can be evaluated by both Node.js or a modern web bundler such as `webpack` (including React) or `rollup` to pick either the native version or the WASM version depending on the context.
 
 ```js
-import { Magick } from 'magickwand.js';
+import ImageMagick from 'magickwand.js';
+// ImageMagick will be either a native library
+// (if called from a Node.js application)
+// or a WASM bundle (when bundled by a web bundler)
+const { Magick, MagickCore } = await ImageMagick;
+```
+
+The only downside is that this requires ES6 2020 top-level `await`. If you are using TypeScript, you will have to transpile to ES2020.
+
+There is is alternative, synchronous, entry point that works only in Node.js. It is compatible with both CJS and ES6. It uses [`@guybedford`](https://github.com/guybedford)s [CJS named exports in Node.js](https://github.com/nodejs/node/pull/35249).
+
+```js
+const { Magick, MagickCore } = require('magickwand.js/sync');
+```
+
+### Example
+
+Using ES6 2020 and top-level `await`:
+
+```js
+import ImageMagick from 'magickwand.js';
 import { fileURLToPath } from 'url';
 import * as path from 'path';
+const { Magick } = await ImageMagick;
 
 // The famous ImageMagick wizard
 const wizard = path.join(path.dirname(fileURLToPath(import.meta.url)),
@@ -72,7 +97,7 @@ const pixels = new Uint16Array(im.size().width() * im.size().height() * 4);
 await im.writeAsync(0, 0, im.size().width(), im.size().height(), 'RGBA', pixels);
 ```
 
-### Using in the browser (WASM module)
+### In a `webpack` bundle
 
 To see run the web browser example:
 

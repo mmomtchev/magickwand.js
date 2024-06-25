@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import IM from 'magickwand.js/wasm';
+import IM from 'magickwand.js';
 
 IM.then(({ MagickCore, MagickVersion, MagickQuantumDepth, MagickQuantumRange, MagickHDRISupport, NAPI_VERSION }) => {
   assert.isString(MagickVersion);

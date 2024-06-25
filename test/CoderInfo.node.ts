@@ -1,6 +1,8 @@
 import { assert } from 'chai';
 
-import { Magick } from 'magickwand.js';
+// These tests are shared between Node.js and the browser
+// (the sync TS types are easier to work with)
+import { Magick } from 'magickwand.js/sync';
 const { CoderInfo, coderInfoList } = Magick;
 
 describe('CoderInfo', () => {

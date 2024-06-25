@@ -1,4 +1,4 @@
-import IM from 'magickwand.js/wasm';
+import IM from 'magickwand.js';
 
 async function component() {
   const root = document.createElement('div');
@@ -8,7 +8,7 @@ async function component() {
   // This is inevitable since the WASM transpilation API itself is asynchronous
   const { Magick, MagickCore, MagickVersion } = await IM;
 
-  root.innerHTML = '';  
+  root.innerHTML = '';
 
   const version = document.createElement('div');
   version.innerHTML = MagickVersion;
@@ -84,4 +84,6 @@ async function component() {
   return root;
 }
 
-component().then((comp) => window.document.body.appendChild(comp));
+component()
+  .then((comp) => window.document.body.appendChild(comp))
+  .then(() => void (document.getElementById('loading').innerHTML = ''));

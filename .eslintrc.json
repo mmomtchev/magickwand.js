@@ -45,6 +45,7 @@
     {
       "files": [
         "*.mjs",
+        "lib/*.js",
         "wasm/*.js"
       ],
       "parserOptions": {

@@ -1,6 +1,9 @@
 {
   "v8-expose-gc": true,
   "timeout": "5000",
+  "extensions": [
+    "ts"
+  ],
   "require": [
     "ts-node/register",
     "tsconfig-paths/register"

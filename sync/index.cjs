@@ -1,7 +1,7 @@
 const path = require('path');
 const os = require('os');
 
-const binding_path = path.resolve(__dirname, 'binding', `${os.platform()}-${os.arch()}`, 'magickwand.node');
+const binding_path = path.resolve(__dirname, '..', 'lib', 'binding', `${os.platform()}-${os.arch()}`, 'magickwand.node');
 // Workaround for https://github.com/conan-io/conan-center-index/issues/10740
 switch (os.platform()) {
   case 'linux':

@@ -6,7 +6,8 @@ import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 const assert = chai.assert;
 
-import { Magick, MagickCore } from 'magickwand.js';
+// This test is used only in Node.js
+import { Magick, MagickCore } from 'magickwand.js/sync';
 const { Image, Color } = Magick;
 
 describe('STL', () => {
