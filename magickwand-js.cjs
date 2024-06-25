@@ -13,7 +13,7 @@
  *
  * ---------------------------------------------------------------------------*/
 
-var dll = require('../lib/index.cjs');
+var dll = require('../sync/index.cjs');
 var {
   MagickLibVersion,
   MagickLibAddendum,
