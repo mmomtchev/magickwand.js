@@ -123,7 +123,7 @@ jobs:
         with:
           node-version: 18.x
       - name: Setup emscripten
-        uses: mymindstorm/setup-emsdk@v13
+        uses: mymindstorm/setup-emsdk@v14
         with:
           version: 3.1.53
       - name: Install the xpacks
@@ -172,7 +172,7 @@ jobs:
         with:
           node-version: 18.x
       - name: Setup emscripten
-        uses: mymindstorm/setup-emsdk@v13
+        uses: mymindstorm/setup-emsdk@v14
         with:
           version: 3.1.53
       - name: Install the xpacks
