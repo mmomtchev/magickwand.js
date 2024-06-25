@@ -17,7 +17,7 @@
     },
     "./wasm": {
       "types": "./lib/index.d.ts",
-      "default": "./lib/index.wasm.js"
+      "default": "./lib/index.wasm.mjs"
     },
     "./wasm/main": {
       "default": "./lib/binding/emscripten-wasm32/magickwand.js"
