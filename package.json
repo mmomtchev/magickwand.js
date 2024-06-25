@@ -7,8 +7,8 @@
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
-      "browser": "./lib/index.wasm.js",
-      "default": "./lib/index.native.js"
+      "browser": "./lib/index.wasm.mjs",
+      "default": "./lib/index.native.mjs"
     },
     "./sync": {
       "types": "./sync/index.d.ts",
