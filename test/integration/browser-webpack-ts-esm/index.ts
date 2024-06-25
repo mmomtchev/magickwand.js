@@ -4,7 +4,7 @@ import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 const assert = chai.assert;
 
-import IM from 'magickwand.js/wasm';
+import IM from 'magickwand.js';
 
 describe('Image', () => {
   before('test', (done) => {

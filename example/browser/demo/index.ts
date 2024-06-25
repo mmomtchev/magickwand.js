@@ -1,4 +1,4 @@
-import IM from 'magickwand.js/wasm';
+import IM from 'magickwand.js';
 import pkg from '../../../package.json';
 
 IM.then(({ Magick, MagickCore, MagickVersion }) => {

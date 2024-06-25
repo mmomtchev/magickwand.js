@@ -18,7 +18,7 @@ module.exports = {
     // These have to be fixed in emscripten
     // https://github.com/emscripten-core/emscripten/issues/20503
     {
-      module: /magickwand\.worker\.js$/,
+      module: /magickwand\.worker\.mjs$/,
       message: /dependency is an expression/,
     },
     {

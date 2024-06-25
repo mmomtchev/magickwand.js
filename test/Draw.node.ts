@@ -1,6 +1,8 @@
 import { assert } from 'chai';
 
-import { Magick, MagickCore } from 'magickwand.js';
+// These tests are shared between Node.js and the browser
+// (the sync TS types are easier to work with)
+import { Magick, MagickCore } from 'magickwand.js/native';
 const { Image, Coordinate } = Magick;
 
 describe('Drawable', () => {

@@ -1,14 +1,14 @@
 // These tests are shared between Node.js and the browser
-import type * as IM from 'magickwand.js';
+import type { Magick, MagickCore } from 'magickwand.js';
 
 export default function (
   path: string,
   assert: typeof import('chai').assert,
-  Magick: typeof IM.Magick,
-  MagickCore: typeof IM.MagickCore
+  bindingsMagick: typeof Magick,
+  bindingsMagickCore: typeof MagickCore
 ) {
-  const { Image, Geometry, Color } = Magick;
-  const { MultiplyCompositeOp } = MagickCore;
+  const { Image, Geometry, Color, Blob } = bindingsMagick;
+  const { MultiplyCompositeOp } = bindingsMagickCore;
 
   describe('Image', () => {
     describe('constructor', () => {
@@ -219,7 +219,7 @@ export default function (
     });
 
     it('read an image, crop it, write it and read it back', () => {
-      const tmpBlob = new Magick.Blob;
+      const tmpBlob = new Blob;
       let im = new Image;
 
       im.read(path);
@@ -234,7 +234,7 @@ export default function (
     });
 
     it('(async) read an image, crop it, write it and read it back', () => {
-      const tmpBlob = new Magick.Blob;
+      const tmpBlob = new Blob;
       let im = new Image;
 
       return assert.isFulfilled(im.readAsync(path)
@@ -259,7 +259,7 @@ export default function (
     });
 
     it('read an image, write it in different format and read it back', () => {
-      const tmpBlob = new Magick.Blob;
+      const tmpBlob = new Blob;
       let im = new Image;
 
       im.read(path);
@@ -272,7 +272,7 @@ export default function (
     });
 
     it('(async) read an image, write it in different format and read it back', () => {
-      const tmpBlob = new Magick.Blob;
+      const tmpBlob = new Blob;
       let im = new Image;
 
       return assert.isFulfilled(im.readAsync(path)

@@ -1,15 +1,15 @@
 // These tests are shared between Node.js and the browser
-import type * as IM from 'magickwand.js';
+import type { Magick } from 'magickwand.js';
 
 export default function (
   path: string,
   data: ArrayBuffer,
   assert: typeof import('chai').assert,
-  Magick: typeof IM.Magick
+  bindingsMagick: typeof Magick
 ) {
   describe('Blob', () => {
-    const { Blob, Image } = Magick;
-    let im: IM.Magick.Image, rawLength: number;
+    const { Blob, Image } = bindingsMagick;
+    let im: Magick.Image, rawLength: number;
 
     before(() => {
       im = new Image(path);

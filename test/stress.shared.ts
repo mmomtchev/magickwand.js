@@ -1,5 +1,6 @@
 // These tests are shared between Node.js and the browser
-import type * as IM from 'magickwand.js';
+// (the sync TS types are easier to work with)
+import type IM from 'magickwand.js/native';
 
 const verbose = (typeof process !== 'undefined' && process.env.VERBOSE_STRESS !== undefined);
 

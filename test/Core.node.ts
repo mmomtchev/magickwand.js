@@ -4,8 +4,9 @@ import * as chai from 'chai';
 
 const assert = chai.assert;
 
-import * as IM from 'magickwand.js';
-import { MagickCore } from 'magickwand.js';
+// This test is used only in Node.js
+import IM from 'magickwand.js/native';
+import { MagickCore } from 'magickwand.js/native';
 
 describe('Core', () => {
   const features = MagickCore.GetMagickFeatures().trimEnd().split(' ').join(',');
