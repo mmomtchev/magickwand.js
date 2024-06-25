@@ -1,3 +1,5 @@
+export { Magick, MagickCore } from '../swig/Magick++';
+
 declare const ImageMagick: Promise<typeof import('../swig/Magick++')>
 
 declare type FSMode = 'r' | 'r+' | 'w' | 'wx' | 'w+' | 'wx+' | 'a' | 'ax' | 'a+' | 'ax+';

@@ -9,8 +9,8 @@
       "magickwand.js": [
         "."
       ],
-      "magickwand.js/sync": [
-        "./sync"
+      "magickwand.js/native": [
+        "./native"
       ]
     }
   },

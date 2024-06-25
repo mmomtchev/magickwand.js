@@ -1,4 +1,4 @@
-import { Magick, MagickCore } from '../sync/index.mjs';
+import { Magick, MagickCore } from '../native/index.mjs';
 import { fileURLToPath } from 'url';
 import * as path from 'path';
 

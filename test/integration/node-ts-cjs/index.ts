@@ -8,7 +8,7 @@ import { assert } from 'chai';
  * of the problems of the early days have been solved. TS transpiled to
  * ES6 offers numerous advantages for both browser and Node.js code.
  */
-import { Magick } from 'magickwand.js/sync';
+import { Magick } from 'magickwand.js/native';
 
 it('TS (transpiled to CJS) import test', () => {
   const im = new Magick.Image;

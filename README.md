@@ -55,10 +55,10 @@ const { Magick, MagickCore } = await ImageMagick;
 
 The only downside is that this requires ES6 2020 top-level `await`. If you are using TypeScript, you will have to transpile to ES2020.
 
-There is is alternative, synchronous, entry point that works only in Node.js. It is compatible with both CJS and ES6. It uses [`@guybedford`](https://github.com/guybedford)s [CJS named exports in Node.js](https://github.com/nodejs/node/pull/35249).
+There is is alternative, synchronous, entry point that works only in Node.js. It is compatible with both CJS and ES6. It uses [`@guybedford`](https://github.com/guybedford)'s [CJS named exports in Node.js](https://github.com/nodejs/node/pull/35249).
 
 ```js
-const { Magick, MagickCore } = require('magickwand.js/sync');
+const { Magick, MagickCore } = require('magickwand.js/native');
 ```
 
 ### Example

@@ -1,12 +1,11 @@
 // These tests are shared between Node.js and the browser
-// (the sync TS types are easier to work with)
-import type * as IM from 'magickwand.js/sync';
+import type { Magick } from 'magickwand.js';
 
 export default function (
   assert: typeof import('chai').assert,
-  Magick: typeof IM.Magick
+  bindingsMagick: typeof Magick
 ) {
-  const { Geometry } = Magick;
+  const { Geometry } = bindingsMagick;
 
   describe('Geometry', () => {
     describe('constructor', () => {
