@@ -4,7 +4,7 @@ import * as chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 
 chai.use(chaiAsPromised);
-const assert = chai.assert;
+const assert = chai.assert as Chai.AssertStatic;
 
 // This test is used only in Node.js
 import { Magick, MagickCore } from 'magickwand.js/native';
