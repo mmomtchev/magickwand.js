@@ -160,7 +160,7 @@ jobs:
       - name: Install magickwand.js from ${{ inputs.package }}
         run: |
           npm install --verbose --foreground-scripts                                     \
-            ${{ inputs.package }} --build-from-source --enable-shared                    \
+            ${{ inputs.package }} --build-from-source --disable-shared                   \
             --disable-fonts --enable-jpeg --enable-png --disable-tiff                    \
             --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia          \
             --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif  \
