@@ -17,7 +17,7 @@ import TestGeometry from './Geometry.shared';
 import TestStress from './stress.shared';
 
 import './CoderInfo.node';
-//import './Core.node';
+import './Core.node';
 import './Draw.node';
 import './STL.node';
 
