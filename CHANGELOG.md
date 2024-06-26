@@ -11,7 +11,7 @@
    - Fully configurable from the `npm install` command
    - New `CMake`-based build system for ImageMagick itself available as a stand-alone project targeted at portable open-source projects that distribute ImageMagick as source - https://github.com/mmomtchev/ImageMagick
    - Support rebuilding from source with Python 3.12 without `distutils`
-
+ - Drop macOS 11 support
 
 ## [1.1.0] 2024-04-17
 
