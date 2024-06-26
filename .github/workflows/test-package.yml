@@ -59,7 +59,11 @@ jobs:
         run: npm install ${{ inputs.package }}
         shell: bash
       - name: Set up the unit tests
-        run: mv node_modules/magickwand.js/test .
+        shell: bash
+        run: |
+          mv node_modules/magickwand.js/test .
+          mkdir -p deps/ImageMagick/config
+          cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
       - name: Run the unit tests headless
         uses: GabrielBB/xvfb-action@v1
         with:
@@ -113,7 +117,11 @@ jobs:
             ${{ inputs.package }} --build-from-source
         shell: bash
       - name: Set up the unit tests
-        run: mv node_modules/magickwand.js/test .
+        shell: bash
+        run: |
+          mv node_modules/magickwand.js/test .
+          mkdir -p deps/ImageMagick/config
+          cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
       - name: Run the unit tests headless
         uses: GabrielBB/xvfb-action@v1
         with:
