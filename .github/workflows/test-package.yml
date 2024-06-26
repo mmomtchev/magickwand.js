@@ -47,7 +47,7 @@ jobs:
         if: startsWith(matrix.platform, 'ubuntu')
       - name: Install dependencies
         run: |
-          npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths \
+          npm i chai@4.3.7 chai-as-promised@7.1.1 mocha typescript ts-node tsconfig-paths \
             @types/chai @types/chai-as-promised @types/mocha @types/node \
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
         shell: bash
@@ -100,7 +100,7 @@ jobs:
         if: startsWith(matrix.platform, 'ubuntu')
       - name: Install dependencies
         run: |
-          npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths \
+          npm i chai@4.3.7 chai-as-promised@7.1.1 mocha typescript ts-node tsconfig-paths \
             @types/chai @types/chai-as-promised @types/mocha @types/node \
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
         shell: bash
@@ -200,7 +200,7 @@ jobs:
         if: startsWith(matrix.platform, 'ubuntu')
       - name: Install dependencies
         run: |
-          npm i chai chai-spies chai-as-promised mocha typescript ts-node tsconfig-paths \
+          npm i chai@4.3.7 chai-as-promised@7.1.1 mocha typescript ts-node tsconfig-paths \
             @types/chai @types/chai-as-promised @types/mocha @types/node \
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
         shell: bash
