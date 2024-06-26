@@ -169,7 +169,7 @@ jobs:
             --disable-openmp --disable-display --disable-jbig --disable-cairo
         shell: bash
       - name: Test loading the package
-        run: node -p 'require("magickwand.js").MagickCore.GetMagickDelegates()'
+        run: node -p 'require("magickwand.js/native").MagickCore.GetMagickDelegates()'
 
 
   test_npm_rebuild_shared:
@@ -225,7 +225,11 @@ jobs:
           CXXFLAGS: -I/usr/include/ImageMagick-7 
         shell: bash
       - name: Set up the unit tests
-        run: mv node_modules/magickwand.js/test .
+        shell: bash
+        run: |
+          mv node_modules/magickwand.js/test .
+          mkdir -p deps/ImageMagick/config
+          cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
       - name: Run the unit tests headless
         uses: GabrielBB/xvfb-action@v1
         with:
