@@ -291,7 +291,6 @@ jobs:
         if: startsWith(matrix.platform, 'ubuntu')
       - name: Build with external ImageMagick library
         run: |
-          [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
           npm install --verbose --foreground-scripts=true --build-from-source  \
             --enable-external --enable-shared                                  \
             --cpp-args="`pkg-config --cflags Magick++`"                        \

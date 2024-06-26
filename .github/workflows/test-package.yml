@@ -109,7 +109,6 @@ jobs:
         if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
         run: |
-          [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
           npm install --verbose --foreground-scripts \
             ${{ inputs.package }} --build-from-source
         shell: bash
@@ -152,7 +151,6 @@ jobs:
         if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
         run: |
-          [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
           npm install --verbose --foreground-scripts                                     \
             ${{ inputs.package }} --build-from-source --enable-shared                    \
             --disable-fonts --enable-jpeg --enable-png --disable-tiff                    \
@@ -209,7 +207,6 @@ jobs:
         if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
         run: |
-          [[ '${{ matrix.platform }}' =~ 'windows' ]] && subst M: `pwd` && cd M:/
           npm install --verbose --foreground-scripts=true      \
             ${{ inputs.package }}                              \
             --enable-external --enable-shared                  \
