@@ -33,7 +33,7 @@ jobs:
           - windows-2022
           - macos-11
           - macos-12
-        node-version: [18.x, 20.x, 21.x]
+        node-version: [18.x, 20.x, 22.x]
 
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
@@ -83,7 +83,7 @@ jobs:
           - windows-2022
           - macos-11
           - macos-12
-        node-version: [18.x, 20.x, 21.x]
+        node-version: [18.x, 20.x, 22.x]
 
     steps:
       - name: Enable long paths on Windows
