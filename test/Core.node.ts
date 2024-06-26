@@ -2,7 +2,7 @@ import { execFileSync } from 'child_process';
 import * as os from 'os';
 import * as chai from 'chai';
 
-const assert = chai.assert as Chai.AssertStatic;
+const assert: Chai.AssertStatic = chai.assert;
 
 // This test is used only in Node.js
 import IM from 'magickwand.js/native';

@@ -2,7 +2,7 @@ import * as chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 
 chai.use(chaiAsPromised);
-const assert = chai.assert as Chai.AssertStatic;
+const assert: Chai.AssertStatic = chai.assert;
 
 /** 
  * TS transpiled to CJS cannot use the automatic import (it requires ES6).

@@ -7,7 +7,7 @@ import chaiAsPromised from 'chai-as-promised';
 import IM from 'magickwand.js';
 
 chai.use(chaiAsPromised);
-const assert = chai.assert as Chai.AssertStatic;
+const assert: Chai.AssertStatic = chai.assert;
 
 const root = ReactDOM.createRoot(document.createElement('div'));
 
