@@ -116,7 +116,7 @@
   "xpack": {
     "minimumXpmRequired": "0.19.1",
     "devDependencies": {
-      "@mmomtchev/python-xpack": "3.10.14-3",
+      "@mmomtchev/python-xpack": "3.10.14-4",
       "@mmomtchev/meson-xpack": "1.4.99-9",
       "@mmomtchev/conan-xpack": "2.3.2-5",
       "@xpack-dev-tools/cmake": "3.27.9-1.2",
