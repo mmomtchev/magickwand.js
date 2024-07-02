@@ -12,6 +12,8 @@
    - New `CMake`-based build system for ImageMagick itself available as a stand-alone project targeted at portable open-source projects that distribute ImageMagick as source - https://github.com/mmomtchev/ImageMagick
    - Support rebuilding from source with Python 3.12 without `distutils`
  - Drop macOS 11 support
+ - macOS 14 `arm64` prebuilt binaries and support for rebuilding from source on macOS 14 `arm64`
+
 
 ## [1.1.0] 2024-04-17
 
