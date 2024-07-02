@@ -32,6 +32,7 @@ jobs:
           - windows-2019
           - windows-2022
           - macos-12
+          - macos-latest
         node-version: [18.x, 20.x, 22.x]
 
     steps:
@@ -85,6 +86,7 @@ jobs:
           - ubuntu-22.04
           - windows-2022
           - macos-12
+          - macos-latest
         node-version: [18.x, 20.x, 22.x]
 
     steps:
