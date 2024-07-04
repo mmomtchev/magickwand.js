@@ -3,7 +3,6 @@
 %include "MagickWand/compare.h"
 %include "MagickWand/composite.h"
 %include "MagickWand/conjure.h"
-%include "MagickWand/convert.h"
 %include "MagickWand/pixel-wand.h"
 %include "MagickWand/deprecate.h"
 %include "MagickWand/display.h"
