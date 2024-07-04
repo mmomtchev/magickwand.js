@@ -98,7 +98,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [linux-x64, win32-x64, darwin-x64, emscripten-wasm32]
+        platform: [linux-x64, win32-x64, darwin-x64, darwin-arm64, emscripten-wasm32]
 
     steps:
     - name: Checkout
