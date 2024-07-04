@@ -146,6 +146,19 @@ endif
 thread_dep = dependency('threads')
 dependencies += [thread_dep]
 
+# When building ImageMagick as a shared library, it goes in lib
+if not static
+  if host_machine.system() == 'linux'
+    rpath = '$ORIGIN/lib'
+  elif host_machine.system() == 'darwin'
+    rpath = '@loader_path/lib'
+  else
+    warning('When using dynamic linking on ' + host_machine.system() + ' you must set the PATH yourself')
+  endif
+else
+  rpath = ''
+endif
+
 # --------------------
 # Build the module
 # --------------------
@@ -154,7 +167,7 @@ main_target = napi.extension_module(
   sources,
   install: true,
   dependencies: dependencies,
-  install_rpath: '$ORIGIN/lib',
+  install_rpath: rpath,
   node_api_options: {
     'swig': true,
     # Node.js is excluded from the WASM loader on purpose:
