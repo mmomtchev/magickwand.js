@@ -13,7 +13,7 @@ project(
     'b_vscrt=static_from_buildtype'
   ],
   subproject_dir: 'deps',
-  meson_version: '>=1.4.99'
+  meson_version: '>=1.5.0'
 )
 napi = import('node-api')
 
@@ -154,6 +154,7 @@ main_target = napi.extension_module(
   sources,
   install: true,
   dependencies: dependencies,
+  install_rpath: not static ? '$ORIGIN/lib' : void,
   node_api_options: {
     'swig': true,
     # Node.js is excluded from the WASM loader on purpose:
