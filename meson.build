@@ -154,7 +154,7 @@ main_target = napi.extension_module(
   sources,
   install: true,
   dependencies: dependencies,
-  install_rpath: not static ? '$ORIGIN/lib' : void,
+  install_rpath: '$ORIGIN/lib',
   node_api_options: {
     'swig': true,
     # Node.js is excluded from the WASM loader on purpose:
