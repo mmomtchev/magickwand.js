@@ -48,8 +48,8 @@ describe('integration tests', function() {
         } catch { /* empty */ }
         console.log(`installing npm modules`);
         execSync('npm install', { env });
-        console.log(`installing magikwand.js "${install}"`);
-        execSync(install, { env });
+        console.log(`installing magickwand.js "${install}"`);
+        execSync(install, { env, stdio: 'pipe' });
         if (browser) {
           console.log(`building`);
           execSync('npm run build', { stdio: 'pipe', env });
