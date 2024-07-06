@@ -17,6 +17,7 @@ describe('integration tests', function() {
   const env = { ...process.env, TS_NODE_PROJECT: undefined, CI: undefined };
 
   for (const test of list) {
+    console.log(`trying ${test}`);
     if (!(fs.statSync(path.resolve(testDir, test))).isDirectory())
       continue;
 
@@ -32,25 +33,34 @@ describe('integration tests', function() {
     if (!browser && !nodeEnabled)
       continue;
 
+    console.log(`scheduling ${test}`);
     it(test + (browser ? ' (browser)' : ' (node)'), async () => {
+      console.log(`running ${test}`);
       try {
         process.chdir(path.resolve(testDir, test));
         try {
+          console.log(`resetting package-lock.json`);
           fs.rmSync('package-lock.json');
         } catch { /* empty */ }
         try {
+          console.log(`clearing node_modules`);
           fs.rmSync('node_modules', { recursive: true });
         } catch { /* empty */ }
+        console.log(`installing npm modules`);
         execSync('npm install', { env });
+        console.log(`installing magikwand.js "${install}"`);
         execSync(install, { env });
         if (browser) {
+          console.log(`building`);
           execSync('npm run build', { stdio: 'pipe', env });
           process.chdir(root);
           execSync(`npx karma start ${karmaPath}`, { env });
         } else {
+          console.log(`running npm test`);
           execSync('npm test', { env });
         }
       } catch (e) {
+        console.log(`got error ${e}`)
         const execErr = e as Error & { stdout: Buffer, stderr: Buffer; };
         if (execErr.stdout)
           console.error(execErr.stdout.toString());
