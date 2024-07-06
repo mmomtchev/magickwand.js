@@ -63,7 +63,10 @@
     "hosting": {
       "provider": "github",
       "repo": "mmomtchev/magickwand.js"
-    }
+    },
+    "napi_versions": [
+      6
+    ]
   },
   "repository": {
     "type": "git",
