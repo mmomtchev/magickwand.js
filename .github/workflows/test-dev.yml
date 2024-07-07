@@ -39,5 +39,6 @@ jobs:
             rm -rf node_modules package-lock.json  ;                        \
             npm install --ignore-scripts magickwand.js@next ; \
             cd node_modules/magickwand.js ; \
-            npm_config_loglevel=verbose npm run install ; \
+            npm_config_loglevel=verbose npx xpm run npm-install ; \
+            cd ../.. ; \
           done
