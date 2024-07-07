@@ -34,7 +34,11 @@ jobs:
           node-version: 22.x
       - run: npm install --skip-magickwand-wasm --skip-magickwand-native
       - run: |
+          cd test/integration/browser-react-ts
           while true; do                                                    \
-            rm -rf lib/binding  ;                        \
-            npm_config_loglevel=verbose npx xpm run npm-install ; \
+            rm -rf node_modules package-lock.json  ;                        \
+            npm install --ignore-scripts magickwand.js@next ; \
+            cd node_modules/magickwand.js ; \
+            npx prebuild-install -d --verbose ; \
+            cd ../.. ; \
           done
