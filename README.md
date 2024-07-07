@@ -263,6 +263,10 @@ If the WASM binary is rebuilt with no additional libraries, its size will be bro
 
 Also note that currently the unit testing suite expects all supported delegates to be included.
 
+### Known issues
+
+* [#181](https://github.com/mmomtchev/magickwand.js/issues/181) Rebuilding the native module from source with `g++14` on Ubuntu 24.04 fails
+
 ## Using this project as a tutorial for creating C++ bindings for Node.js and emscripten/WASM with SWIG Node-API
 
 ImageMagick is the perfect candidate for an automatically generated with SWIG Node.js addon:
