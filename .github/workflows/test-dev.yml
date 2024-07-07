@@ -37,9 +37,9 @@ jobs:
           cd test/integration/browser-react-ts
           while true; do                                                    \
             rm -rf node_modules package-lock.json  ;                        \
-            npm install --ignore-scripts magickwand.js@next ; \
+            npm install --ignore-scripts magickwand.js@next wtfnode ; \
             cd node_modules/magickwand.js ; \
-            node ../@mmomtchev/prebuild-install/bin.js -d --verbose ; \
+            ../.bin/wtfnode ../@mmomtchev/prebuild-install/bin.js -d --verbose ; \
             echo "prebuild-install exited" ; \
             cd ../.. ; \
           done
