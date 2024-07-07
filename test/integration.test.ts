@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as process from 'process';
 import { execSync } from 'child_process';
 
-describe('integration tests', function() {
+describe('integration tests', function () {
   this.timeout(600000);
   const testDir = path.resolve(__dirname, 'integration');
   const list = fs.readdirSync(testDir);
@@ -39,28 +39,28 @@ describe('integration tests', function() {
       try {
         process.chdir(path.resolve(testDir, test));
         try {
-          console.log(`resetting package-lock.json`);
+          console.log('resetting package-lock.json');
           fs.rmSync('package-lock.json');
         } catch { /* empty */ }
         try {
-          console.log(`clearing node_modules`);
+          console.log('clearing node_modules');
           fs.rmSync('node_modules', { recursive: true });
         } catch { /* empty */ }
-        console.log(`installing npm modules`);
-        execSync('npm install', { env });
+        console.log('installing npm modules');
+        execSync('npm install', { env, stdio: 'inherit' });
         console.log(`installing magickwand.js "${install}"`);
-        execSync(install, { env, stdio: 'pipe' });
+        execSync(install, { env, stdio: 'inherit' });
         if (browser) {
-          console.log(`building`);
-          execSync('npm run build', { stdio: 'pipe', env });
+          console.log('building');
+          execSync('npm run build', { stdio: 'inherit', env });
           process.chdir(root);
           execSync(`npx karma start ${karmaPath}`, { env });
         } else {
-          console.log(`running npm test`);
+          console.log('running npm test');
           execSync('npm test', { env });
         }
       } catch (e) {
-        console.log(`got error ${e}`)
+        console.log(`got error ${e}`);
         const execErr = e as Error & { stdout: Buffer, stderr: Buffer; };
         if (execErr.stdout)
           console.error(execErr.stdout.toString());
