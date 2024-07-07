@@ -34,8 +34,8 @@ jobs:
           node-version: 22.x
       - run: npm install --skip-magickwand-wasm --skip-magickwand-native
       - run: |
-          while true; do                         \
-            npx prebuild-install -d --verbose    \
-            rm -rf /Users/runner/.npm/_prebuilds \
-            rm -rf lib/binding                   \
+          while true; do                           \
+            npx prebuild-install -d --verbose ;    \
+            rm -rf /Users/runner/.npm/_prebuilds ; \
+            rm -rf lib/binding ;                   \
           done
