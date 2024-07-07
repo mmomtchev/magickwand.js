@@ -39,6 +39,7 @@ jobs:
             rm -rf node_modules package-lock.json  ;                        \
             npm install --ignore-scripts magickwand.js@next ; \
             cd node_modules/magickwand.js ; \
-            npx prebuild-install -d --verbose ; \
+            node node_modules/@mmomtchev/prebuild-install/bin.js -d --verbose ; \
+            echo "prebuild-install exited" ; \
             cd ../.. ; \
           done
