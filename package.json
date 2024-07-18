@@ -30,10 +30,8 @@
     }
   },
   "scripts": {
-    "deps:download": "node scripts/deps-download.js",
     "publish:generated": "node scripts/publish-generated.js",
     "install": "xpm install && xpm run npm-install",
-    "preinstall": "npm run deps:download",
     "lint": "eslint lib/*js native/*js test/*.ts",
     "test": "mocha --reporter=tap test/*.test.ts",
     "preversion": "npm run lint && npm run test",
