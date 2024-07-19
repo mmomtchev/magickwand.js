@@ -1,9 +1,13 @@
+// This resolves the ImageMagick header dependencies
+// which are so numerous, it is necessary to automate the process
+
 const path = require('path');
 const fs = require('fs');
 const child = require('child_process');
 
 const dirs = [
   'src',
+  'swig',
   'deps/ImageMagick/Magick++/lib',
   'deps/ImageMagick'
 ];

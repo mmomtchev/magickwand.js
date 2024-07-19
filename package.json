@@ -30,7 +30,6 @@
     }
   },
   "scripts": {
-    "publish:generated": "node scripts/publish-generated.js",
     "install": "xpm install && xpm run npm-install",
     "lint": "eslint lib/*js native/*js test/*.ts",
     "test": "mocha --reporter=tap test/*.test.ts",
@@ -138,6 +137,7 @@
         "darwin": "env"
       },
       "cwd": "{{ path.sep | path_relative: '.' }}",
+      "commandGenerateImageMagickConfigure": "cmake -S deps/ImageMagick -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DMAGICK_HDRI_ENABLE=ON -DMAGICKCORE_QUANTUM_DEPTH=16 -B swig",
       "commandGenerate_magickcore": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickCore swig/magickcore.i",
       "commandGenerate_magickpp": "node src/deps.js src/deps-stub.cc deps/ImageMagick/Magick\\\\+\\\\+ swig/magick++.i",
       "commandGenerate_magickwand": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickWand swig/magickwand.i",
@@ -165,6 +165,7 @@
     },
     "actions": {
       "generate": [
+        "{{ properties.commandGenerateImageMagickConfigure }}",
         "{{ properties.commandGenerateDeps }}",
         "{{ properties.commandGenerateWrappers }}"
       ],
