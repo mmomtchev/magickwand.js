@@ -1,0 +1,7 @@
+include(CMakeFindDependencyMacro)
+foreach(D LibLZMA;ZLIB;zstd;Freetype;LibXml2;OpenMP;Threads;TIFF;JPEG;OpenJPEG;PNG;Fontconfig)
+  find_dependency(${D})
+endforeach()
+include(${CMAKE_CURRENT_LIST_DIR}/MagickCoreTargets.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/MagickWandTargets.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/Magick++Targets.cmake)

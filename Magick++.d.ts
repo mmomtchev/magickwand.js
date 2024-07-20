@@ -1170,14 +1170,6 @@ export const StructuralDissimilarityErrorMetric: MetricType;
 
 export type MetricType = number & { readonly [_SWIG_enum_tag]: 'MetricType'; };
 
-export const UndefinedFormatType: MagickFormatType;
-
-export const ImplicitFormatType: MagickFormatType;
-
-export const ExplicitFormatType: MagickFormatType;
-
-export type MagickFormatType = number & { readonly [_SWIG_enum_tag]: 'MagickFormatType'; };
-
 export const UndefinedComplexOperator: ComplexOperator;
 
 export const AddComplexOperator: ComplexOperator;
@@ -1245,6 +1237,14 @@ export const CommandEvent: LogEventType;
 export const AllEvents: LogEventType;
 
 export type LogEventType = number & { readonly [_SWIG_enum_tag]: 'LogEventType'; };
+
+export const UndefinedFormatType: MagickFormatType;
+
+export const ImplicitFormatType: MagickFormatType;
+
+export const ExplicitFormatType: MagickFormatType;
+
+export type MagickFormatType = number & { readonly [_SWIG_enum_tag]: 'MagickFormatType'; };
 
 export function GetMagickCopyright(arg0?: void): string;
 
@@ -1575,8 +1575,6 @@ export const MagickppLibInterface: number;
 
 export const MagickppLibMinInterface: number;
 
-export const MagickGitRevision: string;
-
 export const MagickReleaseDate: string;
 
 export const MagickAuthoritativeLicense: string;
@@ -1588,8 +1586,6 @@ export const MagickHomeURL: string;
 export const MagickQuantumDepth: string;
 
 export const MagickQuantumRange: string;
-
-export const MagickHDRISupport: string;
 
 export const MagickVersion: string;
 

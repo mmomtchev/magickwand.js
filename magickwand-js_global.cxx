@@ -13164,12 +13164,12 @@ SWIGINTERN swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0,
 SWIGINTERN swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_double = {"_p_double", "MagickCore::MagickDoubleType *|MagickCore::MagickRealType *|double *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_float = {"_p_float", "MagickCore::MagickFloatType *|float *", 0, 0, (void*)0, 0};
+SWIGINTERN swig_type_info _swigt__p_long_long = {"_p_long_long", "MagickCore::MagickOffsetType *|long long *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_p_MagickCore___Image = {"_p_p_MagickCore___Image", "MagickCore::Image **|MagickCore::_Image **", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_p_char = {"_p_p_char", "char **", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_p_void = {"_p_p_void", "void **", 0, 0, (void*)0, 0};
-SWIGINTERN swig_type_info _swigt__p_size_t = {"_p_size_t", "MagickCore::MagickAddressType *|MagickCore::MagickSizeType *|size_t *", 0, 0, (void*)0, 0};
+SWIGINTERN swig_type_info _swigt__p_size_t = {"_p_size_t", "size_t *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_size_type = {"_p_size_type", "size_type *", 0, 0, (void*)0, 0};
-SWIGINTERN swig_type_info _swigt__p_ssize_t = {"_p_ssize_t", "MagickCore::MagickOffsetType *|ssize_t *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_std__exception = {"_p_std__exception", "std::exception *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_std__vectorT_Magick__CoderInfo_t = {"_p_std__vectorT_Magick__CoderInfo_t", "p_std__vectorT_Magick__CoderInfo_t|std::vector< Magick::CoderInfo > *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_std__vectorT_Magick__Coordinate_t = {"_p_std__vectorT_Magick__Coordinate_t", "Magick::CoordinateList *|std::vector< Magick::Coordinate > *", 0, 0, (void*)0, 0};
@@ -13178,7 +13178,9 @@ SWIGINTERN swig_type_info _swigt__p_std__vectorT_Magick__PathArcArgs_t = {"_p_st
 SWIGINTERN swig_type_info _swigt__p_std__vectorT_Magick__PathCurvetoArgs_t = {"_p_std__vectorT_Magick__PathCurvetoArgs_t", "Magick::PathCurveToArgsList *|std::vector< Magick::PathCurvetoArgs > *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_std__vectorT_Magick__PathQuadraticCurvetoArgs_t = {"_p_std__vectorT_Magick__PathQuadraticCurvetoArgs_t", "Magick::PathQuadraticCurvetoArgsList *|std::vector< Magick::PathQuadraticCurvetoArgs > *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_std__vectorT_Magick__VPath_t = {"_p_std__vectorT_Magick__VPath_t", "Magick::VPathList *|std::vector< Magick::VPath > *", 0, 0, (void*)0, 0};
+SWIGINTERN swig_type_info _swigt__p_uintptr_t = {"_p_uintptr_t", "MagickCore::MagickAddressType *|uintptr_t *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_unsigned_int = {"_p_unsigned_int", "MagickCore::MagickStatusType *|unsigned int *", 0, 0, (void*)0, 0};
+SWIGINTERN swig_type_info _swigt__p_unsigned_long_long = {"_p_unsigned_long_long", "MagickCore::MagickSizeType *|unsigned long long *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
 SWIGINTERN swig_type_info _swigt__p_void = {"_p_void", "void *", 0, 0, (void*)0, 0};
 
@@ -13531,12 +13533,12 @@ SWIGINTERN swig_type_info *swig_type_initial[] = {
   &_swigt__p_difference_type,
   &_swigt__p_double,
   &_swigt__p_float,
+  &_swigt__p_long_long,
   &_swigt__p_p_MagickCore___Image,
   &_swigt__p_p_char,
   &_swigt__p_p_void,
   &_swigt__p_size_t,
   &_swigt__p_size_type,
-  &_swigt__p_ssize_t,
   &_swigt__p_std__exception,
   &_swigt__p_std__vectorT_Magick__CoderInfo_t,
   &_swigt__p_std__vectorT_Magick__Coordinate_t,
@@ -13545,7 +13547,9 @@ SWIGINTERN swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__vectorT_Magick__PathCurvetoArgs_t,
   &_swigt__p_std__vectorT_Magick__PathQuadraticCurvetoArgs_t,
   &_swigt__p_std__vectorT_Magick__VPath_t,
+  &_swigt__p_uintptr_t,
   &_swigt__p_unsigned_int,
+  &_swigt__p_unsigned_long_long,
   &_swigt__p_value_type,
   &_swigt__p_void,
 };
@@ -13895,12 +13899,12 @@ SWIGINTERN swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0
 SWIGINTERN swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_float[] = {  {&_swigt__p_float, 0, 0, 0},{0, 0, 0, 0}};
+SWIGINTERN swig_cast_info _swigc__p_long_long[] = {  {&_swigt__p_long_long, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_p_MagickCore___Image[] = {  {&_swigt__p_p_MagickCore___Image, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_p_char[] = {  {&_swigt__p_p_char, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_p_void[] = {  {&_swigt__p_p_void, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_size_t[] = {  {&_swigt__p_size_t, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_size_type[] = {  {&_swigt__p_size_type, 0, 0, 0},{0, 0, 0, 0}};
-SWIGINTERN swig_cast_info _swigc__p_ssize_t[] = {  {&_swigt__p_ssize_t, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_std__exception[] = {  {&_swigt__p_std__exception, 0, 0, 0},  {&_swigt__p_Magick__Error, _p_Magick__ErrorTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorBlob, _p_Magick__ErrorBlobTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorCache, _p_Magick__ErrorCacheTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorCoder, _p_Magick__ErrorCoderTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorConfigure, _p_Magick__ErrorConfigureTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorCorruptImage, _p_Magick__ErrorCorruptImageTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorDelegate, _p_Magick__ErrorDelegateTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorDraw, _p_Magick__ErrorDrawTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorFileOpen, _p_Magick__ErrorFileOpenTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorImage, _p_Magick__ErrorImageTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorMissingDelegate, _p_Magick__ErrorMissingDelegateTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorModule, _p_Magick__ErrorModuleTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorMonitor, _p_Magick__ErrorMonitorTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorOption, _p_Magick__ErrorOptionTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorPolicy, _p_Magick__ErrorPolicyTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorRegistry, _p_Magick__ErrorRegistryTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorResourceLimit, _p_Magick__ErrorResourceLimitTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorStream, _p_Magick__ErrorStreamTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorType, _p_Magick__ErrorTypeTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorUndefined, _p_Magick__ErrorUndefinedTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__ErrorXServer, _p_Magick__ErrorXServerTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__Exception, _p_Magick__ExceptionTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__Warning, _p_Magick__WarningTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningBlob, _p_Magick__WarningBlobTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningCache, _p_Magick__WarningCacheTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningCoder, _p_Magick__WarningCoderTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningConfigure, _p_Magick__WarningConfigureTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningCorruptImage, _p_Magick__WarningCorruptImageTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningDelegate, _p_Magick__WarningDelegateTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningDraw, _p_Magick__WarningDrawTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningFileOpen, _p_Magick__WarningFileOpenTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningImage, _p_Magick__WarningImageTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningMissingDelegate, _p_Magick__WarningMissingDelegateTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningModule, _p_Magick__WarningModuleTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningMonitor, _p_Magick__WarningMonitorTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningOption, _p_Magick__WarningOptionTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningPolicy, _p_Magick__WarningPolicyTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningRegistry, _p_Magick__WarningRegistryTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningResourceLimit, _p_Magick__WarningResourceLimitTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningStream, _p_Magick__WarningStreamTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningType, _p_Magick__WarningTypeTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningUndefined, _p_Magick__WarningUndefinedTo_p_std__exception, 0, 0},  {&_swigt__p_Magick__WarningXServer, _p_Magick__WarningXServerTo_p_std__exception, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_std__vectorT_Magick__CoderInfo_t[] = {  {&_swigt__p_std__vectorT_Magick__CoderInfo_t, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_std__vectorT_Magick__Coordinate_t[] = {  {&_swigt__p_std__vectorT_Magick__Coordinate_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -13909,7 +13913,9 @@ SWIGINTERN swig_cast_info _swigc__p_std__vectorT_Magick__PathArcArgs_t[] = {  {&
 SWIGINTERN swig_cast_info _swigc__p_std__vectorT_Magick__PathCurvetoArgs_t[] = {  {&_swigt__p_std__vectorT_Magick__PathCurvetoArgs_t, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_std__vectorT_Magick__PathQuadraticCurvetoArgs_t[] = {  {&_swigt__p_std__vectorT_Magick__PathQuadraticCurvetoArgs_t, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_std__vectorT_Magick__VPath_t[] = {  {&_swigt__p_std__vectorT_Magick__VPath_t, 0, 0, 0},{0, 0, 0, 0}};
+SWIGINTERN swig_cast_info _swigc__p_uintptr_t[] = {  {&_swigt__p_uintptr_t, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_unsigned_int[] = {  {&_swigt__p_unsigned_int, 0, 0, 0},{0, 0, 0, 0}};
+SWIGINTERN swig_cast_info _swigc__p_unsigned_long_long[] = {  {&_swigt__p_unsigned_long_long, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
 SWIGINTERN swig_cast_info _swigc__p_void[] = {  {&_swigt__p_void, 0, 0, 0},{0, 0, 0, 0}};
 
@@ -14259,12 +14265,12 @@ SWIGINTERN swig_cast_info *swig_cast_initial[] = {
   _swigc__p_difference_type,
   _swigc__p_double,
   _swigc__p_float,
+  _swigc__p_long_long,
   _swigc__p_p_MagickCore___Image,
   _swigc__p_p_char,
   _swigc__p_p_void,
   _swigc__p_size_t,
   _swigc__p_size_type,
-  _swigc__p_ssize_t,
   _swigc__p_std__exception,
   _swigc__p_std__vectorT_Magick__CoderInfo_t,
   _swigc__p_std__vectorT_Magick__Coordinate_t,
@@ -14273,7 +14279,9 @@ SWIGINTERN swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__vectorT_Magick__PathCurvetoArgs_t,
   _swigc__p_std__vectorT_Magick__PathQuadraticCurvetoArgs_t,
   _swigc__p_std__vectorT_Magick__VPath_t,
+  _swigc__p_uintptr_t,
   _swigc__p_unsigned_int,
+  _swigc__p_unsigned_long_long,
   _swigc__p_value_type,
   _swigc__p_void,
 };
@@ -14281,6 +14289,6 @@ SWIGINTERN swig_cast_info *swig_cast_initial[] = {
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (END) -------- */
 
-SWIGINTERN swig_type_info *swig_types[363];
-SWIGINTERN swig_module_info swig_module = {swig_types, 362, 0, 0, 0, 0};
+SWIGINTERN swig_type_info *swig_types[365];
+SWIGINTERN swig_module_info swig_module = {swig_types, 364, 0, 0, 0, 0};
 
