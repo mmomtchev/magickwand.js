@@ -193,6 +193,7 @@
           ],
           "configure": "{{ properties.commandConfigure }}",
           "build": [
+            "find / -name heif.h",
             "{{ properties.commandBuild }}",
             "{{ properties.commandInstall }}"
           ],
