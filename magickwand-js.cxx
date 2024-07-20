@@ -16907,6 +16907,93 @@ fail:
 
 
 // js_global_getter
+Napi::Value MagickCore_UndefinedFormatType_get(const Napi::CallbackInfo &info) {
+  Napi::Env env = info.Env();
+  Napi::Value jsresult;
+  
+#ifdef NAPI_CPP_EXCEPTIONS
+  try {
+#endif
+    
+    
+    
+    jsresult = SWIG_From_int  SWIG_NAPI_FROM_CALL_ARGS(static_cast< int >(MagickCore::UndefinedFormatType));
+    
+    
+    
+    return jsresult;
+#ifdef NAPI_CPP_EXCEPTIONS
+  } catch (...) {
+    std::rethrow_exception(std::current_exception());
+  }
+#else
+  goto fail;
+fail:
+  
+  return Napi::Value();
+#endif
+}
+
+
+// js_global_getter
+Napi::Value MagickCore_ImplicitFormatType_get(const Napi::CallbackInfo &info) {
+  Napi::Env env = info.Env();
+  Napi::Value jsresult;
+  
+#ifdef NAPI_CPP_EXCEPTIONS
+  try {
+#endif
+    
+    
+    
+    jsresult = SWIG_From_int  SWIG_NAPI_FROM_CALL_ARGS(static_cast< int >(MagickCore::ImplicitFormatType));
+    
+    
+    
+    return jsresult;
+#ifdef NAPI_CPP_EXCEPTIONS
+  } catch (...) {
+    std::rethrow_exception(std::current_exception());
+  }
+#else
+  goto fail;
+fail:
+  
+  return Napi::Value();
+#endif
+}
+
+
+// js_global_getter
+Napi::Value MagickCore_ExplicitFormatType_get(const Napi::CallbackInfo &info) {
+  Napi::Env env = info.Env();
+  Napi::Value jsresult;
+  
+#ifdef NAPI_CPP_EXCEPTIONS
+  try {
+#endif
+    
+    
+    
+    jsresult = SWIG_From_int  SWIG_NAPI_FROM_CALL_ARGS(static_cast< int >(MagickCore::ExplicitFormatType));
+    
+    
+    
+    return jsresult;
+#ifdef NAPI_CPP_EXCEPTIONS
+  } catch (...) {
+    std::rethrow_exception(std::current_exception());
+  }
+#else
+  goto fail;
+fail:
+  
+  return Napi::Value();
+#endif
+}
+
+
+// js_global_getter
 Napi::Value MagickCore_UndefinedComplexOperator_get(const Napi::CallbackInfo &info) {
   Napi::Env env = info.Env();
   Napi::Value jsresult;
@@ -17864,93 +17951,6 @@ fail:
 
 
 // js_global_getter
-Napi::Value MagickCore_UndefinedFormatType_get(const Napi::CallbackInfo &info) {
-  Napi::Env env = info.Env();
-  Napi::Value jsresult;
-  
-#ifdef NAPI_CPP_EXCEPTIONS
-  try {
-#endif
-    
-    
-    
-    jsresult = SWIG_From_int  SWIG_NAPI_FROM_CALL_ARGS(static_cast< int >(MagickCore::UndefinedFormatType));
-    
-    
-    
-    return jsresult;
-#ifdef NAPI_CPP_EXCEPTIONS
-  } catch (...) {
-    std::rethrow_exception(std::current_exception());
-  }
-#else
-  goto fail;
-fail:
-  
-  return Napi::Value();
-#endif
-}
-
-
-// js_global_getter
-Napi::Value MagickCore_ImplicitFormatType_get(const Napi::CallbackInfo &info) {
-  Napi::Env env = info.Env();
-  Napi::Value jsresult;
-  
-#ifdef NAPI_CPP_EXCEPTIONS
-  try {
-#endif
-    
-    
-    
-    jsresult = SWIG_From_int  SWIG_NAPI_FROM_CALL_ARGS(static_cast< int >(MagickCore::ImplicitFormatType));
-    
-    
-    
-    return jsresult;
-#ifdef NAPI_CPP_EXCEPTIONS
-  } catch (...) {
-    std::rethrow_exception(std::current_exception());
-  }
-#else
-  goto fail;
-fail:
-  
-  return Napi::Value();
-#endif
-}
-
-
-// js_global_getter
-Napi::Value MagickCore_ExplicitFormatType_get(const Napi::CallbackInfo &info) {
-  Napi::Env env = info.Env();
-  Napi::Value jsresult;
-  
-#ifdef NAPI_CPP_EXCEPTIONS
-  try {
-#endif
-    
-    
-    
-    jsresult = SWIG_From_int  SWIG_NAPI_FROM_CALL_ARGS(static_cast< int >(MagickCore::ExplicitFormatType));
-    
-    
-    
-    return jsresult;
-#ifdef NAPI_CPP_EXCEPTIONS
-  } catch (...) {
-    std::rethrow_exception(std::current_exception());
-  }
-#else
-  goto fail;
-fail:
-  
-  return Napi::Value();
-#endif
-}
-
-
-// js_global_getter
 Napi::Value exports_MagickPackageName_get(const Napi::CallbackInfo &info) {
   Napi::Env env = info.Env();
   Napi::Value jsresult;
@@ -17990,7 +17990,7 @@ Napi::Value exports_MagickCopyright_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"\302\251 1999-2019 ImageMagick Studio LLC");
+    jsresult = SWIG_FromCharPtr((const char *)"(C) 1999 ImageMagick Studio LLC");
     
     
     
@@ -18299,6 +18299,35 @@ fail:
 
 
 // js_global_getter
+Napi::Value exports_MagickGitRevision_get(const Napi::CallbackInfo &info) {
+  Napi::Env env = info.Env();
+  Napi::Value jsresult;
+  
+#ifdef NAPI_CPP_EXCEPTIONS
+  try {
+#endif
+    
+    
+    
+    jsresult = SWIG_FromCharPtr((const char *)"");
+    
+    
+    
+    return jsresult;
+#ifdef NAPI_CPP_EXCEPTIONS
+  } catch (...) {
+    std::rethrow_exception(std::current_exception());
+  }
+#else
+  goto fail;
+fail:
+  
+  return Napi::Value();
+#endif
+}
+
+
+// js_global_getter
 Napi::Value exports_MagickReleaseDate_get(const Napi::CallbackInfo &info) {
   Napi::Env env = info.Env();
   Napi::Value jsresult;
@@ -18473,6 +18502,35 @@ fail:
 
 
 // js_global_getter
+Napi::Value exports_MagickHDRISupport_get(const Napi::CallbackInfo &info) {
+  Napi::Env env = info.Env();
+  Napi::Value jsresult;
+  
+#ifdef NAPI_CPP_EXCEPTIONS
+  try {
+#endif
+    
+    
+    
+    jsresult = SWIG_FromCharPtr((const char *)"-HDRI");
+    
+    
+    
+    return jsresult;
+#ifdef NAPI_CPP_EXCEPTIONS
+  } catch (...) {
+    std::rethrow_exception(std::current_exception());
+  }
+#else
+  goto fail;
+fail:
+  
+  return Napi::Value();
+#endif
+}
+
+
+// js_global_getter
 Napi::Value exports_MagickVersion_get(const Napi::CallbackInfo &info) {
   Napi::Env env = info.Env();
   Napi::Value jsresult;
@@ -18483,7 +18541,7 @@ Napi::Value exports_MagickVersion_get(const Napi::CallbackInfo &info) {
     
     
     
-    jsresult = SWIG_FromCharPtr((const char *)"ImageMagick 7.1.1 Q16 x86_64 2024-06-23 https://imagemagick.org");
+    jsresult = SWIG_FromCharPtr((const char *)"ImageMagick 7.1.1 Q16-HDRI x86_64  https://imagemagick.org");
     
     
     
@@ -33526,6 +33584,33 @@ do {
 } while (0);
 // jsnapi_register_global_constant
 do {
+  Napi::Function f = Napi::Function::New(env, MagickCore_UndefinedFormatType_get);
+  Napi::Value value;
+  NAPI_CHECK_RESULT(f.Call(0, SWIG_NULLPTR), value);
+  Napi::PropertyDescriptor pd = Napi::PropertyDescriptor::Value("UndefinedFormatType", value,
+    static_cast<napi_property_attributes>(napi_writable | napi_enumerable | napi_configurable));
+  NAPI_CHECK_MAYBE(MagickCore.DefineProperty(pd));
+} while (0);
+// jsnapi_register_global_constant
+do {
+  Napi::Function f = Napi::Function::New(env, MagickCore_ImplicitFormatType_get);
+  Napi::Value value;
+  NAPI_CHECK_RESULT(f.Call(0, SWIG_NULLPTR), value);
+  Napi::PropertyDescriptor pd = Napi::PropertyDescriptor::Value("ImplicitFormatType", value,
+    static_cast<napi_property_attributes>(napi_writable | napi_enumerable | napi_configurable));
+  NAPI_CHECK_MAYBE(MagickCore.DefineProperty(pd));
+} while (0);
+// jsnapi_register_global_constant
+do {
+  Napi::Function f = Napi::Function::New(env, MagickCore_ExplicitFormatType_get);
+  Napi::Value value;
+  NAPI_CHECK_RESULT(f.Call(0, SWIG_NULLPTR), value);
+  Napi::PropertyDescriptor pd = Napi::PropertyDescriptor::Value("ExplicitFormatType", value,
+    static_cast<napi_property_attributes>(napi_writable | napi_enumerable | napi_configurable));
+  NAPI_CHECK_MAYBE(MagickCore.DefineProperty(pd));
+} while (0);
+// jsnapi_register_global_constant
+do {
   Napi::Function f = Napi::Function::New(env, MagickCore_UndefinedComplexOperator_get);
   Napi::Value value;
   NAPI_CHECK_RESULT(f.Call(0, SWIG_NULLPTR), value);
@@ -33823,33 +33908,6 @@ do {
 } while (0);
 // jsnapi_register_global_constant
 do {
-  Napi::Function f = Napi::Function::New(env, MagickCore_UndefinedFormatType_get);
-  Napi::Value value;
-  NAPI_CHECK_RESULT(f.Call(0, SWIG_NULLPTR), value);
-  Napi::PropertyDescriptor pd = Napi::PropertyDescriptor::Value("UndefinedFormatType", value,
-    static_cast<napi_property_attributes>(napi_writable | napi_enumerable | napi_configurable));
-  NAPI_CHECK_MAYBE(MagickCore.DefineProperty(pd));
-} while (0);
-// jsnapi_register_global_constant
-do {
-  Napi::Function f = Napi::Function::New(env, MagickCore_ImplicitFormatType_get);
-  Napi::Value value;
-  NAPI_CHECK_RESULT(f.Call(0, SWIG_NULLPTR), value);
-  Napi::PropertyDescriptor pd = Napi::PropertyDescriptor::Value("ImplicitFormatType", value,
-    static_cast<napi_property_attributes>(napi_writable | napi_enumerable | napi_configurable));
-  NAPI_CHECK_MAYBE(MagickCore.DefineProperty(pd));
-} while (0);
-// jsnapi_register_global_constant
-do {
-  Napi::Function f = Napi::Function::New(env, MagickCore_ExplicitFormatType_get);
-  Napi::Value value;
-  NAPI_CHECK_RESULT(f.Call(0, SWIG_NULLPTR), value);
-  Napi::PropertyDescriptor pd = Napi::PropertyDescriptor::Value("ExplicitFormatType", value,
-    static_cast<napi_property_attributes>(napi_writable | napi_enumerable | napi_configurable));
-  NAPI_CHECK_MAYBE(MagickCore.DefineProperty(pd));
-} while (0);
-// jsnapi_register_global_constant
-do {
   Napi::Function f = Napi::Function::New(env, exports_MagickPackageName_get);
   Napi::Value value;
   NAPI_CHECK_RESULT(f.Call(0, SWIG_NULLPTR), value);
@@ -33958,6 +34016,15 @@ do {
 } while (0);
 // jsnapi_register_global_constant
 do {
+  Napi::Function f = Napi::Function::New(env, exports_MagickGitRevision_get);
+  Napi::Value value;
+  NAPI_CHECK_RESULT(f.Call(0, SWIG_NULLPTR), value);
+  Napi::PropertyDescriptor pd = Napi::PropertyDescriptor::Value("MagickGitRevision", value,
+    static_cast<napi_property_attributes>(napi_writable | napi_enumerable | napi_configurable));
+  NAPI_CHECK_MAYBE(exports.DefineProperty(pd));
+} while (0);
+// jsnapi_register_global_constant
+do {
   Napi::Function f = Napi::Function::New(env, exports_MagickReleaseDate_get);
   Napi::Value value;
   NAPI_CHECK_RESULT(f.Call(0, SWIG_NULLPTR), value);
@@ -34007,6 +34074,15 @@ do {
   Napi::Value value;
   NAPI_CHECK_RESULT(f.Call(0, SWIG_NULLPTR), value);
   Napi::PropertyDescriptor pd = Napi::PropertyDescriptor::Value("MagickQuantumRange", value,
+    static_cast<napi_property_attributes>(napi_writable | napi_enumerable | napi_configurable));
+  NAPI_CHECK_MAYBE(exports.DefineProperty(pd));
+} while (0);
+// jsnapi_register_global_constant
+do {
+  Napi::Function f = Napi::Function::New(env, exports_MagickHDRISupport_get);
+  Napi::Value value;
+  NAPI_CHECK_RESULT(f.Call(0, SWIG_NULLPTR), value);
+  Napi::PropertyDescriptor pd = Napi::PropertyDescriptor::Value("MagickHDRISupport", value,
     static_cast<napi_property_attributes>(napi_writable | napi_enumerable | napi_configurable));
   NAPI_CHECK_MAYBE(exports.DefineProperty(pd));
 } while (0);
