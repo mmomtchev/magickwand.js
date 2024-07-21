@@ -193,7 +193,8 @@
           ],
           "configure": "{{ properties.commandConfigure }}",
           "build": [
-            "find / -name heif.h",
+            "find / -name heif.h || true",
+            "cat build/native/deps/ImageMagick/__CMake_build/CMakeCache.txt",
             "{{ properties.commandBuild }}",
             "{{ properties.commandInstall }}"
           ],
