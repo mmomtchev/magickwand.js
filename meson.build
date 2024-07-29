@@ -173,6 +173,6 @@ main_target = napi.extension_module(
     # * and including it produces a loader that confuses web bundlers such as Webpack
     'environments': ['web','webview','worker'],
     # Export the FS subsystem
-    'exported_runtime_methods': ['FS']
+    'exported_runtime_methods': ['emnapiInit', 'FS']
   }
 )
