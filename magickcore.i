@@ -1,4 +1,3 @@
-%include "MagickCore/magick-baseconfig.h"
 %include "MagickCore/magick-config.h"
 %include "MagickCore/method-attribute.h"
 %include "MagickCore/magick-type.h"
