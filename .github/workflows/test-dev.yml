@@ -38,6 +38,9 @@ jobs:
         run: |
           npm install xpm
           npx xpm install
+        env:
+          C_INCLUDE_PATH: /usr/local/include
+          CPLUS_INCLUDE_PATH: /usr/local/include
       - name: Get conan home
         shell: bash
         id: conan_home
