@@ -5,7 +5,10 @@
 leak:napi_module_register
 leak:napi_register_module_v1
 
-# Known leaks in magickwand.js (ie SWIG Node-API)
+# Known leaks in magickwand.js (doesn't really support module unloading)
+leak:heif_init
+
+# Known leaks in SWIG Node-API (doesn't really support module unloading)
 leak:GetMembers
 
 # Known leaks in fontconfig
