@@ -63,8 +63,6 @@ if meson.get_compiler('cpp').get_id() == 'msvc'
       # The SWIG-generated wrapper for Magick++::Image is huge
       # and requires compiling with /bigobj on Windows
       '/bigobj',
-      # https://github.com/actions/runner-images/issues/10004
-      '/D_DISABLE_CONSTEXPR_MUTEX_CONSTRUCTOR'
     ], language: 'cpp')
 endif
 
