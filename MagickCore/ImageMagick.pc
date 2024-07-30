@@ -1,0 +1,14 @@
+prefix=/usr/local
+exec_prefix=${prefix}/bin
+libdir=${prefix}/lib
+includedir=${prefix}/include/ImageMagick-7
+includearchdir=${prefix}/include/ImageMagick-7
+libname=MagickCore-7.Q16HDRI
+ 
+Name: ImageMagick
+Description: ImageMagick - convert, edit, and compose images (ABI Q16HDRI)
+URL: https://github.com/ImageMagick
+Version: 7.1.1
+Cflags:  -I${includearchdir} -I${includedir} -DMAGICKCORE_CHANNEL_MASK_DEPTH=32;-DMAGICKCORE_QUANTUM_DEPTH=16;-DMAGICKCORE_HDRI_ENABLE=1
+Libs: -L${libdir} -l${libname}
+Libs.private: -L${libdir} -l${libname}  -lm
