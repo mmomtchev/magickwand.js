@@ -117,7 +117,7 @@ class ImageMagickDelegates(ConanFile):
         self.requires('libxml2/2.10.4')
 
       if self.options.heif:
-        self.requires('libheif/1.13.0')
+        self.requires('libheif/1.16.2')
         self.requires('libaom-av1/3.6.0')
         self.requires('libde265/1.0.12')
 
@@ -125,7 +125,7 @@ class ImageMagickDelegates(ConanFile):
         self.requires('jbig/20160605')
 
       if self.options.exr:
-        self.requires('openexr/3.1.5')
+        self.requires('openexr/3.2.4')
 
       if self.options.png:
         self.requires('libpng/1.6.42')
