@@ -2,10 +2,11 @@
 // which are so numerous, it is necessary to automate the process
 
 const fs = require('fs');
+const path = require('path');
 const child = require('child_process');
 
 const dirs = [
-  'swig',
+  'preconf',
   'deps/ImageMagick/Magick++/lib',
   'deps/ImageMagick'
 ];
@@ -56,4 +57,5 @@ for (let i = 1; i < deps.length; i++) {
 }
 
 deps.filter(x => !x.processed).sort(sortFn).map(inc => output += `%${directive} "${inc.include}"\n`);
+fs.mkdirSync(path.dirname(process.argv[4]), { recursive: true });
 fs.writeFileSync(process.argv[4], output, 'utf-8');
