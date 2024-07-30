@@ -1,7 +1,6 @@
 // This resolves the ImageMagick header dependencies
 // which are so numerous, it is necessary to automate the process
 
-const path = require('path');
 const fs = require('fs');
 const child = require('child_process');
 
@@ -18,8 +17,7 @@ if (process.argv.length < 5) {
 
 const input = child.spawnSync('g++', [
   ...dirs.map((d) => `-I${d}`),
-  '-o',
-  path.join(__dirname, '..', 'build', 'deps-stub'),
+  '-fsyntax-only',
   process.argv[2],
   '-H'
 ]);
