@@ -145,8 +145,8 @@ The xPack fully self-contained version will use `clang` on all platforms.
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
-* In order to regenerate the C++ wrapping code, you will need SWIG JavaScript Evolution 5.0.3 - available from https://github.com/mmomtchev/swig.git (as of 2024-01-18, the basic Node-API has been merged to the main SWIG trunk, the async support is in review, everything else is available only in SWIG JSE)
-* Alternatively, if you don't want to rebuild SWIG JSE yourself, you can clone the `generated` branch where all files have been pre-generated - `npm run deps:download` does this automatically after `npm install`
+* In order to regenerate the C++ wrapping code, you will need SWIG JavaScript Evolution 5.0.4 - available using the [`mmomtchev/setup-swig`](https://github.com/mmomtchev/setup-swig/) Github action or from [`conan`](https://github.com/mmomtchev/swig-conan)
+* Alternatively, if you don't want to rebuild SWIG JSE yourself, the SWIG-generated wrappers are included in the published `npm` packages
 
 * Recursively clone the repo
 ```shell
@@ -159,8 +159,8 @@ cd magickwand.js
 * or, to do everything manually:
 ```shell
 npm install                                # install all npm dependencies
-npm run deps:download                      # retrieve the pregenerated SWIG wrappers
 npx xpm install                            # install the supporting xpm packages (python, conan, meson, ninja, cmake)
+npx xpm generate                           # generate the SWIG wrappers
 npx xpm run prepare --config native-debug  # available builds are native, native-debug, wasm and wasm-debug
 npx xpm run configure --config native-debug -- -Db_sanitize=address # optional step to enable ASAN
 npx xpm run build --config native-debug    # build
