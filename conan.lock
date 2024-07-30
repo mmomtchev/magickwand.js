@@ -23,7 +23,7 @@
         "libmount/2.39#8a95198b2547a8ca7685eb7a1d002903%1705591483.106",
         "libjpeg-turbo/3.0.2#1acc4234a921c5c948652e04c77d3d80%1706213428.499",
         "libiconv/1.17#73fefc1b696e069df90fd1d18aa63edd%1707122814.387",
-        "libheif/1.13.0#22a63076c0f8e093cf2d3a1db3bd1229%1693326477.512",
+        "libheif/1.16.2#19de03ba5898e1b751593d1eff6c0174%1693970119.664",
         "libgettext/0.22#35d2811b2dd27a98f69e4daa86ca2000%1714393058.647",
         "libffi/3.4.4#35eb63842b505824b70aedc1baefc916%1682741110.044",
         "libelf/0.8.13#4f70a3555809ae50cc8add44f0f84288%1682439923.579",
@@ -80,8 +80,8 @@
     "python_requires": [],
     "overrides": {
         "libffi/3.4.4": [
-            "libffi/3.4.4",
-            null
+            null,
+            "libffi/3.4.4"
         ],
         "freetype/2.13.2": [
             "freetype/2.13.2",
@@ -92,8 +92,8 @@
             null
         ],
         "pixman/0.43.4#17a592b79b264d61abeec594cc331e58": [
-            "pixman/0.43.4",
-            null
+            null,
+            "pixman/0.43.4"
         ],
         "glib/2.78.3": [
             "glib/2.78.1"

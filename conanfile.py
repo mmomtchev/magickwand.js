@@ -117,7 +117,7 @@ class ImageMagickDelegates(ConanFile):
         self.requires('libxml2/2.10.4')
 
       if self.options.heif:
-        self.requires('libheif/1.13.0')
+        self.requires('libheif/1.16.2')
         self.requires('libaom-av1/3.6.0')
         self.requires('libde265/1.0.12')
 
