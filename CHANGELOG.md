@@ -14,6 +14,7 @@
    - Support rebuilding from source with Python 3.12 without `distutils`
  - Drop macOS 11 support
  - macOS 14 `arm64` prebuilt binaries and support for rebuilding from source on macOS 14 `arm64`
+ - The generation of the SWIG wrappers and the `npm` package is now reproducible and hosted in Github Actions, and the generated wrappers are included in the published package
 
 
 ## [1.1.0] 2024-04-17

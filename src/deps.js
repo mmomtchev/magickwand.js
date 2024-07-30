@@ -1,9 +1,12 @@
-const path = require('path');
+// This resolves the ImageMagick header dependencies
+// which are so numerous, it is necessary to automate the process
+
 const fs = require('fs');
+const path = require('path');
 const child = require('child_process');
 
 const dirs = [
-  'src',
+  'preconf',
   'deps/ImageMagick/Magick++/lib',
   'deps/ImageMagick'
 ];
@@ -15,8 +18,7 @@ if (process.argv.length < 5) {
 
 const input = child.spawnSync('g++', [
   ...dirs.map((d) => `-I${d}`),
-  '-o',
-  path.join(__dirname, '..', 'build', 'deps-stub'),
+  '-fsyntax-only',
   process.argv[2],
   '-H'
 ]);
@@ -55,4 +57,5 @@ for (let i = 1; i < deps.length; i++) {
 }
 
 deps.filter(x => !x.processed).sort(sortFn).map(inc => output += `%${directive} "${inc.include}"\n`);
+fs.mkdirSync(path.dirname(process.argv[4]), { recursive: true });
 fs.writeFileSync(process.argv[4], output, 'utf-8');

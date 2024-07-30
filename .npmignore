@@ -7,6 +7,9 @@ Attic
 node_modules
 build
 lib/binding
+/conan
+/preconf
+/xpacks
 
 deps/ImageMagick/www/**
 !deps/ImageMagick/www/Magick++/*.html

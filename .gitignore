@@ -4,4 +4,5 @@ build
 /conan
 lib/binding
 /swig
+/preconf
 /xpacks
