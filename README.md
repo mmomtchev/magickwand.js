@@ -17,11 +17,11 @@ The Node.js native addon version and the browser WASM version share the same SWI
 
 The pre-built binaries are fully self-contained and do not need an existing ImageMagick installation. It is also possible to rebuild the package against a shared ImageMagick-7 when using the native version in Node.js.
 
-The default WASM version is also fully self-contained and its size range is from 1.5MB (*minimal, compressed w/ brotli*) to 5MB (*default full build compressed w/ gzip*) depending on the supported image formats.
+The default WASM version is also fully self-contained and its size range is from 1.7MB (*minimal, compressed w/ brotli*) to 5.6MB (*default full build compressed w/ gzip*) depending on the supported image formats.
 
 Both versions support synchronous and asynchronous multi-threaded operations with an identical API and identical TypeScript bindings. WASM requires `SharedArrayBuffer` (read about [COOP / COEP](https://web.dev/articles/coop-coep)). The Node.js native version also support OpenMP multithreading and SIMD instructions.
 
-The project is currently to be considered of beta quality, but it is actively developed and maintained because of it its special status as SWIG Node-API showcase project. It is a testament to SWIG Node-API's capabilities, namely producing a 400k C++ lines multi-threaded and dual-environment project out of 600 lines of SWIG code.
+The project is very actively developed and maintained because of it its special status as SWIG Node-API showcase project. It is a testament to SWIG Node-API's capabilities, namely producing a 400k C++ lines multi-threaded and dual-environment project out of 600 lines of SWIG code.
 
 It is feature-complete and it should be reasonably stable. The Node.js native version is designed to be well-suited for server-side use with an Express.js-like framework. It has been debugged for memory leaks and, and when only asynchronous methods are used, it should never block the event loop. See also [Security](#security).
 
@@ -35,7 +35,7 @@ There is also a [medium article about using the new Node-API support in SWIG](ht
 npm install magickwand.js
 ```
 
-This will install pre-built Node.js native binaries on Windows x64, Linux x64 and macOS x64. It will try to compile the module on all other platforms. It will also install the pre-built WASM binaries which are universal.
+This will install pre-built Node.js native binaries on Windows x64, Linux x64 and macOS x64 and arm64. It will try to compile the module on all other platforms. It will also install the pre-built WASM binaries which are universal. The prebuilt binaries are statically linked to the (almost) full set of supported libraries by ImageMagick and are very large. See below for alternatives.
 
 Refer to the [`example`](https://github.com/mmomtchev/magickwand.js/tree/main/example) directory for more code examples including browser use examples.
 
@@ -133,13 +133,21 @@ When using Node.js with X-Windows, the `Image.display()` function works and it i
 
 ### Rebuilding from npm with the built-in ImageMagick library
 
-Starting with version 2.0, `magickwand.js` uses the new `hadron` build system specifically developed for dual-environment (browser WASM and native Node.js) Node-API projects. This will be documented separately once it has been stabilized.
+Starting with version 2.0, `magickwand.js` uses the new `hadron` build system specifically developed for dual-environment (browser WASM and native Node.js) Node-API projects.
 
 ```shell
 npm install magickwand.js --build-from-source
 ```
 
-This will also rebuild the included Magick++ library. Currently, you will need a working C++17 environment as the full xPack version that will rebuild itself with its own compiler is still not ready. The project is tested, and has pre-built binaries, with `gcc` on Linux x64, `clang` on macOS x64 and `MSVC` on Windows x64. As the project contains assembler code (mostly SIMD), and I do not have access to a macOS arm64 build host, I cannot provide macOS x64 binaries.
+This will also rebuild the included Magick++ library. Currently, you will need a working C++17 environment as the full xPack version that will rebuild itself with its own compiler is still not ready. The project is tested, and has pre-built binaries, with `gcc` on Linux x64, `clang` on macOS x64 and arm64, and `MSVC` on Windows x64.
+
+This will rebuild the bindings against the available system-installed (usually shared) libraries which will lead to an order of magnitude smaller addon size.
+
+If you want to rebuild the bindings using the full set of statically linked libraries obtained from `conan`, you have to use:
+
+```shell
+npm install magickwand.js --build-from-source --enable-conan
+```
 
 The xPack fully self-contained version will use `clang` on all platforms.
 
@@ -188,10 +196,12 @@ The WASM version uses [SWIG JSE](https://github.com/mmomtchev/swig) and `emnapi`
 Generally, the prebuilt WASM binaries should work for everyone. To rebuild the WASM version yourself, you should start by building the conan dependencies:
 
 ```shell
-npm install magickwand.js --build-wasm-from-source
+npm install magickwand.js --build-wasm-from-source --enable-conan
 ```
 
 Currently, you need to have EMSDK installed and activated in your environment. A future version might get it automatically from `conan`.
+
+`conan` is required when building to WASM because it is unlikely that you will have system-installed WASM-version libraries that ImageMagick will detect and use.
 
 Or to build a minimal version that excludes many optional dependencies:
 
@@ -217,7 +227,7 @@ The following options are available when using `npm install`:
 
 * `--build-wasm-from-source` rebuilds the WASM module even if a precompiled binary is available
 
-* `--disable-conan` disables `conan` completely and uses only the system-installed libraries
+* `--enable-conan` enables to automatically retrieve the dependencies `conan`
 
 * `--enable-shared` builds `ImageMagick` as a shared library and prefers linking against the shared versions of the system libraries, this binary will be smaller and load faster, but it will run only on the system on which it was compiled
 
@@ -229,7 +239,7 @@ The following options are available when using `npm install`:
 
 * `--disable-simd` disables SIMD (always disabled for WASM)
 
-Additionally, the following options control the various ImageMagick submodules. All `--disable-*` options have `--enable-*` counterparts which are enabled by default and `--disable-*-conan` variants which disable only the built-in `conan` delegate but leave the support enabled if the corresponding libraries is system-installed
+Additionally, the following options control the various ImageMagick submodules. All `--disable-*` options have `--enable-*` counterparts which are enabled by default and `--disable-*-conan` variants which disable only the built-in `conan` delegate - when `conan` is enabled - but leave the support enabled if the corresponding libraries is system-installed.
 
 * `--disable-fonts` for the font delegate libraries (always disabled for WASM)
 * `--disable-jpeg` for `libopenjpeg`
@@ -256,8 +266,6 @@ Additionally, the following options control the various ImageMagick submodules. 
 * `--disable-cairo` for `cairo` (always disabled for WASM)
 
 When disabling the built-in static delegates with `--disable-*-conan`, the ImageMagick configure script will still detect the presence of compatible system libraries and will try to use them, producing a custom binary that will need the dynamically loaded versions of those libraries on your system. The system-installed libraries will be detected through the use of the standard `CMake` supplied modules and, when that fails, on Linux and macOS, through `pkg-config`.
-
-A WASM version built this way will probably lack support for most formats as it is very unlikely that you will have system-installed WASM-version libraries that ImageMagick will detect and use.
 
 If the WASM binary is rebuilt with no additional libraries, its size will be brought down to 1.5MB compressed with brotli. Further reduction is possible by disabling unneeded SWIG wrappers but this requires to manually edit the SWIG source files and to regenerate the C++ files. Producing a version that supports only synchronous mode and does not require COOP/COEP is also possible. I will consider any offer for commercial support of such dedicated light version.
 
