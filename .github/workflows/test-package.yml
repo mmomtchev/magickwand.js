@@ -68,7 +68,7 @@ jobs:
           mkdir -p deps/ImageMagick/config
           cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
       - name: Run the unit tests headless
-        uses: GabrielBB/xvfb-action@v1
+        uses: coactions/setup-xvfb@v1
         with:
           run: npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 test/*.test.ts
         env:
@@ -129,7 +129,7 @@ jobs:
           mkdir -p deps/ImageMagick/config
           cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
       - name: Run the unit tests headless
-        uses: GabrielBB/xvfb-action@v1
+        uses: coactions/setup-xvfb@v1
         with:
           run: npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 test/*.test.ts
         env:
@@ -239,7 +239,7 @@ jobs:
           mkdir -p deps/ImageMagick/config
           cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
       - name: Run the unit tests headless
-        uses: GabrielBB/xvfb-action@v1
+        uses: coactions/setup-xvfb@v1
         with:
           run: npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 test/*.test.ts
         env:
