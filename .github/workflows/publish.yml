@@ -100,7 +100,7 @@ jobs:
       - name: Build magickwand.js (WASM)
         run: npm install --build-wasm-from-source --verbose --foreground-scripts --skip-magickwand-native
       - name: Run headless test
-        uses: GabrielBB/xvfb-action@v1
+        uses: coactions/setup-xvfb@v1
         env:
           MOCHA_INTEGRATION: browser
           MOCHA_MAGICK_INSTALL: ln -s ${{ github.workspace }} node_modules/magickwand.js
