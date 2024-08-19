@@ -1,0 +1,1526 @@
+Determining if the prototype closedir exists for CLOSEDIR_VOID failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Gj4CqP
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_269d5/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_269d5.dir/build.make CMakeFiles/cmTC_269d5.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Gj4CqP'
+Building C object CMakeFiles/cmTC_269d5.dir/CheckPrototypeDefinition.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_269d5.dir/CheckPrototypeDefinition.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Gj4CqP/CheckPrototypeDefinition.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Gj4CqP/CheckPrototypeDefinition.c:14:6: error: conflicting types for ‘closedir’; have ‘void(DIR *)’
+   14 | void closedir(DIR *dirp) {
+      |      ^~~~~~~~
+In file included from /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Gj4CqP/CheckPrototypeDefinition.c:1:
+/usr/include/dirent.h:134:12: note: previous declaration of ‘closedir’ with type ‘int(DIR *)’
+  134 | extern int closedir (DIR *__dirp) __nonnull ((1));
+      |            ^~~~~~~~
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Gj4CqP/CheckPrototypeDefinition.c: In function ‘closedir’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Gj4CqP/CheckPrototypeDefinition.c:15:10: error: ‘NULL’ undeclared (first use in this function)
+   15 |   return NULL;
+      |          ^~~~
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Gj4CqP/CheckPrototypeDefinition.c:2:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+    1 | #include <dirent.h>
+  +++ |+#include <stddef.h>
+    2 | 
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Gj4CqP/CheckPrototypeDefinition.c:15:10: note: each undeclared identifier is reported only once for each function it appears in
+   15 |   return NULL;
+      |          ^~~~
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Gj4CqP/CheckPrototypeDefinition.c:15:10: warning: ‘return’ with a value, in function returning void
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Gj4CqP/CheckPrototypeDefinition.c:14:6: note: declared here
+   14 | void closedir(DIR *dirp) {
+      |      ^~~~~~~~
+gmake[1]: *** [CMakeFiles/cmTC_269d5.dir/build.make:78: CMakeFiles/cmTC_269d5.dir/CheckPrototypeDefinition.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Gj4CqP'
+gmake: *** [Makefile:127: cmTC_269d5/fast] Error 2
+
+
+
+#include <dirent.h>
+
+
+static void cmakeRequireSymbol(int dummy, ...) {
+  (void) dummy;
+}
+
+static void checkSymbol(void) {
+#ifndef closedir
+  cmakeRequireSymbol(0, &closedir);
+#endif
+}
+
+void closedir(DIR *dirp) {
+  return NULL;
+}
+
+#ifdef __CLASSIC_C__
+int main() {
+  int ac;
+  char*av[];
+#else
+int main(int ac, char *av[]) {
+#endif
+  checkSymbol();
+  if (ac > 1000) {
+    return *av[0];
+  }
+  return 0;
+}
+
+
+Determining if the function acosh exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PXVdVR
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_fb63b/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_fb63b.dir/build.make CMakeFiles/cmTC_fb63b.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PXVdVR'
+Building C object CMakeFiles/cmTC_fb63b.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=acosh -O3 -DNDEBUG -o CMakeFiles/cmTC_fb63b.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PXVdVR/CheckFunctionExists.c
+<command-line>: warning: conflicting types for built-in function ‘acosh’; expected ‘double(double)’ [-Wbuiltin-declaration-mismatch]
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PXVdVR/CheckFunctionExists.c:7:3: note: in expansion of macro ‘CHECK_FUNCTION_EXISTS’
+    7 |   CHECK_FUNCTION_EXISTS(void);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PXVdVR/CheckFunctionExists.c:1:1: note: ‘acosh’ is declared in header ‘<math.h>’
+  +++ |+#include <math.h>
+    1 | #ifdef CHECK_FUNCTION_EXISTS
+Linking C executable cmTC_fb63b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fb63b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=acosh -O3 -DNDEBUG CMakeFiles/cmTC_fb63b.dir/CheckFunctionExists.c.o -o cmTC_fb63b 
+/usr/bin/ld: CMakeFiles/cmTC_fb63b.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `acosh'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_fb63b.dir/build.make:99: cmTC_fb63b] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PXVdVR'
+gmake: *** [Makefile:127: cmTC_fb63b/fast] Error 2
+
+
+
+Determining if the include file arm/limits.h exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-7x00bm
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_adcb9/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_adcb9.dir/build.make CMakeFiles/cmTC_adcb9.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-7x00bm'
+Building C object CMakeFiles/cmTC_adcb9.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_adcb9.dir/CheckIncludeFile.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-7x00bm/CheckIncludeFile.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-7x00bm/CheckIncludeFile.c:1:10: fatal error: arm/limits.h: No such file or directory
+    1 | #include <arm/limits.h>
+      |          ^~~~~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_adcb9.dir/build.make:78: CMakeFiles/cmTC_adcb9.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-7x00bm'
+gmake: *** [Makefile:127: cmTC_adcb9/fast] Error 2
+
+
+
+Determining if the function asinh exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-CpP4K6
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_4b9e5/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_4b9e5.dir/build.make CMakeFiles/cmTC_4b9e5.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-CpP4K6'
+Building C object CMakeFiles/cmTC_4b9e5.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=asinh -O3 -DNDEBUG -o CMakeFiles/cmTC_4b9e5.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-CpP4K6/CheckFunctionExists.c
+<command-line>: warning: conflicting types for built-in function ‘asinh’; expected ‘double(double)’ [-Wbuiltin-declaration-mismatch]
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-CpP4K6/CheckFunctionExists.c:7:3: note: in expansion of macro ‘CHECK_FUNCTION_EXISTS’
+    7 |   CHECK_FUNCTION_EXISTS(void);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-CpP4K6/CheckFunctionExists.c:1:1: note: ‘asinh’ is declared in header ‘<math.h>’
+  +++ |+#include <math.h>
+    1 | #ifdef CHECK_FUNCTION_EXISTS
+Linking C executable cmTC_4b9e5
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4b9e5.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=asinh -O3 -DNDEBUG CMakeFiles/cmTC_4b9e5.dir/CheckFunctionExists.c.o -o cmTC_4b9e5 
+/usr/bin/ld: CMakeFiles/cmTC_4b9e5.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `asinh'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_4b9e5.dir/build.make:99: cmTC_4b9e5] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-CpP4K6'
+gmake: *** [Makefile:127: cmTC_4b9e5/fast] Error 2
+
+
+
+Determining if the function atanh exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-hipKCA
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_928c3/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_928c3.dir/build.make CMakeFiles/cmTC_928c3.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-hipKCA'
+Building C object CMakeFiles/cmTC_928c3.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=atanh -O3 -DNDEBUG -o CMakeFiles/cmTC_928c3.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-hipKCA/CheckFunctionExists.c
+<command-line>: warning: conflicting types for built-in function ‘atanh’; expected ‘double(double)’ [-Wbuiltin-declaration-mismatch]
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-hipKCA/CheckFunctionExists.c:7:3: note: in expansion of macro ‘CHECK_FUNCTION_EXISTS’
+    7 |   CHECK_FUNCTION_EXISTS(void);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-hipKCA/CheckFunctionExists.c:1:1: note: ‘atanh’ is declared in header ‘<math.h>’
+  +++ |+#include <math.h>
+    1 | #ifdef CHECK_FUNCTION_EXISTS
+Linking C executable cmTC_928c3
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_928c3.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=atanh -O3 -DNDEBUG CMakeFiles/cmTC_928c3.dir/CheckFunctionExists.c.o -o cmTC_928c3 
+/usr/bin/ld: CMakeFiles/cmTC_928c3.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `atanh'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_928c3.dir/build.make:99: cmTC_928c3] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-hipKCA'
+gmake: *** [Makefile:127: cmTC_928c3/fast] Error 2
+
+
+
+Performing C++ SOURCE FILE Test HAVE_BOOL failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-GAgigU
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ccc81/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ccc81.dir/build.make CMakeFiles/cmTC_ccc81.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-GAgigU'
+Building CXX object CMakeFiles/cmTC_ccc81.dir/src.cxx.o
+/usr/bin/c++ -DHAVE_BOOL  -O3 -DNDEBUG -o CMakeFiles/cmTC_ccc81.dir/src.cxx.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-GAgigU/src.cxx
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-GAgigU/src.cxx:1:1: error: ‘::main’ must return ‘int’
+    1 | void main () {bool b = false;}
+      | ^~~~
+gmake[1]: *** [CMakeFiles/cmTC_ccc81.dir/build.make:78: CMakeFiles/cmTC_ccc81.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-GAgigU'
+gmake: *** [Makefile:127: cmTC_ccc81/fast] Error 2
+
+
+Source file was:
+void main () {bool b = false;}
+
+Determining if the function strlcpy exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-2991Xi
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_f3b7f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f3b7f.dir/build.make CMakeFiles/cmTC_f3b7f.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-2991Xi'
+Building C object CMakeFiles/cmTC_f3b7f.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=strlcpy -O3 -DNDEBUG -o CMakeFiles/cmTC_f3b7f.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-2991Xi/CheckFunctionExists.c
+Linking C executable cmTC_f3b7f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f3b7f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=strlcpy -O3 -DNDEBUG CMakeFiles/cmTC_f3b7f.dir/CheckFunctionExists.c.o -o cmTC_f3b7f 
+/usr/bin/ld: CMakeFiles/cmTC_f3b7f.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `strlcpy'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_f3b7f.dir/build.make:99: cmTC_f3b7f] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-2991Xi'
+gmake: *** [Makefile:127: cmTC_f3b7f/fast] Error 2
+
+
+
+Determining if the function directio exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-pEKQgO
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_b495d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_b495d.dir/build.make CMakeFiles/cmTC_b495d.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-pEKQgO'
+Building C object CMakeFiles/cmTC_b495d.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=directio -O3 -DNDEBUG -o CMakeFiles/cmTC_b495d.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-pEKQgO/CheckFunctionExists.c
+Linking C executable cmTC_b495d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b495d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=directio -O3 -DNDEBUG CMakeFiles/cmTC_b495d.dir/CheckFunctionExists.c.o -o cmTC_b495d 
+/usr/bin/ld: CMakeFiles/cmTC_b495d.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `directio'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_b495d.dir/build.make:99: cmTC_b495d] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-pEKQgO'
+gmake: *** [Makefile:127: cmTC_b495d/fast] Error 2
+
+
+
+Performing C++ SOURCE FILE Test HAVE_DOUBLE_T failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-3TgvAc
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_6410c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_6410c.dir/build.make CMakeFiles/cmTC_6410c.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-3TgvAc'
+Building CXX object CMakeFiles/cmTC_6410c.dir/src.cxx.o
+/usr/bin/c++ -DHAVE_DOUBLE_T  -O3 -DNDEBUG -o CMakeFiles/cmTC_6410c.dir/src.cxx.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-3TgvAc/src.cxx
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-3TgvAc/src.cxx:3:5: error: ‘::main’ must return ‘int’
+    3 |     void main () {double_t d = 0;}
+      |     ^~~~
+gmake[1]: *** [CMakeFiles/cmTC_6410c.dir/build.make:78: CMakeFiles/cmTC_6410c.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-3TgvAc'
+gmake: *** [Makefile:127: cmTC_6410c/fast] Error 2
+
+
+Source file was:
+
+    #include <math.h>
+    void main () {double_t d = 0;}
+  
+
+Determining if the function erf exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-TW1qUt
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_da93e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_da93e.dir/build.make CMakeFiles/cmTC_da93e.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-TW1qUt'
+Building C object CMakeFiles/cmTC_da93e.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=erf -O3 -DNDEBUG -o CMakeFiles/cmTC_da93e.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-TW1qUt/CheckFunctionExists.c
+<command-line>: warning: conflicting types for built-in function ‘erf’; expected ‘double(double)’ [-Wbuiltin-declaration-mismatch]
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-TW1qUt/CheckFunctionExists.c:7:3: note: in expansion of macro ‘CHECK_FUNCTION_EXISTS’
+    7 |   CHECK_FUNCTION_EXISTS(void);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-TW1qUt/CheckFunctionExists.c:1:1: note: ‘erf’ is declared in header ‘<math.h>’
+  +++ |+#include <math.h>
+    1 | #ifdef CHECK_FUNCTION_EXISTS
+Linking C executable cmTC_da93e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_da93e.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=erf -O3 -DNDEBUG CMakeFiles/cmTC_da93e.dir/CheckFunctionExists.c.o -o cmTC_da93e 
+/usr/bin/ld: CMakeFiles/cmTC_da93e.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `erf'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_da93e.dir/build.make:99: cmTC_da93e] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-TW1qUt'
+gmake: *** [Makefile:127: cmTC_da93e/fast] Error 2
+
+
+
+Performing C++ SOURCE FILE Test HAVE_FLOAT_T failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-10xFAH
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ac5d3/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ac5d3.dir/build.make CMakeFiles/cmTC_ac5d3.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-10xFAH'
+Building CXX object CMakeFiles/cmTC_ac5d3.dir/src.cxx.o
+/usr/bin/c++ -DHAVE_FLOAT_T  -O3 -DNDEBUG -o CMakeFiles/cmTC_ac5d3.dir/src.cxx.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-10xFAH/src.cxx
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-10xFAH/src.cxx:3:5: error: ‘::main’ must return ‘int’
+    3 |     void main () {float_t f = 0;}
+      |     ^~~~
+gmake[1]: *** [CMakeFiles/cmTC_ac5d3.dir/build.make:78: CMakeFiles/cmTC_ac5d3.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-10xFAH'
+gmake: *** [Makefile:127: cmTC_ac5d3/fast] Error 2
+
+
+Source file was:
+
+    #include <math.h> 
+    void main () {float_t f = 0;}
+  
+
+Determining if the function floor exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-fJzooy
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ca97e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ca97e.dir/build.make CMakeFiles/cmTC_ca97e.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-fJzooy'
+Building C object CMakeFiles/cmTC_ca97e.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=floor -O3 -DNDEBUG -o CMakeFiles/cmTC_ca97e.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-fJzooy/CheckFunctionExists.c
+<command-line>: warning: conflicting types for built-in function ‘floor’; expected ‘double(double)’ [-Wbuiltin-declaration-mismatch]
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-fJzooy/CheckFunctionExists.c:7:3: note: in expansion of macro ‘CHECK_FUNCTION_EXISTS’
+    7 |   CHECK_FUNCTION_EXISTS(void);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-fJzooy/CheckFunctionExists.c:1:1: note: ‘floor’ is declared in header ‘<math.h>’
+  +++ |+#include <math.h>
+    1 | #ifdef CHECK_FUNCTION_EXISTS
+Linking C executable cmTC_ca97e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ca97e.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=floor -O3 -DNDEBUG CMakeFiles/cmTC_ca97e.dir/CheckFunctionExists.c.o -o cmTC_ca97e 
+/usr/bin/ld: CMakeFiles/cmTC_ca97e.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `floor'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_ca97e.dir/build.make:99: cmTC_ca97e] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-fJzooy'
+gmake: *** [Makefile:127: cmTC_ca97e/fast] Error 2
+
+
+
+Determining if the function getexecname exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-D8bGJb
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_a65bb/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a65bb.dir/build.make CMakeFiles/cmTC_a65bb.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-D8bGJb'
+Building C object CMakeFiles/cmTC_a65bb.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=getexecname -O3 -DNDEBUG -o CMakeFiles/cmTC_a65bb.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-D8bGJb/CheckFunctionExists.c
+Linking C executable cmTC_a65bb
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a65bb.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=getexecname -O3 -DNDEBUG CMakeFiles/cmTC_a65bb.dir/CheckFunctionExists.c.o -o cmTC_a65bb 
+/usr/bin/ld: CMakeFiles/cmTC_a65bb.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `getexecname'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_a65bb.dir/build.make:99: cmTC_a65bb] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-D8bGJb'
+gmake: *** [Makefile:127: cmTC_a65bb/fast] Error 2
+
+
+
+Determining if the function j0 exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-OukyWY
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_49269/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_49269.dir/build.make CMakeFiles/cmTC_49269.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-OukyWY'
+Building C object CMakeFiles/cmTC_49269.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=j0 -O3 -DNDEBUG -o CMakeFiles/cmTC_49269.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-OukyWY/CheckFunctionExists.c
+<command-line>: warning: conflicting types for built-in function ‘j0’; expected ‘double(double)’ [-Wbuiltin-declaration-mismatch]
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-OukyWY/CheckFunctionExists.c:7:3: note: in expansion of macro ‘CHECK_FUNCTION_EXISTS’
+    7 |   CHECK_FUNCTION_EXISTS(void);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+Linking C executable cmTC_49269
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_49269.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=j0 -O3 -DNDEBUG CMakeFiles/cmTC_49269.dir/CheckFunctionExists.c.o -o cmTC_49269 
+/usr/bin/ld: CMakeFiles/cmTC_49269.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `j0'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_49269.dir/build.make:99: cmTC_49269] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-OukyWY'
+gmake: *** [Makefile:127: cmTC_49269/fast] Error 2
+
+
+
+Determining if the function j1 exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-1elEJ3
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_33e5b/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_33e5b.dir/build.make CMakeFiles/cmTC_33e5b.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-1elEJ3'
+Building C object CMakeFiles/cmTC_33e5b.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=j1 -O3 -DNDEBUG -o CMakeFiles/cmTC_33e5b.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-1elEJ3/CheckFunctionExists.c
+<command-line>: warning: conflicting types for built-in function ‘j1’; expected ‘double(double)’ [-Wbuiltin-declaration-mismatch]
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-1elEJ3/CheckFunctionExists.c:7:3: note: in expansion of macro ‘CHECK_FUNCTION_EXISTS’
+    7 |   CHECK_FUNCTION_EXISTS(void);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+Linking C executable cmTC_33e5b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_33e5b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=j1 -O3 -DNDEBUG CMakeFiles/cmTC_33e5b.dir/CheckFunctionExists.c.o -o cmTC_33e5b 
+/usr/bin/ld: CMakeFiles/cmTC_33e5b.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `j1'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_33e5b.dir/build.make:99: cmTC_33e5b] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-1elEJ3'
+gmake: *** [Makefile:127: cmTC_33e5b/fast] Error 2
+
+
+
+Determining if the function  exists in the gcov failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PX9GjV
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_18623/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_18623.dir/build.make CMakeFiles/cmTC_18623.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PX9GjV'
+Building C object CMakeFiles/cmTC_18623.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS= -O3 -DNDEBUG -o CMakeFiles/cmTC_18623.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PX9GjV/CheckFunctionExists.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PX9GjV/CheckFunctionExists.c:7:25: error: expected identifier or ‘(’ before ‘void’
+    7 |   CHECK_FUNCTION_EXISTS(void);
+      |                         ^~~~
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PX9GjV/CheckFunctionExists.c: In function ‘main’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PX9GjV/CheckFunctionExists.c:17:25: error: expected expression before ‘)’ token
+   17 |   CHECK_FUNCTION_EXISTS();
+      |                         ^
+gmake[1]: *** [CMakeFiles/cmTC_18623.dir/build.make:78: CMakeFiles/cmTC_18623.dir/CheckFunctionExists.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PX9GjV'
+gmake: *** [Makefile:127: cmTC_18623/fast] Error 2
+
+
+
+Determining if the function lltostr exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PLV0sM
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_c9f8e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_c9f8e.dir/build.make CMakeFiles/cmTC_c9f8e.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PLV0sM'
+Building C object CMakeFiles/cmTC_c9f8e.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=lltostr -O3 -DNDEBUG -o CMakeFiles/cmTC_c9f8e.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PLV0sM/CheckFunctionExists.c
+Linking C executable cmTC_c9f8e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c9f8e.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=lltostr -O3 -DNDEBUG CMakeFiles/cmTC_c9f8e.dir/CheckFunctionExists.c.o -o cmTC_c9f8e 
+/usr/bin/ld: CMakeFiles/cmTC_c9f8e.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `lltostr'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_c9f8e.dir/build.make:99: cmTC_c9f8e] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-PLV0sM'
+gmake: *** [Makefile:127: cmTC_c9f8e/fast] Error 2
+
+
+
+Determining size of locale_t failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-FdyDnz
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_7d11f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_7d11f.dir/build.make CMakeFiles/cmTC_7d11f.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-FdyDnz'
+Building C object CMakeFiles/cmTC_7d11f.dir/LOCALE_T.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_7d11f.dir/LOCALE_T.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-FdyDnz/LOCALE_T.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-FdyDnz/LOCALE_T.c:27:22: error: ‘locale_t’ undeclared here (not in a function)
+   27 | #define SIZE (sizeof(locale_t))
+      |                      ^~~~~~~~
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-FdyDnz/LOCALE_T.c:29:12: note: in expansion of macro ‘SIZE’
+   29 |   ('0' + ((SIZE / 10000)%10)),
+      |            ^~~~
+gmake[1]: *** [CMakeFiles/cmTC_7d11f.dir/build.make:78: CMakeFiles/cmTC_7d11f.dir/LOCALE_T.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-FdyDnz'
+gmake: *** [Makefile:127: cmTC_7d11f/fast] Error 2
+
+
+LOCALE_T.c:
+#include <sys/types.h>
+#include <stdint.h>
+#include <stddef.h>
+
+
+#undef KEY
+#if defined(__i386)
+# define KEY '_','_','i','3','8','6'
+#elif defined(__x86_64)
+# define KEY '_','_','x','8','6','_','6','4'
+#elif defined(__PPC64__)
+# define KEY '_','_','P','P','C','6','4','_','_'
+#elif defined(__ppc64__)
+# define KEY '_','_','p','p','c','6','4','_','_'
+#elif defined(__PPC__)
+# define KEY '_','_','P','P','C','_','_'
+#elif defined(__ppc__)
+# define KEY '_','_','p','p','c','_','_'
+#elif defined(__aarch64__)
+# define KEY '_','_','a','a','r','c','h','6','4','_','_'
+#elif defined(__ARM_ARCH_7A__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','A','_','_'
+#elif defined(__ARM_ARCH_7S__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','S','_','_'
+#endif
+
+#define SIZE (sizeof(locale_t))
+static char info_size[] =  {'I', 'N', 'F', 'O', ':', 's','i','z','e','[',
+  ('0' + ((SIZE / 10000)%10)),
+  ('0' + ((SIZE / 1000)%10)),
+  ('0' + ((SIZE / 100)%10)),
+  ('0' + ((SIZE / 10)%10)),
+  ('0' +  (SIZE    % 10)),
+  ']',
+#ifdef KEY
+  ' ','k','e','y','[', KEY, ']',
+#endif
+  '\0'};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_size[argc];
+  (void)argv;
+  return require;
+}
+
+
+Determining if the include file machine/param.h exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-MmZcL6
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_73a7e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_73a7e.dir/build.make CMakeFiles/cmTC_73a7e.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-MmZcL6'
+Building C object CMakeFiles/cmTC_73a7e.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_73a7e.dir/CheckIncludeFile.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-MmZcL6/CheckIncludeFile.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-MmZcL6/CheckIncludeFile.c:1:10: fatal error: machine/param.h: No such file or directory
+    1 | #include <machine/param.h>
+      |          ^~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_73a7e.dir/build.make:78: CMakeFiles/cmTC_73a7e.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-MmZcL6'
+gmake: *** [Makefile:127: cmTC_73a7e/fast] Error 2
+
+
+
+Determining if the include file mach-o/dyld.h exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-HGVk7G
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_342b2/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_342b2.dir/build.make CMakeFiles/cmTC_342b2.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-HGVk7G'
+Building C object CMakeFiles/cmTC_342b2.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_342b2.dir/CheckIncludeFile.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-HGVk7G/CheckIncludeFile.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-HGVk7G/CheckIncludeFile.c:1:10: fatal error: mach-o/dyld.h: No such file or directory
+    1 | #include <mach-o/dyld.h>
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_342b2.dir/build.make:78: CMakeFiles/cmTC_342b2.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-HGVk7G'
+gmake: *** [Makefile:127: cmTC_342b2/fast] Error 2
+
+
+
+Determining if the mbstate_t exist failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-P6hYfl
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_07c71/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_07c71.dir/build.make CMakeFiles/cmTC_07c71.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-P6hYfl'
+Building C object CMakeFiles/cmTC_07c71.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_07c71.dir/CheckSymbolExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-P6hYfl/CheckSymbolExists.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-P6hYfl/CheckSymbolExists.c: In function ‘main’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-P6hYfl/CheckSymbolExists.c:8:19: error: expected expression before ‘mbstate_t’
+    8 |   return ((int*)(&mbstate_t))[argc];
+      |                   ^~~~~~~~~
+gmake[1]: *** [CMakeFiles/cmTC_07c71.dir/build.make:78: CMakeFiles/cmTC_07c71.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-P6hYfl'
+gmake: *** [Makefile:127: cmTC_07c71/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <wchar.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef mbstate_t
+  return ((int*)(&mbstate_t))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Performing C++ SOURCE FILE Test HAVE_NAMESPACES failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-87ERnU
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_d1e88/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_d1e88.dir/build.make CMakeFiles/cmTC_d1e88.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-87ERnU'
+Building CXX object CMakeFiles/cmTC_d1e88.dir/src.cxx.o
+/usr/bin/c++ -DHAVE_NAMESPACES  -O3 -DNDEBUG -o CMakeFiles/cmTC_d1e88.dir/src.cxx.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-87ERnU/src.cxx
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-87ERnU/src.cxx:1:19: error: ‘::main’ must return ‘int’
+    1 | namespace test {} void main() {using namespace ::test;}
+      |                   ^~~~
+gmake[1]: *** [CMakeFiles/cmTC_d1e88.dir/build.make:78: CMakeFiles/cmTC_d1e88.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-87ERnU'
+gmake: *** [Makefile:127: cmTC_d1e88/fast] Error 2
+
+
+Source file was:
+namespace test {} void main() {using namespace ::test;}
+
+Performing C++ SOURCE FILE Test HAVE_NAMESPACE_STD failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Y0HNZG
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_86484/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_86484.dir/build.make CMakeFiles/cmTC_86484.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Y0HNZG'
+Building CXX object CMakeFiles/cmTC_86484.dir/src.cxx.o
+/usr/bin/c++ -DHAVE_NAMESPACE_STD  -O3 -DNDEBUG -o CMakeFiles/cmTC_86484.dir/src.cxx.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Y0HNZG/src.cxx
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Y0HNZG/src.cxx:3:5: error: ‘::main’ must return ‘int’
+    3 |     void main() {std::istream& is = std::cin;}
+      |     ^~~~
+gmake[1]: *** [CMakeFiles/cmTC_86484.dir/build.make:78: CMakeFiles/cmTC_86484.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Y0HNZG'
+gmake: *** [Makefile:127: cmTC_86484/fast] Error 2
+
+
+Source file was:
+
+    #include <iostream> 
+    void main() {std::istream& is = std::cin;}
+  
+
+Determining if the include file ndir.h exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ThSZyB
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_12c7f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_12c7f.dir/build.make CMakeFiles/cmTC_12c7f.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ThSZyB'
+Building C object CMakeFiles/cmTC_12c7f.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_12c7f.dir/CheckIncludeFile.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ThSZyB/CheckIncludeFile.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ThSZyB/CheckIncludeFile.c:1:10: fatal error: ndir.h: No such file or directory
+    1 | #include <ndir.h>
+      |          ^~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_12c7f.dir/build.make:78: CMakeFiles/cmTC_12c7f.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ThSZyB'
+gmake: *** [Makefile:127: cmTC_12c7f/fast] Error 2
+
+
+
+Determining if the include file OS.h exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-U7puhE
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_f6d32/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f6d32.dir/build.make CMakeFiles/cmTC_f6d32.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-U7puhE'
+Building C object CMakeFiles/cmTC_f6d32.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_f6d32.dir/CheckIncludeFile.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-U7puhE/CheckIncludeFile.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-U7puhE/CheckIncludeFile.c:1:10: fatal error: OS.h: No such file or directory
+    1 | #include <OS.h>
+      |          ^~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_f6d32.dir/build.make:78: CMakeFiles/cmTC_f6d32.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-U7puhE'
+gmake: *** [Makefile:127: cmTC_f6d32/fast] Error 2
+
+
+
+Determining if the function pow exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Glkip5
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ccb53/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ccb53.dir/build.make CMakeFiles/cmTC_ccb53.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Glkip5'
+Building C object CMakeFiles/cmTC_ccb53.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pow -O3 -DNDEBUG -o CMakeFiles/cmTC_ccb53.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Glkip5/CheckFunctionExists.c
+<command-line>: warning: conflicting types for built-in function ‘pow’; expected ‘double(double,  double)’ [-Wbuiltin-declaration-mismatch]
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Glkip5/CheckFunctionExists.c:7:3: note: in expansion of macro ‘CHECK_FUNCTION_EXISTS’
+    7 |   CHECK_FUNCTION_EXISTS(void);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Glkip5/CheckFunctionExists.c:1:1: note: ‘pow’ is declared in header ‘<math.h>’
+  +++ |+#include <math.h>
+    1 | #ifdef CHECK_FUNCTION_EXISTS
+Linking C executable cmTC_ccb53
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ccb53.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pow -O3 -DNDEBUG CMakeFiles/cmTC_ccb53.dir/CheckFunctionExists.c.o -o cmTC_ccb53 
+/usr/bin/ld: CMakeFiles/cmTC_ccb53.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `pow'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_ccb53.dir/build.make:99: cmTC_ccb53] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Glkip5'
+gmake: *** [Makefile:127: cmTC_ccb53/fast] Error 2
+
+
+
+Determining if the include file process.h exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-aydbyO
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_112b7/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_112b7.dir/build.make CMakeFiles/cmTC_112b7.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-aydbyO'
+Building C object CMakeFiles/cmTC_112b7.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_112b7.dir/CheckIncludeFile.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-aydbyO/CheckIncludeFile.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-aydbyO/CheckIncludeFile.c:1:10: fatal error: process.h: No such file or directory
+    1 | #include <process.h>
+      |          ^~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_112b7.dir/build.make:78: CMakeFiles/cmTC_112b7.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-aydbyO'
+gmake: *** [Makefile:127: cmTC_112b7/fast] Error 2
+
+
+
+Determining if the function spawnvp exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-yGrKxs
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_971ca/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_971ca.dir/build.make CMakeFiles/cmTC_971ca.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-yGrKxs'
+Building C object CMakeFiles/cmTC_971ca.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=spawnvp -O3 -DNDEBUG -o CMakeFiles/cmTC_971ca.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-yGrKxs/CheckFunctionExists.c
+Linking C executable cmTC_971ca
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_971ca.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=spawnvp -O3 -DNDEBUG CMakeFiles/cmTC_971ca.dir/CheckFunctionExists.c.o -o cmTC_971ca 
+/usr/bin/ld: CMakeFiles/cmTC_971ca.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `spawnvp'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_971ca.dir/build.make:99: cmTC_971ca] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-yGrKxs'
+gmake: *** [Makefile:127: cmTC_971ca/fast] Error 2
+
+
+
+Determining if the function sqrt exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wk9kdL
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_57916/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_57916.dir/build.make CMakeFiles/cmTC_57916.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wk9kdL'
+Building C object CMakeFiles/cmTC_57916.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=sqrt -O3 -DNDEBUG -o CMakeFiles/cmTC_57916.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wk9kdL/CheckFunctionExists.c
+<command-line>: warning: conflicting types for built-in function ‘sqrt’; expected ‘double(double)’ [-Wbuiltin-declaration-mismatch]
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wk9kdL/CheckFunctionExists.c:7:3: note: in expansion of macro ‘CHECK_FUNCTION_EXISTS’
+    7 |   CHECK_FUNCTION_EXISTS(void);
+      |   ^~~~~~~~~~~~~~~~~~~~~
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wk9kdL/CheckFunctionExists.c:1:1: note: ‘sqrt’ is declared in header ‘<math.h>’
+  +++ |+#include <math.h>
+    1 | #ifdef CHECK_FUNCTION_EXISTS
+Linking C executable cmTC_57916
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_57916.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=sqrt -O3 -DNDEBUG CMakeFiles/cmTC_57916.dir/CheckFunctionExists.c.o -o cmTC_57916 
+/usr/bin/ld: CMakeFiles/cmTC_57916.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `sqrt'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_57916.dir/build.make:99: cmTC_57916] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wk9kdL'
+gmake: *** [Makefile:127: cmTC_57916/fast] Error 2
+
+
+
+Determining if the function stdarg exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-WrIdib
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_4bec7/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_4bec7.dir/build.make CMakeFiles/cmTC_4bec7.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-WrIdib'
+Building C object CMakeFiles/cmTC_4bec7.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=stdarg -O3 -DNDEBUG -o CMakeFiles/cmTC_4bec7.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-WrIdib/CheckFunctionExists.c
+Linking C executable cmTC_4bec7
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4bec7.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=stdarg -O3 -DNDEBUG CMakeFiles/cmTC_4bec7.dir/CheckFunctionExists.c.o -o cmTC_4bec7 
+/usr/bin/ld: CMakeFiles/cmTC_4bec7.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `stdarg'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_4bec7.dir/build.make:99: cmTC_4bec7] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-WrIdib'
+gmake: *** [Makefile:127: cmTC_4bec7/fast] Error 2
+
+
+
+Performing C++ SOURCE FILE Test HAVE_STDBOOL_H failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-C5ghSF
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_a7d37/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a7d37.dir/build.make CMakeFiles/cmTC_a7d37.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-C5ghSF'
+Building CXX object CMakeFiles/cmTC_a7d37.dir/src.cxx.o
+/usr/bin/c++ -DHAVE_STDBOOL_H  -O3 -DNDEBUG -o CMakeFiles/cmTC_a7d37.dir/src.cxx.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-C5ghSF/src.cxx
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-C5ghSF/src.cxx:3:5: error: ‘::main’ must return ‘int’
+    3 |     void main() {bool b = __bool_true_false_are_defined;}
+      |     ^~~~
+gmake[1]: *** [CMakeFiles/cmTC_a7d37.dir/build.make:78: CMakeFiles/cmTC_a7d37.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-C5ghSF'
+gmake: *** [Makefile:127: cmTC_a7d37/fast] Error 2
+
+
+Source file was:
+
+    #include <stdbool.h> 
+    void main() {bool b = __bool_true_false_are_defined;}
+  
+
+Performing C++ SOURCE FILE Test HAVE_STD_LIBS failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-MSiY3T
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_70225/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_70225.dir/build.make CMakeFiles/cmTC_70225.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-MSiY3T'
+Building CXX object CMakeFiles/cmTC_70225.dir/src.cxx.o
+/usr/bin/c++ -DHAVE_STD_LIBS  -O3 -DNDEBUG -o CMakeFiles/cmTC_70225.dir/src.cxx.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-MSiY3T/src.cxx
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-MSiY3T/src.cxx:9:5: error: ‘::main’ must return ‘int’
+    9 |     void main() {}
+      |     ^~~~
+gmake[1]: *** [CMakeFiles/cmTC_70225.dir/build.make:78: CMakeFiles/cmTC_70225.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-MSiY3T'
+gmake: *** [Makefile:127: cmTC_70225/fast] Error 2
+
+
+Source file was:
+
+    #include <map>
+    #include <iomanip>
+    #include <cmath>
+    #ifdef HAVE_NAMESPACES
+      using namespace std;
+    #endif
+    
+    void main() {}
+  
+
+Determining if the include file strlcat.h exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-bWvNHL
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_0e4b5/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_0e4b5.dir/build.make CMakeFiles/cmTC_0e4b5.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-bWvNHL'
+Building C object CMakeFiles/cmTC_0e4b5.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_0e4b5.dir/CheckIncludeFile.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-bWvNHL/CheckIncludeFile.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-bWvNHL/CheckIncludeFile.c:1:10: fatal error: strlcat.h: No such file or directory
+    1 | #include <strlcat.h>
+      |          ^~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_0e4b5.dir/build.make:78: CMakeFiles/cmTC_0e4b5.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-bWvNHL'
+gmake: *** [Makefile:127: cmTC_0e4b5/fast] Error 2
+
+
+
+Determining if the include file strlcpy.h exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-goiAXR
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_f3b49/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f3b49.dir/build.make CMakeFiles/cmTC_f3b49.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-goiAXR'
+Building C object CMakeFiles/cmTC_f3b49.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_f3b49.dir/CheckIncludeFile.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-goiAXR/CheckIncludeFile.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-goiAXR/CheckIncludeFile.c:1:10: fatal error: strlcpy.h: No such file or directory
+    1 | #include <strlcpy.h>
+      |          ^~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_f3b49.dir/build.make:78: CMakeFiles/cmTC_f3b49.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-goiAXR'
+gmake: *** [Makefile:127: cmTC_f3b49/fast] Error 2
+
+
+
+Determining if the include file sun_prefetch.h exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-01TpHh
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_0c6d7/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_0c6d7.dir/build.make CMakeFiles/cmTC_0c6d7.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-01TpHh'
+Building C object CMakeFiles/cmTC_0c6d7.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_0c6d7.dir/CheckIncludeFile.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-01TpHh/CheckIncludeFile.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-01TpHh/CheckIncludeFile.c:1:10: fatal error: sun_prefetch.h: No such file or directory
+    1 | #include <sun_prefetch.h>
+      |          ^~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_0c6d7.dir/build.make:78: CMakeFiles/cmTC_0c6d7.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-01TpHh'
+gmake: *** [Makefile:127: cmTC_0c6d7/fast] Error 2
+
+
+
+Determining if the DIR exist failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Oe4oTY
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_cac06/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_cac06.dir/build.make CMakeFiles/cmTC_cac06.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Oe4oTY'
+Building C object CMakeFiles/cmTC_cac06.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_cac06.dir/CheckSymbolExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Oe4oTY/CheckSymbolExists.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Oe4oTY/CheckSymbolExists.c: In function ‘main’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Oe4oTY/CheckSymbolExists.c:8:19: error: expected expression before ‘DIR’
+    8 |   return ((int*)(&DIR))[argc];
+      |                   ^~~
+gmake[1]: *** [CMakeFiles/cmTC_cac06.dir/build.make:78: CMakeFiles/cmTC_cac06.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-Oe4oTY'
+gmake: *** [Makefile:127: cmTC_cac06/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <sys/dir.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef DIR
+  return ((int*)(&DIR))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the DIR exist failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ZNdpva
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_aacfb/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_aacfb.dir/build.make CMakeFiles/cmTC_aacfb.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ZNdpva'
+Building C object CMakeFiles/cmTC_aacfb.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_aacfb.dir/CheckSymbolExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ZNdpva/CheckSymbolExists.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ZNdpva/CheckSymbolExists.c:2:10: fatal error: sys/ndir.h: No such file or directory
+    2 | #include <sys/ndir.h>
+      |          ^~~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_aacfb.dir/build.make:78: CMakeFiles/cmTC_aacfb.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ZNdpva'
+gmake: *** [Makefile:127: cmTC_aacfb/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <sys/ndir.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef DIR
+  return ((int*)(&DIR))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the include file sys/syslimits.h exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-rhozoM
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_d3aea/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_d3aea.dir/build.make CMakeFiles/cmTC_d3aea.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-rhozoM'
+Building C object CMakeFiles/cmTC_d3aea.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_d3aea.dir/CheckIncludeFile.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-rhozoM/CheckIncludeFile.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-rhozoM/CheckIncludeFile.c:1:10: fatal error: sys/syslimits.h: No such file or directory
+    1 | #include <sys/syslimits.h>
+      |          ^~~~~~~~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_d3aea.dir/build.make:78: CMakeFiles/cmTC_d3aea.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-rhozoM'
+gmake: *** [Makefile:127: cmTC_d3aea/fast] Error 2
+
+
+
+Determining if the function ulltostr exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-OPs5VI
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_c03db/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_c03db.dir/build.make CMakeFiles/cmTC_c03db.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-OPs5VI'
+Building C object CMakeFiles/cmTC_c03db.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=ulltostr -O3 -DNDEBUG -o CMakeFiles/cmTC_c03db.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-OPs5VI/CheckFunctionExists.c
+Linking C executable cmTC_c03db
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c03db.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=ulltostr -O3 -DNDEBUG CMakeFiles/cmTC_c03db.dir/CheckFunctionExists.c.o -o cmTC_c03db 
+/usr/bin/ld: CMakeFiles/cmTC_c03db.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `ulltostr'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_c03db.dir/build.make:99: cmTC_c03db] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-OPs5VI'
+gmake: *** [Makefile:127: cmTC_c03db/fast] Error 2
+
+
+
+Determining if the include file vfork.h exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-TBGadG
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_c59ad/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_c59ad.dir/build.make CMakeFiles/cmTC_c59ad.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-TBGadG'
+Building C object CMakeFiles/cmTC_c59ad.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_c59ad.dir/CheckIncludeFile.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-TBGadG/CheckIncludeFile.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-TBGadG/CheckIncludeFile.c:1:10: fatal error: vfork.h: No such file or directory
+    1 | #include <vfork.h>
+      |          ^~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_c59ad.dir/build.make:78: CMakeFiles/cmTC_c59ad.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-TBGadG'
+gmake: *** [Makefile:127: cmTC_c59ad/fast] Error 2
+
+
+
+Determining if the vfprintf_l exist failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-IluaGg
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_82454/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_82454.dir/build.make CMakeFiles/cmTC_82454.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-IluaGg'
+Building C object CMakeFiles/cmTC_82454.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_82454.dir/CheckSymbolExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-IluaGg/CheckSymbolExists.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-IluaGg/CheckSymbolExists.c: In function ‘main’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-IluaGg/CheckSymbolExists.c:8:19: error: ‘vfprintf_l’ undeclared (first use in this function); did you mean ‘vfprintf’?
+    8 |   return ((int*)(&vfprintf_l))[argc];
+      |                   ^~~~~~~~~~
+      |                   vfprintf
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-IluaGg/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_82454.dir/build.make:78: CMakeFiles/cmTC_82454.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-IluaGg'
+gmake: *** [Makefile:127: cmTC_82454/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef vfprintf_l
+  return ((int*)(&vfprintf_l))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the vsnprintf_l exist failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ZOrNmm
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_8a894/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_8a894.dir/build.make CMakeFiles/cmTC_8a894.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ZOrNmm'
+Building C object CMakeFiles/cmTC_8a894.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_8a894.dir/CheckSymbolExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ZOrNmm/CheckSymbolExists.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ZOrNmm/CheckSymbolExists.c: In function ‘main’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ZOrNmm/CheckSymbolExists.c:8:19: error: ‘vsnprintf_l’ undeclared (first use in this function); did you mean ‘vsnprintf’?
+    8 |   return ((int*)(&vsnprintf_l))[argc];
+      |                   ^~~~~~~~~~~
+      |                   vsnprintf
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ZOrNmm/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_8a894.dir/build.make:78: CMakeFiles/cmTC_8a894.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ZOrNmm'
+gmake: *** [Makefile:127: cmTC_8a894/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef vsnprintf_l
+  return ((int*)(&vsnprintf_l))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the include file windows.h exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-MoHbET
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_bb006/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_bb006.dir/build.make CMakeFiles/cmTC_bb006.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-MoHbET'
+Building C object CMakeFiles/cmTC_bb006.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_bb006.dir/CheckIncludeFile.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-MoHbET/CheckIncludeFile.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-MoHbET/CheckIncludeFile.c:1:10: fatal error: windows.h: No such file or directory
+    1 | #include <windows.h>
+      |          ^~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_bb006.dir/build.make:78: CMakeFiles/cmTC_bb006.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-MoHbET'
+gmake: *** [Makefile:127: cmTC_bb006/fast] Error 2
+
+
+
+Performing C++ SOURCE FILE Test HAVE_WORKING_FORK failed with the following compile output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-0hQmuq
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_9a358/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9a358.dir/build.make CMakeFiles/cmTC_9a358.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-0hQmuq'
+Building CXX object CMakeFiles/cmTC_9a358.dir/src.cxx.o
+/usr/bin/c++ -DHAVE_WORKING_FORK  -O3 -DNDEBUG -o CMakeFiles/cmTC_9a358.dir/src.cxx.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-0hQmuq/src.cxx
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-0hQmuq/src.cxx: In function ‘int main()’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-0hQmuq/src.cxx:8:24: error: ‘fork’ was not declared in this scope
+    8 |       int main() { if (fork() < 0) return(1); return(0); }
+      |                        ^~~~
+gmake[1]: *** [CMakeFiles/cmTC_9a358.dir/build.make:78: CMakeFiles/cmTC_9a358.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-0hQmuq'
+gmake: *** [Makefile:127: cmTC_9a358/fast] Error 2
+
+
+...and run output:
+
+Return value: 1
+Source file was:
+
+      #ifdef HAVE_SYS_TYPES_H
+      #include <sys/types.h>
+    #endif
+    #ifdef HAVE_UNISTD_H
+      #include <unistd.h>
+    #endif
+      int main() { if (fork() < 0) return(1); return(0); }
+    
+
+Performing C++ SOURCE FILE Test HAVE_WORKING_VFORK failed with the following compile output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-BPhKd1
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_be11a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_be11a.dir/build.make CMakeFiles/cmTC_be11a.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-BPhKd1'
+Building CXX object CMakeFiles/cmTC_be11a.dir/src.cxx.o
+/usr/bin/c++ -DHAVE_WORKING_VFORK  -O3 -DNDEBUG -o CMakeFiles/cmTC_be11a.dir/src.cxx.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-BPhKd1/src.cxx
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-BPhKd1/src.cxx: In function ‘int main()’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-BPhKd1/src.cxx:11:24: error: ‘vfork’ was not declared in this scope
+   11 |       int main() { if (vfork() < 0) return(1); return(0); }
+      |                        ^~~~~
+gmake[1]: *** [CMakeFiles/cmTC_be11a.dir/build.make:78: CMakeFiles/cmTC_be11a.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-BPhKd1'
+gmake: *** [Makefile:127: cmTC_be11a/fast] Error 2
+
+
+...and run output:
+
+Return value: 1
+Source file was:
+
+      #ifdef HAVE_SYS_TYPES_H
+      #include <sys/types.h>
+    #endif
+    #ifdef HAVE_UNISTD_H
+      #include <unistd.h>
+    #endif
+    #ifdef HAVE_VFORK_H
+      #include <vfork.h>
+    #endif
+      int main() { if (vfork() < 0) return(1); return(0); }
+    
+
+Determining if the include file xlocale.h exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-M8bIdI
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_92e05/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_92e05.dir/build.make CMakeFiles/cmTC_92e05.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-M8bIdI'
+Building C object CMakeFiles/cmTC_92e05.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_92e05.dir/CheckIncludeFile.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-M8bIdI/CheckIncludeFile.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-M8bIdI/CheckIncludeFile.c:1:10: fatal error: xlocale.h: No such file or directory
+    1 | #include <xlocale.h>
+      |          ^~~~~~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_92e05.dir/build.make:78: CMakeFiles/cmTC_92e05.dir/CheckIncludeFile.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-M8bIdI'
+gmake: *** [Makefile:127: cmTC_92e05/fast] Error 2
+
+
+
+Determining if the function _aligned_malloc exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-DiLR7q
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_6ca31/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_6ca31.dir/build.make CMakeFiles/cmTC_6ca31.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-DiLR7q'
+Building C object CMakeFiles/cmTC_6ca31.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=_aligned_malloc -O3 -DNDEBUG -o CMakeFiles/cmTC_6ca31.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-DiLR7q/CheckFunctionExists.c
+Linking C executable cmTC_6ca31
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6ca31.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=_aligned_malloc -O3 -DNDEBUG CMakeFiles/cmTC_6ca31.dir/CheckFunctionExists.c.o -o cmTC_6ca31 
+/usr/bin/ld: CMakeFiles/cmTC_6ca31.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `_aligned_malloc'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_6ca31.dir/build.make:99: cmTC_6ca31] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-DiLR7q'
+gmake: *** [Makefile:127: cmTC_6ca31/fast] Error 2
+
+
+
+Determining if the function _NSGetExecutablePath exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-4efwNA
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_5aa3c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_5aa3c.dir/build.make CMakeFiles/cmTC_5aa3c.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-4efwNA'
+Building C object CMakeFiles/cmTC_5aa3c.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=_NSGetExecutablePath -O3 -DNDEBUG -o CMakeFiles/cmTC_5aa3c.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-4efwNA/CheckFunctionExists.c
+Linking C executable cmTC_5aa3c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5aa3c.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=_NSGetExecutablePath -O3 -DNDEBUG CMakeFiles/cmTC_5aa3c.dir/CheckFunctionExists.c.o -o cmTC_5aa3c 
+/usr/bin/ld: CMakeFiles/cmTC_5aa3c.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `_NSGetExecutablePath'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_5aa3c.dir/build.make:99: cmTC_5aa3c] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-4efwNA'
+gmake: *** [Makefile:127: cmTC_5aa3c/fast] Error 2
+
+
+
+Determining if the function _pclose exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ydnEvM
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_3f3eb/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_3f3eb.dir/build.make CMakeFiles/cmTC_3f3eb.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ydnEvM'
+Building C object CMakeFiles/cmTC_3f3eb.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=_pclose -O3 -DNDEBUG -o CMakeFiles/cmTC_3f3eb.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ydnEvM/CheckFunctionExists.c
+Linking C executable cmTC_3f3eb
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3f3eb.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=_pclose -O3 -DNDEBUG CMakeFiles/cmTC_3f3eb.dir/CheckFunctionExists.c.o -o cmTC_3f3eb 
+/usr/bin/ld: CMakeFiles/cmTC_3f3eb.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `_pclose'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_3f3eb.dir/build.make:99: cmTC_3f3eb] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-ydnEvM'
+gmake: *** [Makefile:127: cmTC_3f3eb/fast] Error 2
+
+
+
+Determining if the function _popen exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-gEHtuz
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_2bdc6/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_2bdc6.dir/build.make CMakeFiles/cmTC_2bdc6.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-gEHtuz'
+Building C object CMakeFiles/cmTC_2bdc6.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=_popen -O3 -DNDEBUG -o CMakeFiles/cmTC_2bdc6.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-gEHtuz/CheckFunctionExists.c
+Linking C executable cmTC_2bdc6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2bdc6.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=_popen -O3 -DNDEBUG CMakeFiles/cmTC_2bdc6.dir/CheckFunctionExists.c.o -o cmTC_2bdc6 
+/usr/bin/ld: CMakeFiles/cmTC_2bdc6.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `_popen'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_2bdc6.dir/build.make:99: cmTC_2bdc6] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-gEHtuz'
+gmake: *** [Makefile:127: cmTC_2bdc6/fast] Error 2
+
+
+
+Determining if the function _wfopen exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wFMQNg
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_5804d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_5804d.dir/build.make CMakeFiles/cmTC_5804d.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wFMQNg'
+Building C object CMakeFiles/cmTC_5804d.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=_wfopen -O3 -DNDEBUG -o CMakeFiles/cmTC_5804d.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wFMQNg/CheckFunctionExists.c
+Linking C executable cmTC_5804d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5804d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=_wfopen -O3 -DNDEBUG CMakeFiles/cmTC_5804d.dir/CheckFunctionExists.c.o -o cmTC_5804d 
+/usr/bin/ld: CMakeFiles/cmTC_5804d.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `_wfopen'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_5804d.dir/build.make:99: cmTC_5804d] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wFMQNg'
+gmake: *** [Makefile:127: cmTC_5804d/fast] Error 2
+
+
+
+Determining if the function _wstat exists failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-faWvjv
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_1bb97/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_1bb97.dir/build.make CMakeFiles/cmTC_1bb97.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-faWvjv'
+Building C object CMakeFiles/cmTC_1bb97.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=_wstat -O3 -DNDEBUG -o CMakeFiles/cmTC_1bb97.dir/CheckFunctionExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-faWvjv/CheckFunctionExists.c
+Linking C executable cmTC_1bb97
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1bb97.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=_wstat -O3 -DNDEBUG CMakeFiles/cmTC_1bb97.dir/CheckFunctionExists.c.o -o cmTC_1bb97 
+/usr/bin/ld: CMakeFiles/cmTC_1bb97.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0xc): undefined reference to `_wstat'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [CMakeFiles/cmTC_1bb97.dir/build.make:99: cmTC_1bb97] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-faWvjv'
+gmake: *** [Makefile:127: cmTC_1bb97/fast] Error 2
+
+
+
+Performing C++ SOURCE FILE Test STRERROR_R_CHAR_P failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-xf3bY3
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_f1c54/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f1c54.dir/build.make CMakeFiles/cmTC_f1c54.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-xf3bY3'
+Building CXX object CMakeFiles/cmTC_f1c54.dir/src.cxx.o
+/usr/bin/c++ -DSTRERROR_R_CHAR_P  -O3 -DNDEBUG -o CMakeFiles/cmTC_f1c54.dir/src.cxx.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-xf3bY3/src.cxx
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-xf3bY3/src.cxx:2:5: error: ‘::main’ must return ‘int’
+    2 |     void main()
+      |     ^~~~
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-xf3bY3/src.cxx: In function ‘int main()’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-xf3bY3/src.cxx:5:17: error: ‘strerror_r’ was not declared in this scope
+    5 |       char x = *strerror_r(0, buf, sizeof buf);
+      |                 ^~~~~~~~~~
+gmake[1]: *** [CMakeFiles/cmTC_f1c54.dir/build.make:78: CMakeFiles/cmTC_f1c54.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-xf3bY3'
+gmake: *** [Makefile:127: cmTC_f1c54/fast] Error 2
+
+
+Source file was:
+
+    void main() 
+    {
+      char buf[100];
+      char x = *strerror_r(0, buf, sizeof buf);
+      char *p = strerror_r(0, buf, sizeof buf);
+    }
+  
+
+Performing C++ SOURCE FILE Test TIME_WITH_SYS_TIME failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-7nQRWb
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_02666/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_02666.dir/build.make CMakeFiles/cmTC_02666.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-7nQRWb'
+Building CXX object CMakeFiles/cmTC_02666.dir/src.cxx.o
+/usr/bin/c++ -DTIME_WITH_SYS_TIME  -O3 -DNDEBUG -o CMakeFiles/cmTC_02666.dir/src.cxx.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-7nQRWb/src.cxx
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-7nQRWb/src.cxx:4:5: error: ‘::main’ must return ‘int’
+    4 |     void main(void){}
+      |     ^~~~
+gmake[1]: *** [CMakeFiles/cmTC_02666.dir/build.make:78: CMakeFiles/cmTC_02666.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-7nQRWb'
+gmake: *** [Makefile:127: cmTC_02666/fast] Error 2
+
+
+Source file was:
+
+    #include <sys/time.h>
+    #include <time.h>
+    void main(void){}
+  
+
+Determining if the struct tm exist failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-dwSDPb
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_0e89e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_0e89e.dir/build.make CMakeFiles/cmTC_0e89e.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-dwSDPb'
+Building C object CMakeFiles/cmTC_0e89e.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_0e89e.dir/CheckSymbolExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-dwSDPb/CheckSymbolExists.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-dwSDPb/CheckSymbolExists.c: In function ‘main’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-dwSDPb/CheckSymbolExists.c:7:19: error: expected expression before ‘struct’
+    7 |   return ((int*)(&struct tm))[argc];
+      |                   ^~~~~~
+gmake[1]: *** [CMakeFiles/cmTC_0e89e.dir/build.make:78: CMakeFiles/cmTC_0e89e.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-dwSDPb'
+gmake: *** [Makefile:127: cmTC_0e89e/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <sys/time.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+  return ((int*)(&struct tm))[argc];
+}
+Determining if the _MINIX exist failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-2XRjvt
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_e6279/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_e6279.dir/build.make CMakeFiles/cmTC_e6279.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-2XRjvt'
+Building C object CMakeFiles/cmTC_e6279.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_e6279.dir/CheckSymbolExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-2XRjvt/CheckSymbolExists.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-2XRjvt/CheckSymbolExists.c: In function ‘main’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-2XRjvt/CheckSymbolExists.c:8:19: error: ‘_MINIX’ undeclared (first use in this function)
+    8 |   return ((int*)(&_MINIX))[argc];
+      |                   ^~~~~~
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-2XRjvt/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_e6279.dir/build.make:78: CMakeFiles/cmTC_e6279.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-2XRjvt'
+gmake: *** [Makefile:127: cmTC_e6279/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _MINIX
+  return ((int*)(&_MINIX))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the _POSIX_1_SOURCE exist failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-XHIRta
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_87483/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_87483.dir/build.make CMakeFiles/cmTC_87483.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-XHIRta'
+Building C object CMakeFiles/cmTC_87483.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_87483.dir/CheckSymbolExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-XHIRta/CheckSymbolExists.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-XHIRta/CheckSymbolExists.c: In function ‘main’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-XHIRta/CheckSymbolExists.c:8:19: error: ‘_POSIX_1_SOURCE’ undeclared (first use in this function)
+    8 |   return ((int*)(&_POSIX_1_SOURCE))[argc];
+      |                   ^~~~~~~~~~~~~~~
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-XHIRta/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[1]: *** [CMakeFiles/cmTC_87483.dir/build.make:78: CMakeFiles/cmTC_87483.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-XHIRta'
+gmake: *** [Makefile:127: cmTC_87483/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef _POSIX_1_SOURCE
+  return ((int*)(&_POSIX_1_SOURCE))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the gid_t exist failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-cZpD8a
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_57636/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_57636.dir/build.make CMakeFiles/cmTC_57636.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-cZpD8a'
+Building C object CMakeFiles/cmTC_57636.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_57636.dir/CheckSymbolExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-cZpD8a/CheckSymbolExists.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-cZpD8a/CheckSymbolExists.c: In function ‘main’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-cZpD8a/CheckSymbolExists.c:8:19: error: expected expression before ‘gid_t’
+    8 |   return ((int*)(&gid_t))[argc];
+      |                   ^~~~~
+gmake[1]: *** [CMakeFiles/cmTC_57636.dir/build.make:78: CMakeFiles/cmTC_57636.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-cZpD8a'
+gmake: *** [Makefile:127: cmTC_57636/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <sys/types.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef gid_t
+  return ((int*)(&gid_t))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the mode_t exist failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-xpRFcJ
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_97992/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_97992.dir/build.make CMakeFiles/cmTC_97992.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-xpRFcJ'
+Building C object CMakeFiles/cmTC_97992.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_97992.dir/CheckSymbolExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-xpRFcJ/CheckSymbolExists.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-xpRFcJ/CheckSymbolExists.c: In function ‘main’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-xpRFcJ/CheckSymbolExists.c:8:19: error: expected expression before ‘mode_t’
+    8 |   return ((int*)(&mode_t))[argc];
+      |                   ^~~~~~
+gmake[1]: *** [CMakeFiles/cmTC_97992.dir/build.make:78: CMakeFiles/cmTC_97992.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-xpRFcJ'
+gmake: *** [Makefile:127: cmTC_97992/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <sys/types.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef mode_t
+  return ((int*)(&mode_t))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the pid_t exist failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wcfxhK
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_b1582/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_b1582.dir/build.make CMakeFiles/cmTC_b1582.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wcfxhK'
+Building C object CMakeFiles/cmTC_b1582.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_b1582.dir/CheckSymbolExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wcfxhK/CheckSymbolExists.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wcfxhK/CheckSymbolExists.c: In function ‘main’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wcfxhK/CheckSymbolExists.c:8:19: error: expected expression before ‘pid_t’
+    8 |   return ((int*)(&pid_t))[argc];
+      |                   ^~~~~
+gmake[1]: *** [CMakeFiles/cmTC_b1582.dir/build.make:78: CMakeFiles/cmTC_b1582.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-wcfxhK'
+gmake: *** [Makefile:127: cmTC_b1582/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <sys/types.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pid_t
+  return ((int*)(&pid_t))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the uid_t exist failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-UlNen8
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_bbc53/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_bbc53.dir/build.make CMakeFiles/cmTC_bbc53.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-UlNen8'
+Building C object CMakeFiles/cmTC_bbc53.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -O3 -DNDEBUG -o CMakeFiles/cmTC_bbc53.dir/CheckSymbolExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-UlNen8/CheckSymbolExists.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-UlNen8/CheckSymbolExists.c: In function ‘main’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-UlNen8/CheckSymbolExists.c:8:19: error: expected expression before ‘uid_t’
+    8 |   return ((int*)(&uid_t))[argc];
+      |                   ^~~~~
+gmake[1]: *** [CMakeFiles/cmTC_bbc53.dir/build.make:78: CMakeFiles/cmTC_bbc53.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-UlNen8'
+gmake: *** [Makefile:127: cmTC_bbc53/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <sys/types.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef uid_t
+  return ((int*)(&uid_t))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Performing C++ SOURCE FILE Test HAVE_VOLATILE failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-7SeQ3D
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_763c9/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_763c9.dir/build.make CMakeFiles/cmTC_763c9.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-7SeQ3D'
+Building CXX object CMakeFiles/cmTC_763c9.dir/src.cxx.o
+/usr/bin/c++ -DHAVE_VOLATILE  -O3 -DNDEBUG -o CMakeFiles/cmTC_763c9.dir/src.cxx.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-7SeQ3D/src.cxx
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-7SeQ3D/src.cxx:2:3: error: ‘::main’ must return ‘int’
+    2 |   void main() { volatile int i = 1; }
+      |   ^~~~
+gmake[1]: *** [CMakeFiles/cmTC_763c9.dir/build.make:78: CMakeFiles/cmTC_763c9.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-7SeQ3D'
+gmake: *** [Makefile:127: cmTC_763c9/fast] Error 2
+
+
+Source file was:
+
+  void main() { volatile int i = 1; }
+  
+
+Determining if the PTHREAD_PRIO_INHERIT exist failed with the following output:
+Change Dir: /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-UPDj2A
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_2905a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_2905a.dir/build.make CMakeFiles/cmTC_2905a.dir/build
+gmake[1]: Entering directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-UPDj2A'
+Building C object CMakeFiles/cmTC_2905a.dir/CheckSymbolExists.c.o
+/usr/bin/cc  -I/usr/include/freetype2 -I/usr/include/libxml2 -O3 -DNDEBUG -o CMakeFiles/cmTC_2905a.dir/CheckSymbolExists.c.o -c /home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-UPDj2A/CheckSymbolExists.c
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-UPDj2A/CheckSymbolExists.c: In function ‘main’:
+/home/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-UPDj2A/CheckSymbolExists.c:8:18: error: lvalue required as unary ‘&’ operand
+    8 |   return ((int*)(&PTHREAD_PRIO_INHERIT))[argc];
+      |                  ^
+gmake[1]: *** [CMakeFiles/cmTC_2905a.dir/build.make:78: CMakeFiles/cmTC_2905a.dir/CheckSymbolExists.c.o] Error 1
+gmake[1]: Leaving directory '/encrypted/mmom/src/magickwand.js/swig/CMakeFiles/CMakeScratch/TryCompile-UPDj2A'
+gmake: *** [Makefile:127: cmTC_2905a/fast] Error 2
+
+
+File CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef PTHREAD_PRIO_INHERIT
+  return ((int*)(&PTHREAD_PRIO_INHERIT))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
