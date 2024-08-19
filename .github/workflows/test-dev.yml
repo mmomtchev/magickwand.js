@@ -102,7 +102,7 @@ jobs:
       - name: Locate addon file
         shell: bash
         id: addon
-        run: node -p '"addon=" + path.resolve(__dirname, "..", "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
+        run: node -p '"addon=" + path.resolve(__dirname, "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
       - name: List linked libraries (Linux)
         run: ldd ${{ steps.addon.outputs.addon }}
         if: runner.os == 'Linux'
@@ -171,7 +171,7 @@ jobs:
       - name: Locate addon file
         shell: bash
         id: addon
-        run: node -p '"addon=" + path.resolve(__dirname, "..", "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
+        run: node -p '"addon=" + path.resolve(__dirname, "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
       - name: List linked libraries (Linux)
         run: ldd ${{ steps.addon.outputs.addon }}
         if: runner.os == 'Linux'
