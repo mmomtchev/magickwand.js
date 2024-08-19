@@ -281,6 +281,7 @@ jobs:
       - name: Build magickwand.js
         run: |
           npm install --build-wasm-from-source --verbose --foreground-scripts           \
+            --enable-conan                                                              \
             --disable-fonts --enable-jpeg --enable-png --disable-tiff                   \
             --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia         \
             --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif \
