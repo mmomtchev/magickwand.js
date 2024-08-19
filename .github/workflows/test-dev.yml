@@ -91,11 +91,24 @@ jobs:
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
+      - name: Install libpng-dev on Ubuntu 24.04
+        run: sudo apt-get install -y libpng-dev
+        if: matrix.platform == 'ubuntu-24.04' && matrix.dependencies == 'system'
       - name: Build magickwand.js
         run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm ${{ matrix.dependencies == 'conan' && '--enable-conan' || '--disable-conan' }}
         env:
           C_INCLUDE_PATH: /usr/local/include
           CPLUS_INCLUDE_PATH: /usr/local/include
+      - name: Locate addon file
+        shell: bash
+        id: addon
+        run: node -p '"addon=" + path.resolve(__dirname, "..", "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
+      - name: List linked libraries (Linux)
+        run: ldd ${{ steps.addon.outputs.addon }}
+        if: runner.os == 'Linux'
+      - name: List linked libraries (macOS)
+        run: otool -L ${{ steps.addon.outputs.addon }}
+        if: runner.os == 'macOS'
       - run: npx mocha test/node.test.ts test/integration.test.ts
         env:
           MOCHA_INTEGRATION: node
@@ -155,6 +168,16 @@ jobs:
             --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd     \
             --disable-openmp --disable-display --disable-jbig --disable-cairo             \
             --skip-magickwand-wasm
+      - name: Locate addon file
+        shell: bash
+        id: addon
+        run: node -p '"addon=" + path.resolve(__dirname, "..", "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
+      - name: List linked libraries (Linux)
+        run: ldd ${{ steps.addon.outputs.addon }}
+        if: runner.os == 'Linux'
+      - name: List linked libraries (macOS)
+        run: otool -L ${{ steps.addon.outputs.addon }}
+        if: runner.os == 'macOS'
       - run: npx mocha test/node.test.ts
         env:
           MOCHA_LIGHT: 1
