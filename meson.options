@@ -6,6 +6,10 @@ option( 'external', type: 'boolean', value: false,
   description: 'Do not build ImageMagick and link the bindings with an externally provided library',
 )
 
+option( 'prefer_static', type: 'boolean', value: false,
+  description: 'Try to prefer static libraries when possible'
+)
+
 option('fonts', type: 'boolean', value: true, description: 'Fonts support')
 option('jpeg', type: 'boolean', value: true, description: 'JPEG support')
 option('png', type: 'boolean', value: true, description: 'PNG support')

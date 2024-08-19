@@ -95,7 +95,7 @@ jobs:
         run: sudo apt-get install -y libpng-dev libjpeg-dev
         if: matrix.platform == 'ubuntu-24.04' && matrix.dependencies == 'system'
       - name: Build magickwand.js
-        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm ${{ matrix.dependencies == 'conan' && '--enable-conan' || '--disable-conan' }}
+        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm ${{ matrix.dependencies == 'conan' && '--enable-conan --enable-prefer_static' || '--disable-conan' }}
         env:
           C_INCLUDE_PATH: /usr/local/include
           CPLUS_INCLUDE_PATH: /usr/local/include
