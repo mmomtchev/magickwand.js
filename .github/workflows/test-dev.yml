@@ -30,3 +30,10 @@ jobs:
     steps:
       - run: pkg-config --cflags zlib
       - run: pkg-config --libs zlib
+      - name: Setup Visual Studio
+        uses: ilammy/msvc-dev-cmd@v1
+        if: runner.os == 'Windows'
+      - run: cc -o test-zlib test-zlib.c
+        if: runner.os != 'Windows'
+      - run: cl -o test-zlib test-zlib.c
+        if: runner.os == 'Windows'
