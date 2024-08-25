@@ -94,6 +94,12 @@ jobs:
       - name: Install libpng-dev and libjpeg-dev on Ubuntu 24.04
         run: sudo apt-get install -y libpng-dev libjpeg-dev
         if: matrix.platform == 'ubuntu-24.04' && matrix.dependencies == 'system'
+      - name: Do not use GHA pkg-config on Windows
+        shell: bash
+        run: |
+          echo "PKG_CONFIG_LIBDIR=" >> $GITHUB_ENV
+          echo "PKG_CONFIG_PATH=" >> $GITHUB_ENV
+        if: runner.os == 'Windows'
       - name: Build magickwand.js
         run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm ${{ matrix.dependencies == 'conan' && '--enable-conan --enable-link-static' || '--disable-conan' }}
         env:
