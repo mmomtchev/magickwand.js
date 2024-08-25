@@ -6,7 +6,7 @@ option( 'external', type: 'boolean', value: false,
   description: 'Do not build ImageMagick and link the bindings with an externally provided library',
 )
 
-option( 'link-static', type: 'boolean', value: false,
+option( 'link_static', type: 'boolean', value: false,
   description: 'Try to prefer static libraries when possible'
 )
 

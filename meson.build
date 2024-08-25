@@ -19,7 +19,7 @@ napi = import('node-api')
 
 root_dir = meson.global_source_root()
 static = not get_option('shared') or meson.is_cross_build()
-link_static = get_option('link-static')
+link_static = get_option('link_static')
 external = get_option('external')
 
 # Show a summary
