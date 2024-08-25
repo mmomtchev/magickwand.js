@@ -29,8 +29,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: pkg-config --cflags zlib
-      - run: pkg-config --libs zlib
+      - run: |
+          pkg-config --cflags zlib
+          pkg-config --libs zlib
+        if: runner.os != 'Windows'
+      - run: |
+          pkg-config --msvc-syntax --cflags zlib
+          pkg-config --msvc-syntax --libs zlib
+        if: runner.os == 'Windows'
       - name: Setup Visual Studio
         uses: ilammy/msvc-dev-cmd@v1
         if: runner.os == 'Windows'
