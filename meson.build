@@ -95,6 +95,7 @@ if not external
   if link_static
     # Used for the prebuilt binaries, links X11 statically
     # This allows to use them even if X11 is not installed
+    # Alas, this requires Ubuntu 24 on Linux and macOS 13 on Mac
     cmake_opts.add_cmake_defines([{'MAGICK_PREFER_STATIC_LIBS': true}])
   endif
 

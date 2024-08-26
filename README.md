@@ -129,7 +129,7 @@ Also, if you have a code editor capable of reading the TypeScript bindings, such
 
 When in doubt about the JS semantics of a particular method, you can also check the unit tests: https://github.com/mmomtchev/magickwand.js/tree/main/test.
 
-When using Node.js with X-Windows, the `Image.display()` function works and it is an excellent debugging tool.
+When using Node.js with X-Windows (Linux or Mac), it is possible to build the module with X11 support, in this case the `Image.display()` function will work and it will provide an excellent debugging tool. The default prebuilt binaries do not have this option at the moment in order to support headless installation. Use `--enable-display` to build the native module with it.
 
 ### Rebuilding from npm with the built-in ImageMagick library
 

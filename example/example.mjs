@@ -33,8 +33,9 @@ console.log('All metadata: ', await im.formatExpressionAsync('%[*:*]'));
 await im.scaleAsync('160x212');
 await im.rotateAsync(60);
 
-// Display it and continue execution (requires X11)
-im.displayAsync();
+// Display it in a window and continue execution (requires X11)
+im.displayAsync()
+  .catch(() => console.warn('X11 support not available'));
 
 // displayAsync locks the previous image object
 // until it completes executions

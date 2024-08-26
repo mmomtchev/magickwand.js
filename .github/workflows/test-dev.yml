@@ -99,7 +99,7 @@ jobs:
         run: rm `which pkg-config`*
         if: runner.os == 'Windows'
       - name: Build magickwand.js
-        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm ${{ matrix.dependencies == 'conan' && '--enable-conan --enable-link-static' || '--disable-conan' }}
+        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm ${{ matrix.dependencies == 'conan' && '--enable-conan' || '--disable-conan' }}
         env:
           C_INCLUDE_PATH: /usr/local/include
           CPLUS_INCLUDE_PATH: /usr/local/include
@@ -118,6 +118,7 @@ jobs:
           MOCHA_INTEGRATION: node
           MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
           MOCHA_LIGHT: ${{ matrix.dependencies == 'conan' && '' || '1' }}
+          MOCHA_EXTRALIGHT: ${{ (matrix.dependencies == 'system' && runner.os == 'Windows') && '1' || '' }}
 
   native-light:
     runs-on: ${{ matrix.platform }}
