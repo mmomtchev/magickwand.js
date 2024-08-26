@@ -41,7 +41,7 @@ export default function (
 
       it('copy constructor', () => {
         const blob1 = new Blob;
-        im.magick('RGB');
+        im.magick('BMP');
         im.write(blob1);
 
         const blob2 = new Blob(blob1);
@@ -50,7 +50,7 @@ export default function (
 
         const test = new Image;
         test.read(blob1);
-        assert.strictEqual(test.magick(), 'RGB');
+        assert.strictEqual(test.magick(), 'BMP');
         test.read(blob2);
         assert.strictEqual(test.magick(), 'GIF');
       });
