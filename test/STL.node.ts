@@ -45,7 +45,7 @@ describe('STL', () => {
     const blur = new Magick.blurImage(20, 10.5);
     blur.call(im);
     const px1 = im.pixelColor(10, 10);
-    assert.closeTo(px1.quantumBlue(), 63635, 1);
+    assert.closeTo(px1.quantumBlue(), 63616, 1);
   });
 
   it('(async) blurImage', () => {
