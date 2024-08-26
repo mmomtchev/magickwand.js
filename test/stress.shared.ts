@@ -137,7 +137,7 @@ export default function (
       // Half of them broken
       const q = [] as Promise<boolean>[];
       for (let i = 0; i < 100; i++) {
-        q.push(im[i].readAsync(i % 2 === 0 ? wizard : 'notwizard.png')
+        q.push(im[i].readAsync(i % 2 === 0 ? wizard : 'notwizard.gif')
           .then(() => true)
           .catch(() => false)
         );
