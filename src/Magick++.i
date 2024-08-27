@@ -1,7 +1,7 @@
 %module magickwand
 
-#ifndef SWIG_JAVASCRIPT_EVOLUTION
-#error magickwand.js requires SWIG JavaScript Evolution
+#if !defined(SWIG_JAVASCRIPT_EVOLUTION) || SWIG_VERSION < 0x050004
+#error magickwand.js requires SWIG JavaScript Evolution >= 5.0.4
 #endif
 
 #define MAGICKCORE_EXCLUDE_DEPRECATED
@@ -189,4 +189,14 @@ using namespace Magick;
 %insert(init) %{
 // We link in everything statically
 InitializeMagick(".");
+%}
+
+%insert(begin) %{
+// Because of https://github.com/emscripten-core/emscripten/pull/21041
+#ifdef __EMSCRIPTEN__
+#include <emscripten/version.h>
+#if __EMSCRIPTEN_major__ < 3 || (__EMSCRIPTEN_major__ == 3 && __EMSCRIPTEN_minor__ < 1) || (__EMSCRIPTEN_major__ == 3 && __EMSCRIPTEN_minor__ == 1 && __EMSCRIPTEN_tiny__ < 52)
+#error Building this project requires emscripten >= 3.1.52
+#endif
+#endif
 %}

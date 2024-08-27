@@ -141,7 +141,7 @@ npm install magickwand.js --build-from-source
 
 This will also rebuild the included Magick++ library. Currently, you will need a working C++17 environment as the full xPack version that will rebuild itself with its own compiler is still not ready. The project is tested, and has pre-built binaries, with `gcc` on Linux x64, `clang` on macOS x64 and arm64, and `MSVC` on Windows x64.
 
-This will rebuild the bindings against the available system-installed (usually shared) libraries which will lead to an order of magnitude smaller addon size.
+This will rebuild the bindings against the available system-installed (usually shared) libraries which will lead to an order of magnitude smaller addon size. If you also specify `--enable-display` you will get X11 support (`Image.display` method) on Linux and macOS if the X11 libraries are available.
 
 If you want to rebuild the bindings using the full set of statically linked libraries obtained from `conan`, you have to use:
 
@@ -168,7 +168,7 @@ cd magickwand.js
 ```shell
 npm install                                # install all npm dependencies
 npx xpm install                            # install the supporting xpm packages (python, conan, meson, ninja, cmake)
-npx xpm generate                           # generate the SWIG wrappers
+npx xpm generate                           # generate the SWIG wrappers (requires SWIG JSE 5.0.4)
 npx xpm run prepare --config native-debug  # available builds are native, native-debug, wasm and wasm-debug
 npx xpm run configure --config native-debug -- -Db_sanitize=address # optional step to enable ASAN
 npx xpm run build --config native-debug    # build
