@@ -263,7 +263,7 @@ export default function (
       let im = new Image;
 
       im.read(path);
-      im.magick('JPEG');
+      im.magick('GIF');
       im.write(tmpBlob);
 
       im = new Image();
@@ -276,7 +276,7 @@ export default function (
       let im = new Image;
 
       return assert.isFulfilled(im.readAsync(path)
-        .then(() => im.magickAsync('JPEG'))
+        .then(() => im.magickAsync('GIF'))
         .then(() => im.writeAsync(tmpBlob))
         .then(() => {
           im = new Image();
@@ -290,13 +290,13 @@ export default function (
     it('throw an exception', () => {
       const im = new Image;
       assert.throws(() => {
-        im.read('something.png');
+        im.read('something.gif');
       }, /unable to open image/);
     });
 
     it('(async) throw an exception', () => {
       const im = new Image;
-      return assert.isRejected(im.readAsync('something.png'), /unable to open image/);
+      return assert.isRejected(im.readAsync('something.gif'), /unable to open image/);
     });
   });
 }

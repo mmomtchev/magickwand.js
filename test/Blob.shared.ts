@@ -20,8 +20,8 @@ export default function (
       it('default', () => {
         const blob = new Blob;
 
-        // PNG image
-        im.magick('PNG');
+        // GIF image
+        im.magick('GIF');
         im.write(blob);
         assert.isBelow(blob.length(), rawLength);
         assert.isAbove(blob.length(), 1024);
@@ -41,18 +41,18 @@ export default function (
 
       it('copy constructor', () => {
         const blob1 = new Blob;
-        im.magick('JPG');
+        im.magick('BMP');
         im.write(blob1);
 
         const blob2 = new Blob(blob1);
-        im.magick('PNG');
+        im.magick('GIF');
         im.write(blob2);
 
         const test = new Image;
         test.read(blob1);
-        assert.strictEqual(test.magick(), 'JPEG');
+        assert.strictEqual(test.magick(), 'BMP');
         test.read(blob2);
-        assert.strictEqual(test.magick(), 'PNG');
+        assert.strictEqual(test.magick(), 'GIF');
       });
     });
 
@@ -119,9 +119,9 @@ export default function (
             }));
       });
 
-      it('import PNG from base64', () => {
+      it('import GIF from base64', () => {
         const blobIn = new Blob;
-        im.magick('PNG');
+        im.magick('GIF');
         im.write(blobIn);
         const b64 = blobIn.base64();
         assert.typeOf(b64, 'string');

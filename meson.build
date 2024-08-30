@@ -19,6 +19,7 @@ napi = import('node-api')
 
 root_dir = meson.global_source_root()
 static = not get_option('shared') or meson.is_cross_build()
+link_static = get_option('link_static')
 external = get_option('external')
 
 # Show a summary
@@ -90,6 +91,13 @@ if not external
     # included in a dynamically loadable module
     {'CMAKE_POSITION_INDEPENDENT_CODE': true}
   ])
+
+  if link_static
+    # Used for the prebuilt binaries, links X11 statically
+    # This allows to use them even if X11 is not installed
+    # Alas, this requires Ubuntu 24 on Linux and macOS 13 on Mac
+    cmake_opts.add_cmake_defines([{'MAGICK_PREFER_STATIC_LIBS': true}])
+  endif
 
   # ImageMagick optional modules
   im_opts = {

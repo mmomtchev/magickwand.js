@@ -28,7 +28,7 @@ describe('CoderInfo', () => {
       assert.isString(list.get(i).name());
       coders.push(list.get(i).name());
     }
-    assert.includeMembers(coders, ['GIF', 'JPEG', 'PNG']);
+    assert.includeMembers(coders, process.env.MOCHA_EXTRALIGHT ? ['GIF'] : ['GIF', 'JPEG', 'PNG']);
 
     const writables = coderInfoList(CoderInfo.AnyMatch, CoderInfo.TrueMatch, CoderInfo.AnyMatch);
     assert.isBelow(writables.size(), list.size());

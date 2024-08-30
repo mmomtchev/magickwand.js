@@ -23,7 +23,7 @@ import './STL.node';
 
 import { Magick, MagickCore } from 'magickwand.js/native';
 
-const imageFile = path.join(__dirname, 'data', 'wizard.png');
+const imageFile = path.join(__dirname, 'data', 'wizard.gif');
 const imageData = fs.readFileSync(imageFile);
 
 TestImage(path.resolve(__dirname, 'data', 'wizard.gif'), assert, Magick, MagickCore);

@@ -48,7 +48,7 @@ class ImageMagickDelegates(ConanFile):
     }
 
     default_options = {
-      'conan':      npm_option('conan', True),
+      'conan':      npm_option('conan', False),
       'fonts':      npm_option('fonts', True) and npm_option('fonts-conan', True),
       'jpeg':       npm_option('jpeg', True) and npm_option('jpeg-conan', True),
       'png':        npm_option('png', True) and npm_option('png-conan', True),

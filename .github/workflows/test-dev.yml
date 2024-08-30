@@ -54,6 +54,9 @@ jobs:
           - macos-12
           - macos-latest
           - windows-latest
+        dependencies:
+          - system
+          - conan
 
     steps:
       - uses: actions/checkout@v4
@@ -88,15 +91,34 @@ jobs:
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
+      - name: Install libpng-dev and libjpeg-dev on Ubuntu 24.04
+        run: sudo apt-get install -y libpng-dev libjpeg-dev
+        if: matrix.platform == 'ubuntu-24.04' && matrix.dependencies == 'system'
+      - name: Do not use GHA pkg-config on Windows
+        shell: bash
+        run: rm `which pkg-config`*
+        if: runner.os == 'Windows'
       - name: Build magickwand.js
-        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm
+        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm ${{ matrix.dependencies == 'conan' && '--enable-conan' || '--disable-conan' }}
         env:
           C_INCLUDE_PATH: /usr/local/include
           CPLUS_INCLUDE_PATH: /usr/local/include
+      - name: Locate addon file
+        shell: bash
+        id: addon
+        run: node -p '"addon=" + path.resolve(__dirname, "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
+      - name: List linked libraries (Linux)
+        run: ldd ${{ steps.addon.outputs.addon }}
+        if: runner.os == 'Linux'
+      - name: List linked libraries (macOS)
+        run: otool -L ${{ steps.addon.outputs.addon }}
+        if: runner.os == 'macOS'
       - run: npx mocha test/node.test.ts test/integration.test.ts
         env:
           MOCHA_INTEGRATION: node
           MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
+          MOCHA_LIGHT: ${{ matrix.dependencies == 'conan' && '' || '1' }}
+          MOCHA_EXTRALIGHT: ${{ (matrix.dependencies == 'system' && runner.os == 'Windows') && '1' || '' }}
 
   native-light:
     runs-on: ${{ matrix.platform }}
@@ -151,6 +173,16 @@ jobs:
             --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd     \
             --disable-openmp --disable-display --disable-jbig --disable-cairo             \
             --skip-magickwand-wasm
+      - name: Locate addon file
+        shell: bash
+        id: addon
+        run: node -p '"addon=" + path.resolve(__dirname, "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
+      - name: List linked libraries (Linux)
+        run: ldd ${{ steps.addon.outputs.addon }}
+        if: runner.os == 'Linux'
+      - name: List linked libraries (macOS)
+        run: otool -L ${{ steps.addon.outputs.addon }}
+        if: runner.os == 'macOS'
       - run: npx mocha test/node.test.ts
         env:
           MOCHA_LIGHT: 1
@@ -197,7 +229,7 @@ jobs:
           path: ${{ steps.conan_home.outputs.path }}
           key: wasm-conan
       - name: Build magickwand.js
-        run: npm install --build-wasm-from-source --verbose --foreground-scripts --skip-magickwand-native
+        run: npm install --build-wasm-from-source --verbose --foreground-scripts --skip-magickwand-native --enable-conan
       - name: Check size
         run: |
           echo "::notice::Default WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
@@ -254,6 +286,7 @@ jobs:
       - name: Build magickwand.js
         run: |
           npm install --build-wasm-from-source --verbose --foreground-scripts           \
+            --enable-conan                                                              \
             --disable-fonts --enable-jpeg --enable-png --disable-tiff                   \
             --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia         \
             --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif \
@@ -323,6 +356,8 @@ jobs:
           npx xpm run prepare --config native-debug
           npx xpm run configure --config native-debug -- -Db_sanitize=address
           npx xpm run build --config native-debug
+        env:
+          npm_config_enable_conan: true
       - run: node node_modules/mocha/bin/mocha.js -i -g Security --repeats 1000 test/node.test.ts
         env:
           LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6

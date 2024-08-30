@@ -12,7 +12,7 @@ const { Image, Color } = Magick;
 
 describe('STL', () => {
   it('mosaicImages', () => {
-    const src1 = new Image(path.join(__dirname, 'data', 'wizard.png'));
+    const src1 = new Image(path.join(__dirname, 'data', 'wizard.gif'));
     const src2 = new Image(src1.size(), new Color('red'));
 
     const dst = Magick.averageImages([src1, src2]);
@@ -25,7 +25,7 @@ describe('STL', () => {
   });
 
   it('montageImages', () => {
-    const src = new Image(path.join(__dirname, 'data', 'wizard.png'));
+    const src = new Image(path.join(__dirname, 'data', 'wizard.gif'));
 
     const opts = new Magick.Montage;
     opts.gravity(MagickCore.CenterGravity);
@@ -40,27 +40,27 @@ describe('STL', () => {
   });
 
   it('blurImage', () => {
-    const im = new Image(path.join(__dirname, 'data', 'wizard.png'));
+    const im = new Image(path.join(__dirname, 'data', 'wizard.gif'));
 
     const blur = new Magick.blurImage(20, 10.5);
     blur.call(im);
     const px1 = im.pixelColor(10, 10);
-    assert.closeTo(px1.quantumBlue(), 63635, 1);
+    assert.closeTo(px1.quantumBlue(), 63616, 1);
   });
 
   it('(async) blurImage', () => {
-    const im = new Image(path.join(__dirname, 'data', 'wizard.png'));
+    const im = new Image(path.join(__dirname, 'data', 'wizard.gif'));
 
     const blur = new Magick.blurImage(20, 10.5);
     return assert.isFulfilled(blur.callAsync(im).then(() => {
       const px1 = im.pixelColor(10, 10);
-      assert.closeTo(px1.quantumBlue(), 63635, 1);
+      assert.closeTo(px1.quantumBlue(), 63616, 1);
     }));
   });
 
   describe('readImages', () => {
     it('readImages()', () => {
-      const images = Magick.readImages(path.join(__dirname, 'data', 'wizard.png'));
+      const images = Magick.readImages(path.join(__dirname, 'data', 'wizard.gif'));
 
       assert.instanceOf(images, Array);
       assert.instanceOf(images[0], Magick.Image);
@@ -69,7 +69,7 @@ describe('STL', () => {
     });
 
     it('readImagesAsync()', () => {
-      return assert.isFulfilled(Magick.readImagesAsync(path.join(__dirname, 'data', 'wizard.png'))
+      return assert.isFulfilled(Magick.readImagesAsync(path.join(__dirname, 'data', 'wizard.gif'))
         .then((images) => {
           assert.instanceOf(images, Array);
           assert.instanceOf(images[0], Magick.Image);
@@ -82,7 +82,7 @@ describe('STL', () => {
       const opt = new Magick.ReadOptions();
       opt.size(new Magick.Geometry('80x106'));
       assert.strictEqual(opt.size().width(), 80);
-      const images = Magick.readImages(path.join(__dirname, 'data', 'wizard.png'), opt);
+      const images = Magick.readImages(path.join(__dirname, 'data', 'wizard.gif'), opt);
 
       assert.instanceOf(images, Array);
       assert.instanceOf(images[0], Magick.Image);
@@ -92,18 +92,18 @@ describe('STL', () => {
   });
 
   describe('writeImages', () => {
-    const tmp = path.join(__dirname, 'data', 'temp.png');
+    const tmp = path.join(__dirname, 'data', 'temp.gif');
 
     it('writeImages()', () => {
       const im = new Magick.Image(new Magick.Geometry(100, 80), new Magick.Color);
-      im.magick('PNG');
+      im.magick('GIF');
       Magick.writeImages([im], tmp);
       fs.rmSync(tmp);
     });
 
     it('writeImagesAsync()', () => {
       const im = new Magick.Image(new Magick.Geometry(100, 80), new Magick.Color);
-      im.magick('PNG');
+      im.magick('GIF');
       return assert.isFulfilled(Magick.writeImagesAsync([im], tmp))
         .then(() => fs.promises.rm(tmp));
     });
