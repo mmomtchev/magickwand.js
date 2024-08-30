@@ -141,7 +141,7 @@ npm install magickwand.js --build-from-source
 
 This will also rebuild the included Magick++ library. Currently, you will need a working C++17 environment as the full xPack version that will rebuild itself with its own compiler is still not ready. The project is tested, and has pre-built binaries, with `gcc` on Linux x64, `clang` on macOS x64 and arm64, and `MSVC` on Windows x64.
 
-This will rebuild the bindings against the available system-installed (usually shared) libraries which will lead to an order of magnitude smaller addon size. If you also specify `--enable-display` you will get X11 support (`Image.display` method) on Linux and macOS if the X11 libraries are available.
+This will rebuild the bindings against the available system-installed (usually shared) libraries which will lead to an order of magnitude smaller addon size. If the X11 libraries are available, this build will support X11 (`Image.display` method) on Linux and macOS.
 
 If you want to rebuild the bindings using the full set of statically linked libraries obtained from `conan`, you have to use:
 

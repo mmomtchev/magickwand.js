@@ -30,6 +30,7 @@ option('lzma', type: 'boolean', value: true, description: 'lzma support')
 option('openmp', type: 'boolean', value: true, description: 'OpenMP support (only in Node.js native on Linux or macOS)')
 option('cairo', type: 'boolean', value: true, description: 'Cairo support (only in Node.js native)')
 
-option('display', type: 'boolean', value: false, description: 'X11 support (only in Node.js native on Linux or macOS/Quartz)')
+option('display', type: 'boolean', value: true, description: 'X11 support (only in Node.js native on Linux or macOS/Quartz)')
+
 option('fftw', type: 'boolean', value: false, description: 'FFTW support (broken)')
 option('jxl', type: 'boolean', value: false, description: 'JXL support (broken)')

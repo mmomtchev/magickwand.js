@@ -60,7 +60,7 @@ jobs:
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
       - name: Build magickwand.js (native)
-        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm --enable-conan
+        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm --enable-conan --disable-display
       - run: npx mocha test/node.test.ts test/integration.test.ts
         env:
           MOCHA_INTEGRATION: node
@@ -98,7 +98,7 @@ jobs:
           name: swig
           path: swig
       - name: Build magickwand.js (WASM)
-        run: npm install --build-wasm-from-source --verbose --foreground-scripts --skip-magickwand-native --enable-conan
+        run: npm install --build-wasm-from-source --verbose --foreground-scripts --skip-magickwand-native --enable-conan --disable-display
       - name: Run headless test
         uses: coactions/setup-xvfb@v1
         env:
