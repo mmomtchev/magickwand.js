@@ -78,7 +78,7 @@ emnapi_sync_memory(env, false, &ab_value, 0, NAPI_AUTO_LENGTH);
   // arrays_javascript defines a typemap for double[], just inline it
   // we can't simply %apply because we want to extend it with
   // automatic size
-  // The 99 is needed because of a typemap deficiency in SWIG JSE 5.0.4
+  // The 99 is a workaround for https://github.com/mmomtchev/swig/issues/62
   $2_ltype &arg99 = $2;
   $typemap(in, double [], 1=arg99, 2=$1, argnum=99);
   // we know the size
