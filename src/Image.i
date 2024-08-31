@@ -72,6 +72,24 @@ emnapi_sync_memory(env, false, &ab_value, 0, NAPI_AUTO_LENGTH);
 %}
 %typemap(tsout) Magick::TypeMetric *metrics "Magick.TypeMetric";
 
+%include <arrays_javascript.i>
+// Arguments in a C array
+%typemap(in) (const size_t numberArguments_, const double *arguments_) {
+  // arrays_javascript defines a typemap for double[], just inline it
+  // we can't simply %apply because we want to extend it with
+  // automatic size
+  // The 99 is a workaround for https://github.com/mmomtchev/swig/issues/62
+  $2_ltype &arg99 = $2;
+  $typemap(in, double [], 1=arg99, 2=$1, argnum=99);
+  // we know the size
+  $1 = $input.As<Napi::Array>().Length();
+}
+%typemap(ts) (const size_t numberArguments_, const double *arguments_) "number[]";
+// Alternative spelling
+%apply (const size_t numberArguments_, const double *arguments_) {
+  (const size_t number_arguments_, const double *arguments_)
+};
+
 // These methods will be built without async version
 // (they are considered latency-free)
 // This is to reduce the RAM requirements when building

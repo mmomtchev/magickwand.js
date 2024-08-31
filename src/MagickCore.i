@@ -7,6 +7,7 @@
 %rename("%s") MagickCore;
 %rename("%s", regextarget=1) ".+Operator$";
 %rename("%s", regextarget=1) ".+Op$";
+%rename("%s", regextarget=1) ".+Method$";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Options$";
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Type$";
 %rename("%s", regextarget=1, %$isconstant) "Magick.+";

@@ -8,7 +8,7 @@ export default function (
   bindingsMagickCore: typeof MagickCore
 ) {
   const { Image, Geometry, Color, Blob } = bindingsMagick;
-  const { MultiplyCompositeOp } = bindingsMagickCore;
+  const { MultiplyCompositeOp, AffineDistortion } = bindingsMagickCore;
 
   describe('Image', () => {
     describe('constructor', () => {
@@ -144,7 +144,7 @@ export default function (
               }));
         });
 
-        it('write', function() {
+        it('write', function () {
           const im = new Image('15x20', new Color(0, 65535, 0, 0));
           const pixels = new typed(15 * 20 * 4);
 
@@ -162,7 +162,7 @@ export default function (
           }, /does not match the number of pixels/);
         });
 
-        it('writeAsync', function() {
+        it('writeAsync', function () {
           const im = new Image('15x20', new Color(0, 65535, 0, 0));
           const pixels = new typed(15 * 20 * 4);
 
@@ -231,6 +231,19 @@ export default function (
       im = new Image();
       im.read(tmpBlob);
       assert.equal(im.size().width(), 10);
+    });
+
+    it('distort', () => {
+      let im = new Image;
+
+      im.read(path);
+      assert.equal(im.size().width(), 80);
+      im.distort(AffineDistortion, [
+        3.5, 60.5, 3.5, 60.5,
+        32.5, 60.5, 32.5, 60.5,
+        3.5, 30.5, 33.5, 20.5
+      ], false);
+      assert.equal(im.size().width(), 80);
     });
 
     it('(async) read an image, crop it, write it and read it back', () => {
