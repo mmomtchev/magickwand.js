@@ -16,7 +16,7 @@
  - macOS 14 `arm64` prebuilt binaries and support for rebuilding from source on macOS 14 `arm64`
  - The generation of the SWIG wrappers and the `npm` package is now reproducible and hosted in Github Actions, and the generated wrappers are included in the published package
  - Drop X11 support from the prebuilt binaries for headless installation, X11 support now requires rebuilding from source
- - Fix [], distortion methods require C-style arrays
+ - Fix [#220](https://github.com/mmomtchev/magickwand.js/issues/220), distortion methods require C-style arrays
 
 
 ## [1.1.0] 2024-04-17
