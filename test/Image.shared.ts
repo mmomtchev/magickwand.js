@@ -8,7 +8,7 @@ export default function (
   bindingsMagickCore: typeof MagickCore
 ) {
   const { Image, Geometry, Color, Blob } = bindingsMagick;
-  const { MultiplyCompositeOp } = bindingsMagickCore;
+  const { MultiplyCompositeOp, AffineDistortion } = bindingsMagickCore;
 
   describe('Image', () => {
     describe('constructor', () => {
@@ -230,6 +230,15 @@ export default function (
 
       im = new Image();
       im.read(tmpBlob);
+      assert.equal(im.size().width(), 10);
+    });
+
+    it('distort', () => {
+      let im = new Image;
+
+      im.read(path);
+      assert.equal(im.size().width(), 80);
+      im.distort(AffineDistortion, [0.9, 1.0, 1.1, 0.9, 1.0, 1.1, 0.9, 1.0, 1.1], false);
       assert.equal(im.size().width(), 10);
     });
 
