@@ -82,7 +82,7 @@ emnapi_sync_memory(env, false, &ab_value, 0, NAPI_AUTO_LENGTH);
   $2_ltype &arg99 = $2;
   $typemap(in, double [], 1=arg99, 2=$1, argnum=99);
   // we know the size
-  $2 = $input.As<Napi::Array>().Length();
+  $1 = $input.As<Napi::Array>().Length();
 }
 %typemap(ts) (const size_t numberArguments_, const double *arguments_) "number[]";
 // Alternative spelling
