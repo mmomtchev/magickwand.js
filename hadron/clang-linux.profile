@@ -1,3 +1,14 @@
+[buildenv]
+CC=clang
+CXX=clang++
+LD=clang-ld
+AR=llvm-ar
+RANLIB=llvm-ranlib
+AS=x86_64-w64-mingw32-as
+NM=llvm-nm
+STRIP=llvm-strip
+OBJDUMP=llvm-objdump
+
 [settings]
 arch=x86_64
 build_type=Release
