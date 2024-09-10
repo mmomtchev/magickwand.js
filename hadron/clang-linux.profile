@@ -9,4 +9,3 @@ os=Linux
 
 [conf]
 tools.build:sharedlinkflags=['-Wl,--exclude-libs,ALL', '-static-libstdc++', '-static-libgcc']
-tools.cmake.cmaketoolchain:generator=Ninja

@@ -239,7 +239,7 @@ The following options are available when using `npm install`:
 
 * `--disable-simd` disables SIMD (always disabled for WASM)
 
-Additionally, the following options control the various ImageMagick submodules. All `--disable-*` options have `--enable-*` counterparts which are enabled by default and `--disable-*-conan` variants which disable only the built-in `conan` delegate - when `conan` is enabled - but leave the support enabled if the corresponding libraries is system-installed.
+Additionally, the following options control the various ImageMagick submodules. All `--disable-*` options have `--enable-*` counterparts which are enabled by default and `--disable-*-conan` variants which disable only the built-in `conan` delegate - when `conan` is enabled - but leave the support enabled if the corresponding libraries is system-installed. For example `--enable-jpeg --disable-jpeg-conan` will include JPEG support using the system-installed library even if `conan` is enabled, while only `--enable-jpeg` will depend on `--enable-conan` or `--disable-conan`.
 
 * `--disable-fonts` for the font delegate libraries (always disabled for WASM)
 * `--disable-jpeg` for `libopenjpeg`
