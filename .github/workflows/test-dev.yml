@@ -249,7 +249,7 @@ jobs:
       - name: Build with xPack
         run: |
           npx xpm install
-          npx xpm install --config xpack
+          npx xpm install --config native-xpack
           npx xpm run prepare --config native-xpack
           npx xpm run configure --config native-xpack
           npx xpm run build --config native-xpack
