@@ -169,6 +169,7 @@ class ImageMagickDelegates(ConanFile):
       if self.settings.arch != 'wasm' and self.options.fonts:
         self.options['glib'].shared = False
         self.options['glib'].fPIC = True
+        self.options['glib'].with_elf = False
 
       if self.options.jpeg2000:
         self.options['jasper'].with_libjpeg = 'libjpeg-turbo'
