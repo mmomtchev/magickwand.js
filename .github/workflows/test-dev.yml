@@ -202,9 +202,6 @@ jobs:
           - macos-12
           - macos-latest
           - windows-latest
-        dependencies:
-          - system
-          - conan
 
     steps:
       - uses: actions/checkout@v4
@@ -241,7 +238,7 @@ jobs:
         if: startsWith(matrix.platform, 'ubuntu')
       - name: Install libpng-dev and libjpeg-dev on Ubuntu 24.04
         run: sudo apt-get install -y libpng-dev libjpeg-dev
-        if: matrix.platform == 'ubuntu-24.04' && matrix.dependencies == 'system'
+        if: matrix.platform == 'ubuntu-24.04'
       - name: Do not use GHA pkg-config on Windows
         shell: bash
         run: rm `which pkg-config`*
@@ -254,7 +251,7 @@ jobs:
           npx xpm run configure --config native-xpack
           npx xpm run build --config native-xpack
         env:
-          npm_config_enable_conan: ${{ matrix.dependencies == 'conan' }}
+          npm_config_enable_conan: true
           C_INCLUDE_PATH: /usr/local/include
           CPLUS_INCLUDE_PATH: /usr/local/include
       - name: Locate addon file
@@ -271,8 +268,6 @@ jobs:
         env:
           MOCHA_INTEGRATION: node
           MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
-          MOCHA_LIGHT: ${{ matrix.dependencies == 'conan' && '' || '1' }}
-          MOCHA_EXTRALIGHT: ${{ (matrix.dependencies == 'system' && runner.os == 'Windows') && '1' || '' }}
 
 
   wasm:
