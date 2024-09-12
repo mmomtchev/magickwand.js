@@ -85,7 +85,8 @@ class ImageMagickDelegates(ConanFile):
         return
 
       # Fonts are not available on WASM targets
-      if self.options.fonts and self.settings.arch != 'wasm':
+      # Also fonts do not compile on Windows with clang: https://github.com/conan-io/conan-center-index/issues/25241 
+      if self.options.fonts and self.settings.arch != 'wasm' and (self.settings.os != 'Windows and ' or self.settings.compiler != "clang"):
         [self.requires(x, force=True) for x in (
           'libffi/3.4.4', 'freetype/2.13.2', 'fribidi/1.0.12', 'glib/2.78.1', 'harfbuzz/8.3.0'
         )]
