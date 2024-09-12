@@ -166,12 +166,26 @@ cd magickwand.js
 
 * or, to do everything manually:
 ```shell
-npm install                                # install all npm dependencies
-npx xpm install                            # install the supporting xpm packages (python, conan, meson, ninja, cmake)
-npx xpm generate                           # generate the SWIG wrappers (requires SWIG JSE 5.0.4)
-npx xpm run prepare --config native-debug  # available builds are native, native-debug, wasm and wasm-debug
-npx xpm run configure --config native-debug -- -Db_sanitize=address # optional step to enable ASAN
-npx xpm run build --config native-debug    # build
+# install all npm dependencies
+npm install
+# install the supporting xpm packages (python, conan, meson, ninja, cmake)                            
+npx xpm install
+# generate the SWIG wrappers (requires SWIG JSE 5.0.4)
+npx xpm generate                  
+# available builds are native, native-debug, wasm and wasm-debug
+npx xpm run prepare --config native-debug
+# build
+npx xpm run build --config native-debug
+```
+
+Other useful commands:
+```shell
+# optional step to enable ASAN (run after prepare)
+npx xpm run configure --config native-debug -- -Db_sanitize=address
+# inspect conan configuration (and, generally, run conan commands)
+npx xpm run conan --config native-debug -- graph info .
+# inspect meson configuration (and, generally, run meson commands)
+npx xpm run meson --config native-debug -- introspect -a build/native-debug
 ```
 
 Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the data used internally by ImageMagick - image files still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. **Unless you can regenerate the SWIG wrappers, you will have to use the exact same version (the latest one at the release date) that was used when they were generated**. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
