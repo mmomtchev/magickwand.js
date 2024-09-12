@@ -20,6 +20,10 @@ def npm_option(option, default):
 class ImageMagickDelegates(ConanFile):
     settings = 'os', 'compiler', 'build_type', 'arch'
 
+    fonts_enabled = False
+    clang_windows = False
+    glib_available = False
+
     options = {
       'conan':     [ True, False ],
       'fonts':     [ True, False ],
@@ -77,23 +81,21 @@ class ImageMagickDelegates(ConanFile):
 
     # CMakeToolchain is manually instantiated at the end
     # (this should probably go into a hadron-specific conan library)
-    generators = [ 'MesonToolchain', 'CMakeDeps' ]
+    generators = [ 'MesonToolchain' ]
 
     def requirements(self):
       # Disable all bundled delegates
       if not self.options.conan or 'npm_config_enable_external' in environ:
         return
 
-      # Fonts are not available on WASM targets
-      # Also fonts do not compile on Windows with clang: https://github.com/conan-io/conan-center-index/issues/25241 
-      if self.options.fonts and self.settings.arch != 'wasm' and (self.settings.os != 'Windows and ' or self.settings.compiler != "clang"):
-        [self.requires(x, force=True) for x in (
-          'libffi/3.4.4', 'freetype/2.13.2', 'fribidi/1.0.12', 'glib/2.78.1', 'harfbuzz/8.3.0'
-        )]
+      if self.fonts_enabled:
+        if self.glib_available:
+          [self.requires(x, force=True) for x in ('libffi/3.4.4', 'glib/2.78.1')]
+        [self.requires(x, force=True) for x in ('freetype/2.13.2', 'fribidi/1.0.12', 'harfbuzz/8.3.0')]
         if self.settings.os != 'Windows':
           self.requires('fontconfig/2.14.2', force=True)
 
-      if self.options.lzma:
+      if self.options.lzma and not self.clang_windows:
         self.requires('xz_utils/5.4.5')
 
       if self.options.bzip2:
@@ -102,7 +104,8 @@ class ImageMagickDelegates(ConanFile):
       if self.options.zstd:
         self.requires('zstd/1.5.5')
 
-      if self.options.zip:
+      # blocked by xz
+      if self.options.zip and not self.clang_windows:
         self.requires('libzip/1.9.2')
 
       if self.options.gzip:
@@ -111,13 +114,16 @@ class ImageMagickDelegates(ConanFile):
       if self.options.fftw:
         self.requires('fftw/3.3.10')
 
-      if self.options.color:
+      # requires a Windows resource compiler
+      if self.options.color and not self.clang_windows:
         self.requires('lcms/2.14')
 
-      if self.options.xml:
+      # libiconv does not compile with clang on Windows
+      # https://github.com/conan-io/conan-center-index/issues/25245
+      if self.options.xml and not self.clang_windows:
         self.requires('libxml2/2.10.4')
 
-      if self.options.heif:
+      if self.options.heif and not self.clang_windows:
         self.requires('libheif/1.16.2')
         self.requires('libaom-av1/3.6.0')
         self.requires('libde265/1.0.12')
@@ -128,7 +134,8 @@ class ImageMagickDelegates(ConanFile):
       if self.options.exr:
         self.requires('openexr/3.2.4')
 
-      if self.options.png:
+      # clang on windows blocked by zlib
+      if self.options.png and not self.clang_windows:
         self.requires('libpng/1.6.42')
 
       if self.options.webp:
@@ -141,13 +148,14 @@ class ImageMagickDelegates(ConanFile):
         self.requires('jasper/4.2.0', force=True)
         self.requires('openjpeg/2.5.0')
 
-      if self.options.tiff:
+      if self.options.tiff and not self.clang_windows:
         self.requires('libtiff/4.6.0')
 
       if self.options.raw:
         self.requires('libraw/0.21.2')
 
-      if self.options.cairo and self.settings.arch != 'wasm':
+      # clang on Windows blocked by png
+      if self.options.cairo and self.settings.arch != 'wasm' and not self.clang_windows:
         self.requires('cairo/1.17.8', force=True)
         self.requires('expat/2.6.0', force=True)
 
@@ -164,6 +172,15 @@ class ImageMagickDelegates(ConanFile):
         self.requires('pixman/0.43.4', force=True)
 
     def configure(self):
+      # clang on Windows is still unpaved
+      self.clang_windows = self.settings.os == 'Windows' and self.settings.compiler == "clang"
+
+      # libffi does not compile on Windows with clang: https://github.com/conan-io/conan-center-index/issues/25241 
+      self.glib_available = not self.clang_windows
+
+      # Fonts are not available on WASM targets
+      self.fonts_enabled = self.options.fonts and self.settings.arch != 'wasm' and not self.clang_windows
+
       if not self.options.conan or 'npm_config_external' in environ:
         return
 
@@ -171,6 +188,7 @@ class ImageMagickDelegates(ConanFile):
         self.options['glib'].shared = False
         self.options['glib'].fPIC = True
         self.options['glib'].with_elf = False
+        self.options['harfbuzz'].with_glib = self.glib_available
 
       if self.options.jpeg2000:
         self.options['jasper'].with_libjpeg = 'libjpeg-turbo'
@@ -180,19 +198,20 @@ class ImageMagickDelegates(ConanFile):
 
       if self.options.raw:
         self.options['libraw'].with_jpeg = 'libjpeg-turbo'
+        if self.clang_windows:
+          self.options['libraw'].with_lcms = False
 
-      fonts_enabled = self.settings.arch != 'wasm' and self.options.fonts
       if self.options.cairo and self.settings.arch != 'wasm':
         self.options['cairo'].with_png = self.options.png
-        self.options['cairo'].with_glib = fonts_enabled
+        self.options['cairo'].with_glib = self.fonts_enabled and self.glib_available
         # There is no portable way to include xlib
         self.options['cairo'].with_xlib = False
         self.options['cairo'].with_xlib_xrender = False
         self.options['cairo'].with_xcb = False
         self.options['cairo'].with_xcb = False
         self.options['cairo'].with_zlib = self.options.gzip
-        self.options['cairo'].with_freetype = fonts_enabled
-        self.options['cairo'].with_fontconfig = fonts_enabled and self.settings.os != 'Windows'
+        self.options['cairo'].with_freetype = self.fonts_enabled
+        self.options['cairo'].with_fontconfig = self.fonts_enabled and self.settings.os != 'Windows'
 
       # While Emscripten supports SIMD, Node.js does not and cannot run the resulting WASM bundle
       # The performance gain is not very significant and it has a huge compatibility issue
@@ -215,6 +234,14 @@ class ImageMagickDelegates(ConanFile):
     # This is the least opionated approach - no one imposes anything
     # and conan remains optional
     def generate(self):
-        tc = CMakeToolchain(self)
-        tc.blocks.remove("generic_system")
-        tc.generate()
+      if self.clang_windows:
+        # https://github.com/conan-io/conan-center-index/issues/23058
+        print('Monkey patching zlib', self.dependencies.host['zlib'], self.dependencies.host['zlib'].cpp_info, self.dependencies.host['zlib'].cpp_info.libs)
+        self.dependencies.host['zlib'].cpp_info.libs = ['z']
+
+      deps = CMakeDeps(self)
+      deps.generate()
+
+      tc = CMakeToolchain(self)
+      tc.blocks.remove('generic_system')
+      tc.generate()
