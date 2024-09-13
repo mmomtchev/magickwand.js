@@ -248,7 +248,6 @@ jobs:
           npx xpm install
           npx xpm install --config native-xpack
           npx xpm run prepare --config native-xpack
-          npx xpm run configure --config native-xpack
           npx xpm run build --config native-xpack
         env:
           npm_config_enable_conan: true
