@@ -149,7 +149,16 @@ If you want to rebuild the bindings using the full set of statically linked libr
 npm install magickwand.js --build-from-source --enable-conan
 ```
 
-The xPack fully self-contained version will use `clang` on all platforms.
+### Experimental `xPack` fully self-contained build
+
+This project supports the new `xPack` fully self-contained build of [`hadron`](https://github.com/mmomtchev/hadron) - which means that it can rebuild itself without a working C++ environment. In this mode, the only requirement is Node.js and `npm` and the project is built using a `clang` `xPack` on all platforms. Currently, this build is not the default one, since `conan` support for `clang` on Windows is still far from complete and many delegate libraries are missing on Windows. The build can be launched only manually and it is not available when installing the package from `npm`:
+
+```shell
+npx xpm install
+npx xpm install --config native-xpack
+npx xpm run prepare --config native-xpack
+npx xpm run build --config native-xpack
+```
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
