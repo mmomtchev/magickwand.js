@@ -205,6 +205,9 @@
         "inherit": [
           "native"
         ],
+        "actions": {
+          "clang": "clang"
+        },
         "properties": {
           "buildType": "release",
           "toolchain": "clang"
