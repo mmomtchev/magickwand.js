@@ -26,7 +26,7 @@ jobs:
     - uses: mmomtchev/setup-swig@main
       with:
         branch: jse
-        version: v5.0.4
+        version: v5.0.5
 
     - name: Verify SWIG
       run: swig-jse -version
