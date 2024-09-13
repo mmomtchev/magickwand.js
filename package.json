@@ -175,7 +175,9 @@
         "{% unless env.npm_config_skip_magickwand_native %}{{ properties.scriptInstallNative }}{% endunless %}",
         "{% unless env.npm_config_skip_magickwand_wasm %}{{ properties.scriptInstallWASM }}{% endunless %}"
       ],
-      "python": "python"
+      "python": "python",
+      "meson": "meson",
+      "conan": "conan"
     },
     "buildConfigurations": {
       "native": {
@@ -196,8 +198,6 @@
           ],
           "clean": "{{ properties.commandClean }}",
           "lock": "{{ properties.commandConanLockNative }}",
-          "meson": "meson",
-          "conan": "conan",
           "conanGraphInfo": "conan graph info {{ properties.argsConanShared }} {{ properties.argsConanNative }} ."
         }
       },
