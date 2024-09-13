@@ -81,7 +81,7 @@ class ImageMagickDelegates(ConanFile):
 
     # CMakeToolchain is manually instantiated at the end
     # (this should probably go into a hadron-specific conan library)
-    generators = [ 'MesonToolchain' ]
+    generators = [ 'MesonToolchain', 'CMakeDeps' ]
 
     def requirements(self):
       # Disable all bundled delegates
@@ -134,8 +134,7 @@ class ImageMagickDelegates(ConanFile):
       if self.options.exr:
         self.requires('openexr/3.2.4')
 
-      # clang on windows blocked by zlib
-      if self.options.png and not self.clang_windows:
+      if self.options.png:
         self.requires('libpng/1.6.42')
 
       if self.options.webp:
@@ -148,14 +147,13 @@ class ImageMagickDelegates(ConanFile):
         self.requires('jasper/4.2.0', force=True)
         self.requires('openjpeg/2.5.0')
 
-      if self.options.tiff and not self.clang_windows:
+      if self.options.tiff:
         self.requires('libtiff/4.6.0')
 
       if self.options.raw:
         self.requires('libraw/0.21.2')
 
-      # clang on Windows blocked by png
-      if self.options.cairo and self.settings.arch != 'wasm' and not self.clang_windows:
+      if self.options.cairo and self.settings.arch != 'wasm':
         self.requires('cairo/1.17.8', force=True)
         self.requires('expat/2.6.0', force=True)
 
@@ -168,8 +166,19 @@ class ImageMagickDelegates(ConanFile):
       if self.options.openmp and self.settings.arch != 'wasm' and self.settings.os != 'Windows':
         self.requires('llvm-openmp/12.0.1')
 
-      if self.options.display and self.settings.arch != 'wasm':
+      if self.options.display and self.settings.arch != 'wasm' and not self.clang_windows:
         self.requires('pixman/0.43.4', force=True)
+
+    def layout(self):
+      if self.clang_windows and self.dependencies['zlib']:
+        # https://github.com/conan-io/conan-center-index/issues/23058
+        print('Monkey patching zlib')
+        zlib = self.dependencies.host['zlib']._conanfile
+        zlib._package_info = zlib.package_info
+        def zlib_package_info():
+          zlib._package_info()
+          zlib.cpp_info.libs = ['z']
+        zlib.package_info = zlib_package_info
 
     def configure(self):
       # clang on Windows is still unpaved
@@ -234,14 +243,6 @@ class ImageMagickDelegates(ConanFile):
     # This is the least opionated approach - no one imposes anything
     # and conan remains optional
     def generate(self):
-      if self.clang_windows:
-        # https://github.com/conan-io/conan-center-index/issues/23058
-        print('Monkey patching zlib', self.dependencies.host['zlib'], self.dependencies.host['zlib'].cpp_info, self.dependencies.host['zlib'].cpp_info.libs)
-        self.dependencies.host['zlib'].cpp_info.libs = ['z']
-
-      deps = CMakeDeps(self)
-      deps.generate()
-
       tc = CMakeToolchain(self)
       tc.blocks.remove('generic_system')
       tc.generate()
