@@ -88,6 +88,9 @@ class ImageMagickDelegates(ConanFile):
       if not self.options.conan or 'npm_config_enable_external' in environ:
         return
 
+      if self.clang_windows:
+        self.tool_requires('make/4.4.1')
+
       if self.fonts_enabled:
         if self.glib_available:
           [self.requires(x, force=True) for x in ('libffi/3.4.4', 'glib/2.78.1')]
@@ -170,7 +173,7 @@ class ImageMagickDelegates(ConanFile):
         self.requires('pixman/0.43.4', force=True)
 
     def layout(self):
-      if self.clang_windows and self.dependencies['zlib']:
+      if self.clang_windows and 'zlib' in self.dependencies:
         # https://github.com/conan-io/conan-center-index/issues/23058
         print('Monkey patching zlib')
         zlib = self.dependencies.host['zlib']._conanfile
