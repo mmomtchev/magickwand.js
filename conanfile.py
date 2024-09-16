@@ -88,9 +88,6 @@ class ImageMagickDelegates(ConanFile):
       if not self.options.conan or 'npm_config_enable_external' in environ:
         return
 
-      if self.clang_windows:
-        self.tool_requires('make/4.4.1')
-
       if self.fonts_enabled:
         if self.glib_available:
           [self.requires(x, force=True) for x in ('libffi/3.4.4', 'glib/2.78.1')]
@@ -98,7 +95,7 @@ class ImageMagickDelegates(ConanFile):
         if self.settings.os != 'Windows':
           self.requires('fontconfig/2.14.2', force=True)
 
-      if self.options.lzma and not self.clang_windows:
+      if self.options.lzma:
         self.requires('xz_utils/5.4.5')
 
       if self.options.bzip2:
@@ -107,8 +104,7 @@ class ImageMagickDelegates(ConanFile):
       if self.options.zstd:
         self.requires('zstd/1.5.5')
 
-      # blocked by xz
-      if self.options.zip and not self.clang_windows:
+      if self.options.zip:
         self.requires('libzip/1.9.2')
 
       if self.options.gzip:
