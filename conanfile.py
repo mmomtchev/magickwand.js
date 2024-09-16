@@ -117,7 +117,8 @@ class ImageMagickDelegates(ConanFile):
       if self.options.color and not self.clang_windows:
         self.requires('lcms/2.14')
 
-      # libiconv does not compile with clang on Windows
+      # libiconv/libxml use MSYS2 and are not compatible
+      # with a clang compiled without MSYS2 (Cygwin-style paths) support
       # https://github.com/conan-io/conan-center-index/issues/25245
       if self.options.xml and not self.clang_windows:
         self.requires('libxml2/2.10.4')
@@ -165,7 +166,7 @@ class ImageMagickDelegates(ConanFile):
       if self.options.openmp and self.settings.arch != 'wasm' and self.settings.os != 'Windows':
         self.requires('llvm-openmp/12.0.1')
 
-      if self.options.display and self.settings.arch != 'wasm' and not self.clang_windows:
+      if self.options.display and self.settings.arch != 'wasm':
         self.requires('pixman/0.43.4', force=True)
 
     def layout(self):
