@@ -273,8 +273,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Checkout submodules
-        run: git submodule update --init --recursive
+      - uses: actions/checkout@v4
+        name: Checkout ImageMagick
+        with:
+          repository: git@github.com:mmomtchev/ImageMagick.git
+          ref: cmake-portable-build
+          path: ${{ github.workspace }}/deps/ImageMagick
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
