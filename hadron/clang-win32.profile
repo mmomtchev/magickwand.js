@@ -24,10 +24,6 @@ compiler.cppstd=gnu17
 compiler.version=17
 os=Windows
 
-# We need make and bash for autotools-based projects
-[tool_requires]
-mingw-builds/13.2.0
-
 [conf]
 # clang tends to be pickier than MSVC when it comes to C/C++ compliance
 tools.build:cflags=['-Wno-incompatible-function-pointer-types']
