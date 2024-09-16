@@ -273,7 +273,9 @@ jobs:
 
     steps:
       - name: Install required software
-        run: apt-get install -y git
+        run: |
+          apt-get update
+          apt-get install -y git
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
