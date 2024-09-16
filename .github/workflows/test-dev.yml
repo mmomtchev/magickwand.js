@@ -276,7 +276,7 @@ jobs:
       - uses: actions/checkout@v4
         name: Checkout ImageMagick
         with:
-          repository: https://github.com/mmomtchev/ImageMagick.git
+          repository: mmomtchev/ImageMagick
           path: ${{ github.workspace }}/deps/ImageMagick
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
