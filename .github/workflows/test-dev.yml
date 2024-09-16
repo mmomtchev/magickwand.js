@@ -272,14 +272,9 @@ jobs:
     container: ubuntu:latest
 
     steps:
-      - name: Install required software
-        run: |
-          apt-get update
-          apt-get install -y git
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: true
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
