@@ -18,4 +18,6 @@ compiler.libcxx=libstdc++11
 os=Linux
 
 [conf]
+# By using clang we are already out of the paved road
+tools.cmake.cmaketoolchain:generator=Ninja
 tools.build:sharedlinkflags=['-Wl,--exclude-libs,ALL', '-static-libstdc++', '-static-libgcc']
