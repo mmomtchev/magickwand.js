@@ -24,9 +24,9 @@ compiler.cppstd=gnu17
 compiler.version=17
 os=Windows
 
-# We need make from MSYS2 for autotools-based projects
+# We need make and bash for autotools-based projects
 [tool_requires]
-msys2/cci.latest
+mingw-builds/13.2.0
 
 [conf]
 # clang tends to be pickier than MSVC when it comes to C/C++ compliance
