@@ -21,4 +21,4 @@ os=Linux
 # By using clang we are already out of the paved road
 tools.cmake.cmaketoolchain:generator=Ninja
 tools.build:sharedlinkflags=['-Wl,--exclude-libs,ALL', '-static-libstdc++', '-static-libgcc']
-tools.cmake.cmaketoolchain:extra_variables={'CMAKE_LINKER': 'llvm-ld', 'CMAKE_AR': 'llvm-ar', 'CMAKE_RANLIB': 'llvm-ranlib', 'CMAKE_NM': 'llvm-nm', 'CMAKE_STRIP': 'llvm-strip', 'CMAKE_OBJDUMP': 'llvm-objdump'}
+tools.cmake.cmaketoolchain:extra_variables={'CMAKE_LINKER': 'clang-ld', 'CMAKE_AR': 'llvm-ar', 'CMAKE_RANLIB': 'llvm-ranlib', 'CMAKE_NM': 'llvm-nm', 'CMAKE_STRIP': 'llvm-strip', 'CMAKE_OBJDUMP': 'llvm-objdump'}
