@@ -20,7 +20,7 @@ os=Macos
 
 # For autotools-based projects
 [tool_requires]
-make/4.4.1
+libffi/*: make/4.4.1
 
 [conf]
 # By using clang we are already out of the paved road
