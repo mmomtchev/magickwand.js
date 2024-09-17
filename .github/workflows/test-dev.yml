@@ -273,7 +273,9 @@ jobs:
 
     steps:
       - name: Install libc6-dev
-        run: apt-get install -y libc6-dev
+        run: |
+          apt-get update
+          apt-get install -y libc6-dev
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         name: Checkout ImageMagick
