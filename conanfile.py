@@ -208,6 +208,7 @@ class ImageMagickDelegates(ConanFile):
         self.options['glib'].fPIC = True
         self.options['glib'].with_elf = False
         self.options['glib'].with_mount = False
+        self.options['glib'].with_selinux = False
         self.options['harfbuzz'].with_glib = self.glib_available
 
       if self.options.jpeg2000:
