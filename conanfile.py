@@ -4,6 +4,7 @@ from conan.tools import CppInfo
 from conan.tools.cmake import CMakeToolchain, CMakeDeps
 from conan.tools.meson import MesonToolchain
 from os import environ
+from io import StringIO
 
 
 required_conan_version = ">=2.0.0"
@@ -164,7 +165,13 @@ class ImageMagickDelegates(ConanFile):
           self.requires('highway/1.0.3')
 
       if self.options.openmp and self.settings.arch != 'wasm' and self.settings.os != 'Windows':
-        self.requires('llvm-openmp/12.0.1')
+        try:
+          print('Checking for perl')
+          self.run('perl --version', quiet=True, stderr=StringIO(), stdout=StringIO())
+          self.requires('llvm-openmp/12.0.1')
+          print('perl found, enabling LLVM OpenMP')
+        except Exception:
+          print('No perl found, disabling LLVM OpenMP')
 
       if self.options.display and self.settings.arch != 'wasm':
         self.requires('pixman/0.43.4', force=True)
