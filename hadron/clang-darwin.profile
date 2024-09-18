@@ -30,6 +30,9 @@ libmount/*: make/4.4.1
 # pcre2 has some kind of weird conan bug
 pcre2/*: ninja/1.11.1
 
+[options]
+glib/*:with_selinux=False
+
 [conf]
 # By using clang we are already out of the paved road
 tools.cmake.cmaketoolchain:generator=Ninja
