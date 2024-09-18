@@ -91,7 +91,7 @@ class ImageMagickDelegates(ConanFile):
 
       if self.fonts_enabled:
         if self.glib_available:
-          [self.requires(x, force=True) for x in ('libffi/3.4.4', 'glib/2.78.1')]
+          [self.requires(x, force=True) for x in ('libffi/3.4.4', 'glib/2.81.0')]
         [self.requires(x, force=True) for x in ('freetype/2.13.2', 'fribidi/1.0.12', 'harfbuzz/8.3.0')]
         if self.settings.os != 'Windows':
           self.requires('fontconfig/2.14.2', force=True)
@@ -103,13 +103,13 @@ class ImageMagickDelegates(ConanFile):
         self.requires('bzip2/1.0.8')
 
       if self.options.zstd:
-        self.requires('zstd/1.5.5')
+        self.requires('zstd/1.5.6', force=True)
 
       if self.options.zip:
-        self.requires('libzip/1.9.2')
+        self.requires('libzip/1.10.1')
 
       if self.options.gzip:
-        self.requires('zlib/1.2.13')
+        self.requires('zlib/1.3.1', force=True)
 
       if self.options.fftw:
         self.requires('fftw/3.3.10')
@@ -136,17 +136,17 @@ class ImageMagickDelegates(ConanFile):
         self.requires('openexr/3.2.4')
 
       if self.options.png:
-        self.requires('libpng/1.6.42')
+        self.requires('libpng/1.6.43')
 
       if self.options.webp:
-        self.requires('libwebp/1.3.2')
+        self.requires('libwebp/1.4.0', force=True)
 
       if self.options.jpeg2000 or self.options.jpeg or self.options.tiff or self.options.raw:
         self.requires('libjpeg-turbo/3.0.2', force=True)
 
       if self.options.jpeg2000:
         self.requires('jasper/4.2.0', force=True)
-        self.requires('openjpeg/2.5.0')
+        self.requires('openjpeg/2.5.2')
 
       if self.options.tiff:
         self.requires('libtiff/4.6.0')
@@ -155,8 +155,8 @@ class ImageMagickDelegates(ConanFile):
         self.requires('libraw/0.21.2')
 
       if self.options.cairo and self.settings.arch != 'wasm':
-        self.requires('cairo/1.17.8', force=True)
-        self.requires('expat/2.6.0', force=True)
+        self.requires('cairo/1.18.0', force=True)
+        self.requires('expat/2.6.3', force=True)
 
       if self.options.jxl:
         self.requires('libjxl/0.6.1')
