@@ -22,6 +22,7 @@ os=Linux
 [tool_requires]
 libffi/*: make/4.4.1
 libiconv/*: make/4.4.1
+libmount/*: make/4.4.1
 
 [conf]
 # By using clang we are already out of the paved road
