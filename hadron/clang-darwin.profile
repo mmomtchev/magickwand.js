@@ -26,6 +26,7 @@ libffi/*: make/4.4.1
 libiconv/*: make/4.4.1
 util-linux-libuuid/*: make/4.4.1
 xz_utils/*: make/4.4.1
+libmount/*: make/4.4.1
 # pcre2 has some kind of weird conan bug
 pcre2/*: ninja/1.11.1
 
