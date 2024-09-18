@@ -201,7 +201,7 @@ class ImageMagickDelegates(ConanFile):
         return
 
       if self.options.zip:
-        self.options['libzip/1.9.2'].crypto = False
+        self.options['libzip'].crypto = False
 
       if self.settings.arch != 'wasm' and self.options.fonts:
         self.options['glib'].shared = False
