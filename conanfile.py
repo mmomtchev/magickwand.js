@@ -166,10 +166,10 @@ class ImageMagickDelegates(ConanFile):
 
       if self.options.openmp and self.settings.arch != 'wasm' and self.settings.os != 'Windows':
         try:
-          print('Checking for perl')
-          self.run('perl --version', quiet=True, stderr=StringIO(), stdout=StringIO())
+          print('Checking for perl with Encode module')
+          self.run('perl -e "use Encode"', stderr=StringIO(), stdout=StringIO())
           self.requires('llvm-openmp/12.0.1')
-          print('perl found, enabling LLVM OpenMP')
+          print('perl with Encode module found, enabling LLVM OpenMP')
         except Exception:
           print('No perl found, disabling LLVM OpenMP')
 
