@@ -200,36 +200,16 @@ class ImageMagickDelegates(ConanFile):
       if not self.options.conan or 'npm_config_external' in environ:
         return
 
-      if self.options.zip:
-        self.options['libzip'].crypto = False
-
       if self.settings.arch != 'wasm' and self.options.fonts:
-        self.options['glib'].shared = False
-        self.options['glib'].fPIC = True
-        self.options['glib'].with_elf = False
-        self.options['glib'].with_mount = False
-        self.options['glib'].with_selinux = False
         self.options['harfbuzz'].with_glib = self.glib_available
 
-      if self.options.jpeg2000:
-        self.options['jasper'].with_libjpeg = 'libjpeg-turbo'
-      
-      if self.options.tiff:
-        self.options['libtiff'].jpeg = 'libjpeg-turbo'
-
       if self.options.raw:
-        self.options['libraw'].with_jpeg = 'libjpeg-turbo'
         if self.clang_windows:
           self.options['libraw'].with_lcms = False
 
       if self.options.cairo and self.settings.arch != 'wasm':
         self.options['cairo'].with_png = self.options.png
         self.options['cairo'].with_glib = self.fonts_enabled and self.glib_available
-        # There is no portable way to include xlib
-        self.options['cairo'].with_xlib = False
-        self.options['cairo'].with_xlib_xrender = False
-        self.options['cairo'].with_xcb = False
-        self.options['cairo'].with_xcb = False
         self.options['cairo'].with_zlib = self.options.gzip
         self.options['cairo'].with_freetype = self.fonts_enabled
         self.options['cairo'].with_fontconfig = self.fonts_enabled and self.settings.os != 'Windows'
@@ -238,10 +218,6 @@ class ImageMagickDelegates(ConanFile):
       # The performance gain is not very significant and it has a huge compatibility issue
       if self.options.webp and (self.settings.arch == 'wasm' or not self.options.simd):
         self.options['libwebp'].with_simd = False
-      
-      # When building with emscripten, the main exe is called zstd.js and all symlinks are broken
-      if self.settings.arch == 'wasm' and self.options.zstd:
-        self.options['zstd'].build_programs = False
 
     # We don't want the conan build system - conan works best with the platforms' defaults
     # We always use ninja on all platforms (this is the meson approach)
