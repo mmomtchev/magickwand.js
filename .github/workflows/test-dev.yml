@@ -308,7 +308,7 @@ jobs:
           path: ${{ steps.conan_home.outputs.path }}
           key: conan-xpack-minimal-Linux
       - name: Install fonts on Ubuntu
-        run: sudo apt-get install -y fonts-ubuntu || true
+        run: apt-get install -y fonts-ubuntu
       - name: Build with xPack
         run: |
           npx xpm install
