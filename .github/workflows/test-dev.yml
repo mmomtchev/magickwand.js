@@ -275,7 +275,7 @@ jobs:
       - name: Install libc6-dev
         run: |
           apt-get update
-          apt-get install -y libc6-dev libstdc++-11-dev libgcc-11-dev binutils
+          apt-get install -y libc6-dev libstdc++-11-dev libgcc-11-dev binutils openssl
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         name: Checkout ImageMagick
