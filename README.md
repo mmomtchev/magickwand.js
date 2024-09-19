@@ -160,7 +160,7 @@ npx xpm run prepare --config native-xpack
 npx xpm run build --config native-xpack
 ```
 
-Be sure to read the notes at [Building hadron-based projects without a system compiler](https://github.com/mmomtchev/hadron/blob/main/README.xPacks.md)
+Be sure to read the notes at [Building hadron-based projects without a system compiler](https://github.com/mmomtchev/magickwand.js/blob/main/README.xPacks.md)
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
