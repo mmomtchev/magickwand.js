@@ -139,7 +139,7 @@ Starting with version 2.0, `magickwand.js` uses the new `hadron` build system sp
 npm install magickwand.js --build-from-source
 ```
 
-This will also rebuild the included Magick++ library. Currently, you will need a working C++17 environment as the full xPack version that will rebuild itself with its own compiler is still not ready. The project is tested, and has pre-built binaries, with `gcc` on Linux x64, `clang` on macOS x64 and arm64, and `MSVC` on Windows x64.
+This will also rebuild the included Magick++ library. Currently, you will need a working C++17 environment. You can read below for the experimental build with an integrated cross-platform compiler in a `xPack` (basically, an `npm` package). The project is tested, and has pre-built binaries, with `gcc` on Linux x64, `clang` on macOS x64 and arm64, and `MSVC` on Windows x64.
 
 This will rebuild the bindings against the available system-installed (usually shared) libraries which will lead to an order of magnitude smaller addon size. If the X11 libraries are available, this build will support X11 (`Image.display` method) on Linux and macOS.
 
@@ -151,7 +151,7 @@ npm install magickwand.js --build-from-source --enable-conan
 
 ### Experimental `xPack` fully self-contained build
 
-This project supports the new `xPack` fully self-contained build of [`hadron`](https://github.com/mmomtchev/hadron) - which means that it can rebuild itself without a working C++ environment. In this mode, the only requirement is Node.js and `npm` and the project is built using a `clang` `xPack` on all platforms. Currently, this build is not the default one, since `conan` support for `clang` on Windows is still far from complete and many delegate libraries are missing on Windows. The build can be launched only manually and it is not available when installing the package from `npm`:
+This project supports the new `xPack` fully self-contained build of [`hadron`](https://github.com/mmomtchev/hadron) - which means that it can rebuild itself without a working C++ environment. This build is currently highly experimental and is included mostly for demonstration purposes. In this mode, the only requirement is Node.js and `npm` and the project is built using a `clang` `xPack` on all platforms. The build can be launched only manually and it is not available when installing the package from `npm`:
 
 ```shell
 npx xpm install
@@ -160,10 +160,13 @@ npx xpm run prepare --config native-xpack
 npx xpm run build --config native-xpack
 ```
 
+Be sure to read the notes at [Building hadron-based projects without a system compiler](https://github.com/mmomtchev/hadron/blob/main/README.xPacks.md)
+
 ### Rebuilding from git or using an externally provided ImageMagick library
 
 * In order to regenerate the C++ wrapping code, you will need SWIG JavaScript Evolution 5.0.4 - available using the [`mmomtchev/setup-swig`](https://github.com/mmomtchev/setup-swig/) Github action or from [`conan`](https://github.com/mmomtchev/swig-conan)
 * Alternatively, if you don't want to rebuild SWIG JSE yourself, the SWIG-generated wrappers are included in the published `npm` packages
+* Or - you can simply download the `./swig` directory from [the latest working build](https://github.com/mmomtchev/magickwand.js/actions/workflows/test-dev.yml?query=branch%3Amain) - it is the artifact called `swig`
 
 * Recursively clone the repo
 ```shell

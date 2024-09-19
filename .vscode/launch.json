@@ -103,15 +103,21 @@
       "type": "debugpy",
       "request": "launch",
       "module": "conans.conan",
+      "justMyCode": false,
       "args": [
         "install",
         ".",
-        "-pr:b=default",
-        "-pr:h=./emscripten.profile",
+        "-pr:b=conan.profile",
+        "-pr:h=conan.profile",
+        "-pr:b=./hadron/clang-linux.profile",
+        "-pr:h=./hadron/clang-linux.profile",
         "-of",
         "build",
         "--build=missing"
-      ]
+      ],
+      "env": {
+        "npm_config_enable_conan": "true"
+      }
     },
   ]
 }
