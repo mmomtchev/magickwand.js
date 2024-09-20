@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Development CI
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
     - uses: mmomtchev/setup-swig@main
       with:
         branch: jse
-        version: v5.0.4
+        version: v5.0.5
 
     - name: Verify SWIG
       run: swig-jse -version
@@ -186,6 +186,150 @@ jobs:
       - run: npx mocha test/node.test.ts
         env:
           MOCHA_LIGHT: 1
+
+
+  native-xpack:
+    runs-on: ${{ matrix.platform }}
+    needs: swig
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - ubuntu-20.04
+          - ubuntu-22.04
+          - ubuntu-24.04
+          - macos-12
+          - macos-latest
+          - windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+      - name: Download the SWIG-generated wrappers
+        uses: actions/download-artifact@v4
+        with:
+          name: swig
+          path: swig
+      - name: Install the xpacks
+        run: |
+          npm install xpm
+          npx xpm install
+      - name: Get conan home
+        shell: bash
+        id: conan_home
+        run: |
+          npx xpm run -q conan -- version
+          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
+      - name: Cache conan artifacts
+        id: conan-artifacts
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.conan_home.outputs.path }}
+          key: conan-xpack-${{ matrix.platform }}
+      - name: Install fonts on Ubuntu
+        run: sudo apt-get install -y fonts-ubuntu || true
+        if: startsWith(matrix.platform, 'ubuntu')
+      - name: Do not use GHA pkg-config on Windows
+        shell: bash
+        run: rm `which pkg-config`*
+        if: runner.os == 'Windows'
+      - name: Build with xPack
+        run: |
+          npx xpm install
+          npx xpm install --config native-xpack
+          npx xpm run prepare --config native-xpack
+          npx xpm run build --config native-xpack
+        env:
+          npm_config_enable_conan: true
+          C_INCLUDE_PATH: /usr/local/include
+          CPLUS_INCLUDE_PATH: /usr/local/include
+      - name: Locate addon file
+        shell: bash
+        id: addon
+        run: node -p '"addon=" + path.resolve(__dirname, "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
+      - name: List linked libraries (Linux)
+        run: ldd ${{ steps.addon.outputs.addon }}
+        if: runner.os == 'Linux'
+      - name: List linked libraries (macOS)
+        run: otool -L ${{ steps.addon.outputs.addon }}
+        if: runner.os == 'macOS'
+      - run: npx mocha test/node.test.ts test/integration.test.ts
+        env:
+          MOCHA_INTEGRATION: node
+          MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
+
+
+  native-xpack-minimal-container:
+    runs-on: ubuntu-latest
+    needs: swig
+    container: ubuntu:latest
+
+    steps:
+      - name: Install libc6-dev
+        run: |
+          apt-get update
+          apt-get install -y libc6-dev libstdc++-11-dev libgcc-11-dev binutils ca-certificates
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        name: Checkout ImageMagick
+        with:
+          repository: mmomtchev/ImageMagick
+          path: ${{ github.workspace }}/deps/ImageMagick
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - name: Download the SWIG-generated wrappers
+        uses: actions/download-artifact@v4
+        with:
+          name: swig
+          path: swig
+      - name: Install the xpacks
+        run: |
+          npm install xpm
+          npx xpm install
+      - name: Get conan home
+        shell: bash
+        id: conan_home
+        run: |
+          npx xpm run -q conan -- version
+          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
+      - name: Cache conan artifacts
+        id: conan-artifacts
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.conan_home.outputs.path }}
+          key: conan-xpack-minimal-Linux
+      - name: Install fonts on Ubuntu
+        run: apt-get install -y fonts-ubuntu
+      - name: Build with xPack
+        run: |
+          npx xpm install
+          npx xpm install --config native-xpack
+          npx xpm run prepare --config native-xpack
+          npx xpm run build --config native-xpack
+        env:
+          npm_config_enable_conan: true
+          C_INCLUDE_PATH: /usr/local/include
+          CPLUS_INCLUDE_PATH: /usr/local/include
+      - name: Locate addon file
+        shell: bash
+        id: addon
+        run: node -p '"addon=" + path.resolve(__dirname, "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
+      - name: List linked libraries (Linux)
+        run: ldd ${{ steps.addon.outputs.addon }}
+      - run: npx mocha test/node.test.ts test/integration.test.ts
+        env:
+          MOCHA_INTEGRATION: node
+          MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
+
 
   wasm:
     runs-on: ubuntu-latest

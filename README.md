@@ -139,7 +139,7 @@ Starting with version 2.0, `magickwand.js` uses the new `hadron` build system sp
 npm install magickwand.js --build-from-source
 ```
 
-This will also rebuild the included Magick++ library. Currently, you will need a working C++17 environment as the full xPack version that will rebuild itself with its own compiler is still not ready. The project is tested, and has pre-built binaries, with `gcc` on Linux x64, `clang` on macOS x64 and arm64, and `MSVC` on Windows x64.
+This will also rebuild the included Magick++ library. Currently, you will need a working C++17 environment. You can read below for the experimental build with an integrated cross-platform compiler in a `xPack` (basically, an `npm` package). The project is tested, and has pre-built binaries, with `gcc` on Linux x64, `clang` on macOS x64 and arm64, and `MSVC` on Windows x64.
 
 This will rebuild the bindings against the available system-installed (usually shared) libraries which will lead to an order of magnitude smaller addon size. If the X11 libraries are available, this build will support X11 (`Image.display` method) on Linux and macOS.
 
@@ -149,12 +149,24 @@ If you want to rebuild the bindings using the full set of statically linked libr
 npm install magickwand.js --build-from-source --enable-conan
 ```
 
-The xPack fully self-contained version will use `clang` on all platforms.
+### Experimental `xPack` fully self-contained build
+
+This project supports the new `xPack` fully self-contained build of [`hadron`](https://github.com/mmomtchev/hadron) - which means that it can rebuild itself without a working C++ environment. This build is currently highly experimental and is included mostly for demonstration purposes. In this mode, the only requirement is Node.js and `npm` and the project is built using a `clang` `xPack` on all platforms. The build can be launched only manually and it is not available when installing the package from `npm`:
+
+```shell
+npx xpm install
+npx xpm install --config native-xpack
+npx xpm run prepare --config native-xpack
+npx xpm run build --config native-xpack
+```
+
+Be sure to read the notes at [Building hadron-based projects without a system compiler](https://github.com/mmomtchev/magickwand.js/blob/main/README.xPacks.md)
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
 * In order to regenerate the C++ wrapping code, you will need SWIG JavaScript Evolution 5.0.4 - available using the [`mmomtchev/setup-swig`](https://github.com/mmomtchev/setup-swig/) Github action or from [`conan`](https://github.com/mmomtchev/swig-conan)
 * Alternatively, if you don't want to rebuild SWIG JSE yourself, the SWIG-generated wrappers are included in the published `npm` packages
+* Or - you can simply download the `./swig` directory from [the latest working build](https://github.com/mmomtchev/magickwand.js/actions/workflows/test-dev.yml?query=branch%3Amain) - it is the artifact called `swig`
 
 * Recursively clone the repo
 ```shell
@@ -166,12 +178,26 @@ cd magickwand.js
 
 * or, to do everything manually:
 ```shell
-npm install                                # install all npm dependencies
-npx xpm install                            # install the supporting xpm packages (python, conan, meson, ninja, cmake)
-npx xpm generate                           # generate the SWIG wrappers (requires SWIG JSE 5.0.4)
-npx xpm run prepare --config native-debug  # available builds are native, native-debug, wasm and wasm-debug
-npx xpm run configure --config native-debug -- -Db_sanitize=address # optional step to enable ASAN
-npx xpm run build --config native-debug    # build
+# install all npm dependencies
+npm install
+# install the supporting xpm packages (python, conan, meson, ninja, cmake)                            
+npx xpm install
+# generate the SWIG wrappers (requires SWIG JSE 5.0.4)
+npx xpm generate                  
+# available builds are native, native-debug, wasm and wasm-debug
+npx xpm run prepare --config native-debug
+# build
+npx xpm run build --config native-debug
+```
+
+Other useful commands:
+```shell
+# optional step to enable ASAN (run after prepare)
+npx xpm run configure --config native-debug -- -Db_sanitize=address
+# inspect conan version (and, generally, run conan commands)
+npx xpm run conan -- version
+# inspect meson version (and, generally, run meson commands)
+npx xpm run meson -- -v
 ```
 
 Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the data used internally by ImageMagick - image files still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. **Unless you can regenerate the SWIG wrappers, you will have to use the exact same version (the latest one at the release date) that was used when they were generated**. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
@@ -239,7 +265,7 @@ The following options are available when using `npm install`:
 
 * `--disable-simd` disables SIMD (always disabled for WASM)
 
-Additionally, the following options control the various ImageMagick submodules. All `--disable-*` options have `--enable-*` counterparts which are enabled by default and `--disable-*-conan` variants which disable only the built-in `conan` delegate - when `conan` is enabled - but leave the support enabled if the corresponding libraries is system-installed.
+Additionally, the following options control the various ImageMagick submodules. All `--disable-*` options have `--enable-*` counterparts which are enabled by default and `--disable-*-conan` variants which disable only the built-in `conan` delegate - when `conan` is enabled - but leave the support enabled if the corresponding libraries is system-installed. For example `--enable-jpeg --disable-jpeg-conan` will include JPEG support using the system-installed library even if `conan` is enabled, while only `--enable-jpeg` will depend on `--enable-conan` or `--disable-conan`.
 
 * `--disable-fonts` for the font delegate libraries (always disabled for WASM)
 * `--disable-jpeg` for `libopenjpeg`
