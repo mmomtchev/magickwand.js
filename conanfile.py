@@ -6,8 +6,7 @@ from conan.tools.meson import MesonToolchain
 from os import environ
 from io import StringIO
 
-
-required_conan_version = ">=2.0.0"
+required_conan_version = ">=2.7.0"
 
 def npm_option(option, default):
     npm_enable_opt = f'npm_config_enable_{option}'
@@ -86,7 +85,7 @@ class ImageMagickDelegates(ConanFile):
 
     def requirements(self):
       # Disable all bundled delegates
-      if not self.options.conan or 'npm_config_enable_external' in environ:
+      if not self.options.conan or npm_option('external', False):
         return
 
       if self.fonts_enabled:
@@ -197,7 +196,7 @@ class ImageMagickDelegates(ConanFile):
       # Fonts are not available on WASM targets
       self.fonts_enabled = self.options.fonts and self.settings.arch != 'wasm' and not self.clang_windows
 
-      if not self.options.conan or 'npm_config_external' in environ:
+      if not self.options.conan or npm_option('external', False):
         return
 
       if self.settings.arch != 'wasm' and self.options.fonts:
