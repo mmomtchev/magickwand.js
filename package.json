@@ -152,7 +152,7 @@
       "commandConanLockNative": "{{ properties.commandConanLock }} {{ properties.argsConanNative }}",
       "commandConanLockWASM": "{{ properties.commandConanLock }} {{ properties.argsConanWASM }}",
       "commandPrepare": "{{ properties.commandConanBuildEnv[os.platform] }} meson setup --backend ninja --buildtype {{ properties.buildType }} {{ properties.buildFolderRelativePath }} . -Dprefix={{ properties.installFolderPath }}",
-      "commandPrepareNative": "{{ properties.commandPrepare }} --native-file hadron{{ path.sep }}conan.ini --native-file hadron{{ path.sep }}{{ properties.toolchain }}-{{ os.platform }}.ini --native-file {{ properties.buildFolderRelativePath }}/conan_meson_native.ini",
+      "commandPrepareNative": "{{ properties.commandPrepare }} --native-file hadron{{ path.sep }}conan.ini --native-file {{ properties.buildFolderRelativePath }}/conan_meson_native.ini",
       "commandPrepareWASM": "{{ properties.commandPrepare }} --cross-file hadron{{ path.sep }}conan.ini --cross-file hadron{{ path.sep }}{{ properties.toolchain }}.ini --cross-file {{ properties.buildFolderRelativePath }}/conan_meson_cross.ini",
       "commandConfigure": "meson configure {{ properties.buildFolderRelativePath }}",
       "commandBuild": "{{ properties.commandConanBuildEnv[os.platform] }} meson compile -C {{ properties.buildFolderRelativePath }} -v",
