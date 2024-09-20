@@ -113,8 +113,7 @@ class ImageMagickDelegates(ConanFile):
       if self.options.fftw:
         self.requires('fftw/3.3.10')
 
-      # requires a Windows resource compiler
-      if self.options.color and not self.clang_windows:
+      if self.options.color:
         self.requires('lcms/2.14')
 
       # libiconv/libxml use MSYS2 and are not compatible

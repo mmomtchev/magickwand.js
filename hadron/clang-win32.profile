@@ -11,7 +11,8 @@ NM=llvm-nm.cmd
 STRIP=llvm-strip.cmd
 OBJDUMP=llvm-objdump.cmd
 NINJA=ninja.cmd
-#RC=llvm-rc.cmd
+RC=llvm-windres.cmd
+WINDRES=llvm-windres.cmd
 # This is the only way to bring in the ninja xPack on Windows where ninja is called ninja.cmd
 # until conan implements a tools.cmake.make_program settings item
 PATH=+(path){{ os.path.dirname(os.getenv("npm_package_json")).replace("\\", "/") }}/xpacks/@xpack-dev-tools/ninja-build/.content/bin
