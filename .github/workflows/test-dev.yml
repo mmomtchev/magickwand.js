@@ -13,6 +13,19 @@ on:
       - 'README.md'
 
 jobs:
+
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Install the dependencies
+      run: npm install --skip-magickwand-native --skip-magickwand-wasm
+    - name: Lint
+      run: npm run lint
+      
   swig:
     runs-on: ubuntu-latest
     name: Generate the SWIG wrappers

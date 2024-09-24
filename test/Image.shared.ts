@@ -234,7 +234,7 @@ export default function (
     });
 
     it('distort', () => {
-      let im = new Image;
+      const im = new Image;
 
       im.read(path);
       assert.equal(im.size().width(), 80);
