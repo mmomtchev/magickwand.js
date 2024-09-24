@@ -48,10 +48,10 @@ export default function (
       const q = [] as Promise<void>[];
       for (let i = 0; i < 10; i++) {
         im[i] = new Magick.Image;
-        verbose && console.time(`read image ${i}`);
+        if (verbose) console.time(`read image ${i}`);
         q[i] = im[i].readAsync(wizard)
           .then(() => {
-            verbose && console.timeEnd(`read image ${i}`);
+            if (verbose) console.timeEnd(`read image ${i}`);
             assert.equal(im[i].size().width(), 80);
             assert.equal(im[i].size().height(), 106);
           });
@@ -72,7 +72,7 @@ export default function (
           .then(() => [new Magick.Image(im[im1]), im[im2]])
           .then(([tgt, other]) => tgt.compositeAsync(other, '0x0', MagickCore.OverlayCompositeOp)
             .then(() => {
-              verbose && console.timeEnd(`overlayed image ${i} (${im1} & ${im2})`);
+              if (verbose) console.timeEnd(`overlayed image ${i} (${im1} & ${im2})`);
               const px = tgt.pixelColor(40, 50);
               assert.strictEqual(px.pixelType(), Magick.Color.RGBPixel);
               assert.isTrue(px.isValid());
@@ -81,11 +81,11 @@ export default function (
               assert.closeTo(px.quantumRed(), 19359, 1);
               assert.closeTo(px.quantumBlue(), 2195, 1);
               assert.closeTo(px.quantumGreen(), 6097, 1);
-              verbose && console.time(`compared ${i} (${im1} & ${im2})`);
+              if (verbose) console.time(`compared ${i} (${im1} & ${im2})`);
               return tgt.compareAsync(imRef);
             })
             .then(r => {
-              verbose && console.timeEnd(`compared ${i} (${im1} & ${im2})`);
+              if (verbose) console.timeEnd(`compared ${i} (${im1} & ${im2})`);
               assert.isTrue(r);
             }))
         );
@@ -110,10 +110,10 @@ export default function (
       // (they will run two by two since they will lock the target image)
       const q = [] as Promise<void>[];
       for (let i = 0; i < 100; i++) {
-        verbose && console.time(`overlayed image ${i}`);
+        if (verbose) console.time(`overlayed image ${i}`);
         q.push(targets[i % 2].compositeAsync(im[i], '0x0', MagickCore.OverlayCompositeOp)
           .then(() => {
-            verbose && console.timeEnd(`overlayed image ${i}`);
+            if (verbose) console.timeEnd(`overlayed image ${i}`);
             // 10x10 is a white pixel
             const px = targets[i % 2].pixelColor(10, 10);
             assert.strictEqual(px.pixelType(), Magick.Color.RGBPixel);
