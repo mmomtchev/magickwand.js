@@ -187,7 +187,7 @@ jobs:
     - run: npm pack
     - name: Get version
       id: version
-      run: node -p '"version=" + require("./package.json").version' >> $GITHUB_OUTPUT
+      run: node -p '"version=" + require("./package.json").version' >> "$GITHUB_OUTPUT"
     - name: Upload the npm package
       uses: ncipollo/release-action@v1
       with:
@@ -197,9 +197,21 @@ jobs:
         omitDraftDuringUpdate: true
 
 
+  publish-release:
+    runs-on: ubuntu-latest
+    needs: [ create-npm-package, pack-prebuilt-binaries ]
+    steps:
+    - name: Publish the draft release
+      uses: ncipollo/release-action@v1
+      with:
+        allowUpdates: true
+        omitDraftDuringUpdate: false
+        draft: false
+
+
   test_package:
     uses: mmomtchev/magickwand.js/.github/workflows/test-package.yml@main
-    needs: [ create-npm-package, pack-prebuilt-binaries ]
+    needs: [ publish-release, create-npm-package ]
     with:
       package: magickwand.js-${{ needs.create-npm-package.outputs.version }}.tgz
       download: true
