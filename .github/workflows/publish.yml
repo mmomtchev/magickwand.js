@@ -1,6 +1,13 @@
 name: Github packages publish
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      prerelease:
+        type: boolean
+        default: false
+        description: whether the release should be marked as a prerelease
+
 
 jobs:
   swig:
@@ -129,7 +136,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         draft: true
-
+        prerelease: ${{ inputs.prerelease }}
 
   pack-prebuilt-binaries:
     name: Pack the prebuilt binaries
@@ -168,6 +175,7 @@ jobs:
         artifacts: ${{ matrix.platform }}.tar.gz
         updateOnlyUnreleased: true
         omitDraftDuringUpdate: true
+        omitPrereleaseDuringUpdate: true
 
 
   create-npm-package:
@@ -200,6 +208,7 @@ jobs:
         artifacts: magickwand.js-${{ steps.version.outputs.version }}.tgz
         updateOnlyUnreleased: true
         omitDraftDuringUpdate: true
+        omitPrereleaseDuringUpdate: true
 
 
   publish-release:
@@ -213,6 +222,7 @@ jobs:
         allowUpdates: true
         omitDraftDuringUpdate: false
         draft: false
+        omitPrereleaseDuringUpdate: true
 
 
   test_package:
