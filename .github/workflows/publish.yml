@@ -187,7 +187,7 @@ jobs:
     - run: npm pack
     - name: Get version
       id: version
-      run: node -p '"version=" + require("./package.json").version'
+      run: node -p '"version=" + require("./package.json").version' >> $GITHUB_OUTPUT
     - name: Upload the npm package
       uses: ncipollo/release-action@v1
       with:
