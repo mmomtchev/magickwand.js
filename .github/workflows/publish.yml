@@ -175,6 +175,10 @@ jobs:
       version: ${{ steps.version.outputs.version }}
 
     steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: true
     - name: Download the SWIG-generated wrappers
       uses: actions/download-artifact@v4
       with:
