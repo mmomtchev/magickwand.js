@@ -78,6 +78,7 @@ jobs:
 
   build-wasm:
     runs-on: ubuntu-latest
+    needs: swig
 
     steps:
       - uses: actions/checkout@v4
