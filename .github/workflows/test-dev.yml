@@ -113,6 +113,7 @@ jobs:
         if: runner.os == 'Windows'
       - name: Build magickwand.js
         run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm ${{ matrix.dependencies == 'conan' && '--enable-conan' || '--disable-conan' }}
+        # Because of https://github.com/mmomtchev/hadron/issues/37
         env:
           C_INCLUDE_PATH: /usr/local/include
           CPLUS_INCLUDE_PATH: /usr/local/include
