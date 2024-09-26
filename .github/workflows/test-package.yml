@@ -140,7 +140,7 @@ jobs:
           TS_NODE_PROJECT: ${{ github.workspace }}/test/tsconfig.standalone.json
           MOCHA_INTEGRATION: node,browser
           MOCHA_MAGICK_INSTALL: npm install --force ${{ inputs.download && format('{0}/{1}', github.workspace, inputs.package) || inputs.package }}
-          MOCHA_LIGHT: 1
+          MOCHA_EXTRALIGHT: 1
 
   test_npm_rebuild_light:
     runs-on: ${{ matrix.platform }}
@@ -250,4 +250,4 @@ jobs:
           TS_NODE_PROJECT: ${{ github.workspace }}/test/tsconfig.standalone.json
           MOCHA_INTEGRATION: node,browser
           MOCHA_MAGICK_INSTALL: npm install --force ${{ inputs.download && format('{0}/{1}', github.workspace, inputs.package) || inputs.package }}
-          MOCHA_LIGHT: 1
+          MOCHA_EXTRALIGHT: 1
