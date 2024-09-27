@@ -71,7 +71,7 @@ jobs:
           - conan
 
     uses:
-      mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
+      mmomtchev/magickwand.js/.github/workflows/build.yml@main
     with:
       native: true
       wasm: false
@@ -93,7 +93,7 @@ jobs:
         platform: [ubuntu-latest]
 
     uses:
-      mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
+      mmomtchev/magickwand.js/.github/workflows/build.yml@main
     with:
       native: true
       wasm: false
@@ -121,7 +121,7 @@ jobs:
           - windows-latest
 
     uses:
-      mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
+      mmomtchev/magickwand.js/.github/workflows/build.yml@main
     with:
       native: true
       wasm: false
@@ -137,7 +137,7 @@ jobs:
     needs: swig
 
     uses:
-      mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
+      mmomtchev/magickwand.js/.github/workflows/build.yml@main
     with:
       native: true
       wasm: false
@@ -155,7 +155,7 @@ jobs:
     needs: swig
 
     uses:
-      mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
+      mmomtchev/magickwand.js/.github/workflows/build.yml@main
     with:
       native: false
       wasm: true
@@ -170,7 +170,7 @@ jobs:
     needs: swig
 
     uses:
-      mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
+      mmomtchev/magickwand.js/.github/workflows/build.yml@main
     with:
       native: false
       wasm: true
@@ -187,7 +187,7 @@ jobs:
     needs: swig
 
     uses:
-      mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
+      mmomtchev/magickwand.js/.github/workflows/build.yml@main
     with:
       native: true
       wasm: false
