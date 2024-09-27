@@ -131,64 +131,31 @@ jobs:
 
 
   native-xpack-minimal-container:
-    runs-on: ubuntu-latest
     needs: swig
-    container: ubuntu:latest
 
-    steps:
-      - name: Install libc6-dev
-        run: |
-          apt-get update
-          apt-get install -y libc6-dev libstdc++-11-dev libgcc-11-dev binutils ca-certificates
-      - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
-        name: Checkout ImageMagick
-        with:
-          repository: mmomtchev/ImageMagick
-          path: ${{ github.workspace }}/deps/ImageMagick
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
-      - name: Download the SWIG-generated wrappers
-        uses: actions/download-artifact@v4
-        with:
-          name: swig
-          path: swig
-      - name: Install the xpacks
-        run: |
-          npm install xpm
-          npx xpm install
-      - name: Get conan home
-        shell: bash
-        id: conan_home
-        run: |
-          npx xpm run -q conan -- version
-          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
-      - name: Cache conan artifacts
-        id: conan-artifacts
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.conan_home.outputs.path }}
-          key: conan-xpack-minimal-Linux
-      - name: Install fonts on Ubuntu
-        run: apt-get install -y fonts-ubuntu
-      - name: Build with xPack
-        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm --enable-conan --enable-standalone-build
-        env:
-          npm_config_enable_conan: true
-          C_INCLUDE_PATH: /usr/local/include
-          CPLUS_INCLUDE_PATH: /usr/local/include
-      - name: Locate addon file
-        shell: bash
-        id: addon
-        run: node -p '"addon=" + path.resolve(__dirname, "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
-      - name: List linked libraries (Linux)
-        run: ldd ${{ steps.addon.outputs.addon }}
-      - run: npx mocha test/node.test.ts test/integration.test.ts
-        env:
-          MOCHA_INTEGRATION: node
-          MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - ubuntu-20.04
+          - ubuntu-22.04
+          - ubuntu-24.04
+          - macos-12
+          - macos-latest
+          - windows-latest
+
+    uses:
+      mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
+    with:
+      native: true
+      wasm: false
+      platform: ${{ matrix.platform }}
+      dependencies: conan
+      integration: node
+      install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
+      extra_npm_opts: '--enable-standalone-build'
+      container: ubuntu:latest
+      container_init: 'apt-get update && apt-get install -y libc6-dev libstdc++-11-dev libgcc-11-dev binutils ca-certificates'
 
 
   wasm:
@@ -208,11 +175,6 @@ jobs:
   wasm-light:
     needs: swig
 
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: [ubuntu-latest]
-
     uses:
       mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
     with:
@@ -226,6 +188,20 @@ jobs:
       extra_npm_opts: '--disable-fonts --enable-jpeg --enable-png --disable-tiff --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif --disable-color --disable-xml --enable-gzip --disable-zip --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd --disable-openmp --disable-display --disable-jbig --disable-cairo'
 
 
+  external:
+    uses:
+      mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
+    with:
+      native: true
+      wasm: false
+      platform: ubuntu-22.04
+      dependencies: conan
+      integration: node
+      install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
+      container_init: 'cd deps/ImageMagick && sh configure --prefix /usr && make -j4 && sudo make install'
+      extra_npm_opts: '--enable-external --enable-shared --cpp-args="`pkg-config --cflags Magick++` --cpp-link-args="`pkg-config --libs Magick++`'
+
+      
   debug-asan:
     runs-on: ${{ matrix.platform }}
     needs: swig
@@ -282,49 +258,3 @@ jobs:
         env:
           LD_PRELOAD: /usr/lib/x86_64-linux-gnu/libasan.so.6
           LSAN_OPTIONS: suppressions=${{ github.workspace }}/test/napi-leaks-suppression.txt
-
-
-  external:
-    runs-on: ${{ matrix.platform }}
-    needs: swig
-
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: [ubuntu-22.04]
-
-    steps:
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: true
-      - name: Download the SWIG-generated wrappers
-        uses: actions/download-artifact@v4
-        with:
-          name: swig
-          path: swig
-      - name: Build and install ImageMagick-7
-        run: |
-          cd deps/ImageMagick
-          sh configure --prefix /usr
-          make -j4
-          sudo make install
-      - name: Install fonts on Ubuntu
-        run: sudo apt-get install -y fonts-ubuntu || true
-        if: startsWith(matrix.platform, 'ubuntu')
-      - name: Build with external ImageMagick library
-        run: |
-          npm install --verbose --foreground-scripts=true --build-from-source  \
-            --enable-external --enable-shared                                  \
-            --cpp-args="`pkg-config --cflags Magick++`"                        \
-            --cpp-link-args="`pkg-config --libs Magick++`"                     \
-            --skip-magickwand-wasm
-        shell: bash
-      - run: npx mocha test/node.test.ts test/integration.test.ts
-        env:
-          MOCHA_INTEGRATION: node
-          MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""

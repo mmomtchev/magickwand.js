@@ -37,17 +37,28 @@ on:
         type: string
         default: ''
         description: extra npm options
+      container:
+        type: string
+        default: null
+        description: run in container
+      container_init:
+        type: string
+        default: null
+        description: container initialization
 
 jobs:
   build:
     name: Build & test ${{ inputs.wasm && 'WASM' || '' }} ${{ inputs.native && 'native' || '' }} ${{ inputs.platform }}/${{ inputs.dependencies }}
     runs-on: ${{ inputs.platform }}
+    container: ${{ inputs.container }}
 
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        name: Checkout ImageMagick
         with:
-          fetch-depth: 0
-          submodules: true
+          repository: mmomtchev/ImageMagick
+          path: ${{ github.workspace }}/deps/ImageMagick
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
@@ -57,6 +68,9 @@ jobs:
         with:
           version: 3.1.53
         if: inputs.wasm
+      - name: Setup container
+        run: ${{ inputs.container_init }}
+        if: inputs.container_init
       - name: Download the SWIG-generated wrappers
         uses: actions/download-artifact@v4
         with:
