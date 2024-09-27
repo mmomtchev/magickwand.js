@@ -133,14 +133,14 @@ jobs:
         run: otool -L ${{ steps.addon.outputs.addon }}
         if: runner.os == 'macOS' && inputs.native
 
-      - run: npx mocha test/node.test.ts test/integration.test.ts
+      - run: npx mocha ${{ inputs.native && 'test/node.test.ts' || '' }} test/integration.test.ts
         if: runner.os != 'Linux' || !contains(inputs.integration, 'browser')
         env:
           MOCHA_INTEGRATION: ${{ inputs.integration }}
           MOCHA_MAGICK_INSTALL: ${{ inputs.install_cmd }}
           MOCHA_LIGHT: ${{ inputs.light }}
           MOCHA_EXTRALIGHT: ${{ inputs.extralight }}
-      - run: xvfb-run npx mocha test/node.test.ts test/integration.test.ts
+      - run: xvfb-run npx mocha ${{ inputs.native && 'test/node.test.ts' || '' }} test/integration.test.ts
         if: runner.os == 'Linux' && contains(inputs.integration, 'browser')
         env:
           MOCHA_INTEGRATION: ${{ inputs.integration }}
