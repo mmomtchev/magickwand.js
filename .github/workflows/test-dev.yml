@@ -144,7 +144,7 @@ jobs:
       install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
       extra_npm_opts: '--enable-standalone-build'
       container: ubuntu:latest
-      container_init: 'apt-get update && apt-get install -y libc6-dev libstdc++-11-dev libgcc-11-dev binutils ca-certificates'
+      container_init: 'apt-get update && apt-get install -y libc6-dev libstdc++-11-dev libgcc-11-dev binutils ca-certificates fonts-ubuntu'
 
 
   wasm:
@@ -229,7 +229,6 @@ jobs:
           key: linux-debug-asan-conan
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
-        if: startsWith(matrix.platform, 'ubuntu')
       - name: Install the dependencies
         run: npm install --skip-magickwand-wasm --skip-magickwand-native
       - name: Build with ASAN
