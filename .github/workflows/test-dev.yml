@@ -79,7 +79,7 @@ jobs:
       dependencies: ${{ matrix.dependencies }}
       integration: node
       install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
-      light: ${{ matrix.dependencies == 'conan' && '' || '1' }}
+      light: ${{ matrix.dependencies == 'conan' }}
       extralight: ${{ matrix.dependencies == 'system' && startsWith(matrix.platform, 'windows') }}
       conan_id: native
 
