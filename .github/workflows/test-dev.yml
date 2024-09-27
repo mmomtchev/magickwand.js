@@ -255,13 +255,8 @@ jobs:
         run: rm `which pkg-config`*
         if: runner.os == 'Windows'
       - name: Build with xPack
-        run: |
-          npx xpm install
-          npx xpm install --config native-xpack
-          npx xpm run prepare --config native-xpack
-          npx xpm run build --config native-xpack
+        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm --enable-conan --enable-standalone-build
         env:
-          npm_config_enable_conan: true
           C_INCLUDE_PATH: /usr/local/include
           CPLUS_INCLUDE_PATH: /usr/local/include
       - name: Locate addon file
@@ -324,11 +319,7 @@ jobs:
       - name: Install fonts on Ubuntu
         run: apt-get install -y fonts-ubuntu
       - name: Build with xPack
-        run: |
-          npx xpm install
-          npx xpm install --config native-xpack
-          npx xpm run prepare --config native-xpack
-          npx xpm run build --config native-xpack
+        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm --enable-conan --enable-standalone-build
         env:
           npm_config_enable_conan: true
           C_INCLUDE_PATH: /usr/local/include
