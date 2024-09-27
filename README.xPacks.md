@@ -12,7 +12,7 @@ It is also available in the two template projects: [`hadron-swig-napi-example-pr
 
 ### The Good
 
-The very ambitious `LLVM/clang` project aims to deliver the very first completely cross-platform, and completely unencumbered by any licenses, C/C++ compiler that is fully self-sufficient and produces native binaries on every platform - including Windows. In 2024, its version 18 comes very close to this goal. Combined with truly cross-platform build systems such as CMake and meson, this allows for an unprecedented uniformity across all platforms. `hadron`s own xPacks include the modified `meson`, a recent `conan` distribution and a fully self-sufficient Python to run them. CMake and `ninja` are also available from the base `xPack` distribution. Using `conan` is optional, but highly recommended, since many of the compiler abstraction problems tend to be already solved. The other alternative is to distribute these in the source tarball and to integrate them in the main `meson` build - which will work quite well for other `meson`-based or CMake-based projects - but it will be far more difficult for `autotools`-based ones.
+The very ambitious `LLVM/clang` project aims to deliver the very first completely cross-platform, and completely unencumbered by any licenses, C/C++ compiler that is fully self-sufficient and produces native binaries on every platform - including Windows. In 2024, its version 18 comes very close to this goal. Combined with truly cross-platform build systems such as CMake and meson, this allows for an unprecedented uniformity across all platforms. `hadron`s own xPacks include the modified `meson`, a recent `conan` distribution and a fully self-sufficient Python to run them. CMake and `ninja` are also available from the base xPack distribution. Using `conan` is optional, but highly recommended, since many of the compiler abstraction problems tend to be already solved. The other alternative is to distribute these in the source tarball and to integrate them in the main `meson` build - which will work quite well for other `meson`-based or CMake-based projects - but it will be far more difficult for `autotools`-based ones.
 
 ### The Bad
 
@@ -24,16 +24,18 @@ Many third party projects tend to break in some way, most often because of makin
 
 ## Common to all OS
 
-For CMake-based projects, it is recommended to use the `ninja` build, as it minimizes the amount of fixing build problems. It cannot be avoided as there are no free alternatives for Windows. For `autotools`-based projects, it is recommended to manually include 
+For CMake-based projects, it is recommended to use the `ninja` build, as it minimizes the amount of fixing build problems. It cannot be avoided as there are no free alternatives for Windows. For `autotools`-based projects, it is recommended to manually include GNU Make.
 
 ## Linux
 
-Paradoxically, Linux, is the last system on which `LLVM/clang` is not fully self-sufficient. As `gcc` is also free and Linux features a very tight integration between the OS and C/C++ compiler, separating them in a clean way has proven to be a challenge. Currently, when using the `xPack` build, the target host must have (package names follow the Ubuntu/Debian scheme):
+Paradoxically, Linux, is the last system on which `LLVM/clang` is not fully self-sufficient. As `gcc` is also free and Linux features a very tight integration between the OS and C/C++ compiler, separating them in a clean way has proven to be a challenge. Currently, when using the xPack build, the target host must have (package names follow the Ubuntu/Debian scheme):
 * `libc6-dev` - On UNIX, the system include header files (`/usr/include`) are considered part of the system, not the compiler. As such, these come from the `glibc` project and not the `gcc` project. This includes the `crt1.o` process startup and shutdown routines. This part currently has no alternatives.
 * `libstdc++-dev` - `LLVM/clang` comes now with its own `libc++` alternative C++ standard library, that is the default one on all systems besides Linux. In 2024 the Linux version works quite well and can fully replace the `gcc`-provided one - but you will be venturing even further in uncharted territory and if you have a large number of 3rd party dependencies, it is very likely that at least one will be incompatible. Use `-stdlib=c++` to enable it and avoid this dependency.
 * `libgcc-11-dev` - Since very recently, `LLVM/clang` includes its own C runtime - this is mostly functions such as `malloc` and `free` - that works best when used with the `libc++` library. Once again, some projects might break. Use `-rtlib=compiler-rt` to enable it and avoid this dependency.
 * `binutils` - The original GNU linker `ld`. `LLVM/clang` has `lld`. Not having it installed triggers a bug in `meson`: https://github.com/mmomtchev/hadron/issues/41
 * `openssl` (actually `ca-certificates`) - OpenSSL itself is compiled statically in every binary, but currently there is no alternative distribution of root SSL certificates and many binaries will expect to find `/etc/ssl`.
+
+As an alternative to requiring all those dependencies - except the certificate - the existing `gcc` xPack can be included.
 
 For `autotools`-based projects, GNU Make will also have to be included - which this project selectively applies in its `conan` profiles. Or it can be expected to be already present on the target system.
 

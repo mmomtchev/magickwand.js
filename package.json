@@ -136,6 +136,7 @@
         "linux": "env",
         "darwin": "env"
       },
+      "configNative": "{% if env.npm_config_enable_standalone_build %}native-xpack{% else %}native{% endif %}",
       "cwd": "{{ path.sep | path_relative: '.' }}",
       "commandGenerateImageMagickConfigure": "cmake -S deps/ImageMagick -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DMAGICK_HDRI_ENABLE=ON -DMAGICKCORE_QUANTUM_DEPTH=16 -B preconf",
       "commandGenerate_magickcore": "node src/deps.js src/deps-stub.cc MagickCore swig/magickcore.i",
@@ -159,7 +160,7 @@
       "commandInstall": "meson install -C {{ properties.buildFolderRelativePath }}",
       "commandClean": "meson compile -C {{ properties.buildFolderRelativePath }} --clean",
       "verbose": "{% if env.npm_config_loglevel %}--verbose{% endif %}",
-      "scriptInstallNative": "npx prebuild-install -d {{ properties.verbose }} || ( npx xpm install && xpm run prepare --config native && xpm run build --config native )",
+      "scriptInstallNative": "npx prebuild-install -d {{ properties.verbose }} || ( npx xpm install && npx xpm install --config {{ properties.configNative }} && xpm run prepare --config {{ properties.configNative }} && xpm run build --config {{ properties.configNative }} )",
       "scriptInstallWASM": "npx prebuild-install --platform emscripten --arch wasm32 -d {{ properties.verbose }} || ( npx xpm install && xpm run prepare --config wasm && xpm run build --config wasm )"
     },
     "actions": {
