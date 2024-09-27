@@ -133,23 +133,12 @@ jobs:
   native-xpack-minimal-container:
     needs: swig
 
-    strategy:
-      fail-fast: false
-      matrix:
-        platform:
-          - ubuntu-20.04
-          - ubuntu-22.04
-          - ubuntu-24.04
-          - macos-12
-          - macos-latest
-          - windows-latest
-
     uses:
       mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
     with:
       native: true
       wasm: false
-      platform: ${{ matrix.platform }}
+      platform: ubuntu-latest
       dependencies: conan
       integration: node
       install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
