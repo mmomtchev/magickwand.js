@@ -71,7 +71,7 @@ jobs:
           - conan
 
     uses:
-      mmomtchev/magickwand.js/.github/workflows/build.yml@${{ github.ref_name }}
+      mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
 
     with:
       platform: ${{ matrix.platform }}

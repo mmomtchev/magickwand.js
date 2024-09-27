@@ -1,7 +1,7 @@
 name: Build & test magickwand.js
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       platform:
         type: string
