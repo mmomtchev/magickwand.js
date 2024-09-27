@@ -1,0 +1,107 @@
+name: Build & test magickwand.js
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        type: string
+        required: true
+      dependencies:
+        type: string
+        default: 'conan'
+        description: dependencies origin ('conan' or 'system')
+      native:
+        type: boolean
+        required: true
+        description: build the native module
+      wasm:
+        type: boolean
+        required: true
+        description: build the WASM module
+      integration:
+        type: string
+        required: true
+        description: integration tests to run ('node' and/or 'browser')
+      light:
+        type: boolean
+        default: false
+        description: do not expect that all delegates are included
+      extralight:
+        type: boolean
+        default: false
+        description: do not expect the PNG delegate
+      install_cmd:
+        type: string
+        description: install command to use for the integration tests
+
+jobs:
+  build:
+    name: Build & test ${{ inputs.wasm && 'WASM' || '' }} ${{ inputs.native && 'native' || '' }} ${{ inputs.platform }}/${{ inputs.dependencies }}
+    runs-on: ${{ inputs.platform }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - name: Download the SWIG-generated wrappers
+        uses: actions/download-artifact@v4
+        with:
+          name: swig
+          path: swig
+      - name: Install the xpacks
+        run: |
+          npm install xpm
+          npx xpm install
+      - name: Get conan home
+        shell: bash
+        id: conan_home
+        run: |
+          npx xpm run -q conan -- version
+          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
+      - name: Cache conan artifacts
+        id: conan-artifacts
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.conan_home.outputs.path }}
+          key: conan-${{ inputs.platform }}
+      - name: Install fonts on Ubuntu
+        run: sudo apt-get install -y fonts-ubuntu || true
+        if: startsWith(inputs.platform, 'ubuntu')
+      - name: Install libpng-dev and libjpeg-dev on Ubuntu 24.04
+        run: sudo apt-get install -y libpng-dev libjpeg-dev
+        if: inputs.platform == 'ubuntu-24.04' && inputs.dependencies == 'system'
+      - name: Do not use GHA pkg-config on Windows
+        shell: bash
+        run: rm `which pkg-config`*
+        if: runner.os == 'Windows'
+      - name: Build magickwand.js
+        run: |
+          npm install --verbose --foreground-scripts \
+            ${{ inputs.native && '--build-from-source' || '--skip-magickwand-native' }}
+            ${{ inputs.wasm   && '--build-wasm-from-source' || '--skip-magickwand-wasm' }}
+            ${{ inputs.dependencies == 'conan' && '--enable-conan' || '--disable-conan' }}
+        # Because of https://github.com/mmomtchev/hadron/issues/37
+        env:
+          C_INCLUDE_PATH: /usr/local/include
+          CPLUS_INCLUDE_PATH: /usr/local/include
+      - name: Locate addon file
+        shell: bash
+        id: addon
+        run: node -p '"addon=" + path.resolve(__dirname, "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
+      - name: List linked libraries (Linux)
+        run: ldd ${{ steps.addon.outputs.addon }}
+        if: runner.os == 'Linux'
+      - name: List linked libraries (macOS)
+        run: otool -L ${{ steps.addon.outputs.addon }}
+        if: runner.os == 'macOS'
+      - run: npx mocha test/node.test.ts test/integration.test.ts
+        env:
+          MOCHA_INTEGRATION: ${{ inputs.integration }}
+          MOCHA_MAGICK_INSTALL: ${{ inputs.install }}
+          MOCHA_LIGHT: ${{ inputs.light }}
+          MOCHA_EXTRALIGHT: ${{ inputs.extralight }}
