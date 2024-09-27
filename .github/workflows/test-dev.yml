@@ -74,6 +74,8 @@ jobs:
       mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
 
     with:
+      native: true
+      wasm: false
       platform: ${{ matrix.platform }}
       dependencies: ${{ matrix.dependencies }}
       integration: 'node'
