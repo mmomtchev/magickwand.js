@@ -102,6 +102,7 @@ jobs:
         shell: bash
         run: rm `which pkg-config`*
         if: runner.os == 'Windows'
+
       - name: Build magickwand.js
         shell: bash
         run: |
@@ -114,6 +115,7 @@ jobs:
         env:
           C_INCLUDE_PATH: /usr/local/include
           CPLUS_INCLUDE_PATH: /usr/local/include
+
       - name: Check size
         run: |
           echo "::notice::WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
@@ -130,7 +132,16 @@ jobs:
       - name: List linked libraries (macOS)
         run: otool -L ${{ steps.addon.outputs.addon }}
         if: runner.os == 'macOS' && inputs.native
+
       - run: npx mocha test/node.test.ts test/integration.test.ts
+        if: runner.os != 'Linux' || !contains(inputs.integration, 'browser')
+        env:
+          MOCHA_INTEGRATION: ${{ inputs.integration }}
+          MOCHA_MAGICK_INSTALL: ${{ inputs.install_cmd }}
+          MOCHA_LIGHT: ${{ inputs.light }}
+          MOCHA_EXTRALIGHT: ${{ inputs.extralight }}
+      - run: xvfb-run npx mocha test/node.test.ts test/integration.test.ts
+        if: runner.os == 'Linux' && contains(inputs.integration, 'browser')
         env:
           MOCHA_INTEGRATION: ${{ inputs.integration }}
           MOCHA_MAGICK_INSTALL: ${{ inputs.install_cmd }}
