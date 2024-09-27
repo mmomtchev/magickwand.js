@@ -189,6 +189,8 @@ jobs:
 
 
   external:
+    needs: swig
+
     uses:
       mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
     with:
