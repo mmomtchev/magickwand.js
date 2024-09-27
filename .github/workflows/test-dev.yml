@@ -162,7 +162,7 @@ jobs:
       platform: ubuntu-latest
       dependencies: conan
       integration: browser
-      install_cmd: ln -s ${{ github.workspace }} node_modules/magickwand.js
+      install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
       conan_id: wasm
 
 
@@ -177,7 +177,7 @@ jobs:
       platform: ubuntu-latest
       dependencies: conan
       integration: browser
-      install_cmd: ln -s ${{ github.workspace }} node_modules/magickwand.js
+      install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
       light: true
       extra_npm_opts: '--disable-fonts --enable-jpeg --enable-png --disable-tiff --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif --disable-color --disable-xml --enable-gzip --disable-zip --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd --disable-openmp --disable-display --disable-jbig --disable-cairo'
       conan_id: wasm-light
