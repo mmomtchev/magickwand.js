@@ -201,15 +201,10 @@ jobs:
       container_init: 'cd deps/ImageMagick && sh configure --prefix /usr && make -j4 && sudo make install'
       extra_npm_opts: '--enable-external --enable-shared --cpp-args="`pkg-config --cflags Magick++` --cpp-link-args="`pkg-config --libs Magick++`'
 
-      
-  debug-asan:
-    runs-on: ${{ matrix.platform }}
-    needs: swig
 
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: [ubuntu-22.04]
+  debug-asan:
+    runs-on: ubuntu-22.04
+    needs: swig
 
     steps:
       - uses: actions/checkout@v4
