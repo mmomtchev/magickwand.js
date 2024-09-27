@@ -89,6 +89,7 @@ jobs:
         run: rm `which pkg-config`*
         if: runner.os == 'Windows'
       - name: Build magickwand.js
+        shell: bash
         run: |
           npm install --verbose --foreground-scripts \
             ${{ inputs.native && '--build-from-source' || '--skip-magickwand-native' }}    \
