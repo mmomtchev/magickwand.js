@@ -77,10 +77,11 @@ jobs:
       wasm: false
       platform: ${{ matrix.platform }}
       dependencies: ${{ matrix.dependencies }}
-      integration: 'node'
+      integration: node
       install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
       light: ${{ matrix.dependencies == 'conan' && '' || '1' }}
       extralight: ${{ matrix.dependencies == 'system' && startsWith(matrix.platform, 'windows') }}
+      conan_id: native
 
 
   native-light:
@@ -97,11 +98,12 @@ jobs:
       native: true
       wasm: false
       platform: ${{ matrix.platform }}
-      dependencies: 'conan'
+      dependencies: conan
       integration: ''
       install_cmd: ''
       light: true
       extra_npm_opts: '--disable-fonts --enable-jpeg --enable-png --disable-tiff --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif --disable-color --disable-xml --enable-gzip --disable-zip --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd --disable-openmp --disable-display --disable-jbig --disable-cairo'
+      conan_id: native-light
 
 
   native-xpack:
@@ -128,6 +130,7 @@ jobs:
       integration: node
       install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
       extra_npm_opts: '--enable-standalone-build'
+      conan_id: native-xpack
 
 
   native-xpack-minimal-container:
@@ -145,6 +148,7 @@ jobs:
       extra_npm_opts: '--enable-standalone-build'
       container: ubuntu:latest
       container_init: 'apt-get update && apt-get install -y libc6-dev libstdc++-11-dev libgcc-11-dev binutils ca-certificates fonts-ubuntu'
+      conan_id: native-xpack-minimal-container
 
 
   wasm:
@@ -158,7 +162,8 @@ jobs:
       platform: ubuntu-latest
       dependencies: conan
       integration: browser
-      install_cmd: 'ln -s ${{ github.workspace }} node_modules/magickwand.js'
+      install_cmd: ln -s ${{ github.workspace }} node_modules/magickwand.js
+      conan_id: wasm
 
 
   wasm-light:
@@ -172,9 +177,10 @@ jobs:
       platform: ubuntu-latest
       dependencies: conan
       integration: browser
-      install_cmd: 'ln -s ${{ github.workspace }} node_modules/magickwand.js'
+      install_cmd: ln -s ${{ github.workspace }} node_modules/magickwand.js
       light: true
       extra_npm_opts: '--disable-fonts --enable-jpeg --enable-png --disable-tiff --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif --disable-color --disable-xml --enable-gzip --disable-zip --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd --disable-openmp --disable-display --disable-jbig --disable-cairo'
+      conan_id: wasm-light
 
 
   external:
@@ -191,6 +197,7 @@ jobs:
       install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
       container_init: 'cd deps/ImageMagick && sh configure --prefix /usr && make -j4 && sudo make install'
       extra_npm_opts: '--enable-external --enable-shared --cpp-args="`pkg-config --cflags Magick++`" --cpp-link-args="`pkg-config --libs Magick++`"'
+      conan_id: external
 
 
   debug-asan:

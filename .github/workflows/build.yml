@@ -45,6 +45,10 @@ on:
         type: string
         default: null
         description: container initialization
+      conan_id:
+        type: string
+        default: conan
+        description: conan cache id to use
 
 jobs:
   build:
@@ -91,7 +95,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ steps.conan_home.outputs.path }}
-          key: conan-${{ inputs.platform }}
+          key: ${{ inputs.conan_id }}-${{ inputs.platform }}
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(inputs.platform, 'ubuntu') && !inputs.container
