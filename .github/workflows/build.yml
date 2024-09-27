@@ -33,6 +33,10 @@ on:
       install_cmd:
         type: string
         description: install command to use for the integration tests
+      extra_npm_opts:
+        type: string
+        default: ''
+        description: extra npm options
 
 jobs:
   build:
@@ -48,6 +52,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
+      - name: Setup emscripten
+        uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: 3.1.53
+        if: inputs.wasm
       - name: Download the SWIG-generated wrappers
         uses: actions/download-artifact@v4
         with:
@@ -82,26 +91,33 @@ jobs:
       - name: Build magickwand.js
         run: |
           npm install --verbose --foreground-scripts \
-            ${{ inputs.native && '--build-from-source' || '--skip-magickwand-native' }}
-            ${{ inputs.wasm   && '--build-wasm-from-source' || '--skip-magickwand-wasm' }}
-            ${{ inputs.dependencies == 'conan' && '--enable-conan' || '--disable-conan' }}
+            ${{ inputs.native && '--build-from-source' || '--skip-magickwand-native' }}    \
+            ${{ inputs.wasm   && '--build-wasm-from-source' || '--skip-magickwand-wasm' }} \
+            ${{ inputs.dependencies == 'conan' && '--enable-conan' || '--disable-conan' }} \
+            ${{ inputs.extra_npm_opts }}
         # Because of https://github.com/mmomtchev/hadron/issues/37
         env:
           C_INCLUDE_PATH: /usr/local/include
           CPLUS_INCLUDE_PATH: /usr/local/include
+      - name: Check size
+        run: |
+          echo "::notice::WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
+          echo "::notice::WASM version is $(( `brotli -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes brotlied"
+        if: inputs.wasm
       - name: Locate addon file
         shell: bash
         id: addon
         run: node -p '"addon=" + path.resolve(__dirname, "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
+        if: inputs.native
       - name: List linked libraries (Linux)
         run: ldd ${{ steps.addon.outputs.addon }}
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && inputs.native
       - name: List linked libraries (macOS)
         run: otool -L ${{ steps.addon.outputs.addon }}
-        if: runner.os == 'macOS'
+        if: runner.os == 'macOS' && inputs.native
       - run: npx mocha test/node.test.ts test/integration.test.ts
         env:
           MOCHA_INTEGRATION: ${{ inputs.integration }}
-          MOCHA_MAGICK_INSTALL: ${{ inputs.install }}
+          MOCHA_MAGICK_INSTALL: ${{ inputs.install_cmd }}
           MOCHA_LIGHT: ${{ inputs.light }}
           MOCHA_EXTRALIGHT: ${{ inputs.extralight }}

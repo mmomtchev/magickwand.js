@@ -72,19 +72,18 @@ jobs:
 
     uses:
       mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
-
     with:
       native: true
       wasm: false
       platform: ${{ matrix.platform }}
       dependencies: ${{ matrix.dependencies }}
       integration: 'node'
-      install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""    
+      install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
       light: ${{ matrix.dependencies == 'conan' && '' || '1' }}
       extralight: ${{ matrix.dependencies == 'system' && startsWith(matrix.platform, 'windows') }}
 
+
   native-light:
-    runs-on: ${{ matrix.platform }}
     needs: swig
 
     strategy:
@@ -92,67 +91,20 @@ jobs:
       matrix:
         platform: [ubuntu-latest]
 
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: true
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
-      - name: Download the SWIG-generated wrappers
-        uses: actions/download-artifact@v4
-        with:
-          name: swig
-          path: swig
-      - name: Install the xpacks
-        run: |
-          npm install xpm
-          npx xpm install
-      - name: Get conan home
-        shell: bash
-        id: conan_home
-        run: |
-          npx xpm run -q conan -- version
-          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
-      - name: Cache conan artifacts
-        id: conan-artifacts
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.conan_home.outputs.path }}
-          key: linux-light-conan
-      - name: Install fonts on Ubuntu
-        run: sudo apt-get install -y fonts-ubuntu || true
-        if: startsWith(matrix.platform, 'ubuntu')
-        shell: bash
-      - name: Build magickwand.js
-        run: |
-          npm install --build-from-source --verbose --foreground-scripts --enable-shared  \
-            --disable-fonts --enable-jpeg --enable-png --disable-tiff                     \
-            --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia           \
-            --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif   \
-            --disable-color --disable-xml --enable-gzip --disable-zip                     \
-            --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd     \
-            --disable-openmp --disable-display --disable-jbig --disable-cairo             \
-            --skip-magickwand-wasm
-      - name: Locate addon file
-        shell: bash
-        id: addon
-        run: node -p '"addon=" + path.resolve(__dirname, "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
-      - name: List linked libraries (Linux)
-        run: ldd ${{ steps.addon.outputs.addon }}
-        if: runner.os == 'Linux'
-      - name: List linked libraries (macOS)
-        run: otool -L ${{ steps.addon.outputs.addon }}
-        if: runner.os == 'macOS'
-      - run: npx mocha test/node.test.ts
-        env:
-          MOCHA_LIGHT: 1
+    uses:
+      mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
+    with:
+      native: true
+      wasm: false
+      platform: ${{ matrix.platform }}
+      dependencies: 'conan'
+      integration: ''
+      install_cmd: ''
+      light: true
+      extra_npm_opts: '--disable-fonts --enable-jpeg --enable-png --disable-tiff --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif --disable-color --disable-xml --enable-gzip --disable-zip --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd --disable-openmp --disable-display --disable-jbig --disable-cairo'
 
 
   native-xpack:
-    runs-on: ${{ matrix.platform }}
     needs: swig
 
     strategy:
@@ -166,62 +118,16 @@ jobs:
           - macos-latest
           - windows-latest
 
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: true
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
-      - name: Download the SWIG-generated wrappers
-        uses: actions/download-artifact@v4
-        with:
-          name: swig
-          path: swig
-      - name: Install the xpacks
-        run: |
-          npm install xpm
-          npx xpm install
-      - name: Get conan home
-        shell: bash
-        id: conan_home
-        run: |
-          npx xpm run -q conan -- version
-          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
-      - name: Cache conan artifacts
-        id: conan-artifacts
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.conan_home.outputs.path }}
-          key: conan-xpack-${{ matrix.platform }}
-      - name: Install fonts on Ubuntu
-        run: sudo apt-get install -y fonts-ubuntu || true
-        if: startsWith(matrix.platform, 'ubuntu')
-      - name: Do not use GHA pkg-config on Windows
-        shell: bash
-        run: rm `which pkg-config`*
-        if: runner.os == 'Windows'
-      - name: Build with xPack
-        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm --enable-conan --enable-standalone-build
-        env:
-          C_INCLUDE_PATH: /usr/local/include
-          CPLUS_INCLUDE_PATH: /usr/local/include
-      - name: Locate addon file
-        shell: bash
-        id: addon
-        run: node -p '"addon=" + path.resolve(__dirname, "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
-      - name: List linked libraries (Linux)
-        run: ldd ${{ steps.addon.outputs.addon }}
-        if: runner.os == 'Linux'
-      - name: List linked libraries (macOS)
-        run: otool -L ${{ steps.addon.outputs.addon }}
-        if: runner.os == 'macOS'
-      - run: npx mocha test/node.test.ts test/integration.test.ts
-        env:
-          MOCHA_INTEGRATION: node
-          MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
+    uses:
+      mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
+    with:
+      native: true
+      wasm: false
+      platform: ${{ matrix.platform }}
+      dependencies: conan
+      integration: node
+      install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
+      extra_npm_opts: '--enable-standalone-build'
 
 
   native-xpack-minimal-container:
@@ -286,123 +192,39 @@ jobs:
 
 
   wasm:
-    runs-on: ubuntu-latest
     needs: swig
 
-    strategy:
-      fail-fast: false
+    uses:
+      mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
+    with:
+      native: false
+      wasm: true
+      platform: ubuntu-latest
+      dependencies: conan
+      integration: browser
+      install_cmd: 'ln -s ${{ github.workspace }} node_modules/magickwand.js'
 
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: true
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
-      - name: Setup emscripten
-        uses: mymindstorm/setup-emsdk@v14
-        with:
-          version: 3.1.53
-      - name: Download the SWIG-generated wrappers
-        uses: actions/download-artifact@v4
-        with:
-          name: swig
-          path: swig
-      - name: Install the xpacks
-        run: |
-          npm install xpm
-          npx xpm install
-      - name: Get conan home
-        shell: bash
-        id: conan_home
-        run: |
-          npx xpm run -q conan -- version
-          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
-      - name: Cache conan artifacts
-        id: conan-artifacts
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.conan_home.outputs.path }}
-          key: wasm-conan
-      - name: Build magickwand.js
-        run: npm install --build-wasm-from-source --verbose --foreground-scripts --skip-magickwand-native --enable-conan
-      - name: Check size
-        run: |
-          echo "::notice::Default WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
-          echo "::notice::Default WASM version is $(( `brotli -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes brotlied"
-      - name: Run headless test
-        uses: coactions/setup-xvfb@v1
-        env:
-          MOCHA_INTEGRATION: browser
-          MOCHA_MAGICK_INSTALL: ln -s ${{ github.workspace }} node_modules/magickwand.js
-        with:
-          run: npx mocha test/browser.test.ts test/integration.test.ts
 
   wasm-light:
-    runs-on: ubuntu-latest
     needs: swig
 
     strategy:
       fail-fast: false
+      matrix:
+        platform: [ubuntu-latest]
 
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: true
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
-      - name: Setup emscripten
-        uses: mymindstorm/setup-emsdk@v14
-        with:
-          version: 3.1.53
-      - name: Download the SWIG-generated wrappers
-        uses: actions/download-artifact@v4
-        with:
-          name: swig
-          path: swig
-      - name: Install the xpacks
-        run: |
-          npm install xpm
-          npx xpm install
-      - name: Get conan home
-        shell: bash
-        id: conan_home
-        run: |
-          npx xpm run -q conan -- version
-          echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
-      - name: Cache conan artifacts
-        id: conan-artifacts
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.conan_home.outputs.path }}
-          key: wasm-light-conan
-      - name: Build magickwand.js
-        run: |
-          npm install --build-wasm-from-source --verbose --foreground-scripts           \
-            --enable-conan                                                              \
-            --disable-fonts --enable-jpeg --enable-png --disable-tiff                   \
-            --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia         \
-            --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif \
-            --disable-color --disable-xml --enable-gzip --disable-zip                   \
-            --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd   \
-            --disable-openmp --disable-display --disable-jbig --disable-cairo           \
-            --skip-magickwand-native
-      - name: Check size
-        run: |
-          echo "::notice::Light WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
-          echo "::notice::Light WASM version is $(( `brotli -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes brotlied"
-      - name: Run headless test
-        uses: coactions/setup-xvfb@v1
-        env:
-          MOCHA_LIGHT: 1
-          MOCHA_INTEGRATION: browser
-        with:
-          run: npx mocha test/browser.test.ts
+    uses:
+      mmomtchev/magickwand.js/.github/workflows/build.yml@xpack-install
+    with:
+      native: false
+      wasm: true
+      platform: ubuntu-latest
+      dependencies: conan
+      integration: browser
+      install_cmd: 'ln -s ${{ github.workspace }} node_modules/magickwand.js'
+      light: true
+      extra_npm_opts: '--disable-fonts --enable-jpeg --enable-png --disable-tiff --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif --disable-color --disable-xml --enable-gzip --disable-zip --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd --disable-openmp --disable-display --disable-jbig --disable-cairo'
+
 
   debug-asan:
     runs-on: ${{ matrix.platform }}
