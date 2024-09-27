@@ -151,16 +151,13 @@ npm install magickwand.js --build-from-source --enable-conan
 
 ### Experimental `xPack` fully self-contained build
 
-This project supports the new `xPack` fully self-contained build of [`hadron`](https://github.com/mmomtchev/hadron) - which means that it can rebuild itself without a working C++ environment. This build is currently highly experimental and is included mostly for demonstration purposes. In this mode, the only requirement is Node.js and `npm` and the project is built using a `clang` `xPack` on all platforms. The build can be launched only manually and it is not available when installing the package from `npm`:
+This project supports the new `xPack` fully self-contained build of [`hadron`](https://github.com/mmomtchev/hadron) - which means that it can rebuild itself without a working C++ environment. This build is currently highly experimental and is included mostly for demonstration purposes. In this mode, the only requirement is Node.js and `npm` and the project is built using a `clang` `xPack` on all platforms. This build is enabled by the `--enable-standalone-build` option:
 
 ```shell
-npx xpm install
-npx xpm install --config native-xpack
-npx xpm run prepare --config native-xpack
-npx xpm run build --config native-xpack
+npm install magickwand.js --build-from-source --enable-conan --enable-standalone-build
 ```
 
-Be sure to read the notes at [Building hadron-based projects without a system compiler](https://github.com/mmomtchev/magickwand.js/blob/main/README.xPacks.md)
+Be sure to read the notes at [Building hadron-based projects without a system compiler](https://github.com/mmomtchev/magickwand.js/blob/main/README.xPacks.md).
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
@@ -257,6 +254,8 @@ The following options are available when using `npm install`:
 
 * `--enable-shared` builds `ImageMagick` as a shared library and prefers linking against the shared versions of the system libraries, this binary will be smaller and load faster, but it will run only on the system on which it was compiled
 
+* `--enable-standalone-build` will use the bundled C/C++ compiler (`clang` on all platforms in a xPack `npm` package) to build the package, this should work on all platform even without a C/C++ compiler installed - *this option is considered experimental*
+
 * `--enable-external` will build only the JavaScript bindings expecting to link to an already existing ImageMagick installation
 
 * `--cpp_args=` can be used to pass additional arguments when compiling, add `-I` when compiling with an external ImageMagick
@@ -327,7 +326,7 @@ SWIG JSE roadmap:
 * a `wasi-wasm32` target in addition to the `emscripten-wasm32` target
 * a much slower for async operations but more compatible WASM version that does not require COOP/COEP but uses message passing between web browser threads    
 * Regexp support for `%feature` avoiding the need to explicitly list all the async classes
-* Provide memory allocation information to the GC
+* Provide memory allocation information to the GC - currently the GC will consider each `Image` to be a small object without an associated data structure - when this object is freed, all the memory will be freed - but the GC may be much more reluctant to actually do so, because it considers the object to be too small
 
 `magickwand.js` roadmap:
 * SIMD support for the WASM version
