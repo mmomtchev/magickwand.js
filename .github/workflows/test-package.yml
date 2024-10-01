@@ -122,10 +122,6 @@ jobs:
           npm install --verbose --foreground-scripts \
             ${{ inputs.package }} --build-from-source
         shell: bash
-        # Because of https://github.com/mmomtchev/hadron/issues/37
-        env:
-          C_INCLUDE_PATH: /usr/local/include
-          CPLUS_INCLUDE_PATH: /usr/local/include
       - name: Set up the unit tests
         shell: bash
         run: |
