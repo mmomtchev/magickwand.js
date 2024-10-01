@@ -119,10 +119,6 @@ jobs:
             ${{ inputs.wasm   && '--build-wasm-from-source' || '--skip-magickwand-wasm' }} \
             ${{ inputs.dependencies == 'conan' && '--enable-conan' || '--disable-conan' }} \
             ${{ inputs.extra_npm_opts }}
-        # Because of https://github.com/mmomtchev/hadron/issues/37
-        env:
-          C_INCLUDE_PATH: /usr/local/include
-          CPLUS_INCLUDE_PATH: /usr/local/include
 
       - name: Check size
         run: |
