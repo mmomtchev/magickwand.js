@@ -29,9 +29,6 @@ xz_utils/*: make/4.4.1
 libmount/*: make/4.4.1
 libxml2/*: make/4.4.1
 
-[options]
-glib/*:with_selinux=False
-
 [conf]
 # By using clang we are already out of the paved road
 tools.cmake.cmaketoolchain:generator=Ninja

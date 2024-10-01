@@ -106,6 +106,10 @@ jobs:
         shell: bash
         run: rm `which pkg-config`*
         if: runner.os == 'Windows'
+      - name: Purge g-ir-scanner on macOS/Linux
+        shell: bash
+        run: which g-ir-scanner && sudo rm -f `which g-ir-scanner` || true
+        if: runner.os != 'Windows'
 
       - name: Build magickwand.js
         shell: bash
