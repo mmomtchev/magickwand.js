@@ -41,10 +41,17 @@ describe('integration tests', function() {
         try {
           fs.rmSync('node_modules', { recursive: true });
         } catch { /* empty */ }
-        execSync('npm install', { env });
-        execSync(install, { env });
+        try {
+          execSync('npm install', { env, stdio: 'pipe' });
+          execSync(install, { env });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (e: any) {
+          console.log('stdout', e.stdout.toString());
+          console.error('stderr', e.stderr.toString());
+          throw e;
+        }
         if (browser) {
-          execSync('npm run build', { stdio: 'pipe', env });
+          execSync('npm run build', { env, stdio: 'pipe' });
           process.chdir(root);
           execSync(`npx karma start ${karmaPath}`, { env });
         } else {
