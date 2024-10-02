@@ -26,32 +26,12 @@ jobs:
     - name: Lint
       run: npm run lint
       
+
   swig:
-    runs-on: ubuntu-latest
     name: Generate the SWIG wrappers
+    uses:
+      mmomtchev/magickwand.js/.github/workflows/swig.yml@main
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-        submodules: true
-    - uses: mmomtchev/setup-swig@main
-      with:
-        branch: jse
-        version: v5.0.5
-
-    - name: Verify SWIG
-      run: swig-jse -version
-
-    - name: Run SWIG to generated the wrappers
-      run: npx xpm run generate
-
-    - name: Upload SWIG-generated wrappers
-      uses: actions/upload-artifact@v4
-      with:
-        name: swig
-        path: swig/*
 
   native:
     needs: swig
