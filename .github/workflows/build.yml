@@ -48,7 +48,11 @@ on:
       conan_id:
         type: string
         default: conan
-        description: conan cache id to use
+        description: conan cache id to use, empty for no cache
+      publish:
+        type: boolean
+        default: false
+        description: publish the binaries to the current release
 
 jobs:
   build:
@@ -96,6 +100,7 @@ jobs:
         with:
           path: ${{ steps.conan_home.outputs.path }}
           key: ${{ inputs.conan_id }}-${{ inputs.platform }}
+        if: inputs.conan_id
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(inputs.platform, 'ubuntu') && !inputs.container
@@ -151,3 +156,20 @@ jobs:
           MOCHA_MAGICK_INSTALL: ${{ inputs.install_cmd }}
           MOCHA_LIGHT: ${{ inputs.light }}
           MOCHA_EXTRALIGHT: ${{ inputs.extralight }}
+
+      - name: Node.js platform ID string
+        id: platform
+        shell: bash
+        run: node -p '"plat=" + os.platform() + "-" + os.arch()' >> "$GITHUB_OUTPUT"
+      - name: Upload native artifact ${{ inputs.platform }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.platform.outputs.plat }}
+          path: lib/binding/*
+        if: inputs.publish && inputs.native
+      - name: Upload native artifact ${{ inputs.platform }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: emscripten-wasm32
+          path: lib/binding/*
+        if: inputs.publish && inputs.wasm

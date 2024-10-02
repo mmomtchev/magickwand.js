@@ -39,7 +39,6 @@ jobs:
 
   build-native:
     name: Build the native modules
-    runs-on: ${{ matrix.platform }}
     needs: swig
 
     strategy:
@@ -50,77 +49,34 @@ jobs:
           - macos-latest
           - windows-2022
 
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: true
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
-      - name: Download the SWIG-generated wrappers
-        uses: actions/download-artifact@v4
-        with:
-          name: swig
-          path: swig
-      - name: Install fonts on Ubuntu
-        run: sudo apt-get install -y fonts-ubuntu || true
-        if: startsWith(matrix.platform, 'ubuntu')
-      - name: Build magickwand.js (native)
-        run: npm install --build-from-source --verbose --foreground-scripts --skip-magickwand-wasm --enable-conan --disable-display
-      - run: npx mocha test/node.test.ts test/integration.test.ts
-        env:
-          MOCHA_INTEGRATION: node
-          MOCHA_MAGICK_INSTALL: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
-      - name: Node.js platform ID string
-        id: platform
-        shell: bash
-        run: node -p '"plat=" + os.platform() + "-" + os.arch()' >> "$GITHUB_OUTPUT"
-      - name: Upload native artifact ${{ matrix.platform }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ steps.platform.outputs.plat }}
-          path: lib/binding/*
+    uses:
+      mmomtchev/magickwand.js/.github/workflows/build.yml@main
+    with:
+      native: true
+      wasm: false
+      platform: ${{ matrix.platform }}
+      dependencies: conan
+      integration: node
+      install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
+      conan_id: ''
+      publish: true
 
 
   build-wasm:
     name: Build the WASM module
-    runs-on: ubuntu-latest
     needs: swig
 
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: true
-      - name: Setup emscripten
-        uses: mymindstorm/setup-emsdk@v14
-        with:
-          version: 3.1.53
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.x
-      - name: Download the SWIG-generated wrappers
-        uses: actions/download-artifact@v4
-        with:
-          name: swig
-          path: swig
-      - name: Build magickwand.js (WASM)
-        run: npm install --build-wasm-from-source --verbose --foreground-scripts --skip-magickwand-native --enable-conan --disable-display
-      - name: Run headless test
-        uses: coactions/setup-xvfb@v1
-        env:
-          MOCHA_INTEGRATION: browser
-          MOCHA_MAGICK_INSTALL: ln -s ${{ github.workspace }} node_modules/magickwand.js
-        with:
-          run: npx mocha test/browser.test.ts test/integration.test.ts
-      - name: Upload native artifact emscripten-wasm32
-        uses: actions/upload-artifact@v4
-        with:
-          name: emscripten-wasm32
-          path: lib/binding/*
+    uses:
+      mmomtchev/magickwand.js/.github/workflows/build.yml@main
+    with:
+      native: false
+      wasm: true
+      platform: ubuntu-latest
+      dependencies: conan
+      integration: browser
+      install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
+      conan_id: ''
+      publish: true
 
 
   create-release:
