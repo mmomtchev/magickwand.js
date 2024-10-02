@@ -125,8 +125,9 @@ jobs:
             ${{ inputs.dependencies == 'conan' && '--enable-conan' || '--disable-conan' }} \
             ${{ inputs.extra_npm_opts }}
 
-      - name: Check size
+      - name: Check WASM module size
         run: |
+          echo "::notice::WASM version is $(( `cat lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes raw"
           echo "::notice::WASM version is $(( `gzip -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes gzipped"
           echo "::notice::WASM version is $(( `brotli -9c lib/binding/emscripten-wasm32/magickwand.wasm | wc -c` / 1024 )) KBytes brotlied"
         if: inputs.wasm
@@ -134,6 +135,10 @@ jobs:
         shell: bash
         id: addon
         run: node -p '"addon=" + path.resolve(__dirname, "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")' >> $GITHUB_OUTPUT
+        if: inputs.native
+      - name: Check native module size
+        run: |
+          node -p '"::notice::native version is " + (fs.statSync(path.resolve(__dirname, "lib", "binding", `${os.platform()}-${os.arch()}`, "magickwand.node")).size / 1024).toFixed(0) + " KBytes"'
         if: inputs.native
       - name: List linked libraries (Linux)
         run: ldd ${{ steps.addon.outputs.addon }}
