@@ -167,7 +167,7 @@ jobs:
           name: ${{ steps.platform.outputs.plat }}
           path: lib/binding/*
         if: inputs.publish && inputs.native
-      - name: Upload native artifact ${{ inputs.platform }}
+      - name: Upload WASM artifact
         uses: actions/upload-artifact@v4
         with:
           name: emscripten-wasm32
