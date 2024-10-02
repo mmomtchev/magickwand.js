@@ -1,4 +1,4 @@
-name: Github packages publish
+name: Generate SWIG wrappers
 
 on: workflow_call
 
