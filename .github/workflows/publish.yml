@@ -38,6 +38,7 @@ jobs:
       integration: node
       install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
       conan_id: ''
+      extra_npm_opts: '--disable-display'
       publish: true
 
 
@@ -55,6 +56,7 @@ jobs:
       integration: browser
       install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
       conan_id: ''
+      extra_npm_opts: '--disable-display'
       publish: true
 
 
