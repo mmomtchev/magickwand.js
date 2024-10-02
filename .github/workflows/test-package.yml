@@ -226,6 +226,7 @@ jobs:
         run: |
           npm install --verbose --foreground-scripts=true      \
             ${{ inputs.package }}                              \
+            --build-from-source                                \
             --enable-external --enable-shared                  \
             --cpp-args="`pkg-config --cflags Magick++`"        \
             --cpp-link-args="`pkg-config --libs Magick++`"
