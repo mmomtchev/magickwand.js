@@ -1,8 +1,9 @@
 name: Development CI
 
 on:
+  workflow_dispatch:
   push:
-    branches: ["*"]
+    branches: main
     paths-ignore:
       - 'CHANGELOG.md'
       - 'README.md'
