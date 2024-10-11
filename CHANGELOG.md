@@ -2,7 +2,7 @@
 
 # [2.0.0]
 
- - ImageMagick 7.1.1-38
+ - ImageMagick 7.1.1-39
  - Completely redesigned fully portable build using the new `hadron` build system (`xpm` + `meson / node-api` + `conan`)
    - Fully self-contained static build that does not depend on any system libraries (`conan`)
    - Identical on all three supported OS - Linux, Windows and macOS - and browser WASM (`meson / node-api`)
