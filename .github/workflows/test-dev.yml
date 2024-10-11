@@ -30,7 +30,7 @@ jobs:
   swig:
     name: Generate the SWIG wrappers
     uses:
-      mmomtchev/magickwand.js/.github/workflows/swig.yml@main
+      ./.github/workflows/swig.yml
 
 
   native:
@@ -51,7 +51,7 @@ jobs:
           - conan
 
     uses:
-      mmomtchev/magickwand.js/.github/workflows/build.yml@main
+      ./.github/workflows/build.yml
     with:
       native: true
       wasm: false
@@ -73,7 +73,7 @@ jobs:
         platform: [ubuntu-latest]
 
     uses:
-      mmomtchev/magickwand.js/.github/workflows/build.yml@main
+      ./.github/workflows/build.yml
     with:
       native: true
       wasm: false
@@ -101,7 +101,7 @@ jobs:
           - windows-latest
 
     uses:
-      mmomtchev/magickwand.js/.github/workflows/build.yml@main
+      ./.github/workflows/build.yml
     with:
       native: true
       wasm: false
@@ -117,7 +117,7 @@ jobs:
     needs: swig
 
     uses:
-      mmomtchev/magickwand.js/.github/workflows/build.yml@main
+      ./.github/workflows/build.yml
     with:
       native: true
       wasm: false
@@ -135,7 +135,7 @@ jobs:
     needs: swig
 
     uses:
-      mmomtchev/magickwand.js/.github/workflows/build.yml@main
+      ./.github/workflows/build.yml
     with:
       native: false
       wasm: true
@@ -150,7 +150,7 @@ jobs:
     needs: swig
 
     uses:
-      mmomtchev/magickwand.js/.github/workflows/build.yml@main
+      ./.github/workflows/build.yml
     with:
       native: false
       wasm: true
@@ -167,7 +167,7 @@ jobs:
     needs: swig
 
     uses:
-      mmomtchev/magickwand.js/.github/workflows/build.yml@main
+      ./.github/workflows/build.yml
     with:
       native: true
       wasm: false
