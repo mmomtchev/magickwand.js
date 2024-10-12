@@ -104,7 +104,6 @@
   "dependencies": {
     "@emnapi/runtime": "^1.0.0",
     "@mmomtchev/prebuild-install": "^1.0.2",
-    "chalk": "^5.3.0",
     "emnapi": "^1.0.0",
     "node-addon-api": "^8.0.0",
     "xpm": "^0.19.1"
