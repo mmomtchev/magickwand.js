@@ -103,7 +103,6 @@
   },
   "dependencies": {
     "@emnapi/runtime": "^1.0.0",
-    "@mapbox/node-pre-gyp": "^1.0.11",
     "@mmomtchev/prebuild-install": "^1.0.2",
     "chalk": "^5.3.0",
     "emnapi": "^1.0.0",
