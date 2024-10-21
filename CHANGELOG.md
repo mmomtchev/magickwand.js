@@ -2,7 +2,8 @@
 
 ### [2.0.1]
 
- - Fix rebuilding the WASM module when installing with `npm` with `--build-wasm-from-source` (at the moment supported only on Linux)
+ - Fix [meson#55](https://github.com/mmomtchev/hadron/issues/55): rebuilding the WASM module when installing with `npm` with `--build-wasm-from-source` (at the moment supported only on Linux)
+ - Prevent `npm` from updating `emnapi` on installation
 
 # [2.0.0] 2024-10-12
 
