@@ -1,5 +1,9 @@
 # Changelog
 
+### [2.0.1]
+
+ - Fix rebuilding the WASM module when installing with `npm` with `--build-wasm-from-source` (at the moment supported only on Linux)
+
 # [2.0.0] 2024-10-12
 
  - ImageMagick 7.1.1-39
