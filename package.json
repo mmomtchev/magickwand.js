@@ -104,7 +104,7 @@
   "dependencies": {
     "@emnapi/runtime": "1.1.1",
     "@mmomtchev/prebuild-install": "^1.0.2",
-    "emnapi": "1.1.1",
+    "emnapi": "1.2.0",
     "node-addon-api": "^8.0.0",
     "xpm": "^0.19.1"
   },
