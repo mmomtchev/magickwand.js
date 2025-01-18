@@ -1,6 +1,6 @@
 # Changelog
 
-### [2.0.2]
+### [2.0.2] 2025-01-18
 
  - Update ImageMagick to 7.1.1-43
  - Fix compilation with MSVC that does not default to C23
