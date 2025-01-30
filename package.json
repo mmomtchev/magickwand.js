@@ -106,7 +106,7 @@
     "@mmomtchev/prebuild-install": "^1.0.2",
     "emnapi": "1.1.1",
     "node-addon-api": "^8.0.0",
-    "xpm": "^0.19.1"
+    "xpm": "^0.20.5"
   },
   "engines": {
     "node": ">=18"
