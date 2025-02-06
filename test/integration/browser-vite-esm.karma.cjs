@@ -1,5 +1,5 @@
 //
-// webpack + ESM
+// vite + ESM
 //
 
 module.exports = function (config) {
