@@ -67,16 +67,8 @@ jobs:
           mv node_modules/magickwand.js/test .
           mkdir -p deps/ImageMagick/config
           cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
-      - name: Run the unit tests headless (macOS/Windows)
+      - name: Run the unit tests headless
         run: npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 test/*.test.ts
-        if: runner.os != 'Linux'
-        env:
-          TS_NODE_PROJECT: ${{ github.workspace }}/test/tsconfig.standalone.json
-          MOCHA_INTEGRATION: node,browser
-          MOCHA_MAGICK_INSTALL: npm install --force ${{ inputs.download && format('{0}/{1}', github.workspace, inputs.package) || inputs.package }}
-      - name: Run the unit tests headless (Linux)
-        run: xvfb-run npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 test/*.test.ts
-        if: runner.os == 'Linux'
         env:
           TS_NODE_PROJECT: ${{ github.workspace }}/test/tsconfig.standalone.json
           MOCHA_INTEGRATION: node,browser
@@ -142,16 +134,6 @@ jobs:
           cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
       - name: Run the unit tests headless (macOS/Windows)
         run: npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 test/*.test.ts
-        if: runner.os != 'Linux'
-        env:
-          TS_NODE_PROJECT: ${{ github.workspace }}/test/tsconfig.standalone.json
-          MOCHA_INTEGRATION: node,browser
-          MOCHA_MAGICK_INSTALL: npm install --force ${{ inputs.download && format('{0}/{1}', github.workspace, inputs.package) || inputs.package }}
-          MOCHA_LIGHT: 1
-          MOCHA_EXTRALIGHT: 1
-      - name: Run the unit tests headless (Linux)
-        run: xvfb-run npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 test/*.test.ts
-        if: runner.os == 'Linux'
         env:
           TS_NODE_PROJECT: ${{ github.workspace }}/test/tsconfig.standalone.json
           MOCHA_INTEGRATION: node,browser
@@ -261,18 +243,9 @@ jobs:
           mv node_modules/magickwand.js/test .
           mkdir -p deps/ImageMagick/config
           cp node_modules/magickwand.js/deps/ImageMagick/config/policy-websafe.xml deps/ImageMagick/config
-      - name: Run the unit tests headless (macOS/Windows)
+      - name: Run the unit tests
         run: npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 test/*.test.ts
         if: runner.os != 'Linux'
-        env:
-          TS_NODE_PROJECT: ${{ github.workspace }}/test/tsconfig.standalone.json
-          MOCHA_INTEGRATION: node,browser
-          MOCHA_MAGICK_INSTALL: npm install --force ${{ inputs.download && format('{0}/{1}', github.workspace, inputs.package) || inputs.package }}
-          MOCHA_LIGHT: 1
-          MOCHA_EXTRALIGHT: 1
-      - name: Run the unit tests headless (Linux)
-        run: xvfb-run npx mocha --require ts-node/register --types mocha --reporter=tap --v8-expose-gc --timeout 5000 test/*.test.ts
-        if: runner.os == 'Linux'
         env:
           TS_NODE_PROJECT: ${{ github.workspace }}/test/tsconfig.standalone.json
           MOCHA_INTEGRATION: node,browser
