@@ -224,9 +224,7 @@ Generally, the prebuilt WASM binaries should work for everyone. To rebuild the W
 npm install magickwand.js --build-wasm-from-source --enable-conan
 ```
 
-Currently, you need to have EMSDK installed and activated in your environment. A future version might get it automatically from `conan`.
-
-`conan` is required when building to WASM because it is unlikely that you will have system-installed WASM-version libraries that ImageMagick will detect and use.
+`conan` is required when building to WASM because it provides `emsdk` and because it is unlikely that you will have system-installed WASM-version libraries that ImageMagick will detect and use. You can override the `emscripten` used by setting `EMCC` and `EMCXX` environment variables to the full path of a custom `emsdk` installation.
 
 Or to build a minimal version that excludes many optional dependencies:
 
