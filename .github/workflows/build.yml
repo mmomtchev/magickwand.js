@@ -71,11 +71,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
-      - name: Setup emscripten
-        uses: mymindstorm/setup-emsdk@v14
-        with:
-          version: 3.1.53
-        if: inputs.wasm
       - name: Setup container
         run: ${{ inputs.container_init }}
         if: inputs.container_init
