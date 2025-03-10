@@ -53,7 +53,7 @@ jobs:
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
         shell: bash
       - name: Download the package
-        uses: robinraju/release-downloader@v1.11
+        uses: robinraju/release-downloader@v1.12
         with:
           tag: ${{ github.ref_name }}
           fileName: ${{ inputs.package }}
@@ -115,7 +115,7 @@ jobs:
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
         shell: bash
       - name: Download the package
-        uses: robinraju/release-downloader@v1.11
+        uses: robinraju/release-downloader@v1.12
         with:
           tag: ${{ github.ref_name }}
           fileName: ${{ inputs.package }}
@@ -163,7 +163,7 @@ jobs:
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
       - name: Download the package
-        uses: robinraju/release-downloader@v1.11
+        uses: robinraju/release-downloader@v1.12
         with:
           tag: ${{ github.ref_name }}
           fileName: ${{ inputs.package }}
@@ -220,7 +220,7 @@ jobs:
             karma karma-chrome-launcher karma-mocha webpack webpack-cli ts-loader
         shell: bash
       - name: Download the package
-        uses: robinraju/release-downloader@v1.11
+        uses: robinraju/release-downloader@v1.12
         with:
           tag: ${{ github.ref_name }}
           fileName: ${{ inputs.package }}
