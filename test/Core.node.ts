@@ -5,8 +5,8 @@ import * as chai from 'chai';
 const assert: Chai.AssertStatic = chai.assert;
 
 // This test is used only in Node.js
-import IM from 'magickwand.js/native';
-import { MagickCore } from 'magickwand.js/native';
+import IM from '../native/index.cjs';
+import { MagickCore } from '../native/index.cjs';
 
 describe('Core', () => {
   const features = MagickCore.GetMagickFeatures().trimEnd().split(' ').join(',');

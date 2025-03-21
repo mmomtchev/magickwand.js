@@ -21,7 +21,7 @@ import './Core.node';
 import './Draw.node';
 import './STL.node';
 
-import { Magick, MagickCore } from 'magickwand.js/native';
+import { Magick, MagickCore } from '../native/index.cjs';
 
 const imageFile = path.join(__dirname, 'data', 'wizard.gif');
 const imageData = fs.readFileSync(imageFile);
