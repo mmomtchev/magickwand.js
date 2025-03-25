@@ -334,6 +334,10 @@ SWIG JSE roadmap:
 * SIMD support for the WASM version
 * Allow configuration from the CLI of the included wrappers - allowing to build an ultra-light version that includes support only for the methods selected by the user
 
+# CLI Tool
+
+Starting with version 2.1, a statically compiled `Magick` CLI tool is shipped with the precompield binaries in `./lib/binding/{platform}-{arch}/bin/Magick`, registered as `package.json` `bin`, launch with `npx Magick` or simply `Magick` if the path is set.
+
 # Security
 
 ImageMagick is a very widely used software. Security vulnerabilities tend to be very well known and are usually fixed very fast.

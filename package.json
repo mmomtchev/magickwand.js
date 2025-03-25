@@ -29,6 +29,9 @@
       "default": "./lib/binding/emscripten-wasm32/magickwand.wasm"
     }
   },
+  "bin": {
+    "Magick": "scripts/cli.cjs"
+  },
   "scripts": {
     "install": "npx xpm install && npx xpm run npm-install",
     "lint": "npx eslint lib/*js native/*js test/*.ts",
