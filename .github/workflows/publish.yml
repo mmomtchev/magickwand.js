@@ -36,7 +36,8 @@ jobs:
       platform: ${{ matrix.platform }}
       dependencies: conan
       integration: node
-      install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
+      link: true
+      install_cmd: 'npm link magickwand.js --ignore-scripts'
       conan_id: ''
       extra_npm_opts: '--disable-display'
       publish: true
@@ -54,7 +55,8 @@ jobs:
       platform: ubuntu-latest
       dependencies: conan
       integration: browser
-      install_cmd: "node -e \"fs.symlinkSync(process.env.GITHUB_WORKSPACE, path.resolve('node_modules', 'magickwand.js'), os.platform() == 'win32' ? 'junction': 'dir')\""
+      link: true
+      install_cmd: 'npm link magickwand.js --ignore-scripts'
       conan_id: ''
       extra_npm_opts: '--disable-display'
       publish: true
