@@ -49,6 +49,10 @@ on:
         type: string
         default: conan
         description: conan cache id to use, empty for no cache
+      link:
+        type: boolean
+        default: false
+        description: link the package globally
       publish:
         type: boolean
         default: false
@@ -79,6 +83,9 @@ jobs:
       - name: Setup container
         run: ${{ inputs.container_init }}
         if: inputs.container_init
+      - name: Link the package globally
+        run: npm link
+        if: inputs.link
       - name: Download the SWIG-generated wrappers
         uses: actions/download-artifact@v4
         with:
