@@ -336,7 +336,7 @@ SWIG JSE roadmap:
 
 # CLI Tool
 
-Starting with version 2.1, a statically compiled `Magick` CLI tool is shipped with the precompield binaries in `./lib/binding/{platform}-{arch}/bin/Magick`, registered as `package.json` `bin`, launch with `npx Magick` or simply `Magick` if the path is set.
+Starting with version 2.1, a statically compiled `Magick` CLI tool is shipped with the precompield binaries in `./lib/binding/{platform}-{arch}/bin/Magick`, registered as `package.json` `bin`, launch with `npx magick` or simply `magick` if the path is set.
 
 # Security
 
