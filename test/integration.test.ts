@@ -56,7 +56,7 @@ describe('integration tests', function() {
           execSync(`npx karma start ${karmaPath}`, { env });
         } else {
           execSync('npm test', { env });
-          execSync('npx Magick -help', { env });
+          execSync('npx magick -help', { env });
         }
       } catch (e) {
         const execErr = e as Error & { stdout: Buffer, stderr: Buffer; };
