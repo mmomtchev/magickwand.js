@@ -30,7 +30,7 @@
     }
   },
   "bin": {
-    "Magick": "scripts/cli.cjs"
+    "magick": "scripts/cli.cjs"
   },
   "scripts": {
     "install": "npx xpm install && npx xpm run npm-install",
