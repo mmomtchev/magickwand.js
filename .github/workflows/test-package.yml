@@ -27,7 +27,6 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          - ubuntu-20.04
           - ubuntu-22.04
           - ubuntu-24.04
           - windows-2019
@@ -82,7 +81,6 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          - ubuntu-20.04
           - ubuntu-22.04
           - ubuntu-24.04
           - windows-2022
@@ -189,7 +187,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ubuntu-20.04]
+        platform: [ubuntu-22.04]
         node-version: [18.x]
 
     steps:
