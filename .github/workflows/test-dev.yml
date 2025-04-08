@@ -232,7 +232,9 @@ jobs:
         env:
           npm_config_enable_conan: true
       - name: Get ASAN library name
-        run: echo LD_PRELOAD=$(gcc -print-file-name=libasan.so) >> $GITHUB_ENV
+        id: asan-lib
+        run: echo LD_PRELOAD=$(gcc -print-file-name=libasan.so) >> $GITHUB_OUTPUT
       - run: node node_modules/mocha/bin/mocha.js -i -g Security --repeats 1000 test/node.test.ts
         env:
           LSAN_OPTIONS: suppressions=${{ github.workspace }}/test/napi-leaks-suppression.txt
+          LD_PRELOAD: ${{ steps.asan-lib.outputs.LD_PRELOAD }}
