@@ -65,10 +65,6 @@ jobs:
     container: ${{ inputs.container }}
 
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: true
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
@@ -81,6 +77,10 @@ jobs:
       - name: Setup container
         run: ${{ inputs.container_init }}
         if: inputs.container_init
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
       - name: Link the package globally
         run: npm link
         if: inputs.link
