@@ -129,7 +129,7 @@ jobs:
       install_cmd: 'npm link magickwand.js --ignore-scripts'
       extra_npm_opts: '--enable-standalone-build'
       container: ubuntu:latest
-      container_init: 'apt-get update && apt-get install -y libc6-dev libstdc++-11-dev libgcc-11-dev binutils ca-certificates fonts-ubuntu'
+      container_init: 'apt-get update && apt-get install -y libc6-dev libstdc++-11-dev libgcc-11-dev binutils ca-certificates fonts-ubuntu git'
       conan_id: native-xpack-minimal-container
 
 
