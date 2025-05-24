@@ -18,9 +18,9 @@ jobs:
         npm install
         xpm install
     - name: Create conan lock (native)
-      run: xpm run lock --config native
+      run: npx xpm run lock --config native
     - name: Create conan lock (WASM)
-      run: xpm run lock --config wasm
+      run: npx xpm run lock --config wasm
       if: matrix.platform == 'ubuntu-latest'
     - name: Commit conan lock
       uses: EndBug/add-and-commit@v9
