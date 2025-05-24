@@ -229,8 +229,6 @@ class ImageMagickDelegates(ConanFile):
     # This is the least opionated approach - no one imposes anything
     # and conan remains optional
     def generate(self):
-      if not self.options.conan or npm_option('external', False):
-        return
       tc = CMakeToolchain(self)
       tc.blocks.remove('generic_system')
       tc.generate()
