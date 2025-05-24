@@ -180,7 +180,7 @@ jobs:
       integration: node
       link: true
       install_cmd: 'npm link magickwand.js --ignore-scripts'
-      container_init: 'cd deps/ImageMagick && sh configure --prefix /usr && make -j4 && sudo make install'
+      prebuild: 'cd deps/ImageMagick && sh configure --prefix /usr && make -j4 && sudo make install'
       extra_npm_opts: '--enable-external --enable-shared --cpp-args="`pkg-config --cflags Magick++`" --cpp-link-args="`pkg-config --libs Magick++`"'
       conan_id: external
 
