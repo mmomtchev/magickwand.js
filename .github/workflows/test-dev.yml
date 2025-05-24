@@ -182,7 +182,6 @@ jobs:
       install_cmd: 'npm link magickwand.js --ignore-scripts'
       prebuild: 'cd deps/ImageMagick && sh configure --prefix /usr && make -j4 && sudo make install'
       extra_npm_opts: '--enable-external --enable-shared --cpp-args="`pkg-config --cflags Magick++`" --cpp-link-args="`pkg-config --libs Magick++`"'
-      conan_id: external
 
 
   debug-asan:
