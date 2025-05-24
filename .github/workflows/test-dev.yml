@@ -129,7 +129,7 @@ jobs:
       install_cmd: 'npm link magickwand.js --ignore-scripts'
       extra_npm_opts: '--enable-standalone-build'
       container: ubuntu:latest
-      container_init: 'apt-get update && apt-get install -y libc6-dev libstdc++-11-dev libgcc-11-dev binutils ca-certificates fonts-ubuntu'
+      container_init: 'apt-get update && apt-get install -y libc6-dev libstdc++-11-dev libgcc-11-dev binutils ca-certificates fonts-ubuntu git'
       conan_id: native-xpack-minimal-container
 
 
@@ -176,13 +176,12 @@ jobs:
       native: true
       wasm: false
       platform: ubuntu-22.04
-      dependencies: conan
+      dependencies: system
       integration: node
       link: true
       install_cmd: 'npm link magickwand.js --ignore-scripts'
-      container_init: 'cd deps/ImageMagick && sh configure --prefix /usr && make -j4 && sudo make install'
+      prebuild: 'cd deps/ImageMagick && sh configure --prefix /usr && make -j4 && sudo make install'
       extra_npm_opts: '--enable-external --enable-shared --cpp-args="`pkg-config --cflags Magick++`" --cpp-link-args="`pkg-config --libs Magick++`"'
-      conan_id: external
 
 
   debug-asan:

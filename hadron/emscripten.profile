@@ -3,6 +3,7 @@ include(default)
 [buildenv]
 CC={{ os.getenv("EMCC") or "emcc" }}
 CXX={{ os.getenv("EMCXX") or "em++" }}
+AR={{ os.getenv("EMAR") or "emar" }}
 
 [settings]
 os=Emscripten

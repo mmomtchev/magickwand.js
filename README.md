@@ -260,9 +260,9 @@ The following options are available when using `npm install`:
 
 * `--enable-external` will build only the JavaScript bindings expecting to link to an already existing ImageMagick installation
 
-* `--cpp_args=` can be used to pass additional arguments when compiling, add `-I` when compiling with an external ImageMagick
+* `--cpp-args=` can be used to pass additional arguments when compiling, add `-I` when compiling with an external ImageMagick
 
-* `--cpp_link_args=` can be used to pass additional arguments when linking, add `-L`/`-l` when linking with an external ImageMagick
+* `--cpp-link-args=` can be used to pass additional arguments when linking, add `-L`/`-l` when linking with an external ImageMagick
 
 * `--disable-simd` disables SIMD (always disabled for WASM)
 

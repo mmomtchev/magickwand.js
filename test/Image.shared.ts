@@ -43,7 +43,7 @@ export default function (
 
       it('rejects null', () => {
         // @ts-ignore
-        assert.throws(() => new Image(null), /Illegal arguments for construction/);
+        assert.throws(() => new Image(null), /invalid null reference/);
       });
 
       it('handling invalid color', () => {
