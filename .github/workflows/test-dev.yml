@@ -176,7 +176,7 @@ jobs:
       native: true
       wasm: false
       platform: ubuntu-22.04
-      dependencies: conan
+      dependencies: system
       integration: node
       link: true
       install_cmd: 'npm link magickwand.js --ignore-scripts'
