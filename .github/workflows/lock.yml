@@ -1,0 +1,29 @@
+name: Create conan lock
+on:
+  workflow_dispatch
+
+jobs:
+  native:
+    strategy:
+      max-parallel: 1
+      matrix:
+        platform: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Install xPacks
+      run:
+        npm install
+        xpm install
+    - name: Create conan lock (native)
+      run: xpm run lock --config native
+    - name: Create conan lock (WASM)
+      run: xpm run lock --config wasm
+      if: matrix.platform == 'ubuntu-latest'
+    - name: Commit conan lock
+      uses: EndBug/add-and-commit@v9
+      with:
+        message: 'Update conan lock for ${{ matrix.platform }}'
+        add: conan.lock
