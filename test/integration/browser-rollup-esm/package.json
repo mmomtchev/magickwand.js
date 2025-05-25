@@ -1,16 +1,15 @@
 {
-  "name": "browser-webpack-esm",
+  "name": "browser-rollup-esm",
   "version": "1.0.0",
-  "description": "browser/webpack/esm integration test",
+  "description": "browser/rollup/esm integration test",
   "scripts": {
     "build": "rollup -c"
   },
   "type": "module",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-node-resolve": "^16.0.1",
-    "@surma/rollup-plugin-off-main-thread": "^2.2.3",
     "@web/rollup-plugin-import-meta-assets": "^2.2.1",
+    "chai": "^5.2.0",
     "rollup": "^4.41.1",
     "rollup-plugin-copy": "^3.5.0"
   }
