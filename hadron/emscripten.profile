@@ -4,6 +4,7 @@ include(default)
 CC={{ os.getenv("EMCC") or "emcc" }}
 CXX={{ os.getenv("EMCXX") or "em++" }}
 AR={{ os.getenv("EMAR") or "emar" }}
+RANLIB={{ os.getenv("EMRANLIB") or "emranlib" }}
 
 [settings]
 os=Emscripten
