@@ -7,6 +7,6 @@
   },
   "type": "module",
   "dependencies": {
-    "chai": "^4.3.10"
+    "chai": "^4.5.0"
   }
 }

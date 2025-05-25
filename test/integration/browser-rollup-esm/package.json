@@ -7,11 +7,11 @@
   },
   "type": "module",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.1",
     "@surma/rollup-plugin-off-main-thread": "^2.2.3",
-    "@web/rollup-plugin-import-meta-assets": "^2.1.0",
-    "rollup": "^4.1.4",
+    "@web/rollup-plugin-import-meta-assets": "^2.2.1",
+    "rollup": "^4.41.1",
     "rollup-plugin-copy": "^3.5.0"
   }
 }

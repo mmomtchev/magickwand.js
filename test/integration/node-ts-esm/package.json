@@ -7,6 +7,6 @@
     "test": "npx mocha --loader=ts-node/esm index.ts"
   },
   "dependencies": {
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.2"
   }
 }
