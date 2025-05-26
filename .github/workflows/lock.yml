@@ -17,6 +17,8 @@ jobs:
         node-version: 22
     - name: Checkout
       uses: actions/checkout@v4
+      with:
+        ref: ${{ github.ref }}
     - name: Install xPacks
       run: |
         npm install
