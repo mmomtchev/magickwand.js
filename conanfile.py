@@ -90,89 +90,89 @@ class ImageMagickDelegates(ConanFile):
 
       if self.fonts_enabled:
         if self.glib_available:
-          [self.requires(x, force=True) for x in ('libffi/3.4.4', 'glib/2.81.0')]
-        [self.requires(x, force=True) for x in ('freetype/2.13.2', 'fribidi/1.0.12', 'harfbuzz/8.3.0')]
+          [self.requires(x, force=True) for x in ('libffi/[~3]', 'glib/[~2]')]
+        [self.requires(x, force=True) for x in ('freetype/[~2]', 'fribidi/[~1]', 'harfbuzz/[~10]')]
         if self.settings.os != 'Windows':
-          self.requires('fontconfig/2.14.2', force=True)
+          self.requires('fontconfig/[~2]')
 
       if self.options.lzma:
         self.requires('xz_utils/5.4.5')
 
       if self.options.bzip2:
-        self.requires('bzip2/1.0.8')
+        self.requires('bzip2/[~1]')
 
       if self.options.zstd:
-        self.requires('zstd/1.5.6', force=True)
+        self.requires('zstd/[~1]', force=True)
 
       if self.options.zip:
-        self.requires('libzip/1.10.1')
+        self.requires('libzip/[~1]')
 
       if self.options.gzip:
-        self.requires('zlib/1.3.1', force=True)
+        self.requires('zlib/[~1]')
 
       if self.options.fftw:
-        self.requires('fftw/3.3.10')
+        self.requires('fftw/[~3]')
 
       if self.options.color:
-        self.requires('lcms/2.14')
+        self.requires('lcms/[~2]')
 
       # libiconv/libxml use MSYS2 and are not compatible
       # with a clang compiled without MSYS2 (Cygwin-style paths) support
       # https://github.com/conan-io/conan-center-index/issues/25245
       if self.options.xml and not self.clang_windows:
-        self.requires('libxml2/2.10.4')
+        self.requires('libxml2/[~2]')
 
       if self.options.heif:
-        self.requires('libheif/1.16.2')
-        self.requires('libaom-av1/3.6.0')
-        self.requires('libde265/1.0.12')
+        self.requires('libheif/[~1]')
+        self.requires('libaom-av1/[~3]')
+        self.requires('libde265/[~1]')
 
       if self.options.jbig:
         self.requires('jbig/20160605')
 
       if self.options.exr:
-        self.requires('openexr/3.2.4')
+        self.requires('openexr/[~3]')
 
       if self.options.png:
-        self.requires('libpng/1.6.43')
+        self.requires('libpng/[~1]')
 
       if self.options.webp:
-        self.requires('libwebp/1.4.0', force=True)
+        self.requires('libwebp/[~1]', force=True)
 
       if self.options.jpeg2000 or self.options.jpeg or self.options.tiff or self.options.raw:
-        self.requires('libjpeg-turbo/3.0.2', force=True)
+        self.requires('libjpeg-turbo/[~3]', force=True)
 
       if self.options.jpeg2000:
-        self.requires('jasper/4.2.0', force=True)
-        self.requires('openjpeg/2.5.2')
+        self.requires('jasper/[~4]', force=True)
+        self.requires('openjpeg/[~2]')
 
       if self.options.tiff:
-        self.requires('libtiff/4.6.0')
+        self.requires('libtiff/[~4]')
 
       if self.options.raw:
-        self.requires('libraw/0.21.2')
+        self.requires('libraw/[~0]')
 
       if self.options.cairo and self.settings.arch != 'wasm':
-        self.requires('cairo/1.17.8', force=True)
-        self.requires('expat/2.6.3', force=True)
+        self.requires('cairo/[~1]')
+        self.requires('expat/[~2]')
 
       if self.options.jxl:
-        self.requires('libjxl/0.6.1')
-        self.requires('brotli/1.1.0')
+        self.requires('libjxl/[~0]')
+        self.requires('brotli/[~1]')
         if self.options.simd:
-          self.requires('highway/1.0.3')
+          self.requires('highway/[~1]')
 
       if self.options.openmp and self.settings.arch != 'wasm' and self.settings.os != 'Windows':
         try:
           print('Checking for perl with Encode module')
           self.run('perl -e "use Encode"', stderr=StringIO(), stdout=StringIO())
-          self.requires('llvm-openmp/12.0.1')
+          self.requires('llvm-openmp/[~12]')
           print('perl with Encode module found, enabling LLVM OpenMP')
         except Exception:
           print('No perl found, disabling LLVM OpenMP')
 
       if self.options.display and self.settings.arch != 'wasm':
-        self.requires('pixman/0.43.4', force=True)
+        self.requires('pixman/[~0]')
 
     def layout(self):
       if self.clang_windows and 'zlib' in self.dependencies:
