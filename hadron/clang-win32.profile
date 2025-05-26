@@ -21,8 +21,8 @@ PATH=+(path){{ os.path.dirname(os.getenv("npm_package_json")).replace("\\", "/")
 arch=x86_64
 build_type=Release
 compiler=clang
-compiler.cppstd=gnu17
 compiler.version=17
+compiler.cppstd=20
 os=Windows
 
 [conf]
