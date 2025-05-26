@@ -22,7 +22,7 @@ arch=x86_64
 build_type=Release
 compiler=clang
 compiler.version=17
-compiler.cppstd=20
+compiler.cppstd=gnu20
 os=Windows
 
 [conf]

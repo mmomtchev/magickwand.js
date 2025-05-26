@@ -7,4 +7,4 @@ include(default)
 tools.build:sharedlinkflags={{ (os.getenv("npm_config_cpp_link_args") or "-Wl,--exclude-libs,ALL").split() }}
 
 [settings]
-compiler.cppstd=20
+compiler.cppstd=gnu20

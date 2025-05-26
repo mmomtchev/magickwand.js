@@ -1,4 +1,4 @@
 include(default)
 
 [settings]
-compiler.cppstd=20
+compiler.cppstd=gnu20

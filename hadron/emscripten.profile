@@ -12,7 +12,7 @@ arch=wasm
 compiler=clang
 compiler.libcxx=libc++
 compiler.version=17
-compiler.cppstd=20
+compiler.cppstd=gnu20
 
 [conf]
 tools.build:cflags=['-pthread']
