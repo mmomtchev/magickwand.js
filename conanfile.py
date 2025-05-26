@@ -122,7 +122,9 @@ class ImageMagickDelegates(ConanFile):
       if self.options.xml and not self.clang_windows:
         self.requires('libxml2/[~2]')
 
-      if self.options.heif:
+      # libheif does not build with the latest emscripten
+      # https://github.com/strukturag/libheif/issues/1527
+      if self.options.heif and not self.settings.arch == 'wasm':
         self.requires('libheif/[~1]')
         self.requires('libaom-av1/[~3]')
         self.requires('libde265/[~1]')
