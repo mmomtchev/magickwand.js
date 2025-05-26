@@ -27,7 +27,7 @@ os=Windows
 
 [conf]
 # clang tends to be pickier than MSVC when it comes to C/C++ compliance
-tools.build:cflags=['-Wno-incompatible-function-pointer-types']
+tools.build:cflags=['-Wno-incompatible-function-pointer-types', '-D_USE_MATH_DEFINES']
 tools.build:sharedlinkflags=['-l:libc++.a', '-static-libgcc']
 tools.build:exelinkflags=['-l:libc++.a', '-static-libgcc']
 # The second most probable to work generator on Windows is Ninja
