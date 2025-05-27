@@ -6,6 +6,7 @@
  - Ship the CLI tool in the prebuilt binaries in `./lib/binding/{platform}-{arch}/bin/Magick`, registered as `package.json` `bin`, launch with `npx magick` or simply `magick` if the path is set
  - Update the `hadron` build components
  - WASM built using the latest `emsdk` with a monolithic JS loader, requires the latest `vite` and features improved (simplified) compatibility with `rollup`
+ - Update all delegate libraries to the latest `conan` versions
 
 ### [2.0.2] 2025-01-18
 
