@@ -24,7 +24,9 @@ jobs:
         npm install
         npx xpm install
     - name: Create conan lock (native)
-      run: npx xpm run lock --config native
+      run: |
+        npx xpm run lock --config native
+        npx xpm run lock --config native-xpack
       env:
         npm_config_enable_conan: true
     - name: Create conan lock (WASM)
