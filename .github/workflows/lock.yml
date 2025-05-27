@@ -11,17 +11,29 @@ jobs:
     runs-on: ${{ matrix.platform }}
 
     steps:
+    - name: Setup Node.js 22
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
     - name: Checkout
       uses: actions/checkout@v4
+      with:
+        ref: ${{ github.ref }}
     - name: Install xPacks
-      run:
+      run: |
         npm install
-        xpm install
+        npx xpm install
     - name: Create conan lock (native)
-      run: xpm run lock --config native
+      run: |
+        npx xpm run lock --config native
+        npx xpm run lock --config native-xpack
+      env:
+        npm_config_enable_conan: true
     - name: Create conan lock (WASM)
-      run: xpm run lock --config wasm
+      run: npx xpm run lock --config wasm
       if: matrix.platform == 'ubuntu-latest'
+      env:
+        npm_config_enable_conan: true
     - name: Commit conan lock
       uses: EndBug/add-and-commit@v9
       with:
