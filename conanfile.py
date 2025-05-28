@@ -157,9 +157,12 @@ class ImageMagickDelegates(ConanFile):
       if self.options.raw:
         self.requires('libraw/[~0]')
 
-      if self.options.cairo and self.settings.arch != 'wasm':
-        self.requires('cairo/[~1]')
-        self.requires('expat/[~2]')
+      if self.options.cairo:
+        if self.settings.arch != 'wasm':
+          self.requires('cairo/[~1]')
+          self.requires('expat/[~2]')
+        else:
+          print('Disabling cairo, not supported in WASM builds')
 
       if self.options.jxl:
         self.requires('libjxl/[~0]')
@@ -167,17 +170,25 @@ class ImageMagickDelegates(ConanFile):
         if self.options.simd:
           self.requires('highway/[~1]')
 
-      if self.options.openmp and self.settings.arch != 'wasm' and self.settings.os != 'Windows':
-        try:
-          print('Checking for perl with Encode module')
-          self.run('perl -e "use Encode"', stderr=StringIO(), stdout=StringIO())
-          self.requires('llvm-openmp/[~12]')
-          print('perl with Encode module found, enabling LLVM OpenMP')
-        except Exception:
-          print('No perl found, disabling LLVM OpenMP')
+      if self.options.openmp:
+        if self.settings.arch == 'wasm':
+          print('Disabling OpenMP, not supported in WASM builds')
+        if self.settings.os == 'Windows':
+          print('Disabling OpenMP, not supported on Windows')
+        else:
+          try:
+            print('Checking for perl with Encode module')
+            self.run('perl -e "use Encode"', stderr=StringIO(), stdout=StringIO())
+            self.requires('llvm-openmp/[~12]')
+            print('perl with Encode module found, enabling LLVM OpenMP')
+          except Exception:
+            print('No perl found, disabling LLVM OpenMP')
 
-      if self.options.display and self.settings.arch != 'wasm':
-        self.requires('pixman/[~0]')
+      if self.options.display:
+        if self.settings.arch != 'wasm':
+          self.requires('pixman/[~0]')
+        else:
+          print('Disabling Image.display, not supported on Windows')
 
     def layout(self):
       if self.clang_windows and 'zlib' in self.dependencies:
@@ -194,22 +205,34 @@ class ImageMagickDelegates(ConanFile):
       # clang on Windows is still unpaved
       self.clang_windows = self.settings.os == 'Windows' and self.settings.compiler == "clang"
 
-      # libffi does not compile 
-      # * on Windows with clang: https://github.com/conan-io/conan-center-index/issues/25241 
-      # * on macOS 15 arm64: https://github.com/libffi/libffi/issues/852
-      self.glib_available = not self.clang_windows and not (self.settings.os == 'Macos' and self.settings.arch == 'armv8' and int(self.settings.compiler.version.value) >= 17)
+      self.glib_available = True
+      if self.clang_windows:
+        print('disabling glib, ffli is not supported with clang on Windows: https://github.com/conan-io/conan-center-index/issues/25241')
+        self.glib_available = False
+      if self.settings.os == 'Macos' and self.settings.arch == 'armv8' and int(self.settings.compiler.version.value) >= 17:
+        print('disabling glib, ffli is not supported with clang 17 on macOS arm64: https://github.com/libffi/libffi/issues/852')
+        self.glib_available = False
 
       # Fonts are not available on WASM targets
-      self.fonts_enabled = self.options.fonts and self.settings.arch != 'wasm' and not self.clang_windows
+      self.fonts_enabled = self.options.fonts
+      if self.fonts_enabled and self.settings.arch == 'wasm':
+        print('Disabling font support, not supported in WASM builds')
+        self.fonts_enabled = False
+      if self.fonts_enabled and self.clang_windows:
+        print('Disabling font support, not supported with clang on Windows')
+        self.fonts_enabled = False
 
       if not self.options.conan or npm_option('external', False):
+        print('conan not enabled, building against system-installed libraries')
         return
+      print('conan enabled, downloading delegate libraries from conan')
 
       if self.settings.arch != 'wasm' and self.options.fonts:
         self.options['harfbuzz'].with_glib = self.glib_available
 
       if self.options.raw:
         if self.clang_windows:
+          print('disabling lcms, not supported with clang on Windows')
           self.options['libraw'].with_lcms = False
 
       if self.options.cairo and self.settings.arch != 'wasm':
