@@ -197,7 +197,7 @@ class ImageMagickDelegates(ConanFile):
       # libffi does not compile 
       # * on Windows with clang: https://github.com/conan-io/conan-center-index/issues/25241 
       # * on macOS 15 arm64: https://github.com/libffi/libffi/issues/852
-      self.glib_available = not self.clang_windows and not (self.settings.os == 'Macos' and self.settings.arch == 'armv8')
+      self.glib_available = not self.clang_windows and not (self.settings.os == 'Macos' and self.settings.arch == 'armv8' and int(self.settings.compiler.version.value) >= 17)
 
       # Fonts are not available on WASM targets
       self.fonts_enabled = self.options.fonts and self.settings.arch != 'wasm' and not self.clang_windows
