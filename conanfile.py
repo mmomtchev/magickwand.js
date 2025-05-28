@@ -173,7 +173,7 @@ class ImageMagickDelegates(ConanFile):
       if self.options.openmp:
         if self.settings.arch == 'wasm':
           print('Disabling OpenMP, not supported in WASM builds')
-        if self.settings.os == 'Windows':
+        elif self.settings.os == 'Windows':
           print('Disabling OpenMP, not supported on Windows')
         else:
           try:
