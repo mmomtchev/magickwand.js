@@ -7,6 +7,7 @@
  - Update the `hadron` build components
  - WASM built using the latest `emsdk` with a monolithic JS loader, requires the latest `vite` and features improved (simplified) compatibility with `rollup`
  - Update all delegate libraries to the latest `conan` versions
+ - Update `conan` to 2.16.1 allowing to rebuild using Apple clang 17 (macOS 15) with the default configuration
 
 ### [2.0.2] 2025-01-18
 
