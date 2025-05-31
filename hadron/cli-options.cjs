@@ -5,6 +5,11 @@ const cp = require('node:child_process');
  * 
  */
 
+
+// These are always set by npm with a special meaning
+// that is not the meson meaning
+const mesonBlacklist = [ 'prefix' ];
+
 function mesonBuildOptions() {
   const r = cp.execSync('meson introspect --buildoptions meson.build -f');
   return JSON.parse(r.toString()).buildoptions;
@@ -19,6 +24,9 @@ function parseMesonOptions(env, mesonOptions) {
   let result = '';
 
   for (const opt of mesonOptions) {
+    if (mesonBlacklist.includes(opt))
+       continue;
+
     const envName = opt.name.replace('-', '_');
     //console.info('found option', opt.name, envName, opt.type);
     switch (opt.type) {
