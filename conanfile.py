@@ -8,15 +8,6 @@ from io import StringIO
 
 required_conan_version = ">=2.7.0"
 
-def npm_option(option, default):
-    npm_enable_opt = f'npm_config_enable_{option}'
-    npm_disable_opt = f'npm_config_disable_{option}'
-    if npm_disable_opt in environ:
-      return False
-    if npm_enable_opt in environ:
-      return True
-    return default
-
 class ImageMagickDelegates(ConanFile):
     settings = 'os', 'compiler', 'build_type', 'arch'
 
@@ -48,35 +39,37 @@ class ImageMagickDelegates(ConanFile):
       'cairo':     [ True, False ],
       'simd':      [ True, False ],
       'openmp':    [ True, False ],
-      'display':   [ True, False ]
+      'display':   [ True, False ],
+      'external':  [ True, False ]
     }
 
     default_options = {
-      'conan':      npm_option('conan', False),
-      'fonts':      npm_option('fonts', True) and npm_option('fonts-conan', True),
-      'jpeg':       npm_option('jpeg', True) and npm_option('jpeg-conan', True),
-      'png':        npm_option('png', True) and npm_option('png-conan', True),
-      'tiff':       npm_option('tiff', True) and npm_option('tiff-conan', True),
-      'webp':       npm_option('webp', True) and npm_option('webp-conan', True),
-      'jpeg':       npm_option('jpeg', True) and npm_option('jpeg-conan', True),
-      'jpeg2000':   npm_option('jpeg2000', True) and npm_option('jpeg2000-conan', True),
-      'jxl':        npm_option('jxl', False) and npm_option('jxl-conan', True),
-      'raw':        npm_option('raw', True) and npm_option('raw-conan', True),
-      'exr':        npm_option('exr', True) and npm_option('exr-conan', True),
-      'fftw':       npm_option('fftw', False) and npm_option('fftw-conan', True),
-      'heif':       npm_option('heif', True) and npm_option('heif-conan', True),
-      'jbig':       npm_option('jbig', True) and npm_option('jbig-conan', True),
-      'color':      npm_option('color', True) and npm_option('color-conan', True),
-      'xml':        npm_option('xml', True) and npm_option('xml-conan', True),
-      'gzip':       npm_option('gzip', True) and npm_option('gzip-conan', True),
-      'zip':        npm_option('zip', True) and npm_option('zip-conan', True),
-      'bzip2':      npm_option('bzip2', True) and npm_option('bzip2-conan', True),
-      'zstd':       npm_option('zstd', True) and npm_option('zstd-conan', True),
-      'lzma':       npm_option('lzma', True) and npm_option('lzma-conan', True),
-      'cairo':      npm_option('cairo', True) and npm_option('cairo-conan', True),
-      'openmp':     npm_option('openmp', True) and npm_option('openmp-conan', True),
-      'display':    npm_option('display', True) and npm_option('display-conan', True),
-      'simd':       npm_option('simd', True)
+      'conan':      False,
+      'fonts':      True,
+      'jpeg':       True,
+      'png':        True,
+      'tiff':       True,
+      'webp':       True,
+      'jpeg':       True,
+      'jpeg2000':   True,
+      'jxl':        True,
+      'raw':        True,
+      'exr':        True,
+      'fftw':       True,
+      'heif':       True,
+      'jbig':       True,
+      'color':      True,
+      'xml':        True,
+      'gzip':       True,
+      'zip':        True,
+      'bzip2':      True,
+      'zstd':       True,
+      'lzma':       True,
+      'cairo':      True,
+      'openmp':     True,
+      'display':    True,
+      'simd':       True,
+      'external':   False
     }
 
     # CMakeToolchain is manually instantiated at the end
@@ -85,7 +78,7 @@ class ImageMagickDelegates(ConanFile):
 
     def requirements(self):
       # Disable all bundled delegates
-      if not self.options.conan or npm_option('external', False):
+      if not self.options.conan or self.options.external:
         return
 
       if self.fonts_enabled:
@@ -219,7 +212,7 @@ class ImageMagickDelegates(ConanFile):
         print('Disabling font support, not supported with clang on Windows')
         self.fonts_enabled = False
 
-      if not self.options.conan or npm_option('external', False):
+      if not self.options.conan or self.options.external:
         print('conan not enabled, building against system-installed libraries')
         return
       print('conan enabled, downloading delegate libraries from conan')
