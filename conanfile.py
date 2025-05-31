@@ -55,7 +55,7 @@ class ImageMagickDelegates(ConanFile):
       'jxl':        True,
       'raw':        True,
       'exr':        True,
-      'fftw':       True,
+      'fftw':       False,
       'heif':       True,
       'jbig':       True,
       'color':      True,
