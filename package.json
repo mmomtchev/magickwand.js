@@ -109,13 +109,16 @@
     "@mmomtchev/prebuild-install": "^1.0.2",
     "emnapi": "=1.5.0",
     "node-addon-api": "^8.0.0",
-    "xpm": "^0.20.8"
+    "xpm": "github:mmomtchev/xpm-js#plugins"
   },
   "engines": {
     "node": ">=18"
   },
   "xpack": {
     "minimumXpmRequired": "0.19.1",
+    "liquidPlugins": [
+      "./hadron/cli-options.cjs"
+    ],
     "devDependencies": {
       "@mmomtchev/python-xpack": "3.12.11-2",
       "@mmomtchev/meson-xpack": "1.8.0-2",
@@ -147,13 +150,13 @@
       "argsConanShared": "--build=missing --settings=build_type={{ properties.buildType | capitalize }} -pr:b=conan.profile -pr:h=conan.profile",
       "argsConanNative": "-pr:h=.{{ path.sep }}hadron{{ path.sep }}{{ properties.toolchain }}-{{ os.platform }}.profile -pr:b=.{{ path.sep }}hadron{{ path.sep }}{{ properties.toolchain }}-{{ os.platform }}.profile",
       "argsConanWASM": "-pr:b=default -pr:h=.{{ path.sep }}hadron{{ path.sep }}{{ properties.toolchain }}.profile",
-      "commandConanDependencies": "conan install . {{ properties.argsConanShared }} -of {{ properties.buildFolderRelativePath }}",
+      "commandConanDependencies": "conan install . {{ properties.argsConanShared }} -of {{ properties.buildFolderRelativePath }} {% conanOptions %}",
       "commandDependenciesNative": "{{ properties.commandConanDependencies }} {{ properties.argsConanNative }}",
       "commandDependenciesWASM": "{{ properties.commandConanDependencies }} {{ properties.argsConanWASM }}",
       "commandConanLock": "conan lock create . {{ properties.argsConanShared }}",
       "commandConanLockNative": "{{ properties.commandConanLock }} {{ properties.argsConanNative }}",
       "commandConanLockWASM": "{{ properties.commandConanLock }} {{ properties.argsConanWASM }}",
-      "commandPrepare": "{{ properties.commandConanBuildEnv[os.platform] }} meson setup --backend ninja --buildtype {{ properties.buildType }} {{ properties.buildFolderRelativePath }} . -Dprefix={{ properties.installFolderPath }}",
+      "commandPrepare": "{{ properties.commandConanBuildEnv[os.platform] }} meson setup --backend ninja --buildtype {{ properties.buildType }} {{ properties.buildFolderRelativePath }} . -Dprefix={{ properties.installFolderPath }} {% mesonOptions %}",
       "commandPrepareNative": "{{ properties.commandPrepare }} --native-file hadron{{ path.sep }}conan.ini --native-file {{ properties.buildFolderRelativePath }}/conan_meson_native.ini",
       "commandPrepareWASM": "{{ properties.commandPrepare }} --cross-file hadron{{ path.sep }}conan.ini --cross-file {{ properties.buildFolderRelativePath }}/conan_meson_cross.ini",
       "commandConfigure": "meson configure {{ properties.buildFolderRelativePath }}",
@@ -165,6 +168,8 @@
       "scriptInstallWASM": "npx prebuild-install --platform emscripten --arch wasm32 -d {{ properties.verbose }} || ( npx xpm install && xpm run prepare --config wasm && xpm run build --config wasm )"
     },
     "actions": {
+      "showMesonOptions": "echo \"{% mesonOptions %}\"",
+      "showConanOptions": "echo \"{% conanOptions %}\"",
       "generate": [
         "{{ properties.commandGenerateImageMagickConfigure }}",
         "{{ properties.commandGenerate_magickcore }}",
