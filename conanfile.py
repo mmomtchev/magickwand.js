@@ -52,7 +52,7 @@ class ImageMagickDelegates(ConanFile):
       'webp':       True,
       'jpeg':       True,
       'jpeg2000':   True,
-      'jxl':        True,
+      'jxl':        False,
       'raw':        True,
       'exr':        True,
       'fftw':       False,
