@@ -87,21 +87,21 @@ function parseConanOptions(env, conanOptions) {
     } else if (enable) {
       if (conanOptions[opt].includes('True')) {
         console.info(` - conan options - ${opt} = True from npm CLI options`);
-        result += ` -o &:${opt}=True`;
+        result += ` -o ${opt}=True`;
       } else {
         throw new Error(`${opt} does not support True setting`);
       }
     } else if (disable) {
       if (conanOptions[opt].includes('True')) {
         console.info(` - conan options - ${opt} = False from npm CLI options`);
-        result += ` -o &:${opt}=False`;
+        result += ` -o ${opt}=False`;
       } else {
         throw new Error(`${opt} does not support False setting`);
       }
     } else if (string) {
       if (conanOptions[opt].includes(string)) {
         console.info(` - conan options - ${opt} = ${string} from npm CLI options`);
-        result += ` -o &:${opt}=${quote}${string}${quote}`;
+        result += ` -o ${opt}=${quote}${string}${quote}`;
       } else {
         throw new Error(`${opt} does not support "${string}" setting`);
       }
