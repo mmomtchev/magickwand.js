@@ -27,7 +27,7 @@ function parseMesonOptions(env, mesonOptions) {
   let result = '';
 
   for (const opt of mesonOptions) {
-    if (mesonBlacklist.includes(opt))
+    if (mesonBlacklist.includes(opt.name))
        continue;
 
     const envName = opt.name.replace('-', '_');
