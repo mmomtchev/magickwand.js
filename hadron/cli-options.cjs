@@ -1,10 +1,13 @@
 const cp = require('node:child_process');
+const os = require('node:os');
 
 /**
  * npm options parser
  * 
  */
 
+
+const quote = os.platform() == 'win32' ? '"' : '\'';
 
 // These are always set by npm with a special meaning
 // that is not the meson meaning
@@ -35,7 +38,7 @@ function parseMesonOptions(env, mesonOptions) {
           const val = env[`npm_config_${envName}`];
           if (val) {
             console.info(` - meson options - ${opt.name} = "${val}" from npm CLI options`);
-            result += ` -D${opt.name}='${val}'`;
+            result += ` -D${opt.name}=${quote}${val}${quote}`;
           }
         }
         break;
@@ -59,7 +62,7 @@ function parseMesonOptions(env, mesonOptions) {
           const val = env[`npm_config_${envName}`];
           if (val) {
             console.info(` - meson options - ${opt.name} = "${val}" from npm CLI options`);
-            result += ` -D${opt.name}='${val}'`;
+            result += ` -D${opt.name}=${quote}${val}${quote}`;
           }
         }
         break;
@@ -98,7 +101,7 @@ function parseConanOptions(env, conanOptions) {
     } else if (string) {
       if (conanOptions[opt].includes(string)) {
         console.info(` - conan options - ${opt} = ${string} from npm CLI options`);
-        result += ` -o ${opt}=${string}`;
+        result += ` -o ${opt}=${quote}${string}${quote}`;
       } else {
         throw new Error(`${opt} does not support "${string}" setting`);
       }
@@ -110,7 +113,7 @@ function parseConanOptions(env, conanOptions) {
           const val = env[`npm_config_${envName}`];
           if (val) {
             console.info(` - ${opt.name} = "${val}" from npm CLI options`);
-            result += ` -D${opt.name}='${val}'`;
+            result += ` -D${opt.name}=${quote}${val}${quote}`;
           }
         }
         break;
@@ -132,7 +135,7 @@ function parseConanOptions(env, conanOptions) {
           const val = env[`npm_config_${envName}`];
           if (val) {
             console.info(` - ${opt.name} = "${val}" from npm CLI options`);
-            result += ` -D${opt.name}='${val}'`;
+            result += ` -D${opt.name}=${quote}${val}${quote}`;
           }
         }
         break;
