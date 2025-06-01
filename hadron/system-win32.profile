@@ -1,12 +1,5 @@
 include(default)
 
-[buildenv]
-# Many npm packages include an rc executable in .bin
-# coming from a completely unrelated npm package called rc
-# Make sure it does not take precedence over the Windows
-# resource compiler
-RC=RC.EXE
-
 [settings]
 # Alas, when shipping binaries for Windows, unless you do this,
 # sooner or later, you will be very sorry
