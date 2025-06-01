@@ -15,18 +15,21 @@ const quote = os.platform() == 'win32' ? '"' : '\'';
 // that is not the meson meaning
 const mesonBlacklist = ['prefix'];
 
-function setXPackPath() {
+function addXPackPath() {
   const xpacks = path.resolve(__dirname, '..', 'xpacks', '.bin');
-  process.env['PATH'] += path.delimiter + xpacks;
-  console.info(`cli-options.js PATH=${process.env.PATH}`);
+  const envPath = process.env['PATH'].split(path.delimiter);
+  if (!envPath.includes(xpacks)) {
+    console.info(`cli_options.cjs: prepending ${xpacks} to PATH`);
+    envPath.unshift(xpacks);
+  }
+  return envPath.join(path.delimiter);
 }
 
 function mesonBuildOptions() {
   let o, r;
 
-  setXPackPath();
   try {
-    o = cp.execSync('meson introspect --buildoptions meson.build -f');
+    o = cp.execSync('meson introspect --buildoptions meson.build -f', { env: { ...process.env, PATH: addXPackPath() } });
   } catch (e) {
     console.error('Failed getting options from meson', e, e.stdout?.toString(), e.stderr?.toString());
     throw e;
@@ -46,9 +49,8 @@ function mesonBuildOptions() {
 function conanBuildOptions() {
   let o, r;
 
-  setXPackPath();
   try {
-    o = cp.execSync('conan inspect -f json .');
+    o = cp.execSync('conan inspect -f json .', { env: { ...process.env, PATH: addXPackPath() } });
   } catch (e) {
     console.error('Failed getting options from conan', e, e.stdout?.toString(), e.stderr?.toString());
     throw e;
