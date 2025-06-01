@@ -1,6 +1,5 @@
 const cp = require('node:child_process');
 const os = require('node:os');
-const path = require('node:path');
 const assert = require('node:assert');
 
 /**
@@ -15,32 +14,12 @@ const quote = os.platform() == 'win32' ? '"' : '\'';
 // that is not the meson meaning
 const mesonBlacklist = ['prefix'];
 
-function addXPackPath() {
-  const xpacks = path.resolve(__dirname, '..', 'xpacks', '.bin');
-  const envPath = process.env['PATH'].split(path.delimiter);
-  if (!envPath.includes(xpacks)) {
-    console.info(`cli_options.cjs: prepending ${xpacks} to PATH`);
-    envPath.unshift(xpacks);
-  }
-  return envPath.join(path.delimiter);
-}
-
-function mesonBuildOptions() {
+function mesonBuildOptions(path) {
   let o, r;
 
-  const PATH = addXPackPath();
-
   try {
-    console.info(`Try clang with PATH=${PATH}`);
-    const clang = cp.execSync('clang --version', { env: { ...process.env, PATH } });
-    console.warn('clang works: ', clang.stdout.toString());
-  } catch (e) {
-    console.error('Failed launching clang', e, e.stdout?.toString(), e.stderr?.toString());
-  }
-
-  try {
-    console.info(`Launching meson with PATH=${PATH}`);
-    o = cp.execSync('meson introspect --buildoptions meson.build -f', { env: { ...process.env, PATH } });
+    console.info(`Launching meson with PATH=${path}`);
+    o = cp.execSync('meson introspect --buildoptions meson.build -f', { env: { ...process.env, PATH: path } });
   } catch (e) {
     console.error('Failed getting options from meson', e, e.stdout?.toString(), e.stderr?.toString());
     throw e;
@@ -57,11 +36,11 @@ function mesonBuildOptions() {
   return r.buildoptions;
 }
 
-function conanBuildOptions() {
+function conanBuildOptions(path) {
   let o, r;
 
   try {
-    o = cp.execSync('conan inspect -f json .', { env: { ...process.env, PATH: addXPackPath() } });
+    o = cp.execSync('conan inspect -f json .', { env: { ...process.env, PATH: path } });
   } catch (e) {
     console.error('Failed getting options from conan', e, e.stdout?.toString(), e.stderr?.toString());
     throw e;
@@ -175,12 +154,12 @@ function parseConanOptions(env, conanOptions) {
 module.exports = function () {
   this.registerTag('mesonOptions', class MesonOptions {
     render(context) {
-      return parseMesonOptions(context.environments.env, mesonBuildOptions());
+      return parseMesonOptions(context.environments.env, mesonBuildOptions(context.environments.PATH));
     }
   });
   this.registerTag('conanOptions', class ConanOptions {
     render(context) {
-      return parseConanOptions(context.environments.env, conanBuildOptions());
+      return parseConanOptions(context.environments.env, conanBuildOptions(context.environments.PATH));
     }
   });
 };
