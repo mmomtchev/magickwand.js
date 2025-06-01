@@ -18,6 +18,7 @@ const mesonBlacklist = ['prefix'];
 function setXPackPath() {
   const xpacks = path.resolve(__dirname, '..', 'xpacks', '.bin');
   process.env['PATH'] += path.delimiter + xpacks;
+  console.info(`cli-options.js PATH=${process.env.PATH}`);
 }
 
 function mesonBuildOptions() {
@@ -46,7 +47,6 @@ function conanBuildOptions() {
   let o, r;
 
   setXPackPath();
-  console.info(`retrieving conan options, PATH=${process.env.PATH}`);
   try {
     o = cp.execSync('conan inspect -f json .');
   } catch (e) {
