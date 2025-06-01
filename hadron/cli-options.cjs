@@ -27,7 +27,7 @@ function mesonBuildOptions() {
   try {
     o = cp.execSync('meson introspect --buildoptions meson.build -f');
   } catch (e) {
-    console.error('Failed getting options from meson', e);
+    console.error('Failed getting options from meson', e, e.stdout.toString(), e.stderr.toString());
     throw e;
   }
 
@@ -50,7 +50,7 @@ function conanBuildOptions() {
   try {
     o = cp.execSync('conan inspect -f json .');
   } catch (e) {
-    console.error('Failed getting options from conan', e);
+    console.error('Failed getting options from conan', e, e.stdout.toString(), e.stderr.toString());
     throw e;
   }
 
