@@ -1,5 +1,6 @@
 const cp = require('node:child_process');
 const os = require('node:os');
+const assert = require('node:assert');
 
 /**
  * npm options parser
@@ -11,16 +12,48 @@ const quote = os.platform() == 'win32' ? '"' : '\'';
 
 // These are always set by npm with a special meaning
 // that is not the meson meaning
-const mesonBlacklist = [ 'prefix' ];
+const mesonBlacklist = ['prefix'];
 
 function mesonBuildOptions() {
-  const r = cp.execSync('meson introspect --buildoptions meson.build -f');
-  return JSON.parse(r.toString()).buildoptions;
+  let o, r;
+
+  try {
+    o = cp.execSync('meson introspect --buildoptions meson.build -f');
+  } catch (e) {
+    console.error('Failed getting options from meson', e);
+    throw e;
+  }
+
+  try {
+    r = JSON.parse(o.toString());
+    assert(r.buildoptions);
+  } catch (e) {
+    console.error('Failed parsing meson output', e);
+    throw e;
+  }
+
+  return r.buildoptions;
 }
 
 function conanBuildOptions() {
-  const r = cp.execSync('conan inspect -f json .');
-  return JSON.parse(r.toString()).options_definitions;
+  let o, r;
+
+  try {
+    o = cp.execSync('conan inspect -f json .');
+  } catch (e) {
+    console.error('Failed getting options from conan', e);
+    throw e;
+  }
+
+  try {
+    r = JSON.parse(o.toString());
+    assert(r.options_definitions);
+  } catch (e) {
+    console.error('Failed parsing meson output', e);
+    throw e;
+  }
+
+  return r.options_definitions;
 }
 
 function parseMesonOptions(env, mesonOptions) {
@@ -28,7 +61,7 @@ function parseMesonOptions(env, mesonOptions) {
 
   for (const opt of mesonOptions) {
     if (mesonBlacklist.includes(opt.name))
-       continue;
+      continue;
 
     const envName = opt.name.replace('-', '_');
     //console.info('found option', opt.name, envName, opt.type);
