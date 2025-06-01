@@ -6,3 +6,5 @@ include(default)
 # Here is an example horror story: https://github.com/actions/runner-images/issues/10020
 compiler.runtime=static
 compiler.cppstd=20
+tools.compilation:verbosity=verbose
+tools.build:verbosity=verbose
