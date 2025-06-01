@@ -150,7 +150,7 @@
       "argsConanShared": "--build=missing --settings=build_type={{ properties.buildType | capitalize }} -pr:b=conan.profile -pr:h=conan.profile",
       "argsConanNative": "-pr:h=.{{ path.sep }}hadron{{ path.sep }}{{ properties.toolchain }}-{{ os.platform }}.profile -pr:b=.{{ path.sep }}hadron{{ path.sep }}{{ properties.toolchain }}-{{ os.platform }}.profile",
       "argsConanWASM": "-pr:b=default -pr:h=.{{ path.sep }}hadron{{ path.sep }}{{ properties.toolchain }}.profile",
-      "commandConanDependencies": "conan install . -vvv {{ properties.argsConanShared }} -of {{ properties.buildFolderRelativePath }} {% conanOptions %}",
+      "commandConanDependencies": "conan install . {{ properties.argsConanShared }} -of {{ properties.buildFolderRelativePath }} {% conanOptions %}",
       "commandDependenciesNative": "{{ properties.commandConanDependencies }} {{ properties.argsConanNative }}",
       "commandDependenciesWASM": "{{ properties.commandConanDependencies }} {{ properties.argsConanWASM }}",
       "commandConanLock": "conan lock create . {{ properties.argsConanShared }}",
