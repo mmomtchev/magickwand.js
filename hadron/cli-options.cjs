@@ -1,5 +1,6 @@
 const cp = require('node:child_process');
 const os = require('node:os');
+const path = require('node:path');
 const assert = require('node:assert');
 
 /**
@@ -14,9 +15,15 @@ const quote = os.platform() == 'win32' ? '"' : '\'';
 // that is not the meson meaning
 const mesonBlacklist = ['prefix'];
 
+function setXPackPath() {
+  const xpacks = path.resolve(__dirname, '..', 'xpacks', '.bin');
+  process.env['PATH'] += path.delimiter + xpacks;
+}
+
 function mesonBuildOptions() {
   let o, r;
 
+  setXPackPath();
   try {
     o = cp.execSync('meson introspect --buildoptions meson.build -f');
   } catch (e) {
@@ -38,6 +45,8 @@ function mesonBuildOptions() {
 function conanBuildOptions() {
   let o, r;
 
+  setXPackPath();
+  console.info(`retrieving conan options, PATH=${process.env.PATH}`);
   try {
     o = cp.execSync('conan inspect -f json .');
   } catch (e) {
