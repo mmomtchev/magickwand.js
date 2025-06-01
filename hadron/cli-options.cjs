@@ -27,7 +27,7 @@ function mesonBuildOptions() {
   try {
     o = cp.execSync('meson introspect --buildoptions meson.build -f');
   } catch (e) {
-    console.error('Failed getting options from meson', e, e.stdout.toString(), e.stderr.toString());
+    console.error('Failed getting options from meson', e, e.stdout?.toString(), e.stderr?.toString());
     throw e;
   }
 
@@ -50,7 +50,7 @@ function conanBuildOptions() {
   try {
     o = cp.execSync('conan inspect -f json .');
   } catch (e) {
-    console.error('Failed getting options from conan', e, e.stdout.toString(), e.stderr.toString());
+    console.error('Failed getting options from conan', e, e.stdout?.toString(), e.stderr?.toString());
     throw e;
   }
 
@@ -89,7 +89,9 @@ function parseMesonOptions(env, mesonOptions) {
           const enable = env[`npm_config_enable_${envName}`];
           const disable = env[`npm_config_disable_${envName}`];
           if (enable && disable) {
-            throw new Error(`Both enable and disable are present for ${opt.name}`);
+            const err = new Error(`Both enable and disable are present for ${opt.name}`);
+            console.error(err);
+            throw err;
           } else if (enable) {
             console.info(` - meson options ${opt.name} = True from npm CLI options`);
             result += ` -D${opt.name}=True`;
@@ -101,7 +103,8 @@ function parseMesonOptions(env, mesonOptions) {
         break;
       case 'array':
         {
-          const val = env[`npm_config_${envName}`];
+          const val = env[`npm_config_${envName}_meson`] ??
+            env[`npm_config_${envName}`];
           if (val) {
             console.info(` - meson options - ${opt.name} = "${val}" from npm CLI options`);
             result += ` -D${opt.name}=${quote}${val}${quote}`;
@@ -109,8 +112,8 @@ function parseMesonOptions(env, mesonOptions) {
         }
         break;
     }
-
   }
+
   return result;
 }
 
@@ -125,7 +128,9 @@ function parseConanOptions(env, conanOptions) {
     //console.info('found option', opt, envName);
 
     if (enable && disable) {
-      throw new Error(`Both enable and disable are present for ${opt}`);
+      const err = new Error(`Both enable and disable are present for ${opt}`);
+      console.error(err);
+      throw err;
     } else if (enable) {
       if (conanOptions[opt].includes('True')) {
         console.info(` - conan options - ${opt} = True from npm CLI options`);
@@ -148,42 +153,8 @@ function parseConanOptions(env, conanOptions) {
         throw new Error(`${opt} does not support "${string}" setting`);
       }
     }
-
-    switch (opt.type) {
-      case 'string':
-        {
-          const val = env[`npm_config_${envName}`];
-          if (val) {
-            console.info(` - ${opt.name} = "${val}" from npm CLI options`);
-            result += ` -D${opt.name}=${quote}${val}${quote}`;
-          }
-        }
-        break;
-      case 'boolean':
-        {
-          if (enable && disable) {
-            throw new Error(`Both enable and disable are present for ${opt.name}`);
-          } else if (enable) {
-            console.info(` - ${opt.name} = True from npm CLI options`);
-            result += ` -D${opt.name}=True`;
-          } else if (disable) {
-            console.info(` - ${opt.name} = False from npm CLI options`);
-            result += ` -D${opt.name}=False`;
-          }
-        }
-        break;
-      case 'array':
-        {
-          const val = env[`npm_config_${envName}`];
-          if (val) {
-            console.info(` - ${opt.name} = "${val}" from npm CLI options`);
-            result += ` -D${opt.name}=${quote}${val}${quote}`;
-          }
-        }
-        break;
-    }
-
   }
+
   return result;
 }
 
