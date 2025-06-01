@@ -28,8 +28,19 @@ function addXPackPath() {
 function mesonBuildOptions() {
   let o, r;
 
+  const PATH = addXPackPath();
+
   try {
-    o = cp.execSync('meson introspect --buildoptions meson.build -f', { env: { ...process.env, PATH: addXPackPath() } });
+    console.info(`Try clang with PATH=${PATH}`);
+    const clang = cp.execSync('clang --version', { env: { ...process.env, PATH } });
+    console.warn('clang works: ', clang.stdout.toString());
+  } catch (e) {
+    console.error('Failed launching clang', e, e.stdout?.toString(), e.stderr?.toString());
+  }
+
+  try {
+    console.info(`Launching meson with PATH=${PATH}`);
+    o = cp.execSync('meson introspect --buildoptions meson.build -f', { env: { ...process.env, PATH } });
   } catch (e) {
     console.error('Failed getting options from meson', e, e.stdout?.toString(), e.stderr?.toString());
     throw e;
