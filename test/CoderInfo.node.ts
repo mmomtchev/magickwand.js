@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 
 // This test is Node.js only
-import { Magick } from '../native/index.cjs';
+import { Magick } from 'magickwand.js/native';
 const { CoderInfo, coderInfoList } = Magick;
 
 describe('CoderInfo', () => {

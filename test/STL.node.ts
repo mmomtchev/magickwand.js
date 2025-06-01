@@ -7,7 +7,7 @@ chai.use(chaiAsPromised);
 const assert: Chai.AssertStatic = chai.assert;
 
 // This test is used only in Node.js
-import { Magick, MagickCore } from '../native/index.cjs';
+import { Magick, MagickCore } from 'magickwand.js/native';
 const { Image, Color } = Magick;
 
 describe('STL', () => {
