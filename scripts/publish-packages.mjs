@@ -35,7 +35,14 @@ const workflowPublishMatch = /publish/;
     process.stdout.write(' no publishing workflow found\n');
     return;
   }
-  const workflowPublish = { ...pkg, workflow_id: workflowPublishId, ref: `v${version}` };
+  const workflowPublish = {
+    ...pkg,
+    workflow_id: workflowPublishId,
+    ref: `v${version}`,
+    inputs: {
+      prerelease: !!process.env.npm_config_preid
+    }
+  };
 
   process.stdout.write(`launching Github actions build on branch ${branch} for ${version}, tag ${workflowPublish.ref}`);
   await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', workflowPublish);
@@ -43,9 +50,7 @@ const workflowPublishMatch = /publish/;
   let status;
   do {
     process.stdout.write('.');
-    // eslint-disable-next-line no-await-in-loop
     await new Promise((res) => setTimeout(res, 5000));
-    // eslint-disable-next-line no-await-in-loop
     status = await octokit.request(`GET /repos/{owner}/{repo}/actions/workflows/${workflowPublishId}/runs`,
       { ...pkg, per_page: 1, page: 0 });
   } while (status.data.workflow_runs[0].status !== 'completed');
