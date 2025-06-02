@@ -103,6 +103,10 @@ jobs:
         name: ${{ matrix.platform }}
         path: lib/binding
 
+    - name: On Linux and macOS render the CLI tool executable
+      if: startsWith(matrix.platform, 'linux') || startsWith(matrix.platform, 'darwin')
+      run: chmod 755 lib/binding/${{ matrix.platform }}/bin/Magick
+
     - name: Pack
       run:
         tar -zcvf ${{ matrix.platform }}.tar.gz lib/binding
