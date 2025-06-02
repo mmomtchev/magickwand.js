@@ -38,7 +38,7 @@
     "test": "npx mocha --reporter=tap test/*.test.ts",
     "preversion": "npm run lint && npm run test",
     "postversion": "git push && git push --tags && node ./scripts/publish-packages.mjs",
-    "postpublish": "gh workflow run test-package.yml -F version=$npm_package_version",
+    "postpublish": "gh workflow run test-package.yml -F package=magickwand.js@$npm_package_version",
     "example:browser": "cd example/browser/webpack && npx webpack-cli serve --mode=development --env development",
     "demo:start": "cd example/browser/demo && npx webpack-cli serve --mode=development --env development",
     "demo:build": "cd example/browser/demo && npx webpack --mode production",
