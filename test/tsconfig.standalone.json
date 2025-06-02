@@ -7,6 +7,7 @@
     "types": [ "node", "mocha", "chai", "chai-as-promised" ]
   },
   "exclude": [
-    "./integration"
+    "./integration",
+    "./native.ts"
   ]
 }
