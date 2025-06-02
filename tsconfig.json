@@ -10,7 +10,7 @@
         "."
       ],
       "magickwand.js/native": [
-        "./native"
+        "./test/native.js"
       ]
     }
   },

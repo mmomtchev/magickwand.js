@@ -1,7 +1,7 @@
 import { assert } from 'chai';
 
 // This test is Node.js only
-import { Magick, MagickCore } from '../native/index.cjs';
+import { Magick, MagickCore } from 'magickwand.js/native';
 const { Image, Coordinate } = Magick;
 
 describe('Drawable', () => {
