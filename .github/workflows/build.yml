@@ -49,10 +49,10 @@ on:
         type: string
         default: null
         description: comand to run before building
-      conan_id:
+      conan_cache_key:
         type: string
-        default: conan
-        description: conan cache id to use, empty for no cache
+        default: ''
+        description: conan cache key to use, empty for no cache
       link:
         type: boolean
         default: false
@@ -108,8 +108,8 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ steps.conan_home.outputs.path }}
-          key: ${{ inputs.conan_id }}-${{ inputs.platform }}
-        if: inputs.conan_id
+          key: ${{ inputs.conan_cache_key }}
+        if: inputs.conan_cache_key
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(inputs.platform, 'ubuntu') && !inputs.container

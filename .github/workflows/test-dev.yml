@@ -62,7 +62,7 @@ jobs:
       install_cmd: 'npm link magickwand.js --ignore-scripts'
       light: ${{ matrix.dependencies == 'conan' }}
       extralight: ${{ matrix.dependencies == 'system' && startsWith(matrix.platform, 'windows') }}
-      conan_id: native
+      conan_cache_key: native-${{ matrix.dependencies }}-${{ matrix.platform }}
 
 
   native-light:
@@ -84,7 +84,7 @@ jobs:
       install_cmd: ''
       light: true
       extra_npm_opts: '--disable-fonts --enable-jpeg --enable-png --disable-tiff --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif --disable-color --disable-xml --enable-gzip --disable-zip --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd --disable-openmp --disable-display --disable-jbig --disable-cairo'
-      conan_id: native-light
+      conan_cache_key: native-light-conan-${{ matrix.platform }}
 
 
   native-xpack:
@@ -111,7 +111,7 @@ jobs:
       link: true
       install_cmd: 'npm link magickwand.js --ignore-scripts'
       extra_npm_opts: '--enable-standalone-build'
-      conan_id: native-xpack
+      conan_cache_key: native-xpack-conan-${{ matrix.platform }}
 
 
   native-xpack-minimal-container:
@@ -130,7 +130,7 @@ jobs:
       extra_npm_opts: '--enable-standalone-build'
       container: ubuntu:latest
       container_init: 'apt-get update && apt-get install -y libc6-dev libstdc++-11-dev libgcc-11-dev binutils ca-certificates fonts-ubuntu git'
-      conan_id: native-xpack-minimal-container
+      conan_cache_key: native-xpack-minimal-conan-ubuntu-latest
 
 
   wasm:
@@ -146,7 +146,7 @@ jobs:
       integration: browser
       link: true
       install_cmd: 'npm link magickwand.js --ignore-scripts'
-      conan_id: wasm
+      conan_cache_key: wasm
 
 
   wasm-light:
@@ -164,7 +164,7 @@ jobs:
       install_cmd: 'npm link magickwand.js --ignore-scripts'
       light: true
       extra_npm_opts: '--disable-fonts --enable-jpeg --enable-png --disable-tiff --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia --disable-brotli --disable-h265 --disable-exr --disable-fftw --disable-heif --disable-color --disable-xml --enable-gzip --disable-zip --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd --disable-openmp --disable-display --disable-jbig --disable-cairo'
-      conan_id: wasm-light
+      conan_cache_key: wasm-light
 
 
   external:

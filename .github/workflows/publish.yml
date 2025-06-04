@@ -38,7 +38,6 @@ jobs:
       integration: node
       link: true
       install_cmd: 'npm link magickwand.js --ignore-scripts'
-      conan_id: ''
       extra_npm_opts: '--disable-display'
       publish: true
 
@@ -57,7 +56,6 @@ jobs:
       integration: browser
       link: true
       install_cmd: 'npm link magickwand.js --ignore-scripts'
-      conan_id: ''
       extra_npm_opts: '--disable-display'
       publish: true
 
