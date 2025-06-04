@@ -209,9 +209,6 @@ class ImageMagickDelegates(ConanFile):
       if self.clang_windows:
         print('disabling glib, ffli is not supported with clang on Windows: https://github.com/conan-io/conan-center-index/issues/25241')
         self.glib_available = False
-      if self.settings.os == 'Macos' and self.settings.arch == 'armv8' and int(self.settings.compiler.version.value) >= 17:
-        print('disabling glib, ffli is not supported with clang 17 on macOS arm64: https://github.com/libffi/libffi/issues/852')
-        self.glib_available = False
 
       # Fonts are not available on WASM targets
       self.fonts_enabled = self.options.fonts

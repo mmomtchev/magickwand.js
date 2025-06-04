@@ -20,7 +20,7 @@
         "libiconv/1.17#1ae2f60ab5d08de1643a22a81b360c59%1737639926.448",
         "libheif/1.19.5#c5e36f9b0e764acd8fad54f1d6e9a62d%1732213216.111",
         "libgettext/0.22#35d2811b2dd27a98f69e4daa86ca2000%1714393058.647",
-        "libffi/3.4.6#e6ea52051cbc4d21ea361a64cfdedf20%1739352847.113",
+        "libffi/3.4.8#06926dca35bcf8e321fcc24def952cde%1748531860.405",
         "libdeflate/1.22#f95aebe763153ccbc4cc76c023e42e5a%1728201690.347",
         "libde265/1.0.12#6e7cec8c7e3b1c9bfb6761dfc4d1dbb8%1690354164.82",
         "libaom-av1/3.8.0#70738a9be7da13e43254e4d0069f905b%1722584910.592",
@@ -56,11 +56,11 @@
         "m4/1.4.19#b38ced39a01e31fef5435bc634461fd2%1700758725.451",
         "libiconv/1.17#1ae2f60ab5d08de1643a22a81b360c59%1737639926.448",
         "libgettext/0.22#35d2811b2dd27a98f69e4daa86ca2000%1714393058.647",
-        "libffi/3.4.4#1520e366dc9a6a38898b4993bb198748%1739352850.021",
+        "libffi/3.4.4#a1442e924f14664d9545dfcfe66d751f%1748521472.248",
         "gperf/3.1#1d622ad9717e9348ed3685c9994ad0b9%1709324989.76",
         "glib/2.81.0#77c20831c00322a143106bfef82e51a2%1741781930.213",
         "gettext/0.21#a2bd3513f212013764c9040f4c70ed69%1717422118.985",
-        "cmake/3.31.6#ed0e6c1d49bd564ce6fed1a19653b86d%1740594968.467",
+        "cmake/3.31.7#57c3e118bcf267552c0ea3f8bee1e7d5%1749040552.758",
         "bzip2/1.0.8#00b4a4658791c1f06914e087f0e792f5%1744702067.178",
         "automake/1.16.5#058bda3e21c36c9aa8425daf3c1faf50%1688481772.751",
         "autoconf/2.71#51077f068e61700d65bb05541ea1e4b0%1731054366.86"
@@ -68,7 +68,7 @@
     "python_requires": [],
     "overrides": {
         "libffi/3.4.4": [
-            "libffi/3.4.6",
+            "libffi/3.4.8",
             null
         ],
         "freetype/2.13.2": [
