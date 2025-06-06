@@ -183,3 +183,7 @@ jobs:
           name: emscripten-wasm32
           path: lib/binding/*
         if: inputs.publish && inputs.wasm
+
+      - name: Thin out the conan cache
+        run: npx xpm run conan -- cache clean
+        if: inputs.conan_cache_key
