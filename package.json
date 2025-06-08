@@ -107,9 +107,9 @@
   "dependencies": {
     "@emnapi/runtime": "=1.4.3",
     "@mmomtchev/prebuild-install": "^1.0.2",
+    "@mmomtchev/xpm": "^0.20.8",
     "emnapi": "=1.4.3",
-    "node-addon-api": "^8.0.0",
-    "xpm": "github:mmomtchev/xpm-js#plugins"
+    "node-addon-api": "^8.0.0"
   },
   "engines": {
     "node": ">=18"
