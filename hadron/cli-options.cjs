@@ -1,10 +1,21 @@
 const cp = require('node:child_process');
 const os = require('node:os');
 const assert = require('node:assert');
+const fs = require('node:fs');
 
 /**
  * npm options parser
  * 
+ * An option can be set and overriden
+ * (last one wins)
+ * 
+ * "enable_option=true" .npmrc entry
+ * - "npm_config_enable_option=true" env variable
+ * - "--enable-option" npm install CLI option
+ *
+ * "magickwand.js:enable_option=true" .npmrc entry 
+ * "npm_config_magickwand.js:enable_option=true" env variable
+ * "--magickwand.js:enable-option" npm install CLI option
  */
 
 
@@ -14,11 +25,49 @@ const quote = os.platform() == 'win32' ? '"' : '\'';
 // that is not the meson meaning
 const mesonBlacklist = ['prefix'];
 
+/**
+ * Get a global npm option from the environment
+ * Returns true, false, a string or undefined
+ */
+function getRawNpmOption(pkgName, env, name) {
+  const envName = name.replace('-', '_');
+  const enable = env[`npm_config_${pkgName ? `${pkgName}:` : ''}enable_${envName}`];
+  const disable = env[`npm_config_${pkgName ? `${pkgName}:` : ''}disable_${envName}`];
+  const string = env[`npm_config_${pkgName ? `${pkgName}:` : ''}${envName}`];
+
+  if (+enable + +disable + +string > 1) {
+    throw new Error(`Conflicting settings present for ${name}`);
+  }
+
+  if (enable) return true;
+  if (disable) return false;
+  if (string) return string;
+  return undefined;
+}
+
+/**
+ * Get an npm option taking into account package overrides 
+ * Returns true, false, a string or undefined
+ */
+function getNpmOption(pkgName, env, name) {
+  const pkgOverride = getRawNpmOption(pkgName, env, name);
+  if (pkgOverride !== undefined) {
+    console.info(` - npm package ${pkgName} option ${name} = ${pkgOverride}`);
+    return pkgOverride;
+  }
+  const globalOption = getRawNpmOption(undefined, env, name);
+  if (globalOption !== undefined) {
+    console.info(` - npm option ${name} = ${globalOption}`);
+    return globalOption;
+  }
+
+  return undefined;
+}
+
 function mesonBuildOptions(path) {
   let o, r;
 
   try {
-    console.info(`Launching meson with PATH=${path}`);
     o = cp.execSync('meson introspect --buildoptions meson.build -f', { env: { ...process.env, PATH: path } });
   } catch (e) {
     console.error('Failed getting options from meson', e, e.stdout?.toString(), e.stderr?.toString());
@@ -57,48 +106,38 @@ function conanBuildOptions(path) {
   return r.options_definitions;
 }
 
-function parseMesonOptions(env, mesonOptions) {
+function parseMesonOptions(pkgName, env, mesonOptions) {
   let result = '';
 
   for (const opt of mesonOptions) {
     if (mesonBlacklist.includes(opt.name))
       continue;
 
-    const envName = opt.name.replace('-', '_');
-    //console.info('found option', opt.name, envName, opt.type);
+    const val = getNpmOption(pkgName, env, opt.name);
     switch (opt.type) {
       case 'string':
         {
-          const val = env[`npm_config_${envName}`];
-          if (val) {
-            console.info(` - meson options - ${opt.name} = "${val}" from npm CLI options`);
+          if (val !== undefined) {
+            console.info(` --- meson option - ${opt.name} = "${val}"`);
             result += ` -D${opt.name}=${quote}${val}${quote}`;
           }
         }
         break;
       case 'boolean':
         {
-          const enable = env[`npm_config_enable_${envName}`];
-          const disable = env[`npm_config_disable_${envName}`];
-          if (enable && disable) {
-            const err = new Error(`Both enable and disable are present for ${opt.name}`);
-            console.error(err);
-            throw err;
-          } else if (enable) {
-            console.info(` - meson options ${opt.name} = True from npm CLI options`);
+          if (val === true) {
+            console.info(` --- meson option ${opt.name} = True`);
             result += ` -D${opt.name}=True`;
-          } else if (disable) {
-            console.info(` - meson options ${opt.name} = False from npm CLI options`);
+          } else if (val === false) {
+            console.info(` --- meson option ${opt.name} = False`);
             result += ` -D${opt.name}=False`;
           }
         }
         break;
       case 'array':
         {
-          const val = env[`npm_config_${envName}_meson`] ??
-            env[`npm_config_${envName}`];
-          if (val) {
-            console.info(` - meson options - ${opt.name} = "${val}" from npm CLI options`);
+          if (val !== undefined) {
+            console.info(` --- meson option - ${opt.name} = "${val}"`);
             result += ` -D${opt.name}=${quote}${val}${quote}`;
           }
         }
@@ -109,40 +148,32 @@ function parseMesonOptions(env, mesonOptions) {
   return result;
 }
 
-function parseConanOptions(env, conanOptions) {
+function parseConanOptions(pkgName, env, conanOptions) {
   let result = '';
 
   for (const opt of Object.keys(conanOptions)) {
-    const envName = opt.replace('-', '_');
-    const enable = env[`npm_config_enable_${envName}`];
-    const disable = env[`npm_config_disable_${envName}`];
-    const string = env[`npm_config_${envName}`];
-    //console.info('found option', opt, envName);
+    const val = getNpmOption(pkgName, env, opt);
 
-    if (enable && disable) {
-      const err = new Error(`Both enable and disable are present for ${opt}`);
-      console.error(err);
-      throw err;
-    } else if (enable) {
+    if (val === true) {
       if (conanOptions[opt].includes('True')) {
-        console.info(` - conan options - ${opt} = True from npm CLI options`);
+        console.info(` --- conan option - ${opt} = True`);
         result += ` -o ${opt}=True`;
       } else {
         throw new Error(`${opt} does not support True setting`);
       }
-    } else if (disable) {
+    } else if (val === false) {
       if (conanOptions[opt].includes('True')) {
-        console.info(` - conan options - ${opt} = False from npm CLI options`);
+        console.info(` --- conan option - ${opt} = False`);
         result += ` -o ${opt}=False`;
       } else {
         throw new Error(`${opt} does not support False setting`);
       }
-    } else if (string) {
-      if (conanOptions[opt].includes(string)) {
-        console.info(` - conan options - ${opt} = ${string} from npm CLI options`);
-        result += ` -o ${opt}=${quote}${string}${quote}`;
+    } else if (typeof val === 'string') {
+      if (conanOptions[opt].includes(val)) {
+        console.info(` --- conan option - ${opt} = ${val}`);
+        result += ` -o ${opt}=${quote}${val}${quote}`;
       } else {
-        throw new Error(`${opt} does not support "${string}" setting`);
+        throw new Error(`${opt} does not support "${val}" setting`);
       }
     }
   }
@@ -154,12 +185,16 @@ function parseConanOptions(env, conanOptions) {
 module.exports = function () {
   this.registerTag('mesonOptions', class MesonOptions {
     render(context) {
-      return parseMesonOptions(context.environments.env, mesonBuildOptions(context.environments.PATH));
+      const pkgName = context.environments.package.name;
+      const mesonOptions = mesonBuildOptions(context.environments.PATH);
+      return parseMesonOptions(pkgName, context.environments.env, mesonOptions);
     }
   });
   this.registerTag('conanOptions', class ConanOptions {
     render(context) {
-      return parseConanOptions(context.environments.env, conanBuildOptions(context.environments.PATH));
+      const pkgName = context.environments.package.name;
+      const conanOptions = conanBuildOptions(context.environments.PATH);
+      return parseConanOptions(pkgName, context.environments.env, conanOptions);
     }
   });
 };
