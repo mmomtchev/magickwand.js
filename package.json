@@ -107,7 +107,7 @@
   "dependencies": {
     "@emnapi/runtime": "=1.4.3",
     "@mmomtchev/prebuild-install": "^1.0.2",
-    "@mmomtchev/xpm": "^0.20.8",
+    "@mmomtchev/xpm": "github:mmomtchev/xpm-js",
     "emnapi": "=1.4.3",
     "node-addon-api": "^8.0.0"
   },
