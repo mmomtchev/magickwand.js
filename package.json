@@ -179,6 +179,7 @@
       ],
       "npm-install": [
         "{% if env.npm_config_loglevel %}{{ properties.commandShowEnv[os.platform] }}{% endif %}",
+        "{% if env.npm_config_loglevel %}echo \"{% mesonOptions %}\"{% endif %}",
         "{% unless env.npm_config_skip_magickwand_native %}{{ properties.scriptInstallNative }}{% endunless %}",
         "{% unless env.npm_config_skip_magickwand_wasm %}{{ properties.scriptInstallWASM }}{% endunless %}"
       ],
