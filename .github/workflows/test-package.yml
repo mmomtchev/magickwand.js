@@ -104,6 +104,9 @@ jobs:
         with:
           version: 4.0.8
         if: runner.os == 'Linux'
+      - name: Select XCode SDK on macOS
+        run: echo SDKROOT=$(xcrun --show-sdk-path) >> $GITHUB_ENV
+        if: runner.os == 'macOS'
       - name: Create package.json
         run: npm init --yes
       - name: Install fonts on Ubuntu
