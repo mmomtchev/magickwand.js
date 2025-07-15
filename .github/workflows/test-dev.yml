@@ -41,13 +41,9 @@ jobs:
       fail-fast: false
       matrix:
         platform: 
-          - macos-13
-          - macos-14
           - macos-15
-          - macos-latest
         dependencies:
           - system
-          - conan
 
     uses:
       ./.github/workflows/build.yml
@@ -62,3 +58,4 @@ jobs:
       light: ${{ matrix.dependencies == 'conan' }}
       extralight: ${{ matrix.dependencies == 'system' && startsWith(matrix.platform, 'windows') }}
       conan_cache_key: native-${{ matrix.dependencies }}-${{ matrix.platform }}
+      container_init: 'sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer'
