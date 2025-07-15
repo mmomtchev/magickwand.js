@@ -12,3 +12,4 @@ compiler.cppstd=gnu20
 [conf]
 tools.build:cflags=['-isysroot', '{{ xcode_path }}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk']
 tools.build:cxxflags=['-isysroot', '{{ xcode_path }}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk']
+tools.build:sharedlinkflags=['-L/usr/lib']
