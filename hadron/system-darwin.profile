@@ -12,17 +12,17 @@
 
 include(default)
 
-{% set xcode_path = subprocess.check_output(['xcode-select', '-p'], text=True).strip() %}
+{% set xcode_sdk_path = subprocess.check_output(['xcrun', '--show-sdk-path'], text=True).strip() %}
 
 [buildenv]
-CC={{ xcode_path }}/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc
-CXX={{ xcode_path }}/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
-LD={{ xcode_path }}/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld
+CC={{ subprocess.check_output(['xcrun', '-f', 'cc'], text=True).strip() }}
+CXX={{ subprocess.check_output(['xcrun', '-f', 'c++'], text=True).strip() }}
+LD={{ subprocess.check_output(['xcrun', '-f', 'ld'], text=True).strip() }}
 
 [settings]
 compiler.cppstd=gnu20
 
 [conf]
-tools.build:cflags=[ '-isysroot', '{{ xcode_path }}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk' ]
-tools.build:cxxflags=[ '-isysroot', '{{ xcode_path }}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk' ]
-tools.build:sharedlinkflags=[ '-L{{ xcode_path }}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib' ]
+tools.build:cflags=[ '-isysroot', '{{ xcode_sdk_path }}' ]
+tools.build:cxxflags=[ '-isysroot', '{{ xcode_sdk_path }}' ]
+tools.build:sharedlinkflags=[ '-L{{ xcode_sdk_path }}/usr/lib' ]
