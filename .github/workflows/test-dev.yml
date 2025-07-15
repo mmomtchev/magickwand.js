@@ -1,61 +1,26 @@
-name: Development CI
+name: macos-15 problem
 
 on:
   workflow_dispatch:
   push:
     branches: '*'
-    paths-ignore:
-      - 'CHANGELOG.md'
-      - 'README.md'
-  pull_request:
-    branches: main
-    paths-ignore:
-      - 'CHANGELOG.md'
-      - 'README.md'
 
 jobs:
-
-  lint:
-    runs-on: ubuntu-latest
-    name: Lint
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Install the dependencies
-      run: npm install --skip-magickwand-native --skip-magickwand-wasm
-    - name: Lint
-      run: npm run lint
-      
-
-  swig:
-    name: Generate the SWIG wrappers
-    uses:
-      ./.github/workflows/swig.yml
-
-
   native:
-    needs: swig
-
     strategy:
       fail-fast: false
       matrix:
         platform: 
+          - macos-13
+          - macos-14
           - macos-15
-        dependencies:
-          - system
 
-    uses:
-      ./.github/workflows/build.yml
-    with:
-      native: true
-      wasm: false
-      platform: ${{ matrix.platform }}
-      dependencies: ${{ matrix.dependencies }}
-      integration: node
-      link: true
-      install_cmd: 'npm link magickwand.js --ignore-scripts'
-      light: ${{ matrix.dependencies == 'conan' }}
-      extralight: ${{ matrix.dependencies == 'system' && startsWith(matrix.platform, 'windows') }}
-      conan_cache_key: native-${{ matrix.dependencies }}-${{ matrix.platform }}
-      container_init: 'sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer'
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - run: xcrun -f cc
+      - run: xcrun -f c++
+      - run: xcrun -f ld
+      - run: xcrun --show-sdk-path 
+      - run: xcode-select -p
+  
