@@ -58,4 +58,4 @@ jobs:
       light: ${{ matrix.dependencies == 'conan' }}
       extralight: ${{ matrix.dependencies == 'system' && startsWith(matrix.platform, 'windows') }}
       conan_cache_key: native-${{ matrix.dependencies }}-${{ matrix.platform }}
-      container_init: 'sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer'
+      container_init: 'sudo xcode-select -s /Applications/Xcode.app/Contents/Developer'
