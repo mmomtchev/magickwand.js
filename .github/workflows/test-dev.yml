@@ -44,7 +44,8 @@ jobs:
           - ubuntu-22.04
           - ubuntu-24.04
           - macos-13
-          - macos-latest
+          - macos-14
+          - macos-15
           - windows-latest
         dependencies:
           - system
@@ -93,11 +94,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform:
+        platform: 
           - ubuntu-22.04
           - ubuntu-24.04
           - macos-13
-          - macos-latest
+          - macos-14
+          - macos-15
           - windows-latest
 
     uses:
