@@ -1,6 +1,10 @@
 # Changelog
 
-### [2.1.0] 2025-07-15
+## [2.2.0]
+
+ - Update ImageMagick to 7.1.2-0
+
+## [2.1.0] 2025-07-15
 
  - Update ImageMagick to 7.1.1-47
  - Ship the CLI tool in the prebuilt binaries in `./lib/binding/{platform}-{arch}/bin/Magick`, registered as `package.json` `bin`, launch with `npx magick` or simply `magick` if the path is set
