@@ -108,7 +108,7 @@
     "@emnapi/runtime": "=1.5.0",
     "@mmomtchev/prebuild-install": "^1.0.2",
     "emnapi": "=1.5.0",
-    "hadron": "github:mmomtchev/hadron-js",
+    "@mmomtchev/hadron": "github:mmomtchev/hadron-js",
     "node-addon-api": "^8.0.0"
   },
   "engines": {
@@ -117,7 +117,7 @@
   "xpack": {
     "minimumXpmRequired": "0.19.1",
     "liquidPlugins": [
-      "hadron"
+      "@mmomtchev/hadron"
     ],
     "devDependencies": {
       "@mmomtchev/python-xpack": "3.12.11-2",
