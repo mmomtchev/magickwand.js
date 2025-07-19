@@ -105,9 +105,9 @@
     "webpack-dev-server": "^5.0.3"
   },
   "dependencies": {
-    "@emnapi/runtime": "=1.4.4",
+    "@emnapi/runtime": "=1.4.5",
     "@mmomtchev/prebuild-install": "^1.0.2",
-    "emnapi": "=1.4.4",
+    "emnapi": "=1.4.5",
     "node-addon-api": "^8.0.0",
     "xpm": "^0.20.8"
   },
