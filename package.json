@@ -106,10 +106,10 @@
   },
   "dependencies": {
     "@emnapi/runtime": "=1.4.5",
+    "@mmomtchev/hadron": "github:mmomtchev/hadron-js",
     "@mmomtchev/prebuild-install": "^1.0.2",
     "@mmomtchev/xpm": "github:mmomtchev/xpm-js",
     "emnapi": "=1.4.5",
-    "@mmomtchev/hadron": "github:mmomtchev/hadron-js",
     "node-addon-api": "^8.0.0"
   },
   "engines": {
