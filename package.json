@@ -116,6 +116,7 @@
     "node": ">=18"
   },
   "xpack": {
+    "minimumXpmRequired": "0.20.0",
     "include": [
       "@mmomtchev/hadron/hadron.json"
     ],
