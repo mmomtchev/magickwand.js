@@ -120,6 +120,9 @@
     "include": [
       "@mmomtchev/hadron/hadron.json"
     ],
+    "devDependencies": {
+      "@xpack-dev-tools/cmake": "3.27.9-1.2"
+    },
     "properties": {
       "module_name": "magickwand",
       "hadronProfile": "conan+meson-dual-async",
