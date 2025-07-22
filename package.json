@@ -125,7 +125,10 @@
     },
     "properties": {
       "module_name": "magickwand",
-      "hadronProfile": "conan+meson-dual-async",
+      "native": true,
+      "wasm": true,
+      "async": true,
+      "conan": true,
       "argsConanInstall": "-pr:b=conan.profile -pr:h=conan.profile",
       "commandGenerateImageMagickConfigure": "cmake -S deps/ImageMagick -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DMAGICK_HDRI_ENABLE=ON -DMAGICKCORE_QUANTUM_DEPTH=16 -B preconf",
       "commandGenerate_magickcore": "node src/deps.js src/deps-stub.cc MagickCore swig/magickcore.i",
