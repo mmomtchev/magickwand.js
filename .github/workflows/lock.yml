@@ -24,11 +24,14 @@ jobs:
         npm install
         npx xpm install
     - name: Create conan lock (native)
-      run: |
-        npx xpm run lock --config native
-        npx xpm run lock --config native-xpack
+      run: npx xpm run lock --config native
       env:
         npm_config_enable_conan: true
+    - name: Create conan lock (native-xpack)
+      run: npx xpm run lock --config native
+      env:
+        npm_config_enable_conan: true
+        npm_config_enable_standalone_build: true
     - name: Create conan lock (WASM)
       run: npx xpm run lock --config wasm
       if: matrix.platform == 'ubuntu-latest'
