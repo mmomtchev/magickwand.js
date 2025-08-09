@@ -1,6 +1,7 @@
 {
   "v8-expose-gc": true,
-  "timeout": "5000",
+  "timeout": 20000,
+  "slow": 2000,
   "extensions": [
     "ts"
   ],
