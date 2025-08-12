@@ -89,7 +89,7 @@ jobs:
         run: npm link --ignore-scripts
         if: inputs.link
       - name: Download the SWIG-generated wrappers
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: swig
           path: swig
