@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
     - name: Install the dependencies
       run: npm install --skip-magickwand-native --skip-magickwand-wasm
     - name: Lint
@@ -189,7 +189,7 @@ jobs:
     needs: swig
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
           submodules: true

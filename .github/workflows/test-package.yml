@@ -201,7 +201,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           repository: 'imagemagick/ImageMagick'
           path: 'ImageMagick'
