@@ -25,7 +25,7 @@ jobs:
         platform:
           - ubuntu-22.04
           - macos-13
-          - macos-latest
+          - macos-14
           - windows-2022
 
     uses:
