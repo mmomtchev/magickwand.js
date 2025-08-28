@@ -86,7 +86,7 @@
     "@types/node": "^24.0.1",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
-    "chai": "^4.3.7",
+    "chai": "^6.0.1",
     "chai-as-promised": "^7.1.1",
     "copy-webpack-plugin": "^13.0.0",
     "eslint": "^9.8.0",
