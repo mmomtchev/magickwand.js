@@ -106,10 +106,10 @@
   },
   "dependencies": {
     "@emnapi/runtime": "=1.5.0",
+    "@mmomtchev/hadron": "github:mmomtchev/hadron-js",
     "@mmomtchev/prebuild-install": "^1.0.2",
     "@mmomtchev/xpm": "github:mmomtchev/xpm-js",
     "emnapi": "=1.5.0",
-    "@mmomtchev/hadron": "github:mmomtchev/hadron-js",
     "node-addon-api": "^8.0.0"
   },
   "engines": {
@@ -127,7 +127,7 @@
       "module_name": "magickwand",
       "native": true,
       "wasm": true,
-      "async": true,
+      "flavor": "async",
       "conan": true,
       "argsConanInstall": "-pr:b=conan.profile -pr:h=conan.profile",
       "commandGenerateImageMagickConfigure": "cmake -S deps/ImageMagick -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DMAGICK_HDRI_ENABLE=ON -DMAGICKCORE_QUANTUM_DEPTH=16 -B preconf",
