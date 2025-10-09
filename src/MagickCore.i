@@ -86,7 +86,7 @@
   }
 }
 // * returning data in a FILE* (only nullptr at the moment)
-%typemap(in, numinputs=0, noblock=1) (FILE *) "$1 = SWIG_NULLPTR;"
+%typemap(in, numinputs=0, noblock=1) (FILE *) "$1 = NULL;"
 
 
 namespace MagickCore {
