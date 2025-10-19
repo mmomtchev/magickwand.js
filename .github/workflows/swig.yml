@@ -14,10 +14,10 @@ jobs:
       with:
         fetch-depth: 0
         submodules: true
-    - uses: mmomtchev/setup-swig@v4
+    - uses: mmomtchev/setup-swig@v5
       with:
         branch: jse
-        version: v5.0.7
+        version: v5.0.9
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Verify SWIG
