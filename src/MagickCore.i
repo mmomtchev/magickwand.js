@@ -121,7 +121,10 @@
 %typemap(out) (MagickCore::Image *) {
   // Create the Magick::Image object
   // ImageMagick does automatic reference counting for images
+  // (ie this is a zero-copy operation)
   Magick::Image *im = new Magick::Image(result);
+  // Dereference our copy
+  MagickCore::DestroyImage(result);
   // Invoke the builtin typemap to create a JS object using im for $1
   $typemap(out, Magick::Image *, 1=im);
 }
