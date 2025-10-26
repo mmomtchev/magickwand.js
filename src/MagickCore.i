@@ -118,13 +118,18 @@
 %typemap(ts) (MagickCore::Image *) "Magick.Image"
 
 // Support creating a C++ Magick::Image object from a MagickCore::Image pointer
-%typemap(out) (MagickCore::Image *) {
+// These functions must be enumerated manually because there are other functions
+// in Magick:: that also return MagickCore::Image* and they use different semantics.
+// (atm SWIG does not support using regexps here)
+%typemap(out) MagickCore::Image *DistortResizeImage,
+    MagickCore::Image *EnhanceImage,
+    MagickCore::Image *CannyEdgeImage,
+    MagickCore::Image *HoughLineImage,
+    MagickCore::Image *MeanShiftImage {
   // Create the Magick::Image object
   // ImageMagick does automatic reference counting for images
   // (ie this is a zero-copy operation)
   Magick::Image *im = new Magick::Image(result);
-  // Dereference our copy
-  MagickCore::DestroyImage(result);
   // Invoke the builtin typemap to create a JS object using im for $1
   // (owner should be used if the method is a constructor/factory)
   $typemap(out, Magick::Image *, 1=im, owner=SWIG_POINTER_OWN);
