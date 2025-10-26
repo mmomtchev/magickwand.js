@@ -19,6 +19,10 @@
 // and those from MagickWand
 %rename("$ignore", regextarget=1, fullname=1) "^MagickCore::Magick.+Image";
 %rename("$ignore", fullname=1) "MagickCore::MatrixToImage";
+// and those from distort.h have C-only unsupported semantics
+%rename("$ignore", fullname=1) "MagickCore::AffineTransformImage";
+%rename("$ignore", fullname=1) "MagickCore::DistortImage";
+%rename("$ignore", fullname=1) "MagickCore::SparseColorImage";
 
 // Never ignore the security policy API which is in MagickCore
 %rename("%s", regextarget=1) "Policy";
