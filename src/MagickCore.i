@@ -23,7 +23,7 @@
 %rename("$ignore", fullname=1) "MagickCore::AffineTransformImage";
 %rename("$ignore", fullname=1) "MagickCore::DistortImage";
 %rename("$ignore", fullname=1) "MagickCore::SparseColorImage";
-// internal 
+// internal methods that should not be wrapped
 %rename("$ignore", regextarget=1, fullname=1) "^MagickCore::(R|Unr)egister.+Image";
 
 // Never ignore the security policy API which is in MagickCore
@@ -71,11 +71,12 @@
 // The security API is a plain-C API and it require some special typemaps, like:
 // * the special case of GetPolicyList
 %typemap(in, numinputs=0, noblock=1) (const char *, size_t *, MagickCore::ExceptionInfo *)
-    (MagickCore::ExceptionInfo _global_error, size_t _global_number_policies) {
+    (std::shared_ptr<MagickCore::ExceptionInfo> _global_error, size_t _global_number_policies) {
   $1 = const_cast<char*>("");
   $2 = &_global_number_policies;
-  $3 = &_global_error;
-  _global_error.severity = MagickCore::ExceptionType::UndefinedException;
+  _global_error = std::shared_ptr<MagickCore::ExceptionInfo>(MagickCore::AcquireExceptionInfo());
+  $3 = _global_error.get();
+  _global_error->severity = MagickCore::ExceptionType::UndefinedException;
 }
 %typemap(tsout) (const char *, size_t *, MagickCore::ExceptionInfo *) "string[]";
 %typemap(out) char **GetPolicyList {
@@ -90,13 +91,15 @@
   $result = array;
 }
 // * returning an exception in an argument
-%typemap(in, numinputs=0, noblock=1) (MagickCore::ExceptionInfo *) (MagickCore::ExceptionInfo _global_error) {
-  $1 = &_global_error;
-  _global_error.severity = MagickCore::ExceptionType::UndefinedException;
+%typemap(in, numinputs=0, noblock=1) (MagickCore::ExceptionInfo *)
+  (std::shared_ptr<MagickCore::ExceptionInfo> _global_error) {
+  _global_error = std::shared_ptr<MagickCore::ExceptionInfo>(MagickCore::AcquireExceptionInfo());
+  $1 = _global_error.get();
+  _global_error->severity = MagickCore::ExceptionType::UndefinedException;
 }
 %typemap(argout, noblock=1) (MagickCore::ExceptionInfo *) {
-  if (_global_error.severity != MagickCore::ExceptionType::UndefinedException) {
-    SWIG_Raise(MagickCore::GetExceptionMessage(_global_error.error_number));
+  if (_global_error->severity != MagickCore::ExceptionType::UndefinedException) {
+    SWIG_Raise(MagickCore::GetExceptionMessage(_global_error->error_number));
   }
 }
 // * returning data in a FILE* (only nullptr at the moment)
