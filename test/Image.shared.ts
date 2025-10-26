@@ -317,14 +317,18 @@ export default function (
         const im = new Image;
         im.read(path);
 
-        assert.isBoolean(MagickCore.WhiteBalanceImage(im));
+        const r = MagickCore.WhiteBalanceImage(im);
+        assert.isBoolean(r);
+        assert.isTrue(r);
       });
 
       it('EnhanceImage()', () => {
         const im = new Image;
         im.read(path);
 
-        assert.instanceOf(MagickCore.EnhanceImage(im), Magick.Image);
+        const r = MagickCore.EnhanceImage(im);
+        assert.instanceOf(r, Magick.Image);
+        assert.strictEqual(r.geometry.toString(), im.geometry.toString());
       });
     });
   });
