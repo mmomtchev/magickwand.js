@@ -70,15 +70,11 @@
 
 // The security API is a plain-C API and it require some special typemaps, like:
 // * the special case of GetPolicyList
-%typemap(in, numinputs=0, noblock=1) (const char *, size_t *, MagickCore::ExceptionInfo *)
-    (std::shared_ptr<MagickCore::ExceptionInfo> _global_error, size_t _global_number_policies) {
+%typemap(in, numinputs=0, noblock=1) (const char *, size_t *) (size_t _global_number_policies) {
   $1 = const_cast<char*>("");
   $2 = &_global_number_policies;
-  _global_error = std::shared_ptr<MagickCore::ExceptionInfo>(MagickCore::AcquireExceptionInfo());
-  $3 = _global_error.get();
-  _global_error->severity = MagickCore::ExceptionType::UndefinedException;
 }
-%typemap(tsout) (const char *, size_t *, MagickCore::ExceptionInfo *) "string[]";
+%typemap(tsout) (const char *, size_t *) "string[]";
 %typemap(out) char **GetPolicyList {
   Napi::Array array = Napi::Array::New(env, _global_number_policies);
   if ($1) {
