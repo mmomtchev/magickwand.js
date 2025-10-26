@@ -89,7 +89,12 @@
 // * returning an exception in an argument
 %typemap(in, numinputs=0, noblock=1) (MagickCore::ExceptionInfo *)
   (std::shared_ptr<MagickCore::ExceptionInfo> _global_error) {
-  _global_error = std::shared_ptr<MagickCore::ExceptionInfo>(MagickCore::AcquireExceptionInfo());
+  _global_error = std::shared_ptr<MagickCore::ExceptionInfo>(
+    MagickCore::AcquireExceptionInfo(),
+    [](void *p) {
+      MagickCore::DestroyExceptionInfo(static_cast<MagickCore::ExceptionInfo *>(p));
+    }
+  );
   $1 = _global_error.get();
   _global_error->severity = MagickCore::ExceptionType::UndefinedException;
 }
