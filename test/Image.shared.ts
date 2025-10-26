@@ -1,5 +1,5 @@
 // These tests are shared between Node.js and the browser
-import type { Magick, MagickCore } from 'magickwand.js';
+import { Magick, MagickCore } from 'magickwand.js';
 
 export default function (
   path: string,
@@ -310,6 +310,22 @@ export default function (
     it('(async) throw an exception', () => {
       const im = new Image;
       return assert.isRejected(im.readAsync('something.gif'), /unable to open image/);
+    });
+
+    describe('MagickCore Image methods', () => {
+      it('WhiteBalanceImage()', () => {
+        const im = new Image;
+        im.read(path);
+
+        assert.isBoolean(MagickCore.WhiteBalanceImage(im));
+      });
+
+      it('EnhanceImage()', () => {
+        const im = new Image;
+        im.read(path);
+
+        assert.instanceOf(MagickCore.EnhanceImage(im), Magick.Image);
+      });
     });
   });
 }

@@ -12,6 +12,14 @@
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Type$";
 %rename("%s", regextarget=1, %$isconstant) "Magick.+";
 
+// Many of the MagickCore/enhance.h methods do not have Magick++ equivalents
+%rename("%s", regextarget=1, %$isfunction) ".+Image$";
+// but omit the Get*Image variants, they do low-level stuff
+%rename("$ignore", regextarget=1, fullname=1) "^MagickCore::Get.+Image";
+// and those from MagickWand
+%rename("$ignore", regextarget=1, fullname=1) "^MagickCore::Magick.+Image";
+%rename("$ignore", fullname=1) "MagickCore::MatrixToImage";
+
 // Never ignore the security policy API which is in MagickCore
 %rename("%s", regextarget=1) "Policy";
 %ignore MagickCore::GetPolicyInfoList;
@@ -88,6 +96,25 @@
 // * returning data in a FILE* (only nullptr at the moment)
 %typemap(in, numinputs=0, noblock=1) (FILE *) "$1 = NULL;"
 
+// Support casting a C++ Magick::Image object to C MagickCore::Image pointer
+%typemap(in) (MagickCore::Image *) {
+  // Start by invoking the builtin typemap to obtain a Magick::Image pointer
+  Magick::Image *im;
+  // Invoke the typemap to place the $1 result in im (defined above)
+  $typemap(in, Magick::Image *, 1=im);
+  // Use the class method to obtain a MagickCore::Image pointer
+  $1 = im->image();
+}
+%typemap(ts) (MagickCore::Image *) "Magick.Image"
+
+// Support creating a C++ Magick::Image object from a MagickCore::Image pointer
+%typemap(out) (MagickCore::Image *) {
+  // Create the Magick::Image object
+  // ImageMagick does automatic reference counting for images
+  Magick::Image *im = new Magick::Image(result);
+  // Invoke the builtin typemap to create a JS object using im for $1
+  $typemap(out, Magick::Image *, 1=im);
+}
 
 namespace MagickCore {
   %include "../swig/magickcore.i"
