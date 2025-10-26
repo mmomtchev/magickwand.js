@@ -126,7 +126,8 @@
   // Dereference our copy
   MagickCore::DestroyImage(result);
   // Invoke the builtin typemap to create a JS object using im for $1
-  $typemap(out, Magick::Image *, 1=im);
+  // (owner should be used if the method is a constructor/factory)
+  $typemap(out, Magick::Image *, 1=im, owner=SWIG_POINTER_OWN);
 }
 
 namespace MagickCore {
