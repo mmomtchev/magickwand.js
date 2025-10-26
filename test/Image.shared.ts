@@ -322,6 +322,15 @@ export default function (
         assert.isTrue(r);
       });
 
+      it('GrayscaleImage()', () => {
+        const im = new Image;
+        im.read(path);
+
+        const r = MagickCore.GrayscaleImage(im, MagickCore.LightnessPixelIntensityMethod);
+        assert.isBoolean(r);
+        assert.isTrue(r);
+      });
+
       it('EnhanceImage()', () => {
         const im = new Image;
         im.read(path);
