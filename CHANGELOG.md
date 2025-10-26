@@ -4,6 +4,7 @@
 
  - Update ImageMagick to 7.1.2-7
  - Major rework of the build system, now based on a new standard with streamlined `npm` options handling and the possibility of automatically rebuilding when installing from source with build options from `.npmrc`
+ - Include the image processing methods from `MagickCore` `enhance.h`
 
 ## [2.1.0] 2025-07-15
 
