@@ -23,6 +23,8 @@
 %rename("$ignore", fullname=1) "MagickCore::AffineTransformImage";
 %rename("$ignore", fullname=1) "MagickCore::DistortImage";
 %rename("$ignore", fullname=1) "MagickCore::SparseColorImage";
+// internal 
+%rename("$ignore", regextarget=1, fullname=1) "^MagickCore::(R|Unr)egister.+Image";
 
 // Never ignore the security policy API which is in MagickCore
 %rename("%s", regextarget=1) "Policy";
