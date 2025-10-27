@@ -198,7 +198,7 @@ jobs:
         with:
           node-version: 18.x
       - name: Download the SWIG-generated wrappers
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: swig
           path: swig
