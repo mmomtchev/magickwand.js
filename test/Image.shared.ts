@@ -313,11 +313,23 @@ export default function (
     });
 
     describe('MagickCore Image methods', () => {
+      it('MagickCore.Image cannot be constructed from JS', () => {
+        assert.throws(() => {
+          new MagickCore.Image;
+        });
+      });
+
+      it('Magick.image() returns a MagickCore.Image', () => {
+        const im = new Image(path);
+        const imp = im.image();
+        assert.instanceOf(imp, MagickCore.Image);
+      });
+
       it('WhiteBalanceImage()', () => {
         const im = new Image;
         im.read(path);
 
-        const r = MagickCore.WhiteBalanceImage(im);
+        const r = MagickCore.WhiteBalanceImage(im.image());
         assert.isBoolean(r);
         assert.isTrue(r);
       });
@@ -326,7 +338,7 @@ export default function (
         const im = new Image;
         im.read(path);
 
-        const r = MagickCore.GrayscaleImage(im, MagickCore.LightnessPixelIntensityMethod);
+        const r = MagickCore.GrayscaleImage(im.image(), MagickCore.LightnessPixelIntensityMethod);
         assert.isBoolean(r);
         assert.isTrue(r);
       });
@@ -335,9 +347,10 @@ export default function (
         const im = new Image;
         im.read(path);
 
-        const r = MagickCore.EnhanceImage(im);
-        assert.instanceOf(r, Magick.Image);
-        assert.strictEqual(r.geometry.toString(), im.geometry.toString());
+        const imp = MagickCore.EnhanceImage(im.image());
+        assert.instanceOf(imp, MagickCore.Image);
+        const im2 = new Image(imp);
+        assert.strictEqual(im2.geometry.toString(), im.geometry.toString());
       });
     });
   });
