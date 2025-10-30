@@ -145,7 +145,7 @@ namespace MagickCore {
   _Image() {
     throw Magick::Exception{"Creating a MagickCore.Image from JS is currently not supported"};
   }
-  inline ~_Image() {
+  ~_Image() {
     MagickCore::DestroyImage($self);
   }
 };
