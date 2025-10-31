@@ -1,7 +1,7 @@
 %module magickwand
 
-#if !defined(SWIG_JAVASCRIPT_EVOLUTION) || SWIG_VERSION < 0x050004
-#error magickwand.js requires SWIG JavaScript Evolution >= 5.0.4
+#if !defined(SWIG_JAVASCRIPT_EVOLUTION) || SWIG_VERSION < 0x050010
+#error magickwand.js requires SWIG JavaScript Evolution >= 5.0.10
 #endif
 
 #define MAGICKCORE_EXCLUDE_DEPRECATED
