@@ -17,8 +17,12 @@
 %rename("%s", regextarget=1, %$not %$isfunction) ".+Type$";
 %rename("%s", regextarget=1, %$isconstant) "Magick.+";
 
-// Many of the MagickCore/enhance.h methods do not have Magick++ equivalents
+// Some MagickCore/enhance.h methods do not have Magick++ equivalents
 %rename("%s", regextarget=1, %$isfunction) ".+Image$";
+%rename("%s", regextarget=1, %$isfunction) "^SetImage.*";
+%rename("%s", regextarget=1, %$isfunction) "^GetImage.*";
+%rename("$ignore", regextarget=1, %$isfunction) "ImageView";
+
 // but omit the Get*Image variants, they do low-level stuff
 %rename("$ignore", regextarget=1, fullname=1) "^MagickCore::Get.+Image";
 // and those from MagickWand
@@ -101,7 +105,10 @@
 }
 %typemap(argout, noblock=1) (MagickCore::ExceptionInfo *) {
   if (_global_error->severity != MagickCore::ExceptionType::UndefinedException) {
-    SWIG_Raise(MagickCore::GetExceptionMessage(_global_error->error_number));
+    const char *err = _global_error->reason;
+    if (!err)
+      err = MagickCore::GetExceptionMessage(_global_error->error_number);
+    SWIG_Raise(err);
   }
 }
 

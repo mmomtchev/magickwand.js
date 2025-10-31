@@ -4,7 +4,7 @@
 
  - Update ImageMagick to 7.1.2-7
  - Major rework of the build system, now based on a new standard with streamlined `npm` options handling and the possibility of automatically rebuilding when installing from source with build options from `.npmrc`
- - Expose `MagickCore.Image` as a JS type and include the image processing methods from `MagickCore`
+ - Expose `MagickCore.Image` as a JS type and greatly improve the integration of `MagickCore` rendering many new image processing methods usable
 
 ## [2.1.0] 2025-07-15
 

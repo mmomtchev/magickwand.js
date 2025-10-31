@@ -351,6 +351,15 @@ export default function (
         const im2 = new Image(imR);
         assert.strictEqual(im2.geometry.toString(), im.geometry.toString());
       });
+
+      it('Throwing an exception', () => {
+        const im = new Magick.Image(path);
+        const imCore = new MagickCore.Image(im);
+
+        assert.throws(() => {
+          MagickCore.SetImageExtent(imCore, 0, 0);
+        }, /negative or zero image size/);
+      });
     });
   });
 }
