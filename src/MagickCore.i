@@ -116,21 +116,26 @@
 // to the first type as SWIG considers it the base type
 %rename("Image", fullname=1) MagickCore::_Image;
 
+// This method returns owned pointers
+%newobject MagickCore::CloneImage;
+
+// These will be converted to ctor/dtor
+%rename("$ignore", fullname=1) "MagickCore::AcquireImage";
+%rename("$ignore", fullname=1) "MagickCore::DestroyImage";
 // Do not generate default ctor/dtor for Image
 %nodefaultctor MagickCore::_Image;
 %nodefaultdtor MagickCore::_Image;
 
-// The SWIG builtin typemaps do not have a typemap
-// for references to pointers (Magick::image() returns these)
-// For SWIG, this is a pointer to pointer
-// For us, it is the same as a normal pointer
-%typemap(out) MagickCore::Image *&  {
-  // Dereference it
-  MagickCore::Image *im = *$1;
-  // And apply the normal pointer typemap
-  $typemap(out, MagickCore::Image *, 1=im);
-}
-%typemap(ts) MagickCore::Image *&   "$typemap(ts,  MagickCore::Image *)";
+// This one creates a new object that must be owned
+%newobject MagickCore::CloneImage;
+
+// Alas, the builtin ImageMagick methods do not allow for safe
+// conversions between C++ Magick::Image and C MagickCore::Image.
+// These two are not made to work together.
+
+// In order to provide a bridge between the two interfaces, we
+// hide the builtin conversions and expose two new constructors that
+// copy the image.
 
 namespace MagickCore {
   %include "../swig/magickcore.i"
@@ -142,10 +147,24 @@ namespace MagickCore {
 %rename("Image") "_Image";
 %rename("~Image") "~_Image";
 %extend MagickCore::_Image {
-  _Image() {
-    throw Magick::Exception{"Creating a MagickCore.Image from JS is currently not supported"};
+  // The ExceptionInfo argument will be automatically handled
+  _Image(Magick::Image *image, ExceptionInfo *exception) {
+    MagickCore::Image *im = image->image();
+    MagickCore::Image *clone = MagickCore::CloneImage(im, 0, 0, MagickTrue, exception);
+    return clone;
   }
   ~_Image() {
     MagickCore::DestroyImage($self);
   }
 };
+
+// And finally, a new Magick::Image constructor that takes
+// a MagickCore::Image and copies it (unlike the original
+// that we ignored)
+%extend Magick::Image {
+  Image(MagickCore::_Image *image, ExceptionInfo *exception) {
+    MagickCore::Image *clone = MagickCore::CloneImage(image, 0, 0, MagickTrue, exception);
+    Magick::Image *im = new Magick::Image(clone);
+    return im;
+  }
+}

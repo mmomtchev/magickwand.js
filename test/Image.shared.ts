@@ -313,43 +313,37 @@ export default function (
     });
 
     describe('MagickCore Image methods', () => {
-      it('MagickCore.Image cannot be constructed from JS', () => {
-        assert.throws(() => {
-          new MagickCore.Image;
-        });
-      });
-
-      it('Magick.image() returns a MagickCore.Image', () => {
-        const im = new Image(path);
-        const imp = im.image();
-        assert.instanceOf(imp, MagickCore.Image);
+      it('convert between Magick.Image and MagickCore.Image', () => {
+        const im = new Magick.Image(path);
+        const imCore = new MagickCore.Image(im);
+        assert.instanceOf(imCore, MagickCore.Image);
+        const im2 = new Magick.Image(imCore);
+        assert.instanceOf(im2, Magick.Image);
+        assert.strictEqual(im2.geometry.toString(), im.geometry.toString());
       });
 
       it('WhiteBalanceImage()', () => {
-        const im = new Image;
-        im.read(path);
-
-        const r = MagickCore.WhiteBalanceImage(im.image());
+        const im = new Magick.Image(path);
+        const imCore = new MagickCore.Image(im);
+        const r = MagickCore.WhiteBalanceImage(imCore);
         assert.isBoolean(r);
         assert.isTrue(r);
       });
 
       it('GrayscaleImage()', () => {
-        const im = new Image;
-        im.read(path);
-
-        const r = MagickCore.GrayscaleImage(im.image(), MagickCore.LightnessPixelIntensityMethod);
+        const im = new Magick.Image(path);
+        const imCore = new MagickCore.Image(im);
+        const r = MagickCore.GrayscaleImage(imCore, MagickCore.LightnessPixelIntensityMethod);
         assert.isBoolean(r);
         assert.isTrue(r);
       });
 
       it('EnhanceImage()', () => {
-        const im = new Image;
-        im.read(path);
-
-        const imp = MagickCore.EnhanceImage(im.image());
-        assert.instanceOf(imp, MagickCore.Image);
-        const im2 = new Image(imp);
+        const im = new Magick.Image(path);
+        const imCore = new MagickCore.Image(im);
+        const imR = MagickCore.EnhanceImage(imCore);
+        assert.instanceOf(imR, MagickCore.Image);
+        const im2 = new Image(imR);
         assert.strictEqual(im2.geometry.toString(), im.geometry.toString());
       });
     });
