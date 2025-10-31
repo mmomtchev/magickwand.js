@@ -5,7 +5,7 @@
 
 // It contains one interesting element - the C struct MagickCore::Image
 // Wrapping it for JavaScript is somewhat tricky but possible
-// and it is an interesting example - you can find it at the end
+// and it is an interesting example - you can find it below
 
 // Ignore everything but a few types - *Operator, *Type and Policy* enums
 %rename("$ignore", regextarget=1, fullname=1) "^MagickCore::.+";
@@ -108,7 +108,16 @@
 // Returning data in a FILE* (only nullptr at the moment)
 %typemap(in, numinputs=0, noblock=1) (FILE *) "$1 = NULL;"
 
+// =================================
 // Wrapping MagickCore::Image for JS
+// =================================
+
+// Alas, the builtin ImageMagick methods do not allow for safe
+// conversions between C++ Magick::Image and C MagickCore::Image.
+// These two are not made to work together.
+// In order to provide a bridge between the two interfaces, we
+// hide the builtin conversions and expose two new constructors that
+// copy the image.
 
 // First, unignore
 // When dealing with the usual C pattern of struct _Struct
@@ -128,14 +137,6 @@
 
 // This one creates a new object that must be owned
 %newobject MagickCore::CloneImage;
-
-// Alas, the builtin ImageMagick methods do not allow for safe
-// conversions between C++ Magick::Image and C MagickCore::Image.
-// These two are not made to work together.
-
-// In order to provide a bridge between the two interfaces, we
-// hide the builtin conversions and expose two new constructors that
-// copy the image.
 
 namespace MagickCore {
   %include "../swig/magickcore.i"
@@ -166,5 +167,12 @@ namespace MagickCore {
     MagickCore::Image *clone = MagickCore::CloneImage(image, 0, 0, MagickTrue, exception);
     Magick::Image *im = new Magick::Image(clone);
     return im;
+  }
+  // Another interesting example:
+  // Magick::Image does not have a whiteBalance method,
+  // while MagickCore has WhiteBalanceImage()
+  // Add this method.
+  void whiteBalance(ExceptionInfo *exception) {
+    MagickCore::WhiteBalanceImage($self->image(), exception);
   }
 }

@@ -330,6 +330,11 @@ export default function (
         assert.isTrue(r);
       });
 
+      it('Magick.Image.whiteBalance()', () => {
+        const im = new Magick.Image(path);
+        im.whiteBalance();
+      });
+
       it('GrayscaleImage()', () => {
         const im = new Magick.Image(path);
         const imCore = new MagickCore.Image(im);
