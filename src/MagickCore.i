@@ -131,12 +131,18 @@
 // These will be converted to ctor/dtor
 %rename("$ignore", fullname=1) "MagickCore::AcquireImage";
 %rename("$ignore", fullname=1) "MagickCore::DestroyImage";
+%rename("$ignore", fullname=1) "MagickCore::ReferenceImage";
 // Do not generate default ctor/dtor for Image
 %nodefaultctor MagickCore::_Image;
 %nodefaultdtor MagickCore::_Image;
 
-// This one creates a new object that must be owned
+// These methods create a new object that must be owned
 %newobject MagickCore::CloneImage;
+%newobject MagickCore::AppendImages;
+%newobject MagickCore::GetImageMask;
+%newobject MagickCore::NewMagickImage;
+%newobject MagickCore::SmushImages;
+%newobject MagickCore::EnhanceImage;
 
 namespace MagickCore {
   %include "../swig/magickcore.i"
