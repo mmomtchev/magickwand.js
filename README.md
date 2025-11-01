@@ -123,9 +123,13 @@ Your best source of further information is the Magick++ documentation itself:
 * The tutorial: https://imagemagick.org/Magick++/tutorial/Magick++_tutorial.pdf
 * The full API: https://www.imagemagick.org/Magick++/Documentation.html
 
-`magickwand.js` implements the full Magick++ C++ API.
+`magickwand.js` implements the full Magick++ C++ API which is object-oriented and translates nicely to JavaScript and TypeScript.
 
 (*only the `Pixels` and `PixelData` classes are not implemented in JavaScript - use `Image.pixelColor` to get individual pixels or write the image to a `TypedArray` with `RGB`/`RGBA`/`CMYK` encoding to get a large region*).
+
+The older, lower level, plain C API - `MagickCore` - is only partially implemented. All the `enum`s required for using `Magick++` are exposed and some image manipulation methods are also implemented. There are two custom constructors that can convert between `Magick.Image` and `MagickCore.Image`.
+
+Unless you are interested in ImageMagick or SWIG internals, you should stick to using Magick++.
 
 Also, if you have a code editor capable of reading the TypeScript bindings, such as Visual Studio Code, it will provide online help for each method.
 
@@ -151,6 +155,8 @@ If you want to rebuild the bindings using the full set of statically linked libr
 npm install magickwand.js --build-from-source --enable-conan
 ```
 
+Otherwise, you will build ImageMagick against your own system-installed libraries.
+
 ### Experimental `xPack` fully self-contained build
 
 This project supports the new `xPack` fully self-contained build of [`hadron`](https://github.com/mmomtchev/hadron) - which means that it can rebuild itself without a working C++ environment. This build is currently highly experimental and is included mostly for demonstration purposes. In this mode, the only requirement is Node.js and `npm` and the project is built using a `clang` `xPack` on all platforms. This build is enabled by the `--enable-standalone-build` option:
@@ -163,7 +169,7 @@ Be sure to read the notes at [Building hadron-based projects without a system co
 
 ### Rebuilding from git or using an externally provided ImageMagick library
 
-* In order to regenerate the C++ wrapping code, you will need SWIG JavaScript Evolution 5.0.4 - available using the [`mmomtchev/setup-swig`](https://github.com/mmomtchev/setup-swig/) Github action or from [`conan`](https://github.com/mmomtchev/swig-conan)
+* In order to regenerate the C++ wrapping code, you will need SWIG JavaScript Evolution 5.0.10 - available using the [`mmomtchev/setup-swig`](https://github.com/mmomtchev/setup-swig/) Github action or from [`conan`](https://github.com/mmomtchev/swig-conan)
 * Alternatively, if you don't want to rebuild SWIG JSE yourself, the SWIG-generated wrappers are included in the published `npm` packages
 * Or - you can simply download the `./swig` directory from [the latest working build](https://github.com/mmomtchev/magickwand.js/actions/workflows/test-dev.yml?query=branch%3Amain) - it is the artifact called `swig`
 

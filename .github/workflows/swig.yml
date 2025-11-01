@@ -17,7 +17,7 @@ jobs:
     - uses: mmomtchev/setup-swig@v5
       with:
         branch: jse
-        version: v5.0.9
+        version: v5.0.10
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Verify SWIG

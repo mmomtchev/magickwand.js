@@ -1,7 +1,7 @@
 %module magickwand
 
-#if !defined(SWIG_JAVASCRIPT_EVOLUTION) || SWIG_VERSION < 0x050004
-#error magickwand.js requires SWIG JavaScript Evolution >= 5.0.4
+#if !defined(SWIG_JAVASCRIPT_EVOLUTION) || SWIG_VERSION < 0x050010
+#error magickwand.js requires SWIG JavaScript Evolution >= 5.0.10
 #endif
 
 #define MAGICKCORE_EXCLUDE_DEPRECATED
@@ -105,7 +105,10 @@ using namespace Magick;
 %ignore Magick::throwExceptionExplicit;
 %ignore Magick::formatExceptionMessage;
 %ignore Magick::createException;
+// These are dangerous methods that are not a public API
 %ignore Magick::Image::Image(MagickCore::Image *image_);
+%ignore Magick::Image::image();
+%ignore Magick::Image::constImage();
 // Ignore the Magick::Exceptions, these do not inherit from JS Error
 // and are not very practical, we throw everything as JS Error
 // with the original message (see above)

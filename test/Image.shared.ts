@@ -1,5 +1,5 @@
 // These tests are shared between Node.js and the browser
-import type { Magick, MagickCore } from 'magickwand.js';
+import { Magick, MagickCore } from 'magickwand.js';
 
 export default function (
   path: string,
@@ -310,6 +310,56 @@ export default function (
     it('(async) throw an exception', () => {
       const im = new Image;
       return assert.isRejected(im.readAsync('something.gif'), /unable to open image/);
+    });
+
+    describe('MagickCore Image methods', () => {
+      it('convert between Magick.Image and MagickCore.Image', () => {
+        const im = new Magick.Image(path);
+        const imCore = new MagickCore.Image(im);
+        assert.instanceOf(imCore, MagickCore.Image);
+        const im2 = new Magick.Image(imCore);
+        assert.instanceOf(im2, Magick.Image);
+        assert.strictEqual(im2.geometry.toString(), im.geometry.toString());
+      });
+
+      it('WhiteBalanceImage()', () => {
+        const im = new Magick.Image(path);
+        const imCore = new MagickCore.Image(im);
+        const r = MagickCore.WhiteBalanceImage(imCore);
+        assert.isBoolean(r);
+        assert.isTrue(r);
+      });
+
+      it('Magick.Image.whiteBalance()', () => {
+        const im = new Magick.Image(path);
+        im.whiteBalance();
+      });
+
+      it('GrayscaleImage()', () => {
+        const im = new Magick.Image(path);
+        const imCore = new MagickCore.Image(im);
+        const r = MagickCore.GrayscaleImage(imCore, MagickCore.LightnessPixelIntensityMethod);
+        assert.isBoolean(r);
+        assert.isTrue(r);
+      });
+
+      it('EnhanceImage()', () => {
+        const im = new Magick.Image(path);
+        const imCore = new MagickCore.Image(im);
+        const imR = MagickCore.EnhanceImage(imCore);
+        assert.instanceOf(imR, MagickCore.Image);
+        const im2 = new Image(imR);
+        assert.strictEqual(im2.geometry.toString(), im.geometry.toString());
+      });
+
+      it('Throwing an exception', () => {
+        const im = new Magick.Image(path);
+        const imCore = new MagickCore.Image(im);
+
+        assert.throws(() => {
+          MagickCore.SetImageExtent(imCore, 0, 0);
+        }, /negative or zero image size/);
+      });
     });
   });
 }
