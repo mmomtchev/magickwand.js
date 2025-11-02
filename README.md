@@ -1,6 +1,6 @@
 # magickwand.js
 
-**Update: since Oct 24 I am homeless and living in my van. I lost access to most of my computer hardware. The eviction from my home has been timed for maximum effect as I was not present when it happened. I have only a single set of clothes and no means to get anything else. Please, if you use my software, consider asking everyone around you if they are taking part in this extortion and why.**
+**Update: since Oct 24 2024 I am homeless and living in my van. I lost access to most of my computer hardware. The eviction from my home has been timed for maximum effect as I was not present when it happened. Please, if you use my software, consider asking everyone around you if they are taking part in this extortion and why.**
 
 [![ISC](https://img.shields.io/github/license/mmomtchev/magickwand.js)](https://github.com/mmomtchev/magickwand.js/blob/main/LICENSE)
 [![Test npm package](https://github.com/mmomtchev/magickwand.js/actions/workflows/test-package.yml/badge.svg)](https://github.com/mmomtchev/magickwand.js/actions/workflows/test-package.yml)
