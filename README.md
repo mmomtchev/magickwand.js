@@ -205,18 +205,18 @@ npx xpm run conan -- version
 npx xpm run meson -- -v
 ```
 
-Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the data used internally by ImageMagick - image files still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. **Unless you can regenerate the SWIG wrappers, you will have to use the exact same version (the latest one at the release date) that was used when they were generated**. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
+Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the data used internally by ImageMagick - image files still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. **Unless you  use the exact same version (the latest one at the release date) that was used when the SWIG wrappers were generated, you will have to regenerate them**. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
 
 ```shell
 npm install --verbose --foreground-scripts=true --build-from-source  \
   --enable-external --enable-shared                                  \
-  --cpp-args="`pkg-config --cflags Magick++`"                        \
+  --cpp-args="`pkg-config --cflags Magick++`"                          \
   --cpp-link-args="`pkg-config --libs Magick++`"
 ```
 
 In this case, it would be possible to use a non Q16HDRI build or any other specially built ImageMagick-7 as long as its version is an exact match.
 
-If you want to use a different ImageMagick-7 version, you will have to regenerate the SWIG wrappers. A future version might do this automatically since SWIG-jse is now available from `conan` on all OS.
+If you want to use a different ImageMagick-7 version, you will have to regenerate the SWIG wrappers using `npx xpm run generate`.
 
 * `npm test` should work at this point
 

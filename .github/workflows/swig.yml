@@ -14,14 +14,6 @@ jobs:
       with:
         fetch-depth: 0
         submodules: true
-    - uses: mmomtchev/setup-swig@v5
-      with:
-        branch: jse
-        version: v5.0.10
-        token: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Verify SWIG
-      run: swig-jse -version
 
     - name: Run SWIG to generated the wrappers
       run: npx xpm run generate

@@ -138,14 +138,25 @@
     },
     "actions": {
       "generate": [
-        "{{ properties.commandGenerateImageMagickConfigure }}",
-        "{{ properties.commandGenerate_magickcore }}",
-        "{{ properties.commandGenerate_magickpp }}",
-        "{{ properties.commandGenerate_magickwand }}",
-        "{{ properties.commandGenerateWrappers }}"
+        "npx xpm install --config generate",
+        "npx xpm run generate --config generate"
       ]
     },
     "buildConfigurations": {
+      "generate": {
+        "devDependencies": {
+          "@mmomtchev/swig-xpack": "5.0.10-2"
+        },
+        "actions": {
+          "generate": [
+            "{{ properties.commandGenerateImageMagickConfigure }}",
+            "{{ properties.commandGenerate_magickcore }}",
+            "{{ properties.commandGenerate_magickpp }}",
+            "{{ properties.commandGenerate_magickwand }}",
+            "{{ properties.commandGenerateWrappers }}"
+          ]
+        }
+      },
       "wasm-debug": {
         "properties": {
           "argsMesonPrepare": "-Doptimization=1"

@@ -5,6 +5,7 @@
  - Update ImageMagick to 7.1.2-8
  - Major rework of the build system, now based on a new standard with streamlined `npm` options handling and the possibility of automatically rebuilding when installing from source with build options from `.npmrc`
  - Expose `MagickCore.Image` as a JS type and greatly improve the integration of `MagickCore` rendering many new image processing methods usable
+ - Regenerating the SWIG wrappers on the end user host is now possible thanks to the universal SWIG JSE xPack, installed automatically when launching `npx xpm run generate`
 
 ## [2.1.0] 2025-07-15
 
