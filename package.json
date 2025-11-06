@@ -33,7 +33,8 @@
     "magick": "scripts/cli.cjs"
   },
   "scripts": {
-    "install": "npx xpm run npm-preinstall && npx xpm run npm-install",
+    "preinstall": "npx xpm run npm-preinstall",
+    "install": "npx xpm run npm-install",
     "lint": "npx eslint lib/*js native/*js test/*.ts",
     "test": "npx mocha --reporter=tap test/*.test.ts",
     "preversion": "npm run lint && npm run test",
