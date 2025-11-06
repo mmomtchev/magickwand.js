@@ -145,6 +145,8 @@ Starting with version 2.0, `magickwand.js` uses the new `hadron` build system sp
 npm install magickwand.js --build-from-source
 ```
 
+*If you suspect something is now working as it should be, you can add `--verbose --foreground-scripts` to any `npm install` command in order to get verbose output*
+
 This will also rebuild the included Magick++ library. Currently, you will need a working C++17 environment. You can read below for the experimental build with an integrated cross-platform compiler in a `xPack` (basically, an `npm` package). The project is tested, and has pre-built binaries, with `gcc` on Linux x64, `clang` on macOS x64 and arm64, and `MSVC` on Windows x64.
 
 This will rebuild the bindings against the available system-installed (usually shared) libraries which will lead to an order of magnitude smaller addon size. If the X11 libraries are available, this build will support X11 (`Image.display` method) on Linux and macOS.
@@ -167,7 +169,7 @@ npm install magickwand.js --build-from-source --enable-conan --enable-standalone
 
 Be sure to read the notes at [Building hadron-based projects without a system compiler](https://github.com/mmomtchev/magickwand.js/blob/main/README.xPacks.md).
 
-### Rebuilding from git or using an externally provided ImageMagick library
+### Rebuilding from git (developer mode)
 
 * In order to regenerate the C++ wrapping code, you will need SWIG JavaScript Evolution 5.0.10 - available as a xPack [`@mmomtchev/swig-xpack`](https://github.com/mmomtchev/swig-xpack)
 * The SWIG-generated wrappers for the included ImageMagick distribution are included in the published `npm` packages
@@ -180,29 +182,24 @@ cd magickwand.js
 
 * `npm install` should automatically install the dependencies and compile the module unless a pre-built binary can be downloaded
 
-* or, to do everything manually:
+* then, you can use the following commands:
 ```shell
-# install all npm dependencies
-npm install
-# install the supporting xpm packages (python, conan, meson, ninja, cmake)                            
-npx xpm install
 # generate the SWIG wrappers
-npx xpm generate                  
+npx xpm generate
 # available builds are native, native-debug, wasm and wasm-debug
 npx xpm run prepare --config native-debug
 # build
 npx xpm run build --config native-debug
-```
 
-Other useful commands:
-```shell
-# optional step to enable ASAN (run after prepare)
+# optional step to enable ASAN (run after prepare and before build)
 npx xpm run configure --config native-debug -- -Db_sanitize=address
 # inspect conan version (and, generally, run conan commands)
 npx xpm run conan -- version
 # inspect meson version (and, generally, run meson commands)
 npx xpm run meson -- -v
 ```
+
+### Linking with an external ImageMagick library
 
 Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the data used internally by ImageMagick - image files still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
 
@@ -237,7 +234,7 @@ Or to build a minimal version that excludes many optional dependencies:
 npm install --build-wasm-from-source --verbose --foreground-scripts           \
   --disable-fonts --enable-jpeg --enable-png --disable-tiff                   \
   --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia         \
-  --disable-exr --disable-fftw --disable-heif \
+  --disable-exr --disable-fftw --disable-heif                                 \
   --disable-color --disable-xml --enable-gzip --disable-zip                   \
   --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd   \
   --disable-openmp --disable-display --disable-jbig --disable-cairo
