@@ -190,11 +190,11 @@ git clone --recursive https://github.com/mmomtchev/magickwand.js
 cd magickwand.js
 ```
 
-* `npm install` should automatically install the dependencies and compile the module unless a pre-built binary can be downloaded
+* `npm install` should automatically install the dependencies and a pre-built binary if it exists
 
 * then, you can use the following commands:
 ```shell
-# generate the SWIG wrappers
+# generate the SWIG wrappers and the TypeScript types
 npx xpm generate
 # configure step, build against system-installed libraries
 # available builds are native, native-debug, wasm and wasm-debug
