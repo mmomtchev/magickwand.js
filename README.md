@@ -186,17 +186,24 @@ cd magickwand.js
 ```shell
 # generate the SWIG wrappers
 npx xpm generate
+# configure step, build against system-installed libraries
 # available builds are native, native-debug, wasm and wasm-debug
 npx xpm run prepare --config native-debug
 # build
 npx xpm run build --config native-debug
+```
 
+Other useful commands:
+
+```shell
 # optional step to enable ASAN (run after prepare and before build)
 npx xpm run configure --config native-debug -- -Db_sanitize=address
 # inspect conan version (and, generally, run conan commands)
 npx xpm run conan -- version
 # inspect meson version (and, generally, run meson commands)
 npx xpm run meson -- -v
+# pass npm options (this will recreate the prebuilt binaries build)
+npm_config_enable_conan=true npx xpm run prepare --config native-debug
 ```
 
 ### Linking with an external ImageMagick library
