@@ -159,6 +159,16 @@ npm install magickwand.js --build-from-source --enable-conan
 
 Otherwise, you will build ImageMagick against your own system-installed libraries.
 
+Options can also be specified in `.npmrc` so that the default `npm install` rebuilds from source:
+
+```ini
+magickwand.js:build_from_source = true
+magickwand.js:build_wasm_from_source = false
+magickwand.js:disable_fonts = true
+magickwand.js:disable_png = true
+magickwand.js:disable_jpeg = false
+```
+
 ### Experimental `xPack` fully self-contained build
 
 This project supports the new `xPack` fully self-contained build of [`hadron`](https://github.com/mmomtchev/hadron) - which means that it can rebuild itself without a working C++ environment. This build is currently highly experimental and is included mostly for demonstration purposes. In this mode, the only requirement is Node.js and `npm` and the project is built using a `clang` `xPack` on all platforms. This build is enabled by the `--enable-standalone-build` option:
