@@ -145,6 +145,8 @@ Starting with version 2.0, `magickwand.js` uses the new `hadron` build system sp
 npm install magickwand.js --build-from-source
 ```
 
+*If you suspect something is now working as it should be, you can add `--verbose --foreground-scripts` to any `npm install` command in order to get verbose output*
+
 This will also rebuild the included Magick++ library. Currently, you will need a working C++17 environment. You can read below for the experimental build with an integrated cross-platform compiler in a `xPack` (basically, an `npm` package). The project is tested, and has pre-built binaries, with `gcc` on Linux x64, `clang` on macOS x64 and arm64, and `MSVC` on Windows x64.
 
 This will rebuild the bindings against the available system-installed (usually shared) libraries which will lead to an order of magnitude smaller addon size. If the X11 libraries are available, this build will support X11 (`Image.display` method) on Linux and macOS.
@@ -157,6 +159,16 @@ npm install magickwand.js --build-from-source --enable-conan
 
 Otherwise, you will build ImageMagick against your own system-installed libraries.
 
+Options can also be specified in `.npmrc` so that the default `npm install` rebuilds from source:
+
+```ini
+magickwand.js:build_from_source = true
+magickwand.js:build_wasm_from_source = false
+magickwand.js:disable_fonts = true
+magickwand.js:disable_png = true
+magickwand.js:disable_jpeg = false
+```
+
 ### Experimental `xPack` fully self-contained build
 
 This project supports the new `xPack` fully self-contained build of [`hadron`](https://github.com/mmomtchev/hadron) - which means that it can rebuild itself without a working C++ environment. This build is currently highly experimental and is included mostly for demonstration purposes. In this mode, the only requirement is Node.js and `npm` and the project is built using a `clang` `xPack` on all platforms. This build is enabled by the `--enable-standalone-build` option:
@@ -167,11 +179,10 @@ npm install magickwand.js --build-from-source --enable-conan --enable-standalone
 
 Be sure to read the notes at [Building hadron-based projects without a system compiler](https://github.com/mmomtchev/magickwand.js/blob/main/README.xPacks.md).
 
-### Rebuilding from git or using an externally provided ImageMagick library
+### Rebuilding from git (developer mode)
 
-* In order to regenerate the C++ wrapping code, you will need SWIG JavaScript Evolution 5.0.10 - available using the [`mmomtchev/setup-swig`](https://github.com/mmomtchev/setup-swig/) Github action or from [`conan`](https://github.com/mmomtchev/swig-conan)
-* Alternatively, if you don't want to rebuild SWIG JSE yourself, the SWIG-generated wrappers are included in the published `npm` packages
-* Or - you can simply download the `./swig` directory from [the latest working build](https://github.com/mmomtchev/magickwand.js/actions/workflows/test-dev.yml?query=branch%3Amain) - it is the artifact called `swig`
+* In order to regenerate the C++ wrapping code, you will need SWIG JavaScript Evolution 5.0.10 - available as a xPack [`@mmomtchev/swig-xpack`](https://github.com/mmomtchev/swig-xpack)
+* The SWIG-generated wrappers for the included ImageMagick distribution are included in the published `npm` packages
 
 * Recursively clone the repo
 ```shell
@@ -181,14 +192,11 @@ cd magickwand.js
 
 * `npm install` should automatically install the dependencies and compile the module unless a pre-built binary can be downloaded
 
-* or, to do everything manually:
+* then, you can use the following commands:
 ```shell
-# install all npm dependencies
-npm install
-# install the supporting xpm packages (python, conan, meson, ninja, cmake)                            
-npx xpm install
-# generate the SWIG wrappers (requires SWIG JSE 5.0.4)
-npx xpm generate                  
+# generate the SWIG wrappers
+npx xpm generate
+# configure step, build against system-installed libraries
 # available builds are native, native-debug, wasm and wasm-debug
 npx xpm run prepare --config native-debug
 # build
@@ -196,27 +204,30 @@ npx xpm run build --config native-debug
 ```
 
 Other useful commands:
+
 ```shell
-# optional step to enable ASAN (run after prepare)
+# optional step to enable ASAN (run after prepare and before build)
 npx xpm run configure --config native-debug -- -Db_sanitize=address
 # inspect conan version (and, generally, run conan commands)
 npx xpm run conan -- version
 # inspect meson version (and, generally, run meson commands)
 npx xpm run meson -- -v
+# pass npm options (this will recreate the prebuilt binaries build)
+npm_config_enable_conan=true npx xpm run prepare --config native-debug
 ```
 
-Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the data used internally by ImageMagick - image files still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. **Unless you  use the exact same version (the latest one at the release date) that was used when the SWIG wrappers were generated, you will have to regenerate them**. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
+### Linking with an external ImageMagick library
+
+Alternatively, you can use an already installed on your system ImageMagick-7 library. In this case you should know that there are two compilation options that can produce four different libraries - enabling/disabling HDRI (*High Dynamic Range Images*) which returns `float` pixels instead of `int` and Q8/Q16 which determines the bit size of the `Quantum`. These only apply to the data used internally by ImageMagick - image files still use whatever is specified. Mismatching those will produce an addon that returns garbage when requesting individual pixels. By default, this addon uses Q16 with HDRI - which is the default setting on Linux. In this case, assuming that you have ImageMagick installed in `/usr/local`, build with:
 
 ```shell
 npm install --verbose --foreground-scripts=true --build-from-source  \
-  --enable-external --enable-shared                                  \
+  --enable-external --enable-shared --enable-regenerate              \
   --cpp-args="`pkg-config --cflags Magick++`"                          \
   --cpp-link-args="`pkg-config --libs Magick++`"
 ```
 
-In this case, it would be possible to use a non Q16HDRI build or any other specially built ImageMagick-7 as long as its version is an exact match.
-
-If you want to use a different ImageMagick-7 version, you will have to regenerate the SWIG wrappers using `npx xpm run generate`.
+In this case, it would be possible to use a non Q16HDRI build or any other specially built ImageMagick-7.
 
 * `npm test` should work at this point
 
@@ -240,7 +251,7 @@ Or to build a minimal version that excludes many optional dependencies:
 npm install --build-wasm-from-source --verbose --foreground-scripts           \
   --disable-fonts --enable-jpeg --enable-png --disable-tiff                   \
   --disable-webp --disable-jpeg2000 --disable-raw --disable-openmedia         \
-  --disable-exr --disable-fftw --disable-heif \
+  --disable-exr --disable-fftw --disable-heif                                 \
   --disable-color --disable-xml --enable-gzip --disable-zip                   \
   --disable-bzip2 --disable-zstd --disable-xz --disable-lzma --disable-simd   \
   --disable-openmp --disable-display --disable-jbig --disable-cairo
@@ -257,6 +268,8 @@ The following options are available when using `npm install`:
 * `--build-from-source` rebuilds the Node.js native module even if a precompiled binary is available
 
 * `--build-wasm-from-source` rebuilds the WASM module even if a precompiled binary is available
+
+* `--enable-regenerate` automatically regenerates the SWIG wrappers, needed if you are building against an ImageMagick distribution different from the builtin one
 
 * `--enable-conan` enables to automatically retrieve the dependencies `conan`
 
@@ -310,7 +323,7 @@ ImageMagick is the perfect candidate for an automatically generated with SWIG No
 
 ![](https://gist.githubusercontent.com/mmomtchev/3ca8f7c96a0a09ef1dd530c8f73dd959/raw/5a54c384c99c336bb2bc71b75cf0109c6b2c69e7/SWIG-positioning.png)
 
-ImageMagick has an absolutely huge number of API methods and objects - the SWIG-generated module totals more than 400k lines of C++ code - and this is only covering the `Magick++` API and the enums from the `MagickWand` API. However there are relatively few distinct method signatures. The whole SWIG project which brings you this full API to Node.js and the browser, measures a grand total of only **656** lines - half of which are comments!!
+ImageMagick has an absolutely huge number of API methods and objects - the SWIG-generated module totals close to 450k lines of C++ code. However there are relatively few distinct method signatures. The whole SWIG project which brings you this full API to Node.js and the browser, measures a grand total of less than **1000** lines - half of which are comments!!
 
 I have tried to be as verbose as possible throughout the `Magick++.i` file - you should start there. ImageMagick is a very complex C++ project with over 30 years history and it uses (almost) every single SWIG feature. Study the various JS wrappers that expect special arguments (`ArrayBuffer`, `TypedArray`, arrays), remember to check the ImageMagick header file for the original C++ function and you should be able to use its SWIG typemaps as a starting point in your project.
 
@@ -319,7 +332,7 @@ There is also a [medium article about using the new Node-API support in SWIG](ht
 ## Known to be broken at the moment
 
 * The Node.js native module supports `worker_threads` but it cannot be unloaded cleanly and it should be loaded in the main thread, before using it in worker threads, to prevent Node.js from unloading it when a worker quits (*fixing this will require changes in Node.js*)
-* Building without HDRI enabled or with a different quantum size than 16 bits is not supported
+* Building without HDRI enabled or with a different quantum size than 16 bits is not supported unless you rebuild ImageMagick manually and link with it externally
 * If rebuilding when installing from `npm` fails on Windows with the error: `npm ERR! fatal: not a git repository (or any of the parent directories): .git`, see [#21](https://github.com/mmomtchev/magickwand.js/issues/21)
 * Fonts do not work in the WASM version and are unlikely to be implemented in the near future as a proper implementation will require a complex interface with the browser font engine
 * Using the PNG encoder for large images in the WASM version leads to stack overflows, the native version encoder and the WASM decoder do not have this limitation
@@ -338,7 +351,6 @@ SWIG JSE roadmap:
 
 `magickwand.js` roadmap:
 * SIMD support for the WASM version
-* Allow configuration from the CLI of the included wrappers - allowing to build an ultra-light version that includes support only for the methods selected by the user
 
 # CLI Tool
 
