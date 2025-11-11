@@ -149,7 +149,7 @@
     "buildConfigurations": {
       "generate": {
         "devDependencies": {
-          "@mmomtchev/swig-xpack": "5.0.10-2"
+          "@mmomtchev/swig-xpack": "5.0.10-3"
         },
         "actions": {
           "generate": [
