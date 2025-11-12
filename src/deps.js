@@ -4,6 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const child = require('child_process');
+const os = require('os');
 
 const dirs = [
   'preconf',
@@ -16,7 +17,9 @@ if (process.argv.length < 5) {
   process.exit(1);
 }
 
-const input = child.spawnSync('g++', [
+const compiler = os.platform() != 'linux' ? 'clang' : 'g++';
+
+const input = child.spawnSync(compiler, [
   ...dirs.map((d) => `-I${d}`),
   '-fsyntax-only',
   process.argv[2],
