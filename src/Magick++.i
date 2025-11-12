@@ -46,12 +46,6 @@ using namespace Magick;
 #define NAPI_VERSION 8  // For the generated C++ code
 %}
 
-// This allows to insert a comment from the SWIG CLI to
-// uniquely identify the generated files for version control
-#ifdef GIT_BRANCH
-%insert(begin) GIT_BRANCH
-#endif
-
 // Shunt __attribute__(x) which is not supported by SWIG
 #define _magickcore_restrict
 #define magick_restrict
