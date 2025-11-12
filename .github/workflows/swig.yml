@@ -16,7 +16,7 @@ jobs:
         submodules: true
 
     - name: Run SWIG to generated the wrappers
-      run: npx xpm run generate
+      run: npx @mmomtchev/xpm run generate
       shell: cmd
 
     - name: Upload SWIG-generated wrappers
