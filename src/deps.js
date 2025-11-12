@@ -29,11 +29,13 @@ if (input.status)
   console.log(input.stderr.toString());
 
 const pattern = process.argv[3] ? new RegExp(process.argv[3]) : /./;
+const normalize = (f) => f.replace(/[/\\]+/g, '/').replace('\r', '');
 
 let deps = input
   .stderr
   .toString()
   .split('\n')
+  .map(normalize)
   .filter((file) => file.match(pattern))
   .map((file) => {
     const parts = file.split(' ');
