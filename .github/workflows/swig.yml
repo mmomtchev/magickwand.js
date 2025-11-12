@@ -15,11 +15,11 @@ jobs:
         fetch-depth: 0
         submodules: true
 
+    - name: Install the dependencies
+      run: npm install
+
     - name: Run SWIG to generated the wrappers
-      run: |
-        npm install
-        npx xpm run generate
-      shell: cmd
+      run: npx xpm run generate
 
     - name: Upload SWIG-generated wrappers
       uses: actions/upload-artifact@v5
