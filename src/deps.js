@@ -29,6 +29,7 @@ if (input.status)
   console.log(input.stderr.toString());
 
 const pattern = process.argv[3] ? new RegExp(process.argv[3]) : /./;
+console.log(pattern);
 const normalize = (f) => f.replace(/[/\\]+/g, '/').replace('\r', '');
 
 let deps = input
