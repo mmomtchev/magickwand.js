@@ -133,7 +133,7 @@
       "argsConanInstall": "-pr:b=conan.profile -pr:h=conan.profile",
       "commandGenerateImageMagickConfigure": "cmake -S deps/ImageMagick -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DMAGICK_HDRI_ENABLE=ON -DMAGICKCORE_QUANTUM_DEPTH=16 -B preconf",
       "commandGenerate_magickcore": "node src/deps.js src/deps-stub.cc MagickCore swig/magickcore.i",
-      "commandGenerate_magickpp": "node src/deps.js src/deps-stub.cc deps/ImageMagick/Magick\\\\+\\\\+ swig/magick++.i",
+      "commandGenerate_magickpp": "node src/deps.js src/deps-stub.cc \"deps/ImageMagick/Magick\\+\\+\" swig/magick++.i",
       "commandGenerate_magickwand": "node src/deps.js src/deps-stub.cc deps/ImageMagick/MagickWand swig/magickwand.i",
       "commandGenerateWrappers": "swig-jse -javascript -typescript -napi -c++ -split -exports '../native/index.cjs' -Ideps/ImageMagick/Magick++/lib -Ideps/ImageMagick -Ipreconf -DMAGICKCORE_HDRI_ENABLE=1 -DMAGICKCORE_QUANTUM_DEPTH=16 -o swig/magickwand-js.cxx -outdir swig src/Magick++.i"
     },
