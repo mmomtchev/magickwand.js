@@ -17,6 +17,7 @@ jobs:
 
     - name: Run SWIG to generated the wrappers
       run: npx xpm run generate
+      shell: cmd
 
     - name: Upload SWIG-generated wrappers
       uses: actions/upload-artifact@v5
