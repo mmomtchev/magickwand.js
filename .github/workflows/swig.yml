@@ -5,7 +5,7 @@ on: workflow_call
 
 jobs:
   swig:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     name: Generate the SWIG wrappers
 
     steps:
@@ -14,6 +14,9 @@ jobs:
       with:
         fetch-depth: 0
         submodules: true
+
+    - name: Install the dependencies
+      run: npm install
 
     - name: Run SWIG to generated the wrappers
       run: npx xpm run generate
