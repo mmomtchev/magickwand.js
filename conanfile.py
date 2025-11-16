@@ -168,6 +168,8 @@ class ImageMagickDelegates(ConanFile):
           print('Disabling OpenMP, not supported in WASM builds')
         elif self.settings.os == 'Windows':
           print('Disabling OpenMP, not supported on Windows')
+        elif self.settings.os == 'Macos' and self.settings.arch == 'armv8':
+          print('Disabling OpenMP, not supported on macOS armv8')
         else:
           try:
             print('Checking for perl with Encode module')
