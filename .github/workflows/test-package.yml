@@ -31,9 +31,9 @@ jobs:
           - ubuntu-24.04
           - windows-2022
           - windows-2025
-          - macos-13
           - macos-14
           - macos-15
+          - macos-15-intel
         node-version: [18.x, 20.x, 22.x]
 
     steps:
@@ -86,9 +86,9 @@ jobs:
           - ubuntu-24.04
           - windows-2022
           - windows-2025
-          - macos-13
           - macos-14
           - macos-15
+          - macos-15-intel
         node-version: [18.x, 20.x, 22.x]
 
     steps:
