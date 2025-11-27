@@ -40,10 +40,10 @@ using namespace Magick;
   }
 }
 
-// We fix the NAPI level to 6 (Node.js >= 14.0, and latest 10.x/12.x)
-#define NAPI_VERSION 6  // For the SWIG interface file
+// We fix the NAPI level to 8 (Node.js >= 14.17, and >= 16)
+#define NAPI_VERSION 8  // For the SWIG interface file
 %insert(begin) %{
-#define NAPI_VERSION 6  // For the generated C++ code
+#define NAPI_VERSION 8  // For the generated C++ code
 %}
 
 // This allows to insert a comment from the SWIG CLI to

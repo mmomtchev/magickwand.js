@@ -18,7 +18,7 @@ function Mocha() {
       assert.strictEqual(MagickQuantumDepth, 'Q16');
       assert.strictEqual(MagickQuantumRange, '65535');
       assert.strictEqual(MagickHDRISupport, '-HDRI');
-      assert.strictEqual(NAPI_VERSION, 6);
+      assert.strictEqual(NAPI_VERSION, 8);
       assert.isString(MagickCore.GetMagickCopyright());
       assert.isString(MagickCore.GetMagickDelegates());
       assert.isString(MagickCore.GetMagickFeatures());

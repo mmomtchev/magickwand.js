@@ -1,9 +1,5 @@
 %define PixelTypedArray
-"Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | "
-"Float32Array | Float64Array"
-#if (NAPI_VERSION > 5)
-" | BigUint64Array"
-#endif
+"Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Float32Array | Float64Array | BigUint64Array"
 %enddef
 
 %{
@@ -23,10 +19,8 @@ inline Magick::StorageType GetMagickStorageType(Napi::Env env, const Napi::Typed
       return MagickCore::FloatPixel;
     case napi_float64_array:
       return MagickCore::DoublePixel;
-#if (NAPI_VERSION > 5)
     case napi_bigint64_array:
     case napi_biguint64_array:
-#endif  // (NAPI_VERSION > 5)
       return MagickCore::LongLongPixel;
   }
   SWIG_Error(SWIG_ERROR, "Invalid type");
