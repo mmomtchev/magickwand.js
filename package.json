@@ -157,7 +157,6 @@
             "{{ properties.commandGenerate_magickcore }}",
             "{{ properties.commandGenerate_magickpp }}",
             "{{ properties.commandGenerate_magickwand }}",
-            "type swig\\magick++.i",
             "{{ properties.commandGenerateWrappers }}"
           ]
         }
