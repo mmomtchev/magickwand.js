@@ -15,6 +15,9 @@ jobs:
         fetch-depth: 0
         submodules: true
 
+    - name: Install the dependencies
+      run: npm install
+
     - name: Run SWIG to generated the wrappers
       run: npx xpm run generate
 
@@ -23,3 +26,9 @@ jobs:
       with:
         name: swig
         path: swig/*
+
+    - name: Upload the output of CMake configure
+      uses: actions/upload-artifact@v5
+      with:
+        name: preconf
+        path: preconf/*

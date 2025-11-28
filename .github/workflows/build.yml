@@ -61,6 +61,10 @@ on:
         type: boolean
         default: false
         description: publish the binaries to the current release
+      regen_swig:
+        type: boolean
+        default: false
+        description: regenerate the SWIG wrappers on the current patform
 
 jobs:
   build:
@@ -88,15 +92,19 @@ jobs:
       - name: Link the package globally
         run: npm link --ignore-scripts
         if: inputs.link
+      - name: Install the xpacks
+        run: |
+          npm install @mmomtchev/xpm
+          npx xpm install
       - name: Download the SWIG-generated wrappers
+        if: ${{ !inputs.regen_swig }}
         uses: actions/download-artifact@v6
         with:
           name: swig
           path: swig
-      - name: Install the xpacks
-        run: |
-          npm install xpm
-          npx xpm install
+      - name: Regenerate the SWIG wrappers on the current platform
+        if: inputs.regen_swig
+        run: npx xpm run generate
       - name: Get conan home
         shell: bash
         id: conan_home

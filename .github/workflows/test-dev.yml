@@ -59,6 +59,7 @@ jobs:
       dependencies: ${{ matrix.dependencies }}
       integration: node
       link: true
+      regen_swig: true
       install_cmd: 'npm link magickwand.js --ignore-scripts'
       light: ${{ matrix.dependencies == 'conan' }}
       extralight: ${{ matrix.dependencies == 'system' && startsWith(matrix.platform, 'windows') }}

@@ -4,6 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const child = require('child_process');
+const os = require('os');
 
 const dirs = [
   'preconf',
@@ -16,7 +17,9 @@ if (process.argv.length < 5) {
   process.exit(1);
 }
 
-const input = child.spawnSync('g++', [
+const compiler = os.platform() != 'linux' ? 'clang' : 'g++';
+
+const input = child.spawnSync(compiler, [
   ...dirs.map((d) => `-I${d}`),
   '-fsyntax-only',
   process.argv[2],
@@ -26,11 +29,14 @@ if (input.status)
   console.log(input.stderr.toString());
 
 const pattern = process.argv[3] ? new RegExp(process.argv[3]) : /./;
+console.log(pattern);
+const normalize = (f) => f.replace(/[/\\]+/g, '/').replace('\r', '');
 
 let deps = input
   .stderr
   .toString()
   .split('\n')
+  .map(normalize)
   .filter((file) => file.match(pattern))
   .map((file) => {
     const parts = file.split(' ');
