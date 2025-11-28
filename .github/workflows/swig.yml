@@ -26,9 +26,3 @@ jobs:
       with:
         name: swig
         path: swig/*
-
-    - name: Upload the output of CMake configure
-      uses: actions/upload-artifact@v5
-      with:
-        name: preconf
-        path: preconf/*
