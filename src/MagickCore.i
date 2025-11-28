@@ -151,6 +151,11 @@
 %newobject MagickCore::SmushImages;
 %newobject MagickCore::EnhanceImage;
 
+// Magick++ includes these two files outside the MagickCore namespace
+// We should do the same as these can contain typedefs
+%include "MagickCore/magick-baseconfig.h"
+%include "MagickCore/magick-config.h"
+
 namespace MagickCore {
   %include "../swig/magickcore.i"
   %include "../swig/magickwand.i"
