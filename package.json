@@ -122,7 +122,7 @@
       "@mmomtchev/hadron/hadron.json"
     ],
     "devDependencies": {
-      "@xpack-dev-tools/cmake": "3.27.9-1.2"
+      "@xpack-dev-tools/cmake": "3.31.9-1.1"
     },
     "properties": {
       "module_name": "magickwand",
