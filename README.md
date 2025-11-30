@@ -162,11 +162,11 @@ Otherwise, you will build ImageMagick against your own system-installed librarie
 Options can also be specified in `.npmrc` so that the default `npm install` rebuilds from source:
 
 ```ini
-magickwand.js:build_from_source = true
-magickwand.js:build_wasm_from_source = false
-magickwand.js:disable_fonts = true
-magickwand.js:disable_png = true
-magickwand.js:disable_jpeg = false
+magickwand_js_build_from_source = true
+magickwand_js_build_wasm_from_source = false
+magickwand_js_disable_fonts = true
+magickwand_js_disable_png = true
+magickwand_js_disable_jpeg = false
 ```
 
 ### Experimental `xPack` fully self-contained build
