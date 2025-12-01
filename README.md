@@ -317,6 +317,24 @@ If the WASM binary is rebuilt with no additional libraries, its size will be bro
 
 Also note that currently the unit testing suite expects all supported delegates to be included.
 
+## Using custom prebuilt binaries
+
+`prebuild-install` supports overriding the location of the prebuilt binaries. This allows users to build locally the module once for each supported platform, and then to distribute this binary automatically when installing the module in production.
+
+The module must be built locally using either `npm install` options or by directly invoking `xpm run prepare --config <native|wasm>` and `xpm run build --config <native|wasm>`. The resulting `./lib/binding/{os}-{arch}` must be uploaded as a `.tar.gz` to a custom URL and when installing the package the user will have to specify in his `.npmrc`:
+
+```ini
+magickwand_js_binary_host = https://overriden-host.com/overriden-path
+```
+
+The file will have to be called `v2.1.0/magickwand.js-v2.1.0-napi-v8-{os}-{arch}.tar.gz`.
+
+Additionally, it is also possible to specify a local path:
+
+```ini
+magickwand_js_local_prebuilds = /path/custom-binary/
+```
+
 ## Using this project as a tutorial for creating C++ bindings for Node.js and emscripten/WASM with SWIG Node-API
 
 ImageMagick is the perfect candidate for an automatically generated with SWIG Node.js addon:
