@@ -25,10 +25,8 @@ using namespace Magick;
 %include "typemaps.i"
 %include "exception.i"
 
-%apply unsigned { size_t };
-%apply int { ssize_t };
-// On compilers without ssize_t (MSVC) MagickCore defines its own type
-%apply int { MagickCore::ssize_t };
+%apply unsigned long long { size_t };
+%apply long long { ssize_t };
 
 // ImageMagick throws instances of Magick::Exception
 // Always catch them and rethrow the message them with SWIG_Raise
