@@ -22,7 +22,7 @@ jobs:
       run: npx xpm run generate
 
     - name: Upload SWIG-generated wrappers
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: swig
         path: swig/*
