@@ -12,6 +12,8 @@ updates:
       emnapi:
         patterns:
         - "*emnapi*"
+    cooldown:
+      default-days: 15
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
