@@ -96,7 +96,7 @@ jobs:
         node-version: 20
 
     - name: Download the artifact for ${{ matrix.platform }}
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v7
       with:
         name: ${{ matrix.platform }}
         path: lib/binding
@@ -134,7 +134,7 @@ jobs:
         fetch-depth: 0
         submodules: true
     - name: Download the SWIG-generated wrappers
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v7
       with:
         name: swig
         path: swig

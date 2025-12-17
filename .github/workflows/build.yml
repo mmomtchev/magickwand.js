@@ -98,7 +98,7 @@ jobs:
           npx xpm install
       - name: Download the SWIG-generated wrappers
         if: ${{ !inputs.regen_swig }}
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: swig
           path: swig
