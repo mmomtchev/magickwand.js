@@ -215,7 +215,7 @@ jobs:
           echo path=`npx xpm run -q conan -- config home` >> $GITHUB_OUTPUT
       - name: Cache conan artifacts
         id: conan-artifacts
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ steps.conan_home.outputs.path }}
           key: linux-debug-asan-conan
