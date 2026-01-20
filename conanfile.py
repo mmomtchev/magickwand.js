@@ -148,7 +148,7 @@ class ImageMagickDelegates(ConanFile):
         self.requires('libtiff/[~4]')
 
       if self.options.raw:
-        self.requires('libraw/[~0]')
+        self.requires('libraw/0.21.4')
 
       if self.options.cairo:
         if self.settings.arch != 'wasm':
