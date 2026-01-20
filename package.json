@@ -163,7 +163,7 @@
       },
       "native": {
         "properties": {
-          "argsConanInstall": "-pr:a=conan.profile {% ifNpmOption standalone_build %}-pr:a=conan-xpack.profile{% endifNpmOption %}"
+          "argsConanInstall": "-pr:a=conan.profile {% ifNpmOption standalone_build %}-pr:a=profiles/clang-{{ os.platform }}.profile{% endifNpmOption %}"
         }
       },
       "wasm-debug": {
