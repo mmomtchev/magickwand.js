@@ -116,8 +116,8 @@ jobs:
         uses: actions/cache@v5
         with:
           path: ${{ steps.conan_home.outputs.path }}
-          key: ${{ inputs.conan_cache_key }}-${{ hashFiles('conan.lock') }}
-          restore-keys: ${{ inputs.conan_cache_key }}
+          key: ${{ inputs.conan_cache_key }}-${{ runner.arch }}-${{ hashFiles('conan.lock') }}
+          restore-keys: ${{ inputs.conan_cache_key }}-${{ runner.arch }}
         if: inputs.conan_cache_key
       - name: Install fonts on Ubuntu
         run: |
