@@ -161,8 +161,8 @@
           ]
         }
       },
-      "native-xpack": {
-        "argsConanInstall": "-pr:a=conan.profile -pr:a=conan-xpack.profile"
+      "native": {
+        "argsConanInstall": "-pr:a=conan.profile {% ifNpmOption standalone_build %}-pr:a=conan-xpack.profile{% endifNpmOption %}"
       },
       "wasm-debug": {
         "properties": {
