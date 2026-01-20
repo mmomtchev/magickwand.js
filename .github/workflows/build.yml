@@ -120,7 +120,9 @@ jobs:
           restore-keys: ${{ inputs.conan_cache_key }}
         if: inputs.conan_cache_key
       - name: Install fonts on Ubuntu
-        run: sudo apt-get install -y fonts-ubuntu || true
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-ubuntu
         if: startsWith(inputs.platform, 'ubuntu') && !inputs.container
       - name: Install libpng-dev and libjpeg-dev on Ubuntu 24.04
         run: sudo apt-get install -y libpng-dev libjpeg-dev
