@@ -3,6 +3,17 @@
 ## [2.2.0]
 
  - Update ImageMagick to 7.1.2-9
+ - Update all delegate libraries for the prebuilt binaries from `conan`
+    - `openjpeg` 2.5.4
+    - `openexr` 3.4.4
+    - `libxml2` 2.15.0
+    - `libwebp` 1.6.0
+    - `libtiff` 4.7.1
+    - `libpng` 1.6.54
+    - `libjpeg-turbo` 3.1.3
+    - `libde265` 1.0.15
+    - `fontconfig` 2.17.1
+    - `freetype` 2.14.1
  - Major rework of the build system, now based on a new standard with streamlined `npm` options handling and the possibility of automatically rebuilding when installing from source with build options from `.npmrc`
  - Expose `MagickCore.Image` as a JS type and greatly improve the integration of `MagickCore` rendering many new image processing methods usable
  - Regenerating the SWIG wrappers on the end user host is now possible thanks to the universal SWIG JSE xPack, installed automatically when launching `npx xpm run generate`
