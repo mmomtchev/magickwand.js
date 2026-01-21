@@ -2,7 +2,7 @@
 
 ## [2.2.0]
 
- - Update ImageMagick to 7.1.2-9
+ - Update ImageMagick to 7.1.2-13
  - Update all delegate libraries for the prebuilt binaries from `conan`
     - `openjpeg` 2.5.4
     - `openexr` 3.4.4
