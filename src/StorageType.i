@@ -22,8 +22,9 @@ inline Magick::StorageType GetMagickStorageType(Napi::Env env, const Napi::Typed
     case napi_bigint64_array:
     case napi_biguint64_array:
       return MagickCore::LongLongPixel;
+    default:
+      SWIG_Error(SWIG_ERROR, "Invalid type");
   }
-  SWIG_Error(SWIG_ERROR, "Invalid type");
   // Avoid a warning
   return MagickCore::CharPixel;
 }
