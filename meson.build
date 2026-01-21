@@ -67,6 +67,11 @@ if meson.get_compiler('cpp').get_id() == 'msvc'
     ], language: 'cpp')
 endif
 
+if meson.get_compiler('cpp').get_id() != 'msvc'
+  # ImageMagick exports its own dependencies but we do not need them
+  add_project_arguments([ '-Wno-unused-command-line-argument' ], language: ['c', 'cpp'])
+endif
+
 dependencies = []
 
 if not external
