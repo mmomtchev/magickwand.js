@@ -116,11 +116,13 @@ jobs:
         uses: actions/cache@v5
         with:
           path: ${{ steps.conan_home.outputs.path }}
-          key: ${{ inputs.conan_cache_key }}-${{ hashFiles('conan.lock') }}
-          restore-keys: ${{ inputs.conan_cache_key }}
+          key: ${{ inputs.conan_cache_key }}-${{ runner.arch }}-${{ hashFiles('conan.lock') }}
+          restore-keys: ${{ inputs.conan_cache_key }}-${{ runner.arch }}
         if: inputs.conan_cache_key
       - name: Install fonts on Ubuntu
-        run: sudo apt-get install -y fonts-ubuntu || true
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-ubuntu
         if: startsWith(inputs.platform, 'ubuntu') && !inputs.container
       - name: Install libpng-dev and libjpeg-dev on Ubuntu 24.04
         run: sudo apt-get install -y libpng-dev libjpeg-dev

@@ -86,7 +86,7 @@ class ImageMagickDelegates(ConanFile):
           [self.requires(x, force=True) for x in ('libffi/[~3]', 'glib/[~2]')]
         [self.requires(x, force=True) for x in ('freetype/[~2]', 'fribidi/[~1]', 'harfbuzz/[~10]')]
         if self.settings.os != 'Windows':
-          self.requires('fontconfig/[~2]')
+          self.requires('fontconfig/[~2]', force=True)
 
       if self.options.lzma:
         self.requires('xz_utils/5.4.5')
@@ -148,7 +148,7 @@ class ImageMagickDelegates(ConanFile):
         self.requires('libtiff/[~4]')
 
       if self.options.raw:
-        self.requires('libraw/[~0]')
+        self.requires('libraw/0.21.4')
 
       if self.options.cairo:
         if self.settings.arch != 'wasm':
