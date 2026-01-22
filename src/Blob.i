@@ -11,10 +11,14 @@
 // * We ignore the original function
 // * We create a new one that uses special out arguments
 // * The arguments are named so that we can enable the argout typemap in arraybuffer.i
-%ignore Magick::Blob::data() const;
+%ignore Magick::Blob::data(void) const;
 %extend Magick::Blob {
   void data(void **arraybuffer_data, size_t *arraybuffer_len) const {
     *arraybuffer_data = const_cast<void *>(self->data());
     *arraybuffer_len = self->length();
   }
 }
+
+// Workaround for
+// https://github.com/mmomtchev/swig/issues/181
+%typemap(tsout, merge="overwrite")  (void **arraybuffer_data, size_t *arraybuffer_len) "ArrayBuffer";

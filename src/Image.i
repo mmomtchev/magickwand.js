@@ -70,7 +70,7 @@ emnapi_sync_memory(env, false, &ab_value, 0, NAPI_AUTO_LENGTH);
   // This applies only to the exception path
   delete $1;
 %}
-%typemap(tsout) Magick::TypeMetric *metrics "Magick.TypeMetric";
+%typemap(tsout, merge="overwrite") Magick::TypeMetric *metrics "Magick.TypeMetric";
 
 %include <arrays_javascript.i>
 // Arguments in a C array
