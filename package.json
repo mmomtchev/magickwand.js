@@ -107,7 +107,7 @@
   },
   "dependencies": {
     "@emnapi/runtime": "=1.8.1",
-    "@mmomtchev/hadron": "github:mmomtchev/hadron-js",
+    "@mmomtchev/hadron": "^1.1.0",
     "@mmomtchev/prebuild-install": "^1.0.2",
     "@mmomtchev/xpm": "^0.21.1",
     "emnapi": "=1.8.1",
