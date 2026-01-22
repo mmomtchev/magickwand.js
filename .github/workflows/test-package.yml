@@ -102,7 +102,7 @@ jobs:
       - name: Setup emscripten
         uses: mymindstorm/setup-emsdk@v14
         with:
-          version: 4.0.8
+          version: 4.0.23
         if: runner.os == 'Linux'
       - name: Select XCode SDK on macOS
         run: echo SDKROOT=$(xcrun --show-sdk-path) >> $GITHUB_ENV
