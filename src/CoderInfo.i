@@ -10,7 +10,7 @@
   $1 = new std::vector<Magick::CoderInfo>;
 }
 
-%typemap(argout)          std::vector<Magick::CoderInfo> *container_ {
+%typemap(argout) std::vector<Magick::CoderInfo> *container_ {
   $result = SWIG_NAPI_NewPointerObj(env, $1, $1_descriptor, SWIG_POINTER_OWN);
 }
-%typemap(tsout)           std::vector<Magick::CoderInfo> *container_ "std.coderInfoArray"
+%typemap(tsout, merge="overwrite") std::vector<Magick::CoderInfo> *container_ "std.coderInfoArray"

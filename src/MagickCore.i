@@ -77,7 +77,7 @@
   $1 = const_cast<char*>("");
   $2 = &_global_number_policies;
 }
-%typemap(tsout) (const char *, size_t *) "string[]";
+%typemap(tsout, merge="overwrite") (const char *, size_t *) "string[]";
 %typemap(out) char **GetPolicyList {
   Napi::Array array = Napi::Array::New(env, _global_number_policies);
   if ($1) {
