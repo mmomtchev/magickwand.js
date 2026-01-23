@@ -23,7 +23,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v6
     - name: Install the dependencies
-      run: npm install --skip-magickwand_js-native --skip-magickwand_js-wasm
+      run: npm install ---magickwand_js-skip-native ---magickwand_js-skip-wasm
     - name: Lint
       run: npm run lint
       
