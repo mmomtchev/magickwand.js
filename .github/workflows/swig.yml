@@ -16,7 +16,7 @@ jobs:
         submodules: true
 
     - name: Install the dependencies
-      run: npm install
+      run: npm install ---magickwand_js-skip-native ---magickwand_js-skip-wasm
 
     - name: Run SWIG to generated the wrappers
       run: npx xpm run generate

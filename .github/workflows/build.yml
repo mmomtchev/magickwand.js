@@ -143,8 +143,8 @@ jobs:
         shell: bash
         run: |
           npm install --verbose --foreground-scripts \
-            ${{ inputs.native && '--build-from-source' || '--skip-magickwand-native' }}    \
-            ${{ inputs.wasm   && '--build-wasm-from-source' || '--skip-magickwand-wasm' }} \
+            ${{ inputs.native && '--build-from-source' || '---magickwand_js-skip-native' }}    \
+            ${{ inputs.wasm   && '--build-wasm-from-source' || '---magickwand_js-skip-wasm' }} \
             ${{ inputs.dependencies == 'conan' && '--enable-conan' || '--disable-conan' }} \
             ${{ inputs.extra_npm_opts }}
 
