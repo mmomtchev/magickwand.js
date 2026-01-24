@@ -20,3 +20,6 @@ leak:node::contextify::Contextify
 
 # Known leaks in V8
 # (none atm)
+
+# False positive due to OpenMP having an independent allocator
+leak:___kmp_allocate
