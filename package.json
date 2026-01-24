@@ -33,7 +33,7 @@
     "magick": "scripts/cli.cjs"
   },
   "scripts": {
-    "preinstall": "npx xpm run npm-preinstall",
+    "preinstall": "npx @mmomtchev/xpm run npm-preinstall",
     "install": "npx xpm run npm-install",
     "lint": "npx eslint lib/*js native/*js test/*.ts",
     "test": "npx mocha --reporter=tap test/*.test.ts",
@@ -139,11 +139,11 @@
     },
     "actions": {
       "npm-preinstall": [
-        "{% ifNpmOption regenerate %}npx xpm run generate{% endifNpmOption %}"
+        "{% ifNpmOption regenerate %}npx @mmomtchev/xpm run generate{% endifNpmOption %}"
       ],
       "generate": [
-        "npx xpm install --config generate",
-        "npx xpm run generate --config generate"
+        "npx @mmomtchev/xpm install --config generate",
+        "npx @mmomtchev/xpm run generate --config generate"
       ]
     },
     "buildConfigurations": {
