@@ -1,39 +1,22 @@
 # All leaks listed here are non-repeat offenders
 # (ie they happen only a fixed number of times per process execution)
 
+# List maintained at
+# https://gist.github.com/mmomtchev/07fad9af00bc6faa9c404e614de908da
+# git clone https://gist.github.com/07fad9af00bc6faa9c404e614de908da.git
+
+# Use with
+# export LSAN_OPTIONS=suppressions=$(pwd)/napi-leaks-suppression.txt
+
+# With Node.js 24+ there has been a dramatic improvement in V8
+# compared to previous versions, leaving only a few cases
+
 # Known leaks in Node-API
 leak:napi_module_register
 leak:napi_register_module_v1
 
-# Known leaks in magickwand.js (doesn't really support module unloading)
-leak:heif_init
-
-# Known leaks in SWIG Node-API (doesn't really support module unloading)
-leak:GetMembers
-
-# Known leaks in fontconfig
-leak:FcStrBufString
-
-# Known leaks in the Node.js runtime
-leak:node::builtins::BuiltinLoader::LoadBuiltinSource
-leak:ProcessWrap::OnExit
-leak:StringBytes::Encode
-leak:Realm::ExecuteBootstrapper
+# Known leaks in the Node.js 24 runtime
+leak:node::contextify::Contextify
 
 # Known leaks in V8
-leak:Heap_GenerationalBarrierSlow
-leak:Scavenger::ScavengePage
-leak:Scavenger::Process
-leak:CompactionSpace::Expand
-leak:Heap::IterateRoots
-leak:Heap::PerformGarbageCollection
-leak:Heap::InsertIntoRememberedSetFromCode
-leak:Heap::SetUpSpaces
-leak:Heap::PerformGarbageCollection
-leak:PagedSpace::RefillLabMain
-leak:OldLargeObjectSpace::AllocateRaw
-leak:BaselineBatchCompiler::EnqueueFunction
-leak:Compiler::FinalizeTurbofanCompilationJob
-
-# False alarm due to OpenMP having an independent allocator
-leak:___kmp_allocate
+# (none atm)
