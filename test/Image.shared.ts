@@ -1,5 +1,5 @@
 // These tests are shared between Node.js and the browser
-import { Magick, MagickCore } from 'magickwand.js';
+import type { Magick, MagickCore } from 'magickwand.js';
 
 export default function (
   path: string,
@@ -314,50 +314,50 @@ export default function (
 
     describe('MagickCore Image methods', () => {
       it('convert between Magick.Image and MagickCore.Image', () => {
-        const im = new Magick.Image(path);
-        const imCore = new MagickCore.Image(im);
-        assert.instanceOf(imCore, MagickCore.Image);
-        const im2 = new Magick.Image(imCore);
-        assert.instanceOf(im2, Magick.Image);
+        const im = new Image(path);
+        const imCore = new bindingsMagickCore.Image(im);
+        assert.instanceOf(imCore, bindingsMagickCore.Image);
+        const im2 = new Image(imCore);
+        assert.instanceOf(im2, Image);
         assert.strictEqual(im2.geometry.toString(), im.geometry.toString());
       });
 
       it('WhiteBalanceImage()', () => {
-        const im = new Magick.Image(path);
-        const imCore = new MagickCore.Image(im);
-        const r = MagickCore.WhiteBalanceImage(imCore);
+        const im = new Image(path);
+        const imCore = new bindingsMagickCore.Image(im);
+        const r = bindingsMagickCore.WhiteBalanceImage(imCore);
         assert.isBoolean(r);
         assert.isTrue(r);
       });
 
       it('Magick.Image.whiteBalance()', () => {
-        const im = new Magick.Image(path);
+        const im = new Image(path);
         im.whiteBalance();
       });
 
       it('GrayscaleImage()', () => {
-        const im = new Magick.Image(path);
-        const imCore = new MagickCore.Image(im);
-        const r = MagickCore.GrayscaleImage(imCore, MagickCore.LightnessPixelIntensityMethod);
+        const im = new Image(path);
+        const imCore = new bindingsMagickCore.Image(im);
+        const r = bindingsMagickCore.GrayscaleImage(imCore, bindingsMagickCore.LightnessPixelIntensityMethod);
         assert.isBoolean(r);
         assert.isTrue(r);
       });
 
       it('EnhanceImage()', () => {
-        const im = new Magick.Image(path);
-        const imCore = new MagickCore.Image(im);
-        const imR = MagickCore.EnhanceImage(imCore);
-        assert.instanceOf(imR, MagickCore.Image);
+        const im = new Image(path);
+        const imCore = new bindingsMagickCore.Image(im);
+        const imR = bindingsMagickCore.EnhanceImage(imCore);
+        assert.instanceOf(imR, bindingsMagickCore.Image);
         const im2 = new Image(imR);
         assert.strictEqual(im2.geometry.toString(), im.geometry.toString());
       });
 
       it('Throwing an exception', () => {
-        const im = new Magick.Image(path);
-        const imCore = new MagickCore.Image(im);
+        const im = new Image(path);
+        const imCore = new bindingsMagickCore.Image(im);
 
         assert.throws(() => {
-          MagickCore.SetImageExtent(imCore, 0, 0);
+          bindingsMagickCore.SetImageExtent(imCore, 0, 0);
         }, /negative or zero image size/);
       });
     });
