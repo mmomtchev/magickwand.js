@@ -32,11 +32,16 @@
   "bin": {
     "magick": "scripts/cli.cjs"
   },
+  "workspaces": [
+    ".",
+    "test"
+  ],
   "scripts": {
     "preinstall": "npx @mmomtchev/xpm run npm-preinstall",
     "install": "npx xpm run npm-install",
     "lint": "npx eslint lib/*js native/*js test/*.ts",
-    "test": "npx mocha --reporter=tap test/*.test.ts",
+    "test": "npm test -w test",
+    "test:integration": "npm run test:integration -w test",
     "preversion": "npm run lint && npm run test",
     "postversion": "git push && git push --tags && node ./scripts/publish-packages.mjs",
     "postpublish": "gh workflow run test-package.yml -F package=magickwand.js@$npm_package_version",
@@ -81,25 +86,14 @@
   "homepage": "https://github.com/mmomtchev/magickwand.js#readme",
   "devDependencies": {
     "@octokit/core": "^7.0.2",
-    "@types/chai": "^4.3.6",
-    "@types/chai-as-promised": "^7.1.6",
-    "@types/mocha": "^10.0.1",
     "@types/node": "^25.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
-    "chai": "^4.3.7",
-    "chai-as-promised": "^7.1.1",
     "copy-webpack-plugin": "^13.0.0",
     "eslint": "^9.8.0",
     "eslint-plugin-mocha": "^11.0.0",
     "gh-pages": "^6.1.1",
-    "karma": "^6.4.2",
-    "karma-chrome-launcher": "^3.2.0",
-    "karma-mocha": "^2.0.1",
-    "mocha": "github:mmomtchev/mocha#mmom",
     "ts-loader": "^9.5.2",
-    "ts-node": "^10.9.2",
-    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.2.2",
     "webpack": "^5.88.2",
     "webpack-cli": "^6.0.1",

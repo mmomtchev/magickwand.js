@@ -15,7 +15,7 @@ it('Security Policy', () => {
   assert.isTrue(MagickCore.IsRightsAuthorized(MagickCore.SystemPolicyDomain, MagickCore.WritePolicyRights, 'file'));
 
   const websafe = fs.readFileSync(path.resolve(__dirname,
-    '..', 'deps', 'ImageMagick', 'config', 'policy-websafe.xml'), 'utf8');
+    'magickwand.js/deps/ImageMagick/config/policy-websafe.xml'), 'utf8');
   assert.isTrue(Magick.SetSecurityPolicy(websafe));
 
   assert.throws(() => {
