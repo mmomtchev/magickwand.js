@@ -27,7 +27,11 @@
     },
     "./wasm/wasm": {
       "default": "./lib/binding/emscripten-wasm32/magickwand.wasm"
-    }
+    },
+    "./policy-limited.xml": "./deps/ImageMagick/config/policy-limited.xml",
+    "./policy-open.xml": "./deps/ImageMagick/config/policy-open.xml",
+    "./policy-secure.xml": "./deps/ImageMagick/config/policy-secure.xml",
+    "./policy-websafe.xml": "./deps/ImageMagick/config/policy-websafe.xml"
   },
   "bin": {
     "magick": "scripts/cli.cjs"

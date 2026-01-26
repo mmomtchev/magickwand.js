@@ -1,4 +1,3 @@
-import * as path from 'path';
 import * as fs from 'fs';
 import * as chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
@@ -14,8 +13,7 @@ it('Security Policy', () => {
   assert.isNull(MagickCore.GetPolicyValue('memory'));
   assert.isTrue(MagickCore.IsRightsAuthorized(MagickCore.SystemPolicyDomain, MagickCore.WritePolicyRights, 'file'));
 
-  const websafe = fs.readFileSync(path.resolve(__dirname,
-    'magickwand.js/deps/ImageMagick/config/policy-websafe.xml'), 'utf8');
+  const websafe = fs.readFileSync(require.resolve('magickwand.js/policy-websafe.xml'), 'utf8');
   assert.isTrue(Magick.SetSecurityPolicy(websafe));
 
   assert.throws(() => {
