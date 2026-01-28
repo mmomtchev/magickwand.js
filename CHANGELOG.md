@@ -19,6 +19,7 @@
  - Regenerating the SWIG wrappers on the end user host is now possible thanks to the universal SWIG JSE xPack, installed automatically when launching `npx xpm run generate`
  - Regenerating the SWIG wrappers is now tested to work on each supported platform - Linux, Windows and macOS
  - `magickwand.js` now requires Node API version 8 (Node.js 14.17+ or Node.js 16+)
+ - The default security policies of ImageMagick are now exported from the package and can be loaded by using `require.resolve`
  - Drop Node.js 18 as testing platform (the package should still work) and add Node.js 24 & 25
  - Drop macOS <13 support completely, keep macOS 13 as _may work_, with macOS 14/15 tested as part of each release
 
