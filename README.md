@@ -398,10 +398,9 @@ However DoS attacks are much more common as it is relatively easy to construct a
 
 Example for loading `websafe` (the most restrictive security policy):
 ```js
-const pathNodeMagick = require.resolve('magickwand.js');
-const websafe = fs.readFileSync(path.resolve(pathNodeMagick,
-  'deps', 'ImageMagick', 'config', 'policy-websafe.xml'), 'utf8');
-Magick.SetSecurityPolicy(websafe);
+const websafePath = require.resolve('magickwand.js/policy-websafe.xml');
+const websafePolicy = fs.readFileSync(websafePath, 'utf8');
+Magick.SetSecurityPolicy(websafePolicy);
 
 assert(MagickCore.IsRightsAuthorized(
   MagickCore.SystemPolicyDomain,
@@ -409,6 +408,8 @@ assert(MagickCore.IsRightsAuthorized(
 ```
 
 The current security policy can be dumped to `stdout` by calling `MagickCore.ListPolicyInfo()`. There is also an online tool for analyzing security policies at https://imagemagick-secevaluator.doyensec.com/.
+
+The exported policies are `policy-limited.xml`, `policy-open.xml`, `policy-secure.xml` and `policy-websafe.xml`.
 
 **In all other cases** security should not be of any concern.
 

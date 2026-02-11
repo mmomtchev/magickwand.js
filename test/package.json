@@ -1,0 +1,34 @@
+{
+  "name": "macikwand.js-test",
+  "version": "1.0.0",
+  "description": "Unit tests for magickwand.js",
+  "main": "karma.conf.js",
+  "scripts": {
+    "test": "npx mocha --reporter=tap *.test.ts",
+    "test:integration": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmomtchev/magickwand.js.git"
+  },
+  "keywords": [
+    "magickwand.js"
+  ],
+  "author": "Momtchil Momtchev <momtchil@momtchev.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.3.6",
+    "@types/chai-as-promised": "^7.1.6",
+    "@types/mocha": "^10.0.1",
+    "chai": "^4.3.7",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^9.8.0",
+    "eslint-plugin-mocha": "^11.0.0",
+    "karma": "^6.4.2",
+    "karma-chrome-launcher": "^3.2.0",
+    "karma-mocha": "^2.0.1",
+    "mocha": "github:mmomtchev/mocha#mmom",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.2.2"
+  }
+}
