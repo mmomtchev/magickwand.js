@@ -234,7 +234,8 @@ jobs:
       - name: Get ASAN library name
         id: asan-lib
         run: echo LD_PRELOAD=$(gcc -print-file-name=libasan.so) >> $GITHUB_OUTPUT
-      - run: node node_modules/mocha/bin/mocha.js -i -g Security --repeats 100 test/node.test.ts
+      - run: node ../node_modules/mocha/bin/mocha.js  -i -g Security --repeats 100 node.test.ts
+        working-directory: ${{ github.workspace }}/test
         env:
           LSAN_OPTIONS: suppressions=${{ github.workspace }}/test/napi-leaks-suppression.txt
           LD_PRELOAD: ${{ steps.asan-lib.outputs.LD_PRELOAD }}

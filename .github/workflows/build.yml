@@ -170,7 +170,7 @@ jobs:
         run: otool -L ${{ steps.addon.outputs.addon }}
         if: runner.os == 'macOS' && inputs.native
 
-      - run: npx mocha ${{ inputs.native && 'test/node.test.ts' || '' }} test/integration.test.ts
+      - run: npx -w test mocha ${{ inputs.native && 'node.test.ts' || '' }} integration.test.ts
         env:
           MOCHA_INTEGRATION: ${{ inputs.integration }}
           MOCHA_MAGICK_INSTALL: ${{ inputs.install_cmd }}
