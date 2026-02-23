@@ -1,8 +1,7 @@
 {
-  "name": "macikwand.js-test",
+  "name": "magickwand.js-test",
   "version": "1.0.0",
   "description": "Unit tests for magickwand.js",
-  "main": "karma.conf.js",
   "scripts": {
     "test": "npx mocha --reporter=tap *.test.ts",
     "test:integration": ""
