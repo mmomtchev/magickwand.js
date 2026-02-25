@@ -41,6 +41,11 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Checkout the unit tests
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: 'test/*'
+          sparse-checkout-cone-mode: false
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
@@ -49,15 +54,15 @@ jobs:
         with:
           tag: ${{ github.ref_name }}
           fileName: ${{ inputs.package }}
+          out-file-path: ./test
         if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
+        working-directory: ${{ github.workspace }}/test
         run: npm install ${{ inputs.package }}
         shell: bash
       - name: Set up the unit tests
-        shell: bash
-        run: |
-          mv node_modules/magickwand.js/test .
-          cd test && npm install
+        working-directory: ${{ github.workspace }}/test
+        run: npm install
       - name: Run the unit tests headless
         run: npx mocha *.test.ts
         working-directory: ${{ github.workspace }}/test
@@ -95,11 +100,14 @@ jobs:
         with:
           version: 4.0.23
         if: runner.os == 'Linux'
+      - name: Checkout the unit tests
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: 'test/*'
+          sparse-checkout-cone-mode: false
       - name: Select XCode SDK on macOS
         run: echo SDKROOT=$(xcrun --show-sdk-path) >> $GITHUB_ENV
         if: runner.os == 'macOS'
-      - name: Create package.json
-        run: npm init --yes
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
@@ -108,18 +116,18 @@ jobs:
         with:
           tag: ${{ github.ref_name }}
           fileName: ${{ inputs.package }}
+          out-file-path: ./test
         if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
+        working-directory: ${{ github.workspace }}/test
         run: |
           npm install --verbose --foreground-scripts  \
             ${{ inputs.package }} --build-from-source \
             ${{ runner.os == 'Linux' && '--build-wasm-from-source' || '' }}
         shell: bash
       - name: Set up the unit tests
-        shell: bash
-        run: |
-          mv node_modules/magickwand.js/test .
-          cd test && npm install
+        working-directory: ${{ github.workspace }}/test
+        run: npm install
       - name: Run the unit tests headless
         run: npx mocha *.test.ts
         working-directory: ${{ github.workspace }}/test
@@ -145,8 +153,6 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Create package.json
-        run: npm init --yes
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
@@ -155,8 +161,10 @@ jobs:
         with:
           tag: ${{ github.ref_name }}
           fileName: ${{ inputs.package }}
+          out-file-path: ./test
         if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
+        working-directory: ${{ github.workspace }}/test
         run: |
           npm install --verbose --foreground-scripts                                     \
             ${{ inputs.package }} --build-from-source --disable-shared                   \
@@ -168,6 +176,7 @@ jobs:
             --disable-openmp --disable-display --disable-jbig --disable-cairo
         shell: bash
       - name: Test loading the package
+        working-directory: ${{ github.workspace }}/test
         run: node -p 'require("magickwand.js/native").MagickCore.GetMagickDelegates()'
 
 
@@ -190,6 +199,11 @@ jobs:
           repository: 'imagemagick/ImageMagick'
           path: 'ImageMagick'
           ref: ${{ github.event.inputs.im_version }}
+      - name: Checkout the unit tests
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: 'test/*'
+          sparse-checkout-cone-mode: false
       - name: Build and install ImageMagick-7
         run: |
           cd ImageMagick
@@ -204,8 +218,10 @@ jobs:
         with:
           tag: ${{ github.ref_name }}
           fileName: ${{ inputs.package }}
+          out-file-path: ./test
         if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
+        working-directory: ${{ github.workspace }}/test
         run: |
           npm install --verbose --foreground-scripts=true      \
             ${{ inputs.package }}                              \
@@ -218,10 +234,8 @@ jobs:
           CXXFLAGS: -I/usr/include/ImageMagick-7 
         shell: bash
       - name: Set up the unit tests
-        shell: bash
-        run: |
-          mv node_modules/magickwand.js/test .
-          cd test && npm install
+        working-directory: ${{ github.workspace }}/test
+        run: npm install
       - name: Run the unit tests headless
         run: npx mocha *.test.ts
         working-directory: ${{ github.workspace }}/test
