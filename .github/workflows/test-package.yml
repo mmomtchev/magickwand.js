@@ -41,6 +41,11 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Checkout the unit tests
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: 'test/*'
+          sparse-checkout-cone-mode: false
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
@@ -57,10 +62,7 @@ jobs:
         shell: bash
       - name: Set up the unit tests
         working-directory: ${{ github.workspace }}/test
-        shell: bash
-        run: |
-          mv node_modules/magickwand.js/test/* .
-          npm install
+        run: npm install
       - name: Run the unit tests headless
         run: npx mocha *.test.ts
         working-directory: ${{ github.workspace }}/test
@@ -98,6 +100,11 @@ jobs:
         with:
           version: 4.0.23
         if: runner.os == 'Linux'
+      - name: Checkout the unit tests
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: 'test/*'
+          sparse-checkout-cone-mode: false
       - name: Select XCode SDK on macOS
         run: echo SDKROOT=$(xcrun --show-sdk-path) >> $GITHUB_ENV
         if: runner.os == 'macOS'
@@ -120,10 +127,7 @@ jobs:
         shell: bash
       - name: Set up the unit tests
         working-directory: ${{ github.workspace }}/test
-        shell: bash
-        run: |
-          mv node_modules/magickwand.js/test/* .
-          npm install
+        run: npm install
       - name: Run the unit tests headless
         run: npx mocha *.test.ts
         working-directory: ${{ github.workspace }}/test
@@ -195,6 +199,11 @@ jobs:
           repository: 'imagemagick/ImageMagick'
           path: 'ImageMagick'
           ref: ${{ github.event.inputs.im_version }}
+      - name: Checkout the unit tests
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: 'test/*'
+          sparse-checkout-cone-mode: false
       - name: Build and install ImageMagick-7
         run: |
           cd ImageMagick
@@ -226,10 +235,7 @@ jobs:
         shell: bash
       - name: Set up the unit tests
         working-directory: ${{ github.workspace }}/test
-        shell: bash
-        run: |
-          mv node_modules/magickwand.js/test/* .
-          npm install
+        run: npm install
       - name: Run the unit tests headless
         run: npx mocha *.test.ts
         working-directory: ${{ github.workspace }}/test
