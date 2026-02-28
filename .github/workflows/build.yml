@@ -89,6 +89,12 @@ jobs:
         with:
           fetch-depth: 0
           submodules: true
+      - name: Download the SWIG-generated wrappers
+        if: ${{ !inputs.regen_swig }}
+        uses: actions/download-artifact@v7
+        with:
+          name: swig
+          path: swig
       - name: Link the package globally
         run: npm link --ignore-scripts
         if: inputs.link
@@ -96,12 +102,6 @@ jobs:
         run: |
           npm install @mmomtchev/xpm
           npx xpm install
-      - name: Download the SWIG-generated wrappers
-        if: ${{ !inputs.regen_swig }}
-        uses: actions/download-artifact@v7
-        with:
-          name: swig
-          path: swig
       - name: Regenerate the SWIG wrappers on the current platform
         if: inputs.regen_swig
         run: npx xpm run generate
