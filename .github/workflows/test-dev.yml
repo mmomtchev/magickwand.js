@@ -205,7 +205,7 @@ jobs:
           path: swig
       - name: Install the xpacks
         run: |
-          npm install xpm
+          npm install @mmomtchev/xpm --skip-native --skip-wasm
           npx xpm install
       - name: Get conan home
         shell: bash
