@@ -68,7 +68,7 @@ jobs:
         working-directory: ${{ github.workspace }}/test
         env:
           MOCHA_INTEGRATION: node,browser
-          MOCHA_MAGICK_INSTALL: npm install ${{ inputs.download && format('{0}/{1}', github.workspace, inputs.package) || inputs.package }}
+          MOCHA_MAGICK_INSTALL: npm install ${{ inputs.download && format('{0}/test/{1}', github.workspace, inputs.package) || inputs.package }}
 
 
   test_npm_rebuild:
@@ -133,7 +133,7 @@ jobs:
         working-directory: ${{ github.workspace }}/test
         env:
           MOCHA_INTEGRATION: node,browser
-          MOCHA_MAGICK_INSTALL: npm install ${{ inputs.download && format('{0}/{1}', github.workspace, inputs.package) || inputs.package }}
+          MOCHA_MAGICK_INSTALL: npm install ${{ inputs.download && format('{0}/test/{1}', github.workspace, inputs.package) || inputs.package }}
           MOCHA_LIGHT: 1
           MOCHA_EXTRALIGHT: 1
 
@@ -241,6 +241,6 @@ jobs:
         working-directory: ${{ github.workspace }}/test
         env:
           MOCHA_INTEGRATION: node,browser
-          MOCHA_MAGICK_INSTALL: npm install ${{ inputs.download && format('{0}/{1}', github.workspace, inputs.package) || inputs.package }}
+          MOCHA_MAGICK_INSTALL: npm install ${{ inputs.download && format('{0}/test/{1}', github.workspace, inputs.package) || inputs.package }}
           MOCHA_LIGHT: 1
           MOCHA_EXTRALIGHT: 1
