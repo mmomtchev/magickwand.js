@@ -28,6 +28,9 @@
     "karma-mocha": "^2.0.1",
     "mocha": "github:mmomtchev/mocha#mmom",
     "ts-node": "^10.9.2",
-    "typescript": "^5.2.2"
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.2.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^6.0.1"
   }
 }
