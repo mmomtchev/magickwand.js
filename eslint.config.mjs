@@ -1,3 +1,4 @@
+import { defineConfig, globalIgnores } from 'eslint/config'; 
 import mocha from 'eslint-plugin-mocha';
 import globals from 'globals';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
@@ -15,8 +16,16 @@ const compat = new FlatCompat({
     allConfig: js.configs.all
 });
 
-export default [
-    ...compat.extends('eslint:recommended'), {
+export default defineConfig([
+    globalIgnores([
+        '**/build',
+        '**/dist',
+        'deps/ImageMagick',
+        'lib/binding',
+        'bundle.js'
+    ]),
+    ...compat.extends('eslint:recommended'),
+    {
         plugins: {
             mocha,
         },
@@ -60,7 +69,7 @@ export default [
         },
     },
     {
-        files: ['**/*.mjs', 'lib/*.js', 'wasm/*.js'],
+        files: ['**/*.mjs', 'lib/*.js', 'wasm/*.js', 'test/integration/browser-vite-esm/src/main.js'],
 
         languageOptions: {
             ecmaVersion: 2022,
@@ -79,4 +88,4 @@ export default [
             sourceType: 'module',
         },
     }
-];
+]);
