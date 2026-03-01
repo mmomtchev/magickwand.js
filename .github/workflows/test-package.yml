@@ -161,10 +161,8 @@ jobs:
         with:
           tag: ${{ github.ref_name }}
           fileName: ${{ inputs.package }}
-          out-file-path: ./test
         if: inputs.download
       - name: Install magickwand.js from ${{ inputs.package }}
-        working-directory: ${{ github.workspace }}/test
         run: |
           npm install --verbose --foreground-scripts                                     \
             ${{ inputs.package }} --build-from-source --disable-shared                   \
