@@ -94,7 +94,7 @@
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
     "copy-webpack-plugin": "^13.0.0",
-    "eslint": "^9.8.0",
+    "eslint": "^10.0.0",
     "eslint-plugin-mocha": "^11.0.0",
     "gh-pages": "^6.1.1",
     "ts-loader": "^9.5.2",
