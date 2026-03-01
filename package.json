@@ -43,7 +43,7 @@
   "scripts": {
     "preinstall": "npx @mmomtchev/xpm run npm-preinstall",
     "install": "npx xpm run npm-install",
-    "lint": "npx eslint lib/*js native/*js test/*.ts",
+    "lint": "npx eslint",
     "test": "npm test -w test",
     "test:integration": "npm run test:integration -w test",
     "preversion": "npm run lint && npm run test",
