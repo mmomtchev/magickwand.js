@@ -199,17 +199,17 @@ jobs:
           repository: 'imagemagick/ImageMagick'
           path: 'ImageMagick'
           ref: ${{ github.event.inputs.im_version }}
+      - name: Build and install ImageMagick-7
+        working-directory: ${{ github.workspace }}/ImageMagick
+        run: |
+          sh configure --prefix /usr
+          make -j4
+          sudo make install
       - name: Checkout the unit tests
         uses: actions/checkout@v6
         with:
           sparse-checkout: 'test/*'
           sparse-checkout-cone-mode: false
-      - name: Build and install ImageMagick-7
-        run: |
-          cd ImageMagick
-          sh configure --prefix /usr
-          make -j4
-          sudo make install
       - name: Install fonts on Ubuntu
         run: sudo apt-get install -y fonts-ubuntu || true
         if: startsWith(matrix.platform, 'ubuntu')
@@ -223,11 +223,11 @@ jobs:
       - name: Install magickwand.js from ${{ inputs.package }}
         working-directory: ${{ github.workspace }}/test
         run: |
-          npm install --verbose --foreground-scripts=true      \
-            ${{ inputs.package }}                              \
-            --build-from-source                                \
-            --enable-external --enable-shared                  \
-            --cpp-args="`pkg-config --cflags Magick++`"        \
+          npm install --verbose --foreground-scripts=true         \
+            ${{ inputs.package }}                                 \
+            --build-from-source                                   \
+            --enable-external --enable-shared --enable-regenerate \
+            --cpp-args="`pkg-config --cflags Magick++`"             \
             --cpp-link-args="`pkg-config --libs Magick++`"
         env:
           CFLAGS: -I/usr/include/ImageMagick-7
