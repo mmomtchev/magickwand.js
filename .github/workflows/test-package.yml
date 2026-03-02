@@ -174,7 +174,6 @@ jobs:
             --disable-openmp --disable-display --disable-jbig --disable-cairo
         shell: bash
       - name: Test loading the package
-        working-directory: ${{ github.workspace }}/test
         run: node -p 'require("magickwand.js/native").MagickCore.GetMagickDelegates()'
 
 
