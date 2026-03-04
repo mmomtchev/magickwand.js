@@ -89,6 +89,8 @@
   },
   "homepage": "https://github.com/mmomtchev/magickwand.js#readme",
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.4",
+    "@eslint/js": "^10.0.1",
     "@octokit/core": "^7.0.2",
     "@types/node": "^25.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
