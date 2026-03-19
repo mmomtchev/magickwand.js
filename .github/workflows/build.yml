@@ -132,7 +132,15 @@ jobs:
         shell: bash
         run: which g-ir-scanner && sudo rm -f `which g-ir-scanner` || true
         if: runner.os != 'Windows'
-
+      - name: Uninstall LLVM clang on macOS 15 Intel
+        # Remove Homebrew LLVM
+        # See https://github.com/actions/runner-images/issues/13816
+        if: inputs.platform == 'macos-15-intel'
+        run: |
+          llvm_pkgs=$(brew ls -1 | grep llvm || true)
+          if [ -n "$llvm_pkgs" ]; then
+            brew uninstall --ignore-dependencies $llvm_pkgs
+          fi
       - name: Prebuild setup
         run: ${{ inputs.prebuild }}
         if: inputs.prebuild
