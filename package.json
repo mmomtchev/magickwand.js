@@ -37,7 +37,6 @@
     "magick": "scripts/cli.cjs"
   },
   "workspaces": [
-    ".",
     "test"
   ],
   "scripts": {
