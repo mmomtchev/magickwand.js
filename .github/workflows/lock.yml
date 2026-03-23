@@ -40,7 +40,7 @@ jobs:
       env:
         npm_config_enable_conan: true
     - name: Commit conan lock
-      uses: EndBug/add-and-commit@v9
+      uses: EndBug/add-and-commit@v10
       with:
         message: 'Update conan lock for ${{ matrix.platform }}'
         add: conan.lock
