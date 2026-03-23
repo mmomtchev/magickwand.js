@@ -102,15 +102,15 @@
     "ts-loader": "^9.5.2",
     "typescript": "^5.2.2",
     "webpack": "^5.88.2",
-    "webpack-cli": "^6.0.1",
+    "webpack-cli": "^7.0.2",
     "webpack-dev-server": "^5.0.3"
   },
   "dependencies": {
-    "@emnapi/runtime": "=1.8.1",
+    "@emnapi/runtime": "=1.9.1",
     "@mmomtchev/hadron": "^1.1.0",
     "@mmomtchev/prebuild-install": "^1.0.2",
     "@mmomtchev/xpm": "^0.21.1",
-    "emnapi": "=1.8.1",
+    "emnapi": "=1.9.1",
     "node-addon-api": "^8.0.0"
   },
   "engines": {
