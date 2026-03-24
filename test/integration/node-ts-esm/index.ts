@@ -1,3 +1,5 @@
+/// <reference types="@types/mocha" />
+
 import { assert } from 'chai';
 import ImageMagick from 'magickwand.js';
 
