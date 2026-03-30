@@ -1,3 +1,5 @@
+/// <reference types="@types/mocha" />
+
 import { assert } from 'chai';
 /** 
  * TS transpiled to CJS cannot use the automatic import (it requires ES6).
