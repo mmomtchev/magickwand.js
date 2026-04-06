@@ -96,7 +96,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Setup emscripten
-        uses: mymindstorm/setup-emsdk@v14
+        uses: mymindstorm/setup-emsdk@v15
         with:
           version: 4.0.23
         if: runner.os == 'Linux'
