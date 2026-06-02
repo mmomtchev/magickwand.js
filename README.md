@@ -195,7 +195,7 @@ cd magickwand.js
 * then, you can use the following commands:
 ```shell
 # generate the SWIG wrappers and the TypeScript types
-npx xpm generate
+npx xpm run generate
 # configure step, build against system-installed libraries
 # available builds are native, native-debug, wasm and wasm-debug
 npx xpm run prepare --config native-debug
