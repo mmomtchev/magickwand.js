@@ -85,6 +85,8 @@ jobs:
         with:
           version: 4.0.23
         if: inputs.wasm
+      - uses: ilammy/msvc-dev-cmd@v1
+        if: runner.os == 'Windows'
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
