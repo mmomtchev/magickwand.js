@@ -63,8 +63,6 @@ jobs:
           npx xpm run build --config native
         env:
           npm_config_enable_conan: true
-      - name: Get ASAN library name
-        id: asan-lib
-        run: echo LD_PRELOAD=$(gcc -print-file-name=libasan.so) >> $GITHUB_OUTPUT
+      - run: npx -w test mocha node.test.ts
       - run: node ../node_modules/mocha/bin/mocha.js  -i -g Security --repeats 10 node.test.ts
         working-directory: ${{ github.workspace }}/test
