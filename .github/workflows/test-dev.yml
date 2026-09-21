@@ -59,8 +59,8 @@ jobs:
       - name: Build with ASAN
         run: |
           npx xpm install
-          npx xpm run prepare --config native-debug
-          npx xpm run build --config native-debug
+          npx xpm run prepare --config native
+          npx xpm run build --config native
         env:
           npm_config_enable_conan: true
       - name: Get ASAN library name
