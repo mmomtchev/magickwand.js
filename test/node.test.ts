@@ -11,6 +11,7 @@ const imageFile = path.join(__dirname, 'data', 'wizard.gif');
 const imageData = fs.readFileSync(imageFile);
 console.log(imageFile, imageData, imageData.buffer, imageData.buffer.toString());
 console.log(imageData[0], imageData.buffer[0]);
+console.log(imageData.byteOffset);
 
 chai.use(chaiAsPromised);
 const assert: Chai.AssertStatic = chai.assert;
