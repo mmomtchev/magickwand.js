@@ -7,6 +7,10 @@ import * as fs from 'fs';
 import * as chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 
+const imageFile = path.join(__dirname, 'data', 'wizard.gif');
+const imageData = fs.readFileSync(imageFile);
+console.log(imageFile, imageData, imageData.buffer, imageData.buffer.toString());
+
 chai.use(chaiAsPromised);
 const assert: Chai.AssertStatic = chai.assert;
 
@@ -22,10 +26,6 @@ import './Draw.node';
 import './STL.node';
 
 import { Magick, MagickCore } from 'magickwand.js/native';
-
-const imageFile = path.join(__dirname, 'data', 'wizard.gif');
-const imageData = fs.readFileSync(imageFile);
-console.log(imageFile, imageData, imageData.buffer, imageData.buffer.toString());
 
 TestImage(path.resolve(__dirname, 'data', 'wizard.gif'), assert, Magick, MagickCore);
 console.log(imageFile, imageData, imageData.buffer, imageData.buffer.toString());
