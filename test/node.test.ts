@@ -30,8 +30,9 @@ import './STL.node';
 import { Magick, MagickCore } from 'magickwand.js/native';
 
 TestImage(path.resolve(__dirname, 'data', 'wizard.gif'), assert, Magick, MagickCore);
-console.log(imageFile, imageData, imageData.buffer, imageData.buffer.toString());
-TestBlob(imageFile, imageData.buffer, assert, Magick);
+const trimmeArraydBuffer = imageData.buffer.slice(imageData.byteOffset, imageData.byteOffset + imageData.length);
+console.log(imageFile, imageData, imageData.buffer, trimmeArraydBuffer);
+TestBlob(imageFile, trimmeArraydBuffer, assert, Magick);
 TestColor(assert, Magick);
 TestGeometry(assert, Magick);
 
