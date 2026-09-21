@@ -22,7 +22,8 @@ describe('Image', () => {
   before('test', (done) => {
     ImageMagick.then(({ Magick, MagickCore, MagickVersion, FS }) => {
       assert.isString(MagickVersion);
-      const data = FS.readFile('wizard.gif', { encoding: 'binary' }).buffer as ArrayBuffer;
+      const buffer = FS.readFile('wizard.gif', { encoding: 'binary' });
+      const data = buffer.buffer.slice(buffer.byteLength, buffer.byteLength + buffer.length);
 
       ImageTest('wizard.gif', assert, Magick, MagickCore);
       BlobTest('wizard.gif', data, assert, Magick);
