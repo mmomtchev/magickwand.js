@@ -59,8 +59,8 @@ jobs:
       - name: Build with ASAN
         run: |
           npx xpm install
-          npx xpm run prepare --config native
-          npx xpm run build --config native
+          npx xpm run prepare --config native-debug
+          npx xpm run build --config native-debug
         env:
           npm_config_enable_conan: true
       - name: Get ASAN library name
@@ -68,6 +68,3 @@ jobs:
         run: echo LD_PRELOAD=$(gcc -print-file-name=libasan.so) >> $GITHUB_OUTPUT
       - run: node ../node_modules/mocha/bin/mocha.js  -i -g Security --repeats 10 node.test.ts
         working-directory: ${{ github.workspace }}/test
-        env:
-          LSAN_OPTIONS: suppressions=${{ github.workspace }}/test/napi-leaks-suppression.txt
-          LD_PRELOAD: ${{ steps.asan-lib.outputs.LD_PRELOAD }}
