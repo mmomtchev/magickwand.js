@@ -17,6 +17,7 @@ leak:napi_register_module_v1
 
 # Known leaks in the Node.js 24 runtime
 leak:node::contextify::Contextify
+leak:ossl_load_builtin_compressions
 
 # Known leaks in V8
 # (none atm)
