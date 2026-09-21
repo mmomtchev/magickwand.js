@@ -24,10 +24,14 @@ import './STL.node';
 import { Magick, MagickCore } from 'magickwand.js/native';
 
 const imageFile = path.join(__dirname, 'data', 'wizard.gif');
-const imageData = fs.readFileSync(imageFile);
+const imageBuffer = fs.readFileSync(imageFile);
+// Alas, this is a horrible pitfall that cannot be avoided
+// Buffers are allowed to reuse their underlying ArrayBuffer
+// The ArrayBuffer type was selected because it works both in Node.js and in the browser
+const imageData = imageBuffer.buffer.slice(imageBuffer.byteOffset, imageBuffer.byteOffset + imageBuffer.length);
 
 TestImage(path.resolve(__dirname, 'data', 'wizard.gif'), assert, Magick, MagickCore);
-TestBlob(imageFile, imageData.buffer, assert, Magick);
+TestBlob(imageFile, imageData, assert, Magick);
 TestColor(assert, Magick);
 TestGeometry(assert, Magick);
 
