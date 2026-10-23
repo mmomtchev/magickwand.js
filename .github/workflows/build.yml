@@ -85,7 +85,7 @@ jobs:
         with:
           version: 4.0.23
         if: inputs.wasm
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
           submodules: true
