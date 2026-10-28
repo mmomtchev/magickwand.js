@@ -159,7 +159,7 @@ class ImageMagickDelegates(ConanFile):
 
       if self.options.jxl:
         self.requires('libjxl/[~0]')
-        self.requires('brotli/[~1]')
+        self.requires('brotli/[~1]', force=True)
         if self.options.simd:
           self.requires('highway/[~1]')
 
