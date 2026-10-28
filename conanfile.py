@@ -87,6 +87,7 @@ class ImageMagickDelegates(ConanFile):
         [self.requires(x, force=True) for x in ('freetype/[~2]', 'fribidi/[~1]', 'harfbuzz/[~10]')]
         if self.settings.os != 'Windows':
           self.requires('fontconfig/[~2]', force=True)
+        self.requires('brotli/[~1]', force=True)
 
       if self.options.lzma:
         self.requires('xz_utils/5.4.5')
