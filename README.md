@@ -388,7 +388,7 @@ The current ImageMagick version can be checked in the `MagickLibVersionText` / `
 
 * Prebuilt binaries of `magickwand.js` are **NOT** affected by [CVE-2024-3094](https://nvd.nist.gov/vuln/detail/CVE-2024-3094) since these are linked with xz-utils 5.4.5, the last version before the backdoor.
 
-* All current prebuilt binaries of `magickwand.js` *ARE* vulnerable to [CVE-2026-111497](https://nvd.nist.gov/vuln/detail/cve-2026-111497) when processing JPEG XL images!
+* All current prebuilt binaries of `magickwand.js` *ARE* vulnerable to [CVE-2026-111497](https://nvd.nist.gov/vuln/detail/cve-2026-111497) only when reading font files. JPEG-XL support is currently disabled by default, but custom built binaries with JPEG XL support will also be vulnerable when processing JPEG XL images.
 
 ---
 
