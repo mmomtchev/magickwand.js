@@ -87,6 +87,7 @@ class ImageMagickDelegates(ConanFile):
         [self.requires(x, force=True) for x in ('freetype/[~2]', 'fribidi/[~1]', 'harfbuzz/[~10]')]
         if self.settings.os != 'Windows':
           self.requires('fontconfig/[~2]', force=True)
+        self.requires('brotli/[~1]', force=True)
 
       if self.options.lzma:
         self.requires('xz_utils/5.4.5')
@@ -159,7 +160,7 @@ class ImageMagickDelegates(ConanFile):
 
       if self.options.jxl:
         self.requires('libjxl/[~0]')
-        self.requires('brotli/[~1]')
+        self.requires('brotli/[~1]', force=True)
         if self.options.simd:
           self.requires('highway/[~1]')
 
