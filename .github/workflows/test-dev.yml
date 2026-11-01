@@ -97,7 +97,7 @@ jobs:
         platform:
           - ubuntu-22.04
           - ubuntu-24.04
-          - macos-15
+          - macos-latest
           - macos-15-intel
           - windows-2022
 
