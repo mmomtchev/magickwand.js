@@ -141,6 +141,15 @@ jobs:
           if [ -n "$llvm_pkgs" ]; then
             brew uninstall --ignore-dependencies $llvm_pkgs
           fi
+      - name: Set SDKROOT on macOS 26
+        # See https://github.com/xpack-dev-tools/clang-xpack/issues/15
+        if: inputs.platform == 'macos-latest'
+        run: |
+          SDKROOT=$(xcrun --sdk macosx26.5 --show-sdk-path)
+          echo SDKROOT=$SDKROOT >> $GITHUB_ENV
+          ISYSROOT="\"-isysroot $SDKROOT\""
+          echo EXTRA_NPM_OPTS=--cpp-args=$ISYSROOT --c-args=$ISYSROOT --cpp-link-args=$ISYSROOT --c-link-args=$ISYSROOT >> $GITHUB_ENV
+
       - name: Prebuild setup
         run: ${{ inputs.prebuild }}
         if: inputs.prebuild
@@ -151,7 +160,8 @@ jobs:
             ${{ inputs.native && '--build-from-source' || '---magickwand_js-skip-native' }}    \
             ${{ inputs.wasm   && '--build-wasm-from-source' || '---magickwand_js-skip-wasm' }} \
             ${{ inputs.dependencies == 'conan' && '--enable-conan' || '--disable-conan' }} \
-            ${{ inputs.extra_npm_opts }}
+            ${{ inputs.extra_npm_opts }} \
+            ${{ env.EXTRA_NPM_OPTS }}
 
       - name: Check WASM module size
         run: |
